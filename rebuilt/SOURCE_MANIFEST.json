@@ -55,12 +55,17 @@
     {
       "path": "docs/database/schema-snapshot.json",
       "bytes": 30096,
-      "sha256": "b25f70432ebbf1c05178ecf5b0a85568507b7252af3369246723fa77eb2622a9"
+      "sha256": "6ffdd1ff2e80f96eeb0ed29f0b8733b407257927ce68ff42194cbfef5942528e"
     },
     {
       "path": "docs/decisions/approved-business-policy.md",
       "bytes": 956,
       "sha256": "08d598938cd9dd64009057574b6b53d38be6861e95b2d32618d78af29725984c"
+    },
+    {
+      "path": "docs/deployment/cloud-status.md",
+      "bytes": 1848,
+      "sha256": "65af78800b3c44afe1613dedee8343f741c97ce32b9a1cd57a1aa05016f4ec3f"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
@@ -413,17 +418,17 @@
       "sha256": "4a9202c74896f3c2dc2ef66245d5157ec067d63c1572b79e416443a62555d154"
     },
     {
-      "path": "supabase/migrations/20261019061514_foundation_core.sql",
+      "path": "supabase/migrations/20261019070313_foundation_core.sql",
       "bytes": 10206,
       "sha256": "0dcad2f2c242fc5fffd4b428fd0e2dfa5d3eff8f5d5053fe6e5965815799cd61"
     },
     {
-      "path": "supabase/migrations/20261019061517_foundation_operations.sql",
+      "path": "supabase/migrations/20261019070320_foundation_operations.sql",
       "bytes": 8896,
       "sha256": "49be6d31973cfccd6dd8aa3112b6b2ba5ed31fc67f87f0cf1f4c1faa5e8e9475"
     },
     {
-      "path": "supabase/migrations/20261019061520_foundation_reference_data.sql",
+      "path": "supabase/migrations/20261019070327_foundation_reference_data.sql",
       "bytes": 1934,
       "sha256": "ad18254f9bcd428e9aed28c05e24c2ccef2c55aab5ab79419b73f73784b2ed1a"
     },
@@ -446,6 +451,11 @@
       "path": "tsconfig.json",
       "bytes": 821,
       "sha256": "28bb0f39cdcc80e0a50a8bb956455a241af100134d58bfc296f3d5b2d03cda23"
+    },
+    {
+      "path": "vercel.json",
+      "bytes": 178,
+      "sha256": "7a1d2a076d1b08351887b42a0dd321506a3a2b845c34b8e4af24014fd9facc63"
     }
   ]
 }

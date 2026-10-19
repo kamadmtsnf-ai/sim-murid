@@ -1,9 +1,9 @@
 {
   "source": "isolated PGlite PostgreSQL introspection, not remote Supabase",
   "migrations": [
-    "20261019061514_foundation_core.sql",
-    "20261019061517_foundation_operations.sql",
-    "20261019061520_foundation_reference_data.sql"
+    "20261019070313_foundation_core.sql",
+    "20261019070320_foundation_operations.sql",
+    "20261019070327_foundation_reference_data.sql"
   ],
   "tables": [
     {
