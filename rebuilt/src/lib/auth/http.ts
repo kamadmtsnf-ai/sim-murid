@@ -33,6 +33,7 @@ export function requestAuth(request: NextRequest, response: NextResponse) {
 
 export async function verifiedPrincipal(client: ReturnType<typeof requestAuth>) {
   const { data: { user }, error } = await client.auth.getUser();
+  if (error && (!error.status || error.status >= 500)) throw new Error("Auth verification unavailable");
   if (error || !user) return null;
   const { data: { session } } = await client.auth.getSession();
   if (!session || session.user.id !== user.id) return null;

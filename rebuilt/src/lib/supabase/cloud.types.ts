@@ -1,4 +1,4 @@
-/** Generated from Supabase qpzoukkhdxpmbtkcqemj after authentication_runtime. Do not edit manually. */
+/** Generated from Supabase qpzoukkhdxpmbtkcqemj after session_management. */
 export type Json =
   | string
   | number
@@ -520,6 +520,10 @@ export type Database = {
         Args: { p_remember: boolean; p_session: string; p_user: string }
         Returns: boolean
       }
+      app_auth_device: {
+        Args: { p_label: string; p_session: string; p_user: string }
+        Returns: undefined
+      }
       app_auth_principal: {
         Args: { p_session: string; p_user: string }
         Returns: Json
@@ -527,6 +531,19 @@ export type Database = {
       app_auth_revoke: {
         Args: { p_session: string; p_user: string }
         Returns: undefined
+      }
+      app_session_list: {
+        Args: { p_actor: string; p_auth_session: string; p_username?: string }
+        Returns: Json
+      }
+      app_session_revoke: {
+        Args: {
+          p_actor: string
+          p_auth_session: string
+          p_session?: string
+          p_username?: string
+        }
+        Returns: Json
       }
     }
     Enums: {

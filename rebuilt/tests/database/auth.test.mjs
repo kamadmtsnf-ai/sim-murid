@@ -15,6 +15,7 @@ test('AUTH DB: service-only rate limiter has fixed window and counts denied requ
 test('AUTH DB: claim rejects active slot, checks exact session, expires/revokes and audits',async()=>{
  await db.query('insert into auth.users values($1)',[user]);
  await db.query("insert into public.profiles(id,username,full_name) values($1,'00081','Auth Test')",[user]);
+ await db.query('insert into auth.sessions(id,user_id) values($1,$3),($2,$3)',[s1,s2,user]);
  await db.exec('set role service_role');
  assert.equal(await val('select public.app_auth_claim($1,$2,false)',[user,s1]),true);
  assert.equal(await val('select public.app_auth_claim($1,$2,true)',[user,s2]),false);

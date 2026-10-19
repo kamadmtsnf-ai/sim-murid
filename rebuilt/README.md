@@ -1,4 +1,4 @@
-# Rebuilt SiM-Murid — Tahap 5
+# Rebuilt SiM-Murid — Tahap 6
 
 Next.js App Router + TypeScript strict + Tailwind CSS + shadcn/ui + Zod + Supabase. Produksi: https://sim-muridv2.vercel.app . GitHub menyimpan aplikasi ini pada `rebuilt/`; gunakan folder tersebut sebagai Root Directory Vercel.
 
@@ -20,8 +20,8 @@ Input JSON: username (teks persis, nol awal dipertahankan), fullName, role, cont
 
 ## Validasi dan cakupan
 
-`npm run check` menjalankan typecheck, ESLint, pengujian fondasi, 18 pengujian DB fondasi, 2 validasi auth, 3 pengujian DB auth, drift snapshot dan build. `npm run test:smoke` memeriksa HTTP build lokal; `npm run db:advisory` memeriksa katalog lokal. Keduanya tidak menggantikan Supabase Auth/PostgREST aktual. Lihat `docs/verification/stage-05.md` untuk bukti integrasi.
+`npm run check` menjalankan typecheck, ESLint, pengujian fondasi, 18 pengujian DB fondasi, 2 validasi auth, 3 pengujian DB auth, drift snapshot dan build. `npm run test:smoke` memeriksa HTTP build lokal; `npm run db:advisory` memeriksa katalog lokal. Keduanya tidak menggantikan Supabase Auth/PostgREST aktual. Lihat `docs/verification/stage-06.md` untuk bukti integrasi.
 
-Empat migrasi cloud di Supabase qpzoukkhdxpmbtkcqemj; 26 tabel RLS. RPC autentikasi hanya service_role; izin modul belum dibuka. `cloud.types.ts` dihasilkan dari proyek daring; `database.types.ts` tetap snapshot replay PGlite untuk tabel publik. Regenerasikan keduanya bila schema berubah.
+Lima migrasi cloud di Supabase qpzoukkhdxpmbtkcqemj; 26 tabel RLS. RPC autentikasi hanya service_role; izin modul belum dibuka. `cloud.types.ts` dihasilkan dari proyek daring; `database.types.ts` tetap snapshot replay PGlite untuk tabel publik. Regenerasikan keduanya bila schema berubah.
 
-Tahap 6 melanjutkan pengelolaan sesi/perangkat dan pencabutan administratif. RLS peran Tahap 7, onboarding/password/recovery/email dan modul operasional mengikuti tahap berikutnya. Dokumen bisnis di `docs/specifications` dan `docs/decisions` tetap menjadi acuan. Health `/api/health` hanya liveness; bukan readiness database. Tidak ada data murid yang dimigrasikan.
+Tahap 6 menambahkan /account/sessions: riwayat perangkat, pencabutan sesi sendiri dan pencabutan oleh Admin dengan audit serta pemeriksaan role terkini. Tahap 7 melanjutkan izin modul dan RLS. RLS peran Tahap 7, onboarding/password/recovery/email dan modul operasional mengikuti tahap berikutnya. Dokumen bisnis di `docs/specifications` dan `docs/decisions` tetap menjadi acuan. Health `/api/health` hanya liveness; bukan readiness database. Tidak ada data murid yang dimigrasikan.

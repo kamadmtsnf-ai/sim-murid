@@ -9,6 +9,9 @@ export async function proxy(request: NextRequest) {
   // Forward the refreshed request cookies to the Server Component as well.
   const next = NextResponse.next({ request: { headers: request.headers } });
   response.cookies.getAll().forEach((cookie) => next.cookies.set(cookie));
+  response.headers.forEach((value, key) => {
+    if (["cache-control", "pragma", "expires"].includes(key)) next.headers.set(key, value);
+  });
   next.headers.set("Cache-Control", "private, no-store");
   return next;
 }

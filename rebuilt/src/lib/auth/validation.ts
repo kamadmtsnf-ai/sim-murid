@@ -10,6 +10,7 @@ export const loginSchema = z.object({
 export const principalSchema = z.object({
   id: z.uuid(), username: z.string(), full_name: z.string(),
   expires_at: z.string(), must_change_password: z.boolean(),
+  is_admin: z.boolean().default(false),
 });
 export type Principal = z.infer<typeof principalSchema>;
 

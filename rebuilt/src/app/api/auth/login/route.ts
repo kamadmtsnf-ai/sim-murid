@@ -5,6 +5,7 @@ import { createAuthAdmin } from "@/lib/auth/admin";
 import { privateJson, requestAuth, sameOrigin } from "@/lib/auth/http";
 import { loginSchema, verifiedTokenSession } from "@/lib/auth/validation";
 import { getSupabasePublicEnvironment } from "@/lib/supabase/environment";
+import { deviceLabel } from "@/lib/auth/devices";
 
 export async function POST(request: NextRequest) {
   if (!sameOrigin(request)) return privateJson({ message: "Permintaan tidak diizinkan." }, 403);
@@ -44,6 +45,7 @@ export async function POST(request: NextRequest) {
       return privateJson({ message: "Akun masih digunakan pada sesi lain. Keluar dari sesi tersebut atau hubungi administrator." }, 409);
     }
     const response = privateJson({ destination: "/account" });
+    await admin.rpc("app_auth_device", { p_user: data.user.id, p_session: sessionId, p_label: deviceLabel(request.headers.get("user-agent") ?? "") });
     const cookieClient = requestAuth(request, response);
     const saved = await cookieClient.auth.setSession({ access_token: data.session.access_token, refresh_token: data.session.refresh_token });
     if (saved.error) {

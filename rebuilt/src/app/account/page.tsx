@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createServerClient } from "@supabase/ssr";
@@ -23,6 +24,7 @@ export default async function AccountPage() {
     <p className="text-sm text-muted-foreground">Sesi berlaku sampai {new Intl.DateTimeFormat("id-ID", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Jakarta" }).format(new Date(state.principal.expires_at))} WIB.</p>
     {state.principal.must_change_password && <p className="rounded-md border p-4 text-sm">Akun menggunakan password sementara. Fitur penggantian password wajib akan tersedia pada tahap keamanan akun. Layanan operasional belum dibuka.</p>}
     <p className="text-sm text-muted-foreground">Akun berhasil diverifikasi. Modul layanan madrasah sedang dikembangkan.</p>
+    <Button asChild variant="outline"><Link href="/account/sessions">Sesi dan perangkat</Link></Button>
     <form action="/api/auth/logout" method="post"><Button type="submit" variant="outline">Keluar</Button></form>
   </CardContent></Card></main>;
 }

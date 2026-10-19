@@ -16,3 +16,16 @@ test('verified JWT session extraction refuses malformed/mismatched identities',(
  assert.throws(()=>verifiedTokenSession(token,session));
  assert.throws(()=>verifiedTokenSession('bad',id));
 });
+
+test('device label uses coarse server classifications without raw UA retention',async()=>{
+ const {deviceLabel}=await import('../src/lib/auth/devices.ts');
+ assert.equal(deviceLabel('Mozilla Windows Chrome/126 Safari/1'),'Chrome · Windows');
+ assert.equal(deviceLabel('Android Chrome/126 Edg/1'),'Edge · Android');
+ assert.equal(deviceLabel('<script>secret username</script>'),'Browser · perangkat tidak dikenal');
+});
+test('session actions never infer revoke-all from a missing session id',async()=>{
+ const {sessionCommand}=await import('../src/lib/auth/sessions.ts');
+ assert.equal(sessionCommand.safeParse({action:'revoke',scope:'one'}).success,false);
+ assert.equal(sessionCommand.safeParse({action:'revoke',scope:'all',actor:'forged'}).success,false);
+ assert.equal(sessionCommand.safeParse({action:'revoke',scope:'all'}).success,true);
+});
