@@ -1,0 +1,16 @@
+{
+  "status": "provider_authentication_blocked",
+  "checks": [
+    "Validation Admin login"
+  ],
+  "limitations": [
+    "Brevo rejected authenticated sender lookup; live positive delivery/OTP acceptance remains pending.",
+    "No mailbox delivery or browser hydration verification."
+  ],
+  "provider_check": {
+    "http_status": 401,
+    "application_code": "BREVO_HTTP_401",
+    "sender_active": "not_verified",
+    "emails_sent": 0
+  }
+}

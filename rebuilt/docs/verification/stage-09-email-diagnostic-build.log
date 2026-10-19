@@ -1,0 +1,54 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 23ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 658ms
+  Running TypeScript ...
+  Finished TypeScript in 2.2s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/20) ...
+  Generating static pages using 8 workers (5/20) 
+  Generating static pages using 8 workers (10/20) 
+  Generating static pages using 8 workers (15/20) 
+✓ Generating static pages using 8 workers (20/20) in 452ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /account
+├ ƒ /account/access
+├ ƒ /account/email
+├ ƒ /account/profile
+├ ƒ /account/recovery
+├ ƒ /account/security
+├ ƒ /account/sessions
+├ ƒ /api/account/email
+├ ƒ /api/account/email-provider
+├ ƒ /api/account/profile
+├ ƒ /api/account/recovery
+├ ƒ /api/auth/access
+├ ƒ /api/auth/email-recovery
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/recovery
+├ ƒ /api/auth/security
+├ ƒ /api/auth/session
+├ ƒ /api/auth/sessions
+├ ƒ /api/health
+├ ○ /foundation
+├ ƒ /login
+├ ○ /recovery
+└ ○ /recovery/email
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

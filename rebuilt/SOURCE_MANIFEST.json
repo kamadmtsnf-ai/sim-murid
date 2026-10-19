@@ -268,6 +268,16 @@
       "sha256": "c8b1dbcb76703d73d6c85d7a08e1bf3895d6cfb6e07bd0dcde436e9040cb0a6d"
     },
     {
+      "path": "docs/verification/stage-09-email-diagnostic-build.log",
+      "bytes": 1436,
+      "sha256": "55097f9e234b702ffbd9b11afcb36e8e74ec41ad69fe9bc6ca3ec0173a272b36"
+    },
+    {
+      "path": "docs/verification/stage-09-email-live.json",
+      "bytes": 440,
+      "sha256": "eef4de50403fa52692de7cd9bdcf86d4a832950c26775627b508748b5a575ba5"
+    },
+    {
       "path": "docs/verification/stage-09-email-smoke.log",
       "bytes": 709,
       "sha256": "dca21b8f740a9305e8f9a5d7fad123c442b845adbbe6f476a0e5ac4f250a1f01"
@@ -434,8 +444,8 @@
     },
     {
       "path": "src/app/api/account/email-provider/route.ts",
-      "bytes": 1184,
-      "sha256": "0395a161858000d1ace850795772dbb382e1749065900d6072454568ffc2ece3"
+      "bytes": 1256,
+      "sha256": "81b17b6b7b4914c3849ddb38bdb79e0136a2db14ff032a65cdfd434f42dd8ccb"
     },
     {
       "path": "src/app/api/account/email/route.ts",
@@ -649,8 +659,8 @@
     },
     {
       "path": "src/lib/email/brevo.ts",
-      "bytes": 1800,
-      "sha256": "63be05362138e7a23ed49ca0b54cd87868990d1597238d426aed00280bf6d5a5"
+      "bytes": 2305,
+      "sha256": "24bd1be6a4770b65a8cf5604cc3e6760e7993f549b98ba76e10896632ccd9024"
     },
     {
       "path": "src/lib/email/otp.ts",
