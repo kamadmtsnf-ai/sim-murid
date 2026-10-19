@@ -1,0 +1,36 @@
+{
+  "status": "negative_checks_passed_positive_checks_pending",
+  "checks": [
+    {
+      "check": "anonymous application access denied",
+      "status": 401
+    },
+    {
+      "check": "anonymous profiles denied",
+      "status": 401
+    },
+    {
+      "check": "anonymous authorization RPC denied",
+      "status": 401
+    },
+    {
+      "check": "forged admin JWT rejected",
+      "status": 401
+    },
+    {
+      "check": "private schema not exposed",
+      "status": 406
+    }
+  ],
+  "readonly_sql": {
+    "inactive_identity": true,
+    "forged_metadata_role": "admin",
+    "visible_profiles": 0,
+    "visible_subjects": 0,
+    "access_context": null
+  },
+  "limitations": [
+    "Positive live-user/Admin tests require explicit approval for temporary privileged production fixtures; auto-review rejected credential/role mutations.",
+    "No production user was reactivated or promoted."
+  ]
+}

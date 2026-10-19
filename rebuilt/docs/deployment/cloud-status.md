@@ -16,3 +16,7 @@ Tahap 5 autentikasi username/password, logout dan registry sesi sudah diterapkan
 ## Tahap 6
 
 Pengelolaan sesi/perangkat tersedia di /account/sessions. Lima migrasi diterapkan, 26 tabel tetap RLS. Pemeriksaan Auth session aktual, pencabutan dengan audit, serta peran Admin terkini ditambahkan. Lihat docs/verification/stage-06.md.
+
+## Tahap 7
+
+Enam migrasi; 27 tabel RLS dan 14 policy SELECT. /account/access dan /api/auth/access tersedia. Uji negatif produksi lulus; uji positif akun/Admin produksi pending persetujuan untuk perubahan fixture berprivilege. Lihat docs/verification/stage-07.md.

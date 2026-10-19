@@ -1,7 +1,5 @@
 # SiM-Murid
 
-Code.gs dan Index.html: aplikasi Google Apps Script lama.
+Aplikasi GAS lama: Code.gs dan Index.html. Rebuilt SiM-Murid (Next.js + Supabase) berada di rebuilt/; gunakan folder tersebut sebagai Root Directory Vercel.
 
-Rebuilt SiM-Murid berada di `rebuilt/` (Next.js + Supabase), Root Directory Vercel: `rebuilt`.
-
-Produksi: https://sim-muridv2.vercel.app . Tahap 6 menambahkan pengelolaan sesi/perangkat dan pencabutan sesi dengan audit. Izin modul/RLS mengikuti Tahap 7. Lihat `rebuilt/docs/verification/stage-06.md` untuk laporan, batas cakupan dan hasil pengujian.
+Produksi: https://sim-muridv2.vercel.app . Tahap 7 menambahkan pemeriksaan izin dan RLS baca fondasi. Uji positif Auth/PostgREST produksi masih memerlukan persetujuan fixture sementara. Lihat rebuilt/docs/verification/stage-07.md untuk hasil, batas dan status verifikasi.

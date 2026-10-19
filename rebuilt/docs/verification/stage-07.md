@@ -27,4 +27,11 @@ Relasi orangtua-anak, guru-mapel, siswa-kelas, mentor-siswa, piket/pengganti har
 
 Enam migrasi, 27 tabel RLS; 14 policy SELECT pada tabel public. Advisor: 13 INFO RLS tanpa policy pada schema private (tetap tertutup), 21 INFO indeks belum digunakan, satu WARN perlindungan password bocor belum aktif. Remediasi WARN: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection . Tidak mengubah paket/biaya.
 
-Bukti HTTP langsung Supabase dan deployment akan dilengkapi setelah pengujian produksi. Uji PGlite memakai stub Auth dan bukan pengganti Auth/PostgREST aktual.
+## Verifikasi cloud dan batas persetujuan
+
+Commit implementasi 3dea1fc93a9345c201565640466a37d2a2e25d62, deployment dpl_DWsQsxSHBPFf6hbrZN4MYaUe8jRK berstatus READY. Hasil HTTP negatif di stage-07-live.json: API aplikasi anonim 401, REST profiles anonim 401, RPC otorisasi anonim 401, JWT Admin palsu 401, akses schema private 406. Transaksi cloud read-only dengan role authenticated, identitas nonaktif dan metadata Admin palsu menghasilkan nol baris profiles/subjects dan context null. Grant client INSERT/UPDATE/DELETE/TRUNCATE = 0.
+
+Uji positif akun pengguna/Admin melalui Auth/PostgREST produksi belum dilakukan. Peninjauan persetujuan otomatis menolak pengaktifan akun validasi, penggantian password dan pemberian role Admin pada proyek live karena belum ada persetujuan eksplisit untuk perubahan kredensial/privilege tersebut. Tidak mencoba jalur lain untuk mengaktifkan akun. Pemeriksaan read-only memastikan kedua akun validasi lama tetap inactive dan tanpa password.
+
+Uji positif SQL sudah lulus pada PostgreSQL terisolasi (38 test keseluruhan), tetapi stub Auth lokal bukan pengganti bukti Auth/PostgREST aktual. Status akhir: implementasi dan pemeriksaan negatif cloud tersedia; penerimaan integrasi positif produksi masih pending persetujuan untuk fixture sementara. Uji visual browser/hidrasi belum dilakukan.
+
