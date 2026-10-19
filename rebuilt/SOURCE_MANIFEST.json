@@ -1,11 +1,11 @@
 {
   "application": "rebuilt-sim-murid",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "files": [
     {
       "path": ".env.example",
-      "bytes": 236,
-      "sha256": "ff727982b4a1761440fca534f62c64d7810b1924436890bc63f1deba375e5901"
+      "bytes": 366,
+      "sha256": "cd991d0497acdcf283896dc29efcd740ac0c5e69d66126a28c996b18ec116a11"
     },
     {
       "path": ".gitignore",
@@ -54,8 +54,8 @@
     },
     {
       "path": "docs/database/schema-snapshot.json",
-      "bytes": 30696,
-      "sha256": "4975f97cad23aeda8c78cbb6c2b5d1285bbe7ba125ccb3d2ab1845c94a8634be"
+      "bytes": 30741,
+      "sha256": "0e903a09571efbb5561ac9f987a6bbc4247686d5f526ec8cfa2bab4b10041c5b"
     },
     {
       "path": "docs/decisions/approved-business-policy.md",
@@ -263,6 +263,21 @@
       "sha256": "381838102dd507fe109bc3c8c757596bc1e763cbf171ecdec270346a5bad260e"
     },
     {
+      "path": "docs/verification/stage-09-email-check.log",
+      "bytes": 12219,
+      "sha256": "c8b1dbcb76703d73d6c85d7a08e1bf3895d6cfb6e07bd0dcde436e9040cb0a6d"
+    },
+    {
+      "path": "docs/verification/stage-09-email-smoke.log",
+      "bytes": 709,
+      "sha256": "dca21b8f740a9305e8f9a5d7fad123c442b845adbbe6f476a0e5ac4f250a1f01"
+    },
+    {
+      "path": "docs/verification/stage-09-email.md",
+      "bytes": 4577,
+      "sha256": "5571e19574380f28a833a287d53e41fbce44c38fa9d79207a54939a2d4cd1d46"
+    },
+    {
       "path": "docs/verification/stage-09-live.json",
       "bytes": 2949,
       "sha256": "bec174df4e9867ea88f2fc99853acd54b8baf82eee93112dca48f89bedf72758"
@@ -305,12 +320,12 @@
     {
       "path": "package-lock.json",
       "bytes": 317319,
-      "sha256": "a3b236e4e1353722e3210fe98823e01377f32d8b6cd2ae1cb29f449c6a741954"
+      "sha256": "366d635b02c79bfe71940226d1d8d3b01be93f820927fce8c9feec97633fd114"
     },
     {
       "path": "package.json",
-      "bytes": 2401,
-      "sha256": "b0c21c7d67ad7f59927cd7333e72cb00e5625d1e4178d3ef3eb820165d2344eb"
+      "bytes": 2527,
+      "sha256": "0e13eeafebde5717a6b28e64ece79169396ac6173a8b0e4c9c2a2af4498b3b0f"
     },
     {
       "path": "postcss.config.mjs",
@@ -363,6 +378,16 @@
       "sha256": "d9cd0e396f1985bed97c1c530891c3b0c351b5050dd1c34f1e6d2cf7018bfa18"
     },
     {
+      "path": "src/app/account/email/email-panel.tsx",
+      "bytes": 3788,
+      "sha256": "9ef3e7be700c64c02072ea9dc6de1648426220e98d0e2206de4279dad9ff2fc7"
+    },
+    {
+      "path": "src/app/account/email/page.tsx",
+      "bytes": 1175,
+      "sha256": "b7025115682544826a4bec5ff44e27703c5d9e05d79bb6c07287411309cb1c74"
+    },
+    {
       "path": "src/app/account/page.tsx",
       "bytes": 2649,
       "sha256": "62a55208ebd5391cc914ea110041af159ab4d9d2ee046ec8c6aad58ba84c7dba"
@@ -394,8 +419,8 @@
     },
     {
       "path": "src/app/account/security/security-panel.tsx",
-      "bytes": 6451,
-      "sha256": "317354de8cec658b7ab190133c6da9754b56ebe0f5066f56175d1ceca1d0d4fc"
+      "bytes": 6566,
+      "sha256": "e2ca1bacb2e04ef4d5e2b45caaa7cd56171e5ecc5a6c0eff136a82aae23372cb"
     },
     {
       "path": "src/app/account/sessions/page.tsx",
@@ -406,6 +431,16 @@
       "path": "src/app/account/sessions/session-panel.tsx",
       "bytes": 6563,
       "sha256": "1cc02f41d53c67ebb364185b2360923d8fb02c951b362e8eb01e91bca30d58e6"
+    },
+    {
+      "path": "src/app/api/account/email-provider/route.ts",
+      "bytes": 1184,
+      "sha256": "0395a161858000d1ace850795772dbb382e1749065900d6072454568ffc2ece3"
+    },
+    {
+      "path": "src/app/api/account/email/route.ts",
+      "bytes": 4232,
+      "sha256": "076dca87a54c668f9b8788e1057a651bd1fa1b397d02680e285961de4f958bc2"
     },
     {
       "path": "src/app/api/account/profile/route.ts",
@@ -421,6 +456,11 @@
       "path": "src/app/api/auth/access/route.ts",
       "bytes": 1024,
       "sha256": "ff8c15aad7147e9096a9a9f40fc01b5a981a90d7bcc96fb07b3db7cf718e3fc0"
+    },
+    {
+      "path": "src/app/api/auth/email-recovery/route.ts",
+      "bytes": 4491,
+      "sha256": "d632059362fd72815f129cb9498961196c65a84cf9b9174c80e1e3195a8c4489"
     },
     {
       "path": "src/app/api/auth/login/route.ts",
@@ -464,8 +504,8 @@
     },
     {
       "path": "src/app/foundation/page.tsx",
-      "bytes": 2337,
-      "sha256": "8b9e8c736892a70e099acf2a6c8b9dfd93bca05acc3aa82c918b2c0538356b01"
+      "bytes": 2344,
+      "sha256": "7c6776aa7bc951f564ecc42043f458f4f44ba5cbea735b779f692a3f5022e976"
     },
     {
       "path": "src/app/globals.css",
@@ -498,9 +538,19 @@
       "sha256": "3f94ab52438e39548c6038762b447bd4a2e0a77e0744c47289b8389b10f53bf7"
     },
     {
+      "path": "src/app/recovery/email/page.tsx",
+      "bytes": 615,
+      "sha256": "065fd27c66079263cbab59e8f849e9a1486a2e5982d43a21af0072abf957aa0e"
+    },
+    {
+      "path": "src/app/recovery/email/recovery-form.tsx",
+      "bytes": 4097,
+      "sha256": "487f4b025682a08dd96cde5df829b2bb671999d4cfc839bf75ed33048d10c7f0"
+    },
+    {
       "path": "src/app/recovery/page.tsx",
-      "bytes": 514,
-      "sha256": "08b6e5077f8f9e122c66ea76a5275f10395b060f2e7cd12f16b9682475ec4d58"
+      "bytes": 635,
+      "sha256": "80607a84ca5915278b1334cc0891e3887c06265102be93d0beab96307c7c0ae0"
     },
     {
       "path": "src/app/recovery/recovery-form.tsx",
@@ -574,8 +624,8 @@
     },
     {
       "path": "src/lib/auth/security-validation.ts",
-      "bytes": 1989,
-      "sha256": "3a367935d4cce0617232e6c15568ed0695bcca098e68c1c571e98d8fc5e5037e"
+      "bytes": 2081,
+      "sha256": "027565faa4068014982e784b6f1cf07e82d23f9b2a057f74e0ff0480bf05456c"
     },
     {
       "path": "src/lib/auth/security.ts",
@@ -598,14 +648,34 @@
       "sha256": "6e0af6e323749d9020c4202038ec811365203e1131a246b3b6f4ab634f0e21d0"
     },
     {
+      "path": "src/lib/email/brevo.ts",
+      "bytes": 1800,
+      "sha256": "63be05362138e7a23ed49ca0b54cd87868990d1597238d426aed00280bf6d5a5"
+    },
+    {
+      "path": "src/lib/email/otp.ts",
+      "bytes": 2287,
+      "sha256": "de4ee4668c96e1c07c522d13fa8afdd82b280ed98a9dc9858807907cb73214eb"
+    },
+    {
+      "path": "src/lib/email/service.ts",
+      "bytes": 1683,
+      "sha256": "27da1c50af91ee50c52862e791aba2181ff32dcb9f7d9f0e85c79c590a3dc73c"
+    },
+    {
+      "path": "src/lib/email/validation.ts",
+      "bytes": 919,
+      "sha256": "30b938e2e02f8c55d3089d871ccfbf077dfd4b35e5e62ad74851e8c6fd42cfa3"
+    },
+    {
       "path": "src/lib/supabase/client.ts",
       "bytes": 446,
       "sha256": "e3f47bbbed35c390956811759df5487f30d30899af446f3a3500beecef88b089"
     },
     {
       "path": "src/lib/supabase/cloud.types.ts",
-      "bytes": 21304,
-      "sha256": "bcce4479a947d64a2cd08295f0de9b52b9fddafb9f7948f55b3099dc2d1216d3"
+      "bytes": 22241,
+      "sha256": "c0af80e74b832b70b0dd73e0eaf5dcc149671b0653bfb8efc051f73acbb5d5db"
     },
     {
       "path": "src/lib/supabase/database.types.ts",
@@ -778,6 +848,11 @@
       "sha256": "5e0d6945803ecb857d43570aa0c221de9b0c635181276d2c1f8832368887f9b3"
     },
     {
+      "path": "supabase/migrations/20261019130139_email_otp_recovery.sql",
+      "bytes": 13478,
+      "sha256": "067257482a0038f8619f785d1ba4ce553871d33d5a2edddad657e64e6f6ee25e"
+    },
+    {
       "path": "supabase/seed.sql",
       "bytes": 195,
       "sha256": "df79afb6610ac66c0345e86f56e1457547cfdd025710dc645b89e8de12d07a5f"
@@ -798,9 +873,14 @@
       "sha256": "b083c72c0037d052ffc6ad8e78c839367f30f6eb2885746de29228c868762ab3"
     },
     {
+      "path": "tests/database/email.test.mjs",
+      "bytes": 8346,
+      "sha256": "a75ad97141b2c79b3b93651721c5ebad98718ff32e21cda9f519c7daf6664e09"
+    },
+    {
       "path": "tests/database/foundation.test.mjs",
       "bytes": 11947,
-      "sha256": "c5fdcc2a195fdfe22bbfc3586dd2dfbc21f980c412e4195fb781d1bf8ce41d97"
+      "sha256": "f1f34db32431545363044ca25e238c1d6a7a77fe53fcc6e031e718ecca4a7981"
     },
     {
       "path": "tests/database/recovery.test.mjs",
@@ -816,6 +896,11 @@
       "path": "tests/database/sessions.test.mjs",
       "bytes": 5879,
       "sha256": "b5793280a7b32fb578b9f39ce84ac208e828b0bc69f1f940d82a09549bd01186"
+    },
+    {
+      "path": "tests/email.test.ts",
+      "bytes": 1837,
+      "sha256": "35f735ef6ea56fed8d0b406f9b04e14cd60bcc6684789492182919eeca179315"
     },
     {
       "path": "tests/foundation.test.ts",

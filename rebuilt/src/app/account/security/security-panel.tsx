@@ -5,7 +5,7 @@ import {useRouter} from 'next/navigation';
 import {Button} from '@/components/ui/button';
 import {Card,CardHeader,CardTitle,CardContent} from '@/components/ui/card';
 import {questions,passwordChangeSchema,questionChangeSchema,securityStateSchema,type SecurityState} from '@/lib/auth/security-validation';
-const pending={profile_pending:'Lengkapi profil sebelum melanjutkan. Formulir profil Siswa dan Calon Siswa belum tersedia. Hubungi administrator bila membutuhkan bantuan.',email_pending:'Alamat email kontak Guru harus diverifikasi. Layanan verifikasi email belum tersedia. Hubungi administrator bila membutuhkan bantuan.',survey_pending:'Survei wajib perlu diselesaikan sebelum melanjutkan.',account_pending:'Peran akun belum tersedia. Hubungi administrator.'};
+const pending={profile_pending:'Lengkapi profil sebelum melanjutkan. Formulir profil Siswa dan Calon Siswa belum tersedia. Hubungi administrator bila membutuhkan bantuan.',email_pending:'Alamat email kontak Guru harus diverifikasi sebelum melanjutkan. Minta kode verifikasi lalu masukkan kode dari email Anda.',survey_pending:'Survei wajib perlu diselesaikan sebelum melanjutkan.',account_pending:'Peran akun belum tersedia. Hubungi administrator.'};
 const field='mt-2 w-full rounded-md border bg-background p-2';
 export function SecurityPanel({username,initialState}:{username:string;initialState:SecurityState}){
  const router=useRouter();const [state,setState]=useState(initialState);const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');const [show,setShow]=useState(false);
@@ -30,6 +30,7 @@ export function SecurityPanel({username,initialState}:{username:string;initialSt
   <p role="status" aria-live="polite">{message}</p>
   {state.gate==='password'&&<p className="rounded-md border p-4">Ganti password sementara sebelum melanjutkan. Setelah berhasil, masuk kembali menggunakan password baru.</p>}
   {state.gate in pending&&<Card><CardContent className="pt-6"><p>{pending[state.gate as keyof typeof pending]}</p><Button className="mt-4" variant="outline" onClick={()=>{router.refresh();}}>Periksa kembali</Button></CardContent></Card>}
+  {state.gate==='email_pending'&&<Link href="/account/email" className="text-primary underline">Verifikasi email Guru</Link>}
   {state.gate==='email_pending'&&<Link href="/account/profile" className="text-primary underline">Perbarui email kontak</Link>}
   {state.gate==='security_question'&&<p>Simpan pertanyaan keamanan untuk melanjutkan.</p>}
   {state.gate==='ready'&&<Link href="/account" className="text-primary underline">Lanjut ke akun</Link>}

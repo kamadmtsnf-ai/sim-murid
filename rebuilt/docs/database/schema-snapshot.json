@@ -8,7 +8,8 @@
     "20261019093647_session_management.sql",
     "20261019110537_authorization_rls.sql",
     "20261019113245_account_security_onboarding.sql",
-    "20261019115417_account_recovery_profile.sql"
+    "20261019115417_account_recovery_profile.sql",
+    "20261019130139_email_otp_recovery.sql"
   ],
   "tables": [
     {

@@ -536,6 +536,45 @@ export type Database = {
         Args: { p_session: string; p_user: string }
         Returns: undefined
       }
+      app_email_consume: {
+        Args: {
+          p_hash: string
+          p_id: string
+          p_operation?: string
+          p_session: string
+          p_user: string
+        }
+        Returns: boolean
+      }
+      app_email_context: { Args: { p_id: string }; Returns: Json }
+      app_email_delivery: {
+        Args: {
+          p_accepted: boolean
+          p_id: string
+          p_message?: string
+          p_user: string
+        }
+        Returns: boolean
+      }
+      app_email_recovery_identity: {
+        Args: { p_username: string }
+        Returns: Json
+      }
+      app_email_reserve: {
+        Args: {
+          p_expected_email: string
+          p_hash: string
+          p_id: string
+          p_purpose: string
+          p_session: string
+          p_user: string
+        }
+        Returns: Json
+      }
+      app_email_state: {
+        Args: { p_session: string; p_user: string }
+        Returns: Json
+      }
       app_onboarding_ready: {
         Args: { p_session: string; p_user: string }
         Returns: boolean

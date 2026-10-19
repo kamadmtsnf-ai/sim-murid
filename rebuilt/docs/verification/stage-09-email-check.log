@@ -1,0 +1,281 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 check
+> npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run db:types:check && npm run build
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 typecheck
+> next typegen && tsc --noEmit
+
+Generating route types...
+✓ Types generated successfully
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 lint
+> eslint . --max-warnings 0
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:foundation
+> node --experimental-strip-types --test tests/foundation.test.ts
+
+✔ query pagination validates untrusted query values and bounds (6.192839ms)
+✔ Supabase public config rejects absent/malformed/insecure remote settings and allows loopback (1.672905ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 240.095143
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:database
+> node --test tests/database/foundation.test.mjs
+
+✔ DB01: migration chain creates 27 RLS-protected tables with reference catalogs only (12.400686ms)
+✔ DB02: rupiah domains reject fractional, unsafe, NaN and negative nonnegative values (9.975243ms)
+✔ DB03: UUID identity preserves text usernames and rejects duplicate/whitespace values (11.469483ms)
+✔ DB04: one base role per profile, catalog FK and restricted account deletion (5.694342ms)
+✔ DB05: academic dates and semester year cannot drift or duplicate (14.847323ms)
+✔ DB06: class identity, holiday dedup and assignment date ranges enforced (6.650907ms)
+✔ DB07: registry prevents two unrevoked sessions and enforces application TTL (8.234071ms)
+✔ DB08: OTP table rejects excess attempts, plaintext-sized hash and invalid TTL (2.905677ms)
+✔ DB09: audit rows are append-only including TRUNCATE and require user actors (5.596829ms)
+✔ DB10: approved policies preserved, cannot be rewritten or truncated (3.081946ms)
+✔ DB11: outbox and scheduled job idempotency keys reject duplicates (3.315088ms)
+✔ DB12: import staging preserves source row and deduplicates identity mappings (5.670748ms)
+✔ DB13: anon stays closed; authenticated reads require verified registry (10.247318ms)
+✔ DB14: RLS independently denies data even if SELECT/INSERT accidentally granted (4.080582ms)
+✔ DB15: privileged provisioning can read but cannot overwrite audit via grant (2.467784ms)
+✔ DB16: helper functions are security invoker with fixed search_path and no client EXECUTE (3.619305ms)
+✔ DB17: updated_at trigger overwrites manually forged timestamps (2.38998ms)
+✔ DB18: second fresh database can replay full migration chain with identical counts (1837.903348ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4574.134995
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:auth
+> node --experimental-strip-types --test tests/auth.test.ts && node --test tests/database/auth.test.mjs
+
+✔ username identity preserves zeroes/case and rejects implicit normalization (3.951803ms)
+✔ verified JWT session extraction refuses malformed/mismatched identities (2.747174ms)
+✔ device label uses coarse server classifications without raw UA retention (1.619438ms)
+✔ session actions never infer revoke-all from a missing session id (11.66449ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 241.091764
+✔ AUTH DB: service-only rate limiter has fixed window and counts denied requests (30.46423ms)
+✔ AUTH DB: claim rejects active slot, checks exact session, expires/revokes and audits (24.477698ms)
+✔ AUTH DB: anon/authenticated cannot call privileged RPC or read private auth state (6.031588ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2373.734672
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:sessions
+> node --test tests/database/sessions.test.mjs
+
+✔ SESS01: device labels, safe own list and foreign ownership denial (31.731642ms)
+✔ SESS02: Admin revocation audits actor/target and rejects stale role immediately (13.461054ms)
+✔ SESS03: owner revoke all denies reuse; unregistered/missing/expired Auth sessions rejected (17.741423ms)
+✔ SESS04: expiry cannot be extended by observation; throttle writes; RLS and RPC grants stay closed (11.393086ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2462.225433
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:authorization
+> node --test tests/database/authorization.test.mjs
+
+✔ AZ01: own data only despite forged metadata; private tables and mutations denied (30.69453ms)
+✔ AZ02: admin sees managed records, cannot write action plan without school-head task, stale role revoked (20.317975ms)
+✔ AZ03: school head read-only fees; task union and expiry/revocation are immediate (27.384196ms)
+✔ AZ04: class scope has no global/null escalation; future/expired task ignored (19.135013ms)
+✔ AZ05: savings flag is own read, never manage; premium checked and parent child access denied (21.842247ms)
+✔ AZ06: malformed/missing Auth session, expired registry, inactive and revoked sessions deny direct reads (13.131112ms)
+✔ AZ07: security-definer allowlist is private, no arguments and fixed search path (2.965064ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2670.115974
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:security
+> node --experimental-strip-types --test tests/security.test.ts && node --test tests/database/security.test.mjs
+
+✔ password requirements preserve legacy strength rules and reject mismatches/reuse (5.598841ms)
+✔ answers have unique salts, normalized Unicode, fixed work factor and timing-safe comparison (232.355322ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 464.458416
+✔ SEC01: default gate is password; setup cannot be skipped or leak answer hash (18.695722ms)
+✔ SEC02: begin revokes registry; only private operation can finalize; stale finish denied (17.519907ms)
+✔ SEC03: profile gate precedes question; teacher contact proof precedes ready (22.947155ms)
+✔ SEC04: rate limit is persistent; all security mutations remain service-only (15.402121ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2582.050641
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:recovery
+> node --experimental-strip-types --test tests/recovery.test.ts && node --test tests/database/recovery.test.mjs
+
+✔ recovery request preserves exact username and rejects identity/role injection (3.447072ms)
+✔ admin recovery requires explicit identity proof, evidence and current password (1.215165ms)
+✔ profile DTO rejects privileges, technical email and invalid addresses (1.808145ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 203.243864
+✔ REC01: rate limiter persists, exact lookup and pending request deduplication (23.481785ms)
+✔ REC02: non-admin, self target, invalid evidence and stale role denied (13.882113ms)
+✔ REC03: session recovery revokes target only and cannot replay (11.775312ms)
+✔ REC04: password recovery stays closed until nonce finish; always forces password change (12.645089ms)
+✔ REC05: expiration and rejection do not reset password or revoke innocent sessions (9.711405ms)
+✔ REC06: queue excludes hashes/answers and nonprivileged clients cannot call RPCs (6.723082ms)
+✔ REC07: profile repair allowed at teacher email gate; contact change invalidates proof/OTP (13.043913ms)
+✔ REC08: basic profile cannot complete mandatory student profile or bypass password gate (4.864055ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2436.476251
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 test:email
+> node --experimental-strip-types --test tests/email.test.ts && node --test tests/database/email.test.mjs
+
+✔ OTP uses six digits and HMAC binds every challenge field (2.104657ms)
+✔ transactional templates escape personal text and distinguish recovery from verification (0.338056ms)
+✔ OTP DTO refuses victim identity overrides and malformed codes (3.009545ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 206.655754
+✔ OTP01: teacher gate precedes verification, rejects recovery/untrusted address and enforces cooldown (25.519353ms)
+✔ OTP02: provider failure cannot activate code; resend supersedes previous code (16.182837ms)
+✔ OTP03: fifth wrong attempt locks; correct code cannot bypass lock (13.226601ms)
+✔ OTP04: correct accepted code releases gate exactly once and enables verified-contact recovery (11.800179ms)
+✔ OTP05: recovery code is consumed before Auth mutation; registry revoked and nonce finalizes once (11.073418ms)
+✔ OTP06: five sends per WIB day shared across purposes; expired/resends never reset quota (4.013156ms)
+✔ OTP07: expired, changed email, and technical Auth email never count as contact proof (9.763962ms)
+✔ OTP08: RPCs and hashes remain inaccessible to public clients (6.392877ms)
+✔ OTP09: changing password invalidates every outstanding email recovery code (14.107895ms)
+✔ OTP10: application rolling budget caps provider usage across users (14.103498ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2333.861392
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 db:types:check
+> node scripts/database/generate-types.mjs --check
+
+PASS: 14 public table types match fresh migration replay.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.9.1 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 26ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.5s
+  Running TypeScript ...
+  Finished TypeScript in 4.1s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/20) ...
+  Generating static pages using 8 workers (5/20) 
+  Generating static pages using 8 workers (10/20) 
+  Generating static pages using 8 workers (15/20) 
+✓ Generating static pages using 8 workers (20/20) in 433ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /account
+├ ƒ /account/access
+├ ƒ /account/email
+├ ƒ /account/profile
+├ ƒ /account/recovery
+├ ƒ /account/security
+├ ƒ /account/sessions
+├ ƒ /api/account/email
+├ ƒ /api/account/email-provider
+├ ƒ /api/account/profile
+├ ƒ /api/account/recovery
+├ ƒ /api/auth/access
+├ ƒ /api/auth/email-recovery
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/recovery
+├ ƒ /api/auth/security
+├ ƒ /api/auth/session
+├ ƒ /api/auth/sessions
+├ ƒ /api/health
+├ ○ /foundation
+├ ƒ /login
+├ ○ /recovery
+└ ○ /recovery/email
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

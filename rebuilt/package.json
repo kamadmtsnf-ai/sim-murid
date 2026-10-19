@@ -1,7 +1,7 @@
 {
   "name": "rebuilt-sim-murid",
-  "version": "0.9.0",
-  "description": "Pemulihan akun dan profil dasar — Tahap 9; OTP menunggu koneksi email",
+  "version": "0.9.1",
+  "description": "Keamanan, pemulihan akun dan OTP Brevo — Tahap 9",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -19,7 +19,8 @@
     "test:sessions": "node --test tests/database/sessions.test.mjs",
     "test:authorization": "node --test tests/database/authorization.test.mjs",
     "test:security": "node --experimental-strip-types --test tests/security.test.ts && node --test tests/database/security.test.mjs",
-    "test:recovery": "node --experimental-strip-types --test tests/recovery.test.ts && node --test tests/database/recovery.test.mjs"
+    "test:recovery": "node --experimental-strip-types --test tests/recovery.test.ts && node --test tests/database/recovery.test.mjs",
+    "test:email": "node --experimental-strip-types --test tests/email.test.ts && node --test tests/database/email.test.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
