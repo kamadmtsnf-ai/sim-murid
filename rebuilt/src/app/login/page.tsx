@@ -29,7 +29,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       {query.password === "changed" && <p role="status" className="mb-5 text-sm">Password berhasil diperbarui. Masuk kembali dengan password baru.</p>}
       {query.password === "pending" && <p role="status" className="mb-5 text-sm">Sesi diakhiri untuk keamanan. Perubahan password belum dapat dipastikan selesai. Coba masuk kembali; jika password lama tidak berlaku, gunakan password baru atau hubungi administrator.</p>}
       <LoginForm />
-      <p className="mt-6 text-sm text-muted-foreground">Belum memiliki akun atau lupa password? Hubungi administrator madrasah.</p>
+      <p className="mt-6 text-sm text-muted-foreground">Lupa password atau tidak bisa mengakses sesi lama? <Link href="/recovery" className="text-primary underline">Minta bantuan akun</Link>. Untuk akun baru, hubungi administrator madrasah.</p>
     </CardContent></Card>
   </main>;
 }

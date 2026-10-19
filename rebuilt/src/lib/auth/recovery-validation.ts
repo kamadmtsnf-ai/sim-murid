@@ -1,0 +1,8 @@
+import {z} from 'zod';
+import {normalizeAnswer} from './security-validation.ts';
+import {loginSchema} from './validation.ts';
+export const recoveryRequestSchema=z.object({username:loginSchema.shape.username,requestType:z.enum(['password','session']),method:z.enum(['question','manual']),question:z.enum(['q1','q2','q3','q4','q5']).optional(),answer:z.string().max(256).transform(normalizeAnswer).optional()}).strict().refine(x=>x.method!=='question'||Boolean(x.question&&x.answer),'Pilih pertanyaan dan isi jawaban.');
+export const recoveryResolveSchema=z.object({requestId:z.uuid(),action:z.enum(['approve','reject']),currentPassword:z.string().min(1).max(1024),identityConfirmed:z.literal(true),evidenceReference:z.string().regex(/^[A-Za-z0-9][A-Za-z0-9 ./_-]{7,119}$/,'Isi referensi verifikasi 8–120 karakter tanpa data rahasia.')}).strict();
+export const recoveryListSchema=z.array(z.object({id:z.uuid(),username:z.string(),full_name:z.string(),request_type:z.enum(['password','session']),status:z.enum(['pending','verified']),requested_at:z.iso.datetime({offset:true}),expires_at:z.iso.datetime({offset:true}),security_answer_verified:z.boolean(),self_request:z.boolean()}));
+export type RecoveryList=z.infer<typeof recoveryListSchema>;
+export const profileSchema=z.object({username:z.string(),full_name:z.string().trim().min(1).max(200),phone:z.string().trim().max(40),contact_email:z.string().trim().pipe(z.union([z.literal(''),z.email().max(320)])).transform(s=>s.toLowerCase()).refine(s=>!s.endsWith('@auth.sim-murid.invalid'),'Gunakan email kontak Anda.'),bio:z.string().trim().max(2000),updated_at:z.iso.datetime({offset:true})}).strict();

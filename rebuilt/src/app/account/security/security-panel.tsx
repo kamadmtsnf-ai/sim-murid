@@ -30,6 +30,7 @@ export function SecurityPanel({username,initialState}:{username:string;initialSt
   <p role="status" aria-live="polite">{message}</p>
   {state.gate==='password'&&<p className="rounded-md border p-4">Ganti password sementara sebelum melanjutkan. Setelah berhasil, masuk kembali menggunakan password baru.</p>}
   {state.gate in pending&&<Card><CardContent className="pt-6"><p>{pending[state.gate as keyof typeof pending]}</p><Button className="mt-4" variant="outline" onClick={()=>{router.refresh();}}>Periksa kembali</Button></CardContent></Card>}
+  {state.gate==='email_pending'&&<Link href="/account/profile" className="text-primary underline">Perbarui email kontak</Link>}
   {state.gate==='security_question'&&<p>Simpan pertanyaan keamanan untuk melanjutkan.</p>}
   {state.gate==='ready'&&<Link href="/account" className="text-primary underline">Lanjut ke akun</Link>}
   <Card><CardHeader><CardTitle>Ganti password</CardTitle></CardHeader><CardContent>

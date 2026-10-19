@@ -548,6 +548,52 @@ export type Database = {
         Args: { p_operation: string; p_user: string }
         Returns: boolean
       }
+      app_profile_read: {
+        Args: { p_session: string; p_user: string }
+        Returns: Json
+      }
+      app_profile_update: {
+        Args: {
+          p_bio: string
+          p_email: string
+          p_name: string
+          p_phone: string
+          p_session: string
+          p_user: string
+          p_version: string
+        }
+        Returns: boolean
+      }
+      app_recovery_begin: {
+        Args: {
+          p_actor: string
+          p_evidence: string
+          p_operation: string
+          p_reject?: boolean
+          p_request: string
+          p_session: string
+        }
+        Returns: Json
+      }
+      app_recovery_finish: {
+        Args: {
+          p_actor: string
+          p_operation: string
+          p_request: string
+          p_session: string
+        }
+        Returns: boolean
+      }
+      app_recovery_identity: { Args: { p_username: string }; Returns: Json }
+      app_recovery_list: {
+        Args: { p_actor: string; p_session: string }
+        Returns: Json
+      }
+      app_recovery_probe: { Args: { p_key: string }; Returns: boolean }
+      app_recovery_request: {
+        Args: { p_answer_verified: boolean; p_type: string; p_user: string }
+        Returns: undefined
+      }
       app_security_question_save: {
         Args: {
           p_hash: string
