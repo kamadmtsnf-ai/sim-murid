@@ -29,6 +29,11 @@ Tujuh migrasi cloud; tetap 27 tabel RLS dan 14 SELECT policy public. Keamanan ak
 
 Delapan migrasi; 27 tabel semuanya RLS. Pemulihan melalui Admin dan profil dasar aktif. Commit adbb42655466241759077b3e6a7b3c97e02ac8b5, deployment dpl_6dm31GLi5wBrvNPQvDUBYNqJjxz6 READY, health stage 9. 55 test lokal, build/lint/typecheck, 5 smoke HTTP dan 46 pemeriksaan integrasi produksi lulus. Fixture dinonaktifkan, sesi diakhiri dan kontak uji dipulihkan. Penyedia email aplikasi belum terhubung; OTP Guru/pemulihan mandiri email belum diimplementasikan dan tidak diklaim selesai. Lihat docs/verification/stage-09.md dan docs/deployment/email-setup.md.
 
-## Tahap9 Brevo — status terbaru
+## Tahap9 Brevo — riwayat sebelum penggantian Gmail
 
 Sembilan migrasi;27 tabel RLS. OTP Guru dan pemulihan email diimplementasikan,68 test lokal dan smoke HTTP lulus. Runtime682aaf6b0624895a543292eadef278f919dbe215 pada dpl_78bN8EoUjQrDb1CH5tSoz5YJknLt READY. Brevo menolak autentikasi401/api_key_rejected; verifikasi pengiriman positif masih pending. Key/identitas pengirim tersedia sebagai secret server; EMAIL_OTP_SECRET ditambahkan. Tidak ada pengiriman berhasil diklaim, tidak mengubah paket/biaya. Lihat docs/verification/stage-09-email.md.
+
+
+## Penggantian Gmail — status terbaru
+
+Adapter Brevo diganti Gmail SMTP TLS465 melalui Nodemailer atas permintaan pengguna. GMAIL_SENDER_NAME disiapkan; GMAIL_USER dan GMAIL_APP_PASSWORD belum tersedia pada pemeriksaan metadata Vercel. EMAIL_OTP_SECRET tidak diubah. Belum ada pengiriman Gmail yang diklaim berhasil. Lihat email-setup.md. Tidak mengubah skema, role, password pengguna atau RLS.

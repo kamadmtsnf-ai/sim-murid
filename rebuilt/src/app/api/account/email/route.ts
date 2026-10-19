@@ -4,7 +4,7 @@ import {privateJson,requestAuth,sameOrigin,verifiedPrincipal} from '@/lib/auth/h
 import {securityState} from '@/lib/auth/security';
 import {emailCommand,emailStateSchema} from '@/lib/email/validation';
 import {emailContextSchema,reserveAndSend} from '@/lib/email/service';
-import {emailEnvironment} from '@/lib/email/brevo';
+import {emailEnvironment} from '@/lib/email/gmail';
 import {otpDigest} from '@/lib/email/otp';
 import type {z} from 'zod';
 async function handle(request:NextRequest,command?:z.infer<typeof emailCommand>){

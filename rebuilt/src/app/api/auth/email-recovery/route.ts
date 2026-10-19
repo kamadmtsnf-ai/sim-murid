@@ -6,7 +6,7 @@ import {privateJson,sameOrigin} from '@/lib/auth/http';
 import {passwordValueSchema} from '@/lib/auth/security-validation';
 import {recoveryEmailRequest,recoveryEmailReset} from '@/lib/email/validation';
 import {reserveAndSend,emailContextSchema} from '@/lib/email/service';
-import {emailEnvironment} from '@/lib/email/brevo';
+import {emailEnvironment} from '@/lib/email/gmail';
 import {otpDigest} from '@/lib/email/otp';
 export async function POST(request:NextRequest){
  if(!sameOrigin(request))return privateJson({message:'Permintaan tidak diizinkan.'},403);

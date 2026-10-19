@@ -4,8 +4,8 @@
   "files": [
     {
       "path": ".env.example",
-      "bytes": 366,
-      "sha256": "cd991d0497acdcf283896dc29efcd740ac0c5e69d66126a28c996b18ec116a11"
+      "bytes": 357,
+      "sha256": "815ce601543cb56dfb497735941ab35fe454226f6d65e67a9a4bb561cbf31941"
     },
     {
       "path": ".gitignore",
@@ -29,8 +29,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 2979,
-      "sha256": "28b8ea656878d5aaf36a5fabe46520011ea43a3650f9c22d0aa762e1c987477e"
+      "bytes": 2912,
+      "sha256": "8d7f9fe175353d75797451caffb558996d7c08071a7245508a0041f1fb8ee5cf"
     },
     {
       "path": "components.json",
@@ -64,13 +64,13 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 4228,
-      "sha256": "30ec497e2e70f501daeb2f97abbfad3b68c27d86c4d6f9660e36513726a8de5f"
+      "bytes": 4646,
+      "sha256": "959fa54c8fd84f3bf404cb96f52ae492e0e7ecd980db2e3be51eac53e7279985"
     },
     {
       "path": "docs/deployment/email-setup.md",
-      "bytes": 2454,
-      "sha256": "488999745c6e28efce6579a7828087d014c20aeabbaf9d7561fc6e650a2b0c30"
+      "bytes": 2412,
+      "sha256": "3aab57c9c8f584b89bdf8d4884176eddfb5c3bc2505797bac3595272f29f1166"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
@@ -284,8 +284,13 @@
     },
     {
       "path": "docs/verification/stage-09-email.md",
-      "bytes": 6876,
-      "sha256": "40d5cf33db1482b931dbe121dc558926d1488bfefc8f9b1f6e80d421c870d186"
+      "bytes": 7030,
+      "sha256": "a5bf85b759379ded91ed81a7217613cfa2cbb56331b3e66c54aabf1f8cf0d001"
+    },
+    {
+      "path": "docs/verification/stage-09-gmail.md",
+      "bytes": 1292,
+      "sha256": "9f9a9ca209e429e2de8dc585a68598ed9cccde45121dd18bee8570c6ba7e1f40"
     },
     {
       "path": "docs/verification/stage-09-live.json",
@@ -329,13 +334,13 @@
     },
     {
       "path": "package-lock.json",
-      "bytes": 317319,
-      "sha256": "366d635b02c79bfe71940226d1d8d3b01be93f820927fce8c9feec97633fd114"
+      "bytes": 318119,
+      "sha256": "2f05978de16759d9006a5f0464edffc05447397794a871db49721fb9d94cd1f6"
     },
     {
       "path": "package.json",
-      "bytes": 2527,
-      "sha256": "0e13eeafebde5717a6b28e64ece79169396ac6173a8b0e4c9c2a2af4498b3b0f"
+      "bytes": 2589,
+      "sha256": "af5c20625f7af830a772a0b43f24b565bfc018e5c347a67c13b38597cc407d65"
     },
     {
       "path": "postcss.config.mjs",
@@ -444,13 +449,13 @@
     },
     {
       "path": "src/app/api/account/email-provider/route.ts",
-      "bytes": 1256,
-      "sha256": "81b17b6b7b4914c3849ddb38bdb79e0136a2db14ff032a65cdfd434f42dd8ccb"
+      "bytes": 1218,
+      "sha256": "1eae38fb8f07478d3bd3f61eff5c307c95587adbdef8a49d0e8d2adb61a138df"
     },
     {
       "path": "src/app/api/account/email/route.ts",
       "bytes": 4232,
-      "sha256": "076dca87a54c668f9b8788e1057a651bd1fa1b397d02680e285961de4f958bc2"
+      "sha256": "a328b06ffe7bf459584076ce861e7242f26977cc99153e0ec5022cf1907b7f2c"
     },
     {
       "path": "src/app/api/account/profile/route.ts",
@@ -470,7 +475,7 @@
     {
       "path": "src/app/api/auth/email-recovery/route.ts",
       "bytes": 4491,
-      "sha256": "d632059362fd72815f129cb9498961196c65a84cf9b9174c80e1e3195a8c4489"
+      "sha256": "8ae4d1461df2d001574d1f6102e8704dae593206161ca7c21a2b643aeb53f85d"
     },
     {
       "path": "src/app/api/auth/login/route.ts",
@@ -658,9 +663,14 @@
       "sha256": "6e0af6e323749d9020c4202038ec811365203e1131a246b3b6f4ab634f0e21d0"
     },
     {
-      "path": "src/lib/email/brevo.ts",
-      "bytes": 2305,
-      "sha256": "24bd1be6a4770b65a8cf5604cc3e6760e7993f549b98ba76e10896632ccd9024"
+      "path": "src/lib/email/gmail-config.ts",
+      "bytes": 1107,
+      "sha256": "66bbc516e96de0e328af001ff384de0afceb7e587fc7776baf055636051d0191"
+    },
+    {
+      "path": "src/lib/email/gmail.ts",
+      "bytes": 1512,
+      "sha256": "77bbf1f918e7ca5ca30560a0abba16a36829db14da3df103e01edfb69e51bcee"
     },
     {
       "path": "src/lib/email/otp.ts",
@@ -670,7 +680,7 @@
     {
       "path": "src/lib/email/service.ts",
       "bytes": 1683,
-      "sha256": "27da1c50af91ee50c52862e791aba2181ff32dcb9f7d9f0e85c79c590a3dc73c"
+      "sha256": "ee7395d32027db0bb93ef19c624a0d8e08323af02fd23292878c31bde3bbd725"
     },
     {
       "path": "src/lib/email/validation.ts",
@@ -909,8 +919,8 @@
     },
     {
       "path": "tests/email.test.ts",
-      "bytes": 1837,
-      "sha256": "35f735ef6ea56fed8d0b406f9b04e14cd60bcc6684789492182919eeca179315"
+      "bytes": 3065,
+      "sha256": "e7ad2994cb161fb5a03d739b62f20bb22de9794ec0cb8efde768923166157d89"
     },
     {
       "path": "tests/foundation.test.ts",

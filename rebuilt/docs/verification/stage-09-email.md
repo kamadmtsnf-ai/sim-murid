@@ -1,4 +1,6 @@
-# Penyelesaian email Tahap 9 — Brevo
+# Riwayat email Tahap 9 — Brevo
+
+> Adapter ini telah diganti Gmail SMTP. Status terbaru dan konfigurasi: ../deployment/email-setup.md. Laporan di bawah adalah bukti historis pengujian Brevo.
 
 Status: implementasi dan 68 test lokal selesai; penerimaan pengiriman produksi tertahan autentikasi Brevo (HTTP401, api_key_rejected). Tidak mengklaim email terkirim.
 

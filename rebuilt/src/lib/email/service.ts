@@ -2,7 +2,7 @@ import 'server-only';
 import {randomUUID} from 'node:crypto';
 import {z} from 'zod';
 import {createAuthAdmin} from '@/lib/auth/admin';
-import {emailEnvironment,sendOtp} from './brevo';
+import {emailEnvironment,sendOtp} from './gmail';
 import {newOtp,otpDigest} from './otp';
 export const emailContextSchema=z.object({user_id:z.uuid(),username:z.string(),email:z.string(),purpose:z.enum(['verify','recovery'])});
 export async function reserveAndSend(userId:string,sessionId:string|null,email:string,purpose:'verify'|'recovery',id=randomUUID()){
