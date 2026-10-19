@@ -1,6 +1,6 @@
 # Penyelesaian email Tahap 9 — Brevo
 
-Status: implementasi dan pengujian lokal; verifikasi produksi dilengkapi setelah deployment.
+Status: implementasi dan 68 test lokal selesai; penerimaan pengiriman produksi tertahan autentikasi Brevo (HTTP401, api_key_rejected). Tidak mengklaim email terkirim.
 
 Penyedia dipilih pengguna: Brevo Free; Resend tidak digunakan. Variabel BREVO_API_KEY, BREVO_SENDER_EMAIL dan BREVO_SENDER_NAME tersedia sebagai sensitive production. EMAIL_OTP_SECRET ditambahkan sebagai secret HMAC acak tersendiri. Nilai secret tidak masuk kode, manifest atau respons client.
 
@@ -27,3 +27,17 @@ Tidak ada bypass OTP untuk pengguna produksi atau endpoint test khusus. Jika uji
 Advisor tetap13 INFO schema private tanpa policy client dan WARN lama leaked password protection disabled; tidak mengubah paket. Remediasi: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection .
 
 Referensi: https://developers.brevo.com/reference/send-transac-email dan https://developers.brevo.com/reference/get-senders .
+
+## Hasil koneksi produksi
+
+Implementasi ef029f6caf16d0958f32eafa429003c8b682406f, diagnostik682aaf6b0624895a543292eadef278f919dbe215. Deployment diagnostik dpl_78bN8EoUjQrDb1CH5tSoz5YJknLt READY. Ketiga variabel Brevo dan secret OTP terbaca oleh server (validasi konfigurasi lulus); GET resmi Brevo /v3/senders menolak dengan401 Unauthorized. Pesan provider diklasifikasikan menjadi api_key_rejected, bukan ip_restricted. Raw error/API key tidak dikirim ke client, log atau laporan. Belum ada email dikirim; sender aktif dan kirim201/messageId belum dapat diverifikasi.
+
+Diperlukan tindakan pemilik akun: periksa API key aktif pada Brevo SMTP & API → API Keys (bukan SMTP key/password), ganti BREVO_API_KEY pada Vercel Production dengan key yang diterima, lalu redeploy. Tidak perlu mengulang migrasi atau merotasi EMAIL_OTP_SECRET. Setelah diperbaiki, lanjutkan pengujian kirim aktual, kode yang diterima pengguna dan pemulihan end-to-end.
+
+Lihat stage-09-email-live.json untuk pemeriksaan negatif dan status cleanup. Tidak melakukan pengujian positif palsu dengan menandai provider accepted atau email verified secara manual di produksi. Semua keberhasilan kode/gate/reset positif pada tahap ini dibuktikan di PostgreSQL terisolasi; provider aktual tetap pending.
+
+## Penutupan pengujian
+
+17 pemeriksaan HTTP negatif/guardrail produksi lulus: login fixture sah, penolakan anonim/cross-origin/perubahan role, Guru tetap email_pending, tidak ada digest/secret pada state, alamat kosong tidak dikirim, kode/identitas palsu ditolak, halaman verifikasi tampil, serta respons pemulihan generik untuk akun tanpa kontak terverifikasi/tidak ditemukan. Ini bukan penerimaan pengiriman positif; status tetap pending API key yang diterima Brevo.
+
+Fixture sementara yang sebelumnya diizinkan telah dinonaktifkan, role teacher/student dipulihkan, password dihapus, Auth diblokir, registry dicabut, Auth sessions diakhiri dan marker kontak/verifikasi dibersihkan. Verifikasi:2disabled,0Adminfixture,0appsessionaktif,0Authsessionaktif. File kredensial/cookie dan salinan pepper lokal dihapus; secret server EMAIL_OTP_SECRET tetap tersedia untuk operasional. Tidak ada email dikirim dan tidak ada pengaturan/paket keamanan Brevo diubah.

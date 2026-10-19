@@ -1,6 +1,10 @@
-# Tahap 9 — Pemulihan akun dan profil dasar; OTP tertunda koneksi email
+# Tahap 9 — Status terbaru
 
-Status: pemulihan melalui Admin dan profil dasar telah diterapkan dan diverifikasi. Tahap 9 belum selesai penuh karena belum ada koneksi pengiriman email yang dapat dipakai aplikasi SiM-Murid.
+Pemulihan lewat Admin dan profil dasar telah terverifikasi produksi (46 pemeriksaan pada fase awal). OTP Guru dan pemulihan kontak email telah diimplementasikan melalui Brevo, termasuk template dan batas keamanan, dengan total68 test lokal lulus. Penerimaan email produksi masih tertahan karena Brevo menolak API key dengan HTTP401/api_key_rejected. Lihat [laporan email](stage-09-email.md) dan [petunjuk konfigurasi](../deployment/email-setup.md).
+
+## Riwayat fase pemulihan/profil sebelum Brevo
+
+Catatan berikut merekam fase awal Tahap9; bagian yang menyebut email belum diimplementasikan adalah status historis sebelum integrasi Brevo, bukan status kode terbaru.
 
 ## Sumber dan perilaku
 

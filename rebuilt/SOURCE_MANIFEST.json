@@ -29,8 +29,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5053,
-      "sha256": "3af37a8fc34a7b78f1eb5f99d9b706d0d644f89ded65ba290f1ea7c970ef2eec"
+      "bytes": 2979,
+      "sha256": "28b8ea656878d5aaf36a5fabe46520011ea43a3650f9c22d0aa762e1c987477e"
     },
     {
       "path": "components.json",
@@ -64,13 +64,13 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 3697,
-      "sha256": "ebdffff65cf4a13cceab141ea6f6a589c4381699a3d4a3bd377df28a38c0cea8"
+      "bytes": 4228,
+      "sha256": "30ec497e2e70f501daeb2f97abbfad3b68c27d86c4d6f9660e36513726a8de5f"
     },
     {
       "path": "docs/deployment/email-setup.md",
-      "bytes": 2435,
-      "sha256": "699f60a37631843331c355e188fcf2092a9c62397bdf6bf586338b438a702ad9"
+      "bytes": 2454,
+      "sha256": "488999745c6e28efce6579a7828087d014c20aeabbaf9d7561fc6e650a2b0c30"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
@@ -274,8 +274,8 @@
     },
     {
       "path": "docs/verification/stage-09-email-live.json",
-      "bytes": 440,
-      "sha256": "eef4de50403fa52692de7cd9bdcf86d4a832950c26775627b508748b5a575ba5"
+      "bytes": 1891,
+      "sha256": "feb2732fcd06e6ed454adf9e1a306345a2075983265339d3b467c25a4d5a6923"
     },
     {
       "path": "docs/verification/stage-09-email-smoke.log",
@@ -284,8 +284,8 @@
     },
     {
       "path": "docs/verification/stage-09-email.md",
-      "bytes": 4577,
-      "sha256": "5571e19574380f28a833a287d53e41fbce44c38fa9d79207a54939a2d4cd1d46"
+      "bytes": 6876,
+      "sha256": "40d5cf33db1482b931dbe121dc558926d1488bfefc8f9b1f6e80d421c870d186"
     },
     {
       "path": "docs/verification/stage-09-live.json",
@@ -304,8 +304,8 @@
     },
     {
       "path": "docs/verification/stage-09.md",
-      "bytes": 7861,
-      "sha256": "d9453dba38a22f5aab1316078d87b15b7840c4bc0a813ed907adc819e1adfa5e"
+      "bytes": 8289,
+      "sha256": "b13a09b44a77d821281e1b35559a8ec36d22c9540be16d2c632eb7e1bf8a0979"
     },
     {
       "path": "docs/verification/verification.json",

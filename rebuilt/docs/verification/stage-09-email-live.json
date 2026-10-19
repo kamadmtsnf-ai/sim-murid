@@ -1,16 +1,45 @@
 {
-  "status": "provider_authentication_blocked",
+  "status": "negative_checks_passed_provider_auth_blocked",
   "checks": [
-    "Validation Admin login"
+    "Validation Admin login",
+    "Anonymous verification state denied",
+    "Anonymous provider state denied",
+    "Cross-origin recovery denied",
+    "Admin cannot bypass teacher-only verification gate",
+    "Provider rejects authentication without exposing API key",
+    "Teacher remains gated until real email proof",
+    "Own verification state available without hash or proof",
+    "Verification response contains no digest or secret",
+    "Former Admin JWT cannot read provider data after role change",
+    "Missing contact email prevents outgoing send",
+    "Malformed OTP rejected before consuming attempts",
+    "Caller identity injection rejected",
+    "Teacher domain access remains blocked before verification",
+    "Verification server page renders",
+    "Unverified and missing accounts get the same recovery message",
+    "Unknown recovery challenge cannot change password"
   ],
   "limitations": [
-    "Brevo rejected authenticated sender lookup; live positive delivery/OTP acceptance remains pending.",
-    "No mailbox delivery or browser hydration verification."
+    "Provider authentication rejected with HTTP401/api_key_rejected; no successful sender lookup, send, mailbox delivery or positive OTP live acceptance.",
+    "Positive OTP/gate/recovery cases verified in isolated PostgreSQL; no production accepted/verified flags were forged.",
+    "No visual browser/hydration validation."
   ],
   "provider_check": {
     "http_status": 401,
-    "application_code": "BREVO_HTTP_401",
-    "sender_active": "not_verified",
+    "reason": "api_key_rejected",
     "emails_sent": 0
+  },
+  "implementation_commit": "682aaf6b0624895a543292eadef278f919dbe215",
+  "deployment": "dpl_78bN8EoUjQrDb1CH5tSoz5YJknLt",
+  "local_tests": 68,
+  "live_acceptance": "pending_valid_Brevo_API_key",
+  "emails_sent": 0,
+  "cleanup": {
+    "disabled_fixtures": 2,
+    "remaining_admin_fixtures": 0,
+    "active_app_sessions": 0,
+    "active_auth_sessions": 0,
+    "contact_and_verification_markers_cleared": true,
+    "local_credentials_and_pepper_removed": true
   }
 }
