@@ -1,7 +1,7 @@
 {
   "name": "rebuilt-sim-murid",
-  "version": "0.4.0",
-  "description": "Fondasi database Rebuilt SiM-Murid \u2014 Tahap 4",
+  "version": "0.5.0",
+  "description": "Autentikasi Rebuilt SiM-Murid \u2014 Tahap 5",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,12 +9,13 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
     "test:database": "node --test tests/database/foundation.test.mjs",
-    "db:advisory": "node scripts/database/advisory.mjs"
+    "db:advisory": "node scripts/database/advisory.mjs",
+    "test:auth": "node --experimental-strip-types --test tests/auth.test.ts && node --test tests/database/auth.test.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

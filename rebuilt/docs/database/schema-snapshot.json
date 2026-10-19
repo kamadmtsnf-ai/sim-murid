@@ -3,7 +3,8 @@
   "migrations": [
     "20261019070313_foundation_core.sql",
     "20261019070320_foundation_operations.sql",
-    "20261019070327_foundation_reference_data.sql"
+    "20261019070327_foundation_reference_data.sql",
+    "20261019083745_authentication_runtime.sql"
   ],
   "tables": [
     {
@@ -84,6 +85,16 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "app_sessions",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "auth_accounts",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "auth_attempts",
       "rls_enabled": true
     },
     {

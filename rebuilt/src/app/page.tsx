@@ -28,8 +28,8 @@ export default function HomePage() {
             <p className="mb-5 text-sm font-semibold tracking-widest text-primary uppercase">Sistem Informasi Murid</p>
             <h1 id="welcome-title" className="text-4xl leading-tight font-semibold tracking-tight text-foreground sm:text-5xl">Mendampingi setiap langkah<br className="hidden sm:block" /> perjalanan murid.</h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">SiM-Murid sedang dibangun kembali untuk mendukung layanan madrasah yang terhubung, tertib, dan mudah digunakan.</p>
-            <Button asChild size="lg" className="mt-8"><Link href="/foundation">Lihat kesiapan pengembangan<ArrowRight aria-hidden="true" className="size-4" /></Link></Button>
-            <p className="mt-4 text-sm text-muted-foreground">Layanan akun dan data murid belum dibuka.</p>
+            <Button asChild size="lg" className="mt-8"><Link href="/login">Masuk ke akun<ArrowRight aria-hidden="true" className="size-4" /></Link></Button>
+            <p className="mt-4 text-sm text-muted-foreground">Login akun tersedia. Modul layanan murid sedang dikembangkan.</p>
           </div>
           <Card className="overflow-hidden border-primary/15 shadow-sm">
             <CardHeader className="border-b bg-primary/5 pb-6">

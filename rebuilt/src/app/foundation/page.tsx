@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { appConfig } from "@/config/app";
 
 export const metadata: Metadata = { title: "Kesiapan pengembangan" };
-const foundations = ["Next.js App Router", "TypeScript strict", "Tailwind CSS", "shadcn/ui", "Zod", "Supabase: skema awal diuji lokal"];
+const foundations = ["Next.js App Router", "TypeScript strict", "Tailwind CSS", "shadcn/ui", "Zod", "Supabase: fondasi database dan autentikasi"];
 
 export default function FoundationPage() {
   return (
@@ -17,7 +17,7 @@ export default function FoundationPage() {
       <p className="mt-5 max-w-2xl leading-relaxed text-muted-foreground">Halaman ini menampilkan ruang lingkup fondasi proyek. Fitur operasional madrasah akan dibangun dan diuji pada tahap berikutnya.</p>
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
         <Card><CardHeader><CardTitle>Fondasi yang disiapkan</CardTitle></CardHeader><CardContent><ul className="space-y-3 text-sm">{foundations.map((name) => <li key={name} className="flex items-center gap-2"><span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />{name}</li>)}</ul></CardContent></Card>
-        <Card><CardHeader><CardTitle>Tahap berikutnya</CardTitle></CardHeader><CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground"><p>Tahap 5: autentikasi username dan password.</p><p>Autentikasi, hak akses, serta modul operasional akan ditambahkan sesuai urutan pengerjaan.</p><p>Belum terhubung ke proyek Supabase daring. Data murid belum dimasukkan.</p></CardContent></Card>
+        <Card><CardHeader><CardTitle>Tahap berikutnya</CardTitle></CardHeader><CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground"><p>Tahap 6: penguatan pengelolaan sesi dan perangkat.</p><p>Login username/password dan logout tersedia. Hak akses modul dan onboarding mengikuti tahapan berikutnya.</p><p>Fondasi terhubung ke proyek Supabase khusus SiM-Murid. Data murid belum dimigrasikan.</p></CardContent></Card>
       </div>
     </main>
   );

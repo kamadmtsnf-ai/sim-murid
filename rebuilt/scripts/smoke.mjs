@@ -30,9 +30,9 @@ try {
   const html = await home.text();
   assert.match(html, /<html[^>]*lang="id"/);
   assert.match(html, /SiM-Murid/);
-  assert.match(html, /href="\/foundation"/);
+  assert.match(html, /href="\/login"/);
   assert.match(html, /id="main-content"/);
-  checks.push('Home 200, Indonesian metadata, main landmark, foundation link, no X-Powered-By');
+  checks.push('Home 200, Indonesian metadata, main landmark, login link, no X-Powered-By');
   const stylePath = html.match(/href="([^"]+\.css[^"]*)"/u)?.[1];
   assert.ok(stylePath, 'Built CSS reference missing');
   const css = await fetch(new URL(stylePath.replaceAll('&amp;', '&'), origin));
@@ -42,7 +42,7 @@ try {
   checks.push('Compiled Tailwind CSS asset returns 200 with application utility styles');
   const foundation = await fetch(`${origin}/foundation`);
   assert.equal(foundation.status, 200);
-  assert.match(await foundation.text(), /Tahap 5/);
+  assert.match(await foundation.text(), /Tahap 6/);
   checks.push('Foundation page 200 and accurate next-stage information');
   const missing = await fetch(`${origin}/nonexistent-foundation-route`);
   assert.equal(missing.status, 404);
@@ -51,9 +51,9 @@ try {
   const health = await fetch(`${origin}/api/health`);
   assert.equal(health.status, 200);
   assert.equal(health.headers.get('cache-control'), 'no-store');
-  assert.deepEqual(await health.json(), { status: 'ok', application: 'sim-murid', stage: 4, scope: 'liveness' });
+  assert.deepEqual(await health.json(), { status: 'ok', application: 'sim-murid', stage: 5, scope: 'liveness' });
   checks.push('Health JSON identifies liveness only, no secrets or database-ready claims');
-  console.log(JSON.stringify({ status: 'passed', checks, limitations: ['HTTP smoke test; no visual browser or hydration validation', 'No remote Supabase connection or authentication in stage 4'] }, null, 2));
+  console.log(JSON.stringify({ status: 'passed', checks, limitations: ['HTTP smoke test; no visual browser or hydration validation', 'Authentication integration covered by separate live tests'] }, null, 2));
 } finally {
   if (child.exitCode === null) {
     child.kill('SIGTERM');
