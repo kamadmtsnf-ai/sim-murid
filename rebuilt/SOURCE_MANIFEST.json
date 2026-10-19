@@ -64,8 +64,13 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 3096,
-      "sha256": "ec1c79442ed55a905fe9b4b66afab61569986adb44f2cb462b40ccde25bac5b4"
+      "bytes": 3697,
+      "sha256": "ebdffff65cf4a13cceab141ea6f6a589c4381699a3d4a3bd377df28a38c0cea8"
+    },
+    {
+      "path": "docs/deployment/email-setup.md",
+      "bytes": 2435,
+      "sha256": "699f60a37631843331c355e188fcf2092a9c62397bdf6bf586338b438a702ad9"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
@@ -258,14 +263,24 @@
       "sha256": "381838102dd507fe109bc3c8c757596bc1e763cbf171ecdec270346a5bad260e"
     },
     {
+      "path": "docs/verification/stage-09-live.json",
+      "bytes": 2949,
+      "sha256": "bec174df4e9867ea88f2fc99853acd54b8baf82eee93112dca48f89bedf72758"
+    },
+    {
+      "path": "docs/verification/stage-09-question-live.json",
+      "bytes": 425,
+      "sha256": "b4e03d90e032e3b658da6558363894f9d7d5f0d762ab2b0d5f7b71cfc038d50d"
+    },
+    {
       "path": "docs/verification/stage-09-smoke.log",
       "bytes": 709,
       "sha256": "fdf9712d41f020347910b7311c9038bee368420a6cf8ccb3dcc87797a3479822"
     },
     {
       "path": "docs/verification/stage-09.md",
-      "bytes": 5699,
-      "sha256": "422e0cc56faa0335d6cd7eee96e4952743f2415130c41e7c42138a56470cc31f"
+      "bytes": 7861,
+      "sha256": "d9453dba38a22f5aab1316078d87b15b7840c4bc0a813ed907adc819e1adfa5e"
     },
     {
       "path": "docs/verification/verification.json",
@@ -331,6 +346,11 @@
       "path": "scripts/smoke.mjs",
       "bytes": 3206,
       "sha256": "ac307f319409f35fc1f3139fe56c70a6f651a5b7820bfd4a99a6a4e2bceb5d3e"
+    },
+    {
+      "path": "scripts/verify-recovery-live.py",
+      "bytes": 8066,
+      "sha256": "7048c7f17e369f0ce0d00cb416bfd7d515a30c62d82e85c846a77e24d4254833"
     },
     {
       "path": "scripts/verify-security-live.py",

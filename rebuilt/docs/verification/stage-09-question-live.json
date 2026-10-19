@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Correct question/answer accepted with the same generic status as wrong question",
+    "Correct proof never reveals account state or reset credential",
+    "Answer not returned in response"
+  ],
+  "cloud_proof": {
+    "security_answer_verified": true,
+    "manual_identity_required": true,
+    "password_changed_by_answer_alone": false,
+    "password_operation_started": false
+  }
+}

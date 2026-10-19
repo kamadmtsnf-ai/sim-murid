@@ -1,5 +1,5 @@
 # SiM-Murid
 
-Aplikasi GAS lama berada pada Code.gs dan Index.html. Rebuilt SiM-Murid berada di rebuilt/; Root Directory Vercel: rebuilt.
+Aplikasi GAS lama: Code.gs dan Index.html. Rebuilt SiM-Murid berada di rebuilt/; Root Directory Vercel: rebuilt.
 
-Produksi: https://sim-muridv2.vercel.app . Tahap 8 keamanan akun dan gate onboarding telah diverifikasi: 44 test lokal dan 41 pemeriksaan HTTP/Auth/PostgREST produksi lulus. Akun validasi dinonaktifkan setelah pengujian. Lihat rebuilt/docs/verification/stage-08.md untuk hasil dan batas cakupan. Tahap berikutnya: verifikasi email dan pemulihan akun.
+Produksi: https://sim-muridv2.vercel.app . Tahap 9 parsial: pemulihan melalui Admin dan profil dasar telah diverifikasi dengan 55 test lokal dan 46 pemeriksaan integrasi produksi. OTP Guru dan pemulihan mandiri email menunggu koneksi penyedia. Lihat rebuilt/docs/verification/stage-09.md dan rebuilt/docs/deployment/email-setup.md. Akun validasi sudah dinonaktifkan setelah pengujian.
