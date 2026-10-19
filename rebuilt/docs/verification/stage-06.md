@@ -12,7 +12,7 @@
 
 ## Validasi
 
-Pemeriksaan lokal mencakup 18 test database fondasi, 4 validasi auth/aksi sesi, 3 test database auth dan 4 test database sesi, selain 2 test fondasi Zod. Test sesi memeriksa IDOR/ownership, stale role, audit, revoke-all, Auth session hilang/expired, TTL tetap serta grant tertutup. Build/lint/typecheck dan HTTP smoke dicatat setelah selesai. PGlite menggunakan stub Auth untuk test SQL; integrasi Supabase Auth aktual diuji terpisah.
+Pemeriksaan lokal mencakup 18 test database fondasi, 4 validasi auth/aksi sesi, 3 test database auth dan 4 test database sesi, selain 2 test fondasi Zod. Test sesi memeriksa IDOR/ownership, stale role, audit, revoke-all, Auth session hilang/expired, TTL tetap serta grant tertutup. Typecheck, ESLint tanpa warning, seluruh 31 test, build produksi dan 5 kelompok HTTP smoke lokal lulus. PGlite menggunakan stub Auth untuk test SQL; integrasi Supabase Auth aktual diuji terpisah.
 
 Migrasi cloud `session_management` versi 20261019093647 diterapkan. Tidak menambah tabel publik/domain; total 26 tabel RLS. Snapshot tipe adapter server dihasilkan ulang dari cloud.
 
@@ -21,3 +21,9 @@ Advisor: 26 INFO RLS tanpa policy, sesuai akses default-deny sebelum Tahap 7. Sa
 ## Batas tahap
 
 Tidak membuat akun Admin pengguna nyata. Akun validasi sementara tanpa data pribadi akan dinonaktifkan, password dan sesi dicabut setelah pengujian; identitas audit tetap dipertahankan. Manajemen pengguna umum/reset password/onboarding/OTP dan izin modul menyusul tahapnya. Kebijakan password sementara dan gate wajib ganti password masih mengikuti batas Tahap 5; akses modul domain belum dibuka.
+
+## Verifikasi produksi
+
+Deployment dpl_HCfvepAZc8LxuGsV8Zsh1xHXWP4A, commit 8c069318b6c89fbabc918fb751fce473a3f05e8c, READY. Bukti HTTP di stage-06-live.json mencakup daftar sesi milik sendiri, label perangkat, penolakan akses lintas akun, validasi scope/Origin, pencabutan Admin, penolakan cookie lama, revoke-all sendiri, login kembali dan race dua login yang menghasilkan tepat 200/409, penolakan Admin yang sudah diturunkan perannya, serta penolakan Auth session yang kedaluwarsa meskipun JWT belum lewat expiry.
+
+Pengujian memakai fixture Auth khusus tanpa email kontak, dibuat langsung pada schema Auth hanya untuk validasi; bukan akun pengguna nyata atau alur provisioning aplikasi. Setelah pengujian, profil dinonaktifkan, password dihapus, akun Auth diblokir, registry dicabut dan semua not_after Auth session dipaksa berakhir. Identitas audit yang tidak memuat data pribadi tetap disimpan. Tidak ada uji browser visual/hidrasi; bukti produksi adalah HTTP/API/database.

@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "checks": [
+    "admin login",
+    "ordinary user login",
+    "own session list",
+    "current marker",
+    "device classification",
+    "ordinary user denied foreign list",
+    "ordinary user denied foreign revoke",
+    "admin can list target",
+    "missing session id rejected",
+    "cross-origin revoke denied",
+    "admin revoke target",
+    "one session revoked",
+    "revoked user cookies denied",
+    "relogin after revoke",
+    "owner revoke all",
+    "owner old cookies denied",
+    "concurrent login permits exactly one session",
+    "winning session can revoke itself",
+    "demoted Admin cannot list foreign sessions with old cookies",
+    "demoted Admin cannot revoke foreign sessions with old cookies",
+    "expired Supabase Auth session denied before JWT expiry"
+  ]
+}

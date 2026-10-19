@@ -1,0 +1,19 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.6.0 test:smoke
+> node scripts/smoke.mjs
+
+{
+  "status": "passed",
+  "checks": [
+    "Home 200, Indonesian metadata, main landmark, login link, no X-Powered-By",
+    "Compiled Tailwind CSS asset returns 200 with application utility styles",
+    "Foundation page 200 and accurate next-stage information",
+    "Unknown route returns custom 404",
+    "Health JSON identifies liveness only, no secrets or database-ready claims"
+  ],
+  "limitations": [
+    "HTTP smoke test; no visual browser or hydration validation",
+    "Authentication integration covered by separate live tests"
+  ]
+}

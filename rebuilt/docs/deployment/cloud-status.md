@@ -12,3 +12,7 @@ Diperiksa 19 Oktober 2026.
 - HTTP produksi terverifikasi: / 200, /foundation 200, /api/health 200 dengan stage 4 dan status ok, halaman tidak ditemukan 404. Health hanya liveness, bukan pemeriksaan koneksi DB. Deployment protection dipertahankan.
 
 Tahap 5 autentikasi username/password, logout dan registry sesi sudah diterapkan. Total empat migrasi dan 26 tabel RLS. Lihat docs/verification/stage-05.md dan stage-05-live.json untuk hasil pengujian login produksi. Redirect URL auth berbasis email, storage, RLS operasional, onboarding dan fitur domain mengikuti tahap berikutnya.
+
+## Tahap 6
+
+Pengelolaan sesi/perangkat tersedia di /account/sessions. Lima migrasi diterapkan, 26 tabel tetap RLS. Pemeriksaan Auth session aktual, pencabutan dengan audit, serta peran Admin terkini ditambahkan. Lihat docs/verification/stage-06.md.

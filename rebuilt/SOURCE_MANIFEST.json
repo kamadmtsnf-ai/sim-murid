@@ -64,8 +64,8 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 1940,
-      "sha256": "6046124f0eb8edc04690f8668f86565ed86ac0e51a31a3b8ab9d2101363ea40d"
+      "bytes": 2190,
+      "sha256": "173eea0769dd7edaacdb18470d6a07845a0b894f5b25a0346dd5ff0af3f9988e"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
@@ -183,9 +183,24 @@
       "sha256": "4c6a70e32cd40d582685b683903b2f63bf325ae5043f7842a2ba06b32198c717"
     },
     {
+      "path": "docs/verification/stage-06-check.log",
+      "bytes": 6852,
+      "sha256": "74e2db9ffd0fa25a44ab402480aa9a6cc1b0b56bec879540e4eb95befaf8e855"
+    },
+    {
+      "path": "docs/verification/stage-06-live.json",
+      "bytes": 810,
+      "sha256": "f8eda0db94a8ee73eb05e7b919e7ea985d6aa5c2cdb9fd82db104ff665e40ec7"
+    },
+    {
+      "path": "docs/verification/stage-06-smoke.log",
+      "bytes": 704,
+      "sha256": "f4d214a12481858b8577a11ccdb64c9e5a867baeb7078cf19b986057e1fffa0d"
+    },
+    {
       "path": "docs/verification/stage-06.md",
-      "bytes": 3414,
-      "sha256": "087de187d01d5f757d940a93165ed5442fa600f5f6caf471d55c73c94983d617"
+      "bytes": 4437,
+      "sha256": "a2cbe01d96e9aa12fba4474f5b823ac39a0926659076e234e6364f89f332fb2c"
     },
     {
       "path": "docs/verification/verification.json",
