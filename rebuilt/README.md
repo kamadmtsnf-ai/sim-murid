@@ -1,59 +1,27 @@
-# Rebuilt SiM-Murid — Fondasi Tahap 4
+# Rebuilt SiM-Murid — Tahap 5
 
-Proyek Next.js App Router + TypeScript strict + Tailwind CSS + shadcn/ui + Zod. Target hosting Vercel; SDK Supabase, migrasi dan schema awal tersedia; penerapan daring belum dilakukan.
+Next.js App Router + TypeScript strict + Tailwind CSS + shadcn/ui + Zod + Supabase. Produksi: https://sim-muridv2.vercel.app . GitHub menyimpan aplikasi ini pada `rebuilt/`; gunakan folder tersebut sebagai Root Directory Vercel.
 
-## Menjalankan
+## Pengembangan
 
-Gunakan Node.js24.x dan npm11 atau versi kompatibel. Buka terminal pada folder proyek, lalu:
+Node.js 24.x dan npm 11. Jalankan `npm ci`, isi `.env.local` dari `.env.example` dengan proyek SiM-Murid, lalu `npm run dev`. Halaman fondasi/build dapat berjalan tanpa credential, tetapi login memerlukan kedua konfigurasi publik dan SUPABASE_SECRET_KEY di server. Secret tidak boleh masuk NEXT_PUBLIC atau git. PowerShell dapat menggunakan `npm.cmd` bila diperlukan.
 
-```bash
-npm ci
-npm run dev
-```
+## Autentikasi
 
-Buka http://localhost:3000. Tidak perlu .env.local untuk halaman fondasi. Pada Windows PowerShell gunakan npm.cmd bila kebijakan eksekusi memblokir npm.ps1.
+`/login` menerima username/password; `/account` memeriksa Supabase Auth dan registry sesi aktif di server. Logout melalui POST same-origin. Tidak ada pendaftaran publik atau password bawaan. Sesi biasa maksimum 1 jam, remember maksimum 168 jam; login kedua ditolak selama sesi lain aktif. Refresh Auth tidak memperpanjang TTL aplikasi. Cookie auth HttpOnly; jangan memakai browser auth SDK untuk sesi ini.
 
-## Pemeriksaan
+Provisioning akun hanya oleh operator tepercaya melalui terminal dengan secret server:
 
 ```bash
-npm run typecheck
-npm run lint
-npm run test:foundation
-npm run test:database
-npm run db:advisory
-npm run db:types:check
-npm run build
-npm run start
+node --env-file=.env.local scripts/provision-account.mjs /absolute/private/account-credential.json < account-input.json
 ```
 
-npm run start dijalankan setelah build. Healthcheck liveness: GET /api/health. Halaman / dan /foundation menginformasikan tahap pengembangan; akun dan modul bisnis belum tersedia.
+Input JSON: username (teks persis, nol awal dipertahankan), fullName, role, contactEmail opsional. Role: admin/teacher/student/applicant/customer/alumni/parent. Simpan input dan output di luar repositori. Password sementara unik otomatis ditulis ke output privat yang belum ada; jangan bagikan melalui git. Akun tanpa email menggunakan email teknis UUID khusus Auth, bukan email kontak/tujuan pemulihan. Flag wajib ganti password default true; UI penggantiannya mengikuti tahap keamanan akun. Tidak ada akun Admin dibuat otomatis.
 
-## Batas tahap
+## Validasi dan cakupan
 
-Termasuk konfigurasi strict, dependensi versi eksak+package-lock, komponen UI, validasi Zod bersama, metadata Indonesia/WIB, error/404, registry17modul, kontrak Result, snapshot kebijakan disepakati, dokumentasi acuan dan template environment tanpa rahasia.
+`npm run check` menjalankan typecheck, ESLint, pengujian fondasi, 18 pengujian DB fondasi, 2 validasi auth, 3 pengujian DB auth, drift snapshot dan build. `npm run test:smoke` memeriksa HTTP build lokal; `npm run db:advisory` memeriksa katalog lokal. Keduanya tidak menggantikan Supabase Auth/PostgREST aktual. Lihat `docs/verification/stage-05.md` untuk bukti integrasi.
 
-Termasuk schema awal dan RLS default-deny yang diuji pada PostgreSQL terisolasi. Belum termasuk koneksi Supabase daring, login (Tahap5), izin peran/RLS scoped (Tahap7), modul operasional (Tahap9+), dan deployment produksi. Tidak ada push GitHub, tidak ada proyek Vercel/Supabase baru yang dibuat otomatis.
+Empat migrasi cloud di Supabase qpzoukkhdxpmbtkcqemj; 26 tabel RLS. RPC autentikasi hanya service_role; izin modul belum dibuka. `cloud.types.ts` dihasilkan dari proyek daring; `database.types.ts` tetap snapshot replay PGlite untuk tabel publik. Regenerasikan keduanya bila schema berubah.
 
-## Struktur
-
-- src/app: App Router, halaman dan API liveness.
-- src/components/ui: komponen shadcn/ui dan style tokens.
-- src/config: metadata, registry modul dan snapshot kebijakan.
-- src/lib: utilities, kontrak response, Zod DTO.
-- src/modules: direktori domain sesuai registry; belum diisi service dummy.
-- docs/specifications: dokumen dasar dan matriks kesetaraan.
-- docs/decisions: keputusan bisnis yang berlaku.
-- docs/verification: catatan hasil validasi aktual.
-- tests: verifikasi kontrak validasi fondasi.
-
-## Environment dan pengembangan lanjutan
-
-Lihat .env.example. Salin ke .env.local hanya saat mulai integrasi dan isi credential project yang benar. Publishable key berbeda dari secret key. Jangan memasukkan private key ke NEXT_PUBLIC_ atau commit. src/lib/validation/environment.ts hanya parser input publik, bukan bukti koneksi berhasil.
-
-Dokumentasi resmi yang diperiksa: https://nextjs.org/docs/app/getting-started/installation, https://tailwindcss.com/docs/installation/framework-guides/nextjs, https://ui.shadcn.com/docs/installation/manual, https://ui.shadcn.com/docs/components/radix/button, https://zod.dev/ .
-
-## Database Tahap 4
-
-Lihat docs/database/README.md dan conventions.md untuk24tabel,3migrasi,runbooktarget,seedmaster,SDK dan batas verifikasi. TestPGlite bukan pengganti SupabaseAuth/PostgREST/Storage. Jalankan npm run test:database untuk18pengujian SQL nyata, db:advisory untuk cekcustom dan db:types:check untuk drift.
-
-Hanya proyek lms-nurul-falah yang terlihat saat pemeriksaan; tidak ada perubahan pada proyek itu. Target Rebuilt SiM-Murid belum dipilih.
+Tahap 6 melanjutkan pengelolaan sesi/perangkat dan pencabutan administratif. RLS peran Tahap 7, onboarding/password/recovery/email dan modul operasional mengikuti tahap berikutnya. Dokumen bisnis di `docs/specifications` dan `docs/decisions` tetap menjadi acuan. Health `/api/health` hanya liveness; bukan readiness database. Tidak ada data murid yang dimigrasikan.

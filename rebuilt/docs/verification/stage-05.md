@@ -16,4 +16,13 @@ Typecheck, ESLint tanpa warning, 18 pengujian fondasi database, 2 pengujian vali
 
 Migrasi cloud `authentication_runtime` diterapkan, versi 20261019083745 disamakan dengan lokal. 26 tabel seluruhnya RLS; RPC SECURITY INVOKER, search_path kosong, hanya service_role dapat mengeksekusi. Advisor security: 26 INFO RLS tanpa policy, sesuai penutupan akses hingga Tahap 7.
 
-Hasil integrasi produksi dicatat setelah deployment. Health hanya liveness.
+## Bukti produksi
+
+Deployment dpl_AHQtkwZxFV1wW2MNLDTu3Vtctzme, commit a3bc33ebe93c97d44ed5e03ba00fb052f5e06365, READY. Seluruh 20 pemeriksaan HTTP integrasi lulus (stage-05-live.json): login benar, password salah/username tidak dikenal dengan respons generik sama, Origin berbeda ditolak, HttpOnly, sesi anonim ditolak, identitas akun persis, email teknis tidak bocor, /account terproteksi, batas 1/168 jam, login kedua ditolak tanpa mematikan sesi pertama, logout serta cookie lama ditolak, dan akun nonaktif ditolak meskipun cookie masih ada.
+
+Akun validasi khusus dibuat langsung pada schema Auth hanya untuk fixture pengujian (bukan alur provisioning aplikasi dan tanpa pengiriman email). Akun tersebut dinonaktifkan setelah uji; password dan seluruh sesi Auth/registry dicabut. Identitas anonim validasi dipertahankan karena audit append-only mereferensikannya. CLI provisioning melalui API Admin sudah disiapkan dan diperiksa sintaks/lint, tetapi belum digunakan membuat akun pengguna nyata.
+
+Snapshot tipe untuk adapter server dihasilkan dari Supabase daring. Typecheck, lint, 25 pengujian otomatis, build dan 5 kelompok HTTP smoke lokal lulus. Satu pengulangan build lokal sempat gagal membaca cache Turbopack; penghapusan cache lokal dan build ulang berhasil. Pengujian produksi menggunakan HTTP dan belum merupakan uji browser visual/hidrasi. Health hanya liveness.
+
+Cookie TTL browser bukan otoritas umur sesi; registry server selalu memeriksa expiry/status. Rate limit awal 30 percobaan/15 menit per IP dan per pasangan IP/username (persisten, termasuk percobaan gagal); penyesuaian ambang untuk jaringan bersama dibahas saat operasional. Preview/development belum diberi secret produksi.
+

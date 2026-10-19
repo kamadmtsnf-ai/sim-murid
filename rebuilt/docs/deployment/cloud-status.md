@@ -11,4 +11,4 @@ Diperiksa 19 Oktober 2026.
 - Advisor: INFO RLS tanpa policy dan indeks belum digunakan; tidak ada WARN/ERROR saat verifikasi fondasi. Policy akses operasional mengikuti tahap otorisasi.
 - HTTP produksi terverifikasi: / 200, /foundation 200, /api/health 200 dengan stage 4 dan status ok, halaman tidak ditemukan 404. Health hanya liveness, bukan pemeriksaan koneksi DB. Deployment protection dipertahankan.
 
-Aplikasi masih fondasi Tahap 4. Auth, redirect URL auth produksi, storage, RLS operasional dan fitur domain mengikuti tahap berikutnya.
+Tahap 5 autentikasi username/password, logout dan registry sesi sudah diterapkan. Total empat migrasi dan 26 tabel RLS. Lihat docs/verification/stage-05.md dan stage-05-live.json untuk hasil pengujian login produksi. Redirect URL auth berbasis email, storage, RLS operasional, onboarding dan fitur domain mengikuti tahap berikutnya.

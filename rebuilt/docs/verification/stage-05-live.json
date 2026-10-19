@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "checks": [
+    "anonymous session denied",
+    "cross-origin login denied",
+    "incorrect password denied",
+    "unknown identity has generic response",
+    "valid username password login",
+    "login response only safe destination",
+    "HttpOnly session cookies",
+    "verified session accepted",
+    "exact username preserved",
+    "no technical email in session response",
+    "ordinary application session max 1 hour",
+    "protected server page accepted",
+    "second login rejected",
+    "rejected second login preserves first session",
+    "logout redirect",
+    "old cookies denied after logout",
+    "remember login accepted after logout",
+    "remember session accepted",
+    "remember application session max 168 hours",
+    "inactive account immediately denied with existing cookies"
+  ]
+}

@@ -29,8 +29,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3063,
-      "sha256": "3f41a1318eeceaf6871a7ead03c315773188dc7fbb4f438b28eafdd20234df48"
+      "bytes": 2880,
+      "sha256": "4c8e6d40e1cebdee9923f5856d01ef10e9140238d5144cb8f2a8d7c84b2b6674"
     },
     {
       "path": "components.json",
@@ -64,8 +64,8 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 1743,
-      "sha256": "9c1fea2e517a7f540a296637ab06c68f55fc546df57bd7634947622c50f96b38"
+      "bytes": 1940,
+      "sha256": "6046124f0eb8edc04690f8668f86565ed86ac0e51a31a3b8ab9d2101363ea40d"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
@@ -163,9 +163,24 @@
       "sha256": "d20269a9b515ce0d8abbd39a5d9a6b24a7a789b435e68c351f1f31b654d82d25"
     },
     {
+      "path": "docs/verification/stage-05-build.log",
+      "bytes": 989,
+      "sha256": "0934b1e561366c77719301af21f19cfde184c94db152efdcbcc46fd7b571d25c"
+    },
+    {
+      "path": "docs/verification/stage-05-live.json",
+      "bytes": 831,
+      "sha256": "d455605dc6eeb30af6226485005d599eb6b2170d859c415c12aa812a0997ba3b"
+    },
+    {
+      "path": "docs/verification/stage-05-smoke.log",
+      "bytes": 704,
+      "sha256": "c0aff0107f28a190657dd2d656badb34fcb1417c5d91765fd88b1d19496bdd23"
+    },
+    {
       "path": "docs/verification/stage-05.md",
-      "bytes": 2626,
-      "sha256": "2a7d1add65cb21ea162822b3ff1ec9f9a39262d91889d5db173d67fcfbde9f9f"
+      "bytes": 4253,
+      "sha256": "4c6a70e32cd40d582685b683903b2f63bf325ae5043f7842a2ba06b32198c717"
     },
     {
       "path": "docs/verification/verification.json",
@@ -284,8 +299,8 @@
     },
     {
       "path": "src/app/login/page.tsx",
-      "bytes": 1239,
-      "sha256": "5385543d081ed6750624466a2cef2f7c1e608b5e851798c6665174d4255021d2"
+      "bytes": 2014,
+      "sha256": "2c2ba5cf19170b8ad74c21caa690c8c81ad11fabe756a9c81884a575c9f44b39"
     },
     {
       "path": "src/app/not-found.tsx",
