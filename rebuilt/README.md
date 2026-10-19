@@ -22,9 +22,9 @@ Input JSON: username (teks persis, nol awal dipertahankan), fullName, role, cont
 
 `npm run check` menjalankan typecheck, ESLint, pengujian fondasi, 18 pengujian DB fondasi, 4 validasi auth, 3 pengujian DB auth, 4 sesi, 7 otorisasi, 6 keamanan, drift snapshot dan build. `npm run test:smoke` memeriksa HTTP build lokal; `npm run db:advisory` memeriksa katalog lokal. Keduanya tidak menggantikan Supabase Auth/PostgREST aktual. Lihat `docs/verification/stage-07.md` untuk bukti integrasi.
 
-Tujuh migrasi cloud di Supabase qpzoukkhdxpmbtkcqemj; 27 tabel RLS. RPC autentikasi hanya service_role; izin modul belum dibuka. `cloud.types.ts` dihasilkan dari proyek daring; `database.types.ts` tetap snapshot replay PGlite untuk tabel publik. Regenerasikan keduanya bila schema berubah.
+Tujuh migrasi cloud di Supabase qpzoukkhdxpmbtkcqemj; 27 tabel RLS. RPC internal keamanan hanya service_role; baca fondasi dibatasi RLS dan gate onboarding. `cloud.types.ts` dihasilkan dari proyek daring; `database.types.ts` tetap snapshot replay PGlite untuk tabel publik. Regenerasikan keduanya bila schema berubah.
 
-Tahap 6 menambahkan /account/sessions: riwayat perangkat, pencabutan sesi sendiri dan pencabutan oleh Admin dengan audit serta pemeriksaan role terkini. Tahap 7 melanjutkan izin modul dan RLS. RLS peran Tahap 7, onboarding/password/recovery/email dan modul operasional mengikuti tahap berikutnya. Dokumen bisnis di `docs/specifications` dan `docs/decisions` tetap menjadi acuan. Health `/api/health` hanya liveness; bukan readiness database. Tidak ada data murid yang dimigrasikan.
+Tahap 6 menambahkan /account/sessions: riwayat perangkat, pencabutan sesi sendiri dan pencabutan oleh Admin dengan audit serta pemeriksaan role terkini. Tahap 7 menambahkan izin fondasi dan RLS; Tahap 8 menambahkan keamanan akun dan gate. Pemulihan/email, profil lengkap dan modul operasional mengikuti tahap terkait. Dokumen bisnis di `docs/specifications` dan `docs/decisions` tetap menjadi acuan. Health `/api/health` hanya liveness; bukan readiness database. Tidak ada data murid yang dimigrasikan.
 
 ## Tahap 7
 
@@ -33,3 +33,5 @@ Tahap 6 menambahkan /account/sessions: riwayat perangkat, pencabutan sesi sendir
 ## Tahap 8
 
 /account/security menyediakan ganti password dengan konfirmasi password lama, validasi kekuatan dan pencabutan seluruh registry sesi, serta lima pertanyaan keamanan dengan hash scrypt bersalt. Gate database dan server konsisten: password → profil wajib → pertanyaan → email Guru → layanan. Marker profil penuh hanya boleh diisi validator Tahap 11; email terverifikasi hanya oleh OTP Tahap 9. Survei wajib dihubungkan saat modul survei tersedia. Tidak ada reset berbasis jawaban saja. Lihat docs/verification/stage-08.md.
+
+Pengujian integrasi keamanan memakai `python scripts/verify-security-live.py /absolute/private-fixtures.json` hanya untuk fixture sementara yang telah disetujui. File berisi publishableKey serta objek admin/student dengan id, username, oldPassword, newPassword dan answer. Skrip tidak mengaktifkan akun atau memberikan peran; operator wajib menonaktifkan fixture dan mencabut semua sesi setelah selesai. Jangan menyimpan file kredensial di repositori.

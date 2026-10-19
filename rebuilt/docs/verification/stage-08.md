@@ -1,6 +1,6 @@
 # Tahap 8 — Keamanan akun dan onboarding
 
-Implementasi keamanan akun tersedia di `/account/security` dan `/api/auth/security`. Verifikasi produksi sedang dilakukan; laporan akan dilengkapi setelah pengujian dan cleanup.
+Implementasi keamanan akun tersedia di `/account/security` dan `/api/auth/security`. Implementasi dan verifikasi tahap ini selesai untuk cakupan keamanan akun dan gate fondasi.
 
 ## Perilaku
 
@@ -24,3 +24,11 @@ Tujuh migrasi replayable; cloud migration `20261019113245_account_security_onboa
 Advisor keamanan: 13 INFO tabel private sengaja tanpa policy client dan WARN lama perlindungan password bocor belum aktif. Tidak mengubah paket atau biaya. Remediasi: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection .
 
 Batas: belum ada pengujian visual browser/hidrasi. Modul profil lengkap, OTP, pemulihan oleh petugas dan survei belum diimplementasikan pada tahap ini; akun dengan kewajiban tersebut tetap tertahan secara eksplisit.
+
+## Integrasi produksi dan cleanup
+
+Kode a42ad8d1f9a1225b31b74c528c5206aec363c674 diterapkan sebagai deployment dpl_DxsMKqufPib9EA1sWrhYSnLcp9e4, READY. Health produksi stage 8. Sebanyak 41 pemeriksaan HTTP/Auth/PostgREST lulus pada dua fixture sementara yang sebelumnya disetujui pengguna; lihat stage-08-live.json dan scripts/verify-security-live.py.
+
+Bukti meliputi password saat ini salah ditolak, password baru berlaku dan password lama ditolak, sesi/JWT lama kehilangan akses, pertanyaan wajib sebelum ready, respons tanpa jawaban/hash, akses Admin pulih setelah ready, RPC finalisasi langsung ditolak, Siswa tanpa email bisa mengganti password lalu tetap tertahan pada profil wajib, bypass pertanyaan/REST/API ditolak, dan percobaan keamanan keenam menghasilkan 429. Query cloud membuktikan encoding scrypt bersalt dan audit dua perubahan password serta satu pengaturan pertanyaan. Probe RPC pertama pada skrip uji belum menyertakan argumen; skrip diperbaiki dan pengujian dilanjutkan dari akun Admin yang sudah ready, tanpa perubahan kode aplikasi.
+
+Setelah pengujian kedua fixture inactive, password dihapus, Auth diblokir, peran semula teacher/student dipulihkan, registry dicabut dan seluruh Auth session diakhiri. Verifikasi cleanup: 2 disabled, 0 Admin fixture, 0 app session aktif, 0 Auth session aktif. File kredensial lokal dihapus. Tidak ada data pengguna nyata diubah atau akun Admin nyata dibuat.

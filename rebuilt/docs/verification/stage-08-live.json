@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "checks": [
+    "Anonymous security state denied",
+    "Cross-origin mutation denied",
+    "Admin fixture login",
+    "Temporary password gate",
+    "Temporary password gate safe response",
+    "Pending password blocks direct RLS reads",
+    "Pending password blocks session management",
+    "Wrong current password rejected",
+    "Password changed with explicit reauthentication",
+    "Old browser session invalid after password change",
+    "Old signed JWT cannot read after password change",
+    "Old password no longer authenticates",
+    "New password authenticates",
+    "Question setup follows password",
+    "Question setup follows password safe response",
+    "Security server page renders forms",
+    "Question setup requires current password",
+    "Question saved and Admin onboarding ready",
+    "Question response contains no answer or hash",
+    "Canonical ready state",
+    "Canonical ready state safe response",
+    "Ready Admin access context works",
+    "Ready Admin direct RLS read works",
+    "Ready Admin session management works",
+    "Admin resumes completed onboarding",
+    "Ready state persists after re-login",
+    "Ready state persists after re-login safe response",
+    "Authenticated cannot invoke password finalizer directly",
+    "Siswa fixture login",
+    "Siswa temporary password gate",
+    "Siswa temporary password gate safe response",
+    "Siswa changes password without contact email",
+    "Siswa new password authenticates",
+    "Siswa full profile required before question",
+    "Siswa full profile required before question safe response",
+    "Siswa cannot skip profile order",
+    "Siswa question setup bypass denied",
+    "Siswa profile pending blocks direct RLS reads",
+    "Siswa profile pending blocks domain context",
+    "Persistent security attempt limit 5",
+    "Persistent security attempt limit 6"
+  ],
+  "limitations": [
+    "HTTP/Auth/PostgREST integration; no visual browser/hydration validation."
+  ],
+  "implementation_commit": "a42ad8d1f9a1225b31b74c528c5206aec363c674",
+  "deployment": "dpl_DxsMKqufPib9EA1sWrhYSnLcp9e4",
+  "health": {
+    "status": "ok",
+    "application": "sim-murid",
+    "stage": 8,
+    "scope": "liveness"
+  },
+  "cloud_catalog": {
+    "tables": 27,
+    "public_select_policies": 14,
+    "client_security_rpc_grants": 0
+  },
+  "cloud_security_storage": {
+    "valid_salted_scrypt_encoding": true,
+    "password_change_started_audits": 2,
+    "password_changed_audits": 2,
+    "question_changed_audits": 1
+  },
+  "harness_note": "Initial direct RPC probe omitted required arguments; corrected to use a complete DTO and resumed the already-ready Admin. No application-code change was needed.",
+  "cleanup": {
+    "disabled_fixtures": 2,
+    "remaining_admin_fixtures": 0,
+    "active_app_sessions": 0,
+    "active_auth_sessions": 0,
+    "local_credentials_removed": true
+  }
+}

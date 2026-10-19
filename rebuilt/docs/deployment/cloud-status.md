@@ -20,3 +20,7 @@ Pengelolaan sesi/perangkat tersedia di /account/sessions. Lima migrasi diterapka
 ## Tahap 7
 
 Enam migrasi; 27 tabel RLS dan 14 policy SELECT. /account/access dan /api/auth/access tersedia. Lima uji HTTP negatif dan 21 uji Auth/PostgREST produksi tambahan lulus setelah persetujuan pengguna. Akun validasi sudah dinonaktifkan dan seluruh sesi dicabut. Lihat docs/verification/stage-07.md.
+
+## Tahap 8 — status terbaru
+
+Tujuh migrasi cloud; tetap 27 tabel RLS dan 14 SELECT policy public. Keamanan akun dan gate terpadu aktif. Commit implementasi a42ad8d1f9a1225b31b74c528c5206aec363c674, deployment dpl_DxsMKqufPib9EA1sWrhYSnLcp9e4 READY; health stage 8. npm ci, 44 test lokal, build/lint/typecheck, 5 smoke HTTP dan 41 pemeriksaan produksi lulus. Kedua fixture validasi sudah dinonaktifkan dan seluruh sesinya diakhiri. OTP/pemulihan Tahap 9, formulir profil penuh Tahap 11, serta gate survei saat modulnya tersedia tetap belum diimplementasikan; lihat docs/verification/stage-08.md.

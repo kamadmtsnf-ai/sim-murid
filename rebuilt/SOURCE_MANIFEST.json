@@ -29,8 +29,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4026,
-      "sha256": "a3413f40b6e1c7858c93644741308721de8fe6cb35d644112fabb8429142538f"
+      "bytes": 4528,
+      "sha256": "9fcbf26bf3522856a2975441a9acc438ef697d70319bd9bb9eefced6be047306"
     },
     {
       "path": "components.json",
@@ -64,8 +64,8 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 2498,
-      "sha256": "e87bb5a8000d5634b3c9ee064ccc416f24fbb2be4aa802ece6f94f4a9a88f4e6"
+      "bytes": 3096,
+      "sha256": "ec1c79442ed55a905fe9b4b66afab61569986adb44f2cb462b40ccde25bac5b4"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
@@ -238,14 +238,19 @@
       "sha256": "6969bea38f2c973fdc7732ee3c522b963c0d60e055fe7c56ab4ecb4edb7b1fef"
     },
     {
+      "path": "docs/verification/stage-08-live.json",
+      "bytes": 2883,
+      "sha256": "4ef2131ed91d6cfcd593f30d25cd8c2d9baeeb319a3f2ce33633717b7e19a26c"
+    },
+    {
       "path": "docs/verification/stage-08-smoke.log",
       "bytes": 704,
       "sha256": "2b5e5661c511294d14b7b715669f883770867e08294364f5874d48ae786b891d"
     },
     {
       "path": "docs/verification/stage-08.md",
-      "bytes": 3521,
-      "sha256": "de03d1373ea84e4993e0127ba280c1a231aa7b5c0f56628247265c4dba1ae978"
+      "bytes": 4936,
+      "sha256": "e015f4163d1d3f1be75dade68c9f5310266f3af1080d2c69279e88fbdab2aee1"
     },
     {
       "path": "docs/verification/verification.json",
@@ -311,6 +316,11 @@
       "path": "scripts/smoke.mjs",
       "bytes": 3201,
       "sha256": "69bbf153f79155f230535b4f55ef28165b84950f2928218fc72dcd62fab2c135"
+    },
+    {
+      "path": "scripts/verify-security-live.py",
+      "bytes": 6998,
+      "sha256": "d8cdb6d2482e030955d3386f1b3aeac28bad9fd2cbbe7ed57c91b0f7555fd283"
     },
     {
       "path": "src/app/account/access/page.tsx",
