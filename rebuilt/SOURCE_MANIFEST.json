@@ -64,8 +64,8 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 5176,
-      "sha256": "0a5650b58956531329f2c08653dd421120a54e3d48a15565fee20f9f5b4d07c0"
+      "bytes": 5381,
+      "sha256": "8a2ff20ae36c80b94bd908026a0ca244a40bb59cddce4ae7c56c4466dbb1d575"
     },
     {
       "path": "docs/deployment/email-setup.md",
@@ -313,9 +313,14 @@
       "sha256": "b13a09b44a77d821281e1b35559a8ec36d22c9540be16d2c632eb7e1bf8a0979"
     },
     {
+      "path": "docs/verification/stage-10-live.json",
+      "bytes": 1550,
+      "sha256": "26826cb1323dc4d28ce297a2464d733851acdb6a3b726be401030c6746270b15"
+    },
+    {
       "path": "docs/verification/stage-10.md",
-      "bytes": 5529,
-      "sha256": "0c2fa11fcccb3d8c22ae6cce56de5d972a18c4f47d1c84491c356ca9f0655c9d"
+      "bytes": 6288,
+      "sha256": "b4f8f992a589789afb60fe17891fe8f585986fd623933a75403445fd4a5127d1"
     },
     {
       "path": "docs/verification/verification.json",
@@ -374,8 +379,8 @@
     },
     {
       "path": "scripts/database/verify-settings.sql",
-      "bytes": 3897,
-      "sha256": "5b1cea3df7ff026eba6fd43827fb37c9d9643cf78ced140b0065627e16422fc7"
+      "bytes": 3937,
+      "sha256": "ded4ee9819ad32f1d66802a35e0e1acb5245119d6988eca03660db31210ea32a"
     },
     {
       "path": "scripts/provision-account.mjs",

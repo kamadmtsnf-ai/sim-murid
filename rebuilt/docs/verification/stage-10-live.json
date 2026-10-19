@@ -1,0 +1,65 @@
+{
+  "implementation_commit": "a344657cc16ddcb15c49558bf50223df45c2f6f0",
+  "deployment": "dpl_8WUn7TCtEwZ6hER8zdWx3vw6KJfB",
+  "deployment_status": "READY",
+  "target": "production",
+  "local_tests": 80,
+  "http_smoke": 5,
+  "cloud_database": "passed_transaction_rolled_back_as_service_role",
+  "cloud_http": [
+    {
+      "check": "Health reports stage10",
+      "http": 200,
+      "passed": true
+    },
+    {
+      "check": "Anonymous settings read denied",
+      "http": 401,
+      "passed": true
+    },
+    {
+      "check": "Anonymous settings write denied",
+      "http": 401,
+      "passed": true
+    },
+    {
+      "check": "Cross-origin settings write denied",
+      "http": 403,
+      "passed": true
+    },
+    {
+      "check": "Anonymous logo upload denied",
+      "http": 401,
+      "passed": true
+    },
+    {
+      "check": "Cross-origin logo upload denied",
+      "http": 403,
+      "passed": true
+    },
+    {
+      "check": "Settings page requires login",
+      "http": 307,
+      "passed": true
+    },
+    {
+      "check": "Anonymous RPC read denied",
+      "http": 401,
+      "passed": true
+    },
+    {
+      "check": "Anonymous direct Storage upload denied",
+      "http": 400,
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "No authenticated Admin browser interaction or positive Storage upload verified.",
+    "No screenshot/hydration evidence.",
+    "No Gmail inbox/OTP delivery acceptance in this stage."
+  ],
+  "cleanup": {
+    "transaction_test_profiles_remaining": 0,
+    "permanent_test_accounts_created": 0
+  }
+}

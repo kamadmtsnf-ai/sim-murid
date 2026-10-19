@@ -37,3 +37,10 @@ Logo: path acak server, bukan nama/path kiriman client. Berkas distage pada antr
 Migrasi lokal 20261019155240_school_settings.sql dibuat CLI. apply_migration konektor dua kali gagal Invalid/expired requestState tanpa mengubah schema. Fallback menjalankan SQL migration dan catatan supabase_migrations.schema_migrations dalam satu transaksi; versi/nama/bucket diperiksa setelah commit. Cloud.types dihasilkan ulang dari proyek qpzoukkhdxpmbtkcqemj. Total30tabel public/private aplikasi tetap RLS. Akun/sesi permanen tidak dibuat untuk tes.
 
 Gmail SMTP telah dibuktikan pengguna melalui endpoint diagnostik: active=true,deliveryVerified=false. Ini membuktikan autentikasi SMTP; inbox/OTP produksi belum dibuktikan dan terpisah dari penerimaan Tahap10.
+
+
+## Hasil deployment produksi
+
+Commit a344657cc16ddcb15c49558bf50223df45c2f6f0, deployment dpl_8WUn7TCtEwZ6hER8zdWx3vw6KJfB READY dan alias sim-muridv2.vercel.app. Tujuh pemeriksaan aplikasi HTTP lulus: health stage10, GET/POST settings anonim401, lintas-origin403, unggahlogo anonim401/lintas-origin403, halaman settings redirect login307. Dua pemeriksaan langsung Supabase lulus: RPC anonim401 dan unggah Storage anonim400 ditolak. Runtime logs error/fatal tidak ditemukan dalam jendela10menit yang diperiksa; ini bukan bukti seluruh alur Admin telah diuji.
+
+Transaksi cloud juga diulang dengan SET LOCAL ROLE service_role setelah setup ephemeral, dan lulus; seluruh data di-ROLLBACK. Tidak ada profil/sesi test permanen tersisa. Lihat stage-10-live.json.

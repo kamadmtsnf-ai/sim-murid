@@ -9,6 +9,7 @@ begin
  insert into sim_murid_private.auth_accounts(user_id,must_change_password) values(u,false);
  insert into sim_murid_private.security_questions(user_id,question_code,answer_hash) values(u,'q1',repeat('0',64));
  perform public.app_auth_claim(u,s,false);
+ execute 'set local role service_role';
  r=public.app_settings_read(u,s);if r is null then raise exception 'ready Admin read failed';end if;v=(r->>'revision')::bigint;
  c=jsonb_build_object('type','subject','id',null,'name','Validation-'||u::text,'active',true);
  r=public.app_settings_write(u,s,op,v,c);if r->>'code'<>'saved' then raise exception 'catalog create failed: %',r;end if;
