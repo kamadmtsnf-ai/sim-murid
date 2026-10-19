@@ -1,0 +1,52 @@
+{
+  "stage": 4,
+  "version": "0.4.0",
+  "status": "local foundation verified; remote target pending",
+  "remote_project_mutations": false,
+  "discovery": "Only lms-nurul-falah listed; not selected",
+  "database_engine": "PGlite 0.5.10 PostgreSQL 18.6 WASM",
+  "supabase_target_major": 17,
+  "tests": {
+    "database": {
+      "pass": 18,
+      "fail": 0
+    },
+    "foundation": {
+      "pass": 2,
+      "fail": 0
+    },
+    "http_smoke_groups": 5,
+    "typecheck": "passed",
+    "lint": "passed",
+    "production_build": "passed",
+    "custom_catalog_checks": "passed",
+    "types_drift": "passed"
+  },
+  "migrations": [
+    {
+      "file": "20261019061514_foundation_core.sql",
+      "sha256": "0dcad2f2c242fc5fffd4b428fd0e2dfa5d3eff8f5d5053fe6e5965815799cd61"
+    },
+    {
+      "file": "20261019061517_foundation_operations.sql",
+      "sha256": "49be6d31973cfccd6dd8aa3112b6b2ba5ed31fc67f87f0cf1f4c1faa5e8e9475"
+    },
+    {
+      "file": "20261019061520_foundation_reference_data.sql",
+      "sha256": "ad18254f9bcd428e9aed28c05e24c2ccef2c55aab5ab79419b73f73784b2ed1a"
+    }
+  ],
+  "tables": 24,
+  "public_tables": 14,
+  "private_tables": 10,
+  "full_supabase_auth_api_storage_tested": false,
+  "remote_advisors_run": false,
+  "pending": [
+    "Select dedicated Supabase target",
+    "Replay/verify on PostgreSQL 17 and full Supabase stack",
+    "Generate official target types",
+    "Scoped permission policies stage 7",
+    "Auth runtime stage 5\u20136",
+    "D10 KKM archive decision"
+  ]
+}

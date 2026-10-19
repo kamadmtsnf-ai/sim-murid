@@ -1,0 +1,26 @@
+✔ DB01: migration chain creates 24 RLS-protected tables with reference catalogs only (11.428362ms)
+✔ DB02: rupiah domains reject fractional, unsafe, NaN and negative nonnegative values (12.446681ms)
+✔ DB03: UUID identity preserves text usernames and rejects duplicate/whitespace values (16.364316ms)
+✔ DB04: one base role per profile, catalog FK and restricted account deletion (7.207494ms)
+✔ DB05: academic dates and semester year cannot drift or duplicate (15.351569ms)
+✔ DB06: class identity, holiday dedup and assignment date ranges enforced (9.368233ms)
+✔ DB07: registry prevents two unrevoked sessions and enforces application TTL (6.997236ms)
+✔ DB08: OTP table rejects excess attempts, plaintext-sized hash and invalid TTL (3.072351ms)
+✔ DB09: audit rows are append-only including TRUNCATE and require user actors (6.716911ms)
+✔ DB10: approved policies preserved, cannot be rewritten or truncated (7.785ms)
+✔ DB11: outbox and scheduled job idempotency keys reject duplicates (8.118542ms)
+✔ DB12: import staging preserves source row and deduplicates identity mappings (7.678763ms)
+✔ DB13: anon/authenticated have no table grants or private schema access (22.482614ms)
+✔ DB14: RLS independently denies data even if SELECT/INSERT accidentally granted (8.290227ms)
+✔ DB15: privileged provisioning can read but cannot overwrite audit via grant (7.283344ms)
+✔ DB16: helper functions are security invoker with fixed search_path and no client EXECUTE (10.40012ms)
+✔ DB17: updated_at trigger overwrites manually forged timestamps (5.810163ms)
+✔ DB18: second fresh database can replay full migration chain with identical counts (3089.675001ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6968.176933

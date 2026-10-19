@@ -1,0 +1,1184 @@
+{
+  "source": "isolated PGlite PostgreSQL introspection, not remote Supabase",
+  "migrations": [
+    "20261019061514_foundation_core.sql",
+    "20261019061517_foundation_operations.sql",
+    "20261019061520_foundation_reference_data.sql"
+  ],
+  "tables": [
+    {
+      "schema_name": "public",
+      "table_name": "academic_years",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "assignment_catalog",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "business_policies",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "classes",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "holidays",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "memorization_catalog",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "profiles",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "role_catalog",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "school_profile",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "semesters",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "subjects",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_access_flags",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_assignments",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_roles",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "activity_logs",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "app_sessions",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "email_verifications",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "import_batches",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "import_rows",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "job_runs",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "legacy_id_map",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "outbox",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "recovery_requests",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "security_questions",
+      "rls_enabled": true
+    }
+  ],
+  "publicColumns": [
+    {
+      "table_name": "academic_years",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "academic_years",
+      "column_name": "start_year",
+      "data_type": "smallint",
+      "udt_name": "int2",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "academic_years",
+      "column_name": "starts_on",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "ALWAYS",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "academic_years",
+      "column_name": "ends_on",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "ALWAYS",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "academic_years",
+      "column_name": "is_active",
+      "data_type": "boolean",
+      "udt_name": "bool",
+      "is_nullable": "NO",
+      "column_default": "false",
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "academic_years",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "assignment_catalog",
+      "column_name": "code",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "assignment_catalog",
+      "column_name": "legacy_label",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "assignment_catalog",
+      "column_name": "description",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": "''::text",
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "business_policies",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "business_policies",
+      "column_name": "policy_type",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "business_policies",
+      "column_name": "version",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "business_policies",
+      "column_name": "approved_on",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "business_policies",
+      "column_name": "configuration",
+      "data_type": "jsonb",
+      "udt_name": "jsonb",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "business_policies",
+      "column_name": "approval_source",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "business_policies",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 7
+    },
+    {
+      "table_name": "classes",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "classes",
+      "column_name": "academic_year_id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "classes",
+      "column_name": "level",
+      "data_type": "smallint",
+      "udt_name": "int2",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "classes",
+      "column_name": "name",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "classes",
+      "column_name": "homeroom_teacher_id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "classes",
+      "column_name": "archived_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "classes",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 7
+    },
+    {
+      "table_name": "classes",
+      "column_name": "updated_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 8
+    },
+    {
+      "table_name": "holidays",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "holidays",
+      "column_name": "holiday_date",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "holidays",
+      "column_name": "description",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "holidays",
+      "column_name": "created_by",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "holidays",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "holidays",
+      "column_name": "updated_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "memorization_catalog",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "memorization_catalog",
+      "column_name": "name",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "memorization_catalog",
+      "column_name": "active",
+      "data_type": "boolean",
+      "udt_name": "bool",
+      "is_nullable": "NO",
+      "column_default": "true",
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "memorization_catalog",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "memorization_catalog",
+      "column_name": "updated_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "username",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "full_name",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "phone",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "contact_email",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "bio",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": "''::text",
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "status",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": "'active'::text",
+      "is_generated": "NEVER",
+      "ordinal_position": 7
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 8
+    },
+    {
+      "table_name": "profiles",
+      "column_name": "updated_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 9
+    },
+    {
+      "table_name": "role_catalog",
+      "column_name": "code",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "role_catalog",
+      "column_name": "legacy_label",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "role_catalog",
+      "column_name": "description",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": "''::text",
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "singleton_key",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": "'main'::text",
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "name",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "identity_data",
+      "data_type": "jsonb",
+      "udt_name": "jsonb",
+      "is_nullable": "NO",
+      "column_default": "'{}'::jsonb",
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "address_data",
+      "data_type": "jsonb",
+      "udt_name": "jsonb",
+      "is_nullable": "NO",
+      "column_default": "'{}'::jsonb",
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "asset_data",
+      "data_type": "jsonb",
+      "udt_name": "jsonb",
+      "is_nullable": "NO",
+      "column_default": "'{}'::jsonb",
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "updated_by",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 7
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 8
+    },
+    {
+      "table_name": "school_profile",
+      "column_name": "updated_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 9
+    },
+    {
+      "table_name": "semesters",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "semesters",
+      "column_name": "academic_year_id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "semesters",
+      "column_name": "year_start",
+      "data_type": "smallint",
+      "udt_name": "int2",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "semesters",
+      "column_name": "number",
+      "data_type": "smallint",
+      "udt_name": "int2",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "semesters",
+      "column_name": "starts_on",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "ALWAYS",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "semesters",
+      "column_name": "ends_on",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "ALWAYS",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "subjects",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "subjects",
+      "column_name": "code",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "subjects",
+      "column_name": "name",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "subjects",
+      "column_name": "sort_order",
+      "data_type": "smallint",
+      "udt_name": "int2",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "subjects",
+      "column_name": "active",
+      "data_type": "boolean",
+      "udt_name": "bool",
+      "is_nullable": "NO",
+      "column_default": "true",
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "subjects",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "subjects",
+      "column_name": "updated_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 7
+    },
+    {
+      "table_name": "user_access_flags",
+      "column_name": "user_id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "user_access_flags",
+      "column_name": "premium_access",
+      "data_type": "boolean",
+      "udt_name": "bool",
+      "is_nullable": "NO",
+      "column_default": "false",
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "user_access_flags",
+      "column_name": "savings_access",
+      "data_type": "boolean",
+      "udt_name": "bool",
+      "is_nullable": "NO",
+      "column_default": "false",
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "user_access_flags",
+      "column_name": "teacher_email_verified_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "user_access_flags",
+      "column_name": "updated_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "user_access_flags",
+      "column_name": "updated_by",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()",
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "user_id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "assignment_code",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "scope_class_id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "valid_from",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 5
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "valid_until",
+      "data_type": "date",
+      "udt_name": "date",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 6
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "assigned_by",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 7
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "created_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 8
+    },
+    {
+      "table_name": "user_assignments",
+      "column_name": "revoked_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 9
+    },
+    {
+      "table_name": "user_roles",
+      "column_name": "user_id",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 1
+    },
+    {
+      "table_name": "user_roles",
+      "column_name": "role_code",
+      "data_type": "text",
+      "udt_name": "text",
+      "is_nullable": "NO",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 2
+    },
+    {
+      "table_name": "user_roles",
+      "column_name": "assigned_at",
+      "data_type": "timestamp with time zone",
+      "udt_name": "timestamptz",
+      "is_nullable": "NO",
+      "column_default": "now()",
+      "is_generated": "NEVER",
+      "ordinal_position": 3
+    },
+    {
+      "table_name": "user_roles",
+      "column_name": "assigned_by",
+      "data_type": "uuid",
+      "udt_name": "uuid",
+      "is_nullable": "YES",
+      "column_default": null,
+      "is_generated": "NEVER",
+      "ordinal_position": 4
+    }
+  ],
+  "publicForeignKeys": [
+    {
+      "table_name": "classes",
+      "foreign_key_name": "classes_academic_year_id_fkey",
+      "referenced_relation": "academic_years",
+      "columns": [
+        "academic_year_id"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "classes",
+      "foreign_key_name": "classes_homeroom_teacher_id_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "homeroom_teacher_id"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "holidays",
+      "foreign_key_name": "holidays_created_by_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "created_by"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "school_profile",
+      "foreign_key_name": "school_profile_updated_by_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "updated_by"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "semesters",
+      "foreign_key_name": "semesters_academic_year_id_year_start_fkey",
+      "referenced_relation": "academic_years",
+      "columns": [
+        "academic_year_id",
+        "year_start"
+      ],
+      "referenced_columns": [
+        "id",
+        "start_year"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_access_flags",
+      "foreign_key_name": "user_access_flags_updated_by_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "updated_by"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_access_flags",
+      "foreign_key_name": "user_access_flags_user_id_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": true
+    },
+    {
+      "table_name": "user_assignments",
+      "foreign_key_name": "user_assignments_assigned_by_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "assigned_by"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_assignments",
+      "foreign_key_name": "user_assignments_assignment_code_fkey",
+      "referenced_relation": "assignment_catalog",
+      "columns": [
+        "assignment_code"
+      ],
+      "referenced_columns": [
+        "code"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_assignments",
+      "foreign_key_name": "user_assignments_scope_class_id_fkey",
+      "referenced_relation": "classes",
+      "columns": [
+        "scope_class_id"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_assignments",
+      "foreign_key_name": "user_assignments_user_id_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_roles",
+      "foreign_key_name": "user_roles_assigned_by_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "assigned_by"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_roles",
+      "foreign_key_name": "user_roles_role_code_fkey",
+      "referenced_relation": "role_catalog",
+      "columns": [
+        "role_code"
+      ],
+      "referenced_columns": [
+        "code"
+      ],
+      "is_one_to_one": false
+    },
+    {
+      "table_name": "user_roles",
+      "foreign_key_name": "user_roles_user_id_fkey",
+      "referenced_relation": "profiles",
+      "columns": [
+        "user_id"
+      ],
+      "referenced_columns": [
+        "id"
+      ],
+      "is_one_to_one": true
+    }
+  ]
+}

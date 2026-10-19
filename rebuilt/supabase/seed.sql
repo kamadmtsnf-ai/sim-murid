@@ -1,0 +1,2 @@
+-- Local optional fixtures only. Required catalogs are in foundation_reference_data migration.
+-- Intentionally no credentials, no Auth accounts, no private data, no invented school year/tariff.

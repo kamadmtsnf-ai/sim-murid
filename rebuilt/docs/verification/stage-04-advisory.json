@@ -1,0 +1,195 @@
+{
+  "status": "passed",
+  "kind": "local custom catalog checks, NOT Supabase platform Advisors",
+  "engine": "PGlite PostgreSQL 18.6",
+  "issues": [],
+  "tables": [
+    {
+      "schema_name": "public",
+      "table_name": "academic_years",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "assignment_catalog",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "business_policies",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "classes",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "holidays",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "memorization_catalog",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "profiles",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "role_catalog",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "school_profile",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "semesters",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "subjects",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_access_flags",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_assignments",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_roles",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "activity_logs",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "app_sessions",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "email_verifications",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "import_batches",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "import_rows",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "job_runs",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "legacy_id_map",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "outbox",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "recovery_requests",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "security_questions",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    }
+  ],
+  "functions": [
+    {
+      "schema_name": "sim_murid_private",
+      "proname": "deny_mutation",
+      "security_definer": false,
+      "proconfig": [
+        "search_path=\"\""
+      ]
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "proname": "touch_updated_at",
+      "security_definer": false,
+      "proconfig": [
+        "search_path=\"\""
+      ]
+    }
+  ],
+  "unindexedForeignKeys": []
+}

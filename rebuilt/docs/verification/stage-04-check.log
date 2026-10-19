@@ -1,0 +1,104 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.4.0 check
+> npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run db:types:check && npm run build
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.4.0 typecheck
+> next typegen && tsc --noEmit
+
+Generating route types...
+✓ Types generated successfully
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.4.0 lint
+> eslint . --max-warnings 0
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.4.0 test:foundation
+> node --experimental-strip-types --test tests/foundation.test.ts
+
+✔ query pagination validates untrusted query values and bounds (4.273688ms)
+✔ Supabase public config rejects absent/malformed/insecure remote settings and allows loopback (1.260337ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 307.493795
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.4.0 test:database
+> node --test tests/database/foundation.test.mjs
+
+✔ DB01: migration chain creates 24 RLS-protected tables with reference catalogs only (40.063613ms)
+✔ DB02: rupiah domains reject fractional, unsafe, NaN and negative nonnegative values (21.585983ms)
+✔ DB03: UUID identity preserves text usernames and rejects duplicate/whitespace values (36.199764ms)
+✔ DB04: one base role per profile, catalog FK and restricted account deletion (17.869863ms)
+✔ DB05: academic dates and semester year cannot drift or duplicate (45.355548ms)
+✔ DB06: class identity, holiday dedup and assignment date ranges enforced (30.410384ms)
+✔ DB07: registry prevents two unrevoked sessions and enforces application TTL (5.327511ms)
+✔ DB08: OTP table rejects excess attempts, plaintext-sized hash and invalid TTL (2.74506ms)
+✔ DB09: audit rows are append-only including TRUNCATE and require user actors (6.332162ms)
+✔ DB10: approved policies preserved, cannot be rewritten or truncated (5.90674ms)
+✔ DB11: outbox and scheduled job idempotency keys reject duplicates (4.111779ms)
+✔ DB12: import staging preserves source row and deduplicates identity mappings (5.29769ms)
+✔ DB13: anon/authenticated have no table grants or private schema access (13.869404ms)
+✔ DB14: RLS independently denies data even if SELECT/INSERT accidentally granted (3.228791ms)
+✔ DB15: privileged provisioning can read but cannot overwrite audit via grant (2.992502ms)
+✔ DB16: helper functions are security invoker with fixed search_path and no client EXECUTE (6.265789ms)
+✔ DB17: updated_at trigger overwrites manually forged timestamps (3.861901ms)
+✔ DB18: second fresh database can replay full migration chain with identical counts (2016.392364ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5682.981741
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.4.0 db:types:check
+> node scripts/database/generate-types.mjs --check
+
+PASS: 14 public table types match fresh migration replay.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.4.0 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 47ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 797ms
+  Running TypeScript ...
+  Finished TypeScript in 2.3s ...
+  Collecting page data using 6 workers ...
+  Generating static pages using 6 workers (0/5) ...
+  Generating static pages using 6 workers (1/5) 
+  Generating static pages using 6 workers (2/5) 
+  Generating static pages using 6 workers (3/5) 
+✓ Generating static pages using 6 workers (5/5) in 806ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /api/health
+└ ○ /foundation
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
