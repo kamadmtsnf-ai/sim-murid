@@ -12,6 +12,13 @@ for(const [id,name,role,sid] of [[admin,'admin-6','admin',as],[user,'0006','stud
  await db.query('insert into public.user_roles(user_id,role_code) values($1,$2)',[id,role]);
  await db.query('select public.app_auth_claim($1,$2,false)',[id,sid]);
 }
+// Completed prerequisite markers for isolated permission/session tests only.
+for(const uid of [admin,user,third]){
+ await db.query("insert into sim_murid_private.auth_accounts(user_id,must_change_password,profile_completed_at,verified_contact_email) values($1,false,now(),'unit@example.org')",[uid]);
+ await db.query("insert into sim_murid_private.security_questions(user_id,question_code,answer_hash) values($1,'q1',repeat('0',64))",[uid]);
+ await db.query("update public.profiles set contact_email='unit@example.org' where id=$1",[uid]);
+ await db.query("insert into public.user_access_flags(user_id,teacher_email_verified_at) values($1,now())",[uid]);
+}
 test('SESS01: device labels, safe own list and foreign ownership denial',async()=>{
  await db.exec('set role service_role');
  await db.query('select public.app_auth_device($1,$2,$3)',[user,us,'Chrome · Windows']);

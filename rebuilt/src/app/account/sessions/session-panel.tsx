@@ -29,6 +29,7 @@ export function SessionPanel({ canManageOthers }: { canManageOthers: boolean }) 
         const body: unknown = await response.json();
         if (!alive) return;
         if (response.status === 401) { setData(null); router.replace("/login?expired=1"); router.refresh(); return; }
+        if(response.status===403&&typeof body==='object'&&body!==null&&'destination' in body&&body.destination==='/account/security'){setData(null);router.replace('/account/security');router.refresh();return;}
         const parsed = sessionListSchema.safeParse(body);
         if (!response.ok || !parsed.success) { setData(null); setMessage("Sesi tidak tersedia atau akses tidak diizinkan. Coba muat ulang."); return; }
         setData(parsed.data);

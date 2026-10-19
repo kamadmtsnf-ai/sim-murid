@@ -1,3 +1,4 @@
+import { securityState } from '@/lib/auth/security';
 import type { NextRequest } from "next/server";
 import { z } from "zod";
 import { createAuthAdmin } from "@/lib/auth/admin";
@@ -15,6 +16,8 @@ async function handle(request: NextRequest, command: z.infer<typeof sessionComma
     const client = requestAuth(request, cookies);
     const state = await verifiedPrincipal(client);
     if (!state) return response({ message: "Sesi berakhir. Silakan masuk kembali." }, 401);
+    const onboarding = await securityState(state.principal.id,state.sessionId);
+    if (onboarding?.gate !== 'ready') return response({message:'Selesaikan langkah keamanan akun terlebih dahulu.',gate:onboarding?.gate,destination:'/account/security'},403);
     const args = { p_actor: state.principal.id, p_auth_session: state.sessionId, ...(command.username ? { p_username: command.username } : {}) };
     const admin = createAuthAdmin();
     if (command.action === "list") {

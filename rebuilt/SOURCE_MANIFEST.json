@@ -1,6 +1,6 @@
 {
   "application": "rebuilt-sim-murid",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "files": [
     {
       "path": ".env.example",
@@ -29,8 +29,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3456,
-      "sha256": "453983a9cf74fc91f3487f07b0c4f601c57030aeb24457527e57279b19011234"
+      "bytes": 4026,
+      "sha256": "a3413f40b6e1c7858c93644741308721de8fe6cb35d644112fabb8429142538f"
     },
     {
       "path": "components.json",
@@ -54,8 +54,8 @@
     },
     {
       "path": "docs/database/schema-snapshot.json",
-      "bytes": 30591,
-      "sha256": "55b9cb837749635e73af7a7160f6cff702935248435b0923dd0459fbe3bd3233"
+      "bytes": 30645,
+      "sha256": "f4acfd180bdc8fdc0febf86c916c411b1c654d5bbf04c96a5bd298395f735e87"
     },
     {
       "path": "docs/decisions/approved-business-policy.md",
@@ -233,6 +233,21 @@
       "sha256": "a8d55e87a23ac594701828b574791e350fd3d0e41f274532290d609f7d8b3718"
     },
     {
+      "path": "docs/verification/stage-08-check.log",
+      "bytes": 8612,
+      "sha256": "6969bea38f2c973fdc7732ee3c522b963c0d60e055fe7c56ab4ecb4edb7b1fef"
+    },
+    {
+      "path": "docs/verification/stage-08-smoke.log",
+      "bytes": 704,
+      "sha256": "2b5e5661c511294d14b7b715669f883770867e08294364f5874d48ae786b891d"
+    },
+    {
+      "path": "docs/verification/stage-08.md",
+      "bytes": 3521,
+      "sha256": "de03d1373ea84e4993e0127ba280c1a231aa7b5c0f56628247265c4dba1ae978"
+    },
+    {
       "path": "docs/verification/verification.json",
       "bytes": 609,
       "sha256": "8409d39c07e4c4abebbfddb46011e78e95cb721b741a8e08bd2643495efc18a3"
@@ -255,12 +270,12 @@
     {
       "path": "package-lock.json",
       "bytes": 317319,
-      "sha256": "d5f249c597a42200fa8dcc67dea11d4ab4d50b91865acad5e8e5cd324b86f85e"
+      "sha256": "3c6866805884f97a8f4691ca7b4fa8b3c3d5ee9415c92e03abf283fdcecf3601"
     },
     {
       "path": "package.json",
-      "bytes": 2062,
-      "sha256": "706bcc05c39cb46105fcc01cfce6b06d1ac955f0bc4b3cb56c38eef17cec2b95"
+      "bytes": 2229,
+      "sha256": "d9cd17aaa9611a4a5d307880c681a32d7137420507fccabd4f963e1444b8efce"
     },
     {
       "path": "postcss.config.mjs",
@@ -295,32 +310,42 @@
     {
       "path": "scripts/smoke.mjs",
       "bytes": 3201,
-      "sha256": "a009e46dda8708c99cf31f0402f18109fd5a1332fe8be07d551fff2c0b294de5"
+      "sha256": "69bbf153f79155f230535b4f55ef28165b84950f2928218fc72dcd62fab2c135"
     },
     {
       "path": "src/app/account/access/page.tsx",
-      "bytes": 2423,
-      "sha256": "86a74c9d6797f083a4ab7a1d58c421f745e20bfa29f32d7d6a2574041fe248bb"
+      "bytes": 2723,
+      "sha256": "d9cd0e396f1985bed97c1c530891c3b0c351b5050dd1c34f1e6d2cf7018bfa18"
     },
     {
       "path": "src/app/account/page.tsx",
-      "bytes": 2348,
-      "sha256": "dc3cce9d205393ffe3f9d0a1b6861995dd24d62e571abcb4f619d15e8e26337d"
+      "bytes": 2420,
+      "sha256": "c6be50425989fbb166c70c66621cac31da31e7f8ec506fc6a981ad312dd5c0dc"
+    },
+    {
+      "path": "src/app/account/security/page.tsx",
+      "bytes": 803,
+      "sha256": "25be62d1fbfdf5c86f57cd65881dcee42c9ed0610e9d91b5644f57d1ffb7dfe7"
+    },
+    {
+      "path": "src/app/account/security/security-panel.tsx",
+      "bytes": 6323,
+      "sha256": "54565997703a39ddab5bdb4b0a5df280dda34cf4438fd463fcc9d18c78a7b30e"
     },
     {
       "path": "src/app/account/sessions/page.tsx",
-      "bytes": 599,
-      "sha256": "d4a8c29dcd23ab94e9810b2de27fad1b4db3b31ecec0647fee9d4a6754aaa9ab"
+      "bytes": 806,
+      "sha256": "c207d62418237c226f538002a6494b6ce8246d7ce191e0f1971fb75433088523"
     },
     {
       "path": "src/app/account/sessions/session-panel.tsx",
-      "bytes": 6353,
-      "sha256": "a9745607c6cb6682a9af53a9efa880549f8c6d9fd0a50bbbf69d8c65e9b67ca3"
+      "bytes": 6563,
+      "sha256": "1cc02f41d53c67ebb364185b2360923d8fb02c951b362e8eb01e91bca30d58e6"
     },
     {
       "path": "src/app/api/auth/access/route.ts",
-      "bytes": 722,
-      "sha256": "0b77c233bdd941856c62198af879eeae34d3aa99634fcb21f3724197d36aac17"
+      "bytes": 1024,
+      "sha256": "ff8c15aad7147e9096a9a9f40fc01b5a981a90d7bcc96fb07b3db7cf718e3fc0"
     },
     {
       "path": "src/app/api/auth/login/route.ts",
@@ -333,14 +358,19 @@
       "sha256": "bddc37a61dbb83f03cf91e32005539817d187abd51b439effebad46e09f51dd2"
     },
     {
+      "path": "src/app/api/auth/security/route.ts",
+      "bytes": 4925,
+      "sha256": "893b11f5517ffde12e4516885f622a346e6446f1b10c7b023e5e354c7fb8146a"
+    },
+    {
       "path": "src/app/api/auth/session/route.ts",
       "bytes": 639,
       "sha256": "f5733380115bd6fa1c8038776362ca9c0be62e73b9ba8f1c5e42d19f187cf696"
     },
     {
       "path": "src/app/api/auth/sessions/route.ts",
-      "bytes": 2778,
-      "sha256": "aa7fbbe11b1f5c5f7528c6616a2b9de67f93da37fa04f889aef134801c8d3695"
+      "bytes": 3087,
+      "sha256": "ec0a6880c98896ed9237876ddda537719d0b14d3477fa0681f45d98a1728103a"
     },
     {
       "path": "src/app/api/health/route.ts",
@@ -354,8 +384,8 @@
     },
     {
       "path": "src/app/foundation/page.tsx",
-      "bytes": 2196,
-      "sha256": "a9dc584ef7c05289084cd48b0afa5276dc548216e18f85bb4532d9cd5b805943"
+      "bytes": 2273,
+      "sha256": "2da763820f0daab1da50d73e4b0620180d88a2069b054b860016f761ed23f595"
     },
     {
       "path": "src/app/globals.css",
@@ -374,8 +404,8 @@
     },
     {
       "path": "src/app/login/page.tsx",
-      "bytes": 2014,
-      "sha256": "2c2ba5cf19170b8ad74c21caa690c8c81ad11fabe756a9c81884a575c9f44b39"
+      "bytes": 2456,
+      "sha256": "46f5918084f65774c5ef465fb60d7e6723119d51258518224d71ea2ad6883aa6"
     },
     {
       "path": "src/app/not-found.tsx",
@@ -405,7 +435,7 @@
     {
       "path": "src/config/app.ts",
       "bytes": 186,
-      "sha256": "816944e4eeed664396fcaebb6f900442cdf3f3bf1cdf9b1b96997453872bffe5"
+      "sha256": "38ceaf276a410eb217ce3d926fab732bdcfeb0b4ea5941ec3e7f4581bc6f7bef"
     },
     {
       "path": "src/config/business-policy.ts",
@@ -421,6 +451,11 @@
       "path": "src/lib/auth/admin.ts",
       "bytes": 583,
       "sha256": "35a2229161a6422593ab383555f2b7c7397c8e3ed22fd37c5068c603c4441572"
+    },
+    {
+      "path": "src/lib/auth/answer-hash.ts",
+      "bytes": 820,
+      "sha256": "478b0b890785aabecdcc3a281b41f5e2a9bffa7443b5626774b5b28d6cba7677"
     },
     {
       "path": "src/lib/auth/authorization.ts",
@@ -441,6 +476,16 @@
       "path": "src/lib/auth/read-server.ts",
       "bytes": 679,
       "sha256": "c4edad82da85f7761778e014b5fb41ec168f54c53c80d3b015270e8154f9c8f5"
+    },
+    {
+      "path": "src/lib/auth/security-validation.ts",
+      "bytes": 1989,
+      "sha256": "3a367935d4cce0617232e6c15568ed0695bcca098e68c1c571e98d8fc5e5037e"
+    },
+    {
+      "path": "src/lib/auth/security.ts",
+      "bytes": 1401,
+      "sha256": "92f0a28cd8183561df90ac040d54dfffd0da744ed3b5fa8632deeb439aae123a"
     },
     {
       "path": "src/lib/auth/sessions.ts",
@@ -464,8 +509,8 @@
     },
     {
       "path": "src/lib/supabase/cloud.types.ts",
-      "bytes": 19360,
-      "sha256": "99219c8dc7a57cfaa62a5b900cfd36ffa648ddcf8a9f9ff529eec931ce2deec6"
+      "bytes": 20072,
+      "sha256": "3b24efaaf8516dff17e63c2ef6c2a59f79978d84e048e11b431716ba40437f69"
     },
     {
       "path": "src/lib/supabase/database.types.ts",
@@ -628,6 +673,11 @@
       "sha256": "2db89c8b3db5fa4b5d63d2a300bc60c5181578bbbc701167a52c59da2c21bd16"
     },
     {
+      "path": "supabase/migrations/20261019113245_account_security_onboarding.sql",
+      "bytes": 12807,
+      "sha256": "5afce4f59316909004bea94e9a3e69f91559ca6798bb97af343c2ace54614c96"
+    },
+    {
       "path": "supabase/seed.sql",
       "bytes": 195,
       "sha256": "df79afb6610ac66c0345e86f56e1457547cfdd025710dc645b89e8de12d07a5f"
@@ -644,23 +694,33 @@
     },
     {
       "path": "tests/database/authorization.test.mjs",
-      "bytes": 7624,
-      "sha256": "10629ff4c82756c1efb1c939b4e7b157eff700f58c660bf73e0d5112724ba357"
+      "bytes": 8295,
+      "sha256": "b083c72c0037d052ffc6ad8e78c839367f30f6eb2885746de29228c868762ab3"
     },
     {
       "path": "tests/database/foundation.test.mjs",
       "bytes": 11947,
-      "sha256": "486b3885b8e4f484cc86176b3d35f3548628d3eb88b0df5eb4ec5c0c8d561031"
+      "sha256": "f00ce16be05772b5477ac2b12d09e80351e02b194471e6814810b79b4f70d528"
+    },
+    {
+      "path": "tests/database/security.test.mjs",
+      "bytes": 5092,
+      "sha256": "d4ad35b1c67743b69b21b0300a941077d48b67c3aa005f765140fb287968d9d5"
     },
     {
       "path": "tests/database/sessions.test.mjs",
-      "bytes": 5221,
-      "sha256": "179bce116a4a3516a739d79a93f774f57054388229f63e26d05581836c5e1c5a"
+      "bytes": 5879,
+      "sha256": "b5793280a7b32fb578b9f39ce84ac208e828b0bc69f1f940d82a09549bd01186"
     },
     {
       "path": "tests/foundation.test.ts",
       "bytes": 1480,
       "sha256": "6a7bc1287c42bcfcacfd10030c8118a28ae553ea5daedd29f240c9712f23fc94"
+    },
+    {
+      "path": "tests/security.test.ts",
+      "bytes": 1498,
+      "sha256": "d00a593d0080548ce14e3ebd90202c84168445d78cc9b03f3ddf81d5edb3639a"
     },
     {
       "path": "tsconfig.json",

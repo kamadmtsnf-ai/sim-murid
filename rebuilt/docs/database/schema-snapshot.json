@@ -6,7 +6,8 @@
     "20261019070327_foundation_reference_data.sql",
     "20261019083745_authentication_runtime.sql",
     "20261019093647_session_management.sql",
-    "20261019110537_authorization_rls.sql"
+    "20261019110537_authorization_rls.sql",
+    "20261019113245_account_security_onboarding.sql"
   ],
   "tables": [
     {

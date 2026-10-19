@@ -1,7 +1,7 @@
 {
   "name": "rebuilt-sim-murid",
-  "version": "0.7.0",
-  "description": "Otorisasi dan RLS Rebuilt SiM-Murid \u2014 Tahap 7",
+  "version": "0.8.0",
+  "description": "Keamanan akun dan onboarding Rebuilt SiM-Murid — Tahap 8",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -17,7 +17,8 @@
     "db:advisory": "node scripts/database/advisory.mjs",
     "test:auth": "node --experimental-strip-types --test tests/auth.test.ts && node --test tests/database/auth.test.mjs",
     "test:sessions": "node --test tests/database/sessions.test.mjs",
-    "test:authorization": "node --test tests/database/authorization.test.mjs"
+    "test:authorization": "node --test tests/database/authorization.test.mjs",
+    "test:security": "node --experimental-strip-types --test tests/security.test.ts && node --test tests/database/security.test.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

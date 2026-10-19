@@ -1,4 +1,3 @@
-/** Generated from Supabase qpzoukkhdxpmbtkcqemj after authorization_rls. */
 export type Json =
   | string
   | number
@@ -536,6 +535,35 @@ export type Database = {
       app_auth_revoke: {
         Args: { p_session: string; p_user: string }
         Returns: undefined
+      }
+      app_onboarding_ready: {
+        Args: { p_session: string; p_user: string }
+        Returns: boolean
+      }
+      app_password_begin: {
+        Args: { p_operation: string; p_session: string; p_user: string }
+        Returns: boolean
+      }
+      app_password_finish: {
+        Args: { p_operation: string; p_user: string }
+        Returns: boolean
+      }
+      app_security_question_save: {
+        Args: {
+          p_hash: string
+          p_question: string
+          p_session: string
+          p_user: string
+        }
+        Returns: boolean
+      }
+      app_security_rate: {
+        Args: { p_session: string; p_user: string }
+        Returns: boolean
+      }
+      app_security_state: {
+        Args: { p_session: string; p_user: string }
+        Returns: Json
       }
       app_session_list: {
         Args: { p_actor: string; p_auth_session: string; p_username?: string }

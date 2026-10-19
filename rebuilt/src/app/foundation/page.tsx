@@ -17,7 +17,7 @@ export default function FoundationPage() {
       <p className="mt-5 max-w-2xl leading-relaxed text-muted-foreground">Halaman ini menampilkan ruang lingkup fondasi proyek. Fitur operasional madrasah akan dibangun dan diuji pada tahap berikutnya.</p>
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
         <Card><CardHeader><CardTitle>Fondasi yang disiapkan</CardTitle></CardHeader><CardContent><ul className="space-y-3 text-sm">{foundations.map((name) => <li key={name} className="flex items-center gap-2"><span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />{name}</li>)}</ul></CardContent></Card>
-        <Card><CardHeader><CardTitle>Tahap berikutnya</CardTitle></CardHeader><CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground"><p>Tahap 8: keamanan akun dan onboarding.</p><p>Login, pengelolaan sesi, pemeriksaan izin dan RLS fondasi tersedia. Hak akses modul dan onboarding mengikuti tahapan berikutnya.</p><p>Fondasi terhubung ke proyek Supabase khusus SiM-Murid. Data murid belum dimigrasikan.</p></CardContent></Card>
+        <Card><CardHeader><CardTitle>Tahap berikutnya</CardTitle></CardHeader><CardContent className="space-y-4 text-sm leading-relaxed text-muted-foreground"><p>Tahap 9: verifikasi email Guru dan pemulihan akun.</p><p>Login, pengelolaan sesi, pemeriksaan izin dan RLS fondasi tersedia. Ganti password, pertanyaan keamanan, dan gate onboarding tersedia. Modul profil dan verifikasi email mengikuti tahap terkait.</p><p>Fondasi terhubung ke proyek Supabase khusus SiM-Murid. Data murid belum dimigrasikan.</p></CardContent></Card>
       </div>
     </main>
   );
