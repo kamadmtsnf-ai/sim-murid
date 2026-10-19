@@ -5,7 +5,8 @@
     "20261019070320_foundation_operations.sql",
     "20261019070327_foundation_reference_data.sql",
     "20261019083745_authentication_runtime.sql",
-    "20261019093647_session_management.sql"
+    "20261019093647_session_management.sql",
+    "20261019110537_authorization_rls.sql"
   ],
   "tables": [
     {
@@ -126,6 +127,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "outbox",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "permission_rules",
       "rls_enabled": true
     },
     {

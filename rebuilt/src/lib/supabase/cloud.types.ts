@@ -1,4 +1,4 @@
-/** Generated from Supabase qpzoukkhdxpmbtkcqemj after session_management. */
+/** Generated from Supabase qpzoukkhdxpmbtkcqemj after authorization_rls. */
 export type Json =
   | string
   | number
@@ -515,6 +515,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      app_access_check: {
+        Args: { p_capability: string; p_class?: string; p_owner?: string }
+        Returns: boolean
+      }
+      app_access_context: { Args: never; Returns: Json }
       app_auth_attempt: { Args: { p_key: string }; Returns: boolean }
       app_auth_claim: {
         Args: { p_remember: boolean; p_session: string; p_user: string }

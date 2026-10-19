@@ -25,6 +25,7 @@ export default async function AccountPage() {
     {state.principal.must_change_password && <p className="rounded-md border p-4 text-sm">Akun menggunakan password sementara. Fitur penggantian password wajib akan tersedia pada tahap keamanan akun. Layanan operasional belum dibuka.</p>}
     <p className="text-sm text-muted-foreground">Akun berhasil diverifikasi. Modul layanan madrasah sedang dikembangkan.</p>
     <Button asChild variant="outline"><Link href="/account/sessions">Sesi dan perangkat</Link></Button>
+    <Button asChild variant="outline"><Link href="/account/access">Hak akses saya</Link></Button>
     <form action="/api/auth/logout" method="post"><Button type="submit" variant="outline">Keluar</Button></form>
   </CardContent></Card></main>;
 }

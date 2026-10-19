@@ -13,10 +13,10 @@ async function rejectsCode(sql, params, code) {
   await assert.rejects(db.query(sql, params), (error) => error.code === code);
 }
 
-test('DB01: migration chain creates 26 RLS-protected tables with reference catalogs only', async () => {
-  assert.equal(migrations.length, 5);
+test('DB01: migration chain creates 27 RLS-protected tables with reference catalogs only', async () => {
+  assert.equal(migrations.length, 6);
   const tables = await db.query(`select c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('public','sim_murid_private') and c.relkind='r'`);
-  assert.equal(tables.rows.length, 26);
+  assert.equal(tables.rows.length, 27);
   assert.ok(tables.rows.every((table) => table.relrowsecurity));
   for (const [table, expected] of [['role_catalog',7],['assignment_catalog',7],['subjects',16],['business_policies',3]]) {
     assert.equal(await count(`select count(*)::int n from public.${table}`), expected);
@@ -117,17 +117,15 @@ test('DB12: import staging preserves source row and deduplicates identity mappin
   await rejectsCode(mapping,[batch,bob],'23505');
 });
 
-test('DB13: anon/authenticated have no table grants or private schema access', async () => {
-  for (const role of ['anon','authenticated']) {
-    assert.equal((await db.query('select has_schema_privilege($1,$2,$3) allowed',[role,'sim_murid_private','usage'])).rows[0].allowed,false);
-    for (const table of ['profiles','role_catalog','user_access_flags','business_policies']) {
-      assert.equal((await db.query('select has_table_privilege($1,$2,$3) allowed',[role,`public.${table}`,'select'])).rows[0].allowed,false);
-    }
-    try {
-      await db.exec(`set role ${role}`);
-      await rejectsCode('select * from public.profiles',[],'42501');
-    } finally { await db.exec('reset role'); }
-  }
+test('DB13: anon stays closed; authenticated reads require verified registry',async()=>{
+ assert.equal((await db.query("select has_schema_privilege('anon','sim_murid_private','usage') allowed")).rows[0].allowed,false);
+ for(const role of ['anon','authenticated']){
+  await db.exec('set role '+role);
+  if(role==='anon')await rejectsCode('select * from public.profiles',[],'42501');
+  else assert.equal(await count('select count(*)::int n from public.profiles'),0);
+  await rejectsCode('select * from sim_murid_private.app_sessions',[],'42501');
+  await db.exec('reset role');
+ }
 });
 
 test('DB14: RLS independently denies data even if SELECT/INSERT accidentally granted', async () => {
@@ -147,7 +145,7 @@ test('DB15: privileged provisioning can read but cannot overwrite audit via gran
 });
 
 test('DB16: helper functions are security invoker with fixed search_path and no client EXECUTE', async () => {
-  const funcs=await db.query("select p.proname,p.prosecdef,p.proconfig from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='sim_murid_private'");
+  const funcs=await db.query("select p.proname,p.prosecdef,p.proconfig from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='sim_murid_private' and p.proname in ('touch_updated_at','deny_mutation')");
   assert.equal(funcs.rows.length,2);
   assert.ok(funcs.rows.every((row)=>row.prosecdef===false && row.proconfig?.some((v)=>v.startsWith('search_path='))));
   assert.equal((await db.query("select has_function_privilege('authenticated','sim_murid_private.touch_updated_at()','execute') allowed")).rows[0].allowed,false);
