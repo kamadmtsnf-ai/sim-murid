@@ -19,4 +19,4 @@ Pengelolaan sesi/perangkat tersedia di /account/sessions. Lima migrasi diterapka
 
 ## Tahap 7
 
-Enam migrasi; 27 tabel RLS dan 14 policy SELECT. /account/access dan /api/auth/access tersedia. Uji negatif produksi lulus; uji positif akun/Admin produksi pending persetujuan untuk perubahan fixture berprivilege. Lihat docs/verification/stage-07.md.
+Enam migrasi; 27 tabel RLS dan 14 policy SELECT. /account/access dan /api/auth/access tersedia. Lima uji HTTP negatif dan 21 uji Auth/PostgREST produksi tambahan lulus setelah persetujuan pengguna. Akun validasi sudah dinonaktifkan dan seluruh sesi dicabut. Lihat docs/verification/stage-07.md.

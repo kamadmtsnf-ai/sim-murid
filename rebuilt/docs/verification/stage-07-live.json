@@ -1,5 +1,5 @@
 {
-  "status": "negative_checks_passed_positive_checks_pending",
+  "status": "passed",
   "checks": [
     {
       "check": "anonymous application access denied",
@@ -30,7 +30,19 @@
     "access_context": null
   },
   "limitations": [
-    "Positive live-user/Admin tests require explicit approval for temporary privileged production fixtures; auto-review rejected credential/role mutations.",
-    "No production user was reactivated or promoted."
-  ]
+    "HTTP/Auth/PostgREST integration; no visual browser/hydration test.",
+    "Policies for domain relationships not yet implemented remain default-deny."
+  ],
+  "positive_verification": {
+    "file": "stage-07-positive-live.json",
+    "checks": 21,
+    "user_approval": "2026-10-19T18:16:22+07:00"
+  },
+  "cleanup": {
+    "disabled_fixtures": 2,
+    "remaining_admin_fixtures": 0,
+    "active_app_sessions": 0,
+    "active_auth_sessions": 0,
+    "local_credentials_removed": true
+  }
 }

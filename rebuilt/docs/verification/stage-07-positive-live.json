@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "checks": [
+    "Admin login via deployed app",
+    "Siswa login via deployed app",
+    "Siswa direct REST returns own profile only",
+    "Admin direct REST can see managed test identities",
+    "Siswa direct foreign profile query yields no row",
+    "Siswa sees own role only",
+    "Admin context resolved from database",
+    "Siswa context resolved from database",
+    "Siswa has no account-management grant",
+    "Admin without school-head task cannot write action plan",
+    "Authenticated reference catalog readable",
+    "Admin permission RPC grants account administration",
+    "Siswa permission RPC denies account administration",
+    "Direct Siswa role escalation denied",
+    "Admin direct unaudited role mutation also denied",
+    "Authenticated access page renders",
+    "Access page contains correct heading",
+    "Admin can revoke Siswa app session",
+    "RLS denies old still-signed JWT after registry revoke",
+    "Direct authorization context cleared after revoke",
+    "Application access denied after revoke"
+  ],
+  "limitations": [
+    "HTTP/Auth/PostgREST integration; no visual browser/hydration test."
+  ]
+}

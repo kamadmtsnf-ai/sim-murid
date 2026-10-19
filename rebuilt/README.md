@@ -28,4 +28,4 @@ Tahap 6 menambahkan /account/sessions: riwayat perangkat, pencabutan sesi sendir
 
 ## Tahap 7
 
-/account/access menampilkan konteks izin dari database. Empat belas tabel fondasi memiliki policy SELECT sesuai ownership/peran/kelas; seluruh mutasi client tetap ditutup hingga handler modul beraudit tersedia. Helper registry private memvalidasi Auth session dan TTL pada setiap akses. Relasi domain yang belum dibuat tetap default-deny; lihat laporan Tahap 7 untuk batas cakupan dan pengujian positif produksi yang masih menunggu persetujuan fixture.
+/account/access menampilkan konteks izin dari database. Empat belas tabel fondasi memiliki policy SELECT sesuai ownership/peran/kelas; seluruh mutasi client tetap ditutup hingga handler modul beraudit tersedia. Helper registry private memvalidasi Auth session dan TTL pada setiap akses. Relasi domain yang belum dibuat tetap default-deny; lihat laporan Tahap 7 untuk batas cakupan dan hasil pengujian positif dan negatif produksi yang telah lulus.
