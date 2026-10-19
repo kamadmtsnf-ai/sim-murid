@@ -1,0 +1,32 @@
+begin;
+do $$
+declare u uuid:=gen_random_uuid(); s uuid:=gen_random_uuid(); op uuid:=gen_random_uuid(); v bigint; r jsonb; c jsonb; mid uuid; saved_code text; path text:=gen_random_uuid()::text||'.png';
+begin
+ insert into auth.users(id,aud,role) values(u,'authenticated','authenticated');
+ insert into auth.sessions(id,user_id) values(s,u);
+ insert into public.profiles(id,username,full_name) values(u,'stage10-transaction-'||u::text,'Transactional validation');
+ insert into public.user_roles(user_id,role_code) values(u,'admin');
+ insert into sim_murid_private.auth_accounts(user_id,must_change_password) values(u,false);
+ insert into sim_murid_private.security_questions(user_id,question_code,answer_hash) values(u,'q1',repeat('0',64));
+ perform public.app_auth_claim(u,s,false);
+ r=public.app_settings_read(u,s);if r is null then raise exception 'ready Admin read failed';end if;v=(r->>'revision')::bigint;
+ c=jsonb_build_object('type','subject','id',null,'name','Validation-'||u::text,'active',true);
+ r=public.app_settings_write(u,s,op,v,c);if r->>'code'<>'saved' then raise exception 'catalog create failed: %',r;end if;
+ if public.app_settings_write(u,s,op,v,c)<>r then raise exception 'idempotency failed';end if;
+ if public.app_settings_write(u,s,gen_random_uuid(),v,c)->>'code'<>'stale' then raise exception 'stale accepted';end if;v=v+1;
+ select id,code into mid,saved_code from public.subjects where name='Validation-'||u::text;
+ r=public.app_settings_write(u,s,gen_random_uuid(),v,jsonb_build_object('type','subject','id',mid,'name','Renamed-'||u::text,'active',true));
+ if r->>'code'<>'saved' or (select code from public.subjects where id=mid)<>saved_code then raise exception 'stable code failed';end if;v=v+1;
+ r=public.app_settings_write(u,s,gen_random_uuid(),v,jsonb_build_object('type','deactivate','catalog','subject','id',mid));if r->>'code'<>'saved' or (select active from public.subjects where id=mid) then raise exception 'deactivation failed';end if;v=v+1;
+ c='{"type":"profile","profile":{"name":"Transactional validation","identity_data":{"head_name":"Test","head_nip":"00123","phone":"0812","npsn":"00001"},"address_data":{"street":"Jl Test","province_id":"01","province":"P","regency_id":"","regency":"R","district_id":"","district":"D","village_id":"","village":"V"}}}'::jsonb;
+ r=public.app_settings_write(u,s,gen_random_uuid(),v,c);if r->>'code'<>'saved' then raise exception 'school profile failed';end if;v=v+1;
+ if public.app_settings_read(u,s)#>>'{school,identity_data,npsn}'<>'00001' then raise exception 'text identity failed';end if;
+ r=public.app_settings_write(u,s,gen_random_uuid(),v,jsonb_build_object('type','logo','slot','school','path',path));if r->>'code'<>'saved' then raise exception 'asset metadata failed';end if;v=v+1;
+ r=public.app_settings_write(u,s,gen_random_uuid(),v,'{"type":"holiday","id":null,"start":"2196-02-28","end":"2196-03-01","description":"Transactional test"}'::jsonb);if r->>'code'<>'saved' then raise exception 'holiday range failed';end if;v=v+1;
+ r=public.app_settings_write(u,s,gen_random_uuid(),v,'{"type":"holiday","id":null,"start":"2196-02-28","end":"2196-03-01","description":"Repeat"}'::jsonb);if r->>'code'<>'saved' or (r->>'added')::integer<>0 or (r->>'skipped')::integer<>3 then raise exception 'holiday dedup failed';end if;v=v+1;
+ update public.user_roles set role_code='parent' where user_id=u;
+ if public.app_settings_read(u,s) is not null or public.app_settings_write(u,s,gen_random_uuid(),v,c)->>'code'<>'denied' then raise exception 'role freshness failed';end if;
+ if has_function_privilege('authenticated','public.app_settings_write(uuid,uuid,uuid,bigint,jsonb)','execute') or has_function_privilege('anon','public.app_settings_read(uuid,uuid)','execute') then raise exception 'client RPC exposure';end if;
+end $$;
+rollback;
+select 'passed_transaction_rolled_back' as stage10_cloud_database_verification;

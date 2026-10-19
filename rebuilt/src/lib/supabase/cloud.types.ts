@@ -663,6 +663,29 @@ export type Database = {
         }
         Returns: Json
       }
+      app_settings_asset_gc: {
+        Args: {
+          p_actor: string
+          p_done?: string
+          p_session: string
+          p_stage?: string
+        }
+        Returns: Json
+      }
+      app_settings_read: {
+        Args: { p_actor: string; p_session: string }
+        Returns: Json
+      }
+      app_settings_write: {
+        Args: {
+          p_actor: string
+          p_command: Json
+          p_request: string
+          p_revision: number
+          p_session: string
+        }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never

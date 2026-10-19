@@ -37,3 +37,8 @@ Sembilan migrasi;27 tabel RLS. OTP Guru dan pemulihan email diimplementasikan,68
 ## Penggantian Gmail — status terbaru
 
 Adapter Brevo diganti Gmail SMTP TLS465 melalui Nodemailer atas permintaan pengguna. GMAIL_SENDER_NAME disiapkan; GMAIL_USER dan GMAIL_APP_PASSWORD belum tersedia pada pemeriksaan metadata Vercel. EMAIL_OTP_SECRET tidak diubah. Belum ada pengiriman Gmail yang diklaim berhasil. Lihat email-setup.md. Tidak mengubah skema, role, password pengguna atau RLS.
+
+
+## Tahap10 — status terbaru
+
+Profil sekolah/master mapel/hafalan/hari libur dan logo diimplementasikan. Migrasi20261019155240 telah diterapkan beserta history secara atomik (fallback execute_sql karena apply_migration requestState expired). Total10migrasi,30tabel aplikasi RLS dan bucket school-assets khusus logo publik. 80test lokal, typecheck/lint/build,5smoke dan transaksi cloud rollback lulus. Tidak mengubah akun Admin/Gmail; SMTP active=true dibuktikan pengguna, inbox belum teruji. Lihat ../verification/stage-10.md.

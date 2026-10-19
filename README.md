@@ -2,4 +2,4 @@
 
 Aplikasi GAS lama: Code.gs dan Index.html. Rebuilt SiM-Murid berada di rebuilt/; Root Directory Vercel: rebuilt.
 
-Produksi: https://sim-muridv2.vercel.app . OTP Guru dan pemulihan email menggunakan Gmail SMTP;70 test lokal lulus. Pengiriman nyata menunggu GMAIL_USER dan GMAIL_APP_PASSWORD di Vercel Production. Panduan: rebuilt/docs/deployment/email-setup.md. Pemulihan Admin/profil dasar sebelumnya terverifikasi produksi.
+Tahap10: profil sekolah/kop/logo, master mata pelajaran/hafalan, dan hari libur tersedia bagi Admin.80test lokal dan transaksi cloud rollback lulus. Produksi: https://sim-muridv2.vercel.app . Laporan: rebuilt/docs/verification/stage-10.md. Gmail SMTP telah terautentikasi menurut hasil diagnostik pengguna; penerimaan inbox masih perlu diuji.

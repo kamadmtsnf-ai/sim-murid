@@ -9,7 +9,8 @@
     "20261019110537_authorization_rls.sql",
     "20261019113245_account_security_onboarding.sql",
     "20261019115417_account_recovery_profile.sql",
-    "20261019130139_email_otp_recovery.sql"
+    "20261019130139_email_otp_recovery.sql",
+    "20261019155240_school_settings.sql"
   ],
   "tables": [
     {
@@ -144,7 +145,22 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "school_asset_gc",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "security_questions",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "settings_requests",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "settings_state",
       "rls_enabled": true
     }
   ],
