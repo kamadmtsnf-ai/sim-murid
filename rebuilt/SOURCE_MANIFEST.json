@@ -64,8 +64,8 @@
     },
     {
       "path": "docs/deployment/cloud-status.md",
-      "bytes": 1848,
-      "sha256": "65af78800b3c44afe1613dedee8343f741c97ce32b9a1cd57a1aa05016f4ec3f"
+      "bytes": 1743,
+      "sha256": "9c1fea2e517a7f540a296637ab06c68f55fc546df57bd7634947622c50f96b38"
     },
     {
       "path": "docs/licenses/shadcn-ui-LICENSE.md",
