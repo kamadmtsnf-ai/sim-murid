@@ -28,6 +28,11 @@ export default async function AccountPage() {
 
     <p className="text-sm text-muted-foreground">Akun berhasil diverifikasi. Modul layanan madrasah sedang dikembangkan.</p>
     {state.principal.is_admin && <Button asChild variant="outline"><Link href="/account/settings">Pengaturan madrasah</Link></Button>}
+    <Button asChild variant="outline"><Link href="/account/biodata">Biodata dan dokumen saya</Link></Button>
+    <Button asChild variant="outline"><Link href="/account/directory">Direktori pengguna</Link></Button>
+    <Button asChild variant="outline"><Link href="/account/classes">Kelas dan siswa</Link></Button>
+    <Button asChild variant="outline"><Link href="/account/schedules">Jadwal dan piket siswa</Link></Button>
+    {state.principal.is_admin && <Button asChild variant="outline"><Link href="/account/families">Relasi keluarga</Link></Button>}
     <Button asChild variant="outline"><Link href="/account/profile">Profil pribadi</Link></Button>
     {state.principal.is_admin && <Button asChild variant="outline"><Link href="/account/recovery">Pemulihan akun</Link></Button>}
     <Button asChild variant="outline"><Link href="/account/security">Keamanan akun</Link></Button>

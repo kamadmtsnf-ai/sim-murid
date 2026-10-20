@@ -1,0 +1,43 @@
+begin;
+do $$
+declare a uuid:=gen_random_uuid();t uuid:=gen_random_uuid();s uuid:=gen_random_uuid();ase uuid:=gen_random_uuid();tse uuid:=gen_random_uuid();sse uuid:=gen_random_uuid();yr uuid;c uuid;sub uuid;l uuid;r jsonb;rev bigint;uid uuid;sid uuid;rol text;checks integer:=0;
+begin
+ for uid,sid,rol in select * from (values(a,ase,'admin'),(t,tse,'teacher'),(s,sse,'student')) v loop
+  insert into auth.users(id,aud,role,email) values(uid,'authenticated','authenticated','stage15-'||uid||'@example.invalid');
+  insert into auth.sessions(id,user_id) values(sid,uid);
+  insert into public.profiles(id,username,full_name,contact_email) values(uid,'v'||replace(uid::text,'-',''),'Validation Stage 15','stage15-'||uid||'@example.invalid');
+  insert into public.user_roles(user_id,role_code) values(uid,rol);
+  insert into sim_murid_private.auth_accounts(user_id,must_change_password,profile_completed_at,verified_contact_email) values(uid,false,now(),'stage15-'||uid||'@example.invalid');
+  insert into sim_murid_private.security_questions(user_id,question_code,answer_hash) values(uid,'q1',repeat('0',64));
+  if rol='teacher' then insert into public.user_access_flags(user_id,teacher_email_verified_at) values(uid,now());end if;
+  perform public.app_auth_claim(uid,sid,false);
+ end loop;
+ if public.app_classes_read(a,ase,null) is null then raise exception 'Admin read denied';end if;checks:=checks+1;
+ select revision into rev from sim_murid_private.education_state;
+ r:=public.app_classes_write(a,ase,gen_random_uuid(),rev,jsonb_build_object('type','year','startYear',2097));
+ if r->>'code'<>'saved' then raise exception 'Year failed %',r;end if;yr:=(r->>'id')::uuid;checks:=checks+1;
+ if (select count(*) from public.semesters where academic_year_id=yr)<>2 then raise exception 'Semesters missing';end if;checks:=checks+1;
+ select revision into rev from sim_murid_private.education_state;
+ r:=public.app_classes_write(a,ase,gen_random_uuid(),rev,jsonb_build_object('type','class','id',null,'yearId',yr,'level',7,'name','VALIDATION-15','teacherId',t));
+ if r->>'code'<>'saved' then raise exception 'Class failed %',r;end if;c:=(r->>'id')::uuid;checks:=checks+1;
+ select revision into rev from sim_murid_private.education_state;
+ r:=public.app_classes_write(s,sse,gen_random_uuid(),rev,jsonb_build_object('type','class_archive','id',c));
+ if r->>'code'<>'denied' then raise exception 'Student class write allowed';end if;checks:=checks+1;
+ select id into sub from public.subjects where active limit 1;
+ select revision into rev from sim_murid_private.education_state;
+ r:=public.app_schedules_write(a,ase,gen_random_uuid(),rev,jsonb_build_object('type','lesson','id',null,'classId',c,'subjectId',sub,'teacherId',t,'weekday',1,'start','07:00','durationMinutes',40,'jtm',2,'breakMinutes',15));
+ if r->>'code'<>'saved' then raise exception 'Lesson failed %',r;end if;l:=(r->>'id')::uuid;checks:=checks+1;
+ if (select end_minute from sim_murid_private.lesson_schedules where id=l)<>515 then raise exception '08:35 duration wrong';end if;checks:=checks+1;
+ select revision into rev from sim_murid_private.education_state;
+ r:=public.app_schedules_write(a,ase,gen_random_uuid(),rev,jsonb_build_object('type','lesson','id',null,'classId',c,'subjectId',sub,'teacherId',t,'weekday',1,'start','08:34','durationMinutes',40,'jtm',2,'breakMinutes',0));
+ if r->>'code'<>'overlap' then raise exception 'Overlap accepted %',r;end if;checks:=checks+1;
+ select revision into rev from sim_murid_private.education_state;
+ r:=public.app_schedules_write(a,ase,gen_random_uuid(),rev,jsonb_build_object('type','schedule_delete','lessonIds',jsonb_build_array(l,gen_random_uuid()),'dutyIds','[]'::jsonb));
+ if r->>'code'<>'not_found' or (select archived_at from sim_murid_private.lesson_schedules where id=l) is not null then raise exception 'Batch delete partial mutation';end if;checks:=checks+1;
+ perform public.app_auth_revoke(t,tse);
+ if public.app_schedules_read(t,tse,null,null,null,false) is not null then raise exception 'Revoked session accepted';end if;checks:=checks+1;
+ if exists(select 1 from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname in('public','sim_murid_private') and c.relkind='r' and not c.relrowsecurity) then raise exception 'RLS missing';end if;checks:=checks+1;
+ if has_function_privilege('authenticated','public.app_classes_write(uuid,uuid,uuid,bigint,jsonb)','execute') then raise exception 'Direct authenticated RPC granted';end if;checks:=checks+1;
+ raise notice '% cloud rollback assertions passed',checks;
+end $$;
+rollback;

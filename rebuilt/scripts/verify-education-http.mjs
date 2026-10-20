@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {writeFile} from 'node:fs/promises';
+const origin=process.env.SIM_MURID_VERIFY_ORIGIN??'https://sim-muridv2.vercel.app';
+assert.equal(new URL(origin).protocol,'https:');
+const checks=[];
+const rawFetch=globalThis.fetch;const fetch=async(url,options={})=>{const r=await rawFetch(url,{...options,signal:AbortSignal.timeout(15000)});console.log(new URL(url).pathname,r.status);return r;};
+const health=await fetch(origin+'/api/health');assert.equal(health.status,200);assert.equal((await health.json()).stage,15);checks.push('Production health identifies stage 15');
+await Promise.all(['/account/directory','/account/classes','/account/families','/account/schedules','/account/biodata'].map(async(path)=>{const r=await fetch(origin+path,{redirect:'manual'});assert.ok([303,307,308].includes(r.status),path);assert.ok(r.headers.get('location')?.includes('/login'));checks.push(path+' requires login');}));
+await Promise.all(['/api/directory','/api/classes','/api/families','/api/schedules'].map(async(path)=>{const r=await fetch(origin+path);assert.equal(r.status,401,path);checks.push(path+' rejects anonymous GET');const p=await fetch(origin+path,{method:'POST',headers:{Origin:'https://invalid.example','Content-Type':'application/json'},body:'{}'});assert.equal(p.status,path==='/api/directory'?405:403,path);checks.push(path+(path==='/api/directory'?' rejects unsupported POST':' rejects foreign origin'));}));
+const result={origin,status:'passed',checks,limitations:['No authenticated browser or positive production upload tested.']};await writeFile(new URL('../docs/verification/stages-11-15-http.json',import.meta.url),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));

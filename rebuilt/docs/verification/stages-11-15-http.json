@@ -1,0 +1,23 @@
+{
+  "origin": "https://sim-muridv2.vercel.app",
+  "status": "passed",
+  "checks": [
+    "Production health identifies stage 15",
+    "/account/directory requires login",
+    "/account/classes requires login",
+    "/account/schedules requires login",
+    "/account/families requires login",
+    "/account/biodata requires login",
+    "/api/families rejects anonymous GET",
+    "/api/schedules rejects anonymous GET",
+    "/api/directory rejects anonymous GET",
+    "/api/classes rejects anonymous GET",
+    "/api/classes rejects foreign origin",
+    "/api/directory rejects unsupported POST",
+    "/api/schedules rejects foreign origin",
+    "/api/families rejects foreign origin"
+  ],
+  "limitations": [
+    "No authenticated browser or positive production upload tested."
+  ]
+}

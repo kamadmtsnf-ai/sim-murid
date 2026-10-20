@@ -10,7 +10,12 @@
     "20261019113245_account_security_onboarding.sql",
     "20261019115417_account_recovery_profile.sql",
     "20261019130139_email_otp_recovery.sql",
-    "20261019155240_school_settings.sql"
+    "20261019155240_school_settings.sql",
+    "20261019163750_student_profiles_families.sql",
+    "20261019163753_private_student_documents.sql",
+    "20261019163756_scoped_directories.sql",
+    "20261019163758_classes_enrollment.sql",
+    "20261019163801_lesson_student_duty_schedules.sql"
   ],
   "tables": [
     {
@@ -105,7 +110,32 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "education_requests",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "education_state",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "email_verifications",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "enrollments",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "family_groups",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "family_members",
       "rls_enabled": true
     },
     {
@@ -126,6 +156,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "legacy_id_map",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "lesson_schedules",
       "rls_enabled": true
     },
     {
@@ -161,6 +196,26 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "settings_state",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_documents",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_duty_assignments",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_guardians",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_profiles",
       "rls_enabled": true
     }
   ],

@@ -16,7 +16,7 @@ for(const uid of [admin,head,student,teacher,parent]){
 }
 await db.query('insert into public.academic_years(id,start_year) values($1,2026)',[year]);
 await db.query("insert into public.classes(id,academic_year_id,level,name) values($1,$3,7,'A'),($2,$3,7,'B')",[ca,cb,year]);
-await db.query("insert into public.user_assignments(user_id,assignment_code,valid_from) values($1,'school_head',current_date-1)",[head]);
+await db.query("insert into public.user_assignments(user_id,assignment_code,valid_from) values($1,'school_head',((now() at time zone 'Asia/Jakarta')::date)-1)",[head]);
 const val=async(sql,args=[])=>Object.values((await db.query(sql,args)).rows[0])[0];
 async function as(uid,fn,extra={}){await db.query("select set_config('request.jwt.claims',$1,false)",[JSON.stringify({sub:uid,session_id:id(Number(uid.slice(-12))+100),user_metadata:{role:'admin'},...extra})]);await db.exec('set role authenticated');try{return await fn();}finally{await db.exec('reset role');await db.query("select set_config('request.jwt.claims','',false)");}}
 const can=(cap,owner=null,cls=null)=>val('select public.app_access_check($1,$2,$3)',[cap,owner,cls]);
@@ -30,14 +30,14 @@ test('AZ02: admin sees managed records, cannot write action plan without school-
 });
 test('AZ03: school head read-only fees; task union and expiry/revocation are immediate',async()=>{
  await as(head,async()=>{assert.equal(await can('fees.read'),true);assert.equal(await can('fees.manage'),false);assert.equal(await can('action_plan.write'),true);assert.equal(await can('accounts.manage'),false);});
- await db.query("insert into public.user_assignments(user_id,assignment_code,valid_from) values($1,'committee_treasurer',current_date-1)",[head]);await as(head,async()=>assert.equal(await can('fees.manage'),true));
+ await db.query("insert into public.user_assignments(user_id,assignment_code,valid_from) values($1,'committee_treasurer',((now() at time zone 'Asia/Jakarta')::date)-1)",[head]);await as(head,async()=>assert.equal(await can('fees.manage'),true));
  await db.query("update public.user_assignments set revoked_at=now() where user_id=$1 and assignment_code='committee_treasurer'",[head]);await as(head,async()=>assert.equal(await can('fees.manage'),false));
 });
 test('AZ04: class scope has no global/null escalation; future/expired task ignored',async()=>{
- await db.query("insert into public.user_assignments(user_id,assignment_code,scope_class_id,valid_from) values($1,'homeroom_teacher',$2,current_date-1)",[teacher,ca]);
+ await db.query("insert into public.user_assignments(user_id,assignment_code,scope_class_id,valid_from) values($1,'homeroom_teacher',$2,((now() at time zone 'Asia/Jakarta')::date)-1)",[teacher,ca]);
  await as(teacher,async()=>{assert.equal(await can('classes.manage',null,ca),true);assert.equal(await can('classes.manage',null,cb),false);assert.equal(await can('classes.manage'),false);assert.equal(await val('select count(*)::int from public.classes'),1);});
- await db.query("update public.user_assignments set valid_until=current_date-1,valid_from=current_date-2 where user_id=$1",[teacher]);await as(teacher,async()=>assert.equal(await can('classes.manage',null,ca),false));
- await db.query("insert into public.user_assignments(user_id,assignment_code,valid_from) values($1,'savings_manager',current_date+1)",[teacher]);await as(teacher,async()=>assert.equal(await can('savings.manage'),false));
+ await db.query("update public.user_assignments set valid_until=((now() at time zone 'Asia/Jakarta')::date)-1,valid_from=((now() at time zone 'Asia/Jakarta')::date)-2 where user_id=$1",[teacher]);await as(teacher,async()=>assert.equal(await can('classes.manage',null,ca),false));
+ await db.query("insert into public.user_assignments(user_id,assignment_code,valid_from) values($1,'savings_manager',((now() at time zone 'Asia/Jakarta')::date)+1)",[teacher]);await as(teacher,async()=>assert.equal(await can('savings.manage'),false));
 });
 test('AZ05: savings flag is own read, never manage; premium checked and parent child access denied',async()=>{
  await db.query('update public.user_access_flags set savings_access=true,premium_access=true where user_id=$1',[teacher]);

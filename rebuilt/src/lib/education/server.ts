@@ -1,0 +1,20 @@
+import 'server-only';
+import type {NextRequest} from 'next/server';
+import {z} from 'zod';
+import {privateJson,requestAuth,verifiedPrincipal} from '@/lib/auth/http';
+import {createAuthAdmin} from '@/lib/auth/admin';
+import {AccessDenied} from '@/lib/auth/authorization';
+import {readBounded} from '@/lib/settings/server';
+import {classSnapshot,familySnapshot,scheduleSnapshot} from './validation';
+export async function educationContext(request:NextRequest){
+ const jar=privateJson({}),client=requestAuth(request,jar),caller=await verifiedPrincipal(client);
+ const reply=(body:unknown,status=200)=>{const response=privateJson(body,status);jar.cookies.getAll().forEach(c=>response.cookies.set(c));return response;};
+ return {caller,reply};
+}
+export async function jsonBody(request:NextRequest){return JSON.parse(new TextDecoder().decode(await readBounded(request,65536))) as unknown;}
+export const resultSchema=z.object({code:z.string(),id:z.uuid().nullable().optional()});
+export const domainMessages:Record<string,string>={stale:'Data berubah. Muat ulang sebelum menyimpan.',denied:'Akses tidak diizinkan atau pengaturan keamanan belum lengkap.',duplicate:'Data duplikat. Periksa pilihan nama, siswa, atau tanggal.',invalid:'Periksa isian dan referensi data.',not_found:'Data tidak ditemukan atau sudah berubah.',request_conflict:'ID permintaan telah digunakan.',class_in_use:'Pindahkan atau keluarkan siswa sebelum mengarsipkan kelas.',overlap:'Waktu bertabrakan dengan jadwal kelas atau guru, termasuk durasi istirahat.',invalid_membership:'Siswa piket harus terdaftar aktif pada kelas yang dipilih.',rate_limited:'Terlalu banyak unggahan. Tunggu sepuluh menit sebelum mencoba kembali.'};
+export function failure(error:unknown){return {status:error instanceof AccessDenied?403:error instanceof RangeError?413:error instanceof SyntaxError||error instanceof z.ZodError?400:503,message:error instanceof AccessDenied?'Akses tidak diizinkan.':error instanceof z.ZodError?error.issues[0]?.message??'Periksa isian.':error instanceof RangeError?'Permintaan terlalu besar.':error instanceof SyntaxError?'Format permintaan tidak valid.':'Layanan belum tersedia. Muat ulang untuk memastikan hasil sebelum mencoba kembali.'};}
+export async function classesData(actor:string,session:string,year:string|null=null){const r=await createAuthAdmin().rpc('app_classes_read',{p_actor:actor,p_session:session,...(year?{p_year:year}:{})});if(r.error)throw new Error('Unavailable');if(!r.data)throw new AccessDenied();return classSnapshot.parse(r.data);}
+export async function familiesData(actor:string,session:string){const r=await createAuthAdmin().rpc('app_family_read',{p_actor:actor,p_session:session});if(r.error)throw new Error('Unavailable');if(!r.data)throw new AccessDenied();return familySnapshot.parse(r.data);}
+export async function schedulesData(actor:string,session:string,filters:{year?:string;classId?:string;weekday?:number;personal?:boolean}={}){const r=await createAuthAdmin().rpc('app_schedules_read',{p_actor:actor,p_session:session,...(filters.year?{p_year:filters.year}:{}),...(filters.classId?{p_class:filters.classId}:{}),...(filters.weekday?{p_weekday:filters.weekday}:{}),p_personal:filters.personal??false});if(r.error)throw new Error('Unavailable');if(!r.data)throw new AccessDenied();return scheduleSnapshot.parse(r.data);}

@@ -13,10 +13,10 @@ async function rejectsCode(sql, params, code) {
   await assert.rejects(db.query(sql, params), (error) => error.code === code);
 }
 
-test('DB01: migration chain creates 30 RLS-protected tables with reference catalogs only', async () => {
-  assert.equal(migrations.length, 10);
+test('DB01: migration chain creates 40 RLS-protected tables with reference catalogs only', async () => {
+  assert.equal(migrations.length, 15);
   const tables = await db.query(`select c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('public','sim_murid_private') and c.relkind='r'`);
-  assert.equal(tables.rows.length, 30);
+  assert.equal(tables.rows.length, 40);
   assert.ok(tables.rows.every((table) => table.relrowsecurity));
   for (const [table, expected] of [['role_catalog',7],['assignment_catalog',7],['subjects',16],['business_policies',3]]) {
     assert.equal(await count(`select count(*)::int n from public.${table}`), expected);
