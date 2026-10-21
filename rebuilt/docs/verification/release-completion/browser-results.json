@@ -1,0 +1,121 @@
+{
+  "status": "passed",
+  "checks": [
+    "/ 360 no document overflow",
+    "/login 360 no document overflow",
+    "/recovery 360 no document overflow",
+    "/recovery/email 360 no document overflow",
+    "dashboard 360 no document overflow",
+    "/ 375 no document overflow",
+    "/login 375 no document overflow",
+    "/recovery 375 no document overflow",
+    "/recovery/email 375 no document overflow",
+    "dashboard 375 no document overflow",
+    "/ 768 no document overflow",
+    "/login 768 no document overflow",
+    "/recovery 768 no document overflow",
+    "/recovery/email 768 no document overflow",
+    "dashboard 768 no document overflow",
+    "/ 1024 no document overflow",
+    "/login 1024 no document overflow",
+    "/recovery 1024 no document overflow",
+    "/recovery/email 1024 no document overflow",
+    "dashboard 1024 no document overflow",
+    "/ 1440 no document overflow",
+    "/login 1440 no document overflow",
+    "/recovery 1440 no document overflow",
+    "/recovery/email 1440 no document overflow",
+    "dashboard 1440 no document overflow",
+    "public home axe serious/critical 0",
+    "dashboard desktop axe serious/critical 0",
+    "dashboard contains no duplicate page navigation or shortcut buttons",
+    "sidebar search",
+    "sidebar empty search and recovery",
+    "keyboard focus reveals lower sidebar destinations",
+    "mobile navigation drawer axe serious/critical 0",
+    "drawer keyboard Escape restores focus",
+    "class dialog mobile no document overflow",
+    "class dialog axe serious/critical 0",
+    "class dialog traps keyboard focus",
+    "class required validation",
+    "dirty class dialog preserves draft on cancelled dismissal",
+    "class form preserves existing request contract and success close (intercepted fixture API)",
+    "landscape dialog stays within viewport with scrollable form",
+    "read-only class fixture hides management controls",
+    "operations mobile no document overflow",
+    "operations has no duplicated module navigation",
+    "operations fixture axe serious/critical 0",
+    "learning mobile no document overflow",
+    "learning has no duplicated module navigation",
+    "learning fixture axe serious/critical 0",
+    "services mobile no document overflow",
+    "services has no duplicated module navigation",
+    "services fixture axe serious/critical 0",
+    "wide table isolated scrolling and keyboard focus",
+    "actual production login axe serious/critical 0",
+    "login password toggle preserves input",
+    "login pending, error focus, retained values and unchanged payload (intercepted API)",
+    "report revisions mobile no document overflow",
+    "report revisions axe serious/critical 0",
+    "historical report download preserves requested version",
+    "report correction shows proposed draft before publishing",
+    "revision requires reason and confirmation, sends expected version and retains safe conflict feedback",
+    "student fixture cannot publish report corrections",
+    "actual anonymous API remains denied",
+    "actual foreign-origin mutation remains denied",
+    "input touch height >=44 CSS px",
+    "reduced motion disables transition",
+    "dashboard text at 200 percent no document overflow",
+    "no uncaught browser errors"
+  ],
+  "axe": [
+    {
+      "name": "public home",
+      "violations": []
+    },
+    {
+      "name": "dashboard desktop",
+      "violations": []
+    },
+    {
+      "name": "mobile navigation drawer",
+      "violations": []
+    },
+    {
+      "name": "class dialog",
+      "violations": []
+    },
+    {
+      "name": "operations fixture",
+      "violations": []
+    },
+    {
+      "name": "learning fixture",
+      "violations": []
+    },
+    {
+      "name": "services fixture",
+      "violations": []
+    },
+    {
+      "name": "actual production login",
+      "violations": []
+    },
+    {
+      "name": "report revisions",
+      "violations": []
+    }
+  ],
+  "viewports": [
+    360,
+    375,
+    768,
+    1024,
+    1440
+  ],
+  "limits": [
+    "Account screens use synthetic component fixtures, not an authenticated production session.",
+    "Login and class mutation responses are intercepted; actual anonymous/origin boundaries are checked separately.",
+    "No production writes, real provider calls, full role-browser UAT or assistive-technology user test."
+  ]
+}

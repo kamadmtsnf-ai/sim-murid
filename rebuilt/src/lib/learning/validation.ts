@@ -80,7 +80,7 @@ export const commands = {
       }),
     z.object({ type: z.literal("void"), id, reason }).strict(),
   ]),
-  reports: z
+  reports: z.union([z
     .object({
       type: z.literal("publish"),
       classId: id,
@@ -91,7 +91,7 @@ export const commands = {
         .max(500)
         .refine((v) => new Set(v).size === v.length),
     })
-    .strict(),
+    .strict(), z.object({type:z.literal("revise"),classId:id,semester:z.number().int().min(1).max(2),studentId:id,expectedVersion:z.number().int().min(1),reason:reason.min(5)}).strict()]),
   promotions: z.discriminatedUnion("type", [
     z
       .object({
@@ -162,6 +162,7 @@ export const learningFilters = z
     subjectId: id.optional(),
     studentId: id.optional(),
     semester: z.coerce.number().int().min(1).max(2).optional(),
+    reportVersion:z.coerce.number().int().min(1).max(100000).optional(),
     query: z.string().max(100).optional(),
     level: z.coerce.number().int().min(7).max(9).optional(),
     category: z.string().max(200).optional(),
@@ -203,6 +204,7 @@ export const assetAction = z
   .strict();
 export const messages: Record<string, string> = {
   saved: "Perubahan berhasil disimpan.",
+  unchanged:"Tidak ada perubahan nilai atau KKM dari versi terakhir.",
   denied: "Akses tidak diizinkan.",
   invalid: "Periksa isian, periode, dan referensi data.",
   duplicate: "Data atau batch sudah diproses.",
@@ -210,5 +212,5 @@ export const messages: Record<string, string> = {
   request_conflict: "ID permintaan telah digunakan.",
   incomplete: "Komponen nilai wajib belum lengkap.",
   published:
-    "Rapor sudah terbit. Arsip dipertahankan; penerbitan ulang menunggu kebijakan koreksi.",
+    "Rapor sudah terbit. Gunakan penerbitan versi koreksi untuk perubahan nilai atau KKM.",
 };

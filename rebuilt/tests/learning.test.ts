@@ -48,6 +48,11 @@ test("Learning DTO rejects forged scores, scope, unsafe URLs, duplicate and over
     }),
   );
   assert.equal(diplomaFields.length, 13);
+  const correction={type:"revise",classId:id(),semester:1,studentId:id(),expectedVersion:1,reason:"Koreksi nilai"};
+  assert.equal(commands.reports.parse(correction).type,"revise");
+  assert.throws(()=>commands.reports.parse({...correction,reason:"abcd"}));
+  assert.throws(()=>commands.reports.parse({...correction,expectedVersion:0}));
+  assert.throws(()=>learningFilters.parse({reportVersion:0}));
 });
 test("Terbilang currency boundaries and KKM100 grade edge", () => {
   for (const [n, s] of [
@@ -123,4 +128,10 @@ test("Slip and report PDF one/selected/all render valid immutable snapshots", as
     2,
   );
   await assert.rejects(reportsPdf([]));
+});
+
+test("PDF font preserves supported Unicode and wraps long identifiers without overflowing",async()=>{
+ const {embedReportFont,wrapPdfText}=await import('../src/lib/pdf/font.ts');const {textPdf}=await import('../src/lib/learning/print.ts');
+ const doc=await PDFDocument.create(),font=await embedReportFont(doc);const input='Muḥammad José Âminah '+ 'A'.repeat(300);const lines=wrapPdfText(font,input,15,510);assert.ok(lines.length>1);for(const line of lines)assert.ok(font.widthOfTextAtSize(line,15)<=510.01);assert.ok(lines.join('').includes('Muḥammad'));assert.throws(()=>wrapPdfText(font,'名字',10,510),/belum didukung/);
+ const bytes=await textPdf([['RAPOR VERSI 2',...Array.from({length:100},()=>input)]]);const parsed=await PDFDocument.load(bytes);assert.ok(parsed.getPageCount()>3);
 });

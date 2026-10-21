@@ -49,7 +49,9 @@ app_grades_mutate: { Args: {p_actor: string; p_session: string; p_command: Json 
 app_jobs_admin: { Args: {p_actor: string; p_session: string; p_command: Json }; Returns: Json };
 app_jobs_tick: { Args: {p_dry_run?: boolean | null }; Returns: Json };
 app_learning_read: { Args: {p_actor: string; p_session: string; p_module: string; p_filters?: Json | null }; Returns: Json };
+app_learning_read_v30: { Args: {p_actor: string; p_session: string; p_module: string; p_filters?: Json | null }; Returns: Json };
 app_learning_write: { Args: {p_actor: string; p_session: string; p_request: string; p_revision: number; p_module: string; p_command: Json }; Returns: Json };
+app_learning_write_v30: { Args: {p_actor: string; p_session: string; p_request: string; p_revision: number; p_module: string; p_command: Json }; Returns: Json };
 app_mentor_access: { Args: {p_actor: string; p_session: string; p_student: string }; Returns: boolean };
 app_mentoring_mutate: { Args: {p_actor: string; p_session: string; p_command: Json }; Returns: Json };
 app_natural_key: { Args: {p_name: string }; Returns: string };

@@ -2,6 +2,10 @@
 
 Next.js App Router + TypeScript strict + Tailwind CSS + shadcn/ui + Zod + Supabase; hosting Vercel. Produksi: https://sim-muridv2.vercel.app . Kode GitHub berada di `rebuilt/`, yang menjadi Root Directory Vercel. Aplikasi GAS lama tetap dipertahankan di root repositori.
 
+## Penyelesaian lanjutan
+
+Kebijakan D10 disepakati: koreksi rapor menjadi versi baru, tanpa menimpa arsip. Implementasi, migrasi lokal dan hasil verifikasi lanjutan berada pada [laporan penyelesaian](docs/verification/release-completion.md). Penerapan migrasi D10 ke cloud dan cutover tetap menunggu gerbang penerimaan; lihat laporan tersebut untuk status aktual.
+
 ## Status saat ini
 
 Kode Tahap26–30 menambahkan SPK, notifikasi, arsip/reset bulanan, SoTM/afektif, survei utama/peer/mikro, analitik berizin, rencana aksi, adapter penyedia dan paket ekspor lintas modul. Lihat [laporan Tahap26–30](docs/verification/stages-26-30.md).
