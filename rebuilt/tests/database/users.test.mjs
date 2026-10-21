@@ -35,3 +35,14 @@ test('reservations rate-limit each admin and invalid commands never reserve user
  assert.equal((await begin(uuid(),{...cmd,username:'over-limit'},other)).code,'rate_limited');
  assert.equal(await val("select count(*)::int from sim_murid_private.user_provisions where username='over-limit'"),0);
 });
+test('hyphenated usernames survive provisioning, exact lookup and login principal',async()=>{
+ const id=uuid(),session=uuid(),username='Guru-001';
+ assert.equal((await begin(id,{...cmd,username})).code,'pending');
+ await db.query('insert into auth.users values($1)',[id]);
+ assert.equal((await finish(id)).code,'created');
+ assert.equal(await val('select id from public.profiles where username=$1',[username]),id);
+ assert.equal((await db.query("select id from public.profiles where username in ('Guru001','guru-001')")).rows.length,0);
+ await db.query('insert into auth.sessions(id,user_id) values($1,$2)',[session,id]);
+ assert.equal(await val('select public.app_auth_claim($1,$2,false)',[id,session]),true);
+ assert.equal((await val('select public.app_auth_principal($1,$2)',[id,session])).username,username);
+});

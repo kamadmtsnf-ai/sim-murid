@@ -4,6 +4,7 @@ import {newUserSchema} from '../src/lib/users/validation.ts';
 import {provisionUser,type ProvisionPorts} from '../src/lib/users/provision.ts';
 const input=newUserSchema.parse({requestId:'12345678-1234-4234-8234-123456789abc',username:'0012',fullName:' Test ',role:'student',contactEmail:'',password:'a'.repeat(48)});
 test('new users preserve exact usernames and validate all roles and fields',()=>{
+ for(const username of ['guru-001','001-002','-guru','guru-'])assert.equal(newUserSchema.parse({...input,username}).username,username);
  assert.equal(input.username,'0012');assert.equal(input.fullName,'Test');
  for(const role of ['admin','teacher','student','applicant','parent','alumni','customer'])assert.ok(newUserSchema.safeParse({...input,role}).success);
  for(const update of [{username:' 0012'},{username:'12\n'},{role:'service_role'},{password:'12345678'},{contactEmail:'bad'},{actor:'forged'}])assert.equal(newUserSchema.safeParse({...input,...update}).success,false);

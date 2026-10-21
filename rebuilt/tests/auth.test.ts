@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { loginSchema, verifiedTokenSession } from '../src/lib/auth/validation.ts';
 
 test('username identity preserves zeroes/case and rejects implicit normalization',()=>{
- for(const username of ['00123','123','Guru.A'])assert.equal(loginSchema.parse({username,password:' Password ',remember:false}).username,username);
+ for(const username of ['00123','123','Guru.A','guru-001','001-002','-guru','guru-'])assert.equal(loginSchema.parse({username,password:' Password ',remember:false}).username,username);
  for(const username of [' 123','123 ','a\n',''])assert.equal(loginSchema.safeParse({username,password:'p',remember:false}).success,false);
  assert.equal(loginSchema.safeParse({username:123,password:'p',remember:false}).success,false);
  assert.equal(loginSchema.parse({username:'001',password:' Password ',remember:false}).password,' Password ');
