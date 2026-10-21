@@ -126,3 +126,13 @@ test("Reconciliation never passes missing evidence, orphans, money mismatch or u
 
 
 test('AI result preserves categorical legacy sentiment and rejects numeric substitution',async()=>{const {analysisSchema}=await import('../src/lib/services/analysis-schema.ts');const value={ringkasan_umum:'Ringkasan',tema_positif:[],tema_perlu_perhatian:[],kutipan_representatif:[],rekomendasi_tindakan:[],skor_sentimen_keseluruhan:'campuran'};assert.equal(analysisSchema.parse(value).skor_sentimen_keseluruhan,'campuran');assert.throws(()=>analysisSchema.parse({...value,skor_sentimen_keseluruhan:.5}));});
+
+test('Notification snapshots reject unsafe IDs, duplicate rows and invalid unread counts while preserving the existing shape',async()=>{
+ const {notificationSnapshot}=await import('../src/lib/services/validation.ts');
+ const value={module:'notifications',revision:1,today:'2026-10-21',month:'2026-10-01',isAdmin:false,isManager:false,classes:[],years:[],subjects:[],rows:[{id:id(),title:null,message:null,created_at:'not-a-date',read_at:null,entity_id:null}],extra:{unread:250}};
+ assert.deepEqual(notificationSnapshot.parse(value),value);
+ for(const changed of [{...value,module:'jobs'},{...value,extra:{unread:-1}},{...value,extra:{unread:'2'}},{...value,rows:[{...value.rows[0],id:undefined}]},{...value,rows:[value.rows[0],value.rows[0]]}])assert.equal(notificationSnapshot.safeParse(changed).success,false);
+ assert.deepEqual(commands.notifications.parse({type:'read',id:null}),{type:'read',id:null});
+ assert.throws(()=>commands.notifications.parse({type:'read',id:undefined}));
+ assert.throws(()=>commands.notifications.parse({type:'read',id:id(),actorId:id()}));
+});

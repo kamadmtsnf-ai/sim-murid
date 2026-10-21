@@ -1,0 +1,9 @@
+{
+  "status": "baseline-reproduced",
+  "findings": [
+    "A saved POST followed by failed reload keeps stale unread state and permits another write without reconciliation.",
+    "Mark-all remains enabled on an empty inbox.",
+    "All 200 rows render at once; global unread count is not explained as broader than loaded rows."
+  ],
+  "scope": "Synthetic fixtures"
+}

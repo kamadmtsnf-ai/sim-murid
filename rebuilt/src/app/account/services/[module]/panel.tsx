@@ -8,13 +8,19 @@ import {
 } from "@/lib/services/validation";
 import { SurveyForm } from "./survey-form";
 import { InsightsPanel } from "./insights";
+import { NotificationsPanel } from "./notifications-panel";
 type Row = Record<string, unknown>;
 export const obj = (v: unknown): Row =>
   v && typeof v === "object" && !Array.isArray(v) ? (v as Row) : {};
 export const list = (v: unknown): Row[] =>
   Array.isArray(v) ? (v as Row[]) : [];
 const text = (r: Row, k: string) => String(r[k] ?? "");
-export function ServicesPanel({
+export function ServicesPanel(props:{initial:ServiceSnapshot;userId:string}) {
+  return props.initial.module === "notifications"
+    ? <NotificationsPanel key={`${props.userId}:${props.initial.revision}`} initial={props.initial}/>
+    : <ServiceModulesPanel {...props}/>;
+}
+function ServiceModulesPanel({
   initial,
   userId,
 }: {
@@ -350,32 +356,6 @@ export function ServicesPanel({
               </form>
             </details>
           )}
-        </>
-      )}
-      {data.module === "notifications" && (
-        <>
-          <p>Belum dibaca: {String(data.extra.unread ?? 0)}</p>
-          <Button
-            disabled={busy}
-            onClick={() => void mutate({ type: "read", id: null })}
-          >
-            Tandai semua dibaca
-          </Button>
-          {data.rows.map((r) => (
-            <article key={text(r, "id")} className="rounded border p-4">
-              <h2 className="font-semibold">{text(r, "title")}</h2>
-              <p>{text(r, "message")}</p>
-              <p>{text(r, "created_at")}</p>
-              {!r.read_at && (
-                <Button
-                  disabled={busy}
-                  onClick={() => void mutate({ type: "read", id: r.id })}
-                >
-                  Tandai dibaca
-                </Button>
-              )}
-            </article>
-          ))}
         </>
       )}
       {data.module === "surveys" && (

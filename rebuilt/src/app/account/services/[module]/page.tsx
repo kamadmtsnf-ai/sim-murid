@@ -17,6 +17,7 @@ export default async function ServicesPage({
   try {
     data = await servicesData(caller.principal.id, caller.sessionId, m.data);
   } catch {
+    if(m.data === "notifications") throw new Error("Notifications unavailable");
     return (
       <main id="main-content" className="p-8">
         <h1>{titles[m.data]}</h1>
