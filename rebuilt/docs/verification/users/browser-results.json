@@ -8,6 +8,7 @@
     "viewport, scroll, keyboard dismissal and focus 812x375",
     "admin role carries explicit privilege explanation",
     "busy guard, pending reopen and retry reuse exact payload without duplicate request",
+    "long success name wraps within 320px dialog",
     "credentials masked, copy works, no browser storage",
     "closing success clears credentials and starts fresh form",
     "no uncaught JavaScript errors"

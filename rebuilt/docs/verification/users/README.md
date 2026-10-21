@@ -23,11 +23,13 @@ Reservasi menyimpan command dan fingerprint HMAC, bukan password. Identitas Auth
 
 - `npm ci --ignore-scripts`: berhasil; skrip wajib aplikasi dijalankan oleh prebuild.
 - `npm run check`: lulus **199 tes**, TypeScript, lint, snapshot 14 tabel publik, dan production build.
-- TypeScript, lint, build diulang sesudah perbaikan label select; lulus. Tes pengguna diulang sesudah penguatan validasi SQL; **10 tes lulus**.
-- Browser fitur: **10 pemeriksaan**, **6 tampilan axe**, nol pelanggaran dan nol uncaught JavaScript error. Viewport 320×700, 375×812, 768×1024, 1440×900, 812×375; dialog berada dalam viewport dan kontennya dapat digulir.
+- TypeScript, lint, build diulang sesudah perbaikan label select dan wrapping nama panjang; lulus. Tes pengguna diulang sesudah penguatan validasi SQL; **10 tes lulus**.
+- Browser fitur: **11 pemeriksaan**, **6 tampilan axe**, nol pelanggaran dan nol uncaught JavaScript error. Viewport 320×700, 375×812, 768×1024, 1440×900, 812×375; dialog berada dalam viewport dan kontennya dapat digulir.
 - Regresi browser: **69 pemeriksaan**, **8 tampilan axe**, nol pelanggaran. API produksi lokal menolak anonim (401) dan Origin asing (403). Next lokal menormalisasi origin request ke localhost; pengujian Origin sah mengikuti canonical URL tersebut.
 - Migration `admin_user_provisioning` berhasil diterapkan ke proyek Supabase aplikasi. Pemeriksaan metadata langsung: RLS true, anon/authenticated table read false, authenticated RPC execute false, service_role RPC execute true.
 - Advisors security/performance diperiksa. RLS tanpa policy pada tabel privat disengaja: browser tidak diberi grant/policy dan hanya server dapat mengakses. Informasi: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy
+- Index baru diberi informasi `unused_index` karena fitur belum dipakai. Index actor/waktu diperlukan untuk pembatasan laju dan FK, sehingga dipertahankan. Tidak ada error advisor baru.
+- Audit deadcode: 151 source files, 87 entry points, nol unreachable.
 - Peringatan platform terpisah: leaked-password protection belum aktif. Tidak diubah sebagai bagian fitur ini. Panduan: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection
 
 ## Batas dan rekonsiliasi
