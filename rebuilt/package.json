@@ -1,7 +1,7 @@
 {
   "name": "rebuilt-sim-murid",
-  "version": "0.15.0",
-  "description": "Biodata, dokumen privat, direktori, kelas dan jadwal — Tahap 11–15",
+  "version": "0.20.0",
+  "description": "Piket, absensi, bimbingan, iuran dan tabungan — Tahap 16–20",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:operations && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -22,7 +22,8 @@
     "test:recovery": "node --experimental-strip-types --test tests/recovery.test.ts && node --test tests/database/recovery.test.mjs",
     "test:email": "node --experimental-strip-types --test tests/email.test.ts && node --test tests/database/email.test.mjs",
     "test:settings": "node --experimental-strip-types --test tests/settings.test.ts && node --test tests/database/settings.test.mjs",
-    "test:education": "node --experimental-strip-types --test tests/education.test.ts && node --test tests/database/education.test.mjs"
+    "test:education": "node --experimental-strip-types --test tests/education.test.ts && node --test tests/database/education.test.mjs",
+    "test:operations": "node --experimental-strip-types --test tests/operations.test.ts && node --test tests/database/operations.test.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
@@ -31,6 +32,7 @@
     "@supabase/supabase-js": "2.118.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
+    "exceljs": "4.4.0",
     "lucide-react": "1.59.0",
     "next": "16.4.2",
     "nodemailer": "10.1.7",

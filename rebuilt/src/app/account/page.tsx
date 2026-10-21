@@ -26,6 +26,7 @@ export default async function AccountPage() {
     <p>Anda masuk sebagai <strong>{state.principal.username}</strong>.</p>
     <p className="text-sm text-muted-foreground">Sesi berlaku sampai {new Intl.DateTimeFormat("id-ID", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Jakarta" }).format(new Date(state.principal.expires_at))} WIB.</p>
 
+    <div className="flex flex-wrap gap-2">{[["duty","Guru piket"],["attendance","Absensi"],["mentoring","Bimbingan"],["fees","Iuran komite"],["savings","Tabungan"]].map(([key,label])=><Button key={key} asChild variant="outline"><Link href={"/account/operations/"+key}>{label}</Link></Button>)}</div>
     <p className="text-sm text-muted-foreground">Akun berhasil diverifikasi. Modul layanan madrasah sedang dikembangkan.</p>
     {state.principal.is_admin && <Button asChild variant="outline"><Link href="/account/settings">Pengaturan madrasah</Link></Button>}
     <Button asChild variant="outline"><Link href="/account/biodata">Biodata dan dokumen saya</Link></Button>

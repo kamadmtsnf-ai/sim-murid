@@ -15,7 +15,12 @@
     "20261019163753_private_student_documents.sql",
     "20261019163756_scoped_directories.sql",
     "20261019163758_classes_enrollment.sql",
-    "20261019163801_lesson_student_duty_schedules.sql"
+    "20261019163801_lesson_student_duty_schedules.sql",
+    "20261021050041_duty_confirmation.sql",
+    "20261021050044_student_attendance.sql",
+    "20261021050046_student_mentoring.sql",
+    "20261021050048_committee_payments.sql",
+    "20261021050051_savings_ledger.sql"
   ],
   "tables": [
     {
@@ -110,6 +115,16 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "committee_payments",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "committee_tariffs",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "education_requests",
       "rls_enabled": true
     },
@@ -165,7 +180,32 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "mentor_students",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "mentoring_reports",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "operations_requests",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "operations_state",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "outbox",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "payment_allocations",
       "rls_enabled": true
     },
     {
@@ -176,6 +216,16 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "recovery_requests",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "savings_accounts",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "savings_transactions",
       "rls_enabled": true
     },
     {
@@ -200,6 +250,11 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "student_attendance",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "student_documents",
       "rls_enabled": true
     },
@@ -216,6 +271,16 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "student_profiles",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "teacher_duty_roster",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "teacher_duty_sessions",
       "rls_enabled": true
     }
   ],

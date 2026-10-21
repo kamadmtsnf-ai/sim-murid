@@ -3,5 +3,5 @@ export const appConfig = {
   description: "Sistem Informasi Murid MTs Nurul Falah",
   locale: "id-ID",
   timeZone: "Asia/Jakarta",
-  foundationStage: 15,
+  foundationStage: 20,
 } as const;
