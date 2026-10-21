@@ -258,3 +258,24 @@
   .workspace-drawer .drawer-inner { min-height:100%; }
   .workspace-drawer .workspace-nav { flex:none; overflow:visible; }
 }
+
+/* Inbox: responsive cards and controls, scoped to Notifications only. */
+@layer components {
+  .notifications-panel { min-width:0; overflow-wrap:anywhere; container-type:inline-size; }
+  .notification-summary { display:flex; flex-direction:column; gap:1.25rem; padding:1.25rem; border:1px solid var(--border); border-radius:1rem; background:var(--surface-glass); box-shadow:var(--surface-shadow); }
+  .notification-actions { display:flex; flex-wrap:wrap; gap:.75rem; }
+  .notification-filters { display:grid; grid-template-columns:minmax(0,1fr); gap:1rem; padding:1.25rem; border:1px solid var(--border); border-radius:1rem; background:var(--card); }
+  .notification-card { min-width:0; padding:1.25rem; border:1px solid var(--border); border-radius:1rem; background:var(--surface-glass); box-shadow:var(--surface-shadow); }
+  .notification-unread { border-inline-start:3px solid var(--primary); }
+  .notification-card-heading,.notification-card-footer { display:flex; flex-wrap:wrap; align-items:start; justify-content:space-between; gap:.75rem; }
+  .notification-card-footer { margin-top:1rem; align-items:center; }
+  .notification-badge { display:inline-flex; flex-shrink:0; max-width:100%; padding:.25rem .625rem; border-radius:2rem; background:var(--secondary); color:var(--muted-foreground); font-size:.75rem; font-weight:600; }
+  .notification-badge-unread { background:var(--info-subtle); color:var(--info); }
+  .notification-pagination { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.75rem; padding-top:.5rem; }
+  .notification-search-help { grid-column:1/-1; }
+  @container(min-width:40rem) { .notification-filters { grid-template-columns:minmax(0,1fr) minmax(0,.4fr); } }
+  @media(min-width:1280px) { .notification-summary { flex-direction:row; justify-content:space-between; align-items:center; } .notification-actions { max-width:55%; justify-content:flex-end; } }
+}
+
+/* Override the reusable button nowrap utility only inside the inbox. */
+.notifications-panel button { max-width:100%; white-space:normal; overflow-wrap:anywhere; }

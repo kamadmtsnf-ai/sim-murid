@@ -1,0 +1,36 @@
+{
+  "base": "56915ad23c5ba08dda569b0b5c2216c9fced8a44",
+  "branch": "fix/notifications-audit",
+  "recordedAt": "2026-10-21T17:17:01.811649+00:00",
+  "npmCi": "passed, unchanged lockfile",
+  "check": "passed including production build",
+  "tests": {
+    "passed": 178,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "lint": "passed, zero warnings",
+  "databaseTypes": "14 public table types match migration replay",
+  "deadcode": {
+    "unreachable": []
+  },
+  "browser": {
+    "status": "passed",
+    "checks": 55,
+    "axeScreens": 7,
+    "axeViolations": 0,
+    "javascriptErrors": [],
+    "expectedNetworkErrors": 5
+  },
+  "crossModule": {
+    "status": "passed",
+    "checks": 63,
+    "axeScreens": 8,
+    "axeViolations": 0
+  },
+  "limits": [
+    "Synthetic browser fixture/intercepted positive API responses; no authenticated production UAT.",
+    "SQL tests run against isolated local migration replay; no production writes.",
+    "Chromium headless; no physical Safari/Firefox or assistive-technology user testing."
+  ]
+}

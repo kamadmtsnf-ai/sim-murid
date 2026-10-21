@@ -269,8 +269,26 @@ test("27: inbox own-only read and dedup, no cross-recipient mark", async () => {
     A.s1,
   );
   assert.equal((await view("notifications", A.s1)).extra.unread, unread);
+  const one=mine.rows.find(row=>!row.read_at);
+  assert.ok(one);
+  const otherBefore=JSON.stringify((await view("notifications",A.admin)).rows);
+  await service("notifications",{type:"read",id:one.id},A.s1);
+  const marked=await view("notifications",A.s1);
+  assert.equal(marked.extra.unread,unread-1);
+  const readAt=marked.rows.find(row=>row.id===one.id).read_at;
+  assert.ok(readAt);
+  await service("notifications",{type:"read",id:one.id},A.s1);
+  assert.equal((await view("notifications",A.s1)).rows.find(row=>row.id===one.id).read_at,readAt);
+  assert.equal(JSON.stringify((await view("notifications",A.admin)).rows),otherBefore);
   await service("notifications", { type: "read", id: null }, A.s1);
   assert.equal((await view("notifications", A.s1)).extra.unread, 0);
+});
+test("Notifications: 200-row cap keeps global unread count and read-all includes hidden own rows",async()=>{
+ const others=JSON.stringify((await view("notifications",A.admin)).rows);
+ await db.query("insert into sim_murid_private.inbox(recipient_id,dedup_key,title,message,created_at) select $1,'qa-inbox-limit-'||n,'Synthetic notification','Synthetic message',now()-n*interval '1 minute' from generate_series(1,205)n",[A.s1.id]);
+ const inbox=await view("notifications",A.s1);assert.equal(inbox.rows.length,200);assert.equal(inbox.extra.unread,205);
+ const hidden=await val("select id::text from sim_murid_private.inbox where dedup_key='qa-inbox-limit-205'");assert.ok(!inbox.rows.some(row=>row.id===hidden));
+ await service("notifications",{type:"read",id:null},A.s1);assert.equal((await view("notifications",A.s1)).extra.unread,0);assert.ok(await val("select read_at is not null from sim_murid_private.inbox where id=$1",[hidden]));assert.equal(JSON.stringify((await view("notifications",A.admin)).rows),others);
 });
 test("27: past-month snapshot unique, retry safe, immutable and current month forbidden", async () => {
   assert.equal(

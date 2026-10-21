@@ -62,3 +62,16 @@ Drawer seluler menempel sisi kiri, mengisi tinggi viewport dinamis, memiliki men
 Dokumen hasil: `docs/verification/dashboard-audit.md`. Halaman panjang tetap menggunakan gulir vertikal normal; keberhasilan responsif berarti tidak ada horizontal overflow halaman atau konten/kontrol yang terpotong, bukan menghilangkan gulir vertikal yang diperlukan.
 
 Untuk viewport sangat pendek (tinggi ≤300px, misalnya saat keyboard layar terbuka), body drawer bergulir sebagai satu wilayah sehingga pencarian dan logout tetap dapat dijangkau. Heading utama tetap tersedia bagi pembaca layar selama loading.
+
+
+## Audit Notifikasi — 21 Oktober 2026
+
+Notifikasi memakai panel khusus dalam router layanan existing. Satu pesan/satu kartu, dengan heading, isi yang mempertahankan baris baru, waktu id-ID/Asia-Jakarta dan badge tekstual dibaca/belum dibaca. Tanggal invalid tidak dirender sebagai `time`. Input tetap memakai `controlClass`, Button dan Status existing; warna identitas tidak diganti.
+
+Kotak masuk merender 20 pesan per halaman secara lokal dari maksimum 200 pesan terbaru yang disediakan backend. Pencarian judul/isi dan filter status hanya berlaku pada daftar yang dimuat. Jumlah belum dibaca serta tindakan tandai semua tetap mencakup seluruh inbox milik pengguna, sebagaimana perilaku backend existing. Tidak menambahkan penghapusan, penandaan belum dibaca, atau navigasi modul dari kartu.
+
+Satu request lock mencakup POST dan GET rekonsiliasi. Hanya respons `saved` disusul snapshot valid yang mengubah data layar. Jika POST berhasil namun GET gagal, feedback membedakan perubahan tersimpan dari daftar yang belum diperbarui; aksi tulis dikunci sampai GET berhasil. Hasil tulis ambigu juga wajib direkonsiliasi melalui GET; tidak ada retry POST otomatis. Request dibatalkan saat unmount. Pergantian user/revisi server mengganti instance panel agar state akun lama tidak dipertahankan.
+
+Filter menyesuaikan lebar container, bukan hanya viewport; tombol dapat wrap pada pembesaran teks. CSS dibatasi pada `.notifications-panel` dan class inbox. Pagination/pencarian tidak membuat request server baru. Fokus kembali ke heading hasil ketika aksi menghilangkan tombol pesan dalam filter belum dibaca.
+
+Rincian audit dan bukti: `docs/verification/notifications-audit.md` dan `docs/verification/notifications/`.

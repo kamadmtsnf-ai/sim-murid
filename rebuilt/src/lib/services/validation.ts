@@ -192,6 +192,14 @@ export const snapshot = z.object({
   classes: z.array(row),
   subjects: z.array(row).nullable(),
 });
+export const notificationSnapshot = snapshot.extend({
+  module: z.literal("notifications"),
+  rows: z.array(z.object({
+    id: z.uuid(), title: z.string().nullable(), message: z.string().nullable(),
+    created_at: z.string().nullable(), read_at: z.string().nullable(),
+  }).passthrough()),
+  extra: z.object({unread: z.number().int().nonnegative()}).passthrough(),
+}).refine(value => new Set(value.rows.map(row => row.id)).size === value.rows.length, "Duplicate notification IDs");
 export type ServiceSnapshot = z.infer<typeof snapshot>;
 export const messages: Record<string, string> = {
   saved: "Perubahan disimpan.",

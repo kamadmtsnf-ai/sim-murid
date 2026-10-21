@@ -7,7 +7,7 @@ import ts from 'typescript';
 import {NextRequest,NextResponse} from 'next/server.js';
 const mockSources={
  'server-only':'export {};',
- '@/lib/auth/http':`export const privateJson=(body,status=200)=>globalThis.auditMocks.json(body,status);export const requestAuth=()=>{if(globalThis.auditMocks.authError)throw Error('secret configuration detail');return {}};export const verifiedPrincipal=async()=>globalThis.auditMocks.caller;export const sameOrigin=()=>true;`,
+ '@/lib/auth/http':`export const privateJson=(body,status=200)=>globalThis.auditMocks.json(body,status);export const requestAuth=()=>{if(globalThis.auditMocks.authError)throw Error('secret configuration detail');return {}};export const verifiedPrincipal=async()=>globalThis.auditMocks.caller;export const sameOrigin=()=>globalThis.auditMocks.originValid!==false;`,
  '@/lib/auth/admin':`export const createAuthAdmin=()=>({rpc:(...args)=>globalThis.auditMocks.rpc(...args)});`,
  '@/lib/auth/authorization':`export class AccessDenied extends Error {}`,
  '@/lib/settings/server':`export const readBounded=async request=>new Uint8Array(await request.arrayBuffer());`,
@@ -57,4 +57,22 @@ test('Cron rejects missing credentials and safely reports job or dispatch outage
  globalThis.auditMocks.rpc=async()=>{throw Error('private configuration')};let r=await cron(req());assert.equal(r.status,503);assert.doesNotMatch(await r.text(),/private configuration/);
  globalThis.auditMocks.rpc=async()=>({error:null,data:[]});process.env.SERVICES_DISPATCH_ENABLED='true';r=await cron(req());assert.equal(r.status,503);assert.doesNotMatch(await r.text(),/provider secret/);
  }finally{if(old===undefined)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;if(oldDispatch===undefined)delete process.env.SERVICES_DISPATCH_ENABLED;else process.env.SERVICES_DISPATCH_ENABLED=oldDispatch;}
+});
+
+
+const {POST:notificationWrite}=await import('../src/app/api/services/[module]/route.ts');
+test('Notification API preserves actor/session envelope, safe statuses and read-one/read-all validation',async()=>{
+ const params={params:Promise.resolve({module:'notifications'})};
+ const payload={requestId:'11111111-1111-4111-8111-111111111111',revision:5,command:{type:'read',id:null}};
+ const req=(body=payload)=>new NextRequest('https://example.test/api/services/notifications',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
+ for(const [code,status] of [['saved',200],['denied',403],['stale',409]]){
+  reset();let rpc;globalThis.auditMocks.rpc=async(...args)=>{rpc=args;return {data:{code},error:null}};
+  const response=await notificationWrite(req(),params);assert.equal(response.status,status);assert.equal((await response.json()).result.code,code);
+  assert.equal(rpc[0],'app_services_write');assert.equal(rpc[1].p_actor,globalThis.auditMocks.caller.principal.id);assert.equal(rpc[1].p_session,globalThis.auditMocks.caller.sessionId);assert.deepEqual(rpc[1].p_command,payload.command);assert.equal(rpc[1].p_revision,5);assert.equal(rpc[1].p_request,payload.requestId);
+ }
+ reset();globalThis.auditMocks.rpc=async()=>({data:{code:'saved'},error:null});assert.equal((await notificationWrite(req({...payload,command:{type:'read',id:payload.requestId}}),params)).status,200);
+ for(const command of [{type:'read'},{type:'read',id:'bad-id'},{type:'read',id:null,actorId:payload.requestId}]){reset();let called=false;globalThis.auditMocks.rpc=async()=>{called=true;return {data:{code:'saved'},error:null}};assert.equal((await notificationWrite(req({...payload,command}),params)).status,400);assert.equal(called,false);}
+ reset();globalThis.auditMocks.caller=null;assert.equal((await notificationWrite(req(),params)).status,401);
+ reset();globalThis.auditMocks.originValid=false;assert.equal((await notificationWrite(req(),params)).status,403);
+ reset();globalThis.auditMocks.rpc=async()=>({data:null,error:{message:'private database detail'}});const failed=await notificationWrite(req(),params);assert.equal(failed.status,503);assert.doesNotMatch(await failed.text(),/private database detail/);
 });
