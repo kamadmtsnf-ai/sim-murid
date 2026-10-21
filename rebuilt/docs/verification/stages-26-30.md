@@ -16,7 +16,7 @@ Halaman: `/account/services/{discipline,notifications,surveys,insights,jobs,reco
 
 ## Hasil pemeriksaan
 
-- npm ci579packages; typecheck, lint,153pengujian lokal, drift tipe dan build produksi lulus.24 pengujian baru terdiri 4DTO/instrumen/ekspor/rekonsiliasi dan 20 skenario DB, masing-masing dengan banyak assertion.
+- npm ci579packages; typecheck, lint,153pengujian lokal, drift tipe dan build produksi lulus.25 pengujian baru terdiri 5DTO/instrumen/ekspor/rekonsiliasi/skemaAI dan 20 skenario DB, masing-masing dengan banyak assertion.
 -24 assertion Supabase cloud memakai hak service_role lulus dalam transaksi rollback; fixture tersisa0. Script scripts/database/verify-services.sql. Pengujian memverifikasi event/residivis/notifikasi/scope/survei/gate/final/agregat/privilege. Tidak mengirim email/WA atau memanggilAI aktual.
 -33 migrasi lokal/cloud,79tabel aplikasiRLS. Lima migrasi modul dan tiga migrasi penyempurnaan menjaga riwayat append-only; file lama tidak dihapus atau diganti. Pemetaan timestampMCP/checksum pada supabase/migration-cloud-map.json; jangan linked db push mentah sebelum reconciliationhistory/dry-run.
 -Advisory katalog lokal lulus. Supabase Advisor: INFO65tabel privateRLS tanpa policy sesuai deny-by-default; WARN lama [leaked-password protection belum aktif](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection).
@@ -54,3 +54,5 @@ CLI pertama dihentikan peninjauan otomatis saat mencoba telemetriPostHog dengan 
 Commit implementasi fddf15baca8bd219512692d041ff0d9b681b6127. Deployment dpl_D61TLzK4QtKTLCzeoeA6Touk4qgG READY, production/sin1, https://sim-muridv2.vercel.app . Penyempurnaan draft memakai versi responden sebagai otoritas; autosave tidak mengubah revisi administrasi dan tidak menginvalidasi draft pengguna lain. Perubahan sendiri dengan versi lama tetap ditolak.
 
 23 pemeriksaan HTTP produksi lulus (health30,6halaman login,6API anonim,5origin mutasi,ekspor/cron/adapter terlindungi); lihat stages-26-30-http.json. Cron pertama pada21Oktober2026 15.00WIB tercatat succeeded (≈37ms) pada cron.job_run_details; ini membuktikan eksekusi pemeriksaanDB, bukan pengiriman provider. Log runtime error/fatal tidak ditemukan dalam jendela pengamatan15menit setelah rilis.
+
+Koreksi akhir mempertahankan label sentimen warisan `positif`, `campuran`, atau `perlu_perhatian` pada `skor_sentimen_keseluruhan`; angka ditolak. Sesudah koreksi: typecheck, lint,25 tes layanan dan build produksi lulus (154 tes tersedia keseluruhan;153 sudah lulus pada pemeriksaan penuh sebelumnya, ditambah1 tes skemaAI baru). Build awal ulang gagal membaca cache lokal; build bersih berhasil. Tidak ada perubahan database atau panggilan provider dalam koreksi ini. Log: stages-26-30-ai-check.log.

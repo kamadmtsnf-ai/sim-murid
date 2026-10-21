@@ -1,0 +1,150 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 typecheck
+> next typegen && tsc --noEmit
+
+Generating route types...
+✓ Types generated successfully
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 lint
+> eslint . --max-warnings 0
+
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 test:services
+> node --experimental-strip-types --test tests/services.test.ts && node --test tests/database/services.test.mjs
+
+✔ Service DTO: forged actor, stale-shaped version, invalid scale, blank policy inputs rejected (5.712482ms)
+✔ Canonical full bank:206 unique role/code, exact essay and attention policies (0.343313ms)
+✔ Export scope, zero preservation, CSV injection escaping, XLSX and PDF open (70.416723ms)
+✔ Reconciliation never passes missing evidence, orphans, money mismatch or username collisions (1.660991ms)
+✔ AI result preserves categorical legacy sentiment and rejects numeric substitution (2.975656ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 477.813101
+✔ 26: exact 25-code seed, residivism 50→48→44→38→0 and positive recovery (55.296487ms)
+✔ 26: cancellation ownership, stable replay, catalog snapshot, parent/stranger scopes (47.771646ms)
+✔ 26: level boundaries and affective conversion (7.095713ms)
+✔ 27: inbox own-only read and dedup, no cross-recipient mark (12.454341ms)
+✔ 27: past-month snapshot unique, retry safe, immutable and current month forbidden (13.264673ms)
+✔ 28: complete instrument, deterministic eight rotations with history priority, isolated respondents (22.96483ms)
+✔ 28: validation, stale draft never overwrites, mandatory essays and final immutable (29.282768ms)
+✔ 28: attention/straightline/duration reliability flags (2.14026ms)
+✔ 28: teacher peer snapshot excludes self, outsider denied, TT accepted and required peer submit (12.186006ms)
+✔ 29: close blocks saves, micro separate, aggregates exclude drafts and attention (18.474732ms)
+✔ 29: action plan only head and H+30, encrypted provider status never exposes key (18.52125ms)
+✔ 29: dry run has no effects, stale claims ambiguous and direct client RPC/table denied (6.458225ms)
+✔ 30: own scope preserved in reconciliation, replay receipt once and revoked session denied (8.820747ms)
+✔ 27/30: scoped certificate keeps population rank; final survey cannot be rewritten via table (22.830503ms)
+✔ 28: mandatory survey gate obeys role/open/submitted and micro never gates (3.773794ms)
+✔ 29: outbox leases, recipient changes, ambiguous never retried and backoff bounds (5.75448ms)
+✔ 29: AI sample/cache transaction requires five essays, max150/1500 and masked reads (3.644114ms)
+✔ 29: role/quality filters recorded and excluded counts match scoped aggregates (9.962412ms)
+✔ 29: head can update completion after H+30 without rewriting plan content (5.457472ms)
+✔ 28: concurrent respondents use own revision, unrelated saves cannot invalidate their draft (16.359348ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2673.807257
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 prebuild
+> node scripts/prepare-pdf-worker.mjs
+
+
+> rebuilt-sim-murid@0.30.0 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 22ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 6.6s
+  Running TypeScript ...
+  Finished TypeScript in 5.7s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/32) ...
+  Generating static pages using 8 workers (8/32) 
+  Generating static pages using 8 workers (16/32) 
+  Generating static pages using 8 workers (24/32) 
+✓ Generating static pages using 8 workers (32/32) in 291ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /account
+├ ƒ /account/access
+├ ƒ /account/biodata
+├ ƒ /account/biodata/[id]
+├ ƒ /account/classes
+├ ƒ /account/directory
+├ ƒ /account/directory/[id]
+├ ƒ /account/email
+├ ƒ /account/families
+├ ƒ /account/learning/[module]
+├ ƒ /account/operations/[module]
+├ ƒ /account/profile
+├ ƒ /account/recovery
+├ ƒ /account/schedules
+├ ƒ /account/security
+├ ƒ /account/services/[module]
+├ ƒ /account/sessions
+├ ƒ /account/settings
+├ ƒ /api/account/email
+├ ƒ /api/account/email-provider
+├ ƒ /api/account/profile
+├ ƒ /api/account/recovery
+├ ƒ /api/auth/access
+├ ƒ /api/auth/email-recovery
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/recovery
+├ ƒ /api/auth/security
+├ ƒ /api/auth/session
+├ ƒ /api/auth/sessions
+├ ƒ /api/classes
+├ ƒ /api/directory
+├ ƒ /api/directory/[id]
+├ ƒ /api/families
+├ ƒ /api/health
+├ ƒ /api/learning/[module]
+├ ƒ /api/learning/assets
+├ ƒ /api/learning/assets/[id]
+├ ƒ /api/operations/[module]
+├ ƒ /api/schedules
+├ ƒ /api/services/[module]
+├ ƒ /api/services/ai
+├ ƒ /api/services/cron
+├ ƒ /api/services/dispatch
+├ ƒ /api/services/exports
+├ ƒ /api/settings
+├ ƒ /api/settings/logo
+├ ƒ /api/slips/[id]
+├ ƒ /api/slips/quote
+├ ƒ /api/student-documents/[id]
+├ ƒ /api/student-profile/[id]
+├ ○ /foundation
+├ ƒ /login
+├ ○ /recovery
+└ ○ /recovery/email
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

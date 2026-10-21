@@ -123,3 +123,6 @@ test("Reconciliation never passes missing evidence, orphans, money mismatch or u
     "blocked",
   );
 });
+
+
+test('AI result preserves categorical legacy sentiment and rejects numeric substitution',async()=>{const {analysisSchema}=await import('../src/lib/services/analysis-schema.ts');const value={ringkasan_umum:'Ringkasan',tema_positif:[],tema_perlu_perhatian:[],kutipan_representatif:[],rekomendasi_tindakan:[],skor_sentimen_keseluruhan:'campuran'};assert.equal(analysisSchema.parse(value).skor_sentimen_keseluruhan,'campuran');assert.throws(()=>analysisSchema.parse({...value,skor_sentimen_keseluruhan:.5}));});
