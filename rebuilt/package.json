@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:operations && npm run test:learning && npm run test:services && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:directory && npm run test:operations && npm run test:learning && npm run test:services && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -34,7 +34,9 @@
     "test:dashboard": "node --test tests/dashboard.test.mjs",
     "test:dashboard:browser": "node scripts/verify-dashboard.mjs",
     "test:notifications:browser": "node scripts/verify-notifications.mjs",
-    "test:notifications": "node --test tests/notifications-page.test.mjs"
+    "test:notifications": "node --test tests/notifications-page.test.mjs",
+    "test:directory": "node --experimental-strip-types --test tests/directory.test.ts && node --test tests/directory-server.test.mjs",
+    "test:directory:browser": "node scripts/verify-directory.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

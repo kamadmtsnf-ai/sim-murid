@@ -2,11 +2,19 @@ import {redirect} from 'next/navigation';
 import {readServerPrincipal} from '@/lib/auth/read-server';
 import {createAuthAdmin} from '@/lib/auth/admin';
 import {directoryQuery,directorySnapshot} from '@/lib/education/validation';
-import {DirectoryPanel} from './directory-panel';
+import {directoryPageCount,directoryPageUrl} from '@/lib/education/directory';
+import {Status} from '@/components/ui/status';
+import {DirectoryPanel,DirectoryFilters} from './directory-panel';
 export const dynamic='force-dynamic';
 export default async function DirectoryPage({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){
  const caller=await readServerPrincipal();if(!caller)redirect('/login?expired=1');
- let input,data;
- try{const parsed=directoryQuery.safeParse(await searchParams);input=parsed.success?parsed.data:directoryQuery.parse({});const r=await createAuthAdmin().rpc('app_directory_read',{p_actor:caller.principal.id,p_session:caller.sessionId,p_role:input.role,p_query:input.query,p_page:input.page,p_status:input.status});if(r.error||!r.data)throw new Error('Unavailable');data=directorySnapshot.parse(r.data);}catch{return <main id="main-content" className="mx-auto max-w-xl space-y-4 px-6 py-12"><h1>Direktori belum tersedia</h1><p>Selesaikan langkah keamanan akun dan muat ulang. Akun tanpa hubungan atau penugasan hanya melihat data yang diizinkan.</p></main>;}
- return <main id="main-content" className="mx-auto max-w-6xl space-y-5 px-6 py-10"><h1 className="text-3xl font-semibold">Direktori pengguna</h1><p>Daftar dan detail mengikuti peran, penugasan, kelas, serta relasi anak yang telah diverifikasi. Data di luar hak akses Anda tidak ditampilkan.</p><DirectoryPanel data={data} filter={input} isAdmin={caller.principal.is_admin}/></main>;
+ const parsed=directoryQuery.safeParse(await searchParams);
+ if(!parsed.success)return <main id="main-content" tabIndex={-1} className="directory-panel space-y-6"><h1 className="text-3xl font-semibold">Direktori pengguna</h1><Status tone="error">Filter tidak valid. Pilih jenis pengguna, masukkan pencarian maksimal 100 karakter, dan gunakan halaman 1–2000.</Status><DirectoryFilters filter={directoryQuery.parse({})} isAdmin={caller.principal.is_admin}/></main>;
+ const input=parsed.data;
+ if(!caller.principal.is_admin&&input.status!=='active')redirect(directoryPageUrl({...input,status:'active'},1));
+ let data;
+ try{const r=await createAuthAdmin().rpc('app_directory_read',{p_actor:caller.principal.id,p_session:caller.sessionId,p_role:input.role,p_query:input.query,p_page:input.page,p_status:input.status});if(r.error)throw new Error('Unavailable');data=r.data===null?null:directorySnapshot.parse(r.data);}catch{throw new Error('Directory unavailable');}
+ if(data===null)return <main id="main-content" className="space-y-4"><h1 className="text-2xl font-semibold">Direktori tidak tersedia untuk akun Anda</h1><Status>Pastikan pengaturan akun telah lengkap. Data hanya tersedia sesuai peran dan hubungan yang telah diverifikasi.</Status></main>;
+ if(input.page>directoryPageCount(data))redirect(directoryPageUrl(input,directoryPageCount(data)));
+ return <main id="main-content" tabIndex={-1} className="space-y-6"><div><h1 className="text-3xl font-semibold">Direktori pengguna</h1><p className="mt-2 max-w-3xl text-muted-foreground">Cari pengguna dan lihat detail sesuai peran, penugasan, kelas, serta hubungan yang telah diverifikasi.</p></div><DirectoryPanel data={data} filter={input} isAdmin={caller.principal.is_admin}/></main>;
 }

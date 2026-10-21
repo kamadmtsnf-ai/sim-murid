@@ -91,3 +91,9 @@ test('ED11-15: service_role entry points work; anon/authenticated have no privat
  await db.exec('set role service_role');assert.notEqual(await classRead(A),null);assert.equal((await write('app_schedules_write',{type:'duties',classId:c2,items:[]},A)).code,'saved');await db.exec('reset role');
  await db.query('select public.app_auth_revoke($1,$2)',args(T2));assert.equal(await scheduleRead(T2),null);assert.equal((await write('app_schedules_write',{type:'duties',classId:c2,items:[]},T2)).code,'denied');
 });
+
+test('ED13-02: directory pagination has stable scoped ordering, admin status and no contact fields',async()=>{
+ for(let n=0;n<56;n++){const id=uuid();await db.query('insert into auth.users values($1)',[id]);await db.query("insert into public.profiles(id,username,full_name,status) values($1,$2,'Pengguna uji direktori',$3)",[id,'qa-directory-page-'+String(n).padStart(3,'0'),n===55?'inactive':'active']);await db.query("insert into public.user_roles(user_id,role_code) values($1,'parent')",[id]);}
+ const list=(actor,page,status)=>val('select public.app_directory_read($1,$2,\'parent\',\'qa-directory-page-\',$3,$4)',[...args(actor),page,status]);
+ const first=await list(A,1,'all'),second=await list(A,2,'all');assert.equal(first.total,56);assert.equal(first.page_size,50);assert.equal(first.rows.length,50);assert.equal(second.rows.length,6);const ids=[...first.rows,...second.rows].map(row=>row.id);assert.equal(new Set(ids).size,56);assert.deepEqual(ids,[...ids].sort());assert.equal((await list(A,1,'active')).total,55);assert.equal((await list(A,1,'inactive')).rows.length,1);assert.equal((await list(P,1,'all')).total,0);assert.equal((await list(P,1,'inactive')).rows.length,0);assert.equal(await list(A,2001,'all'),null);assert.equal(JSON.stringify(first).includes('contact_email'),false);assert.equal(JSON.stringify(first).includes('phone'),false);
+});

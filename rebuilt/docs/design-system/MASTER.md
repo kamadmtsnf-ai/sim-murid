@@ -75,3 +75,16 @@ Satu request lock mencakup POST dan GET rekonsiliasi. Hanya respons `saved` disu
 Filter menyesuaikan lebar container, bukan hanya viewport; tombol dapat wrap pada pembesaran teks. CSS dibatasi pada `.notifications-panel` dan class inbox. Pagination/pencarian tidak membuat request server baru. Fokus kembali ke heading hasil ketika aksi menghilangkan tombol pesan dalam filter belum dibaca.
 
 Rincian audit dan bukti: `docs/verification/notifications-audit.md` dan `docs/verification/notifications/`.
+
+
+## Audit Direktori Pengguna — 22 Oktober 2026
+
+Direktori tetap berupa halaman baca dengan filter GET dan pagination server 50 baris. Tindakan detail/biodata/relasi memakai URL rekaman spesifik, bukan pintasan modul. Tidak menambah CRUD, modal, atau request fetch client. Filter menggunakan TextField/SelectField/Button existing; tabel menggunakan TableRegion existing. Kontrol disusun menurut lebar container agar tetap usable saat sidebar aktif atau teks diperbesar.
+
+Di area sempit, daftar memakai kartu; pada container ≥55rem, tabel ditampilkan. Keduanya membaca objek data server yang sama dan memakai komponen presentasi status/penugasan/detail yang sama. Hanya satu presentasi terlihat/focusable pada satu waktu. Progress native mempunyai label dan tetap menampilkan nilai 0%. Warna bar mengikuti teal identitas. Nama, username, kelas, kontak dan tombol panjang dapat wrap; tidak mengunci gulir vertikal halaman.
+
+Filter invalid ditampilkan sebagai error, tanpa diam-diam membaca filter default. Pagination di luar rentang diarahkan ke halaman valid dengan filter tetap utuh; batas 2000 halaman existing tetap dipertahankan. UI non-admin dinormalisasi ke status aktif, sedangkan otorisasi data tetap sepenuhnya di backend. Link detail tidak diprefetch otomatis. Error layanan memakai boundary/reset existing; loading direktori memiliki heading dan status aksesibel.
+
+Detail menampilkan nama peran dan tugas yang mudah dibaca, tanggal lokal, riwayat kelas, relasi, kontak/biodata yang memang dikembalikan server, serta JTM/istirahat tanpa mengubah nilainya. Kontak/student yang null tidak dibuat-buat. Schema detail dipusatkan untuk view dan validasi; metadata internal tahapan pengembangan tidak ditampilkan.
+
+Bukti dan batas validasi: `docs/verification/directory-audit.md`, `docs/verification/directory/`.

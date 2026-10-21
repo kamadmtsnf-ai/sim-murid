@@ -1,0 +1,35 @@
+{
+  "base": "1baf73a701929872a92ef1fd0787744f45cea714",
+  "branch": "fix/directory-audit",
+  "recordedAt": "2026-10-21T17:54:58.479981+00:00",
+  "npmCi": "passed, unchanged dependencies/lockfile",
+  "check": "passed including production build",
+  "tests": {
+    "passed": 188,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "lint": "passed, zero warnings",
+  "databaseTypes": "14 public table types match fresh migration replay",
+  "deadcode": {
+    "unreachable": []
+  },
+  "directoryBrowser": {
+    "status": "passed",
+    "checks": 71,
+    "axeScreens": 13,
+    "axeViolations": 0,
+    "javascriptErrors": []
+  },
+  "crossModuleBrowser": {
+    "status": "passed",
+    "checks": 67,
+    "axeScreens": 8,
+    "axeViolations": 0
+  },
+  "limits": [
+    "Synthetic component fixtures; no authenticated production UAT or writes.",
+    "Server/API regressions use dependency-boundary mocks; SQL tests use isolated local migration replay.",
+    "Chromium headless; no physical-device Safari/Firefox or assistive-technology user tests."
+  ]
+}
