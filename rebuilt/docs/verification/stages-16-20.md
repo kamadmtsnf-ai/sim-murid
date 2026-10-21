@@ -30,10 +30,19 @@ Ekspor Excel (.xlsx) dan PDF memakai hasil query terotorisasi yang sama, filter 
 
 - 114 pengujian lokal lulus: 96 regresi + 18 pengujian baru (3 DTO/ekspor,15 database). Typecheck, lint, build produksi dan5smoke HTTP lokal lulus.
 - XLSX dibaca kembali untuk memeriksa nominal dan teks yang menyerupai formula tetap berupa string. PDF dibuka kembali; ekspor parsial ditolak.
--20assertion pada database Supabase cloud lulus dalam transaksi rollback: seluruh lima domain, scope anak, penolakan lintas siswa, dukungan waiver, saldo setelah penarikan/koreksi, direct-RPC denial dan RLS. Script: scripts/database/verify-operations.sql. Fixture tersisa nol.
+-20assertion pada database Supabase cloud lulus dalam transaksi rollback, termasuk pengulangan dengan hak service_role yang dipakai server: seluruh lima domain, scope anak, penolakan lintas siswa, dukungan waiver, saldo setelah penarikan/koreksi, direct-RPC denial dan RLS. Script: scripts/database/verify-operations.sql. Fixture tersisa nol.
 - Total20migrasi terkonfirmasi,52tabel aplikasi seluruhnya RLS. apply_migration gagal teknis dengan requestState; fallback execute_sql menerapkan tiap migrasi dengan history secara atomik.
 - Advisor security: INFO38 tabel private RLS tanpa policy sesuai deny-by-default; WARN lama leaked-password protection belum aktif: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection .
 
 ## Batas verifikasi
 
-Fixture cloud memakai Auth session sementara dalam satu transaksi rollback, bukan login/browser produksi. Uji visual terautentikasi lintas peran dan uji concurrency dua koneksi database independen belum dilakukan. Uji paralel lokal membuktikan satu revision hanya menerima satu penarikan dan retry tidak overdraft; ini tidak diklaim sebagai pengujian beban produksi. Data historis belum diimpor. Status deployment dan HTTP produksi dicatat setelah rilis.
+Fixture cloud memakai Auth session sementara dalam satu transaksi rollback, bukan login/browser produksi. Uji visual terautentikasi lintas peran dan uji concurrency dua koneksi database independen belum dilakukan. Uji paralel lokal membuktikan satu revision hanya menerima satu penarikan dan retry tidak overdraft; ini tidak diklaim sebagai pengujian beban produksi. Data historis belum diimpor. Pemeriksaan HTTP produksi dicatat pada bagian rilis setelah selesai.
+
+## Rilis
+
+- Commit implementasi: aeffb9adc863a680cc0d4d84f0e6a3e96a4d1dbe pada main.
+- Deployment kode: dpl_FSzbQbirpAPTGiBEjMqDqRNNUU9g, READY, production/sin1, https://sim-muridv2.vercel.app .
+- npm ci dari lockfile terbaru lulus (575 packages). Build Vercel dari GitHub juga lulus.
+- Pemeriksaan log error/fatal deployment setelah rilis tidak menemukan log sesuai kriteria, pada jendela pengamatan singkat15menit; bukan jaminan semua alur telah diuji.
+
+-21pemeriksaan HTTP produksi lulus: health stage20,5halaman memerlukan login,5API menolak anonim,5POST menolak origin asing,5ekspor menolak anonim. Bukti: stages-16-20-http.json.

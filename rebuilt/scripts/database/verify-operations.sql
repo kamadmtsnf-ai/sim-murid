@@ -12,6 +12,7 @@ begin
  insert into sim_murid_private.enrollments(student_id,class_id,academic_year_id,starts_on,created_by) values(s,c,yr,make_date(sy,7,1),a),(s2,c2,yr,make_date(sy,7,1),a);
  insert into sim_murid_private.student_guardians(student_id,parent_id,relationship,verified_by) values(s,par,'father',a);
  insert into sim_murid_private.family_groups(name,created_by) values('Validation siblings',a) returning id into family;insert into sim_murid_private.family_members(family_id,student_id,created_by) values(family,s,a),(family,s2,a);
+ execute 'set local role service_role';
  select revision into v from sim_murid_private.operations_state;
  r=public.app_operations_write(a,ase,gen_random_uuid(),v,'duty',jsonb_build_object('type','roster','teacherId',t,'weekdays',jsonb_build_array(extract(isodow from public.app_ops_today())::integer)));if r->>'code'<>'saved' then raise exception 'Duty roster %',r;end if;checks=checks+1;
  if public.app_duty_confirmed(t,public.app_ops_today()) then raise exception 'Unconfirmed duty accepted';end if;checks=checks+1;

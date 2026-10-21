@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "origin": "https://sim-muridv2.vercel.app",
+  "checks": [
+    "Health identifies stage 20",
+    "duty page requires login",
+    "mentoring page requires login",
+    "fees page requires login",
+    "attendance page requires login",
+    "duty API rejects anonymous GET",
+    "savings page requires login",
+    "savings API rejects anonymous GET",
+    "mentoring API rejects anonymous GET",
+    "fees API rejects anonymous GET",
+    "duty mutation rejects foreign origin",
+    "attendance API rejects anonymous GET",
+    "attendance mutation rejects foreign origin",
+    "mentoring mutation rejects foreign origin",
+    "duty export rejects anonymous GET",
+    "savings mutation rejects foreign origin",
+    "fees mutation rejects foreign origin",
+    "fees export rejects anonymous GET",
+    "attendance export rejects anonymous GET",
+    "mentoring export rejects anonymous GET",
+    "savings export rejects anonymous GET"
+  ],
+  "limitations": [
+    "No authenticated browser or positive production API login test; domain RPCs tested separately in cloud rollback."
+  ]
+}
