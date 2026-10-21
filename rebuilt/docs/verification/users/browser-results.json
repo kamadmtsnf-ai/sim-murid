@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "checks": [
+    "viewport, scroll, keyboard dismissal and focus 320x700",
+    "viewport, scroll, keyboard dismissal and focus 375x812",
+    "viewport, scroll, keyboard dismissal and focus 768x1024",
+    "viewport, scroll, keyboard dismissal and focus 1440x900",
+    "viewport, scroll, keyboard dismissal and focus 812x375",
+    "admin role carries explicit privilege explanation",
+    "busy guard, pending reopen and retry reuse exact payload without duplicate request",
+    "credentials masked, copy works, no browser storage",
+    "closing success clears credentials and starts fresh form",
+    "no uncaught JavaScript errors"
+  ],
+  "axeViews": [
+    "form 320x700",
+    "form 375x812",
+    "form 768x1024",
+    "form 1440x900",
+    "form 812x375",
+    "success mobile"
+  ],
+  "limits": [
+    "Synthetic UI and intercepted Auth/API success; no real accounts created.",
+    "SQL and service tests run separately; full authenticated production creation not exercised."
+  ]
+}
