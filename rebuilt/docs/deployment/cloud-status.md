@@ -44,3 +44,7 @@ Adapter Brevo diganti Gmail SMTP TLS465 melalui Nodemailer atas permintaan pengg
 Profil sekolah/master mapel/hafalan/hari libur dan logo diimplementasikan. Migrasi20261019155240 telah diterapkan beserta history secara atomik (fallback execute_sql karena apply_migration requestState expired). Total10migrasi,30tabel aplikasi RLS dan bucket school-assets khusus logo publik. 80test lokal, typecheck/lint/build,5smoke dan transaksi cloud rollback lulus. Tidak mengubah akun Admin/Gmail; SMTP active=true dibuktikan pengguna, inbox belum teruji. Lihat ../verification/stage-10.md.
 
 Produksi Tahap10: a344657cc16ddcb15c49558bf50223df45c2f6f0 pada dpl_8WUn7TCtEwZ6hER8zdWx3vw6KJfB READY, health stage10;9pemeriksaan HTTP guardrail lulus. Uji browser Admin/unggah positif belum dilakukan.
+
+## Tahap 21–25
+
+25migrasi dan66tabel aplikasiRLS terkonfirmasi; bucket learning-private privat.27assertion cloud service_role rollback lulus. Detail dan batas: docs/verification/stages-21-25.md.

@@ -20,8 +20,9 @@ export const commandSchemas={
  z.object({type:z.literal('tariff'),classId:id,month,amount:money.or(z.literal(0))}).strict(),
  z.object({type:z.literal('payment'),id:nullableId,studentId:id,date,allocations:z.array(z.object({month,amount:money}).strict()).min(1).max(12).refine(v=>new Set(v.map(x=>x.month)).size===v.length),notes,reason:reason.optional()}).strict(),z.object({type:z.literal('void'),id,reason}).strict()]),
  savings:z.discriminatedUnion('type',[
+ z.object({type:z.literal('bracket'),id:nullableId,minimum:z.number().int().min(0).max(1e12),maximum:z.number().int().min(0).max(1e12).nullable(),percent:z.number().min(0).max(100),active:z.boolean(),reason:reason.optional()}).strict().refine(x=>x.maximum===null||x.maximum>=x.minimum),
  z.object({type:z.literal('account'),ownerId:id,category:z.enum(['S','G','N'])}).strict(),
- z.object({type:z.literal('transaction'),id:nullableId,accountId:id,date,kind:z.enum(['deposit','withdrawal']),amount:money.min(1000).multipleOf(1000),reason}).strict(),z.object({type:z.literal('void'),id,reason}).strict()])
+ z.object({type:z.literal('transaction'),id:nullableId,accountId:id,date,kind:z.enum(['deposit','withdrawal']),amount:money.min(1000).multipleOf(1000),feeApplied:z.boolean().default(false),reason}).strict(),z.object({type:z.literal('void'),id,reason}).strict()])
 };
 export const mutationEnvelope=z.object({requestId:id,revision:z.number().int().min(0).safe(),command:z.unknown()}).strict();
 export const filtersSchema=z.object({year:z.coerce.number().int().min(2000).max(2100).optional(),start:date.optional(),end:date.optional(),classId:id.optional(),studentId:id.optional(),page:z.coerce.number().int().min(1).max(100000).optional(),status:z.enum(['Hadir','Sakit','Izin','Alpha']).optional(),query:z.string().trim().max(100).optional(),export:z.boolean().optional()}).strict().refine(x=>!x.start||!x.end||x.start<=x.end,'Rentang tanggal tidak valid.');

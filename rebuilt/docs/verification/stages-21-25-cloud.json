@@ -1,0 +1,29 @@
+{
+  "project": "sim-muridv2",
+  "migrations": 25,
+  "tables": 66,
+  "rlsMissing": 0,
+  "bucket": "learning-private",
+  "private": true,
+  "maxBytes": 52428800,
+  "assertions": 27,
+  "status": "passed",
+  "mode": "service_role transaction rollback",
+  "fixturesRemaining": 0,
+  "emailSent": false,
+  "storageUploaded": false,
+  "advisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "count": 52,
+      "url": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "count": 1,
+      "url": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ]
+}

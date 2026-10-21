@@ -20,7 +20,12 @@
     "20261021050044_student_attendance.sql",
     "20261021050046_student_mentoring.sql",
     "20261021050048_committee_payments.sql",
-    "20261021050051_savings_ledger.sql"
+    "20261021050051_savings_ledger.sql",
+    "20261021053607_withdrawal_fees_slips.sql",
+    "20261021053610_assessments_kkm.sql",
+    "20261021053613_report_snapshots.sql",
+    "20261021053616_promotions_diplomas.sql",
+    "20261021053618_digital_books.sql"
   ],
   "tables": [
     {
@@ -105,6 +110,16 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "assessment_scores",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "assessments",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "auth_accounts",
       "rls_enabled": true
     },
@@ -121,6 +136,21 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "committee_tariffs",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "digital_books",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "diploma_settings",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "diplomas",
       "rls_enabled": true
     },
     {
@@ -155,6 +185,16 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "fee_brackets",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "grade_counters",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "import_batches",
       "rls_enabled": true
     },
@@ -166,6 +206,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "job_runs",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "learning_assets",
       "rls_enabled": true
     },
     {
@@ -186,6 +231,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "mentoring_reports",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "minimum_grades",
       "rls_enabled": true
     },
     {
@@ -215,7 +265,17 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "promotion_history",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "recovery_requests",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "report_snapshots",
       "rls_enabled": true
     },
     {
@@ -246,6 +306,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "settings_state",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "slip_deliveries",
       "rls_enabled": true
     },
     {
@@ -281,6 +346,16 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "teacher_duty_sessions",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "withdrawal_sequences",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "withdrawal_slips",
       "rls_enabled": true
     }
   ],
