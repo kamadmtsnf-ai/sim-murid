@@ -1,0 +1,29 @@
+{
+  "status": "blocked",
+  "scope": "read-only supplied fields only; not full migration acceptance",
+  "counts": {
+    "Users": 128,
+    "KKM": 53,
+    "Nilai": 1769,
+    "Schedules": 104,
+    "Guru_Wali": 13,
+    "Classes": 3,
+    "Savings": 38,
+    "Iuran_Komite": 13
+  },
+  "issues": [
+    {
+      "code": "unmapped_username",
+      "table": "Nilai",
+      "count": 112
+    },
+    {
+      "code": "fee_name_requires_identity_and_month_allocation_mapping",
+      "count": 13
+    }
+  ],
+  "warnings": [
+    "Preflight does not import data or verify document bytes, historical ordering, financial reconciliation, backups or cutover.",
+    "Never import legacy Password, Security_Answer_Hash, Sessions or Email_OTP as authentication state. Provision application Auth separately."
+  ]
+}

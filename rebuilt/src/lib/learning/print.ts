@@ -1,7 +1,8 @@
+import {embedReportFont,wrapPdfText} from '../pdf/font.ts';
 export function terbilang(n: number): string {
   return n === 0 ? "nol" : spell(n);
 }
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
+import { PDFDocument, rgb } from "pdf-lib";
 export const object = (v: unknown): Record<string, unknown> =>
   typeof v === "object" && v !== null && !Array.isArray(v)
     ? (v as Record<string, unknown>)
@@ -98,13 +99,12 @@ export function htmlEscape(s: string) {
 }
 export async function textPdf(sections: string[][]) {
   const pdf = await PDFDocument.create(),
-    font = await pdf.embedFont(StandardFonts.Helvetica);
+    font = await embedReportFont(pdf);
   for (const lines of sections) {
     let page = pdf.addPage([595, 842]),
       y = 795;
     for (const [index, line] of lines.entries()) {
-      const safe = line.normalize("NFKD").replace(/[^\x20-\x7E]/g, "?");
-      let part = "";
+      const size = index === 0 ? 15 : 10;
       const draw = (s: string) => {
         if (y < 50) {
           page = pdf.addPage([595, 842]);
@@ -119,13 +119,7 @@ export async function textPdf(sections: string[][]) {
         });
         y -= index === 0 ? 28 : 18;
       };
-      for (const word of safe.split(" ")) {
-        if (font.widthOfTextAtSize(part + " " + word, 10) > 510 && part) {
-          draw(part);
-          part = word;
-        } else part += (part ? " " : "") + word;
-      }
-      draw(part);
+      for(const part of wrapPdfText(font,line,size,510))draw(part);
     }
   }
   return pdf.save();
@@ -155,6 +149,7 @@ export async function reportsPdf(
     const lines = [
       String(school.name ?? "SiM-Murid"),
       "RAPOR " + (s.draft ? "DRAFT / SEMENTARA" : "TERBIT"),
+      ...(p.version ? ["Versi: "+String(p.version), ...(p.reason ? ["Alasan koreksi: "+String(p.reason)] : [])] : []),
       String(student.name) + " — " + String(student.username),
       `Kelas ${String(cls.name)} | Tahun ${String(s.year)}/${Number(s.year) + 1} | Semester ${String(s.semester)}`,
       `Jenis: ${kind} | Kebijakan: RAPOR-1.0 (PH20%, ATS30%, ASAS50%; Praktik terpisah)`,

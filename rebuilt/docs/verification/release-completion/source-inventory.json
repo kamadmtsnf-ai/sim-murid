@@ -1,0 +1,141 @@
+{
+  "observedDate": "2026-10-21",
+  "mode": "read-only live sheet; not frozen migration export",
+  "users": {
+    "count": 128,
+    "duplicateUsernames": 0,
+    "numericUsernameCells": 0
+  },
+  "tableCounts": [
+    {
+      "table": "Piket_Hadir",
+      "nonemptyIdRows": 50
+    },
+    {
+      "table": "Survei_Periode",
+      "nonemptyIdRows": 4
+    },
+    {
+      "table": "Survei_Jawaban",
+      "nonemptyIdRows": 1476
+    },
+    {
+      "table": "Survei_Peer",
+      "nonemptyIdRows": 156
+    },
+    {
+      "table": "Survei_Progress",
+      "nonemptyIdRows": 27
+    },
+    {
+      "table": "Survei_Rencana_Aksi",
+      "nonemptyIdRows": 0
+    },
+    {
+      "table": "Survei_AI_Analisis",
+      "nonemptyIdRows": 0
+    },
+    {
+      "table": "NilaiAfektif",
+      "nonemptyIdRows": 2
+    },
+    {
+      "table": "PoinKatalog",
+      "nonemptyIdRows": 25
+    },
+    {
+      "table": "PoinEvent",
+      "nonemptyIdRows": 84
+    },
+    {
+      "table": "PoinResetLog",
+      "nonemptyIdRows": 69
+    },
+    {
+      "table": "PoinNotifikasi",
+      "nonemptyIdRows": 6
+    },
+    {
+      "table": "PoinSaldo",
+      "nonemptyIdRows": 104
+    },
+    {
+      "table": "Ijazah",
+      "nonemptyIdRows": 13
+    },
+    {
+      "table": "KKM",
+      "nonemptyIdRows": 53
+    },
+    {
+      "table": "Nilai",
+      "nonemptyIdRows": 1769
+    },
+    {
+      "table": "SiswaDetail",
+      "nonemptyIdRows": 46
+    },
+    {
+      "table": "SchoolProfile",
+      "nonemptyIdRows": 1
+    },
+    {
+      "table": "eBook",
+      "nonemptyIdRows": 30
+    },
+    {
+      "table": "FeeConfig",
+      "nonemptyIdRows": 7
+    },
+    {
+      "table": "Schedules",
+      "nonemptyIdRows": 104
+    },
+    {
+      "table": "Guru_Wali",
+      "nonemptyIdRows": 13
+    },
+    {
+      "table": "Classes",
+      "nonemptyIdRows": 3
+    },
+    {
+      "table": "Attendance",
+      "nonemptyIdRows": 7139
+    },
+    {
+      "table": "Savings",
+      "nonemptyIdRows": 38
+    },
+    {
+      "table": "Iuran_Komite",
+      "nonemptyIdRows": 13
+    },
+    {
+      "table": "Laporan_Bimbingan",
+      "nonemptyIdRows": 117
+    },
+    {
+      "table": "Hari_Libur",
+      "nonemptyIdRows": 23
+    },
+    {
+      "table": "Activity_Logs",
+      "nonemptyIdRows": 3542
+    }
+  ],
+  "documents": {
+    "referenceCount": 233,
+    "uniqueUrlCount": 228,
+    "bytesChecksumsAndPermissionsVerified": false
+  },
+  "gradeIssues": {
+    "unmappedRows": 112,
+    "distinctUnmappedUsernames": 4
+  },
+  "feeIssues": {
+    "rowsRequiringIdentityAndMonthAllocationReview": 13
+  },
+  "excluded": "Legacy passwords, security answer hashes, OTP rows, session tokens and settings credentials were not fetched.",
+  "cutover": "blocked"
+}

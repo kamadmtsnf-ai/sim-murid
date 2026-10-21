@@ -20,6 +20,10 @@ const text = (v: Row, k: string) => String(v[k] ?? ""),
   list = (v: unknown): Row[] => (Array.isArray(v) ? (v as Row[]) : []),
   obj = (v: unknown): Row =>
     typeof v === "object" && v !== null ? (v as Row) : {};
+function ReportSubjectsTable({subjects,label}:{subjects:Row[];label:string}){
+ const columns=[['name','Mapel'],['ph','PH'],['ats','ATS'],['asas','ASAS'],['practice','Praktik'],['final','Rapor'],['kkm','KKM'],['grade','Predikat']] as const;
+ return <TableRegion label={label}><table className="w-full text-left text-sm"><caption className="sr-only">{label}</caption><thead><tr>{columns.map(([key,title])=><th scope="col" className="p-2" key={key}>{title}</th>)}</tr></thead><tbody>{subjects.map(subject=><tr key={text(subject,'subject_id')}>{columns.map(([key])=><td className="border-b p-2" key={key}>{subject[key]===null?'—':text(subject,key)}{key==='final'&&!subject.complete?' *':''}</td>)}</tr>)}</tbody></table></TableRegion>;
+}
 export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
   const [data, setData] = useState(initial),
     [filters, setFilters] = useState<Record<string, string>>({
@@ -595,48 +599,11 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                       {text(r, "name")} —{" "}
                       {snapshot.draft ? "Draft / sementara" : "Terbit"}
                     </label>
-                    <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom"><table className="w-full text-left text-sm"><caption className="sr-only">Data sesuai filter dan hak akses Anda</caption>
-                        <thead>
-                          <tr>
-                            {[
-                              "Mapel",
-                              "PH",
-                              "ATS",
-                              "ASAS",
-                              "Praktik",
-                              "Rapor",
-                              "KKM",
-                              "Predikat",
-                            ].map((x) => (
-                              <th scope="col" key={x} className="p-2">
-                                {x}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {list(snapshot.subjects).map((s) => (
-                            <tr key={text(s, "subject_id")}>
-                              {[
-                                "name",
-                                "ph",
-                                "ats",
-                                "asas",
-                                "practice",
-                                "final",
-                                "kkm",
-                                "grade",
-                              ].map((k) => (
-                                <td className="border-b p-2" key={k}>
-                                  {s[k] === null ? "—" : text(s, k)}
-                                  {k === "final" && !s.complete ? " *" : ""}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </TableRegion>
+                    {published.version !== undefined && <p className="text-sm">Versi {text(published,"version")}{published.reason ? " · "+text(published,"reason") : ""}</p>}
+                    {list(r.reportVersions).length > 0 && <details><summary className="cursor-pointer text-sm">Riwayat versi rapor</summary><ul className="space-y-2 py-2">{list(r.reportVersions).map(v=><li key={text(v,"id")} className="text-sm"><a className="underline" href={api+"?"+new URLSearchParams({...filters,studentId:text(r,"student_id"),reportVersion:text(v,"version"),kind:reportKind,format:"pdf"})}>Unduh versi {text(v,"version")}</a>{v.reason ? " · "+text(v,"reason") : " · Penerbitan pertama"}</li>)}</ul></details>}
+                    {Object.keys(published).length > 0 && data.extra.canPublish === true && data.extra.reportRevisions === true && <form className="space-y-2 rounded border p-3" onSubmit={e=>{e.preventDefault();const form=new FormData(e.currentTarget);void mutate({type:"revise",classId:filters.classId,semester:Number(filters.semester),studentId:text(r,"student_id"),expectedVersion:Number(published.version??1),reason:String(form.get("revisionReason")??"")});}}><p className="text-sm">Terbitkan koreksi dari nilai dan KKM draft terkini. Versi sebelumnya tetap tersimpan.</p><details><summary className="cursor-pointer">Pratinjau nilai dan KKM untuk versi koreksi</summary><ReportSubjectsTable subjects={list(obj(r.draft).subjects)} label="Pratinjau versi koreksi rapor"/></details><label className="block">Alasan koreksi<textarea name="revisionReason" className={controlClass} required minLength={5} maxLength={2000} disabled={busy}/></label><label className="block text-sm"><input type="checkbox" required disabled={busy}/> Saya sudah memeriksa nilai, KKM, dan identitas pada draft terkini.</label><Button disabled={busy} type="submit">Terbitkan versi koreksi</Button></form>}
+                    <ReportSubjectsTable subjects={list(snapshot.subjects)} label="Rapor yang ditampilkan"/>
+
                     <a
                       className="underline"
                       href={
@@ -666,8 +633,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                   </label>
                   <p>
                     Publikasi hanya diterima bila komponen wajib lengkap. Rapor
-                    yang sudah terbit dipertahankan; penerbitan ulang menunggu
-                    kebijakan koreksi.
+                    yang sudah terbit dipertahankan; koreksi diterbitkan sebagai versi baru dengan alasan dan audit.
                   </p>
                   <Button disabled={busy}>
                     Terbitkan snapshot {selected.length ? "pilihan" : "semua"}

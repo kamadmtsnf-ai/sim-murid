@@ -506,6 +506,32 @@ test("23: published archive immutable across score and KKM changes, per-subject 
     null,
   );
 });
+test("D10: corrections append immutable versions, enforce publisher scope and preserve historical exports", async()=>{
+ const base=await val("select snapshot from sim_murid_private.report_snapshots where student_id=$1",[A.s1.id]);
+ const command={type:"revise",classId:c,semester:sem,studentId:A.s1.id,expectedVersion:1,reason:"Koreksi nilai ATS berdasarkan pemeriksaan guru"};
+ assert.equal((await learn("reports",command,A.sub)).code,"denied");
+ assert.equal((await learn("reports",{...command,reason:""})).code,"invalid");
+ const rev=await val("select revision from sim_murid_private.operations_state"),requestId=uuid();
+ const write=()=>val("select public.app_learning_write($1,$2,$3,$4,'reports',$5::jsonb)",[A.admin.id,A.admin.session,requestId,rev,JSON.stringify(command)]);
+ const saved=await write();assert.equal(saved.code,"saved");assert.equal(saved.version,2);assert.deepEqual(await write(),saved);
+ assert.equal(await val("select count(*)::int from sim_murid_private.report_revisions"),1);
+ assert.equal((await learn("reports",command)).code,"stale");
+ assert.deepEqual(await val("select snapshot from sim_murid_private.report_snapshots where student_id=$1",[A.s1.id]),base);
+ const current=(await learning("reports",A.admin,{classId:c,semester:sem})).rows.find(r=>r.student_id===A.s1.id);
+ assert.equal((await learn("reports",{...command,expectedVersion:2})).code,"unchanged");
+ assert.equal(current.published.version,2);assert.equal(current.reportVersions.length,2);assert.deepEqual(current.reportVersions[1].snapshot,base);
+ const historical=(await learning("reports",A.admin,{classId:c,semester:sem,reportVersion:1})).rows.find(r=>r.student_id===A.s1.id);
+ assert.deepEqual(historical.published.snapshot,base);
+ const teacher=(await learning("reports",A.sub,{classId:c,semester:sem})).rows.find(r=>r.student_id===A.s1.id);
+ for(const v of teacher.reportVersions)assert.deepEqual(v.snapshot.subjects.map(x=>x.subject_id),[subject]);
+ assert.equal((await learning("reports",A.admin,{classId:c,semester:sem,reportVersion:999})).rows.length,0);
+ await assert.rejects(db.exec("delete from sim_murid_private.report_revisions"),/immutable/i);
+ assert.equal(await val("select has_function_privilege('authenticated','public.app_learning_write(uuid,uuid,uuid,bigint,text,jsonb)','execute')"),false);
+});
+test("Local database snapshot restore preserves base report, correction version and permissions",async()=>{
+ const {PGlite}=await import('@electric-sql/pglite');const backup=await db.dumpDataDir();const restored=new PGlite({loadDataDir:backup});
+ try{const rows=(await restored.query("select version,reason from sim_murid_private.report_revisions")).rows;assert.equal(rows.length,1);assert.equal(rows[0].version,2);assert.ok(rows[0].reason);assert.equal((await restored.query("select count(*)::int n from sim_murid_private.report_snapshots")).rows[0].n,1);assert.equal((await restored.query("select has_table_privilege('authenticated','sim_murid_private.report_revisions','select') allowed")).rows[0].allowed,false);}finally{await restored.close();}
+});
 let nextYear, nextClass, next7;
 test("24: promotion mapping validates whole batch before writes, history and duplicate protection", async () => {
   nextYear = uuid();

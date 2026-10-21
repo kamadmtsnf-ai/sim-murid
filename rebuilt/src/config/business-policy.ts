@@ -17,5 +17,6 @@ export const businessPolicy = {
     peerEssayRequired: false,
     sharedStepAndFinalValidation: true,
   },
-  openDecisions: ["D10: pembaruan KKM dan arsip rapor"],
+  reportRevision: {version:"RAPOR-REVISION-1.0", immutableArchives:true, corrections:"append-version-with-reason-and-audit"},
+  openDecisions: [],
 } as const;
