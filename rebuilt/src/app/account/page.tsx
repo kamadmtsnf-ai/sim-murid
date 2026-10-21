@@ -20,6 +20,6 @@ export default async function AccountPage() {
   }
   if (!state) redirect("/login?expired=1");
   if(onboarding?.gate!=="ready")redirect("/account/security");
-  const {createAuthAdmin}=await import('@/lib/auth/admin');const survey=await createAuthAdmin().rpc('app_survey_required',{p_actor:state.principal.id,p_session:state.sessionId});if(survey.data)redirect('/account/services/surveys');
+  const {createAuthAdmin}=await import('@/lib/auth/admin');const survey=await createAuthAdmin().rpc('app_survey_required',{p_actor:state.principal.id,p_session:state.sessionId});if(survey.error)throw new Error('Survey access check unavailable');if(survey.data===true)redirect('/account/services/surveys');
   return <AccountDashboard name={state.principal.full_name} expiresAt={state.principal.expires_at}/>;
 }

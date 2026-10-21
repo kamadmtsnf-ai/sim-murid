@@ -12,7 +12,6 @@ export const principalSchema = z.object({
   expires_at: z.string(), must_change_password: z.boolean(),
   is_admin: z.boolean().default(false),
 });
-export type Principal = z.infer<typeof principalSchema>;
 
 /** Only called after Auth has verified this exact access token. Never authorization by itself. */
 export function verifiedTokenSession(accessToken: string, userId: string): string {

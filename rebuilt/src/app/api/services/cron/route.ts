@@ -15,6 +15,7 @@ export async function GET(request: NextRequest) {
     !timingSafeEqual(Buffer.from(token), Buffer.from(expected))
   )
     return privateJson({ message: "Akses ditolak." }, 401);
+  try {
   const r = await createAuthAdmin().rpc("app_jobs_tick", { p_dry_run: false });
   if (r.error)
     return privateJson({ message: "Pekerjaan belum tersedia." }, 503);
@@ -22,4 +23,7 @@ export async function GET(request: NextRequest) {
   if (process.env.SERVICES_DISPATCH_ENABLED === "true")
     delivery = await dispatchOne();
   return privateJson({ message: "Pemeriksaan pekerjaan selesai.", delivery });
+  } catch {
+    return privateJson({ message: "Pekerjaan belum tersedia. Silakan coba kembali." }, 503);
+  }
 }
