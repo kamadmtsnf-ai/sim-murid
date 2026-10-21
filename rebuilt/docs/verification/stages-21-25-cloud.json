@@ -25,5 +25,12 @@
       "count": 1,
       "url": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
     }
+  ],
+  "migrationVersions": [
+    "20261021055713",
+    "20261021055727",
+    "20261021055735",
+    "20261021055743",
+    "20261021055752"
   ]
 }

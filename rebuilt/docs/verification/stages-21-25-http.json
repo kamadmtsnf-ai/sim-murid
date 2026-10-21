@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "origin": "https://sim-muridv2.vercel.app",
+  "checks": [
+    "Health stage25",
+    "grades page requires login",
+    "reports page requires login",
+    "books page requires login",
+    "promotions page requires login",
+    "grades API rejects anonymous",
+    "grades mutation rejects foreign origin",
+    "books API rejects anonymous",
+    "books mutation rejects foreign origin",
+    "promotions API rejects anonymous",
+    "reports API rejects anonymous",
+    "reports mutation rejects foreign origin",
+    "promotions mutation rejects foreign origin",
+    "/api/learning/reports?format=pdf requires login",
+    "/api/learning/assets/00000000-0000-4000-8000-000000000001 requires login",
+    "/api/slips/00000000-0000-4000-8000-000000000001?format=pdf requires login",
+    "/api/slips/quote?amount=123000&apply=true requires login",
+    "/api/learning/assets rejects foreign origin",
+    "/api/slips/00000000-0000-4000-8000-000000000001 rejects foreign origin",
+    "Pinned PDF.js worker available"
+  ],
+  "limitations": [
+    "No authenticated production browser or positive login API test. Domain RPCs independently verified in cloud rollback. No actual slip email or Storage upload during validation."
+  ]
+}

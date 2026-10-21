@@ -69,3 +69,7 @@ CLI migrations melacak penerapan dan tidak diulang manual. Setiap file memakai t
 createClient browser dan createRequestClient server telah dipasang dengan generik Database. Server factory menerima cookie adapter dengan getAll+setAll termasuk cacheheaders versiSDK aktual. Belum ada route yang memakai factory ini; proxy/sessionrefresh/claims check adaTahap5–6. Hindari shared client global antarrequest. Tidak ada factory secret-bypass umum.
 
 Parser env mengizinkan HTTPSremote serta HTTPlocalhost/loopback tepat untuk Supabase lokal, bukan hostseperti localhost.attacker.invalid. Build static tetap dapat berjalan tanpa environment, dan pemanggilan factory dengan konfigurasi kosong menghasilkan error yang tidak memuat key.
+
+## Pemetaan migrasi Tahap21–25
+
+Supabase apply_migration menetapkan timestamp cloud sendiri. Lima file sumber asli dipertahankan; versi terpasang dan checksum ada di `supabase/migration-cloud-map.json`. Jangan menjalankan `supabase db push --linked` mentah: timestamp sumber berbeda sehingga migrasi yang sudah terpasang dapat dianggap baru. Baca history target, cocokkan nama dan SQL/checksum, lakukan rekonsiliasi history terencana lalu dry-run sebelum memakai alurCLI. Deployment ini sudah menerapkan SQL melalui MCP; tidak ada migrasi ulang yang diperlukan.

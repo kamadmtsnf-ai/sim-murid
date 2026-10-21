@@ -28,3 +28,13 @@ Antrean email diproses satu penerima per klik “Kirim/lanjutkan”; status send
 PDF memakai font Latin standar dan karakter di luar font diganti `?`. Tanda tangan berupa ruang tanda tangan, bukan tanda tangan digital. Lihat/unduh ijazah diperiksa terpisah sebelum pengiriman bytes; pembatasan unduh tidak mencegah seseorang menyimpan bytes yang sudah diizinkan untuk dilihat. URL buku eksternal mengikuti ketersediaan/CORS/izin penyedia; fallback standar/buka terpisah tersedia.
 
 Belum diuji dengan browser produksi terautentikasi lintas peran, unggah Storage aktual50MiB, atau dua koneksi database paralel independen. Uji PDF memuat kembali dokumen yang dihasilkan; belum merupakan pemeriksaan visual semua nama/rapor panjang. Tidak mengimpor data historis atau mengubah password Admin permanen.
+
+## Rilis
+
+- Commit implementasi8aa055dc531f02f09d02816b88a3226040ef93c9, main.
+- Deployment dpl_6JvjJhdDEoAfejZzbXxMuWvpq42e READY, production/sin1; https://sim-muridv2.vercel.app .
+-20pemeriksaan HTTP produksi lulus: health stage25,4halaman login,4API anonim,4mutasi origin asing,4ekspor/objek/quote anonim,2origin asing slip/asset dan worker PDF.js tersedia. Bukti stages-21-25-http.json.
+- Supabase apply_migration memberikan versi20261021055713,20261021055727,20261021055735,20261021055743,20261021055752. File sumber asli dipertahankan. Pemetaan dan checksum disimpan di supabase/migration-cloud-map.json. Jangan menjalankan linked db push mentah sebelum rekonsiliasi riwayat dan dry-run: versi lokal berbeda, sehingga CLI dapat menganggap file sudah terpasang sebagai migrasi baru. Tidak ada migrasi ulang pada cloud.
+- Peninjauan otomatis menolak rename migrasi yang membutuhkan penghapusan lima path lama pada main. Alternatif aman yang diterapkan hanya dokumentasi/pemetaan; tidak mengubah file migrasi atau riwayat cloud.
+
+Log runtime error/fatal deployment tidak ditemukan pada jendela singkat15menit setelah rilis; bukan bukti seluruh alur pengguna telah diuji.

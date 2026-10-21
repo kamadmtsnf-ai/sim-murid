@@ -48,3 +48,5 @@ Produksi Tahap10: a344657cc16ddcb15c49558bf50223df45c2f6f0 pada dpl_8WUn7TCtEwZ6
 ## Tahap 21–25
 
 25migrasi dan66tabel aplikasiRLS terkonfirmasi; bucket learning-private privat.27assertion cloud service_role rollback lulus. Detail dan batas: docs/verification/stages-21-25.md.
+
+Kode Tahap25 commit8aa055dc531f02f09d02816b88a3226040ef93c9; Vercel dpl_6JvjJhdDEoAfejZzbXxMuWvpq42e READY pada URL produksi.20pemeriksaan HTTP lulus. Versi apply_migration cloud dipetakan ke file sumber asli pada supabase/migration-cloud-map.json; jangan menjalankan linked db push tanpa rekonsiliasi riwayat dan dry-run.

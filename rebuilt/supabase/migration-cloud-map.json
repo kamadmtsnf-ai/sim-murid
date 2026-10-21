@@ -1,0 +1,41 @@
+{
+  "project": "qpzoukkhdxpmbtkcqemj",
+  "source": "Supabase apply_migration assigns cloud versions. Local immutable source filenames retained. Do not use raw linked db push without history reconciliation and dry-run.",
+  "migrations": [
+    {
+      "localFile": "20261021053607_withdrawal_fees_slips.sql",
+      "localVersion": "20261021053607",
+      "cloudVersion": "20261021055713",
+      "name": "withdrawal_fees_slips",
+      "sha256": "fcaf2121668ecca400a48b0ed8a840bae3fca1b0fa564bca61a3271187b57dc7"
+    },
+    {
+      "localFile": "20261021053610_assessments_kkm.sql",
+      "localVersion": "20261021053610",
+      "cloudVersion": "20261021055727",
+      "name": "assessments_kkm",
+      "sha256": "2d714f44f5b13a5a978990074fa974b518b89fb65ba9bc41b866c4b370b4f986"
+    },
+    {
+      "localFile": "20261021053613_report_snapshots.sql",
+      "localVersion": "20261021053613",
+      "cloudVersion": "20261021055735",
+      "name": "report_snapshots",
+      "sha256": "56310a95c6bd5a5b2738fa75127d7ffd38b86dfc6715b737b5f3cee5b16a76d8"
+    },
+    {
+      "localFile": "20261021053616_promotions_diplomas.sql",
+      "localVersion": "20261021053616",
+      "cloudVersion": "20261021055743",
+      "name": "promotions_diplomas",
+      "sha256": "7cac355318713c489f02fe34e4cfabb2b840131f0816db24ee0c67aeef1fa2f1"
+    },
+    {
+      "localFile": "20261021053618_digital_books.sql",
+      "localVersion": "20261021053618",
+      "cloudVersion": "20261021055752",
+      "name": "digital_books",
+      "sha256": "2460ab093c6440d63b529c6aa1d7e72125fa1253cb47942d870be699e7ff830f"
+    }
+  ]
+}
