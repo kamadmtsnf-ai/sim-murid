@@ -1,3 +1,3 @@
-# M15 — SPK
+# M15 — SPK dan poin
 
-Status: belum diimplementasikan. Rujuk matriks kesetaraan M15 pada docs/specifications. Tambahkan schemas/service/repository/permissions/types ketika tahap modul dijalankan; jangan membuat endpoint atau data dummy yang dinyatakan selesai.
+Implementasi Tahap26–27: src/lib/services dan /account/services/discipline. Katalog, replay, pembatalan, arsip, notifikasi, ranking dan afektif memakai RPC invoker private. Bukti dan batas ada di docs/verification/stages-26-30.md.

@@ -42,7 +42,7 @@ try {
   checks.push('Compiled Tailwind CSS asset returns 200 with application utility styles');
   const foundation = await fetch(`${origin}/foundation`);
   assert.equal(foundation.status, 200);
-  assert.match(await foundation.text(), /Tahap 25/);
+  assert.match(await foundation.text(), /Tahap 30/);
   checks.push('Foundation page 200 and accurate remaining-scope information');
   const missing = await fetch(`${origin}/nonexistent-foundation-route`);
   assert.equal(missing.status, 404);
@@ -51,7 +51,7 @@ try {
   const health = await fetch(`${origin}/api/health`);
   assert.equal(health.status, 200);
   assert.equal(health.headers.get('cache-control'), 'no-store');
-  assert.deepEqual(await health.json(), { status: 'ok', application: 'sim-murid', stage: 25, scope: 'liveness' });
+  assert.deepEqual(await health.json(), { status: 'ok', application: 'sim-murid', stage: 30, scope: 'liveness' });
   checks.push('Health JSON identifies liveness only, no secrets or database-ready claims');
   console.log(JSON.stringify({ status: 'passed', checks, limitations: ['HTTP smoke test; no visual browser or hydration validation', 'Authentication integration covered by separate live tests'] }, null, 2));
 } finally {

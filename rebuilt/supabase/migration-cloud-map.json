@@ -36,6 +36,55 @@
       "cloudVersion": "20261021055752",
       "name": "digital_books",
       "sha256": "2460ab093c6440d63b529c6aa1d7e72125fa1253cb47942d870be699e7ff830f"
+    },
+    {
+      "localFile": "20261021071406_discipline_events.sql",
+      "localVersion": "20261021071406",
+      "cloudVersion": "20261021074211",
+      "name": "discipline_events",
+      "sha256": "e9336511454467317175afe27684504452c70f86aa408add1f457c4bee7f2133"
+    },
+    {
+      "localFile": "20261021071409_discipline_notifications.sql",
+      "localVersion": "20261021071409",
+      "cloudVersion": "20261021074222",
+      "name": "discipline_notifications",
+      "sha256": "68876130a200af573ca3d6abb208f9d7ef9dbb95d4df314a7347c3959b471213"
+    },
+    {
+      "localFile": "20261021071411_survey_responses.sql",
+      "localVersion": "20261021071411",
+      "cloudVersion": "20261021074229",
+      "name": "survey_responses",
+      "sha256": "afa425a3e43dab4f2301bdf9e96979717d15400ebc1c638b9db09bb92a7b759d"
+    },
+    {
+      "localFile": "20261021071513_survey_analytics_jobs.sql",
+      "localVersion": "20261021071513",
+      "cloudVersion": "20261021074235",
+      "name": "survey_analytics_jobs",
+      "sha256": "2c5644ceead67aa71e611ca609a02844ed4d447ca600a51ef2ff141b4d1646fc"
+    },
+    {
+      "localFile": "20261021071514_release_reconciliation.sql",
+      "localVersion": "20261021071514",
+      "cloudVersion": "20261021074243",
+      "name": "release_reconciliation",
+      "sha256": "3b9bb454e0455f329587a28717fa05579f0f4d6f67fb2a2ed4a7cb4081fde11b"
+    },
+    {
+      "localFile": "20261021074458_service_analytics_filters.sql",
+      "localVersion": "20261021074458",
+      "cloudVersion": "20261021074925",
+      "name": "service_analytics_filters",
+      "sha256": "f297174b524814cf999e3bf995896824efffb4d21d1195f5ad1702b14814401c"
+    },
+    {
+      "localFile": "20261021075439_action_plan_progress.sql",
+      "localVersion": "20261021075439",
+      "cloudVersion": "20261021075559",
+      "name": "action_plan_progress",
+      "sha256": "b5df0deab7c8cbf3e665100e23f27af44a32bd291297be0c13dfaf3cdfd41ff7"
     }
   ]
 }

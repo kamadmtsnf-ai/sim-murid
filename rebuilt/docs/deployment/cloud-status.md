@@ -50,3 +50,7 @@ Produksi Tahap10: a344657cc16ddcb15c49558bf50223df45c2f6f0 pada dpl_8WUn7TCtEwZ6
 25migrasi dan66tabel aplikasiRLS terkonfirmasi; bucket learning-private privat.27assertion cloud service_role rollback lulus. Detail dan batas: docs/verification/stages-21-25.md.
 
 Kode Tahap25 commit8aa055dc531f02f09d02816b88a3226040ef93c9; Vercel dpl_6JvjJhdDEoAfejZzbXxMuWvpq42e READY pada URL produksi.20pemeriksaan HTTP lulus. Versi apply_migration cloud dipetakan ke file sumber asli pada supabase/migration-cloud-map.json; jangan menjalankan linked db push tanpa rekonsiliasi riwayat dan dry-run.
+
+## Tahap26–30
+
+SPK/survei/notifikasi/analitik/adapter/ekspor tersedia pada kode0.30.0.32migrasi,79tabelRLS; CronDB sim-services-hourly memeriksa pengingat dan reset idempotent. Providerpengiriman defaultnonaktif. Cutover belum selesai: perlu sumber aktual, restore dan UAT. Detail docs/verification/stages-26-30.md dan docs/release/cutover-runbook.md.

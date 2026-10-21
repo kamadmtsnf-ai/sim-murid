@@ -3,6 +3,7 @@ import { requestAuth } from "@/lib/auth/http";
 
 /** Refresh only; authorization always happens again in the protected server flow. */
 export async function proxy(request: NextRequest) {
+  request.headers.set("x-sim-path",request.nextUrl.pathname);
   const response = NextResponse.next({ request });
   response.headers.set("Cache-Control", "private, no-store");
   try { await requestAuth(request, response).auth.getUser(); } catch { /* Page fails closed. */ }

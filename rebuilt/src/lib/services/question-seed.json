@@ -1,0 +1,2062 @@
+[
+  {
+    "role": "student",
+    "code": "A1-1",
+    "kind": "likert",
+    "text": "Guru-guru saya menyampaikan materi dengan cara yang jelas dan mudah saya pahami.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A1-2",
+    "kind": "likert",
+    "text": "Guru-guru saya menggunakan metode mengajar yang bervariasi dan tidak membosankan.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A1-3",
+    "kind": "likert",
+    "text": "Guru-guru saya bersedia membantu ketika saya mengalami kesulitan belajar.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A1-4",
+    "kind": "likert",
+    "text": "Guru-guru saya memberikan contoh yang membuat materi mudah saya ingat.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A2-1",
+    "kind": "likert",
+    "text": "Ruang kelas saya nyaman, bersih, dan mendukung kegiatan belajar.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A2-2",
+    "kind": "likert",
+    "text": "Fasilitas pendukung (perpustakaan, mushola, kamar mandi, lapangan) di madrasah memadai.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A2-3",
+    "kind": "likert",
+    "text": "Lingkungan madrasah aman dan terasa nyaman untuk belajar.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A2-4",
+    "kind": "likert",
+    "text": "Sarana dan media belajar (proyektor, alat peraga, buku) tersedia saat dibutuhkan.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A3-1",
+    "kind": "likert",
+    "text": "Materi pelajaran yang saya terima sesuai dengan kemampuan saya.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A3-2",
+    "kind": "likert",
+    "text": "Beban tugas dan PR yang diberikan masih wajar dan dapat saya selesaikan.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A3-3",
+    "kind": "likert",
+    "text": "Materi pelajaran terasa bermanfaat untuk kehidupan sehari-hari saya.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A3-4",
+    "kind": "likert",
+    "text": "Buku dan bahan ajar yang digunakan sudah cukup untuk membantu saya belajar.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A4-1",
+    "kind": "likert",
+    "text": "Saya merasa lebih disiplin dan bertanggung jawab dibanding sebelumnya.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A4-2",
+    "kind": "likert",
+    "text": "Saya merasa karakter Islami saya berkembang selama belajar di madrasah ini.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A4-3",
+    "kind": "likert",
+    "text": "Saya belajar untuk lebih jujur, peduli, dan menghormati orang lain.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A5-1",
+    "kind": "likert",
+    "text": "Guru-guru saya datang dan mengakhiri pelajaran tepat waktu.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A5-2",
+    "kind": "likert",
+    "text": "Aturan kedisiplinan di madrasah diterapkan secara adil kepada semua siswa.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A5-3",
+    "kind": "likert",
+    "text": "Sebagian besar siswa di kelas saya patuh pada aturan madrasah.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A5-4",
+    "kind": "likert",
+    "text": "Pelanggaran kedisiplinan ditangani dengan jelas dan sesuai aturan.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A6-1",
+    "kind": "likert",
+    "text": "Suasana di madrasah terasa hangat, ramah, dan saling menghargai.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A6-2",
+    "kind": "likert",
+    "text": "Saya merasa bangga menjadi bagian dari madrasah ini.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A6-3",
+    "kind": "likert",
+    "text": "Kegiatan keagamaan di madrasah berjalan dengan baik dan bermakna bagi saya.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A7-1",
+    "kind": "essay",
+    "text": "Apa hal yang paling kamu sukai dari pengalaman belajarmu di madrasah selama semester ini?",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A7-2",
+    "kind": "essay",
+    "text": "Apa hal yang menurutmu perlu diperbaiki di madrasah agar belajarmu semakin baik?",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "A7-3",
+    "kind": "essay",
+    "text": "Tuliskan satu saran konkret untuk madrasah yang menurutmu akan membuat suasana belajar lebih menyenangkan.",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-1",
+    "kind": "likert",
+    "text": "Saya merasa termotivasi untuk hadir ke madrasah setiap hari.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-2",
+    "kind": "likert",
+    "text": "Saya menikmati interaksi dengan teman-teman saya di kelas.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-3",
+    "kind": "likert",
+    "text": "Saya merasa diterima dan dihargai oleh teman-teman saya.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-4",
+    "kind": "likert",
+    "text": "Saya merasa aman dari perundungan (bullying) di lingkungan madrasah.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-5",
+    "kind": "likert",
+    "text": "Saya memiliki teman dekat yang membuat saya nyaman berada di madrasah.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-6",
+    "kind": "likert",
+    "text": "Saya merasa beban pelajaran selama satu semester ini wajar dan tidak berlebihan.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-7",
+    "kind": "likert",
+    "text": "Saya memiliki cukup waktu istirahat di luar jam pelajaran.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-8",
+    "kind": "likert",
+    "text": "Kegiatan ekstrakurikuler di madrasah saya menarik dan bermanfaat.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-9",
+    "kind": "likert",
+    "text": "Saya merasa pendapat saya didengar oleh guru atau pihak madrasah.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-10",
+    "kind": "likert",
+    "text": "Secara keseluruhan, saya senang menjadi siswa di madrasah ini.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-11",
+    "kind": "essay",
+    "text": "Ceritakan satu pengalaman belajarmu yang paling berkesan selama semester ini.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BS-12",
+    "kind": "essay",
+    "text": "Apakah ada hal di kehidupan sosial di madrasah yang ingin kamu sampaikan? (misalnya pertemanan, suasana kelas)",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "ATT-1",
+    "kind": "likert",
+    "text": "Madrasah ini terletak di planet Mars.",
+    "section": "B",
+    "aspect": "ATT",
+    "required": true,
+    "attention": 1
+  },
+  {
+    "role": "teacher",
+    "code": "A1-1",
+    "kind": "likert",
+    "text": "Saya menyampaikan materi dengan cara yang jelas, terstruktur, dan mudah dipahami siswa.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A1-2",
+    "kind": "likert",
+    "text": "Saya menggunakan metode mengajar yang bervariasi sesuai karakter siswa dan materi.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A1-3",
+    "kind": "likert",
+    "text": "Saya proaktif membantu siswa yang mengalami kesulitan belajar.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A1-4",
+    "kind": "likert",
+    "text": "Saya menyediakan contoh dan analogi yang membantu siswa mengingat materi.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A2-1",
+    "kind": "likert",
+    "text": "Ruang kelas yang saya gunakan kondusif dan mendukung kegiatan mengajar.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A2-2",
+    "kind": "likert",
+    "text": "Fasilitas pendukung (perpustakaan, lab, mushola, lapangan) memadai untuk pelaksanaan pembelajaran.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A2-3",
+    "kind": "likert",
+    "text": "Lingkungan madrasah aman dan kondusif bagi guru dan siswa.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A2-4",
+    "kind": "likert",
+    "text": "Sarana dan media pembelajaran (proyektor, alat peraga, buku referensi) tersedia saat dibutuhkan.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A3-1",
+    "kind": "likert",
+    "text": "Kurikulum yang berlaku sesuai dengan kebutuhan dan karakteristik siswa.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A3-2",
+    "kind": "likert",
+    "text": "Beban kurikulum yang harus disampaikan masih wajar untuk dialokasikan dalam satu semester.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A3-3",
+    "kind": "likert",
+    "text": "Materi yang saya ajarkan relevan dan bermanfaat bagi kehidupan siswa.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A3-4",
+    "kind": "likert",
+    "text": "Buku dan bahan ajar yang tersedia memadai untuk mendukung pengajaran saya.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A4-1",
+    "kind": "likert",
+    "text": "Saya melihat peningkatan kedisiplinan dan tanggung jawab siswa selama satu semester.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A4-2",
+    "kind": "likert",
+    "text": "Saya melihat perkembangan karakter Islami siswa dalam keseharian di madrasah.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A4-3",
+    "kind": "likert",
+    "text": "Siswa saya semakin terbiasa berperilaku jujur, peduli, dan menghormati orang lain.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A5-1",
+    "kind": "likert",
+    "text": "Saya datang dan mengakhiri pelajaran tepat waktu sesuai jadwal.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A5-2",
+    "kind": "likert",
+    "text": "Aturan kedisiplinan di madrasah diterapkan secara konsisten oleh semua pihak.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A5-3",
+    "kind": "likert",
+    "text": "Sebagian besar siswa yang saya ajar mematuhi aturan madrasah.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A5-4",
+    "kind": "likert",
+    "text": "Pelanggaran kedisiplinan ditindaklanjuti dengan prosedur yang jelas.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A6-1",
+    "kind": "likert",
+    "text": "Suasana kerja di madrasah hangat, kolaboratif, dan saling menghargai.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A6-2",
+    "kind": "likert",
+    "text": "Saya bangga menjadi bagian dari madrasah ini.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A6-3",
+    "kind": "likert",
+    "text": "Kegiatan keagamaan di madrasah berjalan baik dan bermakna bagi seluruh warga sekolah.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A7-1",
+    "kind": "essay",
+    "text": "Hal positif apa yang paling Anda rasakan dari proses pembelajaran selama satu semester ini?",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A7-2",
+    "kind": "essay",
+    "text": "Apa yang menurut Anda perlu diperbaiki di madrasah untuk meningkatkan kualitas pembelajaran?",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "A7-3",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konkret untuk pengelolaan madrasah ke depan.",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-1",
+    "kind": "likert",
+    "text": "Pimpinan madrasah memberikan dukungan yang memadai terhadap pelaksanaan tugas saya.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-2",
+    "kind": "likert",
+    "text": "Komunikasi dengan rekan guru lain berjalan baik dan kolaboratif.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-3",
+    "kind": "likert",
+    "text": "Saya mendapatkan kesempatan yang cukup untuk pengembangan profesional (pelatihan, workshop).",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-4",
+    "kind": "likert",
+    "text": "Beban administratif yang saya terima masih wajar dan tidak mengganggu kualitas mengajar.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-5",
+    "kind": "likert",
+    "text": "Saya memiliki cukup waktu untuk menyiapkan dan mengevaluasi pembelajaran.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-6",
+    "kind": "likert",
+    "text": "Saya memiliki akses yang memadai pada sumber belajar dan bahan referensi yang dibutuhkan.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-7",
+    "kind": "likert",
+    "text": "Sistem kepegawaian dan kesejahteraan di madrasah ini berjalan dengan adil dan transparan.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-8",
+    "kind": "likert",
+    "text": "Saya merasa pendapat saya didengar dan dipertimbangkan oleh pimpinan.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-9",
+    "kind": "likert",
+    "text": "Saya merasa termotivasi untuk terus mengajar dan berkembang di madrasah ini.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-10",
+    "kind": "likert",
+    "text": "Secara keseluruhan, saya puas bekerja sebagai guru di madrasah ini.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-11",
+    "kind": "essay",
+    "text": "Hal apa dari dukungan institusional madrasah yang menurut Anda sudah baik?",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "BG-12",
+    "kind": "essay",
+    "text": "Apa yang menurut Anda perlu diperbaiki untuk meningkatkan kualitas dukungan terhadap guru?",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "teacher",
+    "code": "ATT-1",
+    "kind": "likert",
+    "text": "Guru tidak pernah mengajar di kelas.",
+    "section": "B",
+    "aspect": "ATT",
+    "required": true,
+    "attention": 1
+  },
+  {
+    "role": "parent",
+    "code": "A1-1",
+    "kind": "likert",
+    "text": "Anak saya terlihat memahami materi pelajaran ketika mengerjakan tugas atau saat bercerita di rumah.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A1-2",
+    "kind": "likert",
+    "text": "Anak saya menceritakan cara mengajar guru yang menyenangkan dan tidak membosankan.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A1-3",
+    "kind": "likert",
+    "text": "Anak saya merasa nyaman bertanya kepada gurunya saat menemui kesulitan.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A1-4",
+    "kind": "likert",
+    "text": "Cara guru menjelaskan terlihat membantu anak saya mengingat dan menerapkan materi di rumah.",
+    "section": "A",
+    "aspect": "A1",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A2-1",
+    "kind": "likert",
+    "text": "Anak saya merasa ruang kelas dan lingkungan sekolah nyaman dan bersih.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A2-2",
+    "kind": "likert",
+    "text": "Fasilitas pendukung (perpustakaan, mushola, kamar mandi, lapangan) di madrasah memadai untuk anak saya.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A2-3",
+    "kind": "likert",
+    "text": "Saya merasa anak saya aman selama berada di lingkungan madrasah.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A2-4",
+    "kind": "likert",
+    "text": "Sarana dan media belajar yang dimiliki madrasah cukup untuk mendukung anak saya.",
+    "section": "A",
+    "aspect": "A2",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A3-1",
+    "kind": "likert",
+    "text": "Materi yang dipelajari anak saya sesuai dengan tingkat usia dan kemampuannya.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A3-2",
+    "kind": "likert",
+    "text": "Beban tugas dan PR yang diberikan masih wajar untuk diselesaikan anak di rumah.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A3-3",
+    "kind": "likert",
+    "text": "Materi pelajaran terlihat memberi manfaat bagi kehidupan dan perkembangan anak saya.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A3-4",
+    "kind": "likert",
+    "text": "Buku dan bahan ajar yang digunakan cukup membantu proses belajar anak saya.",
+    "section": "A",
+    "aspect": "A3",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A4-1",
+    "kind": "likert",
+    "text": "Saya melihat anak saya semakin disiplin dan bertanggung jawab di rumah.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A4-2",
+    "kind": "likert",
+    "text": "Karakter Islami anak saya (ibadah, akhlak) terlihat berkembang selama bersekolah di madrasah.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A4-3",
+    "kind": "likert",
+    "text": "Anak saya semakin terbiasa berperilaku jujur, peduli, dan menghormati orang lain.",
+    "section": "A",
+    "aspect": "A4",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A5-1",
+    "kind": "likert",
+    "text": "Anak saya jarang menceritakan keterlambatan atau kekosongan jam pelajaran.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A5-2",
+    "kind": "likert",
+    "text": "Aturan kedisiplinan di madrasah diterapkan secara adil kepada seluruh siswa.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A5-3",
+    "kind": "likert",
+    "text": "Tingkat kedisiplinan teman-teman anak saya di kelas terlihat baik.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A5-4",
+    "kind": "likert",
+    "text": "Pihak madrasah menangani pelanggaran kedisiplinan dengan jelas dan komunikatif.",
+    "section": "A",
+    "aspect": "A5",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A6-1",
+    "kind": "likert",
+    "text": "Saya merasakan suasana madrasah yang hangat dan ramah saat berinteraksi dengan pihak madrasah.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A6-2",
+    "kind": "likert",
+    "text": "Saya merasa bangga menyekolahkan anak di madrasah ini.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A6-3",
+    "kind": "likert",
+    "text": "Kegiatan keagamaan di madrasah memberi dampak positif yang terlihat pada anak saya.",
+    "section": "A",
+    "aspect": "A6",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A7-1",
+    "kind": "essay",
+    "text": "Hal positif apa yang paling Bapak/Ibu rasakan dari proses pembelajaran anak di madrasah ini selama satu semester?",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A7-2",
+    "kind": "essay",
+    "text": "Apa yang menurut Bapak/Ibu perlu diperbaiki oleh madrasah untuk meningkatkan kualitas pembelajaran anak?",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "A7-3",
+    "kind": "essay",
+    "text": "Tuliskan satu saran konkret untuk madrasah dari sudut pandang Bapak/Ibu sebagai orang tua.",
+    "section": "A",
+    "aspect": "A7",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-1",
+    "kind": "likert",
+    "text": "Madrasah memberikan informasi yang jelas tentang perkembangan akademik anak saya.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-2",
+    "kind": "likert",
+    "text": "Saya mudah menghubungi pihak madrasah ketika memerlukan informasi tentang anak saya.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-3",
+    "kind": "likert",
+    "text": "Wali kelas anak saya responsif terhadap pertanyaan atau keluhan yang saya sampaikan.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-4",
+    "kind": "likert",
+    "text": "Pihak madrasah melibatkan orang tua dalam keputusan penting terkait anak.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-5",
+    "kind": "likert",
+    "text": "Pertemuan orang tua-guru terselenggara dengan baik dan bermanfaat.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-6",
+    "kind": "likert",
+    "text": "Anak saya menunjukkan peningkatan kemampuan akademik selama satu semester ini.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-7",
+    "kind": "likert",
+    "text": "Anak saya menunjukkan peningkatan dalam perilaku, kebiasaan, dan ibadah.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-8",
+    "kind": "likert",
+    "text": "Anak saya terlihat antusias dan semangat saat berangkat ke madrasah.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-9",
+    "kind": "likert",
+    "text": "Anak saya merasa nyaman bercerita tentang kegiatan di madrasah.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-10",
+    "kind": "likert",
+    "text": "Secara keseluruhan, saya puas dengan layanan pendidikan yang diberikan madrasah.",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-11",
+    "kind": "essay",
+    "text": "Hal apa dari komunikasi madrasah dengan orang tua yang menurut Bapak/Ibu sudah baik?",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "BOT-12",
+    "kind": "essay",
+    "text": "Apa yang ingin Bapak/Ibu sampaikan kepada madrasah terkait perkembangan anak Bapak/Ibu di sekolah?",
+    "section": "B",
+    "aspect": "B",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "parent",
+    "code": "ATT-1",
+    "kind": "likert",
+    "text": "Madrasah ini terletak di planet Mars.",
+    "section": "B",
+    "aspect": "ATT",
+    "required": true,
+    "attention": 1
+  },
+  {
+    "role": "student",
+    "code": "AQH-1",
+    "kind": "likert",
+    "text": "Guru Al Quran Hadis menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "AQH",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AQH-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Al Quran Hadis meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "AQH",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AQH-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Al Quran Hadis.",
+    "section": "C",
+    "aspect": "AQH",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AQH-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Al Quran Hadis diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "AQH",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AQH-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Al Quran Hadis agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "AQH",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AKA-1",
+    "kind": "likert",
+    "text": "Guru Akidah Akhlak menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "AKA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AKA-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Akidah Akhlak meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "AKA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AKA-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Akidah Akhlak.",
+    "section": "C",
+    "aspect": "AKA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AKA-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Akidah Akhlak diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "AKA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "AKA-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Akidah Akhlak agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "AKA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "FIK-1",
+    "kind": "likert",
+    "text": "Guru Fikih menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "FIK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "FIK-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Fikih meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "FIK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "FIK-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Fikih.",
+    "section": "C",
+    "aspect": "FIK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "FIK-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Fikih diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "FIK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "FIK-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Fikih agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "FIK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SKI-1",
+    "kind": "likert",
+    "text": "Guru Sejarah Kebudayaan Islam menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "SKI",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SKI-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Sejarah Kebudayaan Islam meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "SKI",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SKI-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Sejarah Kebudayaan Islam.",
+    "section": "C",
+    "aspect": "SKI",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SKI-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Sejarah Kebudayaan Islam diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "SKI",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SKI-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Sejarah Kebudayaan Islam agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "SKI",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BAR-1",
+    "kind": "likert",
+    "text": "Guru Bahasa Arab menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "BAR",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BAR-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Bahasa Arab meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "BAR",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BAR-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Bahasa Arab.",
+    "section": "C",
+    "aspect": "BAR",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BAR-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Bahasa Arab diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "BAR",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BAR-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Bahasa Arab agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "BAR",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PPC-1",
+    "kind": "likert",
+    "text": "Guru Pendidikan Pancasila menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "PPC",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PPC-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Pendidikan Pancasila meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "PPC",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PPC-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Pendidikan Pancasila.",
+    "section": "C",
+    "aspect": "PPC",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PPC-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Pendidikan Pancasila diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "PPC",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PPC-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Pendidikan Pancasila agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "PPC",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIN-1",
+    "kind": "likert",
+    "text": "Guru Bahasa Indonesia menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "BIN",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIN-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Bahasa Indonesia meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "BIN",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIN-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Bahasa Indonesia.",
+    "section": "C",
+    "aspect": "BIN",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIN-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Bahasa Indonesia diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "BIN",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIN-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Bahasa Indonesia agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "BIN",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MTK-1",
+    "kind": "likert",
+    "text": "Guru Matematika menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "MTK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MTK-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Matematika meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "MTK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MTK-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Matematika.",
+    "section": "C",
+    "aspect": "MTK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MTK-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Matematika diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "MTK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MTK-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Matematika agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "MTK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPA-1",
+    "kind": "likert",
+    "text": "Guru Ilmu Pengetahuan Alam menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "IPA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPA-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Ilmu Pengetahuan Alam meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "IPA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPA-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Ilmu Pengetahuan Alam.",
+    "section": "C",
+    "aspect": "IPA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPA-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Ilmu Pengetahuan Alam diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "IPA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPA-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Ilmu Pengetahuan Alam agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "IPA",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPS-1",
+    "kind": "likert",
+    "text": "Guru Ilmu Pengetahuan Sosial menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "IPS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPS-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Ilmu Pengetahuan Sosial meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "IPS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPS-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Ilmu Pengetahuan Sosial.",
+    "section": "C",
+    "aspect": "IPS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPS-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Ilmu Pengetahuan Sosial diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "IPS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "IPS-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Ilmu Pengetahuan Sosial agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "IPS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIG-1",
+    "kind": "likert",
+    "text": "Guru Bahasa Inggris menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "BIG",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIG-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Bahasa Inggris meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "BIG",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIG-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Bahasa Inggris.",
+    "section": "C",
+    "aspect": "BIG",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIG-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Bahasa Inggris diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "BIG",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BIG-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Bahasa Inggris agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "BIG",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "INF-1",
+    "kind": "likert",
+    "text": "Guru Informatika menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "INF",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "INF-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Informatika meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "INF",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "INF-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Informatika.",
+    "section": "C",
+    "aspect": "INF",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "INF-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Informatika diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "INF",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "INF-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Informatika agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "INF",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PJK-1",
+    "kind": "likert",
+    "text": "Guru PJOK menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "PJK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PJK-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran PJOK meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "PJK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PJK-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran PJOK.",
+    "section": "C",
+    "aspect": "PJK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PJK-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran PJOK diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "PJK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "PJK-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru PJOK agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "PJK",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SBD-1",
+    "kind": "likert",
+    "text": "Guru Seni Budaya menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "SBD",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SBD-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Seni Budaya meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "SBD",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SBD-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Seni Budaya.",
+    "section": "C",
+    "aspect": "SBD",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SBD-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Seni Budaya diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "SBD",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SBD-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Seni Budaya agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "SBD",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BTQ-1",
+    "kind": "likert",
+    "text": "Guru Baca Tulis Quran menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik.",
+    "section": "C",
+    "aspect": "BTQ",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BTQ-2",
+    "kind": "likert",
+    "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Baca Tulis Quran meningkat selama satu semester ini.",
+    "section": "C",
+    "aspect": "BTQ",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BTQ-3",
+    "kind": "likert",
+    "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Baca Tulis Quran.",
+    "section": "C",
+    "aspect": "BTQ",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BTQ-4",
+    "kind": "likert",
+    "text": "Tugas, ulangan, dan penilaian dalam pelajaran Baca Tulis Quran diberikan secara adil dan sesuai dengan materi yang diajarkan.",
+    "section": "C",
+    "aspect": "BTQ",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "BTQ-5",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan konstruktif untuk guru Baca Tulis Quran agar pembelajaran semakin baik.",
+    "section": "C",
+    "aspect": "BTQ",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "UPB-1",
+    "kind": "likert",
+    "text": "Kegiatan Upacara Bendera dilaksanakan dengan baik dan dikelola secara konsisten.",
+    "section": "D",
+    "aspect": "UPB",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "UPB-2",
+    "kind": "likert",
+    "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Upacara Bendera ini.",
+    "section": "D",
+    "aspect": "UPB",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "UPB-3",
+    "kind": "likert",
+    "text": "Saya berpartisipasi aktif dalam kegiatan Upacara Bendera setiap diadakan.",
+    "section": "D",
+    "aspect": "UPB",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "UPB-4",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Upacara Bendera.",
+    "section": "D",
+    "aspect": "UPB",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "RHS-1",
+    "kind": "likert",
+    "text": "Kegiatan Rohani Islami (Rohis) dilaksanakan dengan baik dan dikelola secara konsisten.",
+    "section": "D",
+    "aspect": "RHS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "RHS-2",
+    "kind": "likert",
+    "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Rohani Islami (Rohis) ini.",
+    "section": "D",
+    "aspect": "RHS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "RHS-3",
+    "kind": "likert",
+    "text": "Saya berpartisipasi aktif dalam kegiatan Rohani Islami (Rohis) setiap diadakan.",
+    "section": "D",
+    "aspect": "RHS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "RHS-4",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Rohani Islami (Rohis).",
+    "section": "D",
+    "aspect": "RHS",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SNM-1",
+    "kind": "likert",
+    "text": "Kegiatan Senam Pagi Bersama dilaksanakan dengan baik dan dikelola secara konsisten.",
+    "section": "D",
+    "aspect": "SNM",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SNM-2",
+    "kind": "likert",
+    "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Senam Pagi Bersama ini.",
+    "section": "D",
+    "aspect": "SNM",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SNM-3",
+    "kind": "likert",
+    "text": "Saya berpartisipasi aktif dalam kegiatan Senam Pagi Bersama setiap diadakan.",
+    "section": "D",
+    "aspect": "SNM",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "SNM-4",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Senam Pagi Bersama.",
+    "section": "D",
+    "aspect": "SNM",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MSP-1",
+    "kind": "likert",
+    "text": "Kegiatan Membaca Surah Pendek dilaksanakan dengan baik dan dikelola secara konsisten.",
+    "section": "D",
+    "aspect": "MSP",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MSP-2",
+    "kind": "likert",
+    "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Membaca Surah Pendek ini.",
+    "section": "D",
+    "aspect": "MSP",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MSP-3",
+    "kind": "likert",
+    "text": "Saya berpartisipasi aktif dalam kegiatan Membaca Surah Pendek setiap diadakan.",
+    "section": "D",
+    "aspect": "MSP",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "MSP-4",
+    "kind": "essay",
+    "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Membaca Surah Pendek.",
+    "section": "D",
+    "aspect": "MSP",
+    "required": true,
+    "attention": null
+  },
+  {
+    "role": "student",
+    "code": "ATT-2",
+    "kind": "likert",
+    "text": "Saya sedang mengisi survei ini dengan sungguh-sungguh.",
+    "section": "C",
+    "aspect": "ATT",
+    "required": true,
+    "attention": 5
+  }
+]

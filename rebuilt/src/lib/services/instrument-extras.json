@@ -1,0 +1,536 @@
+{
+  "names": {
+    "AQH": "Al Quran Hadis",
+    "AKA": "Akidah Akhlak",
+    "FIK": "Fikih",
+    "SKI": "Sejarah Kebudayaan Islam",
+    "BAR": "Bahasa Arab",
+    "PPC": "Pendidikan Pancasila",
+    "BIN": "Bahasa Indonesia",
+    "MTK": "Matematika",
+    "IPA": "Ilmu Pengetahuan Alam",
+    "IPS": "Ilmu Pengetahuan Sosial",
+    "BIG": "Bahasa Inggris",
+    "INF": "Informatika",
+    "PJK": "PJOK",
+    "SBD": "Seni Budaya",
+    "BTQ": "Baca Tulis Quran"
+  },
+  "activities": [
+    {
+      "kode": "UPB",
+      "nama": "Upacara Bendera",
+      "emoji": "🇮🇩",
+      "jadwal": "Setiap Hari Senin"
+    },
+    {
+      "kode": "RHS",
+      "nama": "Rohani Islami (Rohis)",
+      "emoji": "🕌",
+      "jadwal": "Setiap Hari Jumat"
+    },
+    {
+      "kode": "SNM",
+      "nama": "Senam Pagi Bersama",
+      "emoji": "🤸",
+      "jadwal": "Setiap Hari Sabtu"
+    },
+    {
+      "kode": "MSP",
+      "nama": "Membaca Surah Pendek",
+      "emoji": "📿",
+      "jadwal": "Setiap pagi & sebelum pulang"
+    }
+  ],
+  "peer": [
+    {
+      "kode": "PTS-1",
+      "dimensi": "Kedisiplinan — Kehadiran",
+      "pertanyaan": "Selalu hadir dan tidak absen tanpa alasan yang jelas."
+    },
+    {
+      "kode": "PTS-2",
+      "dimensi": "Kedisiplinan — Ketepatan Waktu",
+      "pertanyaan": "Tepat waktu dalam menghadiri rapat dan kegiatan bersama."
+    },
+    {
+      "kode": "PTS-3",
+      "dimensi": "Kerjasama — Kontribusi Tim",
+      "pertanyaan": "Kooperatif dan aktif berkontribusi saat bekerja dalam tim."
+    },
+    {
+      "kode": "PTS-4",
+      "dimensi": "Kerjasama — Berbagi",
+      "pertanyaan": "Bersedia membantu dan berbagi sumber belajar dengan rekan."
+    },
+    {
+      "kode": "PTS-5",
+      "dimensi": "Komunikasi",
+      "pertanyaan": "Berkomunikasi santun dan menghargai pendapat orang lain."
+    },
+    {
+      "kode": "PTS-6",
+      "dimensi": "Profesionalisme",
+      "pertanyaan": "Menjaga etika kerja dan menjadi teladan di lingkungan madrasah."
+    }
+  ],
+  "subjects": [
+    {
+      "kode": "AQH-1",
+      "tipe": "likert",
+      "text": "Guru Al Quran Hadis menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "AQH-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Al Quran Hadis meningkat selama satu semester ini."
+    },
+    {
+      "kode": "AQH-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Al Quran Hadis."
+    },
+    {
+      "kode": "AQH-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Al Quran Hadis diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "AQH-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Al Quran Hadis agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "AKA-1",
+      "tipe": "likert",
+      "text": "Guru Akidah Akhlak menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "AKA-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Akidah Akhlak meningkat selama satu semester ini."
+    },
+    {
+      "kode": "AKA-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Akidah Akhlak."
+    },
+    {
+      "kode": "AKA-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Akidah Akhlak diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "AKA-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Akidah Akhlak agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "FIK-1",
+      "tipe": "likert",
+      "text": "Guru Fikih menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "FIK-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Fikih meningkat selama satu semester ini."
+    },
+    {
+      "kode": "FIK-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Fikih."
+    },
+    {
+      "kode": "FIK-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Fikih diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "FIK-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Fikih agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "SKI-1",
+      "tipe": "likert",
+      "text": "Guru Sejarah Kebudayaan Islam menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "SKI-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Sejarah Kebudayaan Islam meningkat selama satu semester ini."
+    },
+    {
+      "kode": "SKI-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Sejarah Kebudayaan Islam."
+    },
+    {
+      "kode": "SKI-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Sejarah Kebudayaan Islam diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "SKI-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Sejarah Kebudayaan Islam agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "BAR-1",
+      "tipe": "likert",
+      "text": "Guru Bahasa Arab menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "BAR-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Bahasa Arab meningkat selama satu semester ini."
+    },
+    {
+      "kode": "BAR-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Bahasa Arab."
+    },
+    {
+      "kode": "BAR-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Bahasa Arab diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "BAR-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Bahasa Arab agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "PPC-1",
+      "tipe": "likert",
+      "text": "Guru Pendidikan Pancasila menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "PPC-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Pendidikan Pancasila meningkat selama satu semester ini."
+    },
+    {
+      "kode": "PPC-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Pendidikan Pancasila."
+    },
+    {
+      "kode": "PPC-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Pendidikan Pancasila diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "PPC-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Pendidikan Pancasila agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "BIN-1",
+      "tipe": "likert",
+      "text": "Guru Bahasa Indonesia menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "BIN-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Bahasa Indonesia meningkat selama satu semester ini."
+    },
+    {
+      "kode": "BIN-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Bahasa Indonesia."
+    },
+    {
+      "kode": "BIN-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Bahasa Indonesia diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "BIN-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Bahasa Indonesia agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "MTK-1",
+      "tipe": "likert",
+      "text": "Guru Matematika menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "MTK-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Matematika meningkat selama satu semester ini."
+    },
+    {
+      "kode": "MTK-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Matematika."
+    },
+    {
+      "kode": "MTK-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Matematika diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "MTK-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Matematika agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "IPA-1",
+      "tipe": "likert",
+      "text": "Guru Ilmu Pengetahuan Alam menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "IPA-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Ilmu Pengetahuan Alam meningkat selama satu semester ini."
+    },
+    {
+      "kode": "IPA-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Ilmu Pengetahuan Alam."
+    },
+    {
+      "kode": "IPA-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Ilmu Pengetahuan Alam diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "IPA-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Ilmu Pengetahuan Alam agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "IPS-1",
+      "tipe": "likert",
+      "text": "Guru Ilmu Pengetahuan Sosial menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "IPS-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Ilmu Pengetahuan Sosial meningkat selama satu semester ini."
+    },
+    {
+      "kode": "IPS-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Ilmu Pengetahuan Sosial."
+    },
+    {
+      "kode": "IPS-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Ilmu Pengetahuan Sosial diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "IPS-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Ilmu Pengetahuan Sosial agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "BIG-1",
+      "tipe": "likert",
+      "text": "Guru Bahasa Inggris menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "BIG-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Bahasa Inggris meningkat selama satu semester ini."
+    },
+    {
+      "kode": "BIG-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Bahasa Inggris."
+    },
+    {
+      "kode": "BIG-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Bahasa Inggris diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "BIG-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Bahasa Inggris agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "INF-1",
+      "tipe": "likert",
+      "text": "Guru Informatika menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "INF-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Informatika meningkat selama satu semester ini."
+    },
+    {
+      "kode": "INF-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Informatika."
+    },
+    {
+      "kode": "INF-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Informatika diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "INF-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Informatika agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "PJK-1",
+      "tipe": "likert",
+      "text": "Guru PJOK menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "PJK-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran PJOK meningkat selama satu semester ini."
+    },
+    {
+      "kode": "PJK-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran PJOK."
+    },
+    {
+      "kode": "PJK-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran PJOK diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "PJK-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru PJOK agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "SBD-1",
+      "tipe": "likert",
+      "text": "Guru Seni Budaya menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "SBD-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Seni Budaya meningkat selama satu semester ini."
+    },
+    {
+      "kode": "SBD-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Seni Budaya."
+    },
+    {
+      "kode": "SBD-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Seni Budaya diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "SBD-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Seni Budaya agar pembelajaran semakin baik."
+    },
+    {
+      "kode": "BTQ-1",
+      "tipe": "likert",
+      "text": "Guru Baca Tulis Quran menyampaikan materi dengan jelas dan menggunakan metode mengajar yang menarik."
+    },
+    {
+      "kode": "BTQ-2",
+      "tipe": "likert",
+      "text": "Saya merasa pemahaman dan kemajuan saya dalam pelajaran Baca Tulis Quran meningkat selama satu semester ini."
+    },
+    {
+      "kode": "BTQ-3",
+      "tipe": "likert",
+      "text": "Saya merasa antusias dan termotivasi untuk mengikuti pelajaran Baca Tulis Quran."
+    },
+    {
+      "kode": "BTQ-4",
+      "tipe": "likert",
+      "text": "Tugas, ulangan, dan penilaian dalam pelajaran Baca Tulis Quran diberikan secara adil dan sesuai dengan materi yang diajarkan."
+    },
+    {
+      "kode": "BTQ-5",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan konstruktif untuk guru Baca Tulis Quran agar pembelajaran semakin baik."
+    }
+  ],
+  "routine": [
+    {
+      "kode": "UPB-1",
+      "tipe": "likert",
+      "text": "Kegiatan Upacara Bendera dilaksanakan dengan baik dan dikelola secara konsisten."
+    },
+    {
+      "kode": "UPB-2",
+      "tipe": "likert",
+      "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Upacara Bendera ini."
+    },
+    {
+      "kode": "UPB-3",
+      "tipe": "likert",
+      "text": "Saya berpartisipasi aktif dalam kegiatan Upacara Bendera setiap diadakan."
+    },
+    {
+      "kode": "UPB-4",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Upacara Bendera."
+    },
+    {
+      "kode": "RHS-1",
+      "tipe": "likert",
+      "text": "Kegiatan Rohani Islami (Rohis) dilaksanakan dengan baik dan dikelola secara konsisten."
+    },
+    {
+      "kode": "RHS-2",
+      "tipe": "likert",
+      "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Rohani Islami (Rohis) ini."
+    },
+    {
+      "kode": "RHS-3",
+      "tipe": "likert",
+      "text": "Saya berpartisipasi aktif dalam kegiatan Rohani Islami (Rohis) setiap diadakan."
+    },
+    {
+      "kode": "RHS-4",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Rohani Islami (Rohis)."
+    },
+    {
+      "kode": "SNM-1",
+      "tipe": "likert",
+      "text": "Kegiatan Senam Pagi Bersama dilaksanakan dengan baik dan dikelola secara konsisten."
+    },
+    {
+      "kode": "SNM-2",
+      "tipe": "likert",
+      "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Senam Pagi Bersama ini."
+    },
+    {
+      "kode": "SNM-3",
+      "tipe": "likert",
+      "text": "Saya berpartisipasi aktif dalam kegiatan Senam Pagi Bersama setiap diadakan."
+    },
+    {
+      "kode": "SNM-4",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Senam Pagi Bersama."
+    },
+    {
+      "kode": "MSP-1",
+      "tipe": "likert",
+      "text": "Kegiatan Membaca Surah Pendek dilaksanakan dengan baik dan dikelola secara konsisten."
+    },
+    {
+      "kode": "MSP-2",
+      "tipe": "likert",
+      "text": "Saya merasakan manfaat positif dari mengikuti kegiatan Membaca Surah Pendek ini."
+    },
+    {
+      "kode": "MSP-3",
+      "tipe": "likert",
+      "text": "Saya berpartisipasi aktif dalam kegiatan Membaca Surah Pendek setiap diadakan."
+    },
+    {
+      "kode": "MSP-4",
+      "tipe": "esai",
+      "text": "Tuliskan satu masukan untuk meningkatkan kualitas kegiatan Membaca Surah Pendek."
+    }
+  ]
+}

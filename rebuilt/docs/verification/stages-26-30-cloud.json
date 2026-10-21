@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "project": "sim-muridv2",
+  "migrations": 32,
+  "applicationTables": 79,
+  "rlsMissing": 0,
+  "assertions": 21,
+  "mode": "cloud service_role rollback",
+  "fixturesRemaining": 0,
+  "emailSent": false,
+  "whatsappSent": false,
+  "aiCalled": false,
+  "scheduler": {
+    "name": "sim-services-hourly",
+    "active": true,
+    "schedule": "0 * * * *"
+  },
+  "advisors": [
+    {
+      "name": "rls_enabled_no_policy",
+      "level": "INFO",
+      "count": 65,
+      "url": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+    },
+    {
+      "name": "auth_leaked_password_protection",
+      "level": "WARN",
+      "count": 1,
+      "url": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    }
+  ],
+  "cutover": "blocked pending source reconciliation, restore and authenticated UAT"
+}

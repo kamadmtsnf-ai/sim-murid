@@ -1,3 +1,3 @@
 # M16 — Survei
 
-Status: belum diimplementasikan. Rujuk matriks kesetaraan M16 pada docs/specifications. Tambahkan schemas/service/repository/permissions/types ketika tahap modul dijalankan; jangan membuat endpoint atau data dummy yang dinyatakan selesai.
+Implementasi Tahap28–29: /account/services/surveys dan insights, instrumen lengkap berversi di src/lib/services. Survei utama/peer/mikro, gate, revisi draft, final lock, hasil berizin, rencana aksi, konfigurasi/analisis AI; integrasi aktual dan UAT belum diklaim lulus. Lihat docs/verification/stages-26-30.md.

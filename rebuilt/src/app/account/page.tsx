@@ -22,12 +22,14 @@ export default async function AccountPage() {
   }
   if (!state) redirect("/login?expired=1");
   if(onboarding?.gate!=="ready")redirect("/account/security");
+  const {createAuthAdmin}=await import('@/lib/auth/admin');const survey=await createAuthAdmin().rpc('app_survey_required',{p_actor:state.principal.id,p_session:state.sessionId});if(survey.data)redirect('/account/services/surveys');
   return <main id="main-content" className="mx-auto max-w-xl px-6 py-16"><Card><CardHeader><CardTitle>Selamat datang, {state.principal.full_name}</CardTitle></CardHeader><CardContent className="space-y-5">
     <p>Anda masuk sebagai <strong>{state.principal.username}</strong>.</p>
     <p className="text-sm text-muted-foreground">Sesi berlaku sampai {new Intl.DateTimeFormat("id-ID", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Jakarta" }).format(new Date(state.principal.expires_at))} WIB.</p>
 
     <div className="flex flex-wrap gap-2">{[["duty","Guru piket"],["attendance","Absensi"],["mentoring","Bimbingan"],["fees","Iuran komite"],["savings","Tabungan"]].map(([key,label])=><Button key={key} asChild variant="outline"><Link href={"/account/operations/"+key}>{label}</Link></Button>)}</div>
     <div className="flex flex-wrap gap-2">{[["grades","Penilaian dan KKM"],["reports","Rapor"],["promotions","Kenaikan kelas dan ijazah"],["books","Buku digital"]].map(([key,label])=><Button key={key} asChild variant="outline"><Link href={"/account/learning/"+key}>{label}</Link></Button>)}</div>
+    <div className="flex flex-wrap gap-2">{[["discipline","Poin siswa"],["notifications","Notifikasi"],["surveys","Survei"],["insights","Hasil survei"],...(state.principal.is_admin?[["jobs","Pekerjaan"],["reconciliation","Rekonsiliasi"]]:[])].map(([key,label])=><Button key={key} asChild variant="outline"><Link href={"/account/services/"+key}>{label}</Link></Button>)}</div>
     <p className="text-sm text-muted-foreground">Akun berhasil diverifikasi. Modul layanan madrasah sedang dikembangkan.</p>
     {state.principal.is_admin && <Button asChild variant="outline"><Link href="/account/settings">Pengaturan madrasah</Link></Button>}
     <Button asChild variant="outline"><Link href="/account/biodata">Biodata dan dokumen saya</Link></Button>

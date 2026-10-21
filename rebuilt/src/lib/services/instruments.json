@@ -1,0 +1,671 @@
+{
+  "A": {
+    "Siswa": {
+      "A1": {
+        "label": "A1. Kualitas Pengajaran Guru",
+        "items": [
+          {
+            "kode": "A1-1",
+            "tipe": "likert",
+            "text": "Guru-guru saya menyampaikan materi dengan cara yang jelas dan mudah saya pahami."
+          },
+          {
+            "kode": "A1-2",
+            "tipe": "likert",
+            "text": "Guru-guru saya menggunakan metode mengajar yang bervariasi dan tidak membosankan."
+          },
+          {
+            "kode": "A1-3",
+            "tipe": "likert",
+            "text": "Guru-guru saya bersedia membantu ketika saya mengalami kesulitan belajar."
+          },
+          {
+            "kode": "A1-4",
+            "tipe": "likert",
+            "text": "Guru-guru saya memberikan contoh yang membuat materi mudah saya ingat."
+          }
+        ]
+      },
+      "A2": {
+        "label": "A2. Fasilitas & Lingkungan Sekolah",
+        "items": [
+          {
+            "kode": "A2-1",
+            "tipe": "likert",
+            "text": "Ruang kelas saya nyaman, bersih, dan mendukung kegiatan belajar."
+          },
+          {
+            "kode": "A2-2",
+            "tipe": "likert",
+            "text": "Fasilitas pendukung (perpustakaan, mushola, kamar mandi, lapangan) di madrasah memadai."
+          },
+          {
+            "kode": "A2-3",
+            "tipe": "likert",
+            "text": "Lingkungan madrasah aman dan terasa nyaman untuk belajar."
+          },
+          {
+            "kode": "A2-4",
+            "tipe": "likert",
+            "text": "Sarana dan media belajar (proyektor, alat peraga, buku) tersedia saat dibutuhkan."
+          }
+        ]
+      },
+      "A3": {
+        "label": "A3. Kurikulum & Materi Pelajaran",
+        "items": [
+          {
+            "kode": "A3-1",
+            "tipe": "likert",
+            "text": "Materi pelajaran yang saya terima sesuai dengan kemampuan saya."
+          },
+          {
+            "kode": "A3-2",
+            "tipe": "likert",
+            "text": "Beban tugas dan PR yang diberikan masih wajar dan dapat saya selesaikan."
+          },
+          {
+            "kode": "A3-3",
+            "tipe": "likert",
+            "text": "Materi pelajaran terasa bermanfaat untuk kehidupan sehari-hari saya."
+          },
+          {
+            "kode": "A3-4",
+            "tipe": "likert",
+            "text": "Buku dan bahan ajar yang digunakan sudah cukup untuk membantu saya belajar."
+          }
+        ]
+      },
+      "A4": {
+        "label": "A4. Perkembangan Karakter Siswa",
+        "items": [
+          {
+            "kode": "A4-1",
+            "tipe": "likert",
+            "text": "Saya merasa lebih disiplin dan bertanggung jawab dibanding sebelumnya."
+          },
+          {
+            "kode": "A4-2",
+            "tipe": "likert",
+            "text": "Saya merasa karakter Islami saya berkembang selama belajar di madrasah ini."
+          },
+          {
+            "kode": "A4-3",
+            "tipe": "likert",
+            "text": "Saya belajar untuk lebih jujur, peduli, dan menghormati orang lain."
+          }
+        ]
+      },
+      "A5": {
+        "label": "A5. Kedisiplinan Guru dan Murid",
+        "items": [
+          {
+            "kode": "A5-1",
+            "tipe": "likert",
+            "text": "Guru-guru saya datang dan mengakhiri pelajaran tepat waktu."
+          },
+          {
+            "kode": "A5-2",
+            "tipe": "likert",
+            "text": "Aturan kedisiplinan di madrasah diterapkan secara adil kepada semua siswa."
+          },
+          {
+            "kode": "A5-3",
+            "tipe": "likert",
+            "text": "Sebagian besar siswa di kelas saya patuh pada aturan madrasah."
+          },
+          {
+            "kode": "A5-4",
+            "tipe": "likert",
+            "text": "Pelanggaran kedisiplinan ditangani dengan jelas dan sesuai aturan."
+          }
+        ]
+      },
+      "A6": {
+        "label": "A6. Budaya Madrasah",
+        "items": [
+          {
+            "kode": "A6-1",
+            "tipe": "likert",
+            "text": "Suasana di madrasah terasa hangat, ramah, dan saling menghargai."
+          },
+          {
+            "kode": "A6-2",
+            "tipe": "likert",
+            "text": "Saya merasa bangga menjadi bagian dari madrasah ini."
+          },
+          {
+            "kode": "A6-3",
+            "tipe": "likert",
+            "text": "Kegiatan keagamaan di madrasah berjalan dengan baik dan bermakna bagi saya."
+          }
+        ]
+      },
+      "A7": {
+        "label": "A7. Pertanyaan Terbuka",
+        "items": [
+          {
+            "kode": "A7-1",
+            "tipe": "esai",
+            "text": "Apa hal yang paling kamu sukai dari pengalaman belajarmu di madrasah selama semester ini?"
+          },
+          {
+            "kode": "A7-2",
+            "tipe": "esai",
+            "text": "Apa hal yang menurutmu perlu diperbaiki di madrasah agar belajarmu semakin baik?"
+          },
+          {
+            "kode": "A7-3",
+            "tipe": "esai",
+            "text": "Tuliskan satu saran konkret untuk madrasah yang menurutmu akan membuat suasana belajar lebih menyenangkan."
+          }
+        ]
+      }
+    },
+    "Orangtua": {
+      "A1": {
+        "label": "A1. Kualitas Pengajaran Guru (yang teramati di rumah)",
+        "items": [
+          {
+            "kode": "A1-1",
+            "tipe": "likert",
+            "text": "Anak saya terlihat memahami materi pelajaran ketika mengerjakan tugas atau saat bercerita di rumah."
+          },
+          {
+            "kode": "A1-2",
+            "tipe": "likert",
+            "text": "Anak saya menceritakan cara mengajar guru yang menyenangkan dan tidak membosankan."
+          },
+          {
+            "kode": "A1-3",
+            "tipe": "likert",
+            "text": "Anak saya merasa nyaman bertanya kepada gurunya saat menemui kesulitan."
+          },
+          {
+            "kode": "A1-4",
+            "tipe": "likert",
+            "text": "Cara guru menjelaskan terlihat membantu anak saya mengingat dan menerapkan materi di rumah."
+          }
+        ]
+      },
+      "A2": {
+        "label": "A2. Fasilitas & Lingkungan Sekolah",
+        "items": [
+          {
+            "kode": "A2-1",
+            "tipe": "likert",
+            "text": "Anak saya merasa ruang kelas dan lingkungan sekolah nyaman dan bersih."
+          },
+          {
+            "kode": "A2-2",
+            "tipe": "likert",
+            "text": "Fasilitas pendukung (perpustakaan, mushola, kamar mandi, lapangan) di madrasah memadai untuk anak saya."
+          },
+          {
+            "kode": "A2-3",
+            "tipe": "likert",
+            "text": "Saya merasa anak saya aman selama berada di lingkungan madrasah."
+          },
+          {
+            "kode": "A2-4",
+            "tipe": "likert",
+            "text": "Sarana dan media belajar yang dimiliki madrasah cukup untuk mendukung anak saya."
+          }
+        ]
+      },
+      "A3": {
+        "label": "A3. Kurikulum & Materi Pelajaran",
+        "items": [
+          {
+            "kode": "A3-1",
+            "tipe": "likert",
+            "text": "Materi yang dipelajari anak saya sesuai dengan tingkat usia dan kemampuannya."
+          },
+          {
+            "kode": "A3-2",
+            "tipe": "likert",
+            "text": "Beban tugas dan PR yang diberikan masih wajar untuk diselesaikan anak di rumah."
+          },
+          {
+            "kode": "A3-3",
+            "tipe": "likert",
+            "text": "Materi pelajaran terlihat memberi manfaat bagi kehidupan dan perkembangan anak saya."
+          },
+          {
+            "kode": "A3-4",
+            "tipe": "likert",
+            "text": "Buku dan bahan ajar yang digunakan cukup membantu proses belajar anak saya."
+          }
+        ]
+      },
+      "A4": {
+        "label": "A4. Perkembangan Karakter Anak",
+        "items": [
+          {
+            "kode": "A4-1",
+            "tipe": "likert",
+            "text": "Saya melihat anak saya semakin disiplin dan bertanggung jawab di rumah."
+          },
+          {
+            "kode": "A4-2",
+            "tipe": "likert",
+            "text": "Karakter Islami anak saya (ibadah, akhlak) terlihat berkembang selama bersekolah di madrasah."
+          },
+          {
+            "kode": "A4-3",
+            "tipe": "likert",
+            "text": "Anak saya semakin terbiasa berperilaku jujur, peduli, dan menghormati orang lain."
+          }
+        ]
+      },
+      "A5": {
+        "label": "A5. Kedisiplinan Guru dan Murid",
+        "items": [
+          {
+            "kode": "A5-1",
+            "tipe": "likert",
+            "text": "Anak saya jarang menceritakan keterlambatan atau kekosongan jam pelajaran."
+          },
+          {
+            "kode": "A5-2",
+            "tipe": "likert",
+            "text": "Aturan kedisiplinan di madrasah diterapkan secara adil kepada seluruh siswa."
+          },
+          {
+            "kode": "A5-3",
+            "tipe": "likert",
+            "text": "Tingkat kedisiplinan teman-teman anak saya di kelas terlihat baik."
+          },
+          {
+            "kode": "A5-4",
+            "tipe": "likert",
+            "text": "Pihak madrasah menangani pelanggaran kedisiplinan dengan jelas dan komunikatif."
+          }
+        ]
+      },
+      "A6": {
+        "label": "A6. Budaya Madrasah",
+        "items": [
+          {
+            "kode": "A6-1",
+            "tipe": "likert",
+            "text": "Saya merasakan suasana madrasah yang hangat dan ramah saat berinteraksi dengan pihak madrasah."
+          },
+          {
+            "kode": "A6-2",
+            "tipe": "likert",
+            "text": "Saya merasa bangga menyekolahkan anak di madrasah ini."
+          },
+          {
+            "kode": "A6-3",
+            "tipe": "likert",
+            "text": "Kegiatan keagamaan di madrasah memberi dampak positif yang terlihat pada anak saya."
+          }
+        ]
+      },
+      "A7": {
+        "label": "A7. Pertanyaan Terbuka",
+        "items": [
+          {
+            "kode": "A7-1",
+            "tipe": "esai",
+            "text": "Hal positif apa yang paling Bapak/Ibu rasakan dari proses pembelajaran anak di madrasah ini selama satu semester?"
+          },
+          {
+            "kode": "A7-2",
+            "tipe": "esai",
+            "text": "Apa yang menurut Bapak/Ibu perlu diperbaiki oleh madrasah untuk meningkatkan kualitas pembelajaran anak?"
+          },
+          {
+            "kode": "A7-3",
+            "tipe": "esai",
+            "text": "Tuliskan satu saran konkret untuk madrasah dari sudut pandang Bapak/Ibu sebagai orang tua."
+          }
+        ]
+      }
+    },
+    "Guru": {
+      "A1": {
+        "label": "A1. Kualitas Pengajaran (Refleksi Diri)",
+        "items": [
+          {
+            "kode": "A1-1",
+            "tipe": "likert",
+            "text": "Saya menyampaikan materi dengan cara yang jelas, terstruktur, dan mudah dipahami siswa."
+          },
+          {
+            "kode": "A1-2",
+            "tipe": "likert",
+            "text": "Saya menggunakan metode mengajar yang bervariasi sesuai karakter siswa dan materi."
+          },
+          {
+            "kode": "A1-3",
+            "tipe": "likert",
+            "text": "Saya proaktif membantu siswa yang mengalami kesulitan belajar."
+          },
+          {
+            "kode": "A1-4",
+            "tipe": "likert",
+            "text": "Saya menyediakan contoh dan analogi yang membantu siswa mengingat materi."
+          }
+        ]
+      },
+      "A2": {
+        "label": "A2. Fasilitas & Lingkungan Sekolah",
+        "items": [
+          {
+            "kode": "A2-1",
+            "tipe": "likert",
+            "text": "Ruang kelas yang saya gunakan kondusif dan mendukung kegiatan mengajar."
+          },
+          {
+            "kode": "A2-2",
+            "tipe": "likert",
+            "text": "Fasilitas pendukung (perpustakaan, lab, mushola, lapangan) memadai untuk pelaksanaan pembelajaran."
+          },
+          {
+            "kode": "A2-3",
+            "tipe": "likert",
+            "text": "Lingkungan madrasah aman dan kondusif bagi guru dan siswa."
+          },
+          {
+            "kode": "A2-4",
+            "tipe": "likert",
+            "text": "Sarana dan media pembelajaran (proyektor, alat peraga, buku referensi) tersedia saat dibutuhkan."
+          }
+        ]
+      },
+      "A3": {
+        "label": "A3. Kurikulum & Materi Pelajaran",
+        "items": [
+          {
+            "kode": "A3-1",
+            "tipe": "likert",
+            "text": "Kurikulum yang berlaku sesuai dengan kebutuhan dan karakteristik siswa."
+          },
+          {
+            "kode": "A3-2",
+            "tipe": "likert",
+            "text": "Beban kurikulum yang harus disampaikan masih wajar untuk dialokasikan dalam satu semester."
+          },
+          {
+            "kode": "A3-3",
+            "tipe": "likert",
+            "text": "Materi yang saya ajarkan relevan dan bermanfaat bagi kehidupan siswa."
+          },
+          {
+            "kode": "A3-4",
+            "tipe": "likert",
+            "text": "Buku dan bahan ajar yang tersedia memadai untuk mendukung pengajaran saya."
+          }
+        ]
+      },
+      "A4": {
+        "label": "A4. Perkembangan Karakter Siswa",
+        "items": [
+          {
+            "kode": "A4-1",
+            "tipe": "likert",
+            "text": "Saya melihat peningkatan kedisiplinan dan tanggung jawab siswa selama satu semester."
+          },
+          {
+            "kode": "A4-2",
+            "tipe": "likert",
+            "text": "Saya melihat perkembangan karakter Islami siswa dalam keseharian di madrasah."
+          },
+          {
+            "kode": "A4-3",
+            "tipe": "likert",
+            "text": "Siswa saya semakin terbiasa berperilaku jujur, peduli, dan menghormati orang lain."
+          }
+        ]
+      },
+      "A5": {
+        "label": "A5. Kedisiplinan Guru dan Murid",
+        "items": [
+          {
+            "kode": "A5-1",
+            "tipe": "likert",
+            "text": "Saya datang dan mengakhiri pelajaran tepat waktu sesuai jadwal."
+          },
+          {
+            "kode": "A5-2",
+            "tipe": "likert",
+            "text": "Aturan kedisiplinan di madrasah diterapkan secara konsisten oleh semua pihak."
+          },
+          {
+            "kode": "A5-3",
+            "tipe": "likert",
+            "text": "Sebagian besar siswa yang saya ajar mematuhi aturan madrasah."
+          },
+          {
+            "kode": "A5-4",
+            "tipe": "likert",
+            "text": "Pelanggaran kedisiplinan ditindaklanjuti dengan prosedur yang jelas."
+          }
+        ]
+      },
+      "A6": {
+        "label": "A6. Budaya Madrasah",
+        "items": [
+          {
+            "kode": "A6-1",
+            "tipe": "likert",
+            "text": "Suasana kerja di madrasah hangat, kolaboratif, dan saling menghargai."
+          },
+          {
+            "kode": "A6-2",
+            "tipe": "likert",
+            "text": "Saya bangga menjadi bagian dari madrasah ini."
+          },
+          {
+            "kode": "A6-3",
+            "tipe": "likert",
+            "text": "Kegiatan keagamaan di madrasah berjalan baik dan bermakna bagi seluruh warga sekolah."
+          }
+        ]
+      },
+      "A7": {
+        "label": "A7. Pertanyaan Terbuka",
+        "items": [
+          {
+            "kode": "A7-1",
+            "tipe": "esai",
+            "text": "Hal positif apa yang paling Anda rasakan dari proses pembelajaran selama satu semester ini?"
+          },
+          {
+            "kode": "A7-2",
+            "tipe": "esai",
+            "text": "Apa yang menurut Anda perlu diperbaiki di madrasah untuk meningkatkan kualitas pembelajaran?"
+          },
+          {
+            "kode": "A7-3",
+            "tipe": "esai",
+            "text": "Tuliskan satu masukan konkret untuk pengelolaan madrasah ke depan."
+          }
+        ]
+      }
+    }
+  },
+  "B": {
+    "Siswa": {
+      "label": "Bagian B — Pengalaman Belajar Pribadi & Kehidupan Sosial",
+      "likert": [
+        {
+          "kode": "BS-1",
+          "text": "Saya merasa termotivasi untuk hadir ke madrasah setiap hari."
+        },
+        {
+          "kode": "BS-2",
+          "text": "Saya menikmati interaksi dengan teman-teman saya di kelas."
+        },
+        {
+          "kode": "BS-3",
+          "text": "Saya merasa diterima dan dihargai oleh teman-teman saya."
+        },
+        {
+          "kode": "BS-4",
+          "text": "Saya merasa aman dari perundungan (bullying) di lingkungan madrasah."
+        },
+        {
+          "kode": "BS-5",
+          "text": "Saya memiliki teman dekat yang membuat saya nyaman berada di madrasah."
+        },
+        {
+          "kode": "BS-6",
+          "text": "Saya merasa beban pelajaran selama satu semester ini wajar dan tidak berlebihan."
+        },
+        {
+          "kode": "BS-7",
+          "text": "Saya memiliki cukup waktu istirahat di luar jam pelajaran."
+        },
+        {
+          "kode": "BS-8",
+          "text": "Kegiatan ekstrakurikuler di madrasah saya menarik dan bermanfaat."
+        },
+        {
+          "kode": "BS-9",
+          "text": "Saya merasa pendapat saya didengar oleh guru atau pihak madrasah."
+        },
+        {
+          "kode": "BS-10",
+          "text": "Secara keseluruhan, saya senang menjadi siswa di madrasah ini."
+        }
+      ],
+      "esai": [
+        {
+          "kode": "BS-11",
+          "text": "Ceritakan satu pengalaman belajarmu yang paling berkesan selama semester ini."
+        },
+        {
+          "kode": "BS-12",
+          "text": "Apakah ada hal di kehidupan sosial di madrasah yang ingin kamu sampaikan? (misalnya pertemanan, suasana kelas)"
+        }
+      ]
+    },
+    "Orangtua": {
+      "label": "Bagian B — Komunikasi Madrasah & Perkembangan Anak yang Teramati",
+      "likert": [
+        {
+          "kode": "BOT-1",
+          "text": "Madrasah memberikan informasi yang jelas tentang perkembangan akademik anak saya."
+        },
+        {
+          "kode": "BOT-2",
+          "text": "Saya mudah menghubungi pihak madrasah ketika memerlukan informasi tentang anak saya."
+        },
+        {
+          "kode": "BOT-3",
+          "text": "Wali kelas anak saya responsif terhadap pertanyaan atau keluhan yang saya sampaikan."
+        },
+        {
+          "kode": "BOT-4",
+          "text": "Pihak madrasah melibatkan orang tua dalam keputusan penting terkait anak."
+        },
+        {
+          "kode": "BOT-5",
+          "text": "Pertemuan orang tua-guru terselenggara dengan baik dan bermanfaat."
+        },
+        {
+          "kode": "BOT-6",
+          "text": "Anak saya menunjukkan peningkatan kemampuan akademik selama satu semester ini."
+        },
+        {
+          "kode": "BOT-7",
+          "text": "Anak saya menunjukkan peningkatan dalam perilaku, kebiasaan, dan ibadah."
+        },
+        {
+          "kode": "BOT-8",
+          "text": "Anak saya terlihat antusias dan semangat saat berangkat ke madrasah."
+        },
+        {
+          "kode": "BOT-9",
+          "text": "Anak saya merasa nyaman bercerita tentang kegiatan di madrasah."
+        },
+        {
+          "kode": "BOT-10",
+          "text": "Secara keseluruhan, saya puas dengan layanan pendidikan yang diberikan madrasah."
+        }
+      ],
+      "esai": [
+        {
+          "kode": "BOT-11",
+          "text": "Hal apa dari komunikasi madrasah dengan orang tua yang menurut Bapak/Ibu sudah baik?"
+        },
+        {
+          "kode": "BOT-12",
+          "text": "Apa yang ingin Bapak/Ibu sampaikan kepada madrasah terkait perkembangan anak Bapak/Ibu di sekolah?"
+        }
+      ]
+    },
+    "Guru": {
+      "label": "Bagian B — Dukungan Institusional & Pengembangan Profesional",
+      "likert": [
+        {
+          "kode": "BG-1",
+          "text": "Pimpinan madrasah memberikan dukungan yang memadai terhadap pelaksanaan tugas saya."
+        },
+        {
+          "kode": "BG-2",
+          "text": "Komunikasi dengan rekan guru lain berjalan baik dan kolaboratif."
+        },
+        {
+          "kode": "BG-3",
+          "text": "Saya mendapatkan kesempatan yang cukup untuk pengembangan profesional (pelatihan, workshop)."
+        },
+        {
+          "kode": "BG-4",
+          "text": "Beban administratif yang saya terima masih wajar dan tidak mengganggu kualitas mengajar."
+        },
+        {
+          "kode": "BG-5",
+          "text": "Saya memiliki cukup waktu untuk menyiapkan dan mengevaluasi pembelajaran."
+        },
+        {
+          "kode": "BG-6",
+          "text": "Saya memiliki akses yang memadai pada sumber belajar dan bahan referensi yang dibutuhkan."
+        },
+        {
+          "kode": "BG-7",
+          "text": "Sistem kepegawaian dan kesejahteraan di madrasah ini berjalan dengan adil dan transparan."
+        },
+        {
+          "kode": "BG-8",
+          "text": "Saya merasa pendapat saya didengar dan dipertimbangkan oleh pimpinan."
+        },
+        {
+          "kode": "BG-9",
+          "text": "Saya merasa termotivasi untuk terus mengajar dan berkembang di madrasah ini."
+        },
+        {
+          "kode": "BG-10",
+          "text": "Secara keseluruhan, saya puas bekerja sebagai guru di madrasah ini."
+        }
+      ],
+      "esai": [
+        {
+          "kode": "BG-11",
+          "text": "Hal apa dari dukungan institusional madrasah yang menurut Anda sudah baik?"
+        },
+        {
+          "kode": "BG-12",
+          "text": "Apa yang menurut Anda perlu diperbaiki untuk meningkatkan kualitas dukungan terhadap guru?"
+        }
+      ]
+    }
+  },
+  "ATT": {
+    "Siswa": {
+      "kode": "ATT-1",
+      "text": "Madrasah ini terletak di planet Mars."
+    },
+    "Orangtua": {
+      "kode": "ATT-1",
+      "text": "Madrasah ini terletak di planet Mars."
+    },
+    "Guru": {
+      "kode": "ATT-1",
+      "text": "Guru tidak pernah mengajar di kelas."
+    }
+  }
+}

@@ -9,6 +9,7 @@ import {classSnapshot,familySnapshot,scheduleSnapshot} from './validation';
 export async function educationContext(request:NextRequest){
  const jar=privateJson({}),client=requestAuth(request,jar),caller=await verifiedPrincipal(client);
  const reply=(body:unknown,status=200)=>{const response=privateJson(body,status);jar.cookies.getAll().forEach(c=>response.cookies.set(c));return response;};
+ if(caller&&!['/api/services/surveys','/api/services/notifications'].includes(request.nextUrl.pathname)){const gate=await createAuthAdmin().rpc('app_survey_required',{p_actor:caller.principal.id,p_session:caller.sessionId});if(gate.error)return {caller:null,reply:()=>reply({message:'Pemeriksaan survei belum tersedia.'},503)};if(gate.data===true)return {caller:null,reply:()=>reply({message:'Selesaikan survei wajib terlebih dahulu.',redirect:'/account/services/surveys'},403)};}
  return {caller,reply};
 }
 export async function jsonBody(request:NextRequest){return JSON.parse(new TextDecoder().decode(await readBounded(request,65536))) as unknown;}

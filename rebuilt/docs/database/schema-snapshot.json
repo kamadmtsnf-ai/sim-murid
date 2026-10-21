@@ -25,7 +25,14 @@
     "20261021053610_assessments_kkm.sql",
     "20261021053613_report_snapshots.sql",
     "20261021053616_promotions_diplomas.sql",
-    "20261021053618_digital_books.sql"
+    "20261021053618_digital_books.sql",
+    "20261021071406_discipline_events.sql",
+    "20261021071409_discipline_notifications.sql",
+    "20261021071411_survey_responses.sql",
+    "20261021071513_survey_analytics_jobs.sql",
+    "20261021071514_release_reconciliation.sql",
+    "20261021074458_service_analytics_filters.sql",
+    "20261021075439_action_plan_progress.sql"
   ],
   "tables": [
     {
@@ -100,7 +107,27 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "action_plans",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "activity_logs",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "affective_scores",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "ai_analyses",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "ai_configs",
       "rls_enabled": true
     },
     {
@@ -205,6 +232,11 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "inbox",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "job_runs",
       "rls_enabled": true
     },
@@ -265,7 +297,27 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "point_catalog",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "point_events",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "point_month_snapshots",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "promotion_history",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "reconciliation_runs",
       "rls_enabled": true
     },
     {
@@ -296,6 +348,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "security_questions",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "service_settings",
       "rls_enabled": true
     },
     {
@@ -336,6 +393,21 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "student_profiles",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "survey_periods",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "survey_questions",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "survey_respondents",
       "rls_enabled": true
     },
     {

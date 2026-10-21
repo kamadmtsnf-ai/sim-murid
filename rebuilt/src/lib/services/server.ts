@@ -1,0 +1,30 @@
+import "server-only";
+import { createAuthAdmin } from "@/lib/auth/admin";
+import { AccessDenied } from "@/lib/auth/authorization";
+import { filters, snapshot, type ServiceModule } from "./validation";
+import type { Json } from "@/lib/supabase/cloud.types";
+export async function servicesData(
+  actor: string,
+  session: string,
+  module: ServiceModule,
+  input: unknown = {},
+) {
+  const f = filters.parse(input),
+    r = await createAuthAdmin().rpc("app_services_read", {
+      p_actor: actor,
+      p_session: session,
+      p_module: module,
+      p_filters: f as Json,
+    });
+  if (r.error) throw new Error("Unavailable");
+  if (!r.data) throw new AccessDenied();
+  const parsed = snapshot.parse(r.data);
+  if (module === "jobs")
+    parsed.extra.providers = {
+      gmail: !!process.env.GMAIL_USER && !!process.env.GMAIL_APP_PASSWORD,
+      whatsapp:
+        !!process.env.WHATSAPP_API_URL && !!process.env.WHATSAPP_API_KEY,
+      scheduledDispatch: process.env.SERVICES_DISPATCH_ENABLED === "true",
+    };
+  return parsed;
+}

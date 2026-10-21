@@ -1,0 +1,20 @@
+{
+  "origin": "http://127.0.0.1:3277",
+  "scenario": "anonymous liveness ONLY; not authenticated UAT or business workload",
+  "samples": [
+    {
+      "concurrency": 60,
+      "requests": 60,
+      "errors": 0,
+      "p50": 88.33533700000001,
+      "p95": 118.77283999999999
+    },
+    {
+      "concurrency": 132,
+      "requests": 132,
+      "errors": 0,
+      "p50": 107.17319499999999,
+      "p95": 176.288846
+    }
+  ]
+}

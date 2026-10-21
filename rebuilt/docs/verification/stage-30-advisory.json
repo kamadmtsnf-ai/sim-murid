@@ -1,0 +1,604 @@
+{
+  "status": "passed",
+  "kind": "local custom catalog checks, NOT Supabase platform Advisors",
+  "engine": "PGlite PostgreSQL 18.6",
+  "issues": [],
+  "tables": [
+    {
+      "schema_name": "public",
+      "table_name": "academic_years",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "assignment_catalog",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "business_policies",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "classes",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "holidays",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "memorization_catalog",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "profiles",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "role_catalog",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "school_profile",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "semesters",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "subjects",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_access_flags",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_assignments",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "public",
+      "table_name": "user_roles",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "action_plans",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "activity_logs",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "affective_scores",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "ai_analyses",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "ai_configs",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "app_sessions",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "assessment_scores",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "assessments",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "auth_accounts",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "auth_attempts",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "committee_payments",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "committee_tariffs",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "digital_books",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "diploma_settings",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "diplomas",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "education_requests",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "education_state",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "email_verifications",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "enrollments",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "family_groups",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "family_members",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "fee_brackets",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "grade_counters",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "import_batches",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "import_rows",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "inbox",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "job_runs",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "learning_assets",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "legacy_id_map",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "lesson_schedules",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "mentor_students",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "mentoring_reports",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "minimum_grades",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "operations_requests",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "operations_state",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "outbox",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "payment_allocations",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "permission_rules",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "point_catalog",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "point_events",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "point_month_snapshots",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "promotion_history",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "reconciliation_runs",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "recovery_requests",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "report_snapshots",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "savings_accounts",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "savings_transactions",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "school_asset_gc",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "security_questions",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "service_settings",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "settings_requests",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "settings_state",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "slip_deliveries",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_attendance",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_documents",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_duty_assignments",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_guardians",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "student_profiles",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "survey_periods",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "survey_questions",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "survey_respondents",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "teacher_duty_roster",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "teacher_duty_sessions",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "withdrawal_sequences",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "withdrawal_slips",
+      "rls_enabled": true,
+      "anon_can_read": false,
+      "authenticated_can_read": false
+    }
+  ],
+  "functions": [
+    {
+      "schema_name": "sim_murid_private",
+      "proname": "access_allowed",
+      "security_definer": false,
+      "proconfig": [
+        "search_path=\"\""
+      ]
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "proname": "access_snapshot",
+      "security_definer": true,
+      "proconfig": [
+        "search_path=\"\""
+      ]
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "proname": "deny_mutation",
+      "security_definer": false,
+      "proconfig": [
+        "search_path=\"\""
+      ]
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "proname": "survey_lock",
+      "security_definer": false,
+      "proconfig": [
+        "search_path=\"\""
+      ]
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "proname": "touch_updated_at",
+      "security_definer": false,
+      "proconfig": [
+        "search_path=\"\""
+      ]
+    }
+  ],
+  "unindexedForeignKeys": []
+}
