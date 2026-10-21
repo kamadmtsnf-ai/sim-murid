@@ -7,4 +7,3 @@ export const paginationSchema = z.object({
   search: z.string().trim().max(200).default(""),
 });
 
-export type PaginationInput = z.infer<typeof paginationSchema>;

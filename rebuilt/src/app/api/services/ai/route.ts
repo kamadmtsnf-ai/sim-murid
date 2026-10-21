@@ -119,8 +119,8 @@ export async function POST(request: NextRequest) {
           tokens: output.tokens as Json,
         },
       });
-      if (saved.error) throw new Error("Result persistence failed");
-      return reply({ message: "Analisis selesai dan JSON tervalidasi." });
+      if (saved.error || !saved.data || z.object({code:z.literal("saved")}).safeParse(saved.data).success === false) throw new Error("Result persistence failed");
+      return reply({ message: "Analisis selesai dan hasil disimpan." });
     } catch {
       await admin.rpc("app_ai_run", {
         ...args,

@@ -41,9 +41,15 @@ try {
   assert.match(cssText, /\.bg-background/);
   checks.push('Compiled Tailwind CSS asset returns 200 with application utility styles');
   const foundation = await fetch(`${origin}/foundation`);
-  assert.equal(foundation.status, 200);
-  assert.match(await foundation.text(), /Tahap 30/);
-  checks.push('Foundation page 200 and accurate remaining-scope information');
+  assert.equal(foundation.status, 404);
+  assert.doesNotMatch(html, /Dalam pengembangan|sedang dibangun kembali|Fondasi pengembangan/);
+  checks.push('Retired development page returns 404; public home contains no development-stage copy');
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL && !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    const unavailable = await fetch(`${origin}/api/classes`);
+    assert.equal(unavailable.status, 503);
+    assert.match((await unavailable.json()).message, /Pemeriksaan akses belum tersedia/);
+    checks.push('Missing service configuration fails closed with safe JSON 503');
+  }
   const missing = await fetch(`${origin}/nonexistent-foundation-route`);
   assert.equal(missing.status, 404);
   assert.match(await missing.text(), /Halaman tidak ditemukan/);
@@ -53,7 +59,7 @@ try {
   assert.equal(health.headers.get('cache-control'), 'no-store');
   assert.deepEqual(await health.json(), { status: 'ok', application: 'sim-murid', stage: 30, scope: 'liveness' });
   checks.push('Health JSON identifies liveness only, no secrets or database-ready claims');
-  console.log(JSON.stringify({ status: 'passed', checks, limitations: ['HTTP smoke test; no visual browser or hydration validation', 'Authentication integration covered by separate live tests'] }, null, 2));
+  console.log(JSON.stringify({ status: 'passed', checks, limitations: ['HTTP smoke test; no visual browser or hydration validation', 'No authenticated production role UAT; database and mocked route tests are separate'] }, null, 2));
 } finally {
   if (child.exitCode === null) {
     child.kill('SIGTERM');
