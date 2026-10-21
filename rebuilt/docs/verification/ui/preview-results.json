@@ -1,0 +1,15 @@
+{
+  "commit": "ceb5097e02fa10b3e33e9675fba6fd5a88ac0728",
+  "deployment": "dpl_4AxBN3M4DiqH38s1E8S2z5dQLrza",
+  "platformState": "READY",
+  "url": "https://sim-muridv2-b798sr3ti-kamadmtsnf-8533.vercel.app",
+  "checks": {
+    "health": 200,
+    "login": 200,
+    "anonymousClassesApi": 500
+  },
+  "runtimeDiagnosis": "Konfigurasi publik Supabase belum lengkap atau tidak valid pada environment Preview.",
+  "status": "ui-preview-ready-backend-environment-blocked",
+  "productionChanged": false,
+  "protectionDisabled": false
+}

@@ -131,3 +131,13 @@ npm run test:ui:browser
 |`tests/ui.test.ts`|Fixture terisolasi, audit label, tes menu/kontras atau browser QA.|
 |`tests/ui/fixture.tsx`|Fixture terisolasi, audit label, tes menu/kontras atau browser QA.|
 |`tests/ui/navigation-shim.ts`|Fixture terisolasi, audit label, tes menu/kontras atau browser QA.|
+
+|`docs/verification/ui/preview-results.json`|Bukti deployment Preview dan kendala konfigurasi backend.|
+
+## Pemeriksaan deployment Preview
+
+Kode pada commit `ceb5097e02fa10b3e33e9675fba6fd5a88ac0728` terbangun di Vercel sebagai `dpl_4AxBN3M4DiqH38s1E8S2z5dQLrza`, platform berstatus READY. URL: https://sim-muridv2-b798sr3ti-kamadmtsnf-8533.vercel.app . Akses anonim awal diarahkan302 oleh proteksi Vercel; konektor pemilik dipakai untuk pemeriksaan baca tanpa menonaktifkan proteksi.
+
+Health dan halaman login merespons200, termasuk heading/layout baru. `/api/classes` merespons500; runtime log secara eksplisit menyatakan konfigurasi publik Supabase belum lengkap/tidak valid pada environment Preview. Dengan demikian platform READY bukan bukti kesiapan backend preview. Environment hosting tidak diubah dan kredensial produksi tidak disalin ke Preview untuk membuat pengujian tampak berhasil. UAT akun nyata harus memakai environment preview/staging yang dikonfigurasi sesuai cakupan data yang disepakati.
+
+49 pemeriksaan browser lokal tetap lulus dengan konfigurasi publik pada child process QA; hal ini tidak diklaim sebagai49 pengujian deployment Preview. Draft PR: https://github.com/kamadmtsnf-ai/sim-murid/pull/1 . Branch belum digabungkan dan produksi tidak diganti.
