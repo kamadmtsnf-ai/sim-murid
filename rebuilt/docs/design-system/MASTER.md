@@ -49,3 +49,16 @@ Keputusan yang berlaku menggantikan pola navigasi dashboard sebelumnya: **sideba
 Adaptasi material: permukaan konten kaca netral, gradasi135° teal-ke-biru pada kontrol yang ditekan, bayangan ringan, ikon Lucide per menu dan sidebar mengambang pada desktop. Teks pada kedua ujung gradasi harus memenuhi4,5:1. Input tetap44px dan kontras batas3:1. Kontrol tidak dipindah/diskalakan ketika ditekan. Backdrop blur dibatasi pada sidebar/topbar; tidak menambahkan pointer-bloom, drag sidebar atau animasi baru yang membebani aplikasi data. Fallback opaque untuk reduced transparency/tanpa backdrop-filter, forced-colors dan reduced motion dipertahankan.
 
 Token tetap satu sumber di globals.css:primary-to,page-from/page-to,surface-glass/surface-shadow melengkapi token sebelumnya. Light mode saja. Brand teal tetap#125e64; endpoint baru#28597d. Bukan klaim pixel-identical Plass atau kepatuhan WCAG keseluruhan. Hasil verifikasi terbaru ada di docs/verification/plass-ui.md.
+
+
+## Audit Dashboard — 21 Oktober 2026
+
+Dashboard tetap berupa ringkasan akun dan inventaris layanan noninteraktif. Ikon tiap layanan memakai `NavigationIcon` yang sama dengan sidebar; tidak menambahkan KPI, chart, tautan modul, atau kontrak API baru. Tanggal menggunakan id-ID dan Asia/Jakarta; nilai tanggal yang tidak valid diganti teks tanpa elemen `time` yang menyesatkan. Tidak ada otorisasi berdasarkan jam browser.
+
+Keadaan layanan dibedakan: daftar kosong yang sah, context tidak tersedia, dan context akses gagal dimuat sebagian. Kegagalan akses tidak menambah capability; halaman operasional tetap memeriksa akses server. Identitas lengkap boleh wrap di konten; nama pada sidebar yang ruangnya terbatas memakai ellipsis dan title, sementara nilai lengkap tetap tersedia pada ringkasan akun.
+
+Drawer seluler menempel sisi kiri, mengisi tinggi viewport dinamis, memiliki menu yang menggulir sendiri, dan memakai header ringkas pada landscape pendek. Aturan geometrinya sengaja berada di luar layer CSS agar mengalahkan utility posisi tengah Dialog reusable. Saat viewport mencapai 1024px, drawer ditutup dan fokus kembali ke brand sidebar yang terlihat. Penutupan normal melalui Escape/tombol tutup mengembalikan fokus ke tombol menu. Listener breakpoint hanya hidup selama drawer terbuka dan selalu dibersihkan.
+
+Dokumen hasil: `docs/verification/dashboard-audit.md`. Halaman panjang tetap menggunakan gulir vertikal normal; keberhasilan responsif berarti tidak ada horizontal overflow halaman atau konten/kontrol yang terpotong, bukan menghilangkan gulir vertikal yang diperlukan.
+
+Untuk viewport sangat pendek (tinggi ≤300px, misalnya saat keyboard layar terbuka), body drawer bergulir sebagai satu wilayah sehingga pencarian dan logout tetap dapat dijangkau. Heading utama tetap tersedia bagi pembaca layar selama loading.

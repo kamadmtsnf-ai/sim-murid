@@ -1,0 +1,38 @@
+{
+  "status": "baseline-reproduced",
+  "checks": [],
+  "findings": [
+    "Invalid expiresAt throws RangeError and prevents Dashboard rendering.",
+    "Zero service groups render an unexplained empty grid.",
+    "Missing Workspace context renders a bare @ identity.",
+    "Mobile drawer remains modal at desktop breakpoint and blocks the desktop interface.",
+    {
+      "longIdentityLandscapeNavHeight": 20
+    }
+  ],
+  "axe": [],
+  "errors": [
+    "Expected invalid-date render error reproduced"
+  ],
+  "scope": "Synthetic component fixtures. No authenticated production browser session or real data mutations.",
+  "viewports": [
+    320,
+    360,
+    375,
+    390,
+    768,
+    1024,
+    1280,
+    1440
+  ],
+  "landscape": [
+    {
+      "width": 812,
+      "height": 375
+    },
+    {
+      "width": 812,
+      "height": 320
+    }
+  ]
+}

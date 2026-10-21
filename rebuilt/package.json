@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:operations && npm run test:learning && npm run test:services && npm run test:ui && npm run test:production && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:operations && npm run test:learning && npm run test:services && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -30,7 +30,9 @@
     "test:ui": "node --experimental-strip-types --test tests/ui.test.ts",
     "test:ui:browser": "node scripts/verify-ui.mjs",
     "test:production": "node --test tests/production.test.mjs",
-    "audit:deadcode": "node scripts/audit-deadcode.mjs"
+    "audit:deadcode": "node scripts/audit-deadcode.mjs",
+    "test:dashboard": "node --test tests/dashboard.test.mjs",
+    "test:dashboard:browser": "node scripts/verify-dashboard.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
