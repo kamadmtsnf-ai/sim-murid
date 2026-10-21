@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import {useEffect,useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 import type {z} from 'zod';
@@ -19,7 +18,7 @@ export function EmailPanel({initialState}:{initialState:z.infer<typeof emailStat
   }catch{setMessage('Koneksi terputus. Periksa status dan kotak masuk sebelum meminta kode baru.');}finally{setBusy(false);}
  }
  function verify(e:FormEvent<HTMLFormElement>){e.preventDefault();if(!state.challenge)return;const code=String(new FormData(e.currentTarget).get('code')??'');if(!/^\d{6}$/.test(code)){setMessage('Kode harus berupa enam digit angka.');return;}e.currentTarget.reset();void run({action:'verify',challengeId:state.challenge.id,code});}
- return <div className="space-y-5"><p>Email kontak: <strong className="break-all">{state.email||'Belum diisi'}</strong></p><Link href="/account/profile" className="text-primary underline">Perbarui email kontak</Link>
+ return <div className="space-y-5"><p>Email kontak: <strong className="break-all">{state.email||'Belum diisi'}</strong></p>
   {state.verified?<p>Email sudah terverifikasi.</p>:<><p>Kode berlaku maksimal 10 menit, hanya sekali pakai, dan maksimal 5 percobaan. Batas 5 permintaan per hari WIB; pengiriman ulang berjarak minimal 60 detik.</p><Button disabled={busy||now===0||remaining>0||state.sent_today>=5||!state.email} onClick={()=>void run({action:'send'})}>{busy?'Memproses…':remaining>0?`Kirim ulang dalam ${remaining} detik`:'Kirim kode verifikasi'}</Button><p className="text-sm text-muted-foreground">Permintaan hari ini: {state.sent_today}/5.</p>
   {state.challenge&&<form className="space-y-4" onSubmit={verify}><p className="text-sm">Sisa percobaan kode ini: {state.challenge.attempts_remaining}. Kode lama tidak berlaku setelah pengiriman ulang.</p><label className="block" htmlFor="email-otp">Kode enam digit<input id="email-otp" name="code" className="mt-2 w-full rounded-md border p-2" inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" minLength={6} maxLength={6} required disabled={busy}/></label><Button type="submit" disabled={busy||state.challenge.status!=='pending'||state.challenge.delivery_state!=='accepted'||state.challenge.attempts_remaining===0}>Verifikasi email</Button></form>}</>}
   <p role="status" aria-live="polite">{message}</p><Button variant="outline" disabled={busy} onClick={()=>window.location.reload()}>Muat ulang status</Button>

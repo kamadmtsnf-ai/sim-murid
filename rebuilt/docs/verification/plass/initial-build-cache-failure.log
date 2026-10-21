@@ -1,0 +1,79 @@
+udes self, outsider denied, TT accepted and required peer submit (14.061011ms)
+✔ 29: close blocks saves, micro separate, aggregates exclude drafts and attention (19.215303ms)
+✔ 29: action plan only head and H+30, encrypted provider status never exposes key (26.936302ms)
+✔ 29: dry run has no effects, stale claims ambiguous and direct client RPC/table denied (8.896061ms)
+✔ 30: own scope preserved in reconciliation, replay receipt once and revoked session denied (10.255023ms)
+✔ 27/30: scoped certificate keeps population rank; final survey cannot be rewritten via table (19.956171ms)
+✔ 28: mandatory survey gate obeys role/open/submitted and micro never gates (4.332163ms)
+✔ 29: outbox leases, recipient changes, ambiguous never retried and backoff bounds (6.73513ms)
+✔ 29: AI sample/cache transaction requires five essays, max150/1500 and masked reads (4.018035ms)
+✔ 29: role/quality filters recorded and excluded counts match scoped aggregates (8.806343ms)
+✔ 29: head can update completion after H+30 without rewriting plan content (5.20135ms)
+✔ 28: concurrent respondents use own revision, unrelated saves cannot invalidate their draft (17.851671ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2791.487974
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 test:ui
+> node --experimental-strip-types --test tests/ui.test.ts
+
+✔ Navigation never exposes administrative links to non-admin capability contexts (0.979157ms)
+✔ Deep links retain their parent navigation, with exact dashboard and localized search (0.39247ms)
+✔ Semantic text pairs meet AA contrast and input boundary exceeds 3:1 (0.906691ms)
+✔ Account pages have no static cross-page links duplicating sidebar destinations (326.482355ms)
+✔ Both endpoints of the primary control gradient preserve readable white labels (0.456114ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 454.57395
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 db:types:check
+> node scripts/database/generate-types.mjs --check
+
+PASS: 14 public table types match fresh migration replay.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 prebuild
+> node scripts/prepare-pdf-worker.mjs
+
+
+> rebuilt-sim-murid@0.30.0 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 22ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+  Creating an optimized production build ...
+
+thread 'tokio-rt-worker' (769) panicked at turbopack/crates/turbo-persistence/src/static_sorted_file.rs:949:49:
+range start index 1129759049 out of range for slice of length 12910592
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to /tmp/next-panic-d442bbbe987cab389e95b31a994de1eb.log.
+
+To help make Turbopack better, report this error by clicking here: https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20range%20start%20index%201129759049%20out%20of%20range%20for%20slice%20of%20length%2012910592&body=Turbopack%20version%3A%20%602864b177%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0Arange%20start%20index%201129759049%20out%20of%20range%20for%20slice%20of%20length%2012910592%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace
+-----
+
+
+> Build error occurred
+Error [TurbopackInternalError]: range start index 1129759049 out of range for slice of length 12910592
+    at <unknown> (TurbopackInternalError: range start index 1129759049 out of range for slice of length 12910592) {
+  location: 'turbopack/crates/turbo-persistence/src/static_sorted_file.rs:949:49'
+}

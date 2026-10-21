@@ -1,7 +1,6 @@
 "use client";
 import {TableRegion} from "@/components/ui/data-table";
 
-import {ModuleNavigation} from "@/components/module-navigation";
 import { useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +12,6 @@ import { createClient } from "@/lib/supabase/client";
 import {
   diplomaFields,
   learningSnapshot,
-  titles,
   type LearningSnapshot,
 } from "@/lib/learning/validation";
 import { BookReader } from "./reader";
@@ -276,7 +274,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
     });
   return (
     <div className="space-y-6" aria-busy={busy}>
-      <ModuleNavigation base="/account/learning/" titles={titles} label="Akademik dan buku"/>
+      
       <p role="status" aria-live="polite">
         {message}
       </p>

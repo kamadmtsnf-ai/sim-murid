@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { readServerPrincipal } from "@/lib/auth/read-server";
 import { servicesData } from "@/lib/services/server";
@@ -22,13 +21,13 @@ export default async function ServicesPage({
       <main id="main-content" className="p-8">
         <h1>{titles[m.data]}</h1>
         <p>Layanan belum tersedia atau izin tidak mencukupi.</p>
-        <Link href="/account/security">Periksa keamanan akun</Link>
+        
       </main>
     );
   }
   return (
     <main id="main-content" className="mx-auto max-w-7xl space-y-6 p-6">
-      <Link href="/account">Kembali ke akun</Link>
+      
       <h1 className="text-3xl font-semibold">{titles[m.data]}</h1>
       <ServicesPanel initial={data} userId={caller.principal.id} />
     </main>
