@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -56,7 +55,7 @@ export function SessionPanel({ canManageOthers }: { canManageOthers: boolean }) 
     setBusy(false);
   }
   return <main id="main-content" className="mx-auto max-w-3xl space-y-6 px-6 py-12">
-    <Link href="/account" className="text-sm text-primary underline">Kembali ke akun</Link>
+    
     <h1 className="text-3xl font-semibold">Sesi dan perangkat</h1>
     <p className="text-sm text-muted-foreground">Satu sesi aktif per akun. Sesi biasa berlaku maksimal 1 jam, atau 7 hari bila memilih Ingat saya. Ditampilkan 20 sesi terbaru; seluruh waktu dalam WIB.</p>
     {canManageOthers && <Card><CardHeader><CardTitle>Sesi pengguna lain</CardTitle></CardHeader><CardContent><form className="flex flex-wrap items-end gap-3" onSubmit={(e) => { e.preventDefault(); setData(null); setMessage(""); setTarget(input); setRevision((n) => n + 1); }}><label className="flex-1 text-sm" htmlFor="session-username">Username persis<input id="session-username" required maxLength={100} value={input} disabled={busy} onChange={(e) => setInput(e.target.value)} className="mt-2 w-full rounded-md border p-2" autoComplete="off" /></label><Button disabled={busy} type="submit">Cari sesi</Button><Button disabled={busy} type="button" variant="outline" onClick={() => { setTarget(""); setData(null); setMessage(""); }}>Akun saya</Button></form></CardContent></Card>}

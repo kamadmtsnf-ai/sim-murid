@@ -38,3 +38,14 @@ Prioritas: navigasi berulang dan dashboard deretan tombol (tinggi); kontrol36px 
 Risiko: shell menambah pembacaan context akses, perubahan global CSS berdampak luas, tabel panjang di ponsel perlu scroll terlokalisir. Uji source boundary, kontrast, lint/TS/build, pengujian domain dan browser fixture terisolasi; UAT akun produksi tidak diasumsikan tersedia. Hasil aktual dan batas bukti dicatat di laporan verifikasi.
 
 Pencarian ikon `navigation education` lalu retry `search` sama-sama0 hasil. Lucide existing dipakai sebagai fallback aturan umum (tidak mengklaim kecocokan dataset). Pencarian `monthly attendance trend --domain chart` mengembalikan Trend Over Time/Line Chart dan tabel fallback; chart baru tidak diperlukan untuk perbaikan ini.
+
+
+## Pembaruan plass-ui dan navigasi sidebar — 21 Oktober 2026
+
+Referensi terbaru: [jooy2/plass-ui](https://github.com/jooy2/plass-ui/tree/7f7a86c39931ca7b58d55c8c0f70897ea9359c7e), khususnya README, docs/en/design/design-language.md, color.md, dashboard demo, PlSidebar, PlButton, PlCard, internal/styles.ts dan styles.css. Lisensi MIT disertakan. Implementasi mengadaptasi bahasanya melalui komponen existing, tanpa memasang pustaka kedua atau menyalin contoh data toko.
+
+Keputusan yang berlaku menggantikan pola navigasi dashboard sebelumnya: **sidebar adalah satu-satunya tempat navigasi modul** pada area akun. Dashboard menjadi ringkasan akun dan daftar layanan noninteraktif. Hilangkan kartu pintasan, topbar avatar-link, tautan breadcrumb, bar navigasi panel dan tombol/tautan Kembali yang mengarah ke tujuan sidebar. Tombol tindakan tetap ada. Pagination, detail rekaman spesifik dan unduhan bukan navigasi modul dan tetap tersedia. Login/pemulihan publik tetap mempunyai tautan karena belum memiliki sidebar.
+
+Adaptasi material: permukaan konten kaca netral, gradasi135° teal-ke-biru pada kontrol yang ditekan, bayangan ringan, ikon Lucide per menu dan sidebar mengambang pada desktop. Teks pada kedua ujung gradasi harus memenuhi4,5:1. Input tetap44px dan kontras batas3:1. Kontrol tidak dipindah/diskalakan ketika ditekan. Backdrop blur dibatasi pada sidebar/topbar; tidak menambahkan pointer-bloom, drag sidebar atau animasi baru yang membebani aplikasi data. Fallback opaque untuk reduced transparency/tanpa backdrop-filter, forced-colors dan reduced motion dipertahankan.
+
+Token tetap satu sumber di globals.css:primary-to,page-from/page-to,surface-glass/surface-shadow melengkapi token sebelumnya. Light mode saja. Brand teal tetap#125e64; endpoint baru#28597d. Bukan klaim pixel-identical Plass atau kepatuhan WCAG keseluruhan. Hasil verifikasi terbaru ada di docs/verification/plass-ui.md.

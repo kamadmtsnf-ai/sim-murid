@@ -1,11 +1,9 @@
 "use client";
-import {ModuleNavigation} from "@/components/module-navigation";
 import { useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { TextField, SelectField } from "@/components/domain-controls";
 import {
   snapshot,
-  titles,
   type ServiceSnapshot,
 } from "@/lib/services/validation";
 import { SurveyForm } from "./survey-form";
@@ -119,7 +117,7 @@ export function ServicesPanel({
   }
   return (
     <div className="space-y-6" aria-busy={busy}>
-      <ModuleNavigation base="/account/services/" titles={titles} label="Layanan sekolah"/>
+      
       <p role="status" aria-live="polite">
         {message}
       </p>

@@ -1,0 +1,138 @@
+[
+  {
+    "path": "src/app/account/access/page.tsx",
+    "element": "<Link href=\"/account\" className=\"text-sm text-primary underline\">Kembali ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/biodata/[id]/page.tsx",
+    "element": "<Link className=\"underline\" href=\"/account/directory\">Kembali ke direktori</Link>"
+  },
+  {
+    "path": "src/app/account/biodata/[id]/page.tsx",
+    "element": "<Link href=\"/account/directory\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/biodata/biodata-panel.tsx",
+    "element": "<Link href=\"/account/security\" className=\"block text-primary underline\">Lanjutkan pengaturan keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/biodata/page.tsx",
+    "element": "<Link href=\"/account/security\" className=\"underline\">Kembali ke keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/biodata/page.tsx",
+    "element": "<Link href=\"/account/security\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/classes/page.tsx",
+    "element": "<Link href=\"/account\" className=\"underline\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/classes/page.tsx",
+    "element": "<Link href=\"/account/security\">Keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/directory/[id]/page.tsx",
+    "element": "<Link href=\"/account/directory\" className=\"underline\">Kembali ke direktori</Link>"
+  },
+  {
+    "path": "src/app/account/directory/[id]/page.tsx",
+    "element": "<Link href=\"/account/directory\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/directory/page.tsx",
+    "element": "<Link href=\"/account\" className=\"underline\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/directory/page.tsx",
+    "element": "<Link href=\"/account/security\">Keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/email/email-panel.tsx",
+    "element": "<Link href=\"/account/profile\" className=\"text-primary underline\">Perbarui email kontak</Link>"
+  },
+  {
+    "path": "src/app/account/email/page.tsx",
+    "element": "<Link href=\"/account/security\" className=\"text-primary underline\">Kembali ke keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/error.tsx",
+    "element": "<Link href=\"/account\">Kembali ke dashboard</Link>"
+  },
+  {
+    "path": "src/app/account/families/page.tsx",
+    "element": "<Link className=\"underline\" href=\"/account\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/families/page.tsx",
+    "element": "<Link href=\"/account\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/learning/[module]/page.tsx",
+    "element": "<Link href=\"/account\">Kembali ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/learning/[module]/page.tsx",
+    "element": "<Link href=\"/account/security\">Keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/operations/[module]/page.tsx",
+    "element": "<Link href=\"/account\" className=\"underline\">Kembali ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/operations/[module]/page.tsx",
+    "element": "<Link href=\"/account/security\">Periksa keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/profile/page.tsx",
+    "element": "<Link href={gate?.gate==='ready'?'/account':'/account/security'} className=\"text-primary underline\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/recovery/page.tsx",
+    "element": "<Link href=\"/account\" className=\"text-primary underline\">Kembali ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/schedules/page.tsx",
+    "element": "<Link href=\"/account\" className=\"underline\">Kembali</Link>"
+  },
+  {
+    "path": "src/app/account/schedules/page.tsx",
+    "element": "<Link href=\"/account/security\">Keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/security/security-panel.tsx",
+    "element": "<Link href=\"/account\" className=\"text-primary underline\">Lanjut ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/security/security-panel.tsx",
+    "element": "<Link href=\"/account/profile\" className=\"text-primary underline\">Perbarui email kontak</Link>"
+  },
+  {
+    "path": "src/app/account/security/security-panel.tsx",
+    "element": "<Link href=\"/account/email\" className=\"text-primary underline\">Verifikasi email Guru</Link>"
+  },
+  {
+    "path": "src/app/account/security/security-panel.tsx",
+    "element": "<Link href=\"/account/biodata\">Lengkapi biodata dan dokumen</Link>"
+  },
+  {
+    "path": "src/app/account/services/[module]/page.tsx",
+    "element": "<Link href=\"/account\">Kembali ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/services/[module]/page.tsx",
+    "element": "<Link href=\"/account/security\">Periksa keamanan akun</Link>"
+  },
+  {
+    "path": "src/app/account/sessions/session-panel.tsx",
+    "element": "<Link href=\"/account\" className=\"text-sm text-primary underline\">Kembali ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/settings/page.tsx",
+    "element": "<Link className=\"text-primary underline\" href=\"/account\">Kembali ke akun</Link>"
+  },
+  {
+    "path": "src/app/account/settings/page.tsx",
+    "element": "<Link href=\"/account\">Kembali</Link>"
+  }
+]

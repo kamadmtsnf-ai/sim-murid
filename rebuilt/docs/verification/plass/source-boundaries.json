@@ -1,0 +1,53 @@
+{
+  "baseline": "72069b8255665401cf226e99c814fb2a05143285",
+  "changedTrackedFiles": [
+    "README.md",
+    "docs/design-system/MASTER.md",
+    "docs/ui-provenance.md",
+    "scripts/verify-ui.mjs",
+    "src/app/account/access/page.tsx",
+    "src/app/account/biodata/[id]/page.tsx",
+    "src/app/account/biodata/biodata-panel.tsx",
+    "src/app/account/biodata/page.tsx",
+    "src/app/account/classes/page.tsx",
+    "src/app/account/directory/[id]/page.tsx",
+    "src/app/account/directory/page.tsx",
+    "src/app/account/email/email-panel.tsx",
+    "src/app/account/email/page.tsx",
+    "src/app/account/error.tsx",
+    "src/app/account/families/page.tsx",
+    "src/app/account/learning/[module]/page.tsx",
+    "src/app/account/learning/[module]/panel.tsx",
+    "src/app/account/operations/[module]/page.tsx",
+    "src/app/account/operations/[module]/panel.tsx",
+    "src/app/account/profile/page.tsx",
+    "src/app/account/recovery/page.tsx",
+    "src/app/account/schedules/page.tsx",
+    "src/app/account/security/security-panel.tsx",
+    "src/app/account/services/[module]/page.tsx",
+    "src/app/account/services/[module]/panel.tsx",
+    "src/app/account/sessions/session-panel.tsx",
+    "src/app/account/settings/page.tsx",
+    "src/app/globals.css",
+    "src/components/account-dashboard.tsx",
+    "src/components/ui/button.tsx",
+    "src/components/ui/card.tsx",
+    "src/components/workspace-shell.tsx",
+    "tests/ui.test.ts"
+  ],
+  "deletedTrackedFiles": [
+    "src/components/module-navigation.tsx"
+  ],
+  "backendApiAuthDatabaseLockfileChanges": [],
+  "localPreexistingDifferencesExcludedFromCommit": [
+    "docs/verification/build.log",
+    "docs/verification/stage-04-check.log",
+    "docs/verification/stage-05-build.log",
+    "docs/verification/stage-06-check.log",
+    "docs/verification/stage-08-check.log",
+    "docs/verification/stage-09-check.log",
+    "docs/verification/stage-09-email-check.log",
+    "docs/verification/stage-09-email-diagnostic-build.log",
+    "docs/verification/stages-26-30-http.json"
+  ]
+}

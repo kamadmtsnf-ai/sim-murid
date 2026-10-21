@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "files": 60,
+  "controls": 103,
+  "unresolvedLabelChecks": [],
+  "limitations": [
+    "Static JSX associations only; runtime content and screen-reader behavior need separate testing."
+  ]
+}

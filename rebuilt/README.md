@@ -12,7 +12,7 @@ Tahap30 cutover belum dinyatakan selesai: ekspor sumber, rekonsiliasi aktual, pe
 
 Node24.x/npm11. Jalankan `npm ci`, isi `.env.local` dari `.env.example`, lalu `npm run dev`. Gunakan proyek Supabase khusus SiM-Murid. Secret Auth/Gmail/HMAC hanya di server, tidak pada NEXT_PUBLIC atau git. Preview/development harus memakai konfigurasi uji tersendiri.
 
-`npm run check` menjalankan typecheck, lint,157 test, drift tipe dan build. `npm run test:smoke` memeriksa lima alur HTTP build. 33 migrasi replayable,79 tabel RLS; RPC keamanan hanya service_role. Tipe cloud berasal dari Supabase dan snapshot lokal dari PGlite. Pengujian lokal bukan pengganti bukti pengiriman aktual; status dan batas integrasi dicatat dalam docs/verification.
+`npm run check` menjalankan typecheck, lint,159 test, drift tipe dan build. `npm run test:smoke` memeriksa lima alur HTTP build. 33 migrasi replayable,79 tabel RLS; RPC keamanan hanya service_role. Tipe cloud berasal dari Supabase dan snapshot lokal dari PGlite. Pengujian lokal bukan pengganti bukti pengiriman aktual; status dan batas integrasi dicatat dalam docs/verification.
 
 Sesi biasa1jam atau Ingat saya168jam, tidak diperpanjang oleh refresh. Cookie HttpOnly; tidak memakai browser Auth SDK untuk sesi ini. Tidak ada signup publik atau password default bersama. `/api/health` hanya liveness, bukan readiness database/email.
 
@@ -27,3 +27,5 @@ Input: username teks persis, fullName, role, contactEmail opsional. Password sem
 ## UI/UX enterprise
 
 Master design system: [docs/design-system/MASTER.md](docs/design-system/MASTER.md). Audit, peta perubahan dan hasil pengujian: [docs/verification/ui-ux-enterprise.md](docs/verification/ui-ux-enterprise.md). `npm run test:ui` memeriksa menu dan kontras; `node scripts/audit-ui.mjs` memeriksa hubungan label statis. Browser QA memakai fixture komponen yang tidak masuk route aplikasi; instruksi dan batas buktinya ada dalam laporan.
+
+Pembaruan visual berdasarkan plass-ui dan penghapusan navigasi duplikat: [laporan](docs/verification/plass-ui.md). Navigasi modul dipusatkan pada sidebar.

@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import {useState,type FormEvent} from 'react';
 import {useRouter} from 'next/navigation';
 import {Button} from '@/components/ui/button';
@@ -30,11 +29,14 @@ export function SecurityPanel({username,initialState}:{username:string;initialSt
   <p role="status" aria-live="polite">{message}</p>
   {state.gate==='password'&&<p className="rounded-md border p-4">Ganti password sementara sebelum melanjutkan. Setelah berhasil, masuk kembali menggunakan password baru.</p>}
   {state.gate in pending&&<Card><CardContent className="pt-6"><p>{pending[state.gate as keyof typeof pending]}</p><Button className="mt-4" variant="outline" onClick={()=>{router.refresh();}}>Periksa kembali</Button></CardContent></Card>}
-  {state.gate==='profile_pending'&&<Button asChild><Link href="/account/biodata">Lengkapi biodata dan dokumen</Link></Button>}
-  {state.gate==='email_pending'&&<Link href="/account/email" className="text-primary underline">Verifikasi email Guru</Link>}
-  {state.gate==='email_pending'&&<Link href="/account/profile" className="text-primary underline">Perbarui email kontak</Link>}
+  
+  
+  
+  {state.gate==='profile_pending'&&<p className="text-sm text-muted-foreground">Gunakan menu Biodata dan dokumen pada sidebar untuk melengkapi data.</p>}
+  {state.gate==='email_pending'&&<p className="text-sm text-muted-foreground">Gunakan menu Profil pribadi untuk memperbarui email, lalu menu Verifikasi email pada sidebar.</p>}
+  {state.gate==='ready'&&<p className="text-sm text-muted-foreground">Akun siap digunakan. Pilih layanan melalui sidebar.</p>}
   {state.gate==='security_question'&&<p>Simpan pertanyaan keamanan untuk melanjutkan.</p>}
-  {state.gate==='ready'&&<Link href="/account" className="text-primary underline">Lanjut ke akun</Link>}
+  
   <Card><CardHeader><CardTitle>Ganti password</CardTitle></CardHeader><CardContent>
    <p id="password-rules" className="mb-4 text-sm text-muted-foreground">Minimal 8 karakter, maksimal 72 byte. Gunakan huruf besar, huruf kecil, angka, dan simbol. Hindari username, tiga karakter sama berurutan, dan password lama. Semua sesi akan diakhiri.</p>
    <form className="space-y-4" onSubmit={e=>void submit(e,'password')}>
