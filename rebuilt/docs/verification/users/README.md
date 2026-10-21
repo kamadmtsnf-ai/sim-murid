@@ -37,3 +37,11 @@ Reservasi menyimpan command dan fingerprint HMAC, bukan password. Identitas Auth
 Tidak membuat akun nyata atau menyimpan data pribadi produksi untuk QA. Pengujian sukses browser menggunakan respons fixture; provider diuji lewat port mock dan SQL lewat database terisolasi. Pembuatan akun end-to-end dengan sesi admin produksi belum dijalankan karena tidak ada data akun baru yang diminta pengguna.
 
 Jangan memuat ulang/meninggalkan halaman saat hasil masih belum pasti: ulangi melalui dialog yang sama. Dialog pending dapat ditutup dan dibuka kembali selama halaman tetap terbuka. Jika halaman hilang, secret server diputar, hak admin dicabut, atau terjadi benturan dengan CLI di tengah proses, reservasi perlu direkonsiliasi operator. Jangan menghapus/mengadopsi identitas Auth otomatis. Operator berwenang memeriksa reservasi dan UUID terkait, memastikan identitas dan role, menyelesaikan transaksi yang sesuai atau melakukan reset terverifikasi dengan password sementara baru, lalu mengaudit tindakannya. Password lama tidak dapat dipulihkan dari fingerprint. Tidak ada fitur edit/hapus/reset pengguna baru dalam lingkup perubahan ini.
+
+## Verifikasi username dengan tanda minus
+
+Username dapat memuat karakter minus ASCII `-`, misalnya `guru-001` dan `001-002`. Validasi aplikasi/database sebelumnya memang telah mengizinkannya. Petunjuk formulir diperjelas tanpa mempersempit karakter yang sudah diterima atau mengubah username akun lama.
+
+Regresi menambahkan contoh minus di tengah/awal/akhir pada schema pembuatan akun dan login. SQL membuktikan provisioning, pencarian persis, dan principal sesi mempertahankan `Guru-001` serta tidak menyamakannya dengan `Guru001` atau `guru-001`. Fixture API dan browser menggunakan username berminus sampai hasil sukses dan penyalinan kredensial.
+
+Validasi pembaruan ini: 18 tes autentikasi/pengguna, TypeScript, lint, production build, dan 11 pemeriksaan browser lulus; 6 tampilan axe tanpa pelanggaran. Tidak ada migration atau perubahan data produksi.
