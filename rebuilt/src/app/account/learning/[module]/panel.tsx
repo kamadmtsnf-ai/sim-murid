@@ -1,6 +1,8 @@
 "use client";
+import {TableRegion} from "@/components/ui/data-table";
+
+import {ModuleNavigation} from "@/components/module-navigation";
 import { useRef, useState, type FormEvent } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   TextField,
@@ -273,18 +275,8 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
       ...(selected.length ? { selected: selected.join(",") } : {}),
     });
   return (
-    <div className="space-y-6">
-      <nav className="flex flex-wrap gap-3" aria-label="Akademik dan buku">
-        {Object.entries(titles).map(([k, v]) => (
-          <Link
-            href={"/account/learning/" + k}
-            key={k}
-            className="rounded border p-2"
-          >
-            {v}
-          </Link>
-        ))}
-      </nav>
+    <div className="space-y-6" aria-busy={busy}>
+      <ModuleNavigation base="/account/learning/" titles={titles} label="Akademik dan buku"/>
       <p role="status" aria-live="polite">
         {message}
       </p>
@@ -605,8 +597,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                       {text(r, "name")} —{" "}
                       {snapshot.draft ? "Draft / sementara" : "Terbit"}
                     </label>
-                    <div className="overflow-auto">
-                      <table className="w-full text-left text-sm">
+                    <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom"><table className="w-full text-left text-sm"><caption className="sr-only">Data sesuai filter dan hak akses Anda</caption>
                         <thead>
                           <tr>
                             {[
@@ -619,7 +610,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                               "KKM",
                               "Predikat",
                             ].map((x) => (
-                              <th key={x} className="p-2">
+                              <th scope="col" key={x} className="p-2">
                                 {x}
                               </th>
                             ))}
@@ -647,7 +638,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                           ))}
                         </tbody>
                       </table>
-                    </div>
+                    </TableRegion>
                     <a
                       className="underline"
                       href={
@@ -851,10 +842,12 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                             />{" "}
                             {text(r, "name")} ({text(r, "role")})
                           </label>
-                          <select
-                            className={controlClass}
-                            name={"class-" + r.student_id}
-                          >
+                          <label className="block text-sm">
+                            Kelas tujuan untuk {text(r, "name")}
+                            <select
+                              className={controlClass}
+                              name={"class-" + r.student_id}
+                            >
                             <option value="">Alumni / lulus</option>
                             {data.classes
                               .filter((c) => !c.archived_at)
@@ -867,6 +860,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                                 </option>
                               ))}
                           </select>
+                          </label>
                         </div>
                       ))}
                     </div>

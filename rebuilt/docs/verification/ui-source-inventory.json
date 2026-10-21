@@ -1,0 +1,1523 @@
+[
+  {
+    "path": "src/app/account/access/page.tsx",
+    "bytes": 2723,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/biodata/[id]/page.tsx",
+    "bytes": 1164,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/biodata/biodata-panel.tsx",
+    "bytes": 12943,
+    "forms": 2,
+    "tables": 0,
+    "nativeConfirm": 2,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/biodata/page.tsx",
+    "bytes": 1243,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/classes/class-panel.tsx",
+    "bytes": 7294,
+    "forms": 3,
+    "tables": 0,
+    "nativeConfirm": 5,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/classes/page.tsx",
+    "bytes": 944,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/directory/[id]/page.tsx",
+    "bytes": 4558,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/directory/directory-panel.tsx",
+    "bytes": 3051,
+    "forms": 1,
+    "tables": 1,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/directory/page.tsx",
+    "bytes": 1725,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/email/email-panel.tsx",
+    "bytes": 3788,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/email/page.tsx",
+    "bytes": 1175,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/error.tsx",
+    "bytes": 662,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/account/families/family-panel.tsx",
+    "bytes": 4609,
+    "forms": 2,
+    "tables": 0,
+    "nativeConfirm": 2,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/families/page.tsx",
+    "bytes": 968,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/layout.tsx",
+    "bytes": 971,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/learning/[module]/page.tsx",
+    "bytes": 1315,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/learning/[module]/panel.tsx",
+    "bytes": 43069,
+    "forms": 7,
+    "tables": 1,
+    "nativeConfirm": 1,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/learning/[module]/reader.tsx",
+    "bytes": 6115,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 2,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/loading.tsx",
+    "bytes": 443,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/account/operations/[module]/fees.tsx",
+    "bytes": 6553,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 2,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/operations/[module]/page.tsx",
+    "bytes": 1187,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/operations/[module]/panel.tsx",
+    "bytes": 24318,
+    "forms": 3,
+    "tables": 2,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/page.tsx",
+    "bytes": 1579,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/account/profile/page.tsx",
+    "bytes": 1541,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/profile/profile-form.tsx",
+    "bytes": 2894,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/recovery/page.tsx",
+    "bytes": 1691,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/recovery/recovery-panel.tsx",
+    "bytes": 5108,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/schedules/page.tsx",
+    "bytes": 1625,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/schedules/schedule-panel.tsx",
+    "bytes": 10451,
+    "forms": 3,
+    "tables": 1,
+    "nativeConfirm": 2,
+    "statusRegions": 2,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/security/page.tsx",
+    "bytes": 803,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/account/security/security-panel.tsx",
+    "bytes": 6701,
+    "forms": 3,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/account/services/[module]/insights.tsx",
+    "bytes": 13421,
+    "forms": 6,
+    "tables": 1,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/services/[module]/page.tsx",
+    "bytes": 1272,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/services/[module]/panel.tsx",
+    "bytes": 18038,
+    "forms": 6,
+    "tables": 0,
+    "nativeConfirm": 1,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/services/[module]/survey-form.tsx",
+    "bytes": 15953,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 3,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/account/sessions/page.tsx",
+    "bytes": 806,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/account/sessions/session-panel.tsx",
+    "bytes": 6563,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 1,
+    "statusRegions": 2,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/account/settings/page.tsx",
+    "bytes": 1596,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 2
+  },
+  {
+    "path": "src/app/account/settings/settings-panel.tsx",
+    "bytes": 11069,
+    "forms": 4,
+    "tables": 1,
+    "nativeConfirm": 3,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/account/email/route.ts",
+    "bytes": 4232,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/account/email-provider/route.ts",
+    "bytes": 1218,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/account/profile/route.ts",
+    "bytes": 2446,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/account/recovery/route.ts",
+    "bytes": 4357,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/access/route.ts",
+    "bytes": 1024,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/email-recovery/route.ts",
+    "bytes": 4491,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/login/route.ts",
+    "bytes": 4079,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/logout/route.ts",
+    "bytes": 979,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/recovery/route.ts",
+    "bytes": 2853,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/security/route.ts",
+    "bytes": 4925,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/session/route.ts",
+    "bytes": 639,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/auth/sessions/route.ts",
+    "bytes": 3087,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/classes/route.ts",
+    "bytes": 1652,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/directory/[id]/route.ts",
+    "bytes": 800,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/directory/route.ts",
+    "bytes": 964,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/families/route.ts",
+    "bytes": 1652,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/health/route.ts",
+    "bytes": 382,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/learning/[module]/route.ts",
+    "bytes": 3525,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/learning/assets/[id]/route.ts",
+    "bytes": 1710,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/learning/assets/route.ts",
+    "bytes": 4637,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/operations/[module]/route.ts",
+    "bytes": 2623,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/schedules/route.ts",
+    "bytes": 2007,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/services/[module]/route.ts",
+    "bytes": 2606,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/services/ai/route.ts",
+    "bytes": 4638,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/services/cron/route.ts",
+    "bytes": 1080,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/services/dispatch/route.ts",
+    "bytes": 940,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/services/exports/route.ts",
+    "bytes": 6954,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/settings/logo/route.ts",
+    "bytes": 3708,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/settings/route.ts",
+    "bytes": 2486,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/slips/[id]/route.ts",
+    "bytes": 5415,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/api/slips/quote/route.ts",
+    "bytes": 1067,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/student-documents/[id]/route.ts",
+    "bytes": 5312,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/api/student-profile/[id]/route.ts",
+    "bytes": 1882,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/error.tsx",
+    "bytes": 534,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/foundation/page.tsx",
+    "bytes": 2610,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/globals.css",
+    "bytes": 11247,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 2,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/layout.tsx",
+    "bytes": 698,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/login/login-form.tsx",
+    "bytes": 3047,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/login/page.tsx",
+    "bytes": 4011,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/not-found.tsx",
+    "bytes": 556,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/page.tsx",
+    "bytes": 3756,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/recovery/email/page.tsx",
+    "bytes": 648,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/recovery/email/recovery-form.tsx",
+    "bytes": 4097,
+    "forms": 2,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/app/recovery/page.tsx",
+    "bytes": 668,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/app/recovery/recovery-form.tsx",
+    "bytes": 2750,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/account-dashboard.tsx",
+    "bytes": 3326,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/components/domain-controls.tsx",
+    "bytes": 1004,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/module-navigation.tsx",
+    "bytes": 648,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/ui/badge.tsx",
+    "bytes": 1776,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/ui/button.tsx",
+    "bytes": 2405,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/ui/card.tsx",
+    "bytes": 1987,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/ui/data-table.tsx",
+    "bytes": 220,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/ui/dialog.tsx",
+    "bytes": 1544,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/ui/status.tsx",
+    "bytes": 737,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/components/workspace-shell.tsx",
+    "bytes": 4552,
+    "forms": 1,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 1,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/config/account-navigation.ts",
+    "bytes": 4625,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/config/app.ts",
+    "bytes": 187,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/config/business-policy.ts",
+    "bytes": 664,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/config/modules.ts",
+    "bytes": 1891,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/admin.ts",
+    "bytes": 585,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/answer-hash.ts",
+    "bytes": 820,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/authorization.ts",
+    "bytes": 1400,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/devices.ts",
+    "bytes": 582,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/http.ts",
+    "bytes": 2259,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/read-server.ts",
+    "bytes": 1260,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/recovery-validation.ts",
+    "bytes": 1653,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/security-validation.ts",
+    "bytes": 2081,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/security.ts",
+    "bytes": 1401,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/sessions.ts",
+    "bytes": 834,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/auth/validation.ts",
+    "bytes": 981,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/contracts/result.ts",
+    "bytes": 548,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/documents/inspect.ts",
+    "bytes": 1025,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/documents/server.ts",
+    "bytes": 1192,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/documents/validation.ts",
+    "bytes": 1320,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/education/server.ts",
+    "bytes": 3816,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/education/use-mutation.ts",
+    "bytes": 1086,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/education/validation.ts",
+    "bytes": 5012,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/email/gmail-config.ts",
+    "bytes": 1107,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/email/gmail.ts",
+    "bytes": 1512,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/email/otp.ts",
+    "bytes": 2287,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 1
+  },
+  {
+    "path": "src/lib/email/service.ts",
+    "bytes": 1683,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/email/validation.ts",
+    "bytes": 919,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/learning/print.ts",
+    "bytes": 6295,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/learning/server.ts",
+    "bytes": 760,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/learning/validation.ts",
+    "bytes": 6049,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/operations/export.ts",
+    "bytes": 2839,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/operations/server.ts",
+    "bytes": 1308,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/operations/validation.ts",
+    "bytes": 4938,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/analysis-schema.ts",
+    "bytes": 539,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/dispatch.ts",
+    "bytes": 3649,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/export.ts",
+    "bytes": 3582,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/instrument-extras.json",
+    "bytes": 17716,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/instruments.json",
+    "bytes": 21872,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/providers.ts",
+    "bytes": 3884,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/question-seed.json",
+    "bytes": 53293,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/server.ts",
+    "bytes": 1033,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/services/validation.ts",
+    "bytes": 6551,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/settings/image.ts",
+    "bytes": 945,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/settings/server.ts",
+    "bytes": 2706,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/settings/validation.ts",
+    "bytes": 3009,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/student/rules.json",
+    "bytes": 3808,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/student/server.ts",
+    "bytes": 525,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/student/validation.ts",
+    "bytes": 5180,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/supabase/client.ts",
+    "bytes": 446,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/supabase/cloud.types.ts",
+    "bytes": 22766,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/supabase/database.types.ts",
+    "bytes": 12931,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/supabase/environment.ts",
+    "bytes": 556,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/supabase/runtime.types.ts",
+    "bytes": 12665,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/supabase/server.ts",
+    "bytes": 725,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/utils.ts",
+    "bytes": 169,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/validation/environment.ts",
+    "bytes": 720,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/lib/validation/pagination.ts",
+    "bytes": 389,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/attendance/README.md",
+    "bytes": 258,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/classes-mentoring/README.md",
+    "bytes": 270,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/committee-fees/README.md",
+    "bytes": 263,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/dashboard/README.md",
+    "bytes": 260,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/diplomas/README.md",
+    "bytes": 257,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/discipline/README.md",
+    "bytes": 257,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/ebooks/README.md",
+    "bytes": 263,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/grades/README.md",
+    "bytes": 266,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/graduation/README.md",
+    "bytes": 270,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/identity/README.md",
+    "bytes": 268,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/operations/README.md",
+    "bytes": 455,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/savings/README.md",
+    "bytes": 259,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/schedules/README.md",
+    "bytes": 257,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/student-profile/README.md",
+    "bytes": 270,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/surveys/README.md",
+    "bytes": 331,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/teacher-duty/README.md",
+    "bytes": 261,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/modules/users/README.md",
+    "bytes": 273,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  },
+  {
+    "path": "src/proxy.ts",
+    "bytes": 1023,
+    "forms": 0,
+    "tables": 0,
+    "nativeConfirm": 0,
+    "statusRegions": 0,
+    "mainLandmarks": 0
+  }
+]

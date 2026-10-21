@@ -1,0 +1,89 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> rebuilt-sim-murid@0.30.0 prebuild
+> node scripts/prepare-pdf-worker.mjs
+
+
+> rebuilt-sim-murid@0.30.0 build
+> next build
+
+▲ Next.js 16.4.2 (Turbopack)
+✓ Running next.config.ts took 25ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 624ms
+  Running TypeScript ...
+  Finished TypeScript in 2.5s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/32) ...
+  Generating static pages using 8 workers (8/32) 
+  Generating static pages using 8 workers (16/32) 
+  Generating static pages using 8 workers (24/32) 
+✓ Generating static pages using 8 workers (32/32) in 466ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /account
+├ ƒ /account/access
+├ ƒ /account/biodata
+├ ƒ /account/biodata/[id]
+├ ƒ /account/classes
+├ ƒ /account/directory
+├ ƒ /account/directory/[id]
+├ ƒ /account/email
+├ ƒ /account/families
+├ ƒ /account/learning/[module]
+├ ƒ /account/operations/[module]
+├ ƒ /account/profile
+├ ƒ /account/recovery
+├ ƒ /account/schedules
+├ ƒ /account/security
+├ ƒ /account/services/[module]
+├ ƒ /account/sessions
+├ ƒ /account/settings
+├ ƒ /api/account/email
+├ ƒ /api/account/email-provider
+├ ƒ /api/account/profile
+├ ƒ /api/account/recovery
+├ ƒ /api/auth/access
+├ ƒ /api/auth/email-recovery
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/recovery
+├ ƒ /api/auth/security
+├ ƒ /api/auth/session
+├ ƒ /api/auth/sessions
+├ ƒ /api/classes
+├ ƒ /api/directory
+├ ƒ /api/directory/[id]
+├ ƒ /api/families
+├ ƒ /api/health
+├ ƒ /api/learning/[module]
+├ ƒ /api/learning/assets
+├ ƒ /api/learning/assets/[id]
+├ ƒ /api/operations/[module]
+├ ƒ /api/schedules
+├ ƒ /api/services/[module]
+├ ƒ /api/services/ai
+├ ƒ /api/services/cron
+├ ƒ /api/services/dispatch
+├ ƒ /api/services/exports
+├ ƒ /api/settings
+├ ƒ /api/settings/logo
+├ ƒ /api/slips/[id]
+├ ƒ /api/slips/quote
+├ ƒ /api/student-documents/[id]
+├ ƒ /api/student-profile/[id]
+├ ○ /foundation
+├ ƒ /login
+├ ○ /recovery
+└ ○ /recovery/email
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

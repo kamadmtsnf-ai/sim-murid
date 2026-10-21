@@ -1,0 +1,24 @@
+/** Synthetic component QA only. Not an application route or authentication provider. */
+import {createRoot} from 'react-dom/client';
+import {WorkspaceShell} from '../../src/components/workspace-shell';
+import {AccountDashboard} from '../../src/components/account-dashboard';
+import {ClassPanel} from '../../src/app/account/classes/class-panel';
+import {OperationsPanel} from '../../src/app/account/operations/[module]/panel';
+import {LearningPanel} from '../../src/app/account/learning/[module]/panel';
+import {ServicesPanel} from '../../src/app/account/services/[module]/panel';
+import {navigationFor} from '../../src/config/account-navigation';
+import {classSnapshot} from '../../src/lib/education/validation';
+import {operationsSnapshot} from '../../src/lib/operations/validation';
+import {learningSnapshot} from '../../src/lib/learning/validation';
+import {snapshot} from '../../src/lib/services/validation';
+const id='11111111-1111-4111-8111-111111111111';
+const year='22222222-2222-4222-8222-222222222222';
+const view=new URLSearchParams(location.search).get('view')??'dashboard';
+const admin=new URLSearchParams(location.search).get('role')!=='student';
+const navigation=navigationFor(['profiles.read','attendance.read','grades.read','surveys.read','notifications.read','classes.read'],admin);
+export const classes=classSnapshot.parse({revision:1,can_manage:admin,years:[{id:year,start_year:2026,is_active:true}],classes:[{id,year_id:year,level:7,name:'VII A',teacher_id:null,teacher_name:null,archived:false,can_schedule:admin,students:[]}],teachers:[],students:[]});
+const operation=operationsSnapshot.parse({module:'attendance',today:'2026-10-21',revision:1,canManage:admin,isAdmin:admin,people:[],classes:[],rows:[{id,date:'2026-10-21',name:'Siswa contoh dengan nama panjang untuk pengujian tata letak',status:'Hadir',notes:'Catatan untuk pengujian komponen. Bukan data produksi.'}],total:1,page:1,pageSize:20,summary:{recorded:1,present:1},extra:{}});
+const learning=learningSnapshot.parse({module:'reports',revision:1,today:'2026-10-21',isAdmin:admin,canWrite:admin,classes:[],people:[],semester:1,rows:[],extra:{}});
+const services=snapshot.parse({module:'discipline',revision:1,today:'2026-10-21',isAdmin:admin,isManager:admin,month:'2026-10-01',rows:[],extra:{canRecord:false},years:[],classes:[],subjects:[]});
+const content=view==='classes'?<ClassPanel initial={classes}/>:view==='operations'?<OperationsPanel initial={operation}/>:view==='learning'?<LearningPanel initial={learning}/>:view==='services'?<ServicesPanel initial={services} userId={id}/>:null;
+createRoot(document.getElementById('root')!).render(<WorkspaceShell name="Akun Pengujian Antarmuka" username="qa-ui" navigation={navigation}>{view==='dashboard'?<AccountDashboard name="Akun Pengujian Antarmuka" expiresAt="2026-10-21T17:00:00Z"/>:<main id="main-content" className="space-y-6"><h1>{view==='classes'?'Kelas dan penempatan siswa':view==='operations'?'Absensi':view==='learning'?'Rapor':'Poin siswa'}</h1>{content}</main>}</WorkspaceShell>);
