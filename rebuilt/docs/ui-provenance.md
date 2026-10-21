@@ -6,3 +6,7 @@ CLI shadcn tidak selesai merespons dalam sesi ini; komponen dipasang melalui jal
 
 Sumber: https://github.com/shadcn-ui/ui/tree/main/apps/v4/registry/new-york-v4/ui
 Dokumentasi: https://ui.shadcn.com/docs/installation/manual
+
+## Adaptasi enterprise UI, 21 Oktober 2026
+
+Master design system ada pada [design-system/MASTER.md](design-system/MASTER.md). UI UX Pro Max dari upstream dipakai sebagai sumber rekomendasi dan dicatat dengan commit serta hasil pencarian aktual. daisyUI dipakai sebagai referensi warna semantik; tidak diinstal. Komponen baru memakai Radix yang sudah tersedia, Tailwind, dan Lucide existing. Lisensi sumber rekomendasi ada pada licenses/ui-ux-pro-max-LICENSE.txt.

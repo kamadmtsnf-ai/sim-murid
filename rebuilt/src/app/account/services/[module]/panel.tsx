@@ -1,6 +1,6 @@
 "use client";
+import {ModuleNavigation} from "@/components/module-navigation";
 import { useRef, useState, type FormEvent } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { TextField, SelectField } from "@/components/domain-controls";
 import {
@@ -118,18 +118,8 @@ export function ServicesPanel({
     else void mutate({ type, month: get("month") + "-01" });
   }
   return (
-    <div className="space-y-6">
-      <nav className="flex flex-wrap gap-3" aria-label="Layanan sekolah">
-        {Object.entries(titles).map(([k, v]) => (
-          <Link
-            key={k}
-            className="rounded border p-2"
-            href={"/account/services/" + k}
-          >
-            {v}
-          </Link>
-        ))}
-      </nav>
+    <div className="space-y-6" aria-busy={busy}>
+      <ModuleNavigation base="/account/services/" titles={titles} label="Layanan sekolah"/>
       <p role="status" aria-live="polite">
         {message}
       </p>

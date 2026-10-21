@@ -1,4 +1,6 @@
 "use client";
+import {TableRegion} from "@/components/ui/data-table";
+
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -178,13 +180,12 @@ export function InsightsPanel({
               </form>
             </article>
           ))}
-          <div className="overflow-auto">
-            <table className="w-full text-left">
+          <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom"><table className="w-full text-left"><caption className="sr-only">Data sesuai filter dan hak akses Anda</caption>
               <thead>
                 <tr>
                   {["Peran", "Aspek", "Kode", "Jumlah", "Rata-rata"].map(
                     (k) => (
-                      <th key={k}>{k}</th>
+                      <th scope="col" key={k}>{k}</th>
                     ),
                   )}
                 </tr>
@@ -201,7 +202,7 @@ export function InsightsPanel({
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableRegion>
           <details>
             <summary>Tren lintas periode</summary>
             {list(data.extra.trend).map((r, i) => (

@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:operations && npm run test:learning && npm run test:services && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:operations && npm run test:learning && npm run test:services && npm run test:ui && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -26,7 +26,9 @@
     "test:operations": "node --experimental-strip-types --test tests/operations.test.ts && node --test tests/database/operations.test.mjs",
     "prebuild": "node scripts/prepare-pdf-worker.mjs",
     "test:learning": "node --experimental-strip-types --test tests/learning.test.ts && node --test tests/database/learning.test.mjs",
-    "test:services": "node --experimental-strip-types --test tests/services.test.ts && node --test tests/database/services.test.mjs"
+    "test:services": "node --experimental-strip-types --test tests/services.test.ts && node --test tests/database/services.test.mjs",
+    "test:ui": "node --experimental-strip-types --test tests/ui.test.ts",
+    "test:ui:browser": "node scripts/verify-ui.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
