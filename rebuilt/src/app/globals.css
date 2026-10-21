@@ -117,8 +117,6 @@
   .workspace-content p[role="status"]:not(:empty) { border:1px solid var(--border); background:var(--secondary); padding:.75rem 1rem; border-radius:.5rem; }
   .workspace-content :where(form.grid,section.rounded) { background:var(--card); }
   .workspace-footer { display:flex; justify-content:space-between; flex-wrap:wrap; gap:.5rem 1rem; border-top:1px solid var(--border); padding:1rem; font-size:.75rem; color:var(--muted-foreground); }
-  .workspace-drawer { inset:0 auto 0 0; transform:none; width:min(90vw,22rem); max-height:100dvh; border-radius:0; border-block:0; }
-  .workspace-drawer > div:last-child { padding:0; flex:1; min-height:0; display:flex; }
   .drawer-inner { display:flex; flex-direction:column; min-height:0; width:100%; }
   .drawer-inner .workspace-brand { padding-top:1rem; }
   .dashboard-welcome { display:flex; flex-direction:column; gap:1.5rem; padding-block:.5rem 1.5rem; border-bottom:1px solid var(--border); }
@@ -224,4 +222,39 @@
 
 @layer components {
   .account-summary-grid,.dashboard-grid { grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr)); }
+}
+
+/* Dashboard and navigation: keep long content inside its own layout. */
+@layer components {
+  .dashboard-welcome h1 { overflow-wrap:anywhere; line-height:1.25; }
+  .dashboard-services { display:grid; gap:.75rem; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border); }
+  .dashboard-services li { display:flex; align-items:start; gap:.625rem; font-size:.875rem; color:var(--muted-foreground); }
+  .dashboard-services .navigation-icon { margin-top:.125rem; color:var(--primary); }
+  .workspace-brand,.workspace-user,.nav-search { flex-shrink:0; }
+  .workspace-user form { flex-shrink:0; }
+  .workspace-nav { min-height:2.75rem; overflow-wrap:anywhere; }
+  .workspace-topbar > :first-child { flex:1; }
+  .workspace-topbar .workspace-identity { max-width:45%; }
+}
+/* Unlayered intentionally: drawer geometry must override Dialog's centering utilities. */
+.workspace-drawer {
+  inset:0 auto 0 0; transform:none;
+  width:min(90vw,22rem); max-width:none; height:100dvh; max-height:100dvh;
+  border-radius:0; border-block:0;
+}
+.workspace-drawer > div:last-child { padding:0; flex:1; min-height:0; display:flex; overflow:hidden; }
+@media(max-height:500px) {
+  .workspace-drawer > div:first-child { padding:.75rem 1rem; align-items:center; }
+  .workspace-drawer > div:first-child h2 { font-size:1rem; }
+  .workspace-drawer > div:first-child p { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  .drawer-inner .workspace-brand,.workspace-sidebar .workspace-brand { padding:.5rem 1rem; }
+  .drawer-inner > .nav-search,.workspace-sidebar > .nav-search { margin:0 1rem .5rem; }
+  .drawer-inner .workspace-user,.workspace-sidebar .workspace-user { padding:.5rem 1rem; }
+}
+/* Very short viewports (for example while the software keyboard is open):
+   let the drawer body scroll as one region so account controls stay reachable. */
+@media(max-height:300px) {
+  .workspace-drawer > div:last-child { display:block; overflow-y:auto; }
+  .workspace-drawer .drawer-inner { min-height:100%; }
+  .workspace-drawer .workspace-nav { flex:none; overflow:visible; }
 }

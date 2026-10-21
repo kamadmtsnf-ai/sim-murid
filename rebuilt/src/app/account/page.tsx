@@ -1,22 +1,19 @@
 import {securityState} from '@/lib/auth/security';
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createServerClient } from "@supabase/ssr";
-import { getSupabasePublicEnvironment } from "@/lib/supabase/environment";
+import { readServerAuthClient } from "@/lib/auth/read-server";
 import { verifiedPrincipal } from "@/lib/auth/http";
 import { AccountDashboard } from "@/components/account-dashboard";
 
 export const dynamic = "force-dynamic";
 export default async function AccountPage() {
-  const jar = await cookies();
   let state; let onboarding;
   try {
-    const { url, publishableKey } = getSupabasePublicEnvironment();
-    const client = createServerClient(url, publishableKey, { cookies: { getAll: () => jar.getAll(), setAll: () => { /* Proxy handles refresh cookies. */ } } });
+    const client = await readServerAuthClient();
     state = await verifiedPrincipal(client);
     if(state)onboarding=await securityState(state.principal.id,state.sessionId);
   } catch {
-    return <main id="main-content" className="mx-auto max-w-lg px-6 py-20"><h1 className="text-xl font-semibold">Pemeriksaan akun belum tersedia</h1><p className="mt-4">Silakan muat ulang halaman beberapa saat lagi.</p></main>;
+    // Use the existing account error boundary and its retry action.
+    throw new Error("Account verification unavailable");
   }
   if (!state) redirect("/login?expired=1");
   if(onboarding?.gate!=="ready")redirect("/account/security");

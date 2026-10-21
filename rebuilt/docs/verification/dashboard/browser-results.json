@@ -1,0 +1,153 @@
+{
+  "status": "passed",
+  "checks": [
+    "normal 320 — no horizontal overflow",
+    "normal 360 — no horizontal overflow",
+    "normal 375 — no horizontal overflow",
+    "normal 390 — no horizontal overflow",
+    "normal 768 — no horizontal overflow",
+    "normal 1024 — no horizontal overflow",
+    "normal 1280 — no horizontal overflow",
+    "normal 1440 — no horizontal overflow",
+    "normal desktop — axe violations 0",
+    "Dashboard has no duplicate module shortcuts",
+    "long 320 — no horizontal overflow",
+    "long 768 — no horizontal overflow",
+    "long 1440 — no horizontal overflow",
+    "long — axe violations 0",
+    "many 320 — no horizontal overflow",
+    "many 768 — no horizontal overflow",
+    "many 1440 — no horizontal overflow",
+    "many — axe violations 0",
+    "empty 320 — no horizontal overflow",
+    "empty 768 — no horizontal overflow",
+    "empty 1440 — no horizontal overflow",
+    "empty — axe violations 0",
+    "missing 320 — no horizontal overflow",
+    "missing 768 — no horizontal overflow",
+    "missing 1440 — no horizontal overflow",
+    "missing — axe violations 0",
+    "unavailable 320 — no horizontal overflow",
+    "unavailable 768 — no horizontal overflow",
+    "unavailable 1440 — no horizontal overflow",
+    "unavailable — axe violations 0",
+    "invalid-date 320 — no horizontal overflow",
+    "invalid-date 768 — no horizontal overflow",
+    "invalid-date 1440 — no horizontal overflow",
+    "invalid-date — axe violations 0",
+    "blank-date 320 — no horizontal overflow",
+    "blank-date 768 — no horizontal overflow",
+    "blank-date 1440 — no horizontal overflow",
+    "blank-date — axe violations 0",
+    "loading 320 — no horizontal overflow",
+    "loading 768 — no horizontal overflow",
+    "loading 1440 — no horizontal overflow",
+    "loading — axe violations 0",
+    "error 320 — no horizontal overflow",
+    "error 768 — no horizontal overflow",
+    "error 1440 — no horizontal overflow",
+    "error — axe violations 0",
+    "Error retry calls existing reset without exposing internals",
+    "Restricted navigation and id-ID/Asia-Jakarta date preserved",
+    "Sidebar search, empty result and recovery",
+    "Drawer forward/backward keyboard focus trap cycle 0",
+    "Escape restores mobile trigger focus cycle 0",
+    "drawer landscape 0 — no horizontal overflow",
+    "Landscape navigation scrolls to focused last item cycle 0",
+    "Desktop resize closes drawer and restores visible focus cycle 0",
+    "Drawer forward/backward keyboard focus trap cycle 1",
+    "Escape restores mobile trigger focus cycle 1",
+    "drawer landscape 1 — no horizontal overflow",
+    "Landscape navigation scrolls to focused last item cycle 1",
+    "Desktop resize closes drawer and restores visible focus cycle 1",
+    "Drawer forward/backward keyboard focus trap cycle 2",
+    "Escape restores mobile trigger focus cycle 2",
+    "drawer landscape 2 — no horizontal overflow",
+    "Landscape navigation scrolls to focused last item cycle 2",
+    "Desktop resize closes drawer and restores visible focus cycle 2",
+    "mobile drawer — axe violations 0",
+    "Touch search and close target >=44px",
+    "Selecting the Dashboard menu closes mobile navigation",
+    "normal short landscape drawer — no horizontal overflow",
+    "long short landscape drawer — no horizontal overflow",
+    "many short landscape drawer — no horizontal overflow",
+    "240px-high drawer — no horizontal overflow",
+    "Very short viewport keeps logout and search reachable by scrolling",
+    "long identity 200 percent text — no horizontal overflow",
+    "Long page remains vertically scrollable to footer at 200 percent text",
+    "No uncaught JavaScript errors or console errors"
+  ],
+  "findings": [],
+  "axe": [
+    {
+      "label": "normal desktop",
+      "violations": []
+    },
+    {
+      "label": "long",
+      "violations": []
+    },
+    {
+      "label": "many",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "missing",
+      "violations": []
+    },
+    {
+      "label": "unavailable",
+      "violations": []
+    },
+    {
+      "label": "invalid-date",
+      "violations": []
+    },
+    {
+      "label": "blank-date",
+      "violations": []
+    },
+    {
+      "label": "loading",
+      "violations": []
+    },
+    {
+      "label": "error",
+      "violations": []
+    },
+    {
+      "label": "mobile drawer",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "scope": "Synthetic component fixtures. No authenticated production browser session or real data mutations.",
+  "viewports": [
+    320,
+    360,
+    375,
+    390,
+    768,
+    1024,
+    1280,
+    1440
+  ],
+  "landscape": [
+    {
+      "width": 812,
+      "height": 375
+    },
+    {
+      "width": 812,
+      "height": 320
+    },
+    {
+      "width": 812,
+      "height": 240
+    }
+  ]
+}

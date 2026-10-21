@@ -1,0 +1,38 @@
+{
+  "base": "4155373866a4c0550242e9012585fc4288224eb1",
+  "branch": "fix/dashboard-audit",
+  "recordedAt": "2026-10-21T16:53:12.979044+00:00",
+  "node": "24.19.0",
+  "applicationTests": {
+    "passed": 172,
+    "failed": 0,
+    "newDashboardTests": 9,
+    "source": "npm run check completed all test scripts"
+  },
+  "typecheck": "passed",
+  "lint": "passed, zero warnings",
+  "databaseTypes": "passed: 14 public table types match fresh migration replay",
+  "deadcode": {
+    "unreachable": []
+  },
+  "build": "passed on final source",
+  "checkCommandCaveat": "The aggregate check passed all tests/typecheck/lint/database types, then encountered a Turbopack persistence cache error. A clean production build succeeded. Final heading/CSS changes were rechecked with lint/build and both browser suites.",
+  "dashboardBrowser": {
+    "status": "passed",
+    "checks": 75,
+    "axeScreens": 11,
+    "axeViolations": 0,
+    "consoleErrors": []
+  },
+  "crossModuleBrowser": {
+    "status": "passed",
+    "checks": 60,
+    "axeScreens": 8,
+    "axeViolations": 0
+  },
+  "limits": [
+    "Synthetic component fixtures; no production login or production writes.",
+    "Server flow regressions use dependency-boundary mocks.",
+    "Headless Chromium; no physical-device Safari/Firefox or assistive-technology user testing."
+  ]
+}
