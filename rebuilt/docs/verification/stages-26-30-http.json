@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "origin": "https://sim-muridv2.vercel.app",
+  "checks": [
+    "health stage30",
+    "discipline page requires login",
+    "discipline API rejects anonymous",
+    "reconciliation page requires login",
+    "insights page requires login",
+    "notifications page requires login",
+    "surveys page requires login",
+    "jobs page requires login",
+    "jobs API rejects anonymous",
+    "notifications API rejects anonymous",
+    "surveys API rejects anonymous",
+    "discipline mutation rejects foreign origin",
+    "reconciliation API rejects anonymous",
+    "insights API rejects anonymous",
+    "jobs mutation rejects foreign origin",
+    "surveys mutation rejects foreign origin",
+    "notifications mutation rejects foreign origin",
+    "insights mutation rejects foreign origin",
+    "/api/services/discipline?format=xlsx protected",
+    "/api/services/exports protected",
+    "/api/services/cron protected",
+    "/api/services/ai rejects foreign origin",
+    "/api/services/dispatch rejects foreign origin"
+  ],
+  "limitations": [
+    "Anonymous and origin boundary tests only; no authenticated browser UAT. Positive domain RPC verified independently in cloud rollback. No real email/WhatsApp/AI calls."
+  ]
+}

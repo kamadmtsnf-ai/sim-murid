@@ -685,3 +685,5 @@ test("29: head can update completion after H+30 without rewriting plan content",
   assert.equal(after[0].description, before[0].description);
   assert.equal(after[0].status, "selesai");
 });
+
+test('28: concurrent respondents use own revision, unrelated saves cannot invalidate their draft',async()=>{const p=(await service('surveys',periodCmd())).id;const old=await rev();assert.equal((await service('surveys',{type:'start',periodId:p},A.s2,old)).code,'saved');assert.equal((await service('surveys',{type:'start',periodId:p},A.s3,old)).code,'saved');const cmd={type:'save',periodId:p,version:0,answers:{'A1-1':4}};assert.equal((await service('surveys',cmd,A.s2,old)).code,'saved');assert.equal((await service('surveys',cmd,A.s3,old)).code,'saved');assert.equal((await service('surveys',cmd,A.s2,old)).code,'stale');assert.equal(await rev(),old);});

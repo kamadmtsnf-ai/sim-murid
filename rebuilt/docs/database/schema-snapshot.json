@@ -32,7 +32,8 @@
     "20261021071513_survey_analytics_jobs.sql",
     "20261021071514_release_reconciliation.sql",
     "20261021074458_service_analytics_filters.sql",
-    "20261021075439_action_plan_progress.sql"
+    "20261021075439_action_plan_progress.sql",
+    "20261021080335_survey_concurrent_drafts.sql"
   ],
   "tables": [
     {

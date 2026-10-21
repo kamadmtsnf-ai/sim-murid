@@ -53,4 +53,4 @@ Kode Tahap25 commit8aa055dc531f02f09d02816b88a3226040ef93c9; Vercel dpl_6JvjJhdD
 
 ## Tahap26–30
 
-SPK/survei/notifikasi/analitik/adapter/ekspor tersedia pada kode0.30.0.32migrasi,79tabelRLS; CronDB sim-services-hourly memeriksa pengingat dan reset idempotent. Providerpengiriman defaultnonaktif. Cutover belum selesai: perlu sumber aktual, restore dan UAT. Detail docs/verification/stages-26-30.md dan docs/release/cutover-runbook.md.
+SPK/survei/notifikasi/analitik/adapter/ekspor tersedia pada kode0.30.0.33 migrasi,79tabelRLS; CronDB sim-services-hourly memeriksa pengingat dan reset idempotent. Providerpengiriman defaultnonaktif. Cutover belum selesai: perlu sumber aktual, restore dan UAT. Detail docs/verification/stages-26-30.md dan docs/release/cutover-runbook.md.

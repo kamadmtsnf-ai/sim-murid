@@ -12,7 +12,7 @@ Tahap30 cutover belum dinyatakan selesai: ekspor sumber, rekonsiliasi aktual, pe
 
 Node24.x/npm11. Jalankan `npm ci`, isi `.env.local` dari `.env.example`, lalu `npm run dev`. Gunakan proyek Supabase khusus SiM-Murid. Secret Auth/Gmail/HMAC hanya di server, tidak pada NEXT_PUBLIC atau git. Preview/development harus memakai konfigurasi uji tersendiri.
 
-`npm run check` menjalankan typecheck, lint,152 test, drift tipe dan build. `npm run test:smoke` memeriksa lima alur HTTP build. 32 migrasi replayable,79 tabel RLS; RPC keamanan hanya service_role. Tipe cloud berasal dari Supabase dan snapshot lokal dari PGlite. Pengujian lokal bukan pengganti bukti pengiriman aktual; status dan batas integrasi dicatat dalam docs/verification.
+`npm run check` menjalankan typecheck, lint,153 test, drift tipe dan build. `npm run test:smoke` memeriksa lima alur HTTP build. 33 migrasi replayable,79 tabel RLS; RPC keamanan hanya service_role. Tipe cloud berasal dari Supabase dan snapshot lokal dari PGlite. Pengujian lokal bukan pengganti bukti pengiriman aktual; status dan batas integrasi dicatat dalam docs/verification.
 
 Sesi biasa1jam atau Ingat saya168jam, tidak diperpanjang oleh refresh. Cookie HttpOnly; tidak memakai browser Auth SDK untuk sesi ini. Tidak ada signup publik atau password default bersama. `/api/health` hanya liveness, bukan readiness database/email.
 

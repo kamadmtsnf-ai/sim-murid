@@ -85,6 +85,13 @@
       "cloudVersion": "20261021075559",
       "name": "action_plan_progress",
       "sha256": "b5df0deab7c8cbf3e665100e23f27af44a32bd291297be0c13dfaf3cdfd41ff7"
+    },
+    {
+      "localFile": "20261021080335_survey_concurrent_drafts.sql",
+      "localVersion": "20261021080335",
+      "cloudVersion": "20261021080428",
+      "name": "survey_concurrent_drafts",
+      "sha256": "fd91c59d9f62fdcfd46e118f9ed5e99fdd874372f01268b34c9875e072349060"
     }
   ]
 }
