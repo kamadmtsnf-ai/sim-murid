@@ -422,3 +422,9 @@
 .savings-panel :is(input,select), .savings-dialog :is(input:not([type=checkbox]),select) { min-height: 44px; max-width: 100%; }
 .savings-panel :is(td,th) { overflow-wrap: anywhere; }
 .savings-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+
+/* Poin siswa: local scrolling preserves long history without widening the page. */
+.discipline-panel fieldset { min-inline-size: 0; }
+.discipline-panel input, .discipline-panel select, .discipline-dialog input, .discipline-dialog select { min-height: 44px; max-width: 100%; }
+.discipline-panel table { overflow-wrap: anywhere; }
+.discipline-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }

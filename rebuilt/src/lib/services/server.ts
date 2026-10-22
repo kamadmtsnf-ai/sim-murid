@@ -1,4 +1,5 @@
 import "server-only";
+import { parseDiscipline } from "./discipline";
 import { createAuthAdmin } from "@/lib/auth/admin";
 import { AccessDenied } from "@/lib/auth/authorization";
 import { filters, snapshot, type ServiceModule } from "./validation";
@@ -18,6 +19,38 @@ export async function servicesData(
     });
   if (r.error) throw new Error("Unavailable");
   if (!r.data) throw new AccessDenied();
+  if (module === "discipline") {
+    try {
+      const data = parseDiscipline(r.data);
+      if (f.month && data.month !== f.month)
+        throw Error("Unexpected discipline month");
+      let catalog = data;
+      if (f.classId || f.studentId) {
+        const full = await createAuthAdmin().rpc("app_services_read", {
+          p_actor: actor,
+          p_session: session,
+          p_module: module,
+          p_filters: { month: data.month },
+        });
+        if (full.error || !full.data)
+          throw Error("Recording catalog unavailable");
+        catalog = parseDiscipline(full.data);
+        if (catalog.revision !== data.revision || catalog.month !== data.month)
+          throw Error("Recording catalog changed");
+      }
+      data.extra.recordingStudents = catalog.rows.map(
+        ({ student_id, name, class_id, class_name }) => ({
+          student_id,
+          name,
+          class_id,
+          class_name,
+        }),
+      );
+      return data;
+    } catch {
+      throw Error("Discipline unavailable");
+    }
+  }
   const parsed = snapshot.parse(r.data);
   if (module === "jobs")
     parsed.extra.providers = {

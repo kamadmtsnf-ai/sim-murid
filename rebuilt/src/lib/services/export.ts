@@ -1,4 +1,4 @@
-import {formatAcademicYear,semesterLabel} from '../academic/period.ts';
+import { formatAcademicYear, semesterLabel } from "../academic/period.ts";
 import ExcelJS from "exceljs";
 import { z } from "zod";
 import { textPdf, object } from "../learning/print.ts";
@@ -30,7 +30,29 @@ export function serviceExportRows(data: ServiceSnapshot) {
         ];
       }),
     };
-  if(data.module==='surveys')return {columns:['Periode','Tahun ajaran','Semester','Mulai','Selesai','Status','Rincian'],rows:data.rows.map(r=>[r.title,formatAcademicYear(data.years?.find(y=>y.id===r.academic_year_id)?.start_year),semesterLabel(r.semester),r.starts_on,r.ends_on,r.status,JSON.stringify(r)])};
+  if (data.module === "surveys")
+    return {
+      columns: [
+        "Periode",
+        "Tahun ajaran",
+        "Semester",
+        "Mulai",
+        "Selesai",
+        "Status",
+        "Rincian",
+      ],
+      rows: data.rows.map((r) => [
+        r.title,
+        formatAcademicYear(
+          data.years?.find((y) => y.id === r.academic_year_id)?.start_year,
+        ),
+        semesterLabel(r.semester),
+        r.starts_on,
+        r.ends_on,
+        r.status,
+        JSON.stringify(r),
+      ]),
+    };
   return {
     columns: ["Data", "Rincian"],
     rows: data.rows.map((r) => [
@@ -97,10 +119,21 @@ export async function exportServices(data: ServiceSnapshot, input: string) {
         [
           `SiM-Murid — ${data.module}`,
           `Periode ${data.month}`,
+          ...(data.module === "discipline" ? [table.columns.join(" | ")] : []),
           ...table.rows.map((r) => r.map((v) => String(v ?? "")).join(" | ")),
         ],
       ];
-    bytes = await textPdf(sections);
+    bytes = await textPdf(
+      data.module === "discipline"
+        ? sections.map((lines) =>
+            lines.map((line) =>
+              line.replace(/\S{41,}/g, (word) =>
+                word.match(/.{1,40}/g)!.join(" "),
+              ),
+            ),
+          )
+        : sections,
+    );
     mime = "application/pdf";
   }
   return new Response(bytes as BodyInit, {
