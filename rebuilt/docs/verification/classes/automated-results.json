@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "npm_ci": "passed",
+  "typecheck": "passed",
+  "lint": "passed",
+  "unit_integration_database_tests": 257,
+  "failures": 0,
+  "production_build": "passed",
+  "db_types_check": "passed",
+  "deadcode": {
+    "unreachable": []
+  },
+  "http_smoke": "passed",
+  "classes_browser": {
+    "checks": 360,
+    "axe_views": 16
+  },
+  "cross_module_browser": {
+    "checks": 69,
+    "axe_views": 8
+  },
+  "limits": [
+    "Local synthetic API/Auth/SDK fixtures and isolated PGlite SQL tests; no real production class/student mutations or authenticated role-browser UAT."
+  ]
+}

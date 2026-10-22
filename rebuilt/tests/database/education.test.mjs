@@ -114,3 +114,18 @@ test('ED13-04: revoking guardian linkage or teacher role immediately removes det
  try{assert.equal(await detail(T,S3.id),null);}finally{await db.query("update public.user_roles set role_code='teacher' where user_id=$1",[T.id]);}
  assert.equal((await detail(T,S3.id)).id,S3.id);
 });
+
+test('ED14-03: inactive enrolled account can be removed by admin; replay ends history once and unblocks archive',async()=>{
+ const y=(await write('app_classes_write',{type:'year',startYear:2098})).id;
+ const c=(await write('app_classes_write',{type:'class',id:null,yearId:y,level:7,name:'Removal QA',teacherId:null})).id;
+ assert.equal((await write('app_classes_write',{type:'enrollment',classId:c,studentIds:[S3.id],startsOn:'2026-10-22',remove:false})).code,'saved');
+ await db.query("update public.profiles set status='inactive' where id=$1",[S3.id]);
+ try{const command={type:'enrollment',classId:c,studentIds:[S3.id],startsOn:'2026-10-22',remove:true},request=uuid(),v=await revision();assert.equal((await write('app_classes_write',command,T,v)).code,'denied');assert.equal((await write('app_classes_write',command,A,v,request)).code,'saved');assert.equal((await write('app_classes_write',command,A,v,request)).code,'saved');assert.equal(await val('select count(*)::int from sim_murid_private.enrollments where class_id=$1 and ended_at is not null',[c]),1);assert.equal(await val('select count(*)::int from sim_murid_private.activity_logs where request_id=$1',[request]),1);assert.equal((await write('app_classes_write',{type:'class_archive',id:c})).code,'saved');}finally{await db.query("update public.profiles set status='active' where id=$1",[S3.id]);}
+});
+test('ED14-04: removal rejects mixed foreign/current IDs atomically; inactive additions remain invalid',async()=>{
+ const y=(await write('app_classes_write',{type:'year',startYear:2099})).id;
+ const c=(await write('app_classes_write',{type:'class',id:null,yearId:y,level:8,name:'Atomic removal QA',teacherId:null})).id;
+ const command={type:'enrollment',classId:c,studentIds:[S3.id],startsOn:'2026-10-22',remove:false};assert.equal((await write('app_classes_write',command)).code,'saved');
+ assert.equal((await write('app_classes_write',{...command,studentIds:[S3.id,S2.id],remove:true})).code,'not_found');assert.equal(await val('select count(*)::int from sim_murid_private.enrollments where class_id=$1 and ended_at is null',[c]),1);
+ await db.query("update public.profiles set status='inactive' where id=$1",[S2.id]);try{assert.equal((await write('app_classes_write',{...command,studentIds:[S2.id]})).code,'invalid');}finally{await db.query("update public.profiles set status='active' where id=$1",[S2.id]);}
+});

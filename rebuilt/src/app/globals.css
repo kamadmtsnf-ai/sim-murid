@@ -356,3 +356,24 @@
 .workspace-user { padding:16px; gap:12px; }
 .workspace-footer { padding:16px; gap:8px 16px; overflow-wrap:anywhere; }
 @media(min-width:1024px) { .workspace-shell { grid-template-columns:min(17rem,280px) minmax(0,1fr); } }
+
+/* Classes: content-based columns, wrapping controls, and a fully scrollable short-screen dialog. */
+.classes-panel { container-type: inline-size; min-width: 0; overflow-wrap: anywhere; }
+.classes-panel :is(input, select, fieldset), .classes-dialog :is(input, select, fieldset) { min-width: 0; max-width: 100%; }
+.classes-panel :is(input:not([type=checkbox]), select), .classes-dialog :is(input:not([type=checkbox]), select) { min-height: 44px; padding: 8px 12px; }
+.classes-panel button, .classes-dialog button { min-height: 44px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; padding: 8px 12px; }
+.classes-grid, .classes-filters, .classes-fields { display: grid; min-width: 0; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+.classes-student { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding-block: 12px; }
+.classes-picker { max-height: min(20rem, 50dvh); overflow: auto; border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+.classes-check { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding-block: 10px; }
+.classes-check input { flex: 0 0 auto; margin-top: 4px; }
+.classes-check span { min-width: 0; overflow-wrap: anywhere; }
+.classes-panel svg, .classes-dialog svg { width: 16px; height: 16px; flex-shrink: 0; }
+.classes-dialog { display: block; overflow-y: auto; max-height: calc(100dvh - 32px); width: calc(100% - 32px); overflow-wrap: anywhere; }
+.classes-dialog > div { padding: 16px; }
+.classes-dialog > div:first-child { gap: 12px; }
+.classes-dialog > div:first-child > button { min-width: 44px; padding: 12px; }
+@container (min-width: 40rem) { .classes-grid, .classes-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 640px) { .classes-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.classes-year-fields > label { flex: 1 1 240px; }
