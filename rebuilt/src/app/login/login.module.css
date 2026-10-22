@@ -1,0 +1,41 @@
+/* Login only: reuse global semantic tokens and controls without changing recovery/account screens. */
+.layout { min-block-size: 100dvh; display: grid; min-inline-size: 0; overflow-wrap: anywhere; }
+.story { display: none; min-inline-size: 0; color: var(--primary-foreground); background: linear-gradient(135deg,var(--primary),var(--primary-to)); }
+.storyBrand { display: inline-flex; align-items: center; gap: 12px; max-inline-size: 100%; inline-size: fit-content; min-block-size: 44px; border-radius: .5rem; font-size: 1.25rem; font-weight: 650; }
+.storyBrand svg { inline-size: 32px; block-size: 32px; flex-shrink: 0; }
+.storyTitle { font-size: clamp(1.75rem,3vw,2.75rem); font-weight: 650; letter-spacing: -.025em; line-height: 1.25; }
+.storyList { display: grid; gap: 1rem; margin-block-start: 2rem; font-size: .875rem; }
+.storyList li { display: flex; align-items: start; gap: 12px; }
+.storyList svg { inline-size: 20px; block-size: 20px; flex-shrink: 0; margin-block-start: 2px; }
+.main { display: flex; flex-direction: column; justify-content: center; min-inline-size: 0; inline-size: 100%; max-inline-size: 34rem; margin-inline: auto; padding: clamp(24px,4vw,48px) clamp(16px,4vw,40px); }
+.mobileBrand { display: flex; align-items: center; gap: 12px; margin-block-end: 1rem; }
+.brandIcon { inline-size: 44px; block-size: 44px; }
+.brandIcon svg { inline-size: 24px; block-size: 24px; }
+.backLink { display: inline-flex; align-items: center; min-block-size: 44px; inline-size: fit-content; max-inline-size: 100%; margin-block-end: 1rem; border-radius: .25rem; color: var(--primary); font-size: .875rem; text-decoration: underline; text-underline-offset: .2em; }
+.card { min-inline-size: 0; gap: 0; padding-block: 0; }
+.cardHeader { padding: clamp(20px,3vw,28px); }
+.cardContent { padding: 0 clamp(20px,3vw,28px) clamp(20px,3vw,28px); }
+.form { overflow-wrap: anywhere; }
+.form, .fields { display: grid; gap: 1.25rem; min-inline-size: 0; }
+.fields:disabled { opacity: .8; }
+.input { display: block; min-inline-size: 0; inline-size: 100%; margin-block-start: .5rem; border: 1px solid var(--input); background: var(--card); padding: .625rem .75rem; }
+.passwordToggle { display: inline-flex; align-items: center; gap: 8px; max-inline-size: 100%; min-block-size: 44px; margin-block-start: .25rem; padding-block: .25rem; border-radius: .25rem; color: var(--primary); font-size: .875rem; text-align: start; text-decoration: underline; text-underline-offset: .2em; }
+.passwordToggle svg { inline-size: 18px; block-size: 18px; flex-shrink: 0; }
+.remember { display: flex; align-items: start; gap: 12px; }
+.remember input { margin-block-start: .25rem; }
+.remember > span { min-inline-size: 0; font-size: .875rem; }
+.error { min-inline-size: 0; padding: 12px; border: 1px solid color-mix(in srgb,var(--destructive) 35%,var(--border)); border-radius: .65rem; background: var(--danger-subtle); color: var(--destructive); font-size: .875rem; }
+.submit { inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; padding-inline: 12px; white-space: normal; text-align: center; }
+.textLink { display: inline-flex; align-items: center; min-block-size: 44px; max-inline-size: 100%; color: var(--primary); text-decoration: underline; text-underline-offset: .2em; }
+.help { margin-block-start: 1.5rem; font-size: .875rem; color: var(--muted-foreground); }
+.help a { color: var(--primary); text-decoration: underline; text-underline-offset: .2em; }
+.skeleton { block-size: 44px; }
+@media(min-width:64rem) {
+ .layout { grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); }
+ .story { display: flex; flex-direction: column; justify-content: space-between; gap: 2.5rem; padding: clamp(32px,4vw,64px); }
+ .mobileBrand { display: none; }
+}
+@media(forced-colors:active) { .story { background: Canvas; color: CanvasText; border-inline-end: 1px solid CanvasText; } }
+/* Status icons and gutters must not consume the whole card when text is enlarged. */
+.cardContent :is([role="status"],[role="alert"]) { padding: 12px; gap: 12px; }
+.cardContent :is([role="status"],[role="alert"]) > svg { inline-size: 16px; block-size: 16px; }

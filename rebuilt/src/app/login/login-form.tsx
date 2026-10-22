@@ -1,38 +1,84 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Status } from "@/components/ui/status";
+import { loginSchema } from "@/lib/auth/validation";
+import styles from "./login.module.css";
 
+type Phase = "idle" | "submitting" | "success" | "uncertain";
 export function LoginForm() {
   const router = useRouter();
+  const busyRef = useRef(false);
+  const mountedRef = useRef(true);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const errorRef = useRef<HTMLDivElement>(null);
-  const [pending, setPending] = useState(false);
+  const successRef = useRef<HTMLDivElement>(null);
+  const [phase, setPhase] = useState<Phase>("idle");
   const [message, setMessage] = useState("");
   const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+      if (timerRef.current) clearTimeout(timerRef.current);
+      // Do not abort a login mutation on navigation away: its response may still deliver session cookies.
+    };
+  }, []);
+  useEffect(() => { if (message) errorRef.current?.focus(); }, [message]);
+  useEffect(() => { if (phase === "success") successRef.current?.focus(); }, [phase]);
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (pending) return;
+    if (busyRef.current) return;
     const form = new FormData(event.currentTarget);
-    setPending(true); setMessage("");
+    const parsed = loginSchema.safeParse({ username: form.get("username"), password: form.get("password"), remember: form.get("remember") === "on" });
+    if (!parsed.success) {
+      setMessage("Periksa username dan password. Username tidak boleh diawali atau diakhiri spasi.");
+      return;
+    }
+    busyRef.current = true;
+    setPhase("submitting"); setMessage(""); setVisible(false);
+    const controller = new AbortController();
+    timerRef.current = setTimeout(() => controller.abort(), 30_000);
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: form.get("username"), password: form.get("password"), remember: form.get("remember") === "on" }),
+        body: JSON.stringify(parsed.data), signal: controller.signal, cache: "no-store",
       });
       const data: unknown = await response.json();
-      if (response.ok) { router.replace("/account"); router.refresh(); return; }
-      setMessage(typeof data === "object" && data !== null && "message" in data && typeof data.message === "string" ? data.message : "Belum berhasil masuk. Silakan coba kembali.");
-    } catch { setMessage("Tidak dapat menghubungi layanan. Periksa koneksi Anda."); }
-    setPending(false);
-    requestAnimationFrame(() => errorRef.current?.focus());
+      if (!mountedRef.current) return;
+      if (response.ok) {
+        if (typeof data !== "object" || data === null || !("destination" in data) || data.destination !== "/account") throw new Error("Unconfirmed login response");
+        setPhase("success");
+        try { router.replace("/account"); } catch { /* The native link below can complete navigation. */ }
+        return;
+      }
+      if (typeof data !== "object" || data === null || !("message" in data) || typeof data.message !== "string" || !data.message.trim()) throw new Error("Unconfirmed login response");
+      setMessage(data.message.slice(0, 1000));
+      setPhase("idle"); busyRef.current = false;
+    } catch {
+      if (mountedRef.current) {
+        setMessage("Hasil proses masuk belum dapat dipastikan. Periksa sesi Anda sebelum mencoba lagi agar tidak membuat permintaan ganda.");
+        setPhase("uncertain");
+      }
+    } finally {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
   }
-  const input = "mt-2 w-full rounded-md border bg-card px-3 py-2 focus-visible:outline-2 focus-visible:outline-ring";
-  return <form onSubmit={submit} className="space-y-5" aria-busy={pending} aria-describedby={message?"login-error":undefined}>
-    <div><label htmlFor="username" className="text-sm font-medium">Username</label><input id="username" name="username" autoComplete="username" required maxLength={100} className={input} disabled={pending} /></div>
-    <div><label htmlFor="password" className="text-sm font-medium">Password</label><input id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" required maxLength={1024} className={input} disabled={pending} /><button type="button" aria-controls="password" aria-pressed={visible} disabled={pending} onClick={() => setVisible(!visible)} className="mt-1 min-h-11 rounded text-sm text-primary underline underline-offset-4 focus-visible:outline-2">{visible ? "Sembunyikan password" : "Tampilkan password"}</button></div>
-    <label className="flex items-start gap-3 text-sm"><input type="checkbox" name="remember" className="mt-1" disabled={pending} /><span>Ingat saya selama 7 hari<span className="mt-1 block text-xs text-muted-foreground">Gunakan hanya pada perangkat pribadi. Sesi biasa berlaku 1 jam.</span></span></label>
-    {message&&<div id="login-error" ref={errorRef} role="alert" tabIndex={-1} className="rounded-lg border border-destructive/30 bg-danger-subtle p-3 text-sm text-destructive">{message}</div>}
-    <Button type="submit" className="w-full" disabled={pending}>{pending ? "Memeriksa akun…" : "Masuk"}</Button>
+
+  const pending = phase === "submitting";
+  return <form method="post" action="/api/auth/login" onSubmit={submit} className={styles.form} aria-busy={pending} aria-describedby={message ? "login-error" : undefined}>
+    <fieldset disabled={phase !== "idle"} className={styles.fields}>
+      <div><label htmlFor="username" className="text-sm font-medium">Username</label><input id="username" name="username" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} required maxLength={100} className={styles.input} /></div>
+      <div><label htmlFor="password" className="text-sm font-medium">Password</label><input id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" required maxLength={1024} className={styles.input} /><button type="button" aria-controls="password" aria-pressed={visible} onClick={() => setVisible(value => !value)} className={styles.passwordToggle}>{visible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}{visible ? "Sembunyikan password" : "Tampilkan password"}</button></div>
+      <label className={styles.remember}><input type="checkbox" name="remember" /><span>Ingat saya selama 7 hari<span className="mt-1 block text-xs text-muted-foreground">Gunakan hanya pada perangkat pribadi. Sesi biasa berlaku 1 jam.</span></span></label>
+    </fieldset>
+    {message && <div id="login-error" ref={errorRef} role="alert" tabIndex={-1} className={styles.error}>{message}</div>}
+    {pending && <p role="status" className="sr-only">Sedang memeriksa akun.</p>}
+    {phase === "success" ? <div ref={successRef} tabIndex={-1}><Status tone="success"><p>Berhasil masuk. Membuka akun Anda…</p><a className={styles.textLink} href="/account">Lanjutkan ke akun</a></Status></div> : phase === "uncertain" ? <Button asChild className={styles.submit}><a href="/login">Periksa sesi saya</a></Button> : <Button type="submit" className={styles.submit} disabled={pending}>{pending && <LoaderCircle aria-hidden="true" className="size-4 shrink-0 animate-spin" />}{pending ? "Memeriksa akun…" : "Masuk"}</Button>}
   </form>;
 }

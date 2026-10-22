@@ -1,0 +1,1234 @@
+{
+  "status": "issues_found",
+  "baseline": true,
+  "checks": [
+    {
+      "name": "320x700 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "320x700 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 117.59375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "320x700 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 383.375,
+        "width": 238,
+        "height": 44
+      }
+    },
+    {
+      "name": "320x700 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 480.96875,
+        "width": 238,
+        "height": 44
+      }
+    },
+    {
+      "name": "320x700 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 528.96875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "320x700 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 596.96875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "320x700 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 668.96875,
+        "width": 238,
+        "height": 44
+      }
+    },
+    {
+      "name": "320x700 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 758.96875,
+        "width": 201.390625,
+        "height": 36
+      }
+    },
+    {
+      "name": "320x700 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "login 320 — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "360x800 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 360,
+        "document": 360
+      }
+    },
+    {
+      "name": "360x800 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 117.59375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "360x800 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 351.375,
+        "width": 278,
+        "height": 44
+      }
+    },
+    {
+      "name": "360x800 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 448.96875,
+        "width": 278,
+        "height": 44
+      }
+    },
+    {
+      "name": "360x800 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 496.96875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "360x800 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 564.96875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "360x800 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 636.96875,
+        "width": 278,
+        "height": 44
+      }
+    },
+    {
+      "name": "360x800 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 726.96875,
+        "width": 263.984375,
+        "height": 36
+      }
+    },
+    {
+      "name": "360x800 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "375x812 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "375x812 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 117.59375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "375x812 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 351.375,
+        "width": 293,
+        "height": 44
+      }
+    },
+    {
+      "name": "375x812 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 448.96875,
+        "width": 293,
+        "height": 44
+      }
+    },
+    {
+      "name": "375x812 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 496.96875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "375x812 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 564.96875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "375x812 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 636.96875,
+        "width": 293,
+        "height": 44
+      }
+    },
+    {
+      "name": "375x812 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 726.96875,
+        "width": 263.984375,
+        "height": 36
+      }
+    },
+    {
+      "name": "375x812 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "390x844 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "390x844 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 128.609375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "390x844 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 362.390625,
+        "width": 308,
+        "height": 44
+      }
+    },
+    {
+      "name": "390x844 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 459.984375,
+        "width": 308,
+        "height": 44
+      }
+    },
+    {
+      "name": "390x844 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 507.984375,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "390x844 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 575.984375,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "390x844 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 647.984375,
+        "width": 308,
+        "height": 44
+      }
+    },
+    {
+      "name": "390x844 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 119.109375,
+        "y": 737.984375,
+        "width": 139.96875,
+        "height": 16
+      }
+    },
+    {
+      "name": "390x844 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "768x1024 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "768x1024 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 128,
+        "y": 234.609375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "768x1024 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 153,
+        "y": 448.390625,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "768x1024 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 153,
+        "y": 545.984375,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "768x1024 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 153,
+        "y": 593.984375,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "768x1024 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 153,
+        "y": 661.984375,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "768x1024 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 153,
+        "y": 721.984375,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "768x1024 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 153,
+        "y": 791.984375,
+        "width": 419.109375,
+        "height": 36
+      }
+    },
+    {
+      "name": "768x1024 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "login 768 — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "1024x768 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 1024,
+        "document": 1024
+      }
+    },
+    {
+      "name": "1024x768 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 486.390625,
+        "y": 63.8125,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "1024x768 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 511.390625,
+        "y": 277.59375,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1024x768 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 511.390625,
+        "y": 375.1875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1024x768 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 511.390625,
+        "y": 423.1875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "1024x768 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 511.390625,
+        "y": 491.1875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "1024x768 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 511.390625,
+        "y": 551.1875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1024x768 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 511.390625,
+        "y": 621.1875,
+        "width": 419.109375,
+        "height": 36
+      }
+    },
+    {
+      "name": "1024x768 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "1280x900 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 1280,
+        "document": 1280
+      }
+    },
+    {
+      "name": "1280x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 672,
+        "y": 129.8125,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "1280x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 697,
+        "y": 343.59375,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1280x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 697,
+        "y": 441.1875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1280x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 697,
+        "y": 489.1875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "1280x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 697,
+        "y": 557.1875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "1280x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 697,
+        "y": 617.1875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1280x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 697,
+        "y": 687.1875,
+        "width": 419.109375,
+        "height": 36
+      }
+    },
+    {
+      "name": "1280x900 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "1440x900 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "1440x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 788,
+        "y": 129.8125,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "1440x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 813,
+        "y": 343.59375,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1440x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 813,
+        "y": 441.1875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1440x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 813,
+        "y": 489.1875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "1440x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 813,
+        "y": 557.1875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "1440x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 813,
+        "y": 617.1875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "1440x900 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 813,
+        "y": 687.1875,
+        "width": 419.109375,
+        "height": 36
+      }
+    },
+    {
+      "name": "1440x900 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "login 1440 — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "812x375 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "812x375 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 150,
+        "y": 117.59375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "812x375 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 331.375,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x375 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 428.96875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x375 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 476.96875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x375 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 544.96875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "812x375 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 604.96875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x375 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 674.96875,
+        "width": 419.109375,
+        "height": 36
+      }
+    },
+    {
+      "name": "812x375 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "812x240 — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "812x240 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 150,
+        "y": 117.59375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "812x240 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 331.375,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x240 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 428.96875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x240 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 476.96875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x240 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 544.96875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "812x240 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 604.96875,
+        "width": 462,
+        "height": 44
+      }
+    },
+    {
+      "name": "812x240 — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 175,
+        "y": 674.96875,
+        "width": 419.109375,
+        "height": 36
+      }
+    },
+    {
+      "name": "812x240 — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "Text 200% — no page horizontal overflow",
+      "passed": false,
+      "detail": {
+        "width": 320,
+        "document": 351
+      }
+    },
+    {
+      "name": "Text 200% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 32,
+        "y": 342.375,
+        "width": 278.5625,
+        "height": 40
+      }
+    },
+    {
+      "name": "Text 200% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 1239.34375,
+        "width": 189.359375,
+        "height": 88
+      }
+    },
+    {
+      "name": "Text 200% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 1434.53125,
+        "width": 189.359375,
+        "height": 88
+      }
+    },
+    {
+      "name": "Text 200% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 1530.53125,
+        "width": 189.359375,
+        "height": 88
+      }
+    },
+    {
+      "name": "Text 200% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 1666.71875,
+        "width": 36,
+        "height": 36
+      }
+    },
+    {
+      "name": "Text 200% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 2122.71875,
+        "width": 189.359375,
+        "height": 88
+      }
+    },
+    {
+      "name": "Text 200% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 2501.71875,
+        "width": 116.3125,
+        "height": 113
+      }
+    },
+    {
+      "name": "Text 200% — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "Text 200% — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Text 400% — no page horizontal overflow",
+      "passed": false,
+      "detail": {
+        "width": 320,
+        "document": 701
+      }
+    },
+    {
+      "name": "Text 400% — control within viewport",
+      "passed": false,
+      "detail": {
+        "x": 64,
+        "y": 684.78125,
+        "width": 557.109375,
+        "height": 80
+      }
+    },
+    {
+      "name": "Text 400% — control within viewport",
+      "passed": false,
+      "detail": {
+        "x": 161,
+        "y": 2477.765625,
+        "width": 378.734375,
+        "height": 176
+      }
+    },
+    {
+      "name": "Text 400% — control within viewport",
+      "passed": false,
+      "detail": {
+        "x": 161,
+        "y": 2868.15625,
+        "width": 378.734375,
+        "height": 176
+      }
+    },
+    {
+      "name": "Text 400% — control within viewport",
+      "passed": false,
+      "detail": {
+        "x": 161,
+        "y": 3060.15625,
+        "width": 378.734375,
+        "height": 176
+      }
+    },
+    {
+      "name": "Text 400% — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 161,
+        "y": 3332.546875,
+        "width": 72,
+        "height": 72
+      }
+    },
+    {
+      "name": "Text 400% — control within viewport",
+      "passed": false,
+      "detail": {
+        "x": 161,
+        "y": 4244.546875,
+        "width": 378.734375,
+        "height": 176
+      }
+    },
+    {
+      "name": "Text 400% — control within viewport",
+      "passed": false,
+      "detail": {
+        "x": 161,
+        "y": 5003.546875,
+        "width": 232.625,
+        "height": 225
+      }
+    },
+    {
+      "name": "Text 400% — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "Text 400% — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Skip link transfers focus to login main",
+      "passed": false
+    },
+    {
+      "name": "Username disables automatic mobile capitalization",
+      "passed": false
+    },
+    {
+      "name": "Existing account feedback ?logout=1",
+      "passed": true
+    },
+    {
+      "name": "Existing account feedback ?expired=1",
+      "passed": true
+    },
+    {
+      "name": "Existing account feedback ?password=changed",
+      "passed": true
+    },
+    {
+      "name": "Existing account feedback ?password=pending",
+      "passed": true
+    },
+    {
+      "name": "Conflicting URL flags display one coherent notice",
+      "passed": false
+    },
+    {
+      "name": "account notice — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Public Home return link works",
+      "passed": true
+    },
+    {
+      "name": "Account recovery link remains available",
+      "passed": true
+    },
+    {
+      "name": "Password show control changes type",
+      "passed": true
+    },
+    {
+      "name": "Password hide control restores masking",
+      "passed": true
+    },
+    {
+      "name": "Synchronous duplicate submit issues one password request",
+      "passed": false,
+      "detail": {
+        "requests": 2
+      }
+    },
+    {
+      "name": "Username/password/remember payload remains exact",
+      "passed": true
+    },
+    {
+      "name": "Failure retains username",
+      "passed": true
+    },
+    {
+      "name": "credential error — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "Malformed successful response never navigates as authenticated",
+      "passed": false
+    },
+    {
+      "name": "Three orientation cycles — no page horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "Three orientation cycles — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 117.59375,
+        "width": 139.28125,
+        "height": 20
+      }
+    },
+    {
+      "name": "Three orientation cycles — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 351.375,
+        "width": 293,
+        "height": 44
+      }
+    },
+    {
+      "name": "Three orientation cycles — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 448.96875,
+        "width": 293,
+        "height": 44
+      }
+    },
+    {
+      "name": "Three orientation cycles — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 496.96875,
+        "width": 141.359375,
+        "height": 44
+      }
+    },
+    {
+      "name": "Three orientation cycles — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 564.96875,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "Three orientation cycles — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 636.96875,
+        "width": 293,
+        "height": 44
+      }
+    },
+    {
+      "name": "Three orientation cycles — control within viewport",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 726.96875,
+        "width": 263.984375,
+        "height": 36
+      }
+    },
+    {
+      "name": "Three orientation cycles — account help remains reachable",
+      "passed": true
+    },
+    {
+      "name": "forced colors — axe zero violations",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "No uncaught browser JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "issues": [
+    "Text 200% — no page horizontal overflow",
+    "Text 400% — no page horizontal overflow",
+    "Text 400% — control within viewport",
+    "Text 400% — control within viewport",
+    "Text 400% — control within viewport",
+    "Text 400% — control within viewport",
+    "Text 400% — control within viewport",
+    "Text 400% — control within viewport",
+    "Skip link transfers focus to login main",
+    "Username disables automatic mobile capitalization",
+    "Conflicting URL flags display one coherent notice",
+    "Synchronous duplicate submit issues one password request",
+    "Malformed successful response never navigates as authenticated"
+  ],
+  "axe": [
+    {
+      "name": "login 320",
+      "violations": []
+    },
+    {
+      "name": "login 768",
+      "violations": []
+    },
+    {
+      "name": "login 1440",
+      "violations": []
+    },
+    {
+      "name": "Text 200%",
+      "violations": []
+    },
+    {
+      "name": "Text 400%",
+      "violations": []
+    },
+    {
+      "name": "account notice",
+      "violations": []
+    },
+    {
+      "name": "credential error",
+      "violations": []
+    },
+    {
+      "name": "forced colors",
+      "violations": []
+    }
+  ],
+  "limits": [
+    "Actual local production Login layout and navigation; login POST responses are intercepted in an isolated fixture.",
+    "SDK/cookie/registry flows are verified separately by server tests and isolated SQL replay.",
+    "No real account/password, production login mutation, physical mobile device, Safari/Firefox or assistive-technology user test."
+  ]
+}
