@@ -220,7 +220,7 @@ test("malformed duty upstream read is service error instead of input error", asy
     503,
   );
 });
-test("savings POST response remains result-only", async () => {
+test("savings refuses success when its confirmed snapshot is malformed", async () => {
   setup();
   const r = await POST(
     req(
@@ -231,8 +231,8 @@ test("savings POST response remains result-only", async () => {
     ),
     params("savings"),
   );
-  assert.equal(r.status, 200);
-  assert.deepEqual(Object.keys(await r.json()).sort(), ["message", "result"]);
+  assert.equal(r.status, 503);
+  assert.equal((await r.json()).code, undefined);
 });
 test("status/date scoped actions never offer cancelled/historical corrections", () => {
   const base = {

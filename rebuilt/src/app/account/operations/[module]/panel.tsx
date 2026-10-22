@@ -1,46 +1,27 @@
-'use client';
-import {CommitteePanel} from './committee-panel';
-import {committeeSnapshot} from '@/lib/operations/committee';
-import {MentoringPanel} from './mentoring-panel';
-import {mentoringSnapshot} from '@/lib/operations/mentoring';
-import {AttendancePanel} from './attendance-panel';
-import {attendanceSnapshot} from '@/lib/operations/attendance';
-import {DutyPanel} from './duty-panel';
-import {dutySnapshot} from '@/lib/operations/duty';
+"use client";
+import { CommitteePanel } from "./committee-panel";
+import { committeeSnapshot } from "@/lib/operations/committee";
+import { MentoringPanel } from "./mentoring-panel";
+import { mentoringSnapshot } from "@/lib/operations/mentoring";
+import { AttendancePanel } from "./attendance-panel";
+import { attendanceSnapshot } from "@/lib/operations/attendance";
+import { DutyPanel } from "./duty-panel";
+import { dutySnapshot } from "@/lib/operations/duty";
 
-import {TableRegion} from "@/components/ui/data-table";
-
-import {FeeBrackets,FeePreview,SlipActions} from './fees';
-import {useRef,useState,type FormEvent} from 'react';
-import {Button} from '@/components/ui/button';import {TextField,SelectField,controlClass} from '@/components/domain-controls';import {operationsSnapshot,type OperationsSnapshot} from '@/lib/operations/validation';
-type Row=Record<string,unknown>;const text=(r:Row,k:string)=>String(r[k]??'');const rows=(v:unknown):Row[]=>Array.isArray(v)?v as Row[]:[];
-const labels:Record<string,string>={effectiveDays:'Hari efektif',effectiveStudentDays:'Hari efektif × siswa terdaftar',recorded:'Absensi tercatat',present:'Hadir',sick:'Sakit',excused:'Izin',absent:'Alpha',recordedPercent:'Kehadiran / absensi tercatat (%)',effectivePercent:'Kehadiran / hari efektif siswa (%)',studentCount:'Siswa dalam pilihan',cashReceived:'Uang masuk pada periode',waivedMonths:'Bulan gratis saudara',unpaidMonths:'Bulan belum dibayar',knownOutstanding:'Tunggakan dengan tarif diketahui',unknownTariffs:'Bulan dengan tarif belum ditetapkan',balance:'Saldo keseluruhan',periodNet:'Mutasi bersih pada periode',deposits:'Setoran aktif periode',withdrawals:'Penarikan aktif periode'};
-const kindLabel:Record<string,string>={primary:'Piket utama',substitute:'Pengganti',confirmed:'Terkonfirmasi',pending:'Belum dikonfirmasi',cancelled:'Dibatalkan',memorization:'Setoran hafalan',development:'Perkembangan',deposit:'Setoran',withdrawal:'Penarikan',reversal:'Pembalik',paid:'Dibayar',waived:'Gratis saudara',unpaid:'Belum dibayar'};
-const money=(v:unknown)=>new Intl.NumberFormat('id-ID').format(Number(v??0));
-export function OperationsPanel({initial}:{initial:OperationsSnapshot}){return initial.module==='duty'?<DutyPanel initial={dutySnapshot.parse(initial)}/>:initial.module==='attendance'?<AttendancePanel initial={attendanceSnapshot.parse(initial)}/>:initial.module==='mentoring'?<MentoringPanel initial={mentoringSnapshot.parse(initial)}/>:initial.module==='fees'?<CommitteePanel initial={committeeSnapshot.parse(initial)}/>:<GenericOperationsPanel initial={initial}/>;}
-function GenericOperationsPanel({initial}:{initial:OperationsSnapshot}){
- const [data,setData]=useState(initial),[edit,setEdit]=useState<Row|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState(''),[filters,setFilters]=useState<Record<string,string>>({year:initial.today.slice(0,4)}),[tab,setTab]=useState('main');const lock=useRef(false);const mod=data.module,year=filters.year??data.today.slice(0,4),api='/api/operations/'+mod;
- const params=(override:Record<string,string>={})=>new URLSearchParams(Object.entries({...filters,...override}).filter(([,v])=>v)).toString();
- async function refresh(next:Record<string,string>=filters){const response=await fetch(api+'?'+new URLSearchParams(Object.entries(next).filter(([,v])=>v)),{cache:'no-store'});const body=await response.json();if(!response.ok)throw new Error(body.message??'Gagal memuat data.');setData(operationsSnapshot.parse(body.data));}
- async function save(command:unknown){if(lock.current)return;lock.current=true;setBusy(true);setMessage('Menyimpan…');try{const response=await fetch(api,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({requestId:crypto.randomUUID(),revision:data.revision,command})});const body=await response.json();setMessage(body.message??'Permintaan belum berhasil.');if(response.ok){setEdit(null);await refresh();}}catch{setMessage('Koneksi terputus. Muat ulang untuk memastikan hasil sebelum mencoba lagi.');}finally{lock.current=false;setBusy(false);}}
- function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();const f=new FormData(e.currentTarget),get=(k:string)=>String(f.get(k)??''),reason=get('reason');let command:unknown;
- if(tab==='account')command={type:'account',ownerId:get('ownerId'),category:get('category')};else command={type:'transaction',id:edit?.id??null,accountId:get('accountId'),date:get('date'),kind:get('kind'),amount:Number(get('amount')),feeApplied:f.has('feeApplied'),reason};void save(command);}
- async function applyFilter(e:FormEvent<HTMLFormElement>){e.preventDefault();if(lock.current)return;lock.current=true;setBusy(true);const f=new FormData(e.currentTarget),next=Object.fromEntries([...f.entries()].map(([k,v])=>[k,String(v)]));next.page='1';try{await refresh(next);setFilters(next);setEdit(null);setMessage('Data diperbarui.');}catch(error){setMessage(error instanceof Error?error.message:'Data belum tersedia.');}finally{lock.current=false;setBusy(false);}}
- async function page(delta:number){if(busy)return;setBusy(true);const next={...filters,page:String(data.page+delta)};try{await refresh(next);setFilters(next);}catch{setMessage('Halaman belum tersedia.');}finally{setBusy(false);}}
- const formKey=mod+'-'+tab+'-'+String(edit?.id??'new');
- return <div className="space-y-6" aria-busy={busy}>
- <p role="status" aria-live="polite" className="min-h-6 text-sm">{message}</p>
- <form onSubmit={applyFilter} className="grid gap-3 rounded-xl border p-4 sm:grid-cols-3 lg:grid-cols-6"><TextField label="Tahun kalender" name="year" value={year} type="number" required/><TextField label="Dari tanggal" name="start" type="date" value={filters.start}/><TextField label="Sampai tanggal" name="end" type="date" value={filters.end}/><SelectField label="Siswa / pemilik" name="studentId" value={filters.studentId}><option value="">Semua sesuai izin</option>{data.people.map(p=><option key={p.id} value={p.id}>{p.full_name}</option>)}</SelectField><Button disabled={busy} type="submit" className="self-end">Terapkan filter</Button></form>
- {Object.keys(data.summary).length>0&&<div className="grid gap-3 sm:grid-cols-3">{Object.entries(data.summary).map(([key,value])=><div key={key} className="rounded-xl border p-4"><p className="text-sm text-muted-foreground">{labels[key]??key}</p><p className="text-xl font-semibold">{money(value)}</p></div>)}</div>}
- {rows(data.extra.trend).length>0&&<section className="rounded border p-4"><h2 className="font-semibold">Tren bulanan mutasi bersih</h2><div className="mt-3 grid gap-3 sm:grid-cols-3">{rows(data.extra.trend).map(t=><div key={text(t,'month')}><p>{text(t,'month')} — {money(t.value)}</p><meter className="w-full" aria-label={'Tren '+text(t,'month')} min={0} max={Math.max(1,...rows(data.extra.trend).map(v=>Math.abs(Number(v.value))))} value={Math.abs(Number(t.value))}/></div>)}</div></section>}
- {mod==='savings'&&<p className="text-sm text-muted-foreground">Saldo keseluruhan mencakup seluruh riwayat. Mutasi periode mengikuti filter tanggal. Setoran minimal Rp1.000, kelipatan Rp1.000, satu setoran aktif per rekening per hari. Biaya penarikan mengikuti toggle dan snapshot tarif; saldo tidak didebit biaya dua kali.</p>}
- {mod==='savings'&&data.canManage&&<FeeBrackets brackets={rows(data.extra.brackets)} busy={busy} onSave={save}/>}
- {mod==='savings'&&<section className="grid gap-3 sm:grid-cols-3">{rows(data.extra.accounts).map(a=><div className="rounded border p-4" key={text(a,'id')}><h2>{text(a,'name')}</h2><p>Saldo Rp{money(a.balance)}</p></div>)}</section>}
- {data.canManage&&<section className="space-y-4 rounded-xl border p-5"><h2 className="text-xl font-semibold">{edit?'Koreksi catatan':'Input dan pengelolaan'}</h2><div className="flex flex-wrap gap-2">{(mod==='savings'?[['main','Transaksi'],['account','Buka rekening']]:[]).map(([k,v])=><Button type="button" variant={tab===k?'default':'outline'} key={k} onClick={()=>{setTab(k??'main');setEdit(null);}}>{v}</Button>)}</div>
- <form key={formKey} onSubmit={submit} className="space-y-4">
- {mod==='savings'&&(tab==='account'?<><SelectField label="Pemilik rekening" name="ownerId" required><option value="">Pilih pemilik</option>{data.people.map(p=><option key={p.id} value={p.id}>{p.full_name} — {p.role_code}</option>)}</SelectField><SelectField label="Kategori rekening" name="category"><option value="S">Siswa</option><option value="G">Guru</option><option value="N">Nasabah lainnya</option></SelectField></>:<><SelectField label="Rekening" name="accountId" value={text(edit??{},'account_id')} required><option value="">Pilih rekening</option>{rows(data.extra.accounts).map(a=><option key={text(a,'id')} value={text(a,'id')}>{text(a,'name')} — Rp{money(a.balance)}</option>)}</SelectField><TextField label="Tanggal transaksi" name="date" type="date" value={text(edit??{},'date')||data.today} required/><SelectField label="Jenis transaksi" name="kind" value={text(edit??{},'kind')||'deposit'}><option value="deposit">Setoran</option><option value="withdrawal">Penarikan</option></SelectField><label className="block">Nominal (Rp)<input className={controlClass} name="amount" type="number" min="1000" step="1000" max="1000000000000" required defaultValue={text(edit??{},'amount')}/></label><FeePreview/><TextField label="Keterangan / alasan transaksi" name="reason" required max={2000}/></>)}
- {edit&&mod!=='savings'&&<TextField label="Alasan koreksi / pembatalan" name="reason" required max={2000}/>}
- <div className="flex flex-wrap gap-3"><Button disabled={busy} type="submit">{busy?'Menyimpan…':'Simpan'}</Button>{edit&&<><Button disabled={busy} type="button" variant="outline" onClick={()=>setEdit(null)}>Batal koreksi</Button>{<Button disabled={busy} type="button" variant="destructive" onClick={e=>{const form=e.currentTarget.closest('form');if(!form)return;const f=new FormData(form),reason=String(f.get('reason')??'').trim();if(reason.length<3){setMessage('Isi alasan pembatalan minimal 3 karakter.');return;}void save({type:'void',id:edit.id,reason});}}>Batalkan catatan</Button>}</>}</div></form></section>}
- <section className="space-y-3"><div className="flex flex-wrap items-center gap-4"><h2 className="text-xl font-semibold">Riwayat ({data.total})</h2><a className="underline" href={api+'?'+params({format:'xlsx'})}>Ekspor Excel</a><a className="underline" href={api+'?'+params({format:'pdf'})}>Ekspor PDF</a></div><p className="text-sm text-muted-foreground">Ekspor mengikuti filter dan izin yang sama. Maksimal 10.000 catatan; persempit periode bila batas terlampaui.</p><TableRegion label="Tabel data — gulir untuk melihat seluruh kolom"><table className="w-full text-left text-sm"><caption className="sr-only">Data sesuai filter dan hak akses Anda</caption><thead><tr>{['Tanggal','Nama','Jenis / kelas','Status / uraian','Nominal / saldo','Catatan','Tindakan'].map(h=><th scope="col" className="border-b p-3" key={h}>{h}</th>)}</tr></thead><tbody>{data.rows.map(r=><tr key={text(r,'id')}><td className="border-b p-3">{text(r,'date')}</td><td className="min-w-56 border-b p-3">{text(r,'name')}</td><td className="border-b p-3">{kindLabel[text(r,'kind')]??text(r,'class_name')}</td><td className="border-b p-3">{kindLabel[text(r,'status')]??text(r,'status')}{text(r,'subject')} {text(r,'predicate')}{r.reversed===true?' — sudah dibalik':''}</td><td className="border-b p-3">{r.amount!==undefined?'Rp'+money(r.amount):'—'}{r.balance!==undefined?<p>Saldo Rp{money(r.balance)}</p>:null}</td><td className="max-w-xs whitespace-pre-wrap break-words border-b p-3">{text(r,'notes')}</td><td className="border-b p-3">{typeof r.slip_id==='string'&&<SlipActions id={text(r,'slip_id')} canSend={data.canManage}/>} {r.can_edit===true&&<Button type="button" variant="outline" disabled={busy} onClick={()=>{setEdit(r);setTab('main');}}>Kelola</Button>}</td></tr>)}</tbody></table></TableRegion>{data.rows.length===0&&<p>Belum ada catatan sesuai filter dan izin Anda.</p>}<div className="flex items-center gap-4"><Button disabled={busy||data.page<=1} variant="outline" onClick={()=>void page(-1)}>Sebelumnya</Button><span>Halaman {data.page}</span><Button disabled={busy||data.page*data.pageSize>=data.total} variant="outline" onClick={()=>void page(1)}>Berikutnya</Button></div></section>
- </div>;
+import { SavingsPanel } from "./savings-panel";
+import { savingsSnapshot } from "@/lib/operations/savings";
+import type { OperationsSnapshot } from "@/lib/operations/validation";
+export function OperationsPanel({ initial }: { initial: OperationsSnapshot }) {
+  switch (initial.module) {
+    case "duty":
+      return <DutyPanel initial={dutySnapshot.parse(initial)} />;
+    case "attendance":
+      return <AttendancePanel initial={attendanceSnapshot.parse(initial)} />;
+    case "mentoring":
+      return <MentoringPanel initial={mentoringSnapshot.parse(initial)} />;
+    case "fees":
+      return <CommitteePanel initial={committeeSnapshot.parse(initial)} />;
+    case "savings":
+      return <SavingsPanel initial={savingsSnapshot.parse(initial)} />;
+  }
 }

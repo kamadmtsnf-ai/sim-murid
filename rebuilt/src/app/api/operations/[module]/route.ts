@@ -1,3 +1,4 @@
+import { savingsFilters, savingsMessages } from "@/lib/operations/savings";
 import {
   committeeFilters,
   committeeMessages,
@@ -82,7 +83,10 @@ export async function GET(
                     ...query,
                     ...(format ? { export: true, page: 1 } : {}),
                   })
-              : { ...query, ...(format ? { export: true, page: 1 } : {}) };
+              : savingsFilters.parse({
+                  ...query,
+                  ...(format ? { export: true, page: 1 } : {}),
+                });
     const data = await operationsData(
       caller.principal.id,
       caller.sessionId,
@@ -137,7 +141,9 @@ export async function POST(
               ? committeeFilters.parse(
                   Object.fromEntries(request.nextUrl.searchParams),
                 )
-              : {};
+              : savingsFilters.parse(
+                  Object.fromEntries(request.nextUrl.searchParams),
+                );
     const r = await createAuthAdmin().rpc("app_operations_write", {
       p_actor: caller.principal.id,
       p_session: caller.sessionId,
@@ -155,7 +161,8 @@ export async function POST(
         domain === "duty" ||
         domain === "attendance" ||
         domain === "mentoring" ||
-        domain === "fees"
+        domain === "fees" ||
+        domain === "savings"
       )
         throw new Error("Duty write unavailable");
       throw parsed.error;
@@ -165,7 +172,8 @@ export async function POST(
       (domain === "duty" ||
         domain === "attendance" ||
         domain === "mentoring" ||
-        domain === "fees") &&
+        domain === "fees" ||
+        domain === "savings") &&
       ![
         "saved",
         "denied",
@@ -174,6 +182,8 @@ export async function POST(
         "not_found",
         "stale",
         "request_conflict",
+        "insufficient",
+        "overlap",
       ].includes(result.code)
     )
       throw new Error("Duty acknowledgement unavailable");
@@ -181,7 +191,8 @@ export async function POST(
       (domain === "duty" ||
         domain === "attendance" ||
         domain === "mentoring" ||
-        domain === "fees") &&
+        domain === "fees" ||
+        domain === "savings") &&
       result.code === "saved"
         ? await operationsData(
             caller.principal.id,
@@ -190,13 +201,25 @@ export async function POST(
             filters,
           )
         : undefined;
+    if (domain === "savings" && command.type === "account" && data) {
+      const catalog = await operationsData(
+        caller.principal.id,
+        caller.sessionId,
+        domain,
+        {},
+      );
+      if (catalog.revision !== data.revision)
+        throw Error("Savings catalog changed");
+      data.extra.catalogAccounts = catalog.extra.accounts;
+    }
     return reply(
       {
         result,
         ...(domain === "duty" ||
         domain === "attendance" ||
         domain === "mentoring" ||
-        domain === "fees"
+        domain === "fees" ||
+        domain === "savings"
           ? { code: result.code }
           : {}),
         ...(data ? { data } : {}),
@@ -209,7 +232,9 @@ export async function POST(
                 ? mentoringMessages[result.code]
                 : domain === "fees"
                   ? committeeMessages[result.code]
-                  : undefined) ??
+                  : domain === "savings"
+                    ? savingsMessages[result.code]
+                    : undefined) ??
           operationMessages[result.code] ??
           "Perubahan belum berhasil.",
       },
