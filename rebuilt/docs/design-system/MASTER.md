@@ -96,3 +96,13 @@ Beranda `/` berbeda dari Dashboard `/account`. Halaman publik tetap statis, mema
 Struktur heading adalah H1 pengantar → H2 layanan → H3 setiap prinsip. Tiga prinsip merupakan daftar semantik. Target skip link mempunyai tabindex=-1 agar fokus keyboard benar-benar berpindah ke main. Judul dokumen membedakan Beranda dari halaman akun.
 
 CSS Module hanya mengatur Beranda: gutter mengikuti viewport, track grid minmax(0,...), anak flex/grid boleh menyusut, teks panjang membungkus, CTA boleh multiline. Ikon brand mempunyai ukuran tetap agar pembesaran teks tidak mengambil seluruh lebar. Header/kartu/footer tetap memakai token existing. Shell flex minimum 100dvh menempatkan footer di bawah pada layar tinggi; halaman panjang tetap menggunakan gulir dokumen biasa tanpa kontainer tinggi tetap atau overflow yang menyembunyikan konten.
+
+### Login — audit 22 Oktober 2026
+
+- Gunakan shell Login yang sama pada halaman dan loading; token warna, Card, Button, Status tetap mengikuti sistem existing.
+- Lebar minimum kolom 0, wrapping teks, gutter responsif, kontrol sentuh minimal 44 px, serta scroll vertikal normal untuk viewport pendek/pembesaran teks. Jangan menyembunyikan konten untuk mengatasi overflow.
+- Satu notice dengan prioritas password pending, password changed, expired, logout. Target skip link dapat difokuskan.
+- Username peka huruf besar/kecil: nonaktifkan auto-capitalization, jangan trim/ubah case atau hapus minus.
+- Fase form idle, submitting, success, uncertain harus jelas. Gunakan pengunci sinkron, fokus error/sukses, pemeriksaan sesi untuk hasil tak pasti, serta tautan native setelah sukses.
+- Form memiliki method POST eksplisit. Tanpa JavaScript tampilkan bantuan dan sembunyikan form; password tidak boleh dikirim sebagai query URL.
+- Bukti dan batas pengujian: `docs/verification/login-audit.md`.

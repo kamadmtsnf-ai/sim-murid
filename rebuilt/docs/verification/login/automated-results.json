@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-22",
+  "baseline": "965fd9afd53bcb8ddb5d952c145029627d83c577",
+  "npmCi": "passed (575 packages; --ignore-scripts)",
+  "check": {
+    "status": "passed",
+    "typecheck": "passed",
+    "lint": "passed (zero warnings)",
+    "tests": 218,
+    "failed": 0,
+    "loginTests": 17,
+    "databaseTypeSnapshot": "14 public tables match fresh migration replay",
+    "productionBuild": "passed"
+  },
+  "loginBrowser": {
+    "status": "passed",
+    "checks": 173,
+    "axeViews": 12,
+    "issues": []
+  },
+  "homeRegression": {
+    "status": "passed",
+    "checks": 64,
+    "axeViews": 6,
+    "issues": []
+  },
+  "smoke": {
+    "status": "passed",
+    "checks": 6
+  },
+  "deadcode": {
+    "entries": 90,
+    "sourceFiles": 153,
+    "unreachable": []
+  },
+  "diffCheck": "passed",
+  "buildNote": "An earlier repeat build failed due to corrupt local Turbopack cache. Cache was moved aside; final clean full check/build passed.",
+  "limitations": [
+    "Auth SDK boundary tests use synthetic sessions; no real account/password login or production mutation.",
+    "Browser checks use actual local production pages plus actual component fixtures for controlled request outcomes.",
+    "Cleanup during provider outage remains best effort; no cross-service atomicity claim."
+  ]
+}
