@@ -407,3 +407,8 @@
 .attendance-panel :is(td, th) { overflow-wrap: anywhere; }
 .attendance-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
 .attendance-dialog :is(input, select) { min-height: 44px; }
+
+.mentoring-panel fieldset, .mentoring-dialog fieldset { min-inline-size: 0; }
+.mentoring-panel :is(input,select), .mentoring-dialog :is(input:not([type=checkbox]),select,textarea) { min-height: 44px; max-width: 100%; }
+.mentoring-panel :is(td,th) { overflow-wrap: anywhere; }
+.mentoring-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }

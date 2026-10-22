@@ -1,4 +1,8 @@
 import {
+  mentoringFilters,
+  mentoringMessages,
+} from "@/lib/operations/mentoring";
+import {
   attendanceFilters,
   attendanceMonth,
   attendanceMessages,
@@ -56,7 +60,12 @@ export async function GET(
                   }
                 : { ...query, ...(format ? { export: true, page: 1 } : {}) },
             )
-          : { ...query, ...(format ? { export: true, page: 1 } : {}) };
+          : domain === "mentoring"
+            ? mentoringFilters.parse({
+                ...query,
+                ...(format ? { export: true, page: 1 } : {}),
+              })
+            : { ...query, ...(format ? { export: true, page: 1 } : {}) };
     const data = await operationsData(
       caller.principal.id,
       caller.sessionId,
@@ -103,7 +112,11 @@ export async function POST(
           ? attendanceFilters.parse(
               Object.fromEntries(request.nextUrl.searchParams),
             )
-          : {};
+          : domain === "mentoring"
+            ? mentoringFilters.parse(
+                Object.fromEntries(request.nextUrl.searchParams),
+              )
+            : {};
     const r = await createAuthAdmin().rpc("app_operations_write", {
       p_actor: caller.principal.id,
       p_session: caller.sessionId,
@@ -117,13 +130,19 @@ export async function POST(
       .object({ code: z.string(), id: z.uuid().nullable().optional() })
       .safeParse(r.data);
     if (!parsed.success) {
-      if (domain === "duty" || domain === "attendance")
+      if (
+        domain === "duty" ||
+        domain === "attendance" ||
+        domain === "mentoring"
+      )
         throw new Error("Duty write unavailable");
       throw parsed.error;
     }
     const result = parsed.data;
     if (
-      (domain === "duty" || domain === "attendance") &&
+      (domain === "duty" ||
+        domain === "attendance" ||
+        domain === "mentoring") &&
       ![
         "saved",
         "denied",
@@ -136,7 +155,10 @@ export async function POST(
     )
       throw new Error("Duty acknowledgement unavailable");
     const data =
-      (domain === "duty" || domain === "attendance") && result.code === "saved"
+      (domain === "duty" ||
+        domain === "attendance" ||
+        domain === "mentoring") &&
+      result.code === "saved"
         ? await operationsData(
             caller.principal.id,
             caller.sessionId,
@@ -147,7 +169,9 @@ export async function POST(
     return reply(
       {
         result,
-        ...(domain === "duty" || domain === "attendance"
+        ...(domain === "duty" ||
+        domain === "attendance" ||
+        domain === "mentoring"
           ? { code: result.code }
           : {}),
         ...(data ? { data } : {}),
@@ -156,7 +180,9 @@ export async function POST(
             ? dutyMessages[result.code]
             : domain === "attendance"
               ? attendanceMessages[result.code]
-              : undefined) ??
+              : domain === "mentoring"
+                ? mentoringMessages[result.code]
+                : undefined) ??
           operationMessages[result.code] ??
           "Perubahan belum berhasil.",
       },

@@ -1,3 +1,4 @@
+import {mentoringSnapshot} from './mentoring';
 import "server-only";
 import { attendanceSnapshot } from "./attendance";
 import { dutySnapshot } from "./duty";
@@ -35,6 +36,7 @@ export async function operationsData(
     if (!result.success) throw new Error("Attendance data unavailable");
     return result.data;
   }
+  if(module==="mentoring"){const result=mentoringSnapshot.safeParse(r.data);if(!result.success)throw new Error("Mentoring data unavailable");return result.data;}
   return operationsSnapshot.parse(r.data);
 }
 export const operationMessages: Record<string, string> = {
