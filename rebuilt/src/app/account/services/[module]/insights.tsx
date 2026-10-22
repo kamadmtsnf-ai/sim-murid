@@ -1,4 +1,5 @@
 "use client";
+import {formatAcademicYear,semesterLabel} from '@/lib/academic/period';
 import {TableRegion} from "@/components/ui/data-table";
 
 import { useState, type FormEvent } from "react";
@@ -80,7 +81,7 @@ export function InsightsPanel({
           <option value="">Pilih periode</option>
           {data.rows.map((p) => (
             <option key={String(p.id)} value={String(p.id)}>
-              {String(p.title)} ({String(p.kind)})
+              {String(p.title)} ({String(p.kind)}) · {formatAcademicYear(data.years?.find(y=>y.id===p.academic_year_id)?.start_year)} · {semesterLabel(p.semester)}
             </option>
           ))}
         </select>

@@ -1,14 +1,22 @@
 import {z} from 'zod';
+import {academicYearInput} from '../academic/period.ts';
 import {guardianRequest,familyRequest} from '../student/validation.ts';
 const ids=z.array(z.uuid()).max(500).refine(a=>new Set(a).size===a.length,'Pilih ID unik.');
 const name=z.string().trim().min(1).max(50).refine(s=>!/[\u0000-\u001f\u007f]/.test(s));
-export const classCommand=z.discriminatedUnion('type',[
+const classCommandBase=z.discriminatedUnion('type',[
  z.object({type:z.literal('year'),startYear:z.number().int().min(1900).max(2199)}).strict(),
  z.object({type:z.literal('year_activate'),id:z.uuid()}).strict(),
  z.object({type:z.literal('class'),id:z.uuid().nullable(),yearId:z.uuid(),level:z.union([z.literal(7),z.literal(8),z.literal(9)]),name,teacherId:z.uuid().nullable()}).strict(),
  z.object({type:z.literal('class_archive'),id:z.uuid()}).strict(),
  z.object({type:z.literal('enrollment'),classId:z.uuid(),studentIds:ids.refine(a=>a.length>0),startsOn:z.iso.date(),remove:z.boolean()}).strict(),
 ]);
+export const classCommand=z.preprocess(input=>{
+ if(typeof input==='object'&&input!==null&&'type' in input&&input.type==='year'&&'academicYear' in input&&!('startYear' in input)){
+  const {academicYear,...rest}=input;const parsed=academicYearInput.safeParse(academicYear);
+  if(parsed.success)return {...rest,startYear:Number(parsed.data.slice(0,4))};
+ }return input;
+},classCommandBase);
+
 export function endMinute(start:string,duration:number,jtm:number,rest:number){const [h,m]=start.split(':').map(Number);return(h??0)*60+(m??0)+duration*jtm+rest;}
 export const clock=(n:number)=>`${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;
 export const weekdays=['','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];

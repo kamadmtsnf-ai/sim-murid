@@ -1,4 +1,10 @@
 "use client";
+import {
+  formatAcademicYear,
+  semesterLabel,
+  semesterPeriod,
+  academicPeriodForDate,
+} from "@/lib/academic/period";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -320,11 +326,34 @@ export function SurveyForm({
   mutate: Mutate;
 }) {
   const [active, setActive] = useState<string>("");
+  const [periodYear, setPeriodYear] = useState(
+    String(
+      data.years?.find((y) => y.is_active)?.id ?? data.years?.[0]?.id ?? "",
+    ),
+  );
+  const [periodSemester, setPeriodSemester] = useState(
+    academicPeriodForDate(data.today)?.semester ?? 1,
+  );
+  const [dateError, setDateError] = useState("");
+  const selectedYear = data.years?.find((y) => y.id === periodYear),
+    periodBounds = semesterPeriod(selectedYear?.start_year, periodSemester);
   function create(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget),
       get = (k: string) => String(f.get(k) ?? ""),
       kind = get("kind");
+    if (
+      !periodBounds ||
+      get("start") < periodBounds.start ||
+      get("end") > periodBounds.end ||
+      get("end") < get("start")
+    ) {
+      setDateError(
+        "Tanggal survei harus berada dalam semester dan tahun ajaran yang dipilih.",
+      );
+      return;
+    }
+    setDateError("");
     void mutate({
       type: "period",
       periodId: null,
@@ -365,23 +394,75 @@ export function SurveyForm({
           <summary>Buat periode survei utama / mikro</summary>
           <form onSubmit={create} className="mt-3 grid gap-3 sm:grid-cols-2">
             <TextField name="title" label="Judul" required />
-            <SelectField label="Tahun ajaran" name="yearId" required>
-              {(data.years ?? []).map((y) => (
-                <option key={String(y.id)} value={String(y.id)}>
-                  {String(y.start_year)}
-                </option>
-              ))}
-            </SelectField>
-            <SelectField name="semester" label="Semester">
-              <option>1</option>
-              <option>2</option>
-            </SelectField>
+            <label className="block text-sm">
+              Tahun ajaran
+              <select
+                className={controlClass}
+                name="yearId"
+                required
+                value={periodYear}
+                onChange={(e) => {
+                  setPeriodYear(e.target.value);
+                  setDateError("");
+                }}
+              >
+                {(data.years ?? []).map((y) => (
+                  <option key={String(y.id)} value={String(y.id)}>
+                    {formatAcademicYear(y.start_year)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="block text-sm">
+              Semester
+              <select
+                className={controlClass}
+                name="semester"
+                value={periodSemester}
+                onChange={(e) => {
+                  setPeriodSemester(Number(e.target.value));
+                  setDateError("");
+                }}
+              >
+                <option value="1">Ganjil (Juli–Desember)</option>
+                <option value="2">Genap (Januari–Juni)</option>
+              </select>
+            </label>
             <SelectField label="Jenis" name="kind">
               <option value="main">Survei utama</option>
               <option value="micro">Survei mikro</option>
             </SelectField>
-            <TextField type="date" label="Mulai" name="start" required />
-            <TextField type="date" label="Selesai" name="end" required />
+            {periodBounds && (
+              <p className="text-sm text-muted-foreground">
+                {formatAcademicYear(selectedYear?.start_year)} ·{" "}
+                {periodBounds.label}
+              </p>
+            )}
+            {dateError && <p role="alert">{dateError}</p>}
+            <div key={`${periodYear}-${periodSemester}`} className="contents">
+              <label className="block text-sm">
+                Mulai
+                <input
+                  className={controlClass}
+                  type="date"
+                  name="start"
+                  min={periodBounds?.start}
+                  max={periodBounds?.end}
+                  required
+                />
+              </label>
+              <label className="block text-sm">
+                Selesai
+                <input
+                  className={controlClass}
+                  type="date"
+                  name="end"
+                  min={periodBounds?.start}
+                  max={periodBounds?.end}
+                  required
+                />
+              </label>
+            </div>
             <fieldset>
               <legend>Target</legend>
               {[
@@ -417,6 +498,14 @@ export function SurveyForm({
             <h2 className="text-xl font-semibold">
               {String(p.title)} — {String(p.kind)}
             </h2>
+            <p className="text-sm text-muted-foreground">
+              Tahun ajaran{" "}
+              {formatAcademicYear(
+                data.years?.find((y) => y.id === p.academic_year_id)
+                  ?.start_year,
+              )}{" "}
+              · Semester {semesterLabel(p.semester)}
+            </p>
             <p>
               {String(p.starts_on)} s.d. {String(p.ends_on)} |{" "}
               {String(p.status)} | {r.submitted_at ? "Terkirim" : "Belum final"}

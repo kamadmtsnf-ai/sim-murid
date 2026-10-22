@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {formatAcademicYear} from '@/lib/academic/period';
 import type {z} from 'zod';
 import {Users,ArrowLeft,ArrowRight,Search} from 'lucide-react';
 import {TableRegion} from '@/components/ui/data-table';
@@ -17,7 +18,7 @@ export function DirectoryFilters({filter,isAdmin}:{filter:Filter;isAdmin:boolean
  </form>;
 }
 function PersonStatus({person}:{person:Person}){return <div className="space-y-2"><span className={`directory-status ${person.status==='active'?'directory-status-active':''}`}>{person.status==='active'?'Aktif':'Nonaktif'}</span>{person.progress?<div className="space-y-1"><p className="text-xs text-muted-foreground">Kelengkapan profil {person.progress.percent}%</p><progress className="directory-progress" value={person.progress.percent} max={100} aria-label={`Kelengkapan profil ${person.name}`}/></div>:null}</div>;}
-function PersonAssignments({person}:{person:Person}){return <div className="space-y-2 text-sm"><p>{person.classes.map(c=>`${c.name} (${c.year}/${c.year+1})`).join(', ')||'Informasi kelas belum tersedia.'}</p>{person.role==='teacher'?<><p>{person.assignments.map(a=>assignmentLabel(a.code)).join(', ')||'Tidak ada tugas tambahan aktif'}</p><p>Wali kelas: {person.homerooms.map(c=>c.name).join(', ')||'Belum ditetapkan'}</p><p>{person.schedule_count} jadwal aktif</p></>:null}</div>;}
+function PersonAssignments({person}:{person:Person}){return <div className="space-y-2 text-sm"><p>{person.classes.map(c=>`${c.name} (${formatAcademicYear(c.year)})`).join(', ')||'Informasi kelas belum tersedia.'}</p>{person.role==='teacher'?<><p>{person.assignments.map(a=>assignmentLabel(a.code)).join(', ')||'Tidak ada tugas tambahan aktif'}</p><p>Wali kelas: {person.homerooms.map(c=>c.name).join(', ')||'Belum ditetapkan'}</p><p>{person.schedule_count} jadwal aktif</p></>:null}</div>;}
 function DetailLink({person}:{person:Person}){return <Button asChild variant="outline"><Link prefetch={false} href={`/account/directory/${person.id}`} aria-label={`Lihat detail: ${person.name}`}>Lihat detail<ArrowRight aria-hidden="true"/></Link></Button>;}
 export function DirectoryPanel({data,filter,isAdmin}:{data:z.infer<typeof directorySnapshot>;filter:Filter;isAdmin:boolean}){
  const pages=directoryPageCount(data),pageUrl=(page:number)=>directoryPageUrl(filter,page);

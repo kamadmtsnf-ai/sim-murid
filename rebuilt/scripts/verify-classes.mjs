@@ -189,7 +189,9 @@ try {
     if (body.command.type === "year")
       data.years.unshift({
         id: "00000000-0000-4000-8000-000000000012",
-        start_year: body.command.startYear,
+        start_year:
+          body.command.startYear ??
+          Number(body.command.academicYear.slice(0, 4)),
         is_active: false,
       });
     await route.fulfill({
@@ -338,7 +340,9 @@ try {
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(writes[0].command.teacherId === null, "explicit teacher removal kept");
   await visit();
-  await page.getByLabel("Tahun awal").fill("2027");
+  await page
+    .getByLabel("Tahun ajaran (misalnya 2026/2027)", { exact: true })
+    .fill("2027/2028");
   await page
     .getByRole("button", { name: "Tambah tahun ajaran", exact: true })
     .click();
@@ -472,7 +476,9 @@ try {
   await visit();
   await page.clock.install();
   mode = "hold";
-  await page.getByLabel("Tahun awal").fill("2027");
+  await page
+    .getByLabel("Tahun ajaran (misalnya 2026/2027)", { exact: true })
+    .fill("2027/2028");
   await page
     .getByRole("button", { name: "Tambah tahun ajaran", exact: true })
     .click();

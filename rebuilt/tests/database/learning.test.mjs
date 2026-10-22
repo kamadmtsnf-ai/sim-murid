@@ -801,3 +801,11 @@ test("21–25: receipt replay once, stale data rejected, public tables/RPC denie
     "denied",
   );
 });
+
+test('Academic boundaries keep KKM in Ganjil/Genap of the selected class year and reject outside dates',async()=>{
+ const academic=uuid(),cls=uuid();await db.query('insert into public.academic_years(id,start_year) values($1,2071)',[academic]);await db.query("insert into public.classes(id,academic_year_id,level,name) values($1,$2,7,'Boundary class')",[cls,academic]);
+ for(const [date,semester,value] of [['2071-07-01',1,71],['2071-12-31',1,72],['2072-01-01',2,73],['2072-02-29',2,74],['2072-06-30',2,75]]){
+  assert.equal((await learn('grades',{type:'kkm',classId:cls,subjectId:subject,date,value})).code,'saved');assert.equal(Number(await val('select value from sim_murid_private.minimum_grades where class_id=$1 and semester=$2',[cls,semester])),value);
+ }
+ for(const date of ['2071-06-30','2072-07-01'])assert.equal((await learn('grades',{type:'kkm',classId:cls,subjectId:subject,date,value:80})).code,'invalid');
+});

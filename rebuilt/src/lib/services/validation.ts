@@ -1,3 +1,4 @@
+import {academicPeriodForDate} from '../academic/period.ts';
 import { z } from "zod";
 export const modules = z.enum([
   "discipline",
@@ -94,6 +95,7 @@ export const commands = {
       })
       .strict()
       .refine((v) => v.end >= v.start)
+      .refine(v=>{const a=academicPeriodForDate(v.start),b=academicPeriodForDate(v.end);return a?.semester===v.semester&&b?.semester===v.semester&&a.startYear===b.startYear;},'Tanggal survei harus berada dalam satu semester yang dipilih.')
       .refine((v) => v.kind !== "micro" || v.questions !== null),
     z.object({ type: z.enum(["start", "close"]), periodId: id }).strict(),
     z

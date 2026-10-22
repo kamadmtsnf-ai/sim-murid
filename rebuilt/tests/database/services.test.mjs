@@ -705,3 +705,16 @@ test("29: head can update completion after H+30 without rewriting plan content",
 });
 
 test('28: concurrent respondents use own revision, unrelated saves cannot invalidate their draft',async()=>{const p=(await service('surveys',periodCmd())).id;const old=await rev();assert.equal((await service('surveys',{type:'start',periodId:p},A.s2,old)).code,'saved');assert.equal((await service('surveys',{type:'start',periodId:p},A.s3,old)).code,'saved');const cmd={type:'save',periodId:p,version:0,answers:{'A1-1':4}};assert.equal((await service('surveys',cmd,A.s2,old)).code,'saved');assert.equal((await service('surveys',cmd,A.s3,old)).code,'saved');assert.equal((await service('surveys',cmd,A.s2,old)).code,'stale');assert.equal(await rev(),old);});
+
+test('Academic survey dates must stay inside the selected year and semester, including edits',async()=>{
+ const base={...periodCmd(),examOverride:'Academic boundary verification'};
+ for(const [semester,start,end] of [[1,`${startYear}-07-01`,`${startYear}-12-31`],[2,`${startYear+1}-01-01`,`${startYear+1}-06-30`]]){
+  assert.equal((await service('surveys',{...base,semester,start,end})).code,'saved');
+ }
+ for(const [semester,start,end] of [[1,`${startYear}-06-30`,`${startYear}-07-01`],[1,`${startYear}-12-31`,`${startYear+1}-01-01`],[2,`${startYear}-07-01`,`${startYear}-07-02`],[2,`${startYear+1}-06-30`,`${startYear+1}-07-01`]]){
+  assert.equal((await service('surveys',{...base,semester,start,end})).code,'invalid');
+ }
+ const valid={...base,semester:2,start:`${startYear+1}-01-01`,end:`${startYear+1}-06-30`};const created=await service('surveys',valid);assert.equal(created.code,'saved');
+ assert.equal((await service('surveys',{...valid,periodId:created.id,semester:1,start:`${startYear}-07-01`,end:`${startYear}-07-02`})).code,'invalid');
+ const actual=await val('select to_jsonb(p) from sim_murid_private.survey_periods p where id=$1',[created.id]);assert.equal(actual.semester,2);assert.equal(actual.starts_on,`${startYear+1}-01-01`);
+});

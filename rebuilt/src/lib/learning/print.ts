@@ -1,3 +1,4 @@
+import {formatAcademicYear,semesterLabel} from '../academic/period.ts';
 export function terbilang(n: number): string {
   return n === 0 ? "nol" : spell(n);
 }
@@ -156,7 +157,7 @@ export async function reportsPdf(
       String(school.name ?? "SiM-Murid"),
       "RAPOR " + (s.draft ? "DRAFT / SEMENTARA" : "TERBIT"),
       String(student.name) + " — " + String(student.username),
-      `Kelas ${String(cls.name)} | Tahun ${String(s.year)}/${Number(s.year) + 1} | Semester ${String(s.semester)}`,
+      `Kelas ${String(cls.name)} | Tahun ajaran ${formatAcademicYear(s.year)} | Semester ${semesterLabel(s.semester)}`,
       `Jenis: ${kind} | Kebijakan: RAPOR-1.0 (PH20%, ATS30%, ASAS50%; Praktik terpisah)`,
       "Mata pelajaran | Nilai | KKM | Predikat",
     ];

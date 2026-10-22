@@ -1,0 +1,23 @@
+{
+  "project": "qpzoukkhdxpmbtkcqemj",
+  "denied": {
+    "code": "denied"
+  },
+  "anon_execute": false,
+  "migration_count": 37,
+  "service_execute": true,
+  "security_definer": false,
+  "migration_version": "20261022094510",
+  "authenticated_execute": false,
+  "matchesTestedBody": true,
+  "advisors": {
+    "before": {
+      "rls_enabled_no_policy": 1,
+      "auth_leaked_password_protection": 1
+    },
+    "after": {
+      "rls_enabled_no_policy": 1,
+      "auth_leaked_password_protection": 1
+    }
+  }
+}
