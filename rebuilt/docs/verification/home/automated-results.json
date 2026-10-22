@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "baselineCommit": "7df05584ef38210109e88cb620dbcde640d973b5",
+  "tests": 201,
+  "typecheck": "passed",
+  "lint": "passed",
+  "publicTableTypeSnapshot": 14,
+  "productionBuild": "passed",
+  "httpSmokeChecks": 6,
+  "browserChecks": 64,
+  "axeViews": 6,
+  "axeViolations": 0,
+  "deadcode": {
+    "sourceFiles": 151,
+    "entryPoints": 87,
+    "unreachable": []
+  },
+  "limits": [
+    "Public / Home only; Dashboard /account is separate.",
+    "Static content has no CRUD, data pagination, modal or provider loading/empty state.",
+    "Chromium headless; no physical-device, screen-reader user or authenticated production role UAT.",
+    "Synthetic long heading is injected only for a layout stress test; no backend data is changed."
+  ]
+}

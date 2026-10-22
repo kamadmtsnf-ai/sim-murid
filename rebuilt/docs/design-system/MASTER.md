@@ -88,3 +88,11 @@ Filter invalid ditampilkan sebagai error, tanpa diam-diam membaca filter default
 Detail menampilkan nama peran dan tugas yang mudah dibaca, tanggal lokal, riwayat kelas, relasi, kontak/biodata yang memang dikembalikan server, serta JTM/istirahat tanpa mengubah nilainya. Kontak/student yang null tidak dibuat-buat. Schema detail dipusatkan untuk view dan validasi; metadata internal tahapan pengembangan tidak ditampilkan.
 
 Bukti dan batas validasi: `docs/verification/directory-audit.md`, `docs/verification/directory/`.
+
+## Audit Beranda publik — 22 Oktober 2026
+
+Beranda `/` berbeda dari Dashboard `/account`. Halaman publik tetap statis, memakai Button/Card dan token warna/permukaan existing. Akses akun tetap melalui `/login`; verifikasi sesi, onboarding, survei dan RBAC berada pada alur server yang sama. Tidak menambahkan metrik, fetch pengguna, dependency aplikasi, maupun komponen interaktif tanpa kebutuhan.
+
+Struktur heading adalah H1 pengantar → H2 layanan → H3 setiap prinsip. Tiga prinsip merupakan daftar semantik. Target skip link mempunyai tabindex=-1 agar fokus keyboard benar-benar berpindah ke main. Judul dokumen membedakan Beranda dari halaman akun.
+
+CSS Module hanya mengatur Beranda: gutter mengikuti viewport, track grid minmax(0,...), anak flex/grid boleh menyusut, teks panjang membungkus, CTA boleh multiline. Ikon brand mempunyai ukuran tetap agar pembesaran teks tidak mengambil seluruh lebar. Header/kartu/footer tetap memakai token existing. Shell flex minimum 100dvh menempatkan footer di bawah pada layar tinggi; halaman panjang tetap menggunakan gulir dokumen biasa tanpa kontainer tinggi tetap atau overflow yang menyembunyikan konten.
