@@ -1,0 +1,1627 @@
+{
+  "status": "passed",
+  "baseline": false,
+  "checks": [
+    {
+      "name": "/recovery 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 415.34375,
+        "width": 246,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 516.53125,
+        "width": 246,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 584.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 723.6875,
+        "width": 246,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 886.0625,
+        "width": 246,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 953.65625,
+        "width": 246,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1079.4375,
+        "width": 246,
+        "height": 51.1875
+      }
+    },
+    {
+      "name": "/recovery 320 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "/recovery 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 415.34375,
+        "width": 301,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 516.53125,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 584.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 701.296875,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 841.28125,
+        "width": 301,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 908.875,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1034.65625,
+        "width": 261.53125,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 375 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 80,
+        "y": 38.390625,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 366.390625,
+        "width": 544.5625,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 467.578125,
+        "width": 544.5625,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 535.578125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 629.953125,
+        "width": 544.5625,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 769.9375,
+        "width": 544.5625,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 837.53125,
+        "width": 544.5625,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 940.921875,
+        "width": 261.53125,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 768 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 416,
+        "y": 64,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 394.5625,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 495.75,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 563.75,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 658.125,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 798.109375,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 865.703125,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 969.09375,
+        "width": 261.53125,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 1440 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "/recovery 812 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 102,
+        "y": 40.59375,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 371.15625,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 472.34375,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 540.34375,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 634.71875,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 774.703125,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 842.296875,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 945.6875,
+        "width": 261.53125,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery 812 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 263.328125,
+        "height": 51.1875
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1251.328125,
+        "width": 246,
+        "height": 88
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1469.703125,
+        "width": 246,
+        "height": 88
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1581.703125,
+        "width": 36,
+        "height": 36
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 2111.25,
+        "width": 246,
+        "height": 88
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 2484.015625,
+        "width": 246,
+        "height": 88
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 2592.015625,
+        "width": 246,
+        "height": 100
+      }
+    },
+    {
+      "name": "/recovery text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 2924.203125,
+        "width": 246,
+        "height": 153.5625
+      }
+    },
+    {
+      "name": "/recovery text 200 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 288,
+        "height": 204.78125
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 4572.84375,
+        "width": 246,
+        "height": 176
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 5186.40625,
+        "width": 246,
+        "height": 176
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 5386.40625,
+        "width": 72,
+        "height": 72
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 7611.84375,
+        "width": 246,
+        "height": 176
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 8782.96875,
+        "width": 246,
+        "height": 176
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 8978.96875,
+        "width": 246,
+        "height": 340
+      }
+    },
+    {
+      "name": "/recovery text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 10031.125,
+        "width": 246,
+        "height": 614.34375
+      }
+    },
+    {
+      "name": "/recovery text 400 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery skip link focuses main",
+      "passed": true
+    },
+    {
+      "name": "/recovery preserves case on mobile",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "/recovery/email 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 452.953125,
+        "width": 246,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery/email 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 520.546875,
+        "width": 246,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 646.328125,
+        "width": 172.09375,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 320 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "/recovery/email 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "/recovery/email 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 390.5625,
+        "width": 301,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery/email 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 458.15625,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 583.9375,
+        "width": 172.09375,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 375 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "/recovery/email 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 80,
+        "y": 38.390625,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 344,
+        "width": 544.5625,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery/email 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 411.59375,
+        "width": 544.5625,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 768 control fits",
+      "passed": true,
+      "detail": {
+        "x": 111.71875,
+        "y": 514.984375,
+        "width": 172.09375,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 768 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "/recovery/email 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 416,
+        "y": 64,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 372.171875,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery/email 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 439.765625,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 1440 control fits",
+      "passed": true,
+      "detail": {
+        "x": 449,
+        "y": 543.15625,
+        "width": 172.09375,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 1440 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "/recovery/email 812 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "/recovery/email 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 102,
+        "y": 40.59375,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 348.765625,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "/recovery/email 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 416.359375,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 519.75,
+        "width": 172.09375,
+        "height": 44
+      }
+    },
+    {
+      "name": "/recovery/email 812 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "/recovery/email text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 263.328125,
+        "height": 51.1875
+      }
+    },
+    {
+      "name": "/recovery/email text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1075.34375,
+        "width": 246,
+        "height": 88
+      }
+    },
+    {
+      "name": "/recovery/email text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1183.34375,
+        "width": 246,
+        "height": 100
+      }
+    },
+    {
+      "name": "/recovery/email text 200 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1560.328125,
+        "width": 246,
+        "height": 102.375
+      }
+    },
+    {
+      "name": "/recovery/email text 200 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "/recovery/email text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 288,
+        "height": 204.78125
+      }
+    },
+    {
+      "name": "/recovery/email text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 3952.09375,
+        "width": 246,
+        "height": 176
+      }
+    },
+    {
+      "name": "/recovery/email text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 4148.09375,
+        "width": 246,
+        "height": 340
+      }
+    },
+    {
+      "name": "/recovery/email text 400 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 5558.625,
+        "width": 246,
+        "height": 409.5625
+      }
+    },
+    {
+      "name": "/recovery/email text 400 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email skip link focuses main",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email preserves case on mobile",
+      "passed": true
+    },
+    {
+      "name": "/recovery noJS help",
+      "passed": true
+    },
+    {
+      "name": "/recovery noJS sensitive form hidden",
+      "passed": true
+    },
+    {
+      "name": "/recovery explicit native POST",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email noJS help",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email noJS sensitive form hidden",
+      "passed": true
+    },
+    {
+      "name": "/recovery/email explicit native POST",
+      "passed": true
+    },
+    {
+      "name": "long selected question remains fully readable",
+      "passed": true
+    },
+    {
+      "name": "resize/orientation 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 415.34375,
+        "width": 246,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 516.53125,
+        "width": 246,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 584.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 723.6875,
+        "width": 246,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 886.0625,
+        "width": 246,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 953.65625,
+        "width": 246,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 320 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1079.4375,
+        "width": 246,
+        "height": 51.1875
+      }
+    },
+    {
+      "name": "resize/orientation 320 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "resize preserves form state",
+      "passed": true
+    },
+    {
+      "name": "resize/orientation 812 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 102,
+        "y": -435.40625,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": -104.84375,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": -3.65625,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 64.34375,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 158.71875,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 298.703125,
+        "width": 542,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 366.296875,
+        "width": 542,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 812 control fits",
+      "passed": true,
+      "detail": {
+        "x": 135,
+        "y": 469.6875,
+        "width": 261.53125,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 812 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "resize preserves form state",
+      "passed": true
+    },
+    {
+      "name": "resize/orientation 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": -310,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 81.34375,
+        "width": 301,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 182.53125,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 250.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 367.296875,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 529.671875,
+        "width": 301,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 597.265625,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 375 control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 723.046875,
+        "width": 261.53125,
+        "height": 44
+      }
+    },
+    {
+      "name": "resize/orientation 375 last action reachable",
+      "passed": true
+    },
+    {
+      "name": "resize preserves form state",
+      "passed": true
+    },
+    {
+      "name": "synchronous double submit sent once",
+      "passed": true,
+      "detail": {
+        "requests": 1
+      }
+    },
+    {
+      "name": "pending disables submit",
+      "passed": true
+    },
+    {
+      "name": "manual payload exact",
+      "passed": true
+    },
+    {
+      "name": "accepted manual status visible",
+      "passed": true
+    },
+    {
+      "name": "accepted form cannot silently repeat",
+      "passed": true
+    },
+    {
+      "name": "manual accepted axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "known error retains input",
+      "passed": true
+    },
+    {
+      "name": "error receives focus",
+      "passed": true
+    },
+    {
+      "name": "malformed reset success never redirects",
+      "passed": true
+    },
+    {
+      "name": "uncertain reset offers login check",
+      "passed": true
+    },
+    {
+      "name": "uncertain reset locks consumed code",
+      "passed": true
+    },
+    {
+      "name": "uncertain reset axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "confirmed reset fixed destination",
+      "passed": true
+    },
+    {
+      "name": "OTP leading zeros retained",
+      "passed": true
+    },
+    {
+      "name": "reset success axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "uncertain manual has explicit recovery",
+      "passed": true
+    },
+    {
+      "name": "question/session exact payload",
+      "passed": true
+    },
+    {
+      "name": "code step gets focus",
+      "passed": true
+    },
+    {
+      "name": "confirmation mismatch never sends reset",
+      "passed": true
+    },
+    {
+      "name": "reset synchronous double submit once",
+      "passed": true
+    },
+    {
+      "name": "late reset success after unmount never navigates",
+      "passed": true
+    },
+    {
+      "name": "resend returns to editable username",
+      "passed": true
+    },
+    {
+      "name": "resend discards old challenge UI",
+      "passed": true
+    },
+    {
+      "name": "no recovery data in browser storage",
+      "passed": true
+    },
+    {
+      "name": "forced colors no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "width": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 24,
+        "width": 131.671875,
+        "height": 44
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 415.34375,
+        "width": 301,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 516.53125,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 584.53125,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 701.296875,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 841.28125,
+        "width": 301,
+        "height": 47.59375
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 908.875,
+        "width": 301,
+        "height": 44
+      }
+    },
+    {
+      "name": "forced colors control fits",
+      "passed": true,
+      "detail": {
+        "x": 37,
+        "y": 1034.65625,
+        "width": 261.53125,
+        "height": 44
+      }
+    },
+    {
+      "name": "forced colors last action reachable",
+      "passed": true
+    },
+    {
+      "name": "forced colors axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "actual loading component busy",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "timeout never silently retries",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript exceptions",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "issues": [],
+  "axe": [
+    {
+      "name": "/recovery 320",
+      "violations": []
+    },
+    {
+      "name": "/recovery 1440",
+      "violations": []
+    },
+    {
+      "name": "/recovery/email 320",
+      "violations": []
+    },
+    {
+      "name": "/recovery/email 1440",
+      "violations": []
+    },
+    {
+      "name": "manual accepted",
+      "violations": []
+    },
+    {
+      "name": "uncertain reset",
+      "violations": []
+    },
+    {
+      "name": "reset success",
+      "violations": []
+    },
+    {
+      "name": "forced colors",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Synthetic API outcomes; no real email/password writes.",
+    "Actual production pages for layout; actual client components in isolated fixture for controlled state transitions."
+  ]
+}

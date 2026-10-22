@@ -1,21 +1,161 @@
-'use client';
-import {useState,type FormEvent} from 'react';
-import {Button} from '@/components/ui/button';
-import {questions} from '@/lib/auth/security-validation';
-import {recoveryRequestSchema} from '@/lib/auth/recovery-validation';
-export function RecoveryForm(){
- const [manual,setManual]=useState(false);const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
- async function submit(e:FormEvent<HTMLFormElement>){
-  e.preventDefault();if(busy)return;const form=e.currentTarget;const data=Object.fromEntries(new FormData(form));
-  const input=recoveryRequestSchema.safeParse({...data,method:manual?'manual':'question'});if(!input.success){setMessage('Isi username, jenis permintaan, serta pertanyaan dan jawaban bila dipilih.');return;}
-  setBusy(true);setMessage('');try{const r=await fetch('/api/auth/recovery',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input.data)});const body:unknown=await r.json();setMessage(typeof body==='object'&&body!==null&&'message' in body&&typeof body.message==='string'?body.message:'Permintaan belum berhasil.');if(r.ok){form.reset();setManual(false);}}catch{setMessage('Tidak dapat menghubungi layanan. Coba kembali atau hubungi petugas madrasah.');}finally{setBusy(false);}
- }
- const field='mt-2 w-full rounded-md border bg-background p-2';
- return <form className="space-y-5" onSubmit={e=>void submit(e)}>
-  <label className="block" htmlFor="recovery-username">Username<input id="recovery-username" name="username" autoComplete="username" className={field} required maxLength={100} disabled={busy}/></label>
-  <label className="block" htmlFor="recovery-type">Bantuan yang dibutuhkan<select id="recovery-type" name="requestType" className={field} disabled={busy}><option value="password">Lupa password</option><option value="session">Tidak dapat mengakses sesi lama</option></select></label>
-  <label className="flex items-center gap-2"><input type="checkbox" checked={manual} onChange={e=>setManual(e.target.checked)} disabled={busy}/>Saya belum mengatur atau lupa jawaban keamanan; minta pemeriksaan langsung oleh petugas.</label>
-  {!manual&&<><label className="block" htmlFor="recovery-question">Pertanyaan keamanan<select id="recovery-question" name="question" className={field} disabled={busy}>{questions.map(q=><option key={q.code} value={q.code}>{q.label}</option>)}</select></label><label className="block" htmlFor="recovery-answer">Jawaban<input id="recovery-answer" name="answer" type="password" autoComplete="off" className={field} maxLength={256} required disabled={busy}/></label></>}
-  <p role="status" aria-live="polite">{message}</p><Button type="submit" disabled={busy}>{busy?'Mengirim…':'Minta bantuan Admin'}</Button>
- </form>;
+"use client";
+import { useState, type FormEvent } from "react";
+import { Button } from "@/components/ui/button";
+import { questions } from "@/lib/auth/security-validation";
+import { recoveryRequestSchema } from "@/lib/auth/recovery-validation";
+import { useRecoverySubmission } from "./use-recovery-submission";
+import { RecoveryFeedback } from "./recovery-feedback";
+import styles from "./recovery.module.css";
+export function RecoveryForm() {
+  const [manual, setManual] = useState(false),
+    [sent, setSent] = useState(false);
+  const [question, setQuestion] = useState<string>(questions[0].code);
+  const state = useRecoverySubmission("/api/auth/recovery");
+  function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (state.locked || sent) return;
+    const form = e.currentTarget;
+    const input = recoveryRequestSchema.safeParse({
+      ...Object.fromEntries(new FormData(form)),
+      method: manual ? "manual" : "question",
+    });
+    if (!input.success) {
+      state.fail(
+        "Isi username, jenis permintaan, serta pertanyaan dan jawaban bila dipilih.",
+      );
+      return;
+    }
+    void state.run(
+      input.data,
+      (status) => status === 202,
+      () => {
+        form.reset();
+        setManual(false);
+        setQuestion(questions[0].code);
+        setSent(true);
+      },
+    );
+  }
+  return (
+    <div className={styles.stack}>
+      <RecoveryFeedback {...state} />
+      {sent ? (
+        <>
+          <p className={styles.note}>
+            Hubungi petugas madrasah untuk melanjutkan pemeriksaan identitas.
+            Jangan memberikan password atau kode pemulihan kepada siapa pun.
+          </p>
+          <Button
+            className={styles.action}
+            variant="outline"
+            onClick={() => {
+              setSent(false);
+              state.clear();
+            }}
+          >
+            Buat permintaan lain
+          </Button>
+        </>
+      ) : (
+        <form
+          method="post"
+          action="/api/auth/recovery"
+          className={styles.form}
+          onSubmit={submit}
+          aria-busy={state.pending}
+        >
+          <fieldset disabled={state.locked} className={styles.fields}>
+            <label htmlFor="recovery-username">
+              Username
+              <input
+                id="recovery-username"
+                name="username"
+                autoComplete="username"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
+                className={styles.input}
+                required
+                maxLength={100}
+              />
+            </label>
+            <label htmlFor="recovery-type">
+              Bantuan yang dibutuhkan
+              <select
+                id="recovery-type"
+                name="requestType"
+                className={styles.input}
+              >
+                <option value="password">Lupa password</option>
+                <option value="session">Tidak dapat mengakses sesi lama</option>
+              </select>
+            </label>
+            <label className={styles.check}>
+              <input
+                type="checkbox"
+                checked={manual}
+                onChange={(e) => {
+                  setManual(e.target.checked);
+                  setQuestion(questions[0].code);
+                  state.clear();
+                }}
+              />
+              <span>
+                Saya belum mengatur atau lupa jawaban keamanan. Saya ingin
+                diperiksa langsung oleh petugas.
+              </span>
+            </label>
+            {!manual && (
+              <>
+                <label htmlFor="recovery-question">
+                  Pertanyaan keamanan
+                  <select
+                    id="recovery-question"
+                    name="question"
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)}
+                    aria-describedby="recovery-question-help"
+                    className={styles.input}
+                  >
+                    {questions.map((q) => (
+                      <option key={q.code} value={q.code}>
+                        {q.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <p id="recovery-question-help" className={styles.note}>
+                  {questions.find((q) => q.code === question)?.label}
+                </p>
+                <label htmlFor="recovery-answer">
+                  Jawaban keamanan
+                  <input
+                    id="recovery-answer"
+                    name="answer"
+                    type="password"
+                    autoComplete="off"
+                    className={styles.input}
+                    maxLength={256}
+                    required
+                  />
+                </label>
+              </>
+            )}
+          </fieldset>
+          <Button
+            type="submit"
+            className={styles.action}
+            disabled={state.locked}
+          >
+            {state.pending ? "Mengirim…" : "Minta bantuan Admin"}
+          </Button>
+        </form>
+      )}
+      {state.phase === "uncertain" && (
+        <a className={styles.link} href="/recovery">
+          Hubungi Admin melalui permintaan baru
+        </a>
+      )}
+    </div>
+  );
 }

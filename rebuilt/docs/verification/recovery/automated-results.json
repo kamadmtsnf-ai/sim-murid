@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-22",
+  "baseline": "5ab8f37c59072afcff3d3da9c9e530640e8b6dbb",
+  "npmCi": "passed (--ignore-scripts)",
+  "fullCheck": {
+    "status": "passed",
+    "typecheck": "passed",
+    "lint": "passed with zero warnings",
+    "tests": 228,
+    "failures": 0,
+    "productionBuild": "passed",
+    "databaseTypes": "14 public table snapshots match fresh migration replay"
+  },
+  "recoveryRoutes": {
+    "status": "passed",
+    "tests": 10,
+    "note": "Delivery failure fixture strengthened and rerun after full check; same test count."
+  },
+  "baselineRoutes": {
+    "tests": 10,
+    "passed": 8,
+    "failed": 2
+  },
+  "baselineBrowser": {
+    "checks": 127,
+    "issues": 19,
+    "axeViews": 4
+  },
+  "recoveryBrowser": {
+    "status": "passed",
+    "checks": 199,
+    "axeViews": 9,
+    "issues": []
+  },
+  "loginRegression": {
+    "status": "passed",
+    "checks": 173,
+    "axeViews": 12,
+    "issues": []
+  },
+  "smoke": {
+    "status": "passed",
+    "checks": 6
+  },
+  "deadcode": {
+    "entries": 92,
+    "sourceFiles": 157,
+    "unreachable": []
+  },
+  "diffCheck": "passed",
+  "limits": [
+    "Provider/SMTP interactions mocked at SDK boundary; no real account/password/email writes.",
+    "Browser uses actual local production pages and isolated actual components for controlled outcomes.",
+    "Native no-JS form fallback is POST and hidden with help; it does not implement URLencoded recovery on the JSON API.",
+    "Normal vertical document scrolling is retained."
+  ]
+}
