@@ -1,5 +1,10 @@
 "use client";
-import {TableRegion} from "@/components/ui/data-table";
+import {
+  formatAcademicYear,
+  defaultSemesterDate,
+  semesterPeriod,
+} from "@/lib/academic/period";
+import { TableRegion } from "@/components/ui/data-table";
 
 import { useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -45,11 +50,13 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
     ),
     alumni = data.rows.filter((r) => r.role === "alumni");
   const classRow = data.classes.find((c) => c.id === filters.classId),
-    gradeDate =
-      filters.semester === "2"
-        ? String(Number(classRow?.year ?? data.today.slice(0, 4)) + 1) +
-          "-02-01"
-        : String(classRow?.year ?? data.today.slice(0, 4)) + "-09-01";
+    gradeDate = defaultSemesterDate(
+      classRow?.year,
+      filters.semester,
+      data.today,
+    );
+  const selectedPeriod = semesterPeriod(classRow?.year, filters.semester);
+
   async function load(f = filters) {
     const r = await fetch(api + "?" + new URLSearchParams(f), {
         cache: "no-store",
@@ -274,10 +281,15 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
     });
   return (
     <div className="space-y-6" aria-busy={busy}>
-      
       <p role="status" aria-live="polite">
         {message}
       </p>
+      {selectedPeriod && domain !== "books" && domain !== "promotions" && (
+        <p className="text-sm text-muted-foreground">
+          Tahun ajaran {formatAcademicYear(classRow?.year)} ·{" "}
+          {selectedPeriod.label}
+        </p>
+      )}
       <form
         onSubmit={filter}
         className="grid gap-3 rounded border p-4 sm:grid-cols-3"
@@ -286,13 +298,13 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
           <>
             <SelectField
               name="classId"
-              label="Kelas / tahun"
+              label="Kelas / tahun ajaran"
               value={filters.classId}
             >
               <option value="">Pilih kelas</option>
               {data.classes.map((c) => (
                 <option key={text(c, "id")} value={text(c, "id")}>
-                  {text(c, "name")} — {text(c, "year")}
+                  {text(c, "name")} — {formatAcademicYear(c.year)}
                 </option>
               ))}
             </SelectField>
@@ -302,8 +314,8 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                 name="semester"
                 value={filters.semester ?? "1"}
               >
-                <option value="1">1 (Juli–Desember)</option>
-                <option value="2">2 (Januari–Juni)</option>
+                <option value="1">Ganjil (Juli–Desember)</option>
+                <option value="2">Genap (Januari–Juni)</option>
               </SelectField>
             )}
             <SelectField
@@ -370,17 +382,30 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                 </Button>
               </div>
               <form
-                key={tab + "-" + String(edit?.id ?? "new")}
+                key={[
+                  tab,
+                  edit?.id ?? "new",
+                  filters.classId,
+                  filters.subjectId,
+                  filters.semester,
+                ].join("-")}
                 onSubmit={submit}
                 className="space-y-3"
               >
-                <TextField
-                  label="Tanggal penilaian / periode KKM"
-                  name="date"
-                  type="date"
-                  value={text(edit ?? {}, "assessment_date") || gradeDate}
-                  required
-                />
+                <label className="block text-sm">
+                  Tanggal penilaian / periode KKM
+                  <input
+                    className={controlClass}
+                    name="date"
+                    type="date"
+                    defaultValue={
+                      text(edit ?? {}, "assessment_date") || gradeDate
+                    }
+                    min={selectedPeriod?.start}
+                    max={selectedPeriod?.end}
+                    required
+                  />
+                </label>
                 {tab === "kkm" ? (
                   <TextField
                     label="KKM (0–100)"
@@ -595,7 +620,11 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                       {text(r, "name")} —{" "}
                       {snapshot.draft ? "Draft / sementara" : "Terbit"}
                     </label>
-                    <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom"><table className="w-full text-left text-sm"><caption className="sr-only">Data sesuai filter dan hak akses Anda</caption>
+                    <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
+                      <table className="w-full text-left text-sm">
+                        <caption className="sr-only">
+                          Data sesuai filter dan hak akses Anda
+                        </caption>
                         <thead>
                           <tr>
                             {[
@@ -798,26 +827,26 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                     </SelectField>
                     <div className="grid gap-3 sm:grid-cols-2">
                       <SelectField
-                        label="Tahun asal"
+                        label="Tahun ajaran asal"
                         name="sourceYearId"
                         required
                       >
                         <option value="">Pilih tahun asal</option>
                         {years.map((y) => (
                           <option value={text(y, "id")} key={text(y, "id")}>
-                            {text(y, "start_year")}
+                            {formatAcademicYear(y.start_year)}
                           </option>
                         ))}
                       </SelectField>
                       <SelectField
-                        label="Tahun tujuan"
+                        label="Tahun ajaran tujuan"
                         name="targetYearId"
                         required
                       >
                         <option value="">Pilih tahun tujuan</option>
                         {years.map((y) => (
                           <option value={text(y, "id")} key={text(y, "id")}>
-                            {text(y, "start_year")}
+                            {formatAcademicYear(y.start_year)}
                           </option>
                         ))}
                       </SelectField>
@@ -846,18 +875,19 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
                               className={controlClass}
                               name={"class-" + r.student_id}
                             >
-                            <option value="">Alumni / lulus</option>
-                            {data.classes
-                              .filter((c) => !c.archived_at)
-                              .map((c) => (
-                                <option
-                                  key={text(c, "id")}
-                                  value={text(c, "id")}
-                                >
-                                  {text(c, "name")} — {text(c, "year")}
-                                </option>
-                              ))}
-                          </select>
+                              <option value="">Alumni / lulus</option>
+                              {data.classes
+                                .filter((c) => !c.archived_at)
+                                .map((c) => (
+                                  <option
+                                    key={text(c, "id")}
+                                    value={text(c, "id")}
+                                  >
+                                    {text(c, "name")} —{" "}
+                                    {formatAcademicYear(c.year)}
+                                  </option>
+                                ))}
+                            </select>
                           </label>
                         </div>
                       ))}

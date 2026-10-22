@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "check": "npm run check",
+  "tests": 266,
+  "failures": 0,
+  "typecheck": "passed",
+  "lint": "passed",
+  "production_build": "passed",
+  "db_types_replay": "passed",
+  "deadcode_unreachable": [],
+  "academic_browser": {
+    "checks": 41,
+    "axe_views": 6
+  },
+  "classes_browser": {
+    "checks": 360,
+    "axe_views": 16
+  },
+  "cross_module_browser": {
+    "checks": 69,
+    "axe_views": 8
+  },
+  "limits": [
+    "Synthetic browser data, intercepted read/write responses, isolated SQL tests. No real production account/student/assessment/survey CRUD or authenticated role UAT."
+  ]
+}

@@ -237,3 +237,8 @@ test("page redirects anonymous, distinguishes denied data and upstream outage", 
   await assert.rejects(() => page(), /Classes unavailable/);
   await assert.rejects(() => classesData(id(1), id(2)), /Unavailable/);
 });
+
+test('paired academic-year request normalizes at the actual route and invalid pairs never write',async()=>{
+ for(const academicYear of ['2026/2027','2026-2027']){const m=setup();assert.equal((await POST(req({type:'year',academicYear}))).status,200);assert.deepEqual(writes(m)[0][1].p_command,{type:'year',startYear:2026});}
+ for(const academicYear of ['2026','2026/2028','2027/2026']){const m=setup();assert.equal((await POST(req({type:'year',academicYear}))).status,400);assert.equal(writes(m).length,0);}
+});

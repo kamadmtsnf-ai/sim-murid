@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {formatAcademicYear} from '@/lib/academic/period';
 import { UserRound, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/components/ui/status";
@@ -127,7 +128,7 @@ export function DirectoryDetailView({
                 {p.enrollments.map((e) => (
                   <li key={e.id}>
                     <p className="font-medium">
-                      {e.class_name} · {e.year}/{e.year + 1}
+                      {e.class_name} · {formatAcademicYear(e.year)}
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
                       Mulai <DateValue value={e.starts_on} /> ·{" "}

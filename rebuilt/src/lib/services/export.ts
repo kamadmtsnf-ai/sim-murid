@@ -1,3 +1,4 @@
+import {formatAcademicYear,semesterLabel} from '../academic/period.ts';
 import ExcelJS from "exceljs";
 import { z } from "zod";
 import { textPdf, object } from "../learning/print.ts";
@@ -29,6 +30,7 @@ export function serviceExportRows(data: ServiceSnapshot) {
         ];
       }),
     };
+  if(data.module==='surveys')return {columns:['Periode','Tahun ajaran','Semester','Mulai','Selesai','Status','Rincian'],rows:data.rows.map(r=>[r.title,formatAcademicYear(data.years?.find(y=>y.id===r.academic_year_id)?.start_year),semesterLabel(r.semester),r.starts_on,r.ends_on,r.status,JSON.stringify(r)])};
   return {
     columns: ["Data", "Rincian"],
     rows: data.rows.map((r) => [

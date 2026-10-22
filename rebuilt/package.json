@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:login && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:recovery:routes && npm run test:email && npm run test:settings && npm run test:education && npm run test:classes && npm run test:directory && npm run test:user-detail && npm run test:users && npm run test:operations && npm run test:learning && npm run test:services && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:login && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:recovery:routes && npm run test:email && npm run test:settings && npm run test:education && npm run test:academic && npm run test:classes && npm run test:directory && npm run test:user-detail && npm run test:users && npm run test:operations && npm run test:learning && npm run test:services && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -47,7 +47,9 @@
     "test:user-detail": "node --test tests/user-detail.test.mjs",
     "test:user-detail:browser": "node scripts/verify-user-detail.mjs",
     "test:classes": "node --test tests/classes.test.mjs",
-    "test:classes:browser": "node scripts/verify-classes.mjs"
+    "test:classes:browser": "node scripts/verify-classes.mjs",
+    "test:academic": "node --experimental-strip-types --test tests/academic.test.ts",
+    "test:academic:browser": "node scripts/verify-academic.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

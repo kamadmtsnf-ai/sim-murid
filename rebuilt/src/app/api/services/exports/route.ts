@@ -1,3 +1,4 @@
+import {formatAcademicYear,semesterLabel} from '@/lib/academic/period';
 import type { NextRequest } from "next/server";
 import ExcelJS from "exceljs";
 import { z } from "zod";
@@ -126,8 +127,8 @@ export async function GET(request: NextRequest) {
             const q = object(v);
             return [
               r.name,
-              s.year,
-              s.semester,
+              formatAcademicYear(s.year),
+              semesterLabel(s.semester),
               s.draft ? "draft" : "terbit",
               q.name,
               q.ph,
@@ -144,7 +145,7 @@ export async function GET(request: NextRequest) {
           "reports",
           [
             "Siswa",
-            "Tahun",
+            "Tahun ajaran",
             "Semester",
             "Status",
             "Mapel",

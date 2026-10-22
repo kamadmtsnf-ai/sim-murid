@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { z } from "zod";
+import { formatAcademicYear, semesterPeriod } from "@/lib/academic/period";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
@@ -70,7 +71,7 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
   );
   const yearLabel = (id: string) => {
     const y = data.years.find((y) => y.id === id);
-    return y ? `${y.start_year}/${y.start_year + 1}` : "—";
+    return y ? formatAcademicYear(y.start_year) : "—";
   };
   useEffect(() => {
     if (roster) {
@@ -125,6 +126,7 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
       });
     }
   }
+  const selectedYear = data.years.find((y) => y.id === year);
   const feedback = message ? (
     <div
       ref={feedbackRef}
@@ -166,6 +168,13 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
   return (
     <div className="classes-panel space-y-6" aria-busy={busy}>
       {!classOpen && feedback}
+      {selectedYear && (
+        <Status>
+          Tahun ajaran {formatAcademicYear(selectedYear.start_year)}:{" "}
+          {semesterPeriod(selectedYear.start_year, 1)?.label};{" "}
+          {semesterPeriod(selectedYear.start_year, 2)?.label}.
+        </Status>
+      )}
       <div className="classes-filters">
         <label className="block text-sm">
           Tahun ajaran
@@ -183,7 +192,7 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
             <option value="">Semua tahun ajaran</option>
             {data.years.map((y) => (
               <option value={y.id} key={y.id}>
-                {y.start_year}/{y.start_year + 1}
+                {formatAcademicYear(y.start_year)}
                 {y.is_active ? " (Aktif)" : ""}
               </option>
             ))}
@@ -215,7 +224,7 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
                 const f = new FormData(e.currentTarget);
                 void mutate(data.revision, {
                   type: "year",
-                  startYear: Number(f.get("startYear")),
+                  academicYear: String(f.get("academicYear")),
                 });
               }}
             >
@@ -224,14 +233,14 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
                 className="classes-year-fields flex flex-wrap items-end gap-3"
               >
                 <label className="block min-w-0 flex-1 text-sm">
-                  Tahun awal (misalnya 2026)
+                  Tahun ajaran (misalnya 2026/2027)
                   <input
                     className={controlClass}
-                    name="startYear"
-                    type="number"
-                    min={1900}
-                    max={2199}
-                    step={1}
+                    name="academicYear"
+                    type="text"
+                    placeholder="2026/2027"
+                    maxLength={9}
+                    pattern="[0-9]{4}(/[0-9]{4}|-[0-9]{4})"
                     required
                   />
                 </label>

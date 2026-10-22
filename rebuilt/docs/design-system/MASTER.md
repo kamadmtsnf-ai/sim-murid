@@ -134,3 +134,7 @@ CSS Module hanya mengatur Beranda: gutter mengikuti viewport, track grid minmax(
 - Modal kelas memakai Dialog yang sama; seluruh konten dapat digulir pada layar pendek dan pembesaran teks. Fokus kembali ke pemicu, Escape menghormati konfirmasi draft, dan feedback kesalahan berada di dalam modal.
 - Daftar siswa memakai baris/kartu yang membungkus. Pemilih siswa memiliki gulir lokal maksimal 50dvh, pencarian mempertahankan pilihan, dan penempatan baru memerlukan tanggal serta konfirmasi perpindahan.
 - Keberhasilan hanya ditampilkan setelah snapshot tervalidasi. Kegagalan tak pasti mengunci penyimpanan dan menawarkan muat ulang; tidak mengulang mutasi secara otomatis. Mode ini hanya diaktifkan oleh Kelas.
+
+## Tahun ajaran dan semester — 22 Oktober 2026
+
+Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/period.ts`: `2026/2027`, `Ganjil` dan `Genap`. Input tahun ajaran berupa teks pasangan tahun (`2026/2027` atau `2026-2027`); dropdown relasional tetap memakai UUID. Kelas menampilkan kedua rentang semester, sedangkan penilaian dan survei menampilkan rentang semester terpilih dengan tahun kalender yang tepat. Tanggal formulir dibatasi oleh rentang itu dan direset saat periode berubah. Ekspor PDF/CSV/XLSX memakai label yang sama, termasuk ketika membaca snapshot lama yang menyimpan tahun awal numerik. Tahun kalender finansial/penerbitan bukan tahun ajaran.
