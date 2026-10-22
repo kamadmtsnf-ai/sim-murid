@@ -31,7 +31,13 @@ const learning = learningSnapshot.parse({
   people: [],
   semester: 1,
   rows: [],
-  extra: { years, subjects: [{ id: id(30), name: "IPA" }] },
+  extra: {
+    kkm: null,
+    entryPeople: [],
+    scope: { semester: 1 },
+    years,
+    subjects: [{ id: id(30), name: "IPA" }],
+  },
 });
 const service = snapshot.parse({
   module: view === "insights" ? "insights" : "surveys",
@@ -96,7 +102,12 @@ createRoot(document.getElementById("root")!).render(
     {view === "survey" ? (
       <SurveyForm data={service} userId={id(1)} busy={false} mutate={capture} />
     ) : view === "insights" ? (
-      <InsightsPanel data={service} busy={false} mutate={capture} load={async () => {}} />
+      <InsightsPanel
+        data={service}
+        busy={false}
+        mutate={capture}
+        load={async () => {}}
+      />
     ) : view === "schedule" ? (
       <SchedulePanel
         initial={schedule}

@@ -809,3 +809,27 @@ test('Academic boundaries keep KKM in Ganjil/Genap of the selected class year an
  }
  for(const date of ['2071-06-30','2072-07-01'])assert.equal((await learn('grades',{type:'kkm',classId:cls,subjectId:subject,date,value:80})).code,'invalid');
 });
+
+test('Grades correction preserves omitted scores and KKM changes do not rewrite prior snapshots',async()=>{
+ const make={type:'batch',id:null,classId:c2,subjectId:subject,date:today,kind:'PH',items:[{studentId:A.s2.id,value:0,notes:'Zero retained'},{studentId:A.s3.id,value:null,notes:'Unfilled retained'}]};
+ const created=await learn('grades',make);assert.equal(created.code,'saved');
+ const before=await val('select to_jsonb(a) from sim_murid_private.assessments a where id=$1',[created.id]);
+ assert.equal((await learn('grades',{...make,id:created.id,reason:'Correct one student',items:[{studentId:A.s2.id,value:45.25,notes:'Corrected'}]})).code,'saved');
+ const scores=await val('select jsonb_object_agg(student_id::text,jsonb_build_object(\'value\',value,\'notes\',notes)) from sim_murid_private.assessment_scores where assessment_id=$1',[created.id]);
+ assert.equal(scores[A.s2.id].value,45.25);assert.equal(scores[A.s3.id].value,null);assert.equal(scores[A.s3.id].notes,'Unfilled retained');
+ assert.equal((await learn('grades',{type:'kkm',classId:c2,subjectId:subject,date:today,value:100})).code,'saved');
+ assert.equal(Number(await val('select kkm_snapshot from sim_murid_private.assessments where id=$1',[created.id])),Number(before.kkm_snapshot));
+ const next=await learn('grades',make);assert.equal(next.code,'saved');assert.equal(Number(await val('select kkm_snapshot from sim_murid_private.assessments where id=$1',[next.id])),100);
+ const frozen=await val('select snapshot from sim_murid_private.report_snapshots where student_id=$1',[A.s1.id]);
+ assert.equal((await learn('grades',{type:'kkm',classId:c,subjectId:subject,date:today,value:100})).code,'saved');
+ assert.deepEqual(await val('select snapshot from sim_murid_private.report_snapshots where student_id=$1',[A.s1.id]),frozen);
+ const draftForStudent=()=>val('select public.app_report_draft($1,$2,$3,$4,$5)',[...args(A.admin),A.s1.id,c,sem]);
+ assert.equal((await learn('grades',gradeCmd('Praktik',0))).code,'saved');
+ const zero=(await draftForStudent()).subjects.find(s=>s.subject_id===subject);
+ assert.equal(zero.practice,0);
+ assert.equal((await learn('grades',gradeCmd('Praktik',100))).code,'saved');
+ const hundred=(await draftForStudent()).subjects.find(s=>s.subject_id===subject);
+ assert.equal(hundred.practice,100);assert.equal(hundred.final,zero.final);
+ assert.deepEqual(await val('select snapshot from sim_murid_private.report_snapshots where student_id=$1',[A.s1.id]),frozen);
+
+});

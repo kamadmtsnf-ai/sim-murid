@@ -202,3 +202,14 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Katalog mendukung poin negatif dan status nonaktif. Kode asal terkunci ketika edit. Mapel afektif tersimpan yang tidak lagi aktif harus tetap terlihat dan tidak boleh dihapus diam-diam saat pengaturan lain disimpan.
 - Pembatalan mengikuti admin atau pembuat yang masih dapat mencatat dan belum diarsipkan; alasan dan konfirmasi wajib. Arsip/sinkronisasi menyebut bulan/tindakan, added 0 tetap ditampilkan. Pencarian lokal tidak mengubah cakupan ekspor tanpa pemberitahuan.
 - Write confirmed, timeout dan reload untuk hasil tak pasti. Read gagal mempertahankan snapshot, konteks bertentangan ditolak. Sertifikat kosong memberi pesan yang jelas; PDF membungkus token panjang tanpa keluar halaman.
+
+## Penilaian dan KKM — 23 Oktober 2026
+
+- Konteks koreksi selalu mengikuti assessment asal: kelas/mapel/tahun/semester/jenis, bukan filter laporan. Muat konteks tervalidasi pada revision sama; gagal/mismatch tidak boleh membuka koreksi kosong yang bisa disimpan.
+- Bedakan 0, null/belum diisi, KKM 0 dan default75. Nilai/draf controlled per UUID; search/pagination formulir tidak menghapus nilai tersembunyi atau score asal di luar katalog.
+- ATS/ASAS/Praktik existing diperlakukan sebagai koreksi dengan prefill, ID asli dan alasan, bukan form baru kosong. PH memakai nomor server dan tidak dipakai ulang setelah void.
+- KKM periode digunakan untuk penilaian baru dan rapor draf; snapshot penilaian lama dan rapor terbit tetap. Jangan mengubah bobot PH20/ATS30/ASAS50, Praktik terpisah, atau menetapkan kebijakan D10 lewat perubahan visual.
+- Gunakan Dialog existing dengan scope terlihat, konfirmasi overwrite/void, dirty/pending guard, focus return/fallback, controls 44px dan footer terjangkau. Tabel scroll lokal, teks wrap, riwayat/input memiliki pagination terpisah.
+- Siswa filter membatasi laporan; katalog input lengkap per kelas/periode tetap. Read gagal mempertahankan data; write confirmed dengan timeout dan reload untuk hasil tak pasti.
+
+- Pada formulir penilaian berhalaman, validasi rentang/desimal harus meliputi seluruh draf, bukan hanya input yang sedang terpasang di DOM. Kolom pencarian tampilan tidak menandai draf berubah atau mengirim formulir saat Enter.

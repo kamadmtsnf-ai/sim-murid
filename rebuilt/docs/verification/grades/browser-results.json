@@ -1,0 +1,343 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "normal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "normal 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "reader has no correction actions",
+      "passed": true
+    },
+    {
+      "name": "loading 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "expanded scores 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "expanded scores axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "zero grade remains visible",
+      "passed": true
+    },
+    {
+      "name": "null grade is distinct from zero",
+      "passed": true
+    },
+    {
+      "name": "zero KKM does not fall back to 75",
+      "passed": true
+    },
+    {
+      "name": "batch modal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "batch modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "double submission produces one write",
+      "passed": true
+    },
+    {
+      "name": "batch keeps zero and blank as distinct values",
+      "passed": true
+    },
+    {
+      "name": "existing nonPH upsert preloads stored values",
+      "passed": true
+    },
+    {
+      "name": "implicit nonPH correction requires reason",
+      "passed": true
+    },
+    {
+      "name": "nonPH correction submits existing ID and reason",
+      "passed": true
+    },
+    {
+      "name": "Enter in form search never submits grades",
+      "passed": true
+    },
+    {
+      "name": "view-only search does not mark grade draft dirty",
+      "passed": true
+    },
+    {
+      "name": "KKM modal restores actual zero",
+      "passed": true
+    },
+    {
+      "name": "invalid KKM blocked before network",
+      "passed": true
+    },
+    {
+      "name": "KKM landscape no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "KKM modal submit reachable",
+      "passed": true
+    },
+    {
+      "name": "KKM 100 saved without changing old score snapshots",
+      "passed": true
+    },
+    {
+      "name": "old assessment KKM stays visible after KKM update",
+      "passed": true
+    },
+    {
+      "name": "correction uses original academic-year date",
+      "passed": true
+    },
+    {
+      "name": "explicit correction cannot change assessment kind",
+      "passed": true
+    },
+    {
+      "name": "original score missing from catalog retained",
+      "passed": true
+    },
+    {
+      "name": "correction binds original class/subject and preserves hidden scores",
+      "passed": true
+    },
+    {
+      "name": "Genap uses second academic-year January to June",
+      "passed": true
+    },
+    {
+      "name": "outside-semester date rejected before network",
+      "passed": true
+    },
+    {
+      "name": "context outage never opens an editable blank correction",
+      "passed": true
+    },
+    {
+      "name": "context revision conflict blocks editing",
+      "passed": true
+    },
+    {
+      "name": "student report filter never truncates batch roster",
+      "passed": true
+    },
+    {
+      "name": "Escape returns focus to trigger",
+      "passed": true
+    },
+    {
+      "name": "history search respects selected student scope",
+      "passed": true
+    },
+    {
+      "name": "failed read retains prior history",
+      "passed": true
+    },
+    {
+      "name": "entry pagination works",
+      "passed": true
+    },
+    {
+      "name": "paging/search preserves input draft",
+      "passed": true
+    },
+    {
+      "name": "large batch landscape no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "hidden-page invalid decimal rejected before network",
+      "passed": true
+    },
+    {
+      "name": "hidden pages all submit without loss",
+      "passed": true
+    },
+    {
+      "name": "history pagination works",
+      "passed": true
+    },
+    {
+      "name": "void requires only original ID and reason",
+      "passed": true
+    },
+    {
+      "name": "removed assessment restores stable focus",
+      "passed": true
+    },
+    {
+      "name": "dirty close cancellation preserves form",
+      "passed": true
+    },
+    {
+      "name": "pending Escape cannot discard batch",
+      "passed": true
+    },
+    {
+      "name": "uncertain write retains draft",
+      "passed": true
+    },
+    {
+      "name": "uncertain write prevents blind retry",
+      "passed": true
+    },
+    {
+      "name": "30 second timeout blocks retry",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal 320",
+      "violations": []
+    },
+    {
+      "name": "normal 1440",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "large",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "expanded scores",
+      "violations": []
+    },
+    {
+      "name": "batch modal",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic fixtures and intercepted writes, not authenticated production role UAT or physical-device testing."
+  ]
+}

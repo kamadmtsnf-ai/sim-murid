@@ -134,6 +134,7 @@ try {
   });
   const page = await browser.newPage();
   page.on("pageerror", (e) => errors.push(String(e)));
+  page.on("dialog", (d) => d.accept());
   await page.route("**/api/learning/**", async (route) => {
     check(
       route.request().method() === "GET",
@@ -143,6 +144,14 @@ try {
     d.semester = Number(
       new URL(route.request().url()).searchParams.get("semester") ?? 1,
     );
+    if (d.module === "grades") {
+      const q = new URL(route.request().url()).searchParams;
+      d.extra.scope = {
+        ...(q.get("classId") ? { classId: q.get("classId") } : {}),
+        ...(q.get("subjectId") ? { subjectId: q.get("subjectId") } : {}),
+        semester: d.semester,
+      };
+    }
     await route.fulfill({ status: 200, json: { data: d } });
   });
   const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -177,6 +186,7 @@ try {
     .getByRole("combobox", { name: "Mata pelajaran" })
     .selectOption(id(30));
   await page.getByRole("button", { name: "Tampilkan", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
   await page.getByLabel("Tanggal penilaian / periode KKM").waitFor();
   let date = page.getByLabel("Tanggal penilaian / periode KKM");
   check(
@@ -185,17 +195,17 @@ try {
     "Ganjil date bounds",
   );
   await date.fill("2026-10-30");
+  await page.keyboard.press("Escape");
+  await page.getByRole("dialog").waitFor({ state: "hidden" });
   await page
     .getByRole("combobox", { name: "Semester", exact: true })
     .selectOption("2");
   await page.getByRole("button", { name: "Tampilkan", exact: true }).click();
-  await page.waitForFunction(
-    () => document.querySelector("input[name=date]")?.min === "2027-01-01",
-  );
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
   date = page.getByLabel("Tanggal penilaian / periode KKM");
   check(
     (await date.inputValue()) === "2027-01-01",
-    "semester change resets old dirty date into correct Genap year",
+    "Genap input after period change uses the correct academic year",
   );
   check(
     (await date.getAttribute("max")) === "2027-06-30",
@@ -203,7 +213,7 @@ try {
   );
   check(
     (await page
-      .getByText("Tahun ajaran 2026/2027 · Genap · Januari–Juni 2027", {
+      .getByText("VII A · 2026/2027 · Genap · Januari–Juni 2027", {
         exact: true,
       })
       .count()) === 1,
