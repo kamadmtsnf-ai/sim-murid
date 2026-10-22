@@ -1,26 +1,213 @@
-'use client';
-import {useState,type FormEvent} from 'react';
-import {useRouter} from 'next/navigation';
-import {Button} from '@/components/ui/button';
-import {recoveryEmailRequest,recoveryEmailReset} from '@/lib/email/validation';
-import {passwordValueSchema} from '@/lib/auth/security-validation';
-export function EmailRecoveryForm(){
- const router=useRouter();const [username,setUsername]=useState('');const [challenge,setChallenge]=useState('');const [busy,setBusy]=useState(false);const [message,setMessage]=useState('');
- async function submit(e:FormEvent<HTMLFormElement>,action:'send'|'reset'){
-  e.preventDefault();if(busy)return;const form=e.currentTarget;const fields=Object.fromEntries(new FormData(form));const input=action==='send'?recoveryEmailRequest.safeParse({...fields,action}):recoveryEmailReset.safeParse({...fields,username,challengeId:challenge,action});
-  if(!input.success){setMessage('Periksa username, kode enam digit, dan password.');return;}
-  if(input.data.action==='reset'&&(!passwordValueSchema(username).safeParse(input.data.newPassword).success||input.data.newPassword!==input.data.confirmPassword)){setMessage('Periksa kekuatan dan konfirmasi password sesuai ketentuan.');return;}
-  setBusy(true);setMessage('');
-  try{const response=await fetch('/api/auth/email-recovery',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input.data)});const body:unknown=await response.json();const data=typeof body==='object'&&body!==null?body as Record<string,unknown>:{};setMessage(typeof data.message==='string'?data.message:'Permintaan belum berhasil.');
-   if(response.ok&&input.data.action==='send'&&typeof data.challengeId==='string'){setUsername(input.data.username);setChallenge(data.challengeId);form.reset();}
-   if(response.ok&&input.data.action==='reset'){form.reset();setChallenge('');router.replace('/login?password=changed');router.refresh();}
-  }catch{setMessage('Koneksi terputus. Jika sedang mengganti password, pastikan statusnya dengan mencoba login atau hubungi Admin.');}finally{setBusy(false);}
- }
- const field='mt-2 w-full rounded-md border bg-background p-2';
- return <div className="space-y-5"><p role="status" aria-live="polite">{message}</p>{!challenge?<form className="space-y-4" onSubmit={e=>void submit(e,'send')}><label className="block" htmlFor="email-recovery-user">Username<input id="email-recovery-user" name="username" className={field} autoComplete="username" maxLength={100} required disabled={busy}/></label><Button type="submit" disabled={busy}>{busy?'Memproses…':'Minta kode pemulihan'}</Button></form>:<><p>Akun: {username}. Gunakan kode terbaru dari email Anda. Kode berlaku maksimal 10 menit dan 5 percobaan.</p><form className="space-y-4" onSubmit={e=>void submit(e,'reset')}>
-  <label className="block" htmlFor="recovery-email-code">Kode enam digit<input id="recovery-email-code" name="code" className={field} inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} required disabled={busy}/></label>
-  <p id="reset-password-rules" className="text-sm text-muted-foreground">Password minimal 8 karakter, maksimal 72 byte; huruf besar/kecil, angka dan simbol. Hindari username dan tiga karakter sama berurutan.</p>
-  <label className="block" htmlFor="recovery-new-password">Password baru<input id="recovery-new-password" name="newPassword" type="password" autoComplete="new-password" className={field} minLength={8} maxLength={72} aria-describedby="reset-password-rules" required disabled={busy}/></label>
-  <label className="block" htmlFor="recovery-confirm-password">Konfirmasi password<input id="recovery-confirm-password" name="confirmPassword" type="password" autoComplete="new-password" className={field} required disabled={busy}/></label><Button type="submit" disabled={busy}>{busy?'Memproses…':'Simpan password baru'}</Button></form><Button variant="outline" disabled={busy} onClick={()=>{setChallenge('');setMessage('Pengiriman ulang harus berjarak 60 detik dan maksimal 5 permintaan per hari WIB.');}}>Minta kode baru atau ganti username</Button></>}
- </div>;
+"use client";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import {
+  recoveryEmailRequest,
+  recoveryEmailReset,
+} from "@/lib/email/validation";
+import { passwordValueSchema } from "@/lib/auth/security-validation";
+import { useRecoverySubmission } from "../use-recovery-submission";
+import { RecoveryFeedback } from "../recovery-feedback";
+import styles from "../recovery.module.css";
+export function EmailRecoveryForm() {
+  const router = useRouter(),
+    codeRef = useRef<HTMLInputElement>(null);
+  const [username, setUsername] = useState(""),
+    [challenge, setChallenge] = useState(""),
+    [done, setDone] = useState(false);
+  const state = useRecoverySubmission("/api/auth/email-recovery");
+  useEffect(() => {
+    if (challenge) codeRef.current?.focus();
+  }, [challenge]);
+  function submit(e: FormEvent<HTMLFormElement>, action: "send" | "reset") {
+    e.preventDefault();
+    if (state.locked || done) return;
+    const form = e.currentTarget,
+      fields = Object.fromEntries(new FormData(form));
+    const input =
+      action === "send"
+        ? recoveryEmailRequest.safeParse({ ...fields, action })
+        : recoveryEmailReset.safeParse({
+            ...fields,
+            username,
+            challengeId: challenge,
+            action,
+          });
+    if (!input.success) {
+      state.fail("Periksa username, kode enam digit, dan password.");
+      return;
+    }
+    if (
+      input.data.action === "reset" &&
+      (!passwordValueSchema(username).safeParse(input.data.newPassword)
+        .success ||
+        input.data.newPassword !== input.data.confirmPassword)
+    ) {
+      state.fail("Periksa kekuatan dan konfirmasi password sesuai ketentuan.");
+      return;
+    }
+    void state.run(
+      input.data,
+      (status, data) =>
+        action === "send"
+          ? status === 202 && z.uuid().safeParse(data.challengeId).success
+          : status === 200 && data.destination === "/login?password=changed",
+      (data) => {
+        form.reset();
+        if (input.data.action === "send") {
+          setUsername(input.data.username);
+          setChallenge(data.challengeId as string);
+        } else {
+          setDone(true);
+          setChallenge("");
+          try {
+            router.replace("/login?password=changed");
+          } catch {
+            /* Native link completes navigation if client routing fails. */
+          }
+        }
+      },
+    );
+  }
+  return (
+    <div className={styles.stack}>
+      <ol className={styles.steps} aria-label="Tahap pemulihan">
+        <li aria-current={!challenge && !done ? "step" : undefined}>
+          1. Minta kode
+        </li>
+        <li aria-current={challenge ? "step" : undefined}>2. Ganti password</li>
+        <li aria-current={done ? "step" : undefined}>3. Masuk kembali</li>
+      </ol>
+      <RecoveryFeedback {...state} />
+      {done ? (
+        <a className={styles.link} href="/login?password=changed">
+          Masuk dengan password baru
+        </a>
+      ) : !challenge ? (
+        <form
+          method="post"
+          action="/api/auth/email-recovery"
+          className={styles.form}
+          onSubmit={(e) => submit(e, "send")}
+          aria-busy={state.pending}
+        >
+          <label htmlFor="email-recovery-user">
+            Username
+            <input
+              id="email-recovery-user"
+              name="username"
+              className={styles.input}
+              autoComplete="username"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
+              maxLength={100}
+              required
+              disabled={state.locked}
+            />
+          </label>
+          <Button
+            type="submit"
+            className={styles.action}
+            disabled={state.locked}
+          >
+            {state.pending ? "Memproses…" : "Minta kode pemulihan"}
+          </Button>
+        </form>
+      ) : (
+        <>
+          <p className={styles.note}>
+            Akun: <strong>{username}</strong>. Gunakan kode terbaru dari email
+            Anda. Kode berlaku maksimal 10 menit dan 5 percobaan. Jangan
+            membagikan kode kepada siapa pun.
+          </p>
+          <form
+            method="post"
+            action="/api/auth/email-recovery"
+            className={styles.form}
+            onSubmit={(e) => submit(e, "reset")}
+            aria-busy={state.pending}
+          >
+            <fieldset disabled={state.locked} className={styles.fields}>
+              <label htmlFor="recovery-email-code">
+                Kode enam digit
+                <input
+                  ref={codeRef}
+                  id="recovery-email-code"
+                  name="code"
+                  className={styles.input}
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                  pattern="[0-9]{6}"
+                  maxLength={6}
+                  required
+                />
+              </label>
+              <p id="reset-password-rules" className={styles.note}>
+                Password minimal 8 karakter, maksimal 72 byte; huruf
+                besar/kecil, angka dan simbol. Hindari username dan tiga
+                karakter sama berurutan.
+              </p>
+              <label htmlFor="recovery-new-password">
+                Password baru
+                <input
+                  id="recovery-new-password"
+                  name="newPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  className={styles.input}
+                  minLength={8}
+                  maxLength={72}
+                  aria-describedby="reset-password-rules"
+                  required
+                />
+              </label>
+              <label htmlFor="recovery-confirm-password">
+                Konfirmasi password
+                <input
+                  id="recovery-confirm-password"
+                  name="confirmPassword"
+                  type="password"
+                  autoComplete="new-password"
+                  className={styles.input}
+                  maxLength={1024}
+                  required
+                />
+              </label>
+            </fieldset>
+            <Button
+              type="submit"
+              className={styles.action}
+              disabled={state.locked}
+            >
+              {state.pending ? "Memproses…" : "Simpan password baru"}
+            </Button>
+          </form>
+          <Button
+            variant="outline"
+            className={styles.action}
+            disabled={state.locked}
+            onClick={() => {
+              setChallenge("");
+              state.clear();
+            }}
+          >
+            Minta kode baru atau ganti username
+          </Button>
+          <p className={styles.note}>
+            Pengiriman ulang minimal berjarak 60 detik; maksimal 5 permintaan
+            per hari WIB. Setelah proses reset yang tidak pasti, tunggu dua
+            menit atau hubungi Admin.
+          </p>
+        </>
+      )}
+      {state.phase === "uncertain" && (
+        <a className={styles.link} href="/login">
+          Periksa dengan login
+        </a>
+      )}
+    </div>
+  );
 }

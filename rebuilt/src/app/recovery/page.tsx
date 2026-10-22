@@ -1,3 +1,28 @@
-import Link from 'next/link';
-import {RecoveryForm} from './recovery-form';
-export default function RecoveryPage(){return <main id="main-content" className="mx-auto max-w-lg space-y-6 rounded-xl border bg-card p-6 my-8 sm:my-12"><Link href="/login" className="text-primary underline">Kembali ke login</Link><h1 className="text-3xl font-semibold">Bantuan akun</h1><p>Minta pemulihan password atau sesi, kemudian hubungi petugas madrasah untuk memverifikasi identitas Anda. Jawaban keamanan tidak langsung mengubah akun.</p><p><Link href="/recovery/email" className="text-primary underline">Pulihkan melalui email kontak terverifikasi</Link></p><RecoveryForm/></main>;}
+import type { Metadata } from "next";
+import Link from "next/link";
+import { RecoveryForm } from "./recovery-form";
+import { RecoveryShell } from "./recovery-shell";
+import styles from "./recovery.module.css";
+export const metadata: Metadata = { title: "Bantuan akun" };
+export default function RecoveryPage() {
+  return (
+    <RecoveryShell
+      title="Bantuan akun"
+      description="Minta bantuan untuk password atau sesi akun. Petugas madrasah akan memverifikasi identitas Anda sebelum melakukan pemulihan."
+    >
+      <p className={styles.note}>
+        Jawaban keamanan membantu pemeriksaan, tetapi tidak langsung mengubah
+        password atau mengakhiri sesi.
+      </p>
+      <RecoveryForm />
+      <div className="border-t pt-4">
+        <p className={styles.note}>
+          Memiliki email kontak yang sudah terverifikasi?
+        </p>
+        <Link href="/recovery/email" className={styles.link}>
+          Pulihkan password melalui email
+        </Link>
+      </div>
+    </RecoveryShell>
+  );
+}

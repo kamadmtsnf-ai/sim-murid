@@ -106,3 +106,13 @@ CSS Module hanya mengatur Beranda: gutter mengikuti viewport, track grid minmax(
 - Fase form idle, submitting, success, uncertain harus jelas. Gunakan pengunci sinkron, fokus error/sukses, pemeriksaan sesi untuk hasil tak pasti, serta tautan native setelah sukses.
 - Form memiliki method POST eksplisit. Tanpa JavaScript tampilkan bantuan dan sembunyikan form; password tidak boleh dikirim sebagai query URL.
 - Bukti dan batas pengujian: `docs/verification/login-audit.md`.
+
+### Bantuan akun — audit 22 Oktober 2026
+
+- Kedua jalur `/recovery` dan `/recovery/email` memakai RecoveryShell, token dan komponen existing; tidak membuat sistem warna/komponen dasar baru.
+- Form hanya satu mutasi aktif. Bedakan pending, diterima/sukses, error isian, dan hasil tidak pasti; jangan retry otomatis pada timeout/gangguan layanan.
+- Reset berhasil membutuhkan kontrak destination yang terverifikasi dan fallback tautan native. Tahap kode mendapat fokus; error/sukses dapat difokuskan.
+- Pertanyaan keamanan panjang memiliki teks lengkap di bawah dropdown. Kolom minimum 0, wrapping dan kontrol sentuh menjaga konten tetap dapat dijangkau pada mobile/teks besar.
+- Form sensitif memiliki method POST eksplisit; tanpa JavaScript tampilkan bantuan petugas dan sembunyikan form. Jangan menaruh password/jawaban/OTP pada URL atau browser storage.
+- Status pengiriman email tetap generik; UI tidak mengklaim kode terkirim kepada akun tertentu. TTL/cooldown/kuota/percobaan tetap ditentukan server.
+- Bukti dan batas pengujian: `docs/verification/recovery-audit.md`.

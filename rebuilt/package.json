@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:login && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:directory && npm run test:users && npm run test:operations && npm run test:learning && npm run test:services && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:login && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:recovery:routes && npm run test:email && npm run test:settings && npm run test:education && npm run test:directory && npm run test:users && npm run test:operations && npm run test:learning && npm run test:services && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -41,7 +41,9 @@
     "test:users:browser": "node scripts/verify-users.mjs",
     "test:home:browser": "node scripts/verify-home.mjs",
     "test:login": "node --test tests/login-route.test.mjs tests/login-page.test.mjs",
-    "test:login:browser": "node scripts/verify-login.mjs"
+    "test:login:browser": "node scripts/verify-login.mjs",
+    "test:recovery:routes": "node --test tests/recovery-routes.test.mjs",
+    "test:recovery:browser": "node scripts/verify-recovery.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
