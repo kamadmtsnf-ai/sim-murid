@@ -24,6 +24,7 @@ export function WorkspaceShell({navigation,name,username,navigationUnavailable=f
   desktop.addEventListener("change",closeOnDesktop);
   return ()=>desktop.removeEventListener("change",closeOnDesktop);
  },[open]);
+ const isDirectoryDetail=/^\/account\/directory\/[^/]+\/?$/.test(path);
  const item=currentNavItem(path),group=navigation.find(g=>g.items.some(i=>i.href===item?.href));
  const filtered=navigation.map(g=>({...g,items:g.items.filter(i=>matchesNavigation(i,query))})).filter(g=>g.items.length);
  function navigationContent(mobile:boolean){return <>
@@ -35,7 +36,7 @@ export function WorkspaceShell({navigation,name,username,navigationUnavailable=f
  return <WorkspaceContext.Provider value={{navigation,name,username,navigationUnavailable}}><div className="workspace-shell">
   <aside className="workspace-sidebar" aria-label="Sidebar layanan madrasah">{navigationContent(false)}</aside>
   <div className="workspace-body"><header className="workspace-topbar"><div className="flex min-w-0 items-center gap-3"><Button variant="outline" size="icon" className="shrink-0 lg:hidden" ref={menuRef} onClick={()=>{returnFocusRef.current=menuRef.current;setOpen(true);}} aria-label="Buka navigasi" aria-expanded={open}><Menu aria-hidden="true"/></Button><PanelLeft className="hidden size-4 text-muted-foreground lg:block" aria-hidden="true"/><span className="text-sm font-medium">Ruang kerja madrasah</span></div><div className="workspace-identity"><span className="user-avatar" aria-hidden="true">{name.slice(0,1).toLocaleUpperCase("id-ID")}</span><span className="hidden max-w-56 truncate text-sm sm:block">{name}</span></div></header>
-   <div className="workspace-content"><nav aria-label="Breadcrumb" className="workspace-breadcrumb"><ol><li><span className="breadcrumb-home"><LayoutDashboard className="size-4" aria-hidden="true"/><span aria-current={path==="/account"?"page":undefined}>Dashboard</span></span></li>{item?.href!=="/account"&&<>{group&&<li><ChevronRight aria-hidden="true"/><span>{group.label}</span></li>}<li><ChevronRight aria-hidden="true"/><span aria-current="page">{item?.label??"Detail"}</span></li></>}</ol></nav>{children}</div>
+   <div className="workspace-content"><nav aria-label="Breadcrumb" className="workspace-breadcrumb"><ol><li><span className="breadcrumb-home"><LayoutDashboard className="size-4" aria-hidden="true"/><span aria-current={path==="/account"?"page":undefined}>Dashboard</span></span></li>{item?.href!=="/account"&&<>{group&&<li><ChevronRight aria-hidden="true"/><span>{group.label}</span></li>}<li><ChevronRight aria-hidden="true"/><span aria-current={isDirectoryDetail?undefined:"page"}>{item?.label??"Detail"}</span></li>{isDirectoryDetail&&<li><ChevronRight aria-hidden="true"/><span aria-current="page">Detail pengguna</span></li>}</>}</ol></nav>{children}</div>
    <footer className="workspace-footer">SiM-Murid · MTs Nurul Falah<span>Data mengikuti hak akses akun Anda.</span></footer>
   </div>
   <Dialog returnFocusRef={returnFocusRef} open={open} onOpenChange={setOpen} title="Navigasi" description="Pilih layanan madrasah" className="workspace-drawer translate-x-0 translate-y-0"><div className="drawer-inner">{navigationContent(true)}</div></Dialog>

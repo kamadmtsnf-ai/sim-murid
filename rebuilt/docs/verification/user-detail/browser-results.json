@@ -1,0 +1,979 @@
+{
+  "status": "passed",
+  "baseline": false,
+  "checks": [
+    {
+      "name": "long 320x700 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "long 320x700 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3267.015625,
+        "width": 254,
+        "height": 58
+      }
+    },
+    {
+      "name": "long 320x700 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "long 360x800 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 360,
+        "document": 360
+      }
+    },
+    {
+      "name": "long 360x800 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2842.25,
+        "width": 294,
+        "height": 58
+      }
+    },
+    {
+      "name": "long 360x800 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 375x812 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "long 375x812 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2491.90625,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 375x812 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 390x844 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "long 390x844 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2491.90625,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 390x844 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 768x1024 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "long 768x1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 44.1875,
+        "y": 1315.203125,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 768x1024 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "long 1024x768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1024,
+        "document": 1024
+      }
+    },
+    {
+      "name": "long 1024x768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 341,
+        "y": 1459.015625,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 1024x768 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 1280x900 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1280,
+        "document": 1280
+      }
+    },
+    {
+      "name": "long 1280x900 action fits",
+      "passed": true,
+      "detail": {
+        "x": 811,
+        "y": 839.34375,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 1280x900 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 1440x900 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "long 1440x900 action fits",
+      "passed": true,
+      "detail": {
+        "x": 891,
+        "y": 756.25,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 1440x900 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "long 812x375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "long 812x375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 45.296875,
+        "y": 1237.34375,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 812x375 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long 812x240 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "long 812x240 action fits",
+      "passed": true,
+      "detail": {
+        "x": 45.296875,
+        "y": 1237.34375,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long 812x240 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "320 text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "320 text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 49,
+        "y": 24142.90625,
+        "width": 222,
+        "height": 234
+      }
+    },
+    {
+      "name": "320 text 200 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "320 text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "320 text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 80720.375,
+        "width": 158,
+        "height": 2226
+      }
+    },
+    {
+      "name": "320 text 400 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "1280 text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1280,
+        "document": 1280
+      }
+    },
+    {
+      "name": "1280 text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 393,
+        "y": 3756.203125,
+        "width": 606.109375,
+        "height": 88
+      }
+    },
+    {
+      "name": "1280 text 200 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "1280 text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1280,
+        "document": 1280
+      }
+    },
+    {
+      "name": "1280 text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 481,
+        "y": 21654.046875,
+        "width": 598,
+        "height": 306
+      }
+    },
+    {
+      "name": "1280 text 400 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "breadcrumb identifies detail page",
+      "passed": true
+    },
+    {
+      "name": "schedule day and time unchanged",
+      "passed": true
+    },
+    {
+      "name": "schedule duration preserved",
+      "passed": true
+    },
+    {
+      "name": "future assignment distinguished",
+      "passed": true
+    },
+    {
+      "name": "expired assignment distinguished",
+      "passed": true
+    },
+    {
+      "name": "impossible calendar date never rendered as valid time",
+      "passed": true
+    },
+    {
+      "name": "student no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "student action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 744.109375,
+        "width": 254,
+        "height": 58
+      }
+    },
+    {
+      "name": "student footer reachable",
+      "passed": true
+    },
+    {
+      "name": "student axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "authorized biodata target retained",
+      "passed": true
+    },
+    {
+      "name": "private raw student fields not rendered",
+      "passed": true
+    },
+    {
+      "name": "parent no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "parent action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 975.28125,
+        "width": 228.046875,
+        "height": 44
+      }
+    },
+    {
+      "name": "parent footer reachable",
+      "passed": true
+    },
+    {
+      "name": "parent axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "related child detail link retained",
+      "passed": true
+    },
+    {
+      "name": "restricted no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "restricted footer reachable",
+      "passed": true
+    },
+    {
+      "name": "restricted axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "restricted contact remains absent",
+      "passed": true
+    },
+    {
+      "name": "empty history explained",
+      "passed": true
+    },
+    {
+      "name": "empty no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty footer reachable",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "restricted contact remains absent",
+      "passed": true
+    },
+    {
+      "name": "empty history explained",
+      "passed": true
+    },
+    {
+      "name": "empty-teacher no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty-teacher footer reachable",
+      "passed": true
+    },
+    {
+      "name": "empty-teacher axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "admin no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "admin footer reachable",
+      "passed": true
+    },
+    {
+      "name": "admin axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "customer no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "customer footer reachable",
+      "passed": true
+    },
+    {
+      "name": "customer axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "applicant no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "applicant footer reachable",
+      "passed": true
+    },
+    {
+      "name": "applicant axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "alumni no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "alumni footer reachable",
+      "passed": true
+    },
+    {
+      "name": "alumni axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "inactive no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "inactive footer reachable",
+      "passed": true
+    },
+    {
+      "name": "inactive axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "many no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "many footer reachable",
+      "passed": true
+    },
+    {
+      "name": "many axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large dataset retains all records",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading footer reachable",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "loading text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading text 200 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "loading text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading text 400 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "loading skip link focus",
+      "passed": true
+    },
+    {
+      "name": "loading uses detail context",
+      "passed": true
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 408.390625,
+        "width": 127.375,
+        "height": 44
+      }
+    },
+    {
+      "name": "error footer reachable",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "error text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 32,
+        "y": 1193.375,
+        "width": 254.734375,
+        "height": 88
+      }
+    },
+    {
+      "name": "error text 200 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "error text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 64,
+        "y": 4295.0625,
+        "width": 192,
+        "height": 864
+      }
+    },
+    {
+      "name": "error text 400 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "error skip link focus",
+      "passed": true
+    },
+    {
+      "name": "error hides internal details",
+      "passed": true
+    },
+    {
+      "name": "error reset action runs",
+      "passed": true
+    },
+    {
+      "name": "unavailable no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "unavailable footer reachable",
+      "passed": true
+    },
+    {
+      "name": "unavailable axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "unavailable text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "unavailable text 200 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "unavailable text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "unavailable text 400 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "unavailable skip link focus",
+      "passed": true
+    },
+    {
+      "name": "detail skip focus",
+      "passed": true
+    },
+    {
+      "name": "record link keyboard reachable",
+      "passed": true
+    },
+    {
+      "name": "mobile navigation opens",
+      "passed": true
+    },
+    {
+      "name": "mobile navigation closes with Escape",
+      "passed": true
+    },
+    {
+      "name": "navigation restores focus",
+      "passed": true
+    },
+    {
+      "name": "orientation 812 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "orientation 812 action fits",
+      "passed": true,
+      "detail": {
+        "x": 45.296875,
+        "y": 630.21875,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "orientation 812 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "orientation keeps record",
+      "passed": true
+    },
+    {
+      "name": "orientation 1280 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1280,
+        "document": 1280
+      }
+    },
+    {
+      "name": "orientation 1280 action fits",
+      "passed": true,
+      "detail": {
+        "x": 811,
+        "y": 395.46875,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "orientation 1280 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "orientation keeps record",
+      "passed": true
+    },
+    {
+      "name": "orientation 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "orientation 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 692.125,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "orientation 375 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "orientation keeps record",
+      "passed": true
+    },
+    {
+      "name": "forced colors no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "forced colors action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 199.125,
+        "width": 304.0625,
+        "height": 44
+      }
+    },
+    {
+      "name": "forced colors footer reachable",
+      "passed": true
+    },
+    {
+      "name": "forced colors axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no JavaScript/console errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "issues": [],
+  "axe": [
+    {
+      "name": "long 320",
+      "violations": []
+    },
+    {
+      "name": "long 768",
+      "violations": []
+    },
+    {
+      "name": "long 1440",
+      "violations": []
+    },
+    {
+      "name": "student",
+      "violations": []
+    },
+    {
+      "name": "parent",
+      "violations": []
+    },
+    {
+      "name": "restricted",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "empty-teacher",
+      "violations": []
+    },
+    {
+      "name": "admin",
+      "violations": []
+    },
+    {
+      "name": "customer",
+      "violations": []
+    },
+    {
+      "name": "applicant",
+      "violations": []
+    },
+    {
+      "name": "alumni",
+      "violations": []
+    },
+    {
+      "name": "inactive",
+      "violations": []
+    },
+    {
+      "name": "many",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    },
+    {
+      "name": "unavailable",
+      "violations": []
+    },
+    {
+      "name": "forced colors",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "Actual components with synthetic role-scoped data in isolated workspace fixture.",
+    "Server/API and SQL authorization are tested separately; not live role UAT."
+  ]
+}

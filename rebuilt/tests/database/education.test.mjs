@@ -97,3 +97,20 @@ test('ED13-02: directory pagination has stable scoped ordering, admin status and
  const list=(actor,page,status)=>val('select public.app_directory_read($1,$2,\'parent\',\'qa-directory-page-\',$3,$4)',[...args(actor),page,status]);
  const first=await list(A,1,'all'),second=await list(A,2,'all');assert.equal(first.total,56);assert.equal(first.page_size,50);assert.equal(first.rows.length,50);assert.equal(second.rows.length,6);const ids=[...first.rows,...second.rows].map(row=>row.id);assert.equal(new Set(ids).size,56);assert.deepEqual(ids,[...ids].sort());assert.equal((await list(A,1,'active')).total,55);assert.equal((await list(A,1,'inactive')).rows.length,1);assert.equal((await list(P,1,'all')).total,0);assert.equal((await list(P,1,'inactive')).rows.length,0);assert.equal(await list(A,2001,'all'),null);assert.equal(JSON.stringify(first).includes('contact_email'),false);assert.equal(JSON.stringify(first).includes('phone'),false);
 });
+
+test('ED13-03: detail keeps own/admin/contact and guardian/teacher redaction with current sessions',async()=>{
+ const detail=(actor,target)=>val('select public.app_directory_detail($1,$2,$3)',[...args(actor),target]);
+ assert.equal((await detail(A,S.id)).student.data.NIK,'0012345678901234');
+ assert.equal((await detail(T,T.id)).contact.email,'teacher@example.org');
+ const teacher=await detail(T,S3.id);assert.equal(teacher.contact,null);assert.equal(teacher.student,null);assert.equal(teacher.documents,null);
+ const parent=await detail(P,S.id);assert.equal(parent.contact,null);assert.equal(parent.student.can_write,false);
+ assert.equal(await detail(P2,S.id),null);assert.equal(await detail(A,uuid()),null);assert.equal(await detail(T2,T2.id),null);
+});
+test('ED13-04: revoking guardian linkage or teacher role immediately removes detail access',async()=>{
+ const detail=(actor,target)=>val('select public.app_directory_detail($1,$2,$3)',[...args(actor),target]);
+ const links=(await db.query('update sim_murid_private.student_guardians set revoked_at=now() where parent_id=$1 and student_id=$2 and revoked_at is null returning id',[P.id,S.id])).rows;
+ try{assert.equal(await detail(P,S.id),null);assert.equal((await detail(P,P.id)).children.length,0);}finally{for(const link of links)await db.query('update sim_murid_private.student_guardians set revoked_at=null where id=$1',[link.id]);}
+ await db.query("update public.user_roles set role_code='parent' where user_id=$1",[T.id]);
+ try{assert.equal(await detail(T,S3.id),null);}finally{await db.query("update public.user_roles set role_code='teacher' where user_id=$1",[T.id]);}
+ assert.equal((await detail(T,S3.id)).id,S3.id);
+});

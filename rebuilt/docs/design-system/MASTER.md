@@ -116,3 +116,13 @@ CSS Module hanya mengatur Beranda: gutter mengikuti viewport, track grid minmax(
 - Form sensitif memiliki method POST eksplisit; tanpa JavaScript tampilkan bantuan petugas dan sembunyikan form. Jangan menaruh password/jawaban/OTP pada URL atau browser storage.
 - Status pengiriman email tetap generik; UI tidak mengklaim kode terkirim kepada akun tertentu. TTL/cooldown/kuota/percobaan tetap ditentukan server.
 - Bukti dan batas pengujian: `docs/verification/recovery-audit.md`.
+
+### Detail pengguna — audit 22 Oktober 2026
+
+- Detail merupakan tampilan baca. Scope kontak/biodata/relasi mengikuti RPC server; null tidak ditafsirkan sebagai izin baru.
+- Grid dua kolom hanya ketika konten cukup lebar; seluruh section, record link dan footer tetap dapat dijangkau pada data panjang/teks besar.
+- Status tugas harus membedakan aktif, belum berlaku, berakhir dan dicabut, menggunakan tanggal WIB. Tanggal kalender invalid memakai fallback, tanpa normalisasi diam-diam.
+- Loading/error/unavailable memakai konteks detail, main yang focusable, serta breadcrumb dengan satu aria-current page. Error tidak menampilkan detail internal.
+- Track sidebar serta ikon/gutter dekoratif tidak membesar tanpa batas ketika teks diperbesar. Pertahankan wrapping dan scroll vertikal normal; jangan menutupi overflow dengan pemotongan konten.
+- Schema/page/API memakai satu loader tervalidasi. Bentuk respons sukses dan tujuan link record existing tetap kompatibel.
+- Bukti dan batas pengujian: `docs/verification/user-detail-audit.md`.

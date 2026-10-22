@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-22",
+  "baseline": "2fca552cc2a6d06487c9ad2f310540e5e877dd92",
+  "npmCi": "passed (--ignore-scripts; 575 packages)",
+  "fullCheck": {
+    "status": "passed",
+    "tests": 245,
+    "failed": 0,
+    "typecheck": "passed",
+    "lint": "passed",
+    "databaseTypes": "14 public table snapshots match fresh migration replay",
+    "productionBuild": "passed"
+  },
+  "finalPresentationChecks": {
+    "detailTests": 15,
+    "status": "passed",
+    "typecheck": "passed",
+    "lint": "passed with zero warnings",
+    "productionBuild": "passed",
+    "note": "Rerun after error wrapper refinement; final browser uses this stable production CSS."
+  },
+  "baselineDetailTests": {
+    "tests": 14,
+    "passed": 4,
+    "failed": 10
+  },
+  "detailBrowser": {
+    "status": "passed",
+    "checks": 146,
+    "axeViews": 18,
+    "issues": []
+  },
+  "directoryRegression": {
+    "status": "passed",
+    "checks": 71,
+    "axeViews": 13
+  },
+  "dashboardRegression": {
+    "status": "passed",
+    "checks": 75,
+    "axeViews": 11,
+    "note": "An early immediate-focus assertion failed, then passed on identical source. Final suite waits for autofocus within existing timeout, retains same assertion and passes."
+  },
+  "smoke": {
+    "status": "passed",
+    "checks": 6
+  },
+  "deadcode": {
+    "entries": 96,
+    "sourceFiles": 160,
+    "unreachable": []
+  },
+  "diffCheck": "passed",
+  "limits": [
+    "Synthetic SDK boundaries for server/page/API; actual isolated SQL authorization tests.",
+    "Actual UI components in isolated workspace; no real account/password or private production reads.",
+    "Normal vertical document scrolling is retained.",
+    "No physical Safari/Firefox or all-role production UAT claim."
+  ]
+}
