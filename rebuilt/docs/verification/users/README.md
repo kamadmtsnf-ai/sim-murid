@@ -45,3 +45,17 @@ Username dapat memuat karakter minus ASCII `-`, misalnya `guru-001` dan `001-002
 Regresi menambahkan contoh minus di tengah/awal/akhir pada schema pembuatan akun dan login. SQL membuktikan provisioning, pencarian persis, dan principal sesi mempertahankan `Guru-001` serta tidak menyamakannya dengan `Guru001` atau `guru-001`. Fixture API dan browser menggunakan username berminus sampai hasil sukses dan penyalinan kredensial.
 
 Validasi pembaruan ini: 18 tes autentikasi/pengguna, TypeScript, lint, production build, dan 11 pemeriksaan browser lulus; 6 tampilan axe tanpa pelanggaran. Tidak ada migration atau perubahan data produksi.
+
+## Perbaikan izin provisioning — 22 Oktober 2026
+
+Pembuatan akun gagal dengan pesan “Hasil pembuatan belum dapat dipastikan” karena RPC SECURITY INVOKER memeriksa keberadaan UUID di auth.users, sementara service_role belum mempunyai SELECT pada kolom id. Kegagalan terjadi sebelum reservasi tersimpan. Uji sebelumnya menggunakan pemilik database sehingga kesenjangan privilege produksi luput.
+
+Migration 20261021183558_user_provision_auth_id_grant.sql memberi SELECT(id) hanya kepada service_role. RPC tetap SECURITY INVOKER. Tidak ada grant SELECT seluruh tabel, akses email/hash password, akses browser, atau pengubahan akun.
+
+Seluruh pemanggilan begin/finish dalam tes provisioning kini memakai SET ROLE service_role dengan RESET ROLE dalam finally. Regresi mencabut grant di transaksi lokal untuk mereproduksi SQLSTATE 42501, rollback, lalu memastikan reservasi kembali berhasil. Baseline migration berubah menjadi 35; jumlah tabel tetap 80.
+
+Verifikasi pada sesi pengerjaan perbaikan: npm run check lulus 201 tes, TypeScript, lint, snapshot 14 tabel publik, dan production build. Migration telah diterapkan di produksi. Pemeriksaan ulang produksi memastikan ID read=true, table-wide read=false, password-hash read=false, browser read=false; query keberadaan ID memakai SET LOCAL ROLE service_role berhasil tanpa membuat akun. Pemeriksaan itu diulang saat melanjutkan pekerjaan. Pembuatan akun lengkap melalui provider produksi tidak dijalankan sebagai QA karena tidak ada akun nyata baru yang diminta.
+
+Security Advisors tetap hanya melaporkan informasi RLS tabel privat tanpa policy dan peringatan leaked-password protection yang sudah dicatat di atas. Jika dialog masih terbuka, Coba kembali mempertahankan payload dan UUID yang sama.
+
+Saat melanjutkan pekerjaan, 24 tes database (foundation dan provisioning) diulang dari sumber main ditambah perbaikan ini; seluruhnya lulus. Seluruh begin/finish provisioning tetap dijalankan sebagai service_role. Tidak ada data akun produksi yang dibuat dalam pengujian ini.

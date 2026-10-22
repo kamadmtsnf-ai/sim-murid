@@ -7,8 +7,9 @@ const val=async(q,p=[])=>Object.values((await db.query(q,p)).rows[0])[0];
 async function actor(name,role){const id=uuid(),session=uuid();await db.query('insert into auth.users values($1)',[id]);await db.query('insert into auth.sessions(id,user_id) values($1,$2)',[session,id]);await db.query('insert into public.profiles(id,username,full_name) values($1,$2,$2)',[id,name]);await db.query('insert into public.user_roles(user_id,role_code) values($1,$2)',[id,role]);await db.query('insert into sim_murid_private.auth_accounts(user_id,must_change_password,profile_completed_at) values($1,false,now())',[id]);await db.query("insert into sim_murid_private.security_questions(user_id,question_code,answer_hash) values($1,'q1',repeat('0',64))",[id]);await db.query('select public.app_auth_claim($1,$2,false)',[id,session]);return {id,session};}
 const admin=await actor('admin','admin'),other=await actor('other','admin'),student=await actor('student','student');
 const cmd={username:'0012',fullName:'New student',role:'student',contactEmail:''},hash='a'.repeat(64);
-const begin=(id,command=cmd,a=admin,fingerprint=hash)=>val('select public.app_user_provision_begin($1,$2,$3,$4::jsonb,$5)',[a.id,a.session,id,JSON.stringify(command),fingerprint]);
-const finish=(id,a=admin,fingerprint=hash)=>val('select public.app_user_provision_finish($1,$2,$3,$4)',[a.id,a.session,id,fingerprint]);
+const service=async(sql,args)=>{await db.exec('set role service_role');try{return await val(sql,args);}finally{await db.exec('reset role');}};
+const begin=(id,command=cmd,a=admin,fingerprint=hash)=>service('select public.app_user_provision_begin($1,$2,$3,$4::jsonb,$5)',[a.id,a.session,id,JSON.stringify(command),fingerprint]);
+const finish=(id,a=admin,fingerprint=hash)=>service('select public.app_user_provision_finish($1,$2,$3,$4)',[a.id,a.session,id,fingerprint]);
 test('service-only RPC and private table deny browser roles',async()=>{
  for(const role of ['anon','authenticated']){
   assert.equal(await val("select has_function_privilege($1,'public.app_user_provision_begin(uuid,uuid,uuid,jsonb,text)','execute')",[role]),false);
@@ -45,4 +46,14 @@ test('hyphenated usernames survive provisioning, exact lookup and login principa
  await db.query('insert into auth.sessions(id,user_id) values($1,$2)',[session,id]);
  assert.equal(await val('select public.app_auth_claim($1,$2,false)',[id,session]),true);
  assert.equal((await val('select public.app_auth_principal($1,$2)',[id,session])).username,username);
+});
+test('provisioning has only the Auth ID grant; missing grant reproduces production SQLSTATE 42501',async()=>{
+ assert.equal(await val("select has_column_privilege('service_role','auth.users','id','select')"),true);
+ assert.equal(await val("select has_table_privilege('service_role','auth.users','select')"),false);
+ for(const role of ['anon','authenticated'])assert.equal(await val("select has_column_privilege($1,'auth.users','id','select')",[role]),false);
+ try{
+  await db.exec('begin; revoke select(id) on auth.users from service_role; set local role service_role;');
+  await assert.rejects(db.query('select public.app_user_provision_begin($1,$2,$3,$4::jsonb,$5)',[admin.id,admin.session,uuid(),JSON.stringify({...cmd,username:'permission-regression'}),hash]),error=>error.code==='42501');
+ }finally{await db.exec('rollback');}
+ assert.equal((await begin(uuid(),{...cmd,username:'permission-restored'})).code,'pending');
 });
