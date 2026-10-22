@@ -1,0 +1,518 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "normal mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal mobile axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "empty mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty mobile axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "empty 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "empty 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "large mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large mobile axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "large 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "large 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly mobile axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "readonly 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "readonly 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly no input",
+      "passed": true
+    },
+    {
+      "name": "loading mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "loading 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "loading 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "error mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "error 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "error 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "all present preserves notes",
+      "passed": true
+    },
+    {
+      "name": "all present updates selected status",
+      "passed": true
+    },
+    {
+      "name": "clear status preserves notes",
+      "passed": true
+    },
+    {
+      "name": "clear status only clears status",
+      "passed": true
+    },
+    {
+      "name": "empty batch never sent",
+      "passed": true
+    },
+    {
+      "name": "synchronous duplicate submission locked",
+      "passed": true
+    },
+    {
+      "name": "blank statuses omitted",
+      "passed": true
+    },
+    {
+      "name": "batch payload retains notes",
+      "passed": true
+    },
+    {
+      "name": "successful save resets draft",
+      "passed": true
+    },
+    {
+      "name": "successful save clears statuses",
+      "passed": true
+    },
+    {
+      "name": "filtered history retains full selected class roster",
+      "passed": true
+    },
+    {
+      "name": "export preserves history filter",
+      "passed": true
+    },
+    {
+      "name": "calendar requests all 31 dates",
+      "passed": true
+    },
+    {
+      "name": "calendar retains status excluded by history filter",
+      "passed": true
+    },
+    {
+      "name": "calendar scope independent from history pagination/status",
+      "passed": true
+    },
+    {
+      "name": "calendar marks Sundays and configured holiday",
+      "passed": true
+    },
+    {
+      "name": "calendar does not reset batch draft",
+      "passed": true
+    },
+    {
+      "name": "calendar mobile axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "calendar mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "calendar error never displays false unrecorded days",
+      "passed": true
+    },
+    {
+      "name": "calendar incomplete never displays false unrecorded days",
+      "passed": true
+    },
+    {
+      "name": "mobile dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 129.703125,
+        "right": 359,
+        "bottom": 682.296875,
+        "vw": 375,
+        "vh": 812,
+        "scroll": 341,
+        "client": 341
+      }
+    },
+    {
+      "name": "correction modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "keyboard focus remains inside dialog",
+      "passed": true
+    },
+    {
+      "name": "correction requires reason",
+      "passed": true
+    },
+    {
+      "name": "correction error feedback stays focused inside modal",
+      "passed": true
+    },
+    {
+      "name": "correction failure retains reason",
+      "passed": true
+    },
+    {
+      "name": "correction preserves command/reason",
+      "passed": true
+    },
+    {
+      "name": "correction preserves independent batch draft",
+      "passed": true
+    },
+    {
+      "name": "void uses existing audit command",
+      "passed": true
+    },
+    {
+      "name": "pending correction cannot close via Escape",
+      "passed": true
+    },
+    {
+      "name": "landscape dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 70,
+        "y": 16,
+        "right": 742,
+        "bottom": 359,
+        "vw": 812,
+        "vh": 375,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "desktop resize dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 183.703125,
+        "right": 1056,
+        "bottom": 716.296875,
+        "vw": 1440,
+        "vh": 900,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "short mobile dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 304,
+        "bottom": 552,
+        "vw": 320,
+        "vh": 568,
+        "scroll": 286,
+        "client": 286
+      }
+    },
+    {
+      "name": "short modal footer reachable by scrolling",
+      "passed": true
+    },
+    {
+      "name": "Escape returns trigger focus",
+      "passed": true
+    },
+    {
+      "name": "declined class change preserves selection",
+      "passed": true
+    },
+    {
+      "name": "declined class change preserves draft",
+      "passed": true
+    },
+    {
+      "name": "stale correct retry policy",
+      "passed": true
+    },
+    {
+      "name": "stale preserves draft",
+      "passed": true
+    },
+    {
+      "name": "denied correct retry policy",
+      "passed": true
+    },
+    {
+      "name": "denied preserves draft",
+      "passed": true
+    },
+    {
+      "name": "network correct retry policy",
+      "passed": true
+    },
+    {
+      "name": "network preserves draft",
+      "passed": true
+    },
+    {
+      "name": "malformed correct retry policy",
+      "passed": true
+    },
+    {
+      "name": "malformed preserves draft",
+      "passed": true
+    },
+    {
+      "name": "invalid correct retry policy",
+      "passed": true
+    },
+    {
+      "name": "invalid preserves draft",
+      "passed": true
+    },
+    {
+      "name": "duplicate correct retry policy",
+      "passed": true
+    },
+    {
+      "name": "duplicate preserves draft",
+      "passed": true
+    },
+    {
+      "name": "pending write disables competing history read",
+      "passed": true
+    },
+    {
+      "name": "pagination advances",
+      "passed": true
+    },
+    {
+      "name": "failed read retains prior page",
+      "passed": true
+    },
+    {
+      "name": "30 second timeout locks blind retries",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal mobile",
+      "violations": []
+    },
+    {
+      "name": "empty mobile",
+      "violations": []
+    },
+    {
+      "name": "large mobile",
+      "violations": []
+    },
+    {
+      "name": "readonly mobile",
+      "violations": []
+    },
+    {
+      "name": "calendar mobile",
+      "violations": []
+    },
+    {
+      "name": "correction modal",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic fixtures and intercepted writes, not authenticated production role UAT or physical-device testing."
+  ]
+}

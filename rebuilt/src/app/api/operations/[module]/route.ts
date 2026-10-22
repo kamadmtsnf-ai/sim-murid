@@ -1,3 +1,8 @@
+import {
+  attendanceFilters,
+  attendanceMonth,
+  attendanceMessages,
+} from "@/lib/operations/attendance";
 import { dutyFilters, dutyMessages } from "@/lib/operations/duty";
 import type { NextRequest } from "next/server";
 import { sameOrigin, privateJson } from "@/lib/auth/http";
@@ -24,13 +29,34 @@ export async function GET(
       query = Object.fromEntries(request.nextUrl.searchParams),
       format = query.format;
     delete query.format;
+    const calendar = query.calendar;
+    delete query.calendar;
+    if (
+      calendar &&
+      (domain !== "attendance" ||
+        format ||
+        !z.uuid().safeParse(query.studentId).success ||
+        Object.keys(query).some((k) => k !== "studentId"))
+    )
+      z.never().parse(calendar);
     const filters =
       domain === "duty"
         ? {
             ...dutyFilters.parse(query),
             ...(format ? { export: true, page: 1 } : {}),
           }
-        : { ...query, ...(format ? { export: true, page: 1 } : {}) };
+        : domain === "attendance"
+          ? attendanceFilters.parse(
+              calendar
+                ? {
+                    ...attendanceMonth(calendar),
+                    studentId: query.studentId,
+                    export: true,
+                    page: 1,
+                  }
+                : { ...query, ...(format ? { export: true, page: 1 } : {}) },
+            )
+          : { ...query, ...(format ? { export: true, page: 1 } : {}) };
     const data = await operationsData(
       caller.principal.id,
       caller.sessionId,
@@ -73,7 +99,11 @@ export async function POST(
     const filters =
       domain === "duty"
         ? dutyFilters.parse(Object.fromEntries(request.nextUrl.searchParams))
-        : {};
+        : domain === "attendance"
+          ? attendanceFilters.parse(
+              Object.fromEntries(request.nextUrl.searchParams),
+            )
+          : {};
     const r = await createAuthAdmin().rpc("app_operations_write", {
       p_actor: caller.principal.id,
       p_session: caller.sessionId,
@@ -87,12 +117,13 @@ export async function POST(
       .object({ code: z.string(), id: z.uuid().nullable().optional() })
       .safeParse(r.data);
     if (!parsed.success) {
-      if (domain === "duty") throw new Error("Duty write unavailable");
+      if (domain === "duty" || domain === "attendance")
+        throw new Error("Duty write unavailable");
       throw parsed.error;
     }
     const result = parsed.data;
     if (
-      domain === "duty" &&
+      (domain === "duty" || domain === "attendance") &&
       ![
         "saved",
         "denied",
@@ -105,21 +136,27 @@ export async function POST(
     )
       throw new Error("Duty acknowledgement unavailable");
     const data =
-      domain === "duty" && result.code === "saved"
+      (domain === "duty" || domain === "attendance") && result.code === "saved"
         ? await operationsData(
             caller.principal.id,
             caller.sessionId,
-            "duty",
+            domain,
             filters,
           )
         : undefined;
     return reply(
       {
         result,
-        ...(domain === "duty" ? { code: result.code } : {}),
+        ...(domain === "duty" || domain === "attendance"
+          ? { code: result.code }
+          : {}),
         ...(data ? { data } : {}),
         message:
-          (domain === "duty" ? dutyMessages[result.code] : undefined) ??
+          (domain === "duty"
+            ? dutyMessages[result.code]
+            : domain === "attendance"
+              ? attendanceMessages[result.code]
+              : undefined) ??
           operationMessages[result.code] ??
           "Perubahan belum berhasil.",
       },

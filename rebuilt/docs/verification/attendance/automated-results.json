@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-22",
+  "baseMain": "9fe6923c1cbfba96a78f629d1b513716474a0ae2",
+  "status": "passed",
+  "npmCi": true,
+  "check": {
+    "tests": 301,
+    "runnerGroups": 40,
+    "failed": 0,
+    "typeScript": true,
+    "lintZeroWarnings": true,
+    "databaseTypesTables": 14,
+    "productionBuild": true
+  },
+  "finalUiChanges": {
+    "lint": true,
+    "productionBuildWithTypeScript": true,
+    "attendanceBrowserChecks": 84,
+    "attendanceAxeRuns": 6,
+    "violations": 0,
+    "javaScriptErrors": []
+  },
+  "dutyRegression": {
+    "checks": 131,
+    "axeRuns": 9,
+    "violations": 0,
+    "errors": []
+  },
+  "deadcodeUnreachable": [],
+  "diffCheck": true,
+  "limits": [
+    "Synthetic browser fixtures and intercepted API responses; no authenticated production CRUD or physical-device role UAT.",
+    "Database suite uses isolated PGlite, not native pg-safeupdate extension.",
+    "Current active catalog is unchanged; historical enrollment is checked on the server, not loaded as an input roster.",
+    "Normal page/modal vertical scroll and local table horizontal scroll remain available."
+  ]
+}
