@@ -41,6 +41,23 @@ test('OP19: cash allocations and zero-value sibling waiver, lowest natural class
 test('OP19: void reconciles only supported waiver, unknown tariff not zero, all unpaid included',async()=>{
  await write('fees',{type:'void',id:pay1,reason:'Revoke first source'},A.treasurer);let r=await read('fees');assert.equal(r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===month).status,'waived');await write('fees',{type:'void',id:pay2,reason:'Revoke last source'},A.treasurer);r=await read('fees');assert.equal(r.summary.cashReceived,0);const m=r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===month);assert.equal(m.status,'unpaid');assert.equal(m.tariff,null);assert.ok(r.summary.unknownTariffs>0);await write('fees',{type:'tariff',classId:c,month,amount:50000},A.treasurer);r=await read('fees');assert.equal(r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===month).outstanding,50000);
 });
+test('OP19: cross-year correction preserves cash and atomically reconciles sibling waiver',async()=>{
+ const december=startYear+'-12-01',january=(startYear+1)+'-01-01';
+ const cmd={type:'payment',id:null,studentId:A.s2.id,date:today,allocations:[{month:december,amount:50000},{month:january,amount:70000}],notes:'Two calendar years'};
+ const created=await write('fees',cmd);assert.equal(created.code,'saved');
+ let r=await read('fees',A.admin,{start:december,end:january});
+ assert.equal(r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===december).status,'waived');
+ assert.equal(r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===january).status,'waived');
+ const version=await rev();
+ assert.equal((await write('fees',{...cmd,studentId:A.s1.id})).code,'duplicate');assert.equal(await rev(),version);
+ assert.equal((await write('fees',{...cmd,id:created.id,allocations:[{month:january,amount:90000}],reason:'Review allocation'})).code,'saved');
+ const payment=(await read('fees')).rows.find(x=>x.id===created.id);assert.equal(payment.amount,90000);assert.deepEqual(payment.allocations,[{month:january,amount:90000}]);
+ r=await read('fees',A.admin,{start:december,end:january});
+ assert.equal(r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===december).status,'unpaid');
+ assert.equal(r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===january).status,'waived');
+ assert.equal((await write('fees',{type:'void',id:created.id,reason:'Void corrected payment'})).code,'saved');
+ r=await read('fees',A.admin,{start:december,end:january});assert.equal(r.extra.months.find(x=>x.student_id===A.s1.id&&x.month===january).status,'unpaid');
+});
 test('OP20: account independent of role, nominal validation, one daily deposit, atomic overdraft prevention',async()=>{
  account=(await write('savings',{type:'account',ownerId:A.s1.id,category:'S'},A.manager)).id;assert.ok(account);assert.equal((await write('savings',{type:'account',ownerId:A.customer.id,category:'N'},A.manager)).code,'saved');const cmd={type:'transaction',id:null,accountId:account,date:today,kind:'deposit',amount:200000,reason:'Initial deposit'};assert.equal((await write('savings',{...cmd,amount:1999},A.manager)).code,'invalid');deposit=(await write('savings',cmd,A.manager)).id;assert.ok(deposit);assert.equal((await write('savings',cmd,A.manager)).code,'duplicate');assert.equal((await write('savings',{...cmd,kind:'withdrawal',amount:123000},A.s1)).code,'denied');withdrawal=(await write('savings',{...cmd,kind:'withdrawal',amount:123000},A.manager)).id;assert.ok(withdrawal);assert.equal((await write('savings',{...cmd,kind:'withdrawal',amount:100000},A.manager)).code,'insufficient');assert.equal((await read('savings',A.s1)).summary.balance,77000);assert.equal((await read('savings',A.parent)).summary.balance,77000);assert.equal((await read('savings',A.stranger)).extra.accounts.length,0);
 });

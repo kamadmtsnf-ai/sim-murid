@@ -1,3 +1,4 @@
+import {committeeSnapshot} from './committee';
 import {mentoringSnapshot} from './mentoring';
 import "server-only";
 import { attendanceSnapshot } from "./attendance";
@@ -37,6 +38,7 @@ export async function operationsData(
     return result.data;
   }
   if(module==="mentoring"){const result=mentoringSnapshot.safeParse(r.data);if(!result.success)throw new Error("Mentoring data unavailable");return result.data;}
+  if(module==="fees"){const result=committeeSnapshot.safeParse(r.data);if(!result.success)throw new Error("Committee data unavailable");return result.data;}
   return operationsSnapshot.parse(r.data);
 }
 export const operationMessages: Record<string, string> = {

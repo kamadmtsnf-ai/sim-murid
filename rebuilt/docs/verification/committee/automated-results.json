@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-22",
+  "baseMain": "dabd825e386db3a65cac837349dccafc1f5ef96e",
+  "status": "passed",
+  "npmCi": true,
+  "check": {
+    "tests": 321,
+    "runnerGroups": 42,
+    "failures": 0,
+    "typeScript": true,
+    "lintZeroWarnings": true,
+    "databaseTypesTables": 14,
+    "productionBuild": true
+  },
+  "committeeBrowser": {
+    "checks": 86,
+    "axeRuns": 6,
+    "violations": 0,
+    "errors": []
+  },
+  "mentoringRegression": {
+    "checks": 87,
+    "axeRuns": 7,
+    "violations": 0,
+    "errors": []
+  },
+  "postHarnessLint": true,
+  "deadcodeUnreachable": [],
+  "diffCheck": true,
+  "limits": [
+    "Synthetic browser/API fixtures, not authenticated production CRUD, physical devices or manual screen readers.",
+    "Isolated PGlite does not load native pg-safeupdate extension.",
+    "Existing active profile catalog limit and current-class filter semantics preserved; dynamic scope/revision still checked by server.",
+    "Normal page/modal vertical scroll and local table horizontal scroll remain available."
+  ]
+}

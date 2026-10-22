@@ -1,4 +1,9 @@
 import {
+  committeeFilters,
+  committeeMessages,
+  paymentContextQuery,
+} from "@/lib/operations/committee";
+import {
   mentoringFilters,
   mentoringMessages,
 } from "@/lib/operations/mentoring";
@@ -43,6 +48,11 @@ export async function GET(
         Object.keys(query).some((k) => k !== "studentId"))
     )
       z.never().parse(calendar);
+    const contextView = domain === "fees" && query.view === "payment";
+    if (contextView) {
+      delete query.view;
+      if (format) z.never().parse(format);
+    }
     const filters =
       domain === "duty"
         ? {
@@ -65,7 +75,14 @@ export async function GET(
                 ...query,
                 ...(format ? { export: true, page: 1 } : {}),
               })
-            : { ...query, ...(format ? { export: true, page: 1 } : {}) };
+            : domain === "fees"
+              ? contextView
+                ? { ...paymentContextQuery.parse(query), page: 1 }
+                : committeeFilters.parse({
+                    ...query,
+                    ...(format ? { export: true, page: 1 } : {}),
+                  })
+              : { ...query, ...(format ? { export: true, page: 1 } : {}) };
     const data = await operationsData(
       caller.principal.id,
       caller.sessionId,
@@ -116,7 +133,11 @@ export async function POST(
             ? mentoringFilters.parse(
                 Object.fromEntries(request.nextUrl.searchParams),
               )
-            : {};
+            : domain === "fees"
+              ? committeeFilters.parse(
+                  Object.fromEntries(request.nextUrl.searchParams),
+                )
+              : {};
     const r = await createAuthAdmin().rpc("app_operations_write", {
       p_actor: caller.principal.id,
       p_session: caller.sessionId,
@@ -133,7 +154,8 @@ export async function POST(
       if (
         domain === "duty" ||
         domain === "attendance" ||
-        domain === "mentoring"
+        domain === "mentoring" ||
+        domain === "fees"
       )
         throw new Error("Duty write unavailable");
       throw parsed.error;
@@ -142,7 +164,8 @@ export async function POST(
     if (
       (domain === "duty" ||
         domain === "attendance" ||
-        domain === "mentoring") &&
+        domain === "mentoring" ||
+        domain === "fees") &&
       ![
         "saved",
         "denied",
@@ -157,7 +180,8 @@ export async function POST(
     const data =
       (domain === "duty" ||
         domain === "attendance" ||
-        domain === "mentoring") &&
+        domain === "mentoring" ||
+        domain === "fees") &&
       result.code === "saved"
         ? await operationsData(
             caller.principal.id,
@@ -171,7 +195,8 @@ export async function POST(
         result,
         ...(domain === "duty" ||
         domain === "attendance" ||
-        domain === "mentoring"
+        domain === "mentoring" ||
+        domain === "fees"
           ? { code: result.code }
           : {}),
         ...(data ? { data } : {}),
@@ -182,7 +207,9 @@ export async function POST(
               ? attendanceMessages[result.code]
               : domain === "mentoring"
                 ? mentoringMessages[result.code]
-                : undefined) ??
+                : domain === "fees"
+                  ? committeeMessages[result.code]
+                  : undefined) ??
           operationMessages[result.code] ??
           "Perubahan belum berhasil.",
       },

@@ -412,3 +412,8 @@
 .mentoring-panel :is(input,select), .mentoring-dialog :is(input:not([type=checkbox]),select,textarea) { min-height: 44px; max-width: 100%; }
 .mentoring-panel :is(td,th) { overflow-wrap: anywhere; }
 .mentoring-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+
+.committee-panel fieldset, .committee-dialog fieldset { min-inline-size: 0; }
+.committee-panel :is(input,select), .committee-dialog :is(input:not([type=checkbox]),select) { min-height: 44px; max-width: 100%; }
+.committee-panel :is(td,th) { overflow-wrap: anywhere; }
+.committee-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }

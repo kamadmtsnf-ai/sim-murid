@@ -176,3 +176,11 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Form hafalan dan perkembangan menampilkan field wajib sesuai jenis, tanpa menyisakan referensi hafalan pada payload perkembangan. Koreksi/void memerlukan alasan; void meminta konfirmasi dan tidak memerlukan field laporan lain yang sedang tidak valid.
 - Gunakan Dialog dan semantic tokens existing; focus trap/return focus, feedback error di dalam modal, dirty/pending dismissal guard, kontrol 44px dan tinggi maksimum dalam viewport dengan scroll yang dapat dijangkau.
 - Riwayat memakai kolom siswa/Guru Wali/jenis/aspek/predikat/catatan, filter tahun kalender/tanggal/siswa, empty state dan export sesuai scope. Penyimpanan confirmed dengan timeout, snapshot tervalidasi dan reload untuk konflik/hasil tak pasti.
+
+## Iuran Komite — 22 Oktober 2026
+
+- Pisahkan tahun bulan iuran, tanggal pembayaran dan filter riwayat. Alokasi controlled lintas tahun tetap terlihat beserta nominal/total, dan hanya dihapus melalui tindakan eksplisit. Koreksi tidak boleh menyusutkan alokasi mengikuti tahun filter.
+- Status bulan harus berasal dari konteks lengkap siswa/tahun dengan revision yang sama, bukan halaman riwayat. Paid/waived terkunci kecuali alokasi milik transaksi yang dikoreksi. Context gagal/parsial tidak ditafsirkan unpaid.
+- Bedakan kas, pembebasan Rp0, tarif nol, tarif belum ditetapkan dan tunggakan yang belum dapat dihitung. Uang masuk mengikuti tanggal pembayaran; rekap mengikuti bulan alokasi. Selalu tampilkan nilai rupiah integer tanpa membulatkan data yang tidak valid.
+- Gunakan Dialog existing, konfirmasi tarif/void, alasan koreksi, dirty/pending guard, feedback dan fallback focus ketika baris hilang. Kontrol 44px, wrap, tabel scroll lokal, rekap paginated, modal maksimum viewport dengan footer terjangkau.
+- Penyimpanan confirmed dan timeout/reload untuk hasil tak pasti. Ekspor mencantumkan alokasi lintas tahun; jangan memotong rekap diam-diam ketika batas ekspor terlampaui.

@@ -220,16 +220,16 @@ test("malformed duty upstream read is service error instead of input error", asy
     503,
   );
 });
-test("generic operation POST response remains result-only", async () => {
+test("savings POST response remains result-only", async () => {
   setup();
   const r = await POST(
     req(
-      { type: "tariff", classId: id(50), month: "2026-10-01", amount: 0 },
+      { type: "account", ownerId: id(50), category: "S" },
       "",
       "https://example.test",
-      "fees",
+      "savings",
     ),
-    params("fees"),
+    params("savings"),
   );
   assert.equal(r.status, 200);
   assert.deepEqual(Object.keys(await r.json()).sort(), ["message", "result"]);
