@@ -139,12 +139,13 @@ CSS Module hanya mengatur Beranda: gutter mengikuti viewport, track grid minmax(
 
 Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/period.ts`: `2026/2027`, `Ganjil` dan `Genap`. Input tahun ajaran berupa teks pasangan tahun (`2026/2027` atau `2026-2027`); dropdown relasional tetap memakai UUID. Kelas menampilkan kedua rentang semester, sedangkan penilaian dan survei menampilkan rentang semester terpilih dengan tahun kalender yang tepat. Tanggal formulir dibatasi oleh rentang itu dan direset saat periode berubah. Ekspor PDF/CSV/XLSX memakai label yang sama, termasuk ketika membaca snapshot lama yang menyimpan tahun awal numerik. Tahun kalender finansial/penerbitan bukan tahun ajaran.
 
-## Jadwal dan piket siswa — audit 22 Oktober 2026
+## Jadwal dan piket siswa — tab dan modal, 22 Oktober 2026
 
-- Ringkasan jumlah mengikuti filter dan scope server. Heading semantik, Card/Button/SelectField/TableRegion dan token existing tetap dipakai. Tidak ada sistem desain baru.
-- Filter kelas mengikuti tahun ajaran yang dipilih; mengganti tahun mengosongkan pilihan kelas lama. Label tahun memakai pasangan tahun, waktu dan hari ini mengikuti WIB.
-- Editor pelajaran tetap inline karena isian singkat. Edit menggulir dan memfokuskan field pertama; waktu selesai mempertahankan istirahat dan tidak boleh melewati hari yang sama. Referensi guru/mapel nonaktif tidak diganti diam-diam.
-- Editor piket memuat tujuh hari dari duty_roster, bukan daftar hasil filter. Siswa nonaktif tidak dapat ditugaskan; pembersihan penugasan lama dijelaskan sebelum penyimpanan. Pengosongan seluruh piket membutuhkan konfirmasi.
-- Lindungi draf saat berpindah editor, menerapkan filter, memuat ulang atau menyimpan formulir lain. Mutasi memakai mode confirmed bersama: pending mengunci, konflik isian dapat diperbaiki, hasil tak pasti/stale mengharuskan reload tanpa retry otomatis.
-- Tabel lebar bergulir lokal dengan region keyboard; halaman tidak menyembunyikan overflow. Nama panjang membungkus, baris pilihan piket dan tombol mempunyai target sentuh 44px. Gulir vertikal dokumen/daftar tetap normal dan konten dapat dijangkau.
-- Bukti dan batas: docs/verification/schedules-audit.md.
+- Radix Tabs dari dependency existing memisahkan Jadwal KBM dan Jadwal Piket. Heading, Card/Button/SelectField/TableRegion dan token tetap satu sistem. Tab mendukung panah/Home/End, aria-selected dan panel terkait.
+- Setiap tab mempunyai tombol Input Jadwal KBM/Input Jadwal Piket sesuai izin. Input dan Edit KBM memakai LessonForm yang sama dalam Dialog existing; input piket memakai DutyForm existing. Form di-unmount saat ditutup dan hanya satu editor terbuka.
+- Pilihan hapus dikosongkan ketika tab berubah; command hapus hanya memuat ID jenis jadwal pada tab aktif. Filter GET mempertahankan tab via view=kbm/piket. Tahun berpasangan, kelas mengikuti tahun, waktu mengikuti WIB.
+- Tutup/Escape/Batal menghormati draf. Saat pending, modal tetap terbuka dan kontrol simpan terkunci. Sukses memerlukan snapshot tervalidasi sebelum menutup modal. Konflik/hasil tak pasti mempertahankan isian; feedback dan reload tersedia di dalam focus trap.
+- Dialog mengembalikan fokus ke pemicu input atau Edit. Lebar modal mengikuti viewport dan tinggi maksimal 100dvh-32px; gulir vertikal modal membuat header, form dan tombol akhir tetap dapat dijangkau pada layar pendek.
+- Piket memuat seluruh tujuh hari dari duty_roster meskipun filter daftar satu hari. Penggantian/pengosongan dikonfirmasi; cleanup penugasan siswa nonaktif dijelaskan. Istirahat, deteksi benturan dan larangan melewati tengah malam dipertahankan.
+- Tabel menggulir lokal, teks panjang membungkus, kontrol sentuh minimal 44px. Tidak menggunakan overflow hidden untuk menyembunyikan konten halaman.
+- Bukti terbaru: docs/verification/schedules-tabs-audit.md; audit sebelum tab/modal tetap tercatat pada schedules-audit.md.

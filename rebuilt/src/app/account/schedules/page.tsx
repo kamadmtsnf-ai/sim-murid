@@ -13,8 +13,8 @@ export default async function SchedulesPage({
   const caller = await readServerPrincipal();
   if (!caller) redirect("/login?expired=1");
   let classes, schedules, filters;
+  const q = await searchParams;
   try {
-    const q = await searchParams;
     classes = await classesData(caller.principal.id, caller.sessionId);
     filters = {
       ...(typeof q.year === "string" && z.uuid().safeParse(q.year).success
@@ -59,7 +59,8 @@ export default async function SchedulesPage({
         Jadwal pelajaran dan piket siswa
       </h1>
       <SchedulePanel
-        key={JSON.stringify(filters) + schedules.revision}
+        key={JSON.stringify(filters) + schedules.revision + String(q.view)}
+        initialTab={q.view === "piket" ? "piket" : "kbm"}
         initial={schedules}
         classes={classes}
         filters={filters}

@@ -42,6 +42,17 @@ const classes = classSnapshot.parse({
       students,
     },
     {
+      id: id(22),
+      year_id: id(10),
+      name: "VII B",
+      level: 7,
+      teacher_id: null,
+      teacher_name: null,
+      archived: false,
+      can_schedule: can,
+      students: [],
+    },
+    {
       id: id(21),
       year_id: id(11),
       name: "VII Lama",
@@ -126,6 +137,11 @@ createRoot(document.getElementById("root")!).render(
           Jadwal pelajaran dan piket siswa
         </h1>
         <SchedulePanel
+          initialTab={
+            new URLSearchParams(location.search).get("view") === "piket"
+              ? "piket"
+              : "kbm"
+          }
           initial={data}
           classes={classes}
           filters={{ year: id(10), weekday: 1 }}
