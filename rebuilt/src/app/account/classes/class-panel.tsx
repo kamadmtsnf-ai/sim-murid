@@ -1,23 +1,609 @@
-'use client';
-import {useRef,useState} from 'react';
-import {Dialog} from '@/components/ui/dialog';
-import type {z} from 'zod';
-import {Button} from '@/components/ui/button';
-import {Card,CardHeader,CardTitle,CardContent} from '@/components/ui/card';
-import {SelectField,TextField,controlClass} from '@/components/domain-controls';
-import {classSnapshot} from '@/lib/education/validation';
-import {useDomainMutation} from '@/lib/education/use-mutation';
-export function ClassPanel({initial}:{initial:z.infer<typeof classSnapshot>}){
- const classOpener=useRef<HTMLButtonElement>(null);
- const [classOpen,setClassOpen]=useState(false),[dirty,setDirty]=useState(false);
- const [data,setData]=useState(initial),[year,setYear]=useState(initial.years.find(y=>y.is_active)?.id??initial.years[0]?.id??''),[editing,setEditing]=useState<string|null>(null),[roster,setRoster]=useState(''),[search,setSearch]=useState('');const {busy,message,mutate}=useDomainMutation('/api/classes',classSnapshot,'classes',next=>{setData(next);setEditing(null);setDirty(false);setClassOpen(false);if(!year)setYear(next.years[0]?.id??'');});
- const current=data.classes.find(c=>c.id===editing),selected=data.classes.find(c=>c.id===roster);const classes=data.classes.filter(c=>(!year||c.year_id===year)&&c.name.toLowerCase().includes(search.toLowerCase()));
- return <div className="space-y-6" aria-busy={busy}><p>Wali kelas berbeda dari Guru Wali. Penempatan memakai ID dan tahun ajaran; perpindahan tidak menghapus riwayat kelas.</p><p role="status" aria-live="polite">{message}</p><div className="grid gap-3 sm:grid-cols-2"><label>Tahun ajaran<select className={controlClass} value={year} disabled={busy} onChange={e=>{setYear(e.target.value);setEditing(null);setRoster('');}}><option value="">Pilih tahun…</option>{data.years.map(y=><option value={y.id} key={y.id}>{y.start_year}/{y.start_year+1}{y.is_active?' (Aktif)':''}</option>)}</select></label><label>Cari kelas<input className={controlClass} value={search} onChange={e=>setSearch(e.target.value)}/></label></div>
- {data.can_manage&&<Card><CardHeader><CardTitle>Tahun ajaran</CardTitle></CardHeader><CardContent className="space-y-4"><form onSubmit={e=>{e.preventDefault();const f=new FormData(e.currentTarget);void mutate(data.revision,{type:'year',startYear:Number(f.get('startYear'))});}}><fieldset disabled={busy} className="flex flex-wrap items-end gap-3"><TextField label="Tahun awal (misalnya 2026)" name="startYear" type="number" required/><Button type="submit">Tambah tahun ajaran</Button></fieldset></form><Button disabled={busy||!year} variant="outline" onClick={()=>{if(window.confirm('Aktifkan tahun ajaran terpilih? Tahun lain tetap tersimpan sebagai riwayat.'))void mutate(data.revision,{type:'year_activate',id:year});}}>Jadikan tahun terpilih aktif</Button></CardContent></Card>}
- {data.can_manage&&<Dialog returnFocusRef={classOpener} open={classOpen} onOpenChange={next=>{if(busy)return;if(!next&&dirty&&!window.confirm('Tutup formulir dan abaikan perubahan kelas yang belum disimpan?'))return;setClassOpen(next);if(!next){setEditing(null);setDirty(false);}}} title={current?'Edit kelas':'Tambah kelas'} description="Nama, tingkat, dan wali kelas mengikuti tahun ajaran terpilih. Tanda * wajib diisi." trigger={<Button disabled={busy||!year} onClick={e=>{classOpener.current=e.currentTarget;setEditing(null);setDirty(false);}}>Tambah kelas</Button>}><form onChangeCapture={()=>setDirty(true)} key={`${editing}-${year}-${data.revision}`} onSubmit={e=>{e.preventDefault();const f=new FormData(e.currentTarget);void mutate(data.revision,{type:'class',id:current?.id??null,yearId:current?.year_id??year,level:Number(f.get('level')),name:String(f.get('name')),teacherId:String(f.get('teacherId'))||null});}}><fieldset disabled={busy||!year} className="grid gap-4 sm:grid-cols-2"><TextField name="name" label="Nama kelas" value={current?.name} required max={50}/><SelectField name="level" label="Tingkat" value={String(current?.level??7)}>{[7,8,9].map(l=><option key={l} value={l}>{l}</option>)}</SelectField><SelectField name="teacherId" label="Wali kelas" value={current?.teacher_id??''}><option value="">Belum ditetapkan</option>{data.teachers.map(p=><option key={p.id} value={p.id}>{p.name} ({p.username})</option>)}</SelectField><div className="flex items-end gap-2"><Button type="submit">Simpan kelas</Button>{<Button variant="outline" type="button" onClick={()=>{if(!dirty||window.confirm('Abaikan perubahan kelas yang belum disimpan?')){setEditing(null);setClassOpen(false);setDirty(false);}}}>Batal</Button>}</div></fieldset></form></Dialog>}
- {classes.length===0?<p className="rounded border p-6">Belum ada kelas yang sesuai tahun, pencarian, dan hak akses Anda.</p>:<ul className="grid gap-4 sm:grid-cols-2">{classes.map(c=><li key={c.id} className="space-y-3 rounded border p-4"><h2 className="text-xl font-semibold">{c.name} {c.archived?'(Arsip)':''}</h2><p>Tingkat {c.level}; wali kelas {c.teacher_name??'belum ditetapkan'}.</p><p>{c.students.length} siswa dapat diakses pada penempatan ini.</p><div className="flex flex-wrap gap-2"><Button variant="outline" disabled={busy} onClick={()=>setRoster(c.id)}>Daftar siswa</Button>{data.can_manage&&!c.archived&&<><Button variant="outline" disabled={busy} onClick={e=>{classOpener.current=e.currentTarget;setEditing(c.id);setDirty(false);setClassOpen(true);}}>Edit</Button><Button variant="outline" disabled={busy} onClick={()=>{if(window.confirm(`Arsipkan kelas ${c.name}? Riwayat tetap tersimpan.`))void mutate(data.revision,{type:'class_archive',id:c.id});}}>Arsipkan</Button></>}</div></li>)}</ul>}
- {selected&&<Card><CardHeader><CardTitle>Siswa kelas {selected.name}</CardTitle></CardHeader><CardContent className="space-y-4">{selected.students.length===0?<p>Belum ada siswa yang dapat diakses.</p>:<ul className="divide-y">{selected.students.map(p=><li key={p.id} className="flex flex-wrap justify-between gap-3 py-2"><span>{p.name} ({p.username}) · mulai {p.starts_on}{p.status!=='active'?' · akun nonaktif':''}</span>{data.can_manage&&!selected.archived&&<Button variant="outline" disabled={busy} onClick={()=>{if(window.confirm(`Keluarkan ${p.name} dari penempatan kelas ini?`))void mutate(data.revision,{type:'enrollment',classId:selected.id,studentIds:[p.id],startsOn:p.starts_on,remove:true});}}>Keluarkan</Button>}</li>)}</ul>}
- {data.can_manage&&!selected.archived&&<form key={`${selected.id}-${data.revision}`} onSubmit={e=>{e.preventDefault();const f=new FormData(e.currentTarget);void mutate(data.revision,{type:'enrollment',classId:selected.id,studentIds:f.getAll('students').map(String),startsOn:String(f.get('startsOn')),remove:false});}}><fieldset disabled={busy} className="space-y-3"><TextField name="startsOn" label="Tanggal mulai penempatan" type="date" required/><fieldset className="max-h-64 overflow-auto rounded border p-3"><legend>Pilih siswa untuk ditambah / dipindahkan</legend>{data.students.map(p=><label key={p.id} className="flex items-center gap-2 py-1"><input type="checkbox" name="students" value={p.id}/>{p.name} ({p.username})</label>)}</fieldset><Button type="submit">Tempatkan siswa terpilih</Button></fieldset></form>}
- <p className="text-sm text-muted-foreground">Rekap kehadiran, iuran, saldo, dan bimbingan akan menggunakan ID penempatan ini pada modul terkait.</p></CardContent></Card>}
- <Button variant="outline" disabled={busy} onClick={()=>window.location.reload()}>Muat ulang</Button></div>;
+"use client";
+import { useEffect, useRef, useState } from "react";
+import type { z } from "zod";
+import { Dialog } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import {
+  SelectField,
+  TextField,
+  controlClass,
+} from "@/components/domain-controls";
+import { Status } from "@/components/ui/status";
+import { classCommand, classSnapshot } from "@/lib/education/validation";
+import { useDomainMutation } from "@/lib/education/use-mutation";
+type Snapshot = z.infer<typeof classSnapshot>;
+export function ClassPanel({ initial }: { initial: Snapshot }) {
+  const classOpener = useRef<HTMLButtonElement>(null),
+    rosterHeading = useRef<HTMLHeadingElement>(null);
+  const [data, setData] = useState(initial),
+    [year, setYear] = useState(
+      initial.years.find((y) => y.is_active)?.id ?? initial.years[0]?.id ?? "",
+    );
+  const [classOpen, setClassOpen] = useState(false),
+    [dirty, setDirty] = useState(false),
+    [editing, setEditing] = useState<string | null>(null);
+  const [roster, setRoster] = useState(""),
+    [search, setSearch] = useState(""),
+    [studentSearch, setStudentSearch] = useState("");
+  const [chosen, setChosen] = useState<string[]>([]),
+    [startsOn, setStartsOn] = useState("");
+  function clearPlacement() {
+    setChosen([]);
+    setStartsOn("");
+    setStudentSearch("");
+  }
+  const mutation = useDomainMutation(
+    "/api/classes",
+    classSnapshot,
+    "classes",
+    (next, raw) => {
+      const command = classCommand.parse(raw);
+      setData(next);
+      setClassOpen(false);
+      setEditing(null);
+      setDirty(false);
+      if (command.type === "year") {
+        setYear(
+          next.years.find((y) => y.start_year === command.startYear)?.id ?? "",
+        );
+        setRoster("");
+        clearPlacement();
+      } else if (year && !next.years.some((y) => y.id === year)) {
+        setYear(next.years[0]?.id ?? "");
+        setRoster("");
+        clearPlacement();
+      }
+      if (command.type === "enrollment" || !next.can_manage) clearPlacement();
+    },
+    { confirmed: true, commandSchema: classCommand },
+  );
+  const { busy, message, phase, blocked, feedbackRef, fail, clear, mutate } =
+    mutation;
+  const disabled = busy || blocked,
+    current = data.classes.find((c) => c.id === editing),
+    selected = data.classes.find((c) => c.id === roster);
+  const classes = data.classes.filter(
+    (c) =>
+      (!year || c.year_id === year) &&
+      c.name.toLowerCase().includes(search.trim().toLowerCase()),
+  );
+  const yearLabel = (id: string) => {
+    const y = data.years.find((y) => y.id === id);
+    return y ? `${y.start_year}/${y.start_year + 1}` : "—";
+  };
+  useEffect(() => {
+    if (roster) {
+      rosterHeading.current?.focus();
+      rosterHeading.current?.scrollIntoView({
+        block: "start",
+        behavior: "instant",
+      });
+    }
+  }, [roster]);
+  function leavePlacement() {
+    return (
+      (!chosen.length && !startsOn) ||
+      window.confirm(
+        "Abaikan pilihan siswa dan tanggal penempatan yang belum disimpan?",
+      )
+    );
+  }
+  function openClass(id: string | null, button: HTMLButtonElement) {
+    classOpener.current = button;
+    setEditing(id);
+    setDirty(false);
+    clear();
+    setClassOpen(true);
+  }
+  function closeClass(open: boolean) {
+    if (busy) return;
+    if (
+      !open &&
+      dirty &&
+      !window.confirm(
+        "Tutup formulir dan abaikan perubahan kelas yang belum disimpan?",
+      )
+    )
+      return;
+    setClassOpen(open);
+    if (!open) {
+      setEditing(null);
+      setDirty(false);
+    }
+  }
+  function showRoster(id: string) {
+    if (id !== roster) {
+      if (!leavePlacement()) return;
+      clearPlacement();
+      setRoster(id);
+    } else {
+      rosterHeading.current?.focus();
+      rosterHeading.current?.scrollIntoView({
+        block: "start",
+        behavior: "instant",
+      });
+    }
+  }
+  const feedback = message ? (
+    <div
+      ref={feedbackRef}
+      tabIndex={-1}
+      className="rounded-lg focus-visible:outline-2 focus-visible:outline-ring"
+    >
+      <Status
+        tone={
+          phase === "success"
+            ? "success"
+            : phase === "pending"
+              ? "info"
+              : "error"
+        }
+      >
+        {message}
+        {blocked && (
+          <div className="mt-3">
+            <Button
+              type="button"
+              variant="outline"
+              disabled={busy}
+              onClick={() => window.location.reload()}
+            >
+              Muat ulang data
+            </Button>
+          </div>
+        )}
+      </Status>
+    </div>
+  ) : null;
+  const candidates = data.students.filter(
+    (p) =>
+      !selected?.students.some((s) => s.id === p.id) &&
+      `${p.name} ${p.username ?? ""}`
+        .toLowerCase()
+        .includes(studentSearch.trim().toLowerCase()),
+  );
+  return (
+    <div className="classes-panel space-y-6" aria-busy={busy}>
+      {!classOpen && feedback}
+      <div className="classes-filters">
+        <label className="block text-sm">
+          Tahun ajaran
+          <select
+            className={controlClass}
+            value={year}
+            disabled={disabled}
+            onChange={(e) => {
+              if (!leavePlacement()) return;
+              setYear(e.target.value);
+              setRoster("");
+              clearPlacement();
+            }}
+          >
+            <option value="">Semua tahun ajaran</option>
+            {data.years.map((y) => (
+              <option value={y.id} key={y.id}>
+                {y.start_year}/{y.start_year + 1}
+                {y.is_active ? " (Aktif)" : ""}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="block text-sm">
+          Cari kelas
+          <input
+            className={controlClass}
+            type="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </label>
+      </div>
+      {data.can_manage && (
+        <Card>
+          <CardHeader>
+            <h2 className="text-lg font-semibold">Tahun ajaran</h2>
+            <p className="text-sm text-muted-foreground">
+              Tahun baru tersimpan sebagai riwayat sampai diaktifkan.
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!leavePlacement()) return;
+                const f = new FormData(e.currentTarget);
+                void mutate(data.revision, {
+                  type: "year",
+                  startYear: Number(f.get("startYear")),
+                });
+              }}
+            >
+              <fieldset
+                disabled={disabled}
+                className="classes-year-fields flex flex-wrap items-end gap-3"
+              >
+                <label className="block min-w-0 flex-1 text-sm">
+                  Tahun awal (misalnya 2026)
+                  <input
+                    className={controlClass}
+                    name="startYear"
+                    type="number"
+                    min={1900}
+                    max={2199}
+                    step={1}
+                    required
+                  />
+                </label>
+                <Button type="submit">Tambah tahun ajaran</Button>
+              </fieldset>
+            </form>
+            <Button
+              disabled={
+                disabled ||
+                !year ||
+                data.years.some((y) => y.id === year && y.is_active)
+              }
+              variant="outline"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Aktifkan tahun ajaran terpilih? Tahun lain tetap tersimpan sebagai riwayat.",
+                  )
+                )
+                  void mutate(data.revision, {
+                    type: "year_activate",
+                    id: year,
+                  });
+              }}
+            >
+              Jadikan tahun terpilih aktif
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p role="status" className="text-sm text-muted-foreground">
+          {classes.length} kelas ditampilkan
+        </p>
+        {data.can_manage && (
+          <Button
+            disabled={disabled || !year}
+            onClick={(e) => openClass(null, e.currentTarget)}
+          >
+            Tambah kelas
+          </Button>
+        )}
+      </div>
+      {data.can_manage && (
+        <Dialog
+          className="classes-dialog"
+          returnFocusRef={classOpener}
+          open={classOpen}
+          onOpenChange={closeClass}
+          title={current ? "Edit kelas" : "Tambah kelas"}
+          description="Isi nama, tingkat, dan wali kelas. Tanda * wajib diisi."
+        >
+          <div className="space-y-4">
+            {feedback}
+            <p className="text-sm text-muted-foreground">
+              Tahun ajaran {yearLabel(current?.year_id ?? year)}
+            </p>
+            <form
+              key={`${editing}-${year}-${data.revision}`}
+              onChangeCapture={() => setDirty(true)}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const f = new FormData(e.currentTarget),
+                  teacherId = String(f.get("teacherId"));
+                if (
+                  teacherId &&
+                  !data.teachers.some((t) => t.id === teacherId)
+                ) {
+                  fail(
+                    "Wali kelas sebelumnya tidak lagi tersedia. Pilih guru aktif atau Belum ditetapkan sebelum menyimpan.",
+                  );
+                  return;
+                }
+                void mutate(data.revision, {
+                  type: "class",
+                  id: current?.id ?? null,
+                  yearId: current?.year_id ?? year,
+                  level: Number(f.get("level")),
+                  name: String(f.get("name")),
+                  teacherId: teacherId || null,
+                });
+              }}
+            >
+              <fieldset disabled={disabled || !year} className="classes-fields">
+                <TextField
+                  name="name"
+                  label="Nama kelas"
+                  value={current?.name}
+                  required
+                  max={50}
+                />
+                <SelectField
+                  name="level"
+                  label="Tingkat"
+                  value={String(current?.level ?? 7)}
+                >
+                  {[7, 8, 9].map((l) => (
+                    <option key={l} value={l}>
+                      {l}
+                    </option>
+                  ))}
+                </SelectField>
+                <SelectField
+                  name="teacherId"
+                  label="Wali kelas"
+                  value={current?.teacher_id ?? ""}
+                >
+                  <option value="">Belum ditetapkan</option>
+                  {current?.teacher_id &&
+                    !data.teachers.some((p) => p.id === current.teacher_id) && (
+                      <option value={current.teacher_id}>
+                        {current.teacher_name ?? "Wali kelas sebelumnya"} (tidak
+                        tersedia)
+                      </option>
+                    )}
+                  {data.teachers.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name} ({p.username})
+                    </option>
+                  ))}
+                </SelectField>
+              </fieldset>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Button type="submit" disabled={disabled || !year}>
+                  {busy ? "Menyimpan…" : "Simpan kelas"}
+                </Button>
+                <Button
+                  variant="outline"
+                  type="button"
+                  disabled={busy}
+                  onClick={() => closeClass(false)}
+                >
+                  Batal
+                </Button>
+              </div>
+            </form>
+          </div>
+        </Dialog>
+      )}
+      {classes.length === 0 ? (
+        <Status>
+          {search.trim()
+            ? "Tidak ada kelas yang cocok. Ubah pencarian atau tahun ajaran."
+            : "Belum ada kelas yang dapat diakses pada tahun ajaran ini."}
+        </Status>
+      ) : (
+        <ul className="classes-grid">
+          {classes.map((c) => (
+            <li
+              key={c.id}
+              className="min-w-0 space-y-4 rounded-xl border bg-card p-4 shadow-xs"
+            >
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  {yearLabel(c.year_id)} · Tingkat {c.level}
+                  {c.archived ? " · Arsip" : ""}
+                </p>
+                <h2 id={`class-${c.id}`} className="text-xl font-semibold">
+                  {c.name}
+                </h2>
+                <p className="text-sm">
+                  Wali kelas: {c.teacher_name ?? "belum ditetapkan"}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {c.students.length} siswa dapat diakses
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  disabled={busy}
+                  aria-describedby={`class-${c.id}`}
+                  onClick={() => showRoster(c.id)}
+                >
+                  Daftar siswa
+                </Button>
+                {data.can_manage && !c.archived && (
+                  <>
+                    <Button
+                      variant="outline"
+                      disabled={disabled}
+                      aria-describedby={`class-${c.id}`}
+                      onClick={(e) => openClass(c.id, e.currentTarget)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="outline"
+                      disabled={disabled}
+                      aria-describedby={`class-${c.id}`}
+                      onClick={() => {
+                        if (
+                          window.confirm(
+                            `Arsipkan kelas ${c.name}? Riwayat tetap tersimpan.`,
+                          )
+                        )
+                          void mutate(data.revision, {
+                            type: "class_archive",
+                            id: c.id,
+                          });
+                      }}
+                    >
+                      Arsipkan
+                    </Button>
+                  </>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {selected && (
+        <Card>
+          <CardHeader>
+            <h2
+              ref={rosterHeading}
+              tabIndex={-1}
+              className="scroll-mt-6 text-xl font-semibold"
+            >
+              Siswa kelas {selected.name}
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              {yearLabel(selected.year_id)} · {selected.students.length} siswa
+              dapat diakses
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            {selected.students.length === 0 ? (
+              <Status>Belum ada siswa yang dapat diakses.</Status>
+            ) : (
+              <ul className="divide-y">
+                {selected.students.map((p) => (
+                  <li key={p.id} className="classes-student">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium">{p.name}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {p.username} · mulai {p.starts_on}
+                        {p.status !== "active" ? " · akun nonaktif" : ""}
+                      </p>
+                    </div>
+                    {data.can_manage && !selected.archived && (
+                      <Button
+                        variant="outline"
+                        disabled={disabled}
+                        aria-label={`Keluarkan ${p.name}`}
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              `Keluarkan ${p.name} dari penempatan kelas ini? Riwayat tetap tersimpan.`,
+                            )
+                          )
+                            void mutate(data.revision, {
+                              type: "enrollment",
+                              classId: selected.id,
+                              studentIds: [p.id],
+                              startsOn: p.starts_on,
+                              remove: true,
+                            });
+                        }}
+                      >
+                        Keluarkan
+                      </Button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {data.can_manage && !selected.archived && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const command = {
+                    type: "enrollment" as const,
+                    classId: selected.id,
+                    studentIds: chosen,
+                    startsOn,
+                    remove: false,
+                  };
+                  if (!classCommand.safeParse(command).success) {
+                    fail("Pilih 1–500 siswa dan tanggal mulai yang valid.");
+                    return;
+                  }
+                  if (
+                    window.confirm(
+                      `Tempatkan ${chosen.length} siswa di kelas ${selected.name}? Penempatan sebelumnya pada tahun yang sama akan diakhiri; riwayat tetap tersimpan.`,
+                    )
+                  )
+                    void mutate(data.revision, command);
+                }}
+              >
+                <fieldset disabled={disabled} className="space-y-4">
+                  <legend className="mb-3 text-lg font-semibold">
+                    Tambah atau pindahkan siswa
+                  </legend>
+                  <p className="text-sm text-muted-foreground">
+                    Wali kelas berbeda dari Guru Wali. Perpindahan tetap
+                    menyimpan riwayat kelas.
+                  </p>
+                  <label className="block text-sm">
+                    Tanggal mulai penempatan
+                    <input
+                      className={controlClass}
+                      type="date"
+                      name="startsOn"
+                      value={startsOn}
+                      onChange={(e) => setStartsOn(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label className="block text-sm">
+                    Cari siswa
+                    <input
+                      className={controlClass}
+                      type="search"
+                      value={studentSearch}
+                      onChange={(e) => setStudentSearch(e.target.value)}
+                    />
+                  </label>
+                  <p role="status" className="text-sm">
+                    {chosen.length} siswa dipilih · maksimum 500
+                  </p>
+                  <fieldset className="classes-picker">
+                    <legend>Pilih siswa untuk ditambah / dipindahkan</legend>
+                    {candidates.length === 0 ? (
+                      <p className="text-sm text-muted-foreground">
+                        Tidak ada siswa yang tersedia sesuai pencarian.
+                      </p>
+                    ) : (
+                      candidates.map((p) => (
+                        <label key={p.id} className="classes-check">
+                          <input
+                            type="checkbox"
+                            name="students"
+                            value={p.id}
+                            checked={chosen.includes(p.id)}
+                            disabled={
+                              !chosen.includes(p.id) && chosen.length >= 500
+                            }
+                            onChange={(e) =>
+                              setChosen((old) =>
+                                e.target.checked
+                                  ? [...old, p.id]
+                                  : old.filter((id) => id !== p.id),
+                              )
+                            }
+                          />
+                          <span>
+                            {p.name} ({p.username})
+                          </span>
+                        </label>
+                      ))
+                    )}
+                  </fieldset>
+                  <Button
+                    type="submit"
+                    disabled={disabled || chosen.length === 0}
+                  >
+                    Tempatkan siswa terpilih
+                  </Button>
+                </fieldset>
+              </form>
+            )}
+          </CardContent>
+        </Card>
+      )}
+      <Button
+        variant="outline"
+        disabled={busy}
+        onClick={() => window.location.reload()}
+      >
+        Muat ulang
+      </Button>
+    </div>
+  );
 }

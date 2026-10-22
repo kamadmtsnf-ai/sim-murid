@@ -8,8 +8,8 @@ async function handle(request:NextRequest,mutate:boolean){
  const {caller,reply}=await educationContext(request);if(!caller)return reply({message:'Sesi tidak berlaku.'},401);
  try{
   const args={p_actor:caller.principal.id,p_session:caller.sessionId};
-  if(mutate){const input=mutation(classCommand).parse(await jsonBody(request));const command=classCommand.parse(input.command);const r=await createAuthAdmin().rpc('app_classes_write',{...args,p_request:input.requestId,p_revision:input.revision,p_command:command});if(r.error)throw new Error('Write unavailable');const result=resultSchema.parse(r.data);if(result.code!=='saved')return reply({code:result.code,message:domainMessages[result.code]??'Permintaan belum berhasil.'},result.code==='denied'?403:409);}
   const year=request.nextUrl.searchParams.get('year');if(year)z.uuid().parse(year);
+  if(mutate){const input=mutation(classCommand).parse(await jsonBody(request));const command=classCommand.parse(input.command);const r=await createAuthAdmin().rpc('app_classes_write',{...args,p_request:input.requestId,p_revision:input.revision,p_command:command});if(r.error)throw new Error('Write unavailable');const result=resultSchema.parse(r.data);if(result.code!=='saved')return reply({code:result.code,message:domainMessages[result.code]??'Permintaan belum berhasil.'},result.code==='denied'?403:409);}
   return reply({classes:await classesData(args.p_actor,args.p_session,year),message:mutate?'Data berhasil disimpan.':''});
  }catch(error){const e=failure(error);return reply({message:e.message},e.status);}
 }

@@ -1,0 +1,3187 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "normal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 610.59375,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 670.59375,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 821.59375,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1034.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 1034.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1086.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1308.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 1308.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1360.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1582.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 1667.59375,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 320 action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 1735.59375,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "normal 320 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "normal 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 581.796875,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 641.796875,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 239.765625,
+        "y": 735.796875,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 949.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 949.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 214.953125,
+        "y": 949.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1171.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 1171.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 214.953125,
+        "y": 1171.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1393.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 1478.796875,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 375 action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 1546.796875,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "normal 375 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "normal 375 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 546.359375,
+        "y": 421.796875,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 49,
+        "y": 481.796875,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 624.765625,
+        "y": 575.796875,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 789.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 161.828125,
+        "y": 789.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 222.953125,
+        "y": 789.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 409,
+        "y": 789.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 529.828125,
+        "y": 789.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 590.953125,
+        "y": 789.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 1011.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 24,
+        "y": 1096.796875,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 768 action fits",
+      "passed": true,
+      "detail": {
+        "x": 24,
+        "y": 1164.796875,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "normal 768 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "normal 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 1024 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1024,
+        "document": 1024
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 782.359375,
+        "y": 437.796875,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 341,
+        "y": 497.796875,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 860.765625,
+        "y": 591.796875,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 333,
+        "y": 805.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 453.828125,
+        "y": 805.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 514.953125,
+        "y": 805.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 673,
+        "y": 805.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 793.828125,
+        "y": 805.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 854.953125,
+        "y": 805.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 333,
+        "y": 1027.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 316,
+        "y": 1112.796875,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1024 action fits",
+      "passed": true,
+      "detail": {
+        "x": 316,
+        "y": 1180.796875,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "normal 1024 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "normal 1024 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 1198.359375,
+        "y": 437.796875,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 341,
+        "y": 497.796875,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 1276.765625,
+        "y": 591.796875,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 333,
+        "y": 805.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 453.828125,
+        "y": 805.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 514.953125,
+        "y": 805.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 881,
+        "y": 805.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 1001.828125,
+        "y": 805.796875,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 1062.953125,
+        "y": 805.796875,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 333,
+        "y": 1027.796875,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 316,
+        "y": 1112.796875,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "normal 1440 action fits",
+      "passed": true,
+      "detail": {
+        "x": 316,
+        "y": 1180.796875,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "normal 1440 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "normal 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "long no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 610.59375,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 670.59375,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 821.59375,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1566.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 1566.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1618.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2372.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 2372.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2424.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3178.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 3263.59375,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "long action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 3331.59375,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "long footer reachable",
+      "passed": true
+    },
+    {
+      "name": "long axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "many no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 610.59375,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 670.59375,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 821.59375,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1034.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 1034.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1086.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1308.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 1308.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1360.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1582.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1804.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 1804.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1856.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2078.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 2078.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2130.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2352.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 2352.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2404.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2626.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 2626.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2678.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2900.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 2900.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 2952.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3174.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 3174.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3226.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3448.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 3448.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3500.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3722.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 3722.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3774.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 3996.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 3996.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 4048.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 4270.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 4270.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 4322.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 4544.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 4544.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 4596.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 4818.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 4818.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 4870.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5092.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 5092.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5144.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5366.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 5366.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5418.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5640.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 5640.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5692.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5914.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 5914.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 5966.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 6188.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 6188.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 6240.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 6462.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 6462.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 6514.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 6736.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 6736.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 6788.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7010.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 7010.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7062.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7284.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 7284.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7336.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7558.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 7558.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7610.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7832.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 7832.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 7884.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8106.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 8106.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8158.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8380.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 8380.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8432.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8654.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 8654.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8706.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8928.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 8928.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 8980.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 9202.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 9202.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 9254.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 9476.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 9476.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 9528.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 9750.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 9750.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 9802.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10024.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 10024.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10076.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10298.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 10298.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10350.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10572.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 10572.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10624.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10846.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 10846.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 10898.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11120.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 11120.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11172.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11394.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 11394.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11446.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11668.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 11668.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11720.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11942.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 11942.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 11994.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 12216.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 12216.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 12268.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 12490.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 12490.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 12542.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 12764.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 12764.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 12816.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13038.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 13038.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13090.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13312.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 13312.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13364.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13586.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 13586.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13638.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13860.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 13860.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 13912.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 14134.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 153.828125,
+        "y": 14134.59375,
+        "width": 53.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 14186.59375,
+        "width": 86.71875,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 14271.59375,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "many action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 14339.59375,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "many footer reachable",
+      "passed": true
+    },
+    {
+      "name": "many axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 610.59375,
+        "width": 172.640625,
+        "height": 44
+      }
+    },
+    {
+      "name": "empty action fits",
+      "passed": true,
+      "detail": {
+        "x": 41,
+        "y": 670.59375,
+        "width": 211.125,
+        "height": 44
+      }
+    },
+    {
+      "name": "empty action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 821.59375,
+        "width": 119.234375,
+        "height": 44
+      }
+    },
+    {
+      "name": "empty action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 987.59375,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "empty action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 1055.59375,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "empty footer reachable",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 620.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "readonly action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 842.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "readonly action fits",
+      "passed": true,
+      "detail": {
+        "x": 33,
+        "y": 1064.59375,
+        "width": 112.828125,
+        "height": 44
+      }
+    },
+    {
+      "name": "readonly action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 1149.59375,
+        "width": 104.578125,
+        "height": 44
+      }
+    },
+    {
+      "name": "readonly action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 1217.59375,
+        "width": 117.65625,
+        "height": 25.59375
+      }
+    },
+    {
+      "name": "readonly footer reachable",
+      "passed": true
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "read-only no management",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading footer reachable",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error action fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 387.59375,
+        "width": 119.375,
+        "height": 44
+      }
+    },
+    {
+      "name": "error footer reachable",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "error retry callback",
+      "passed": true
+    },
+    {
+      "name": "safe error content",
+      "passed": true
+    },
+    {
+      "name": "text 200 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 1611.78125,
+        "width": 158,
+        "height": 136
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 81,
+        "y": 1779.78125,
+        "width": 158,
+        "height": 178
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 32,
+        "y": 2208.78125,
+        "width": 214.453125,
+        "height": 56
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 65,
+        "y": 5769.78125,
+        "width": 190,
+        "height": 98
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 65,
+        "y": 5883.78125,
+        "width": 80.234375,
+        "height": 58
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 65,
+        "y": 5957.78125,
+        "width": 147.4375,
+        "height": 58
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 65,
+        "y": 9521.78125,
+        "width": 190,
+        "height": 98
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 65,
+        "y": 9635.78125,
+        "width": 80.234375,
+        "height": 58
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 65,
+        "y": 9709.78125,
+        "width": 147.4375,
+        "height": 58
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 65,
+        "y": 13313.78125,
+        "width": 190,
+        "height": 98
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 32,
+        "y": 13492.78125,
+        "width": 183.15625,
+        "height": 58
+      }
+    },
+    {
+      "name": "text 200 action fits",
+      "passed": true,
+      "detail": {
+        "x": 32,
+        "y": 13598.78125,
+        "width": 235.296875,
+        "height": 51.1875
+      }
+    },
+    {
+      "name": "text 200 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "text 200 dialog fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "right": 304,
+        "y": 16,
+        "bottom": 796,
+        "width": 320,
+        "height": 812,
+        "scroll": 1073,
+        "client": 778
+      }
+    },
+    {
+      "name": "text 200 dialog no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "text 200 footer usable",
+      "passed": true
+    },
+    {
+      "name": "text 400 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 161,
+        "y": 9714.3125,
+        "width": 24,
+        "height": 1296
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 161,
+        "y": 11079.3125,
+        "width": 26,
+        "height": 1858
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 64,
+        "y": 14236.3125,
+        "width": 192,
+        "height": 256
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 129,
+        "y": 63453.3125,
+        "width": 62,
+        "height": 738
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 129,
+        "y": 64223.3125,
+        "width": 62,
+        "height": 338
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 129,
+        "y": 64593.3125,
+        "width": 62,
+        "height": 658
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 129,
+        "y": 114117.3125,
+        "width": 62,
+        "height": 738
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 129,
+        "y": 114887.3125,
+        "width": 62,
+        "height": 338
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 129,
+        "y": 115257.3125,
+        "width": 62,
+        "height": 658
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 129,
+        "y": 165101.3125,
+        "width": 62,
+        "height": 738
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 64,
+        "y": 166005.3125,
+        "width": 192,
+        "height": 178
+      }
+    },
+    {
+      "name": "text 400 action fits",
+      "passed": true,
+      "detail": {
+        "x": 64,
+        "y": 166279.3125,
+        "width": 192,
+        "height": 307.171875
+      }
+    },
+    {
+      "name": "text 400 footer reachable",
+      "passed": true
+    },
+    {
+      "name": "text 400 dialog fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "right": 304,
+        "y": 16,
+        "bottom": 796,
+        "width": 320,
+        "height": 812,
+        "scroll": 4865,
+        "client": 778
+      }
+    },
+    {
+      "name": "text 400 dialog no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "text 400 footer usable",
+      "passed": true
+    },
+    {
+      "name": "320x640 dialog fits",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "right": 304,
+        "y": 82.5,
+        "bottom": 557.5,
+        "width": 320,
+        "height": 640,
+        "scroll": 473,
+        "client": 473
+      }
+    },
+    {
+      "name": "320x640 dialog no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320x640 footer usable",
+      "passed": true
+    },
+    {
+      "name": "dialog 320x640 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "modal keyboard focus trapped",
+      "passed": true
+    },
+    {
+      "name": "focus restored after Escape",
+      "passed": true
+    },
+    {
+      "name": "768x1024 dialog fits",
+      "passed": true,
+      "detail": {
+        "x": 48,
+        "right": 720,
+        "y": 326.5,
+        "bottom": 697.5,
+        "width": 768,
+        "height": 1024,
+        "scroll": 369,
+        "client": 369
+      }
+    },
+    {
+      "name": "768x1024 dialog no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "768x1024 footer usable",
+      "passed": true
+    },
+    {
+      "name": "dialog 768x1024 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "modal keyboard focus trapped",
+      "passed": true
+    },
+    {
+      "name": "focus restored after Escape",
+      "passed": true
+    },
+    {
+      "name": "1440x900 dialog fits",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "right": 1056,
+        "y": 264.5,
+        "bottom": 635.5,
+        "width": 1440,
+        "height": 900,
+        "scroll": 369,
+        "client": 369
+      }
+    },
+    {
+      "name": "1440x900 dialog no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440x900 footer usable",
+      "passed": true
+    },
+    {
+      "name": "dialog 1440x900 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "modal keyboard focus trapped",
+      "passed": true
+    },
+    {
+      "name": "focus restored after Escape",
+      "passed": true
+    },
+    {
+      "name": "812x240 dialog fits",
+      "passed": true,
+      "detail": {
+        "x": 70,
+        "right": 742,
+        "y": 16,
+        "bottom": 224,
+        "width": 812,
+        "height": 240,
+        "scroll": 369,
+        "client": 206
+      }
+    },
+    {
+      "name": "812x240 dialog no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "812x240 footer usable",
+      "passed": true
+    },
+    {
+      "name": "dialog 812x240 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "modal keyboard focus trapped",
+      "passed": true
+    },
+    {
+      "name": "focus restored after Escape",
+      "passed": true
+    },
+    {
+      "name": "unavailable teacher preserved",
+      "passed": true
+    },
+    {
+      "name": "unavailable teacher never silently cleared",
+      "passed": true
+    },
+    {
+      "name": "modal feedback stays accessible",
+      "passed": true
+    },
+    {
+      "name": "explicit teacher removal kept",
+      "passed": true
+    },
+    {
+      "name": "new year selected without activating",
+      "passed": true
+    },
+    {
+      "name": "year creation single command",
+      "passed": true
+    },
+    {
+      "name": "roster focuses heading",
+      "passed": true
+    },
+    {
+      "name": "search preserves selected IDs",
+      "passed": true
+    },
+    {
+      "name": "resize keeps date",
+      "passed": true
+    },
+    {
+      "name": "resize keeps student selection",
+      "passed": true
+    },
+    {
+      "name": "pending write disabled",
+      "passed": true
+    },
+    {
+      "name": "one pending enrollment request",
+      "passed": true
+    },
+    {
+      "name": "confirmed save clears placement draft",
+      "passed": true
+    },
+    {
+      "name": "hidden selection sent exactly once",
+      "passed": true
+    },
+    {
+      "name": "known error preserves draft",
+      "passed": true
+    },
+    {
+      "name": "duplicate remains editable",
+      "passed": true
+    },
+    {
+      "name": "duplicate modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "stale write locked",
+      "passed": true
+    },
+    {
+      "name": "stale no automatic replay",
+      "passed": true
+    },
+    {
+      "name": "stale reload available",
+      "passed": true
+    },
+    {
+      "name": "stale lock survives modal close",
+      "passed": true
+    },
+    {
+      "name": "offline write locked",
+      "passed": true
+    },
+    {
+      "name": "offline no automatic replay",
+      "passed": true
+    },
+    {
+      "name": "offline reload available",
+      "passed": true
+    },
+    {
+      "name": "offline lock survives modal close",
+      "passed": true
+    },
+    {
+      "name": "invalid write locked",
+      "passed": true
+    },
+    {
+      "name": "invalid no automatic replay",
+      "passed": true
+    },
+    {
+      "name": "invalid reload available",
+      "passed": true
+    },
+    {
+      "name": "invalid lock survives modal close",
+      "passed": true
+    },
+    {
+      "name": "late response after unmount cannot call onSaved",
+      "passed": true
+    },
+    {
+      "name": "shared hook remains compatible with single-argument callbacks",
+      "passed": true
+    },
+    {
+      "name": "timeout blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal 320",
+      "violations": []
+    },
+    {
+      "name": "normal 375",
+      "violations": []
+    },
+    {
+      "name": "normal 768",
+      "violations": []
+    },
+    {
+      "name": "normal 1024",
+      "violations": []
+    },
+    {
+      "name": "normal 1440",
+      "violations": []
+    },
+    {
+      "name": "long",
+      "violations": []
+    },
+    {
+      "name": "many",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    },
+    {
+      "name": "dialog 320x640",
+      "violations": []
+    },
+    {
+      "name": "dialog 768x1024",
+      "violations": []
+    },
+    {
+      "name": "dialog 1440x900",
+      "violations": []
+    },
+    {
+      "name": "dialog 812x240",
+      "violations": []
+    },
+    {
+      "name": "duplicate modal",
+      "violations": []
+    }
+  ],
+  "issues": [],
+  "limits": [
+    "Synthetic class data and intercepted write responses. Actual API/database permission checks run in separate suites.",
+    "No production student/account mutations or real role-browser UAT. Normal page/list scrolling is intentional."
+  ]
+}

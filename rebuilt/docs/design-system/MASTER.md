@@ -126,3 +126,11 @@ CSS Module hanya mengatur Beranda: gutter mengikuti viewport, track grid minmax(
 - Track sidebar serta ikon/gutter dekoratif tidak membesar tanpa batas ketika teks diperbesar. Pertahankan wrapping dan scroll vertikal normal; jangan menutupi overflow dengan pemotongan konten.
 - Schema/page/API memakai satu loader tervalidasi. Bentuk respons sukses dan tujuan link record existing tetap kompatibel.
 - Bukti dan batas pengujian: `docs/verification/user-detail-audit.md`.
+
+## Kelas dan siswa — audit 22 Oktober 2026
+
+- Kartu kelas memakai judul semantik, tahun ajaran, tingkat, wali, dan jumlah siswa sesuai scope server. Grid mengikuti lebar konten (satu kolom; dua mulai 40rem), bukan hanya lebar viewport.
+- Form tahun memakai basis label 240px agar tombol membungkus ke baris berikutnya pada ponsel. Kontrol dan tindakan minimal 44px, teks panjang boleh membungkus.
+- Modal kelas memakai Dialog yang sama; seluruh konten dapat digulir pada layar pendek dan pembesaran teks. Fokus kembali ke pemicu, Escape menghormati konfirmasi draft, dan feedback kesalahan berada di dalam modal.
+- Daftar siswa memakai baris/kartu yang membungkus. Pemilih siswa memiliki gulir lokal maksimal 50dvh, pencarian mempertahankan pilihan, dan penempatan baru memerlukan tanggal serta konfirmasi perpindahan.
+- Keberhasilan hanya ditampilkan setelah snapshot tervalidasi. Kegagalan tak pasti mengunci penyimpanan dan menawarkan muat ulang; tidak mengulang mutasi secara otomatis. Mode ini hanya diaktifkan oleh Kelas.
