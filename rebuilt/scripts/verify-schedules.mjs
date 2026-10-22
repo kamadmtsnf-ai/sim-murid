@@ -1,4 +1,4 @@
-/** Isolated Classes browser regression suite. No real account, API mutation or production data. */
+/** Isolated Schedules tab/modal browser regression suite. No real account, API mutation or production data. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
 import { createServer } from "node:http";
@@ -9,7 +9,8 @@ import assert from "node:assert/strict";
 const root = process.cwd(),
   baseline = process.argv.includes("--baseline");
 const out =
-  process.env.SCHEDULES_QA_OUTPUT ?? join(root, "docs/verification/schedules");
+  process.env.SCHEDULES_QA_OUTPUT ??
+  join(root, "docs/verification/schedules-tabs");
 await mkdir(out, { recursive: true });
 const temp = await mkdtemp(join(tmpdir(), "sim-directory-"));
 const req = createRequire(import.meta.url),
@@ -61,7 +62,7 @@ const server = createServer(async (request, response) => {
   } else {
     response.setHeader("Content-Type", "text/html");
     response.end(
-      '<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kelas QA SiM-Murid</title><link rel="stylesheet" href="/fixture.css"></head><body><a class="sr-only focus:not-sr-only" href="#main-content">Lewati ke konten utama</a><div id="root"></div><script src="/fixture.js"></script></body></html>',
+      '<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jadwal QA SiM-Murid</title><link rel="stylesheet" href="/fixture.css"></head><body><a class="sr-only focus:not-sr-only" href="#main-content">Lewati ke konten utama</a><div id="root"></div><script src="/fixture.js"></script></body></html>',
     );
   }
 });
@@ -141,21 +142,19 @@ try {
     const body = route.request().postDataJSON();
     requests.push(body);
     if (reply === "network") return route.abort();
-    if (reply === "slow") await new Promise((r) => setTimeout(r, 500));
-    if (reply === "overlap")
+    if (reply === "hang") return;
+    if (reply === "slow") await new Promise((r) => setTimeout(r, 700));
+    if (["overlap", "stale", "denied", "invalid_membership"].includes(reply))
       return route.fulfill({
-        status: 409,
+        status: reply === "denied" ? 403 : 409,
         json: {
-          code: "overlap",
-          message: "Waktu bertabrakan dengan jadwal kelas atau guru.",
-        },
-      });
-    if (reply === "stale")
-      return route.fulfill({
-        status: 409,
-        json: {
-          code: "stale",
-          message: "Data berubah. Muat ulang sebelum menyimpan.",
+          code: reply,
+          message:
+            reply === "overlap"
+              ? "Waktu bertabrakan dengan jadwal kelas atau guru."
+              : reply === "invalid_membership"
+                ? "Siswa tidak terdaftar aktif."
+                : "Data berubah. Muat ulang sebelum menyimpan.",
         },
       });
     if (reply === "malformed")
@@ -171,17 +170,72 @@ try {
     });
   });
   const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
-  async function visit(mode = "normal", width = 375, height = 812) {
+  async function visit(
+    mode = "normal",
+    width = 375,
+    height = 812,
+    view = "kbm",
+  ) {
     reply = "success";
     requests = [];
     await page.setViewportSize({ width, height });
-    await page.goto(base + "/?mode=" + mode);
+    await page.goto(base + "/?mode=" + mode + "&view=" + view);
     await page.getByRole("heading", { level: 1 }).waitFor();
   }
+  const dialog = () => page.getByRole("dialog");
+  async function tab(value) {
+    await page
+      .getByRole("tab", {
+        name: value === "kbm" ? "Jadwal KBM" : "Jadwal Piket",
+        exact: true,
+      })
+      .click();
+  }
+  async function open(kind = "kbm") {
+    await tab(kind);
+    await page
+      .getByRole("button", {
+        name: kind === "kbm" ? "Input Jadwal KBM" : "Input Jadwal Piket",
+        exact: true,
+      })
+      .click();
+    await dialog().waitFor();
+  }
   async function lesson() {
-    await page.locator("select[name=classId]").selectOption(id(20));
-    await page.locator("select[name=subjectId]").selectOption(id(50));
-    await page.locator("select[name=teacherId]").selectOption(id(30));
+    await dialog().locator("select[name=classId]").selectOption(id(20));
+    await dialog().locator("select[name=subjectId]").selectOption(id(50));
+    await dialog().locator("select[name=teacherId]").selectOption(id(30));
+  }
+  async function duty(cls = id(20)) {
+    await dialog()
+      .getByRole("combobox", { name: "Kelas untuk piket", exact: true })
+      .selectOption(cls);
+  }
+  async function bounds(name) {
+    const r = await dialog().evaluate((e) => {
+      const r = e.getBoundingClientRect();
+      return {
+        x: r.x,
+        y: r.y,
+        right: r.right,
+        bottom: r.bottom,
+        width: r.width,
+        height: r.height,
+        viewportWidth: innerWidth,
+        viewportHeight: innerHeight,
+        client: e.clientWidth,
+        scroll: e.scrollWidth,
+      };
+    });
+    check(
+      r.x >= -1 &&
+        r.y >= -1 &&
+        r.right <= r.viewportWidth + 1 &&
+        r.bottom <= r.viewportHeight + 1 &&
+        r.scroll <= r.client + 1,
+      name + " dialog contained",
+      r,
+    );
   }
   for (const mode of [
     "normal",
@@ -191,101 +245,314 @@ try {
     "loading",
     "error",
   ])
-    for (const width of [320, 375, 768, 1440]) {
+    for (const width of [320, 768, 1440]) {
       await visit(mode, width);
       await geometry(page, mode + " " + width);
       if (width === 320) await a11y(page, mode);
+      if (!["loading", "error"].includes(mode)) {
+        await tab("piket");
+        await geometry(page, mode + " piket " + width);
+        check(
+          (await page
+            .getByRole("tabpanel", { name: "Jadwal Piket", exact: true })
+            .count()) === 1,
+          mode + " piket panel " + width,
+        );
+        if (mode === "readonly")
+          check(
+            (await page
+              .getByRole("button", { name: /Input Jadwal/ })
+              .count()) === 0,
+            "readonly hides input actions " + width,
+          );
+      }
+    }
+  for (const width of [320, 375, 768, 1440])
+    for (const kind of ["kbm", "piket"]) {
+      await visit("large", width, width === 320 ? 568 : 812);
+      await open(kind);
+      if (kind === "piket") await duty();
+      await bounds(kind + " " + width);
+      await a11y(page, kind + " modal " + width);
+      await dialog()
+        .getByRole("button", { name: "Batal", exact: true })
+        .scrollIntoViewIfNeeded();
+      check(
+        await dialog()
+          .getByRole("button", { name: "Batal", exact: true })
+          .isVisible(),
+        kind + " footer reachable " + width,
+      );
+      await page.keyboard.press("Escape");
+      await dialog().waitFor({ state: "hidden" });
+      check(
+        await page
+          .getByRole("button", {
+            name: kind === "kbm" ? "Input Jadwal KBM" : "Input Jadwal Piket",
+            exact: true,
+          })
+          .evaluate((e) => e === document.activeElement),
+        kind + " restores trigger focus " + width,
+      );
     }
   await visit();
-  await page
-    .getByRole("combobox", { name: "Kelas untuk piket", exact: true })
-    .selectOption(id(20));
   check(
-    (await page.locator("input[name=assignment]:checked").count()) === 2,
-    "full-week roster survives day filter",
+    (await page.getByRole("dialog").count()) === 0 &&
+      (await page.locator("select[name=classId]").count()) === 0,
+    "forms unmounted until opened",
+  );
+  check((await page.getByRole("table").count()) === 1, "KBM tab shows lessons");
+  await page.getByRole("tab", { name: "Jadwal KBM", exact: true }).focus();
+  await page.keyboard.press("ArrowRight");
+  await page.waitForFunction(
+    () =>
+      document.querySelector("[role=tab][data-state=active]")?.textContent ===
+      "Jadwal Piket",
   );
   check(
-    (await page.getByText(/penugasan lama untuk siswa nonaktif/).count()) === 1,
-    "inactive roster cleanup is explicit",
+    (await page
+      .getByRole("tab", { name: "Jadwal Piket", exact: true })
+      .getAttribute("aria-selected")) === "true",
+    "arrow key activates Piket tab",
   );
-  await a11y(page, "duty editor");
-  await geometry(page, "duty editor");
+  check(
+    (await page.getByRole("table").count()) === 0,
+    "Piket hides lesson table",
+  );
+  check(
+    (await page.locator("input[name=view]").inputValue()) === "piket",
+    "filter GET retains active tab",
+  );
+  await page.keyboard.press("Home");
+  await page.waitForFunction(
+    () =>
+      document.querySelector("[role=tab][data-state=active]")?.textContent ===
+      "Jadwal KBM",
+  );
+  check(
+    (await page
+      .getByRole("tab", { name: "Jadwal KBM", exact: true })
+      .getAttribute("aria-selected")) === "true",
+    "Home activates first tab",
+  );
   await page
+    .getByRole("checkbox", { name: "Pilih IPA VII A Senin", exact: true })
+    .tap();
+  await tab("piket");
+  check(
+    (await page
+      .getByRole("button", { name: /Hapus .* jadwal terpilih/ })
+      .count()) === 0,
+    "tab switch clears hidden lesson selection",
+  );
+  await tab("kbm");
+  check(
+    !(await page
+      .getByRole("checkbox", { name: "Pilih IPA VII A Senin", exact: true })
+      .isChecked()),
+    "returning tab starts with no old selection",
+  );
+  await open();
+  await lesson();
+  await dialog().getByLabel("Istirahat (menit)", { exact: true }).fill("15");
+  check(
+    (await dialog().getByText("08:35", { exact: true }).count()) === 1,
+    "computed time retains break",
+  );
+  await dialog().getByLabel("Waktu mulai", { exact: true }).fill("23:50");
+  check(
+    await dialog()
+      .getByRole("button", { name: "Simpan pelajaran", exact: true })
+      .isDisabled(),
+    "cross-midnight cannot submit",
+  );
+  await dialog().getByLabel("Waktu mulai", { exact: true }).fill("07:00");
+  page.removeAllListeners("dialog");
+  page.on("dialog", (d) => d.dismiss());
+  await page.keyboard.press("Escape");
+  check(
+    (await dialog().count()) === 1,
+    "dirty Escape cancellation retains modal",
+  );
+  check(
+    (await dialog()
+      .getByLabel("Istirahat (menit)", { exact: true })
+      .inputValue()) === "15",
+    "dirty cancellation retains values",
+  );
+  page.removeAllListeners("dialog");
+  page.on("dialog", (d) => d.accept());
+  reply = "slow";
+  await dialog()
+    .getByRole("button", { name: "Simpan pelajaran", exact: true })
+    .click();
+  await page.keyboard.press("Escape");
+  check((await dialog().count()) === 1, "pending modal cannot close");
+  check(
+    await dialog()
+      .getByRole("button", { name: "Simpan pelajaran", exact: true })
+      .isDisabled(),
+    "pending disables submit",
+  );
+  await dialog().waitFor({ state: "hidden" });
+  await page.getByText("Data berhasil disimpan.", { exact: true }).waitFor();
+  check(
+    requests.length === 1 && requests[0].command.breakMinutes === 15,
+    "confirmed lesson saves once and closes modal",
+  );
+  await page.getByRole("button", { name: "Edit", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  await dialog().waitFor();
+  check(
+    (await dialog()
+      .getByRole("heading", { name: "Edit Jadwal KBM", exact: true })
+      .count()) === 1,
+    "keyboard Edit uses same modal",
+  );
+  check(
+    (await dialog()
+      .getByLabel("Istirahat (menit)", { exact: true })
+      .inputValue()) === "15",
+    "edit retains original break",
+  );
+  await page.keyboard.press("Escape");
+  await dialog().waitFor({ state: "hidden" });
+  check(
+    await page
+      .getByRole("button", { name: "Edit", exact: true })
+      .evaluate((e) => e === document.activeElement),
+    "edit close restores row trigger",
+  );
+  await visit();
+  await open("piket");
+  await duty();
+  check(
+    (await dialog().locator("input[name=assignment]:checked").count()) === 2,
+    "day filter still loads all-week duty roster",
+  );
+  check(
+    (await dialog()
+      .getByText(/penugasan lama untuk siswa nonaktif/)
+      .count()) === 1,
+    "inactive cleanup explicit",
+  );
+  await dialog().locator("input[name=assignment]").first().uncheck();
+  page.removeAllListeners("dialog");
+  page.on("dialog", (d) => d.dismiss());
+  await duty(id(22));
+  check(
+    (await dialog()
+      .getByRole("combobox", { name: "Kelas untuk piket", exact: true })
+      .inputValue()) === id(20),
+    "dirty class-switch cancellation preserves class",
+  );
+  check(
+    !(await dialog().locator("input[name=assignment]").first().isChecked()),
+    "dirty class-switch preserves choices",
+  );
+  page.removeAllListeners("dialog");
+  page.on("dialog", (d) => d.accept());
+  await duty(id(22));
+  check(
+    (await dialog()
+      .getByText("Belum ada siswa aktif di kelas ini.", { exact: true })
+      .count()) === 1,
+    "empty student state shown",
+  );
+  await duty();
+  await dialog()
     .getByRole("button", { name: "Simpan seluruh piket kelas", exact: true })
     .click();
-  await page.getByText("Data berhasil disimpan.", { exact: true }).waitFor();
+  await dialog().waitFor({ state: "hidden" });
   check(
     requests.length === 1 &&
       requests[0].command.items.some((x) => x.weekday === 7),
-    "full-week duty save includes Sunday",
+    "full-week duties retain Sunday on save",
   );
   check(
     requests[0].command.items.every((x) => x.studentId !== id(102)),
     "inactive student cannot be assigned",
   );
   await visit();
-  await lesson();
-  await page.getByLabel("Istirahat (menit)", { exact: true }).fill("15");
+  await open("piket");
+  await duty();
+  while (await dialog().locator("input[name=assignment]:checked").count())
+    await dialog().locator("input[name=assignment]:checked").first().uncheck();
+  await dialog()
+    .getByRole("button", { name: "Simpan seluruh piket kelas", exact: true })
+    .click();
+  await dialog().waitFor({ state: "hidden" });
   check(
-    (await page.getByText("08:35", { exact: true }).count()) === 1,
-    "computed end includes break",
+    requests[0].command.items.length === 0,
+    "explicit empty roster remains supported",
   );
-  await page.getByLabel("Waktu mulai", { exact: true }).fill("23:50");
-  check(
-    await page
+  for (const failure of [
+    "overlap",
+    "stale",
+    "denied",
+    "network",
+    "malformed",
+  ]) {
+    await visit();
+    await open();
+    await lesson();
+    reply = failure;
+    await dialog()
       .getByRole("button", { name: "Simpan pelajaran", exact: true })
-      .isDisabled(),
-    "cross-midnight prevented",
-  );
-  await page.getByLabel("Waktu mulai", { exact: true }).fill("07:00");
-  reply = "slow";
-  await page
+      .click();
+    await dialog().getByRole("alert").waitFor();
+    check(
+      await dialog()
+        .getByRole("alert")
+        .evaluate((e) => e === document.activeElement),
+      failure + " feedback focused inside modal",
+    );
+    check(
+      (await dialog()
+        .getByRole("button", { name: "Simpan pelajaran", exact: true })
+        .isDisabled()) ===
+        (failure !== "overlap"),
+      failure + " correct retry lock",
+    );
+    check(
+      (await dialog().locator("select[name=classId]").inputValue()) === id(20),
+      failure + " values retained",
+    );
+    if (failure !== "overlap")
+      check(
+        await dialog()
+          .getByRole("button", { name: "Muat ulang", exact: true })
+          .isEnabled(),
+        failure + " reload reachable inside trap",
+      );
+    check(requests.length === 1, failure + " no automatic retry");
+  }
+  await visit();
+  await open();
+  await lesson();
+  reply = "hang";
+  await page.clock.install();
+  await dialog()
     .getByRole("button", { name: "Simpan pelajaran", exact: true })
     .click();
+  await page.clock.fastForward(31000);
+  await page.clock.resume();
+  await dialog().getByRole("alert").waitFor();
   check(
-    await page
+    await dialog()
       .getByRole("button", { name: "Simpan pelajaran", exact: true })
       .isDisabled(),
-    "pending disables resubmit",
+    "30-second timeout retains write lock",
   );
-  await page.getByText("Data berhasil disimpan.", { exact: true }).waitFor();
-  check(
-    requests.length === 1 && requests[0].command.breakMinutes === 15,
-    "lesson submits once with rest preserved",
-  );
-  await visit();
+  check(requests.length === 1, "timeout performs no automatic retry");
+  await visit("unavailable");
   await page.getByRole("button", { name: "Edit", exact: true }).click();
   check(
-    await page
-      .locator("select[name=classId]")
-      .evaluate((e) => e === document.activeElement),
-    "edit focuses first field",
+    (await dialog().locator("select[name=subjectId]").inputValue()) === "" &&
+      (await dialog().locator("select[name=teacherId]").inputValue()) === "",
+    "inactive references require active choice",
   );
-  check(
-    (await page
-      .getByLabel("Istirahat (menit)", { exact: true })
-      .inputValue()) === "15",
-    "edit retains break",
-  );
-  await page.getByLabel("Jumlah JTM", { exact: true }).fill("3");
-  page.removeAllListeners("dialog");
-  page.on("dialog", (d) => d.dismiss());
-  await page.getByRole("button", { name: "Batal edit" }).click();
-  check(
-    (await page
-      .getByRole("heading", { name: "Edit pelajaran", exact: true })
-      .count()) === 1,
-    "cancel dirty discard retains edit",
-  );
-  page.removeAllListeners("dialog");
-  page.on("dialog", (d) => d.accept());
-  await page.getByRole("button", { name: "Batal edit" }).click();
-  check(
-    (await page
-      .getByRole("heading", { name: "Tambah pelajaran", exact: true })
-      .count()) === 1,
-    "accepted discard returns to create",
-  );
+  await page.keyboard.press("Escape");
   await visit();
   await page
     .getByRole("combobox", { name: "Tahun ajaran", exact: true })
@@ -299,110 +566,66 @@ try {
           a.some((x) => x.includes("VII Lama")) &&
           !a.some((x) => x.includes("VII A")),
       ),
-    "class choices follow selected year",
+    "year-scoped filter choices preserved",
   );
-  await visit();
-  await page
-    .getByRole("checkbox", { name: "Pilih IPA VII A Senin", exact: true })
-    .check();
-  await page
-    .getByRole("button", { name: "Hapus 1 jadwal terpilih", exact: true })
-    .click();
-  await page.getByText("Data berhasil disimpan.", { exact: true }).waitFor();
-  check(
-    requests[0].command.lessonIds.length === 1 &&
-      requests[0].command.dutyIds.length === 0,
-    "selective deletion keeps untouched duty IDs",
-  );
+  for (const kind of ["kbm", "piket"]) {
+    await visit();
+    await tab(kind);
+    await page
+      .getByRole("checkbox", {
+        name:
+          kind === "kbm" ? "Pilih IPA VII A Senin" : new RegExp("Pilih piket"),
+      })
+      .first()
+      .check();
+    await page
+      .getByRole("button", { name: "Hapus 1 jadwal terpilih", exact: true })
+      .click();
+    await page.getByText("Data berhasil disimpan.", { exact: true }).waitFor();
+    check(
+      requests.length === 1 &&
+        requests[0].command.lessonIds.length === (kind === "kbm" ? 1 : 0) &&
+        requests[0].command.dutyIds.length === (kind === "piket" ? 1 : 0),
+      kind + " delete only visible domain",
+    );
+  }
+  await visit("normal", 320, 568, "piket");
   check(
     (await page
-      .getByRole("checkbox", { name: "Pilih IPA VII A Senin", exact: true })
-      .isChecked()) === false,
-    "selection clears after confirmed save",
+      .getByRole("tab", { name: "Jadwal Piket", exact: true })
+      .getAttribute("aria-selected")) === "true",
+    "initial Piket view preserved",
   );
-  for (const failure of ["overlap", "stale", "network", "malformed"]) {
-    await visit();
-    await lesson();
-    reply = failure;
-    await page
-      .getByRole("button", { name: "Simpan pelajaran", exact: true })
-      .click();
-    await page.getByRole("alert").waitFor();
-    check(
-      (await page
-        .getByRole("button", { name: "Simpan pelajaran", exact: true })
-        .isDisabled()) ===
-        (failure !== "overlap"),
-      failure + " correct retry lock",
-    );
-    check(
-      await page
-        .getByRole("alert")
-        .evaluate((e) => e === document.activeElement),
-      failure + " feedback focused",
-    );
-    check(
-      await page
-        .getByRole("button", { name: "Muat ulang", exact: true })
-        .isEnabled(),
-      failure + " reload reachable",
-    );
-    check(requests.length === 1, failure + " no automatic retry");
-  }
-  await visit("unavailable");
-  await page.getByRole("button", { name: "Edit", exact: true }).click();
-  check(
-    (await page.locator("select[name=subjectId]").inputValue()) === "" &&
-      (await page.locator("select[name=teacherId]").inputValue()) === "",
-    "unavailable references require active selection",
-  );
-  check(
-    await page
-      .locator("select[name=teacherId]")
-      .evaluate((e) => !e.checkValidity()),
-    "missing active teacher blocks native validation",
-  );
-  await visit("large", 320, 568);
-  await page
-    .getByRole("combobox", { name: "Kelas untuk piket", exact: true })
-    .selectOption(id(20));
-  await geometry(page, "large duty at short mobile");
-  await a11y(page, "large duty");
+  await open("piket");
+  await duty();
   await page.setViewportSize({ width: 812, height: 375 });
-  await geometry(page, "landscape resize");
+  await bounds("landscape resize");
   await page.setViewportSize({ width: 1440, height: 900 });
-  await geometry(page, "desktop resize");
+  await bounds("desktop resize");
+  await page.keyboard.press("Tab");
+  check(
+    await dialog().evaluate((e) => e.contains(document.activeElement)),
+    "keyboard focus stays in dialog",
+  );
+  await page.screenshot({
+    path: join(out, "piket-desktop.png"),
+    fullPage: false,
+  });
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.screenshot({
+    path: join(out, "piket-mobile.png"),
+    fullPage: false,
+  });
+  await page.keyboard.press("Escape");
   await visit("normal", 1440, 900);
-  await page.getByRole("button", { name: "Edit", exact: true }).focus();
-  await page.keyboard.press("Enter");
-  check(
-    await page
-      .locator("select[name=classId]")
-      .evaluate((e) => e === document.activeElement),
-    "keyboard Edit opens and focuses editor",
-  );
-  await page.getByRole("button", { name: "Batal edit" }).click();
-  await page
-    .getByRole("checkbox", { name: "Pilih IPA VII A Senin", exact: true })
-    .tap();
-  check(
-    await page
-      .getByRole("checkbox", { name: "Pilih IPA VII A Senin", exact: true })
-      .isChecked(),
-    "touch toggles lesson selection",
-  );
-  await page
-    .getByRole("checkbox", { name: "Pilih IPA VII A Senin", exact: true })
-    .uncheck();
+  await open();
   await page.screenshot({
-    path: join(out, "schedules-desktop.png"),
-    fullPage: true,
+    path: join(out, "kbm-desktop.png"),
+    fullPage: false,
   });
-  await page.setViewportSize({ width: 320, height: 812 });
-  await page.screenshot({
-    path: join(out, "schedules-mobile.png"),
-    fullPage: true,
-  });
+  await page.setViewportSize({ width: 320, height: 568 });
+  await bounds("KBM short mobile");
+  await page.screenshot({ path: join(out, "kbm-mobile.png"), fullPage: false });
   check(!errors.length, "no uncaught JavaScript errors", errors);
   await writeFile(
     join(out, "browser-results.json"),
@@ -413,7 +636,7 @@ try {
         axe: axeResults,
         errors,
         limits: [
-          "Synthetic fixtures and intercepted API writes; no authenticated production role UAT.",
+          "Actual components with synthetic fixtures/intercepted API writes; authenticated production role UAT not performed.",
         ],
       },
       null,

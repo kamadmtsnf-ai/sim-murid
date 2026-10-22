@@ -13,8 +13,8 @@ export default async function SchedulesPage({
   const caller = await readServerPrincipal();
   if (!caller) redirect("/login?expired=1");
   let classes, schedules, filters;
+  const q = await searchParams;
   try {
-    const q = await searchParams;
     classes = await classesData(caller.principal.id, caller.sessionId);
     filters = {
       ...(typeof q.year === "string" && z.uuid().safeParse(q.year).success
@@ -35,6 +35,9 @@ export default async function SchedulesPage({
       caller.sessionId,
       filters,
     );
+    // Both RPCs share education_state; never edit a roster from mixed revisions.
+    if (classes.revision !== schedules.revision)
+      throw new Error("Education snapshot changed");
   } catch (error) {
     if (!(error instanceof AccessDenied))
       throw new Error("Schedules unavailable");
@@ -59,7 +62,8 @@ export default async function SchedulesPage({
         Jadwal pelajaran dan piket siswa
       </h1>
       <SchedulePanel
-        key={JSON.stringify(filters) + schedules.revision}
+        key={JSON.stringify(filters) + schedules.revision + String(q.view)}
+        initialTab={q.view === "piket" ? "piket" : "kbm"}
         initial={schedules}
         classes={classes}
         filters={filters}

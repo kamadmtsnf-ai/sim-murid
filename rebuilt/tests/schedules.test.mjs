@@ -301,3 +301,35 @@ test("page redirects anonymous and exposes upstream outage to retry boundary", a
     /Schedules unavailable/,
   );
 });
+
+test("page preserves the Piket tab across filters without changing RPC command scope", async () => {
+  const m = setup();
+  const result = await page({
+    searchParams: Promise.resolve({ view: "piket", day: "7", personal: "1" }),
+  });
+  const panel = result.props.children[1];
+  assert.equal(panel.props.initialTab, "piket");
+  assert.equal(panel.props.filters.weekday, 7);
+  assert.equal(panel.props.filters.personal, true);
+  assert.equal(
+    m.calls.some((c) => c[0] === "app_schedules_write"),
+    false,
+  );
+});
+test("unknown or repeated tab query safely defaults to KBM", async () => {
+  for (const view of ["invalid", ["piket", "kbm"]]) {
+    setup();
+    const result = await page({ searchParams: Promise.resolve({ view }) });
+    assert.equal(result.props.children[1].props.initialTab, "kbm");
+  }
+});
+
+test("mixed class/schedule revisions fail closed before rendering an editable roster", async () => {
+  const m = setup();
+  m.snapshot.revision = 1;
+  await assert.rejects(
+    () => page({ searchParams: Promise.resolve({}) }),
+    /Schedules unavailable/,
+  );
+  assert.equal(writes(m).length, 0);
+});

@@ -1,5 +1,7 @@
 "use client";
 import { formatAcademicYear } from "@/lib/academic/period";
+import { Tabs } from "radix-ui";
+import { Dialog } from "@/components/ui/dialog";
 import { TableRegion } from "@/components/ui/data-table";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -23,7 +25,9 @@ export function SchedulePanel({
   initial,
   classes,
   filters,
+  initialTab = "kbm",
 }: {
+  initialTab?: "kbm" | "piket";
   initial: Schedule;
   classes: Classes;
   filters: {
@@ -39,8 +43,10 @@ export function SchedulePanel({
     [selectedDuties, setSelectedDuties] = useState<string[]>([]),
     [dutyClass, setDutyClass] = useState("");
   const dirty = useRef(false),
-    drafts = useRef(new Set<string>()),
-    editor = useRef<HTMLDivElement>(null);
+    saving = useRef(false),
+    returnFocusRef = useRef<HTMLElement | null>(null);
+  const [activeTab, setActiveTab] = useState(initialTab);
+  const [modal, setModal] = useState<"lesson" | "duty" | null>(null);
   const [draftEpoch, setDraftEpoch] = useState(0);
   const [filterYear, setFilterYear] = useState(filters.year ?? "");
   const [filterClass, setFilterClass] = useState(filters.classId ?? "");
@@ -49,7 +55,6 @@ export function SchedulePanel({
     if (!window.confirm("Tinggalkan perubahan yang belum disimpan?"))
       return false;
     dirty.current = false;
-    drafts.current.clear();
     setDraftEpoch((n) => n + 1);
     return true;
   };
@@ -63,28 +68,22 @@ export function SchedulePanel({
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
   }, []);
-  useEffect(() => {
-    if (editing) {
-      editor.current?.scrollIntoView({ block: "start", behavior: "instant" });
-      editor.current?.querySelector("select")?.focus();
-    }
-  }, [editing]);
   const query = new URLSearchParams({
     ...(filters.year ? { year: filters.year } : {}),
     ...(filters.classId ? { class: filters.classId } : {}),
     ...(filters.weekday ? { day: String(filters.weekday) } : {}),
     ...(filters.personal ? { personal: "1" } : {}),
   }).toString();
-  const { busy, message, mutate, blocked, phase, feedbackRef } =
+  const { busy, message, mutate, blocked, phase, feedbackRef, clear } =
     useDomainMutation(
       `/api/schedules?${query}`,
       scheduleSnapshot,
       "schedules",
       (next) => {
         dirty.current = false;
-        drafts.current.clear();
         setData(next);
         setEditing(null);
+        setModal(null);
         setSelectedLessons([]);
         setSelectedDuties([]);
       },
@@ -100,13 +99,58 @@ export function SchedulePanel({
     writable = available.filter((c) => c.can_schedule),
     current = data.lessons.find((l) => l.id === editing),
     duty = available.find((c) => c.id === dutyClass);
-  const totalSelected = selectedLessons.length + selectedDuties.length;
+  const totalSelected =
+    activeTab === "kbm" ? selectedLessons.length : selectedDuties.length;
   const toggle = (array: string[], id: string) =>
     array.includes(id)
       ? array.filter((x) => x !== id)
-      : selectedLessons.length + selectedDuties.length < 500
+      : array.length < 500
         ? [...array, id]
         : array;
+  const closeModal = () => {
+    if (saving.current || busy || !discard()) return;
+    setModal(null);
+    setEditing(null);
+  };
+  const openModal = (
+    kind: "lesson" | "duty",
+    trigger: HTMLElement,
+    id: string | null = null,
+  ) => {
+    if (locked) return;
+    returnFocusRef.current = trigger;
+    dirty.current = false;
+    clear();
+    setEditing(id);
+    setDutyClass(
+      writable.some((c) => c.id === filters.classId)
+        ? filters.classId!
+        : writable.length === 1
+          ? writable[0]!.id
+          : "",
+    );
+    setDraftEpoch((n) => n + 1);
+    setModal(kind);
+  };
+  async function save(command: unknown) {
+    if (saving.current || locked) return;
+    saving.current = true;
+    try {
+      await mutate(data.revision, command);
+    } finally {
+      saving.current = false;
+    }
+  }
+  const feedback = message ? (
+    <div
+      ref={feedbackRef}
+      tabIndex={-1}
+      role={phase === "error" || blocked ? "alert" : "status"}
+      className="rounded-lg border bg-muted/40 p-4 text-sm"
+    >
+      {message}
+    </div>
+  ) : null;
   return (
     <div className="schedules-panel min-w-0 space-y-6" aria-busy={busy}>
       <div className="grid grid-cols-2 gap-3" aria-label="Ringkasan jadwal">
@@ -126,16 +170,7 @@ export function SchedulePanel({
         bertabrakan untuk kelas atau guru ditolak. Penggantian piket tidak
         mengubah jadwal pelajaran.
       </p>
-      {message && (
-        <div
-          ref={feedbackRef}
-          tabIndex={-1}
-          role={phase === "error" || blocked ? "alert" : "status"}
-          className="rounded-lg border bg-muted/40 p-4 text-sm"
-        >
-          {message}
-        </div>
-      )}
+      {!modal && feedback}
       <form
         action="/account/schedules"
         method="get"
@@ -144,6 +179,7 @@ export function SchedulePanel({
         }}
         className="grid gap-3 rounded border p-4 sm:grid-cols-3"
       >
+        <input type="hidden" name="view" value={activeTab} />
         <label className="block text-sm">
           Tahun ajaran
           <select
@@ -219,159 +255,174 @@ export function SchedulePanel({
           Terapkan filter
         </Button>
       </form>
-      {writable.length > 0 && (
-        <div ref={editor} className="scroll-mt-24">
+      <Tabs.Root
+        value={activeTab}
+        onValueChange={(value) => {
+          if (busy) return;
+          setActiveTab(value === "piket" ? "piket" : "kbm");
+          setSelectedLessons([]);
+          setSelectedDuties([]);
+        }}
+      >
+        <Tabs.List
+          aria-label="Jenis jadwal"
+          className="schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
+        >
+          <Tabs.Trigger value="kbm" disabled={busy}>
+            Jadwal KBM
+          </Tabs.Trigger>
+          <Tabs.Trigger value="piket" disabled={busy}>
+            Jadwal Piket
+          </Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="kbm" className="mt-5 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground">
+              Daftar pelajaran sesuai tahun ajaran, kelas, dan hari.
+            </p>
+            {writable.length > 0 && (
+              <Button
+                disabled={locked}
+                onClick={(e) => openModal("lesson", e.currentTarget)}
+              >
+                Input Jadwal KBM
+              </Button>
+            )}
+          </div>
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-semibold">
-                {current ? "Edit pelajaran" : "Tambah pelajaran"}
-              </h2>
+              <h2 className="text-lg font-semibold">Jadwal pelajaran</h2>
             </CardHeader>
             <CardContent>
-              <LessonForm
-                key={`${editing}-${data.revision}-${draftEpoch}`}
-                current={current}
-                classes={writable}
-                data={data}
-                busy={locked}
-                onCancel={() => {
-                  if (discard()) {
-                    dirty.current = false;
-                    drafts.current.clear();
-                    setEditing(null);
-                  }
-                }}
-                onSubmit={(command) => {
-                  if (
-                    !drafts.current.has("duty") ||
-                    window.confirm(
-                      "Menyimpan pelajaran akan memuat ulang isian piket yang belum disimpan. Lanjutkan?",
-                    )
-                  )
-                    void mutate(data.revision, command);
-                }}
-                onDirty={() => {
-                  dirty.current = true;
-                  drafts.current.add("lesson");
-                }}
-              />
+              {data.lessons.length === 0 ? (
+                <p>Belum ada pelajaran sesuai filter dan hak akses.</p>
+              ) : (
+                <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
+                  <table className="w-full text-left text-sm">
+                    <caption className="sr-only">
+                      Daftar jadwal pelajaran
+                    </caption>
+                    <thead>
+                      <tr>
+                        {[
+                          "Pilih",
+                          "Hari / waktu",
+                          "Kelas / mapel",
+                          "Guru / durasi",
+                          "Tindakan",
+                        ].map((h) => (
+                          <th key={h} scope="col" className="p-2">
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.lessons.map((l) => (
+                        <tr key={l.id} className="border-t">
+                          <td className="p-2">
+                            <input
+                              type="checkbox"
+                              aria-label={`Pilih ${l.subject} ${l.class_name} ${weekdays[l.weekday]}`}
+                              disabled={locked || !l.can_manage}
+                              checked={selectedLessons.includes(l.id)}
+                              onChange={() =>
+                                setSelectedLessons((a) => toggle(a, l.id))
+                              }
+                            />
+                          </td>
+                          <td className="whitespace-nowrap p-2">
+                            {weekdays[l.weekday]}
+                            <p>
+                              {clock(l.start_minute)}–{clock(l.end_minute)}
+                            </p>
+                          </td>
+                          <td className="p-2">
+                            {l.class_name}
+                            <p>{l.subject}</p>
+                          </td>
+                          <td className="p-2">
+                            {l.teacher_name}
+                            <p>
+                              {l.duration_minutes} menit × {l.jtm} JTM +
+                              istirahat {l.break_minutes} menit
+                            </p>
+                          </td>
+                          <td className="p-2">
+                            {l.can_manage && (
+                              <Button
+                                disabled={locked}
+                                variant="outline"
+                                onClick={(e) =>
+                                  openModal("lesson", e.currentTarget, l.id)
+                                }
+                              >
+                                Edit
+                              </Button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </TableRegion>
+              )}
             </CardContent>
           </Card>
-        </div>
-      )}
-      <Card>
-        <CardHeader>
-          <h2 className="text-lg font-semibold">Jadwal pelajaran</h2>
-        </CardHeader>
-        <CardContent>
-          {data.lessons.length === 0 ? (
-            <p>Belum ada pelajaran sesuai filter dan hak akses.</p>
-          ) : (
-            <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
-              <table className="w-full text-left text-sm">
-                <caption className="sr-only">Daftar jadwal pelajaran</caption>
-                <thead>
-                  <tr>
-                    {[
-                      "Pilih",
-                      "Hari / waktu",
-                      "Kelas / mapel",
-                      "Guru / durasi",
-                      "Tindakan",
-                    ].map((h) => (
-                      <th key={h} scope="col" className="p-2">
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.lessons.map((l) => (
-                    <tr key={l.id} className="border-t">
-                      <td className="p-2">
-                        <input
-                          type="checkbox"
-                          aria-label={`Pilih ${l.subject} ${l.class_name} ${weekdays[l.weekday]}`}
-                          disabled={locked || !l.can_manage}
-                          checked={selectedLessons.includes(l.id)}
-                          onChange={() =>
-                            setSelectedLessons((a) => toggle(a, l.id))
-                          }
-                        />
-                      </td>
-                      <td className="whitespace-nowrap p-2">
-                        {weekdays[l.weekday]}
-                        <p>
-                          {clock(l.start_minute)}–{clock(l.end_minute)}
-                        </p>
-                      </td>
-                      <td className="p-2">
-                        {l.class_name}
-                        <p>{l.subject}</p>
-                      </td>
-                      <td className="p-2">
-                        {l.teacher_name}
-                        <p>
-                          {l.duration_minutes} menit × {l.jtm} JTM + istirahat{" "}
-                          {l.break_minutes} menit
-                        </p>
-                      </td>
-                      <td className="p-2">
-                        {l.can_manage && (
-                          <Button
-                            disabled={locked}
-                            variant="outline"
-                            onClick={() => {
-                              if (discard()) {
-                                dirty.current = false;
-                                drafts.current.clear();
-                                setEditing(l.id);
-                              }
-                            }}
-                          >
-                            Edit
-                          </Button>
-                        )}
-                      </td>
-                    </tr>
+        </Tabs.Content>
+        <Tabs.Content value="piket" className="mt-5 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-muted-foreground">
+              Penugasan piket siswa sesuai filter yang diterapkan.
+            </p>
+            {writable.length > 0 && (
+              <Button
+                disabled={locked}
+                onClick={(e) => openModal("duty", e.currentTarget)}
+              >
+                Input Jadwal Piket
+              </Button>
+            )}
+          </div>
+          <Card>
+            <CardHeader>
+              <h2 className="text-lg font-semibold">Piket siswa</h2>
+            </CardHeader>
+            <CardContent>
+              {data.duties.length === 0 ? (
+                <p>Belum ada piket sesuai filter dan hak akses.</p>
+              ) : (
+                <ul className="divide-y">
+                  {data.duties.map((d) => (
+                    <li
+                      key={d.id}
+                      className="flex min-w-0 items-center gap-3 py-2"
+                    >
+                      <input
+                        type="checkbox"
+                        aria-label={`Pilih piket ${d.student_name} ${weekdays[d.weekday]}`}
+                        disabled={locked || !d.can_manage}
+                        checked={selectedDuties.includes(d.id)}
+                        onChange={() =>
+                          setSelectedDuties((a) => toggle(a, d.id))
+                        }
+                      />
+                      <span className="min-w-0 break-words">
+                        {weekdays[d.weekday]} · {d.class_name} ·{" "}
+                        {d.student_name}
+                      </span>
+                    </li>
                   ))}
-                </tbody>
-              </table>
-            </TableRegion>
-          )}
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <h2 className="text-lg font-semibold">Piket siswa</h2>
-        </CardHeader>
-        <CardContent>
-          {data.duties.length === 0 ? (
-            <p>Belum ada piket sesuai filter dan hak akses.</p>
-          ) : (
-            <ul className="divide-y">
-              {data.duties.map((d) => (
-                <li key={d.id} className="flex min-w-0 items-center gap-3 py-2">
-                  <input
-                    type="checkbox"
-                    aria-label={`Pilih piket ${d.student_name} ${weekdays[d.weekday]}`}
-                    disabled={locked || !d.can_manage}
-                    checked={selectedDuties.includes(d.id)}
-                    onChange={() => setSelectedDuties((a) => toggle(a, d.id))}
-                  />
-                  <span className="min-w-0 break-words">
-                    {weekdays[d.weekday]} · {d.class_name} · {d.student_name}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </CardContent>
-      </Card>
+                </ul>
+              )}
+            </CardContent>
+          </Card>
+        </Tabs.Content>
+      </Tabs.Root>
       {totalSelected >= 500 && (
         <p role="status">Maksimal 500 jadwal dapat dipilih sekaligus.</p>
       )}
-      {selectedLessons.length + selectedDuties.length > 0 && (
+      {totalSelected > 0 && (
         <Button
           variant="outline"
           disabled={locked}
@@ -382,73 +433,107 @@ export function SchedulePanel({
                 "Hapus jadwal terpilih? Seluruh pilihan diperiksa izinnya dan riwayat tetap disimpan.",
               )
             )
-              void mutate(data.revision, {
+              void save({
                 type: "schedule_delete",
-                lessonIds: selectedLessons,
-                dutyIds: selectedDuties,
+                lessonIds: activeTab === "kbm" ? selectedLessons : [],
+                dutyIds: activeTab === "piket" ? selectedDuties : [],
               });
           }}
         >
-          Hapus {selectedLessons.length + selectedDuties.length} jadwal terpilih
+          Hapus {totalSelected} jadwal terpilih
         </Button>
       )}
-      {writable.length > 0 && (
-        <Card>
-          <CardHeader>
-            <h2 className="text-lg font-semibold">Atur seluruh piket kelas</h2>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p>
-              Editor memuat seluruh hari untuk kelas, termasuk ketika daftar di
-              atas sedang difilter satu hari. Simpan mengganti piket aktif kelas
-              secara atomik.
-            </p>
-            <label>
-              Kelas untuk piket
-              <select
-                value={dutyClass}
-                className={controlClass}
-                disabled={locked}
-                onChange={(e) => {
-                  if (discard()) {
-                    dirty.current = false;
-                    drafts.current.clear();
-                    setDutyClass(e.target.value);
-                  }
-                }}
-              >
-                <option value="">Pilih kelas…</option>
-                {writable.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {duty && (
-              <DutyForm
-                key={`${duty.id}-${data.revision}-${draftEpoch}`}
-                data={data}
-                classroom={duty}
-                busy={locked}
-                onSubmit={(command) => {
-                  if (
-                    !drafts.current.has("lesson") ||
-                    window.confirm(
-                      "Menyimpan piket akan memuat ulang isian pelajaran yang belum disimpan. Lanjutkan?",
-                    )
-                  )
-                    void mutate(data.revision, command);
-                }}
-                onDirty={() => {
-                  dirty.current = true;
-                  drafts.current.add("duty");
-                }}
-              />
-            )}
-          </CardContent>
-        </Card>
-      )}
+      <Dialog
+        open={modal !== null}
+        onOpenChange={(open) => {
+          if (!open) closeModal();
+        }}
+        returnFocusRef={returnFocusRef}
+        className="schedules-dialog schedules-panel"
+        title={
+          modal === "duty"
+            ? "Input Jadwal Piket"
+            : current
+              ? "Edit Jadwal KBM"
+              : "Input Jadwal KBM"
+        }
+        description={
+          modal === "duty"
+            ? "Atur piket kelas untuk seluruh minggu. Menyimpan mengganti pilihan pada semua hari."
+            : "Pilih kelas, mata pelajaran, guru, dan waktu. Waktu selesai dihitung termasuk istirahat."
+        }
+      >
+        <div className="space-y-4" aria-busy={busy}>
+          {feedback}
+          {modal === "lesson" && (
+            <LessonForm
+              key={`${editing}-${draftEpoch}`}
+              current={current}
+              defaultClassId={filters.classId}
+              classes={writable}
+              data={data}
+              busy={locked}
+              onCancel={closeModal}
+              onSubmit={(command) => void save(command)}
+              onDirty={() => {
+                dirty.current = true;
+              }}
+            />
+          )}
+          {modal === "duty" && (
+            <>
+              <label className="block text-sm">
+                Kelas untuk piket
+                <select
+                  value={dutyClass}
+                  className={controlClass}
+                  disabled={locked}
+                  onChange={(e) => {
+                    if (discard()) setDutyClass(e.target.value);
+                  }}
+                >
+                  <option value="">Pilih kelas…</option>
+                  {writable.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              {duty ? (
+                <DutyForm
+                  key={`${duty.id}-${draftEpoch}`}
+                  data={data}
+                  classroom={duty}
+                  busy={locked}
+                  onSubmit={(command) => void save(command)}
+                  onDirty={() => {
+                    dirty.current = true;
+                  }}
+                />
+              ) : (
+                <p className="text-sm text-muted-foreground">
+                  Pilih kelas untuk menampilkan siswa dan jadwal piket seluruh
+                  minggu.
+                </p>
+              )}
+              <Button disabled={busy} variant="outline" onClick={closeModal}>
+                Batal
+              </Button>
+            </>
+          )}
+          {blocked && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                if (discard()) window.location.reload();
+              }}
+            >
+              Muat ulang
+            </Button>
+          )}
+        </div>
+      </Dialog>
       <Button
         variant="outline"
         disabled={busy}
@@ -463,6 +548,7 @@ export function SchedulePanel({
 }
 function LessonForm({
   current,
+  defaultClassId,
   classes,
   data,
   busy,
@@ -471,6 +557,7 @@ function LessonForm({
   onDirty,
 }: {
   current: Lesson | undefined;
+  defaultClassId?: string | undefined;
   classes: Classes["classes"];
   data: Schedule;
   busy: boolean;
@@ -512,7 +599,10 @@ function LessonForm({
         <SelectField
           name="classId"
           label="Kelas"
-          value={current?.class_id}
+          value={
+            current?.class_id ??
+            (classes.some((c) => c.id === defaultClassId) ? defaultClassId : "")
+          }
           required
         >
           <option value="">Pilih…</option>
@@ -633,11 +723,9 @@ function LessonForm({
           <Button disabled={!validEnd} type="submit">
             Simpan pelajaran
           </Button>
-          {current && (
-            <Button variant="outline" type="button" onClick={onCancel}>
-              Batal edit
-            </Button>
-          )}
+          <Button variant="outline" type="button" onClick={onCancel}>
+            Batal
+          </Button>
         </div>
       </fieldset>
     </form>

@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "base": "7d2431cf7a33adeabc789a8465c2039f9edf61c1",
+  "checks": {
+    "npm_run_check": {
+      "tests": 280,
+      "passed": 280,
+      "failed": 0,
+      "suites": 38,
+      "typecheck": "passed",
+      "lint": "passed",
+      "database_types": "passed",
+      "production_build": "passed"
+    },
+    "schedule_route_page_schema": {
+      "tests": 12,
+      "passed": 12
+    },
+    "schedules_browser": {
+      "checks": 145,
+      "axe_runs": 14,
+      "violations": 0
+    },
+    "academic_browser": {
+      "checks": 41,
+      "axe_runs": 6,
+      "violations": 0
+    },
+    "deadcode": {
+      "unreachable": []
+    }
+  },
+  "limits": [
+    "Browser uses actual components, synthetic records and intercepted writes, not production role UAT.",
+    "Viewport resize and touch emulation are automated Chromium checks, not physical device testing.",
+    "No database migration, privilege or backend contract changes."
+  ]
+}

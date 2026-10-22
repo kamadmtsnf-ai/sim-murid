@@ -386,3 +386,11 @@
 .schedules-panel th, .schedules-panel td { vertical-align: top; }
 .schedules-panel button { min-height: 2.75rem; white-space: normal; }
 .schedules-panel h2 { line-height: 1.4; }
+
+/* Tab controls and modal content use the existing schedule tokens. */
+.schedule-tabs [role="tab"] { min-width: 0; min-height: 44px; border-radius: .65rem; padding: .65rem .75rem; font-weight: 600; color: var(--muted-foreground); }
+.schedule-tabs [role="tab"][data-state="active"] { color: var(--primary-foreground); background: var(--primary); box-shadow: 0 1px 3px #0002; }
+.schedule-tabs [role="tab"]:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+.schedules-dialog { display: block; overflow-y: auto; max-height: calc(100dvh - 32px); width: calc(100% - 32px); overflow-wrap: anywhere; }
+.schedules-dialog input:not([type="checkbox"]), .schedules-dialog select { min-height: 44px; max-width: 100%; }
+.schedules-dialog > div:first-child > button { flex-shrink: 0; }
