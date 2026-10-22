@@ -37,7 +37,8 @@
     "20261021180621_admin_user_provisioning.sql",
     "20261021183558_user_provision_auth_id_grant.sql",
     "20261022091201_class_enrollment_removal.sql",
-    "20261022094510_survey_academic_period.sql"
+    "20261022094510_survey_academic_period.sql",
+    "20261022101238_singleton_write_predicates.sql"
   ],
   "tables": [
     {
