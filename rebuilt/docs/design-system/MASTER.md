@@ -161,3 +161,11 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Filter riwayat hanya tahun kalender dan rentang tanggal yang benar-benar dipakai server, maksimum 366 hari. Input tanggal kosong dinormalisasi; view=history, pagination dan ekspor mempertahankan filter. Filter riwayat tidak mengubah roster mingguan.
 - Nama panjang membungkus, kontrol sentuh minimal 44px, tabel menggulir lokal dan modal dibatasi viewport dengan gulir vertikal normal. Tidak menyembunyikan overflow halaman.
 - Bukti: docs/verification/teacher-duty-audit.md; keterbatasan role UAT dan emulasi browser dijelaskan di sana.
+
+## Absensi Siswa — 22 Oktober 2026
+
+- Pisahkan konteks input batch, filter riwayat dan kalender. Katalog input tidak ikut menyempit ketika riwayat difilter; kalender harus menerima seluruh catatan satu siswa/bulan, bukan halaman tabel aktif.
+- Kontrol status/catatan batch mempertahankan draf. Aksi massal hanya mengubah status. Tampilkan jumlah siswa dipilih; status kosong tidak dianggap Alpha. Simpan koreksi tidak menghapus draf input lain.
+- Ringkasan memberi label dua denominator kehadiran, tahun kalender, hari efektif dan hari kosong. Gunakan tokens semantik existing, teks status eksplisit, responsive metric grid dan tabel dengan scroll lokal.
+- Koreksi/void memakai Dialog existing, alasan wajib, konfirmasi pembatalan, focus trap/return focus, feedback dalam dialog dan pending dismissal guard. Lebar dibatasi viewport, tinggi maksimum 100dvh-32px dengan scroll yang dapat dijangkau; kontrol 44px.
+- Penyimpanan confirmed: snapshot baru sebelum sukses, timeout 30 detik, konflik/hasil tak pasti meminta reload. Read/calendar error tidak ditafsirkan sebagai data kosong atau Alpha.
