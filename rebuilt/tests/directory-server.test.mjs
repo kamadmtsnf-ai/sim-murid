@@ -8,7 +8,7 @@ const sources={
  '@/lib/education/server':`export const educationContext=async()=>({caller:globalThis.directoryMocks.caller,reply:(body,status=200)=>globalThis.directoryMocks.reply(body,status)});export const failure=error=>({status:error.name==='ZodError'?400:503,message:'Safe service error'});`,
  './add-user':`export function AddUser(){return null}`,
  './directory-panel':`export const DirectoryPanel=()=>null;export const DirectoryFilters=()=>null;`,
- '../directory-detail':`export const DirectoryDetailView=()=>null;`,
+ '../directory-detail':`export const DirectoryDetailView=()=>null;export const DirectoryDetailUnavailable=()=>null;`,
  '@/components/ui/status':`export const Status=()=>null;`,
 };
 registerHooks({resolve(specifier,context,next){if(specifier in sources)return {url:'directory-mock:'+specifier,shortCircuit:true};if(specifier.startsWith('@/'))return {url:new URL('file://'+resolve('src',specifier.slice(2)+'.ts')).href,shortCircuit:true};return next(specifier,context);},load(url,context,next){if(url.startsWith('directory-mock:'))return {format:'module',source:sources[url.slice('directory-mock:'.length)],shortCircuit:true};if(/\.tsx?$/.test(url))return {format:'module',source:ts.transpileModule(readFileSync(new URL(url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,shortCircuit:true};return next(url,context);}});
