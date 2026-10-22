@@ -169,3 +169,10 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Ringkasan memberi label dua denominator kehadiran, tahun kalender, hari efektif dan hari kosong. Gunakan tokens semantik existing, teks status eksplisit, responsive metric grid dan tabel dengan scroll lokal.
 - Koreksi/void memakai Dialog existing, alasan wajib, konfirmasi pembatalan, focus trap/return focus, feedback dalam dialog dan pending dismissal guard. Lebar dibatasi viewport, tinggi maksimum 100dvh-32px dengan scroll yang dapat dijangkau; kontrol 44px.
 - Penyimpanan confirmed: snapshot baru sebelum sukses, timeout 30 detik, konflik/hasil tak pasti meminta reload. Read/calendar error tidak ditafsirkan sebagai data kosong atau Alpha.
+
+## Guru Wali dan bimbingan — 22 Oktober 2026
+
+- Pisahkan penugasan replacement dari filter riwayat. Selected student IDs harus memuat seluruh penugasan awal, termasuk yang tersembunyi oleh search/katalog; pencarian tidak mengubah pilihan. Konflik mentor lain dilabeli dan tidak selectable; empty replacement meminta konfirmasi.
+- Form hafalan dan perkembangan menampilkan field wajib sesuai jenis, tanpa menyisakan referensi hafalan pada payload perkembangan. Koreksi/void memerlukan alasan; void meminta konfirmasi dan tidak memerlukan field laporan lain yang sedang tidak valid.
+- Gunakan Dialog dan semantic tokens existing; focus trap/return focus, feedback error di dalam modal, dirty/pending dismissal guard, kontrol 44px dan tinggi maksimum dalam viewport dengan scroll yang dapat dijangkau.
+- Riwayat memakai kolom siswa/Guru Wali/jenis/aspek/predikat/catatan, filter tahun kalender/tanggal/siswa, empty state dan export sesuai scope. Penyimpanan confirmed dengan timeout, snapshot tervalidasi dan reload untuk konflik/hasil tak pasti.

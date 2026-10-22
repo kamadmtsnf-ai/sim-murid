@@ -45,7 +45,7 @@ export default async function OperationsPage({
       filters,
     );
   } catch (error) {
-    if ((m.data === "duty" || m.data === "attendance") && !(error instanceof AccessDenied))
+    if ((m.data === "duty" || m.data === "attendance" || m.data === "mentoring") && !(error instanceof AccessDenied))
       throw new Error(m.data === "duty" ? "Duty unavailable" : "Operations unavailable");
     return (
       <main

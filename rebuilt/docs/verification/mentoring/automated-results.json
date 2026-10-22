@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-22",
+  "baseMain": "b8412891cf1e316b627b22e0450b742d34079c94",
+  "status": "passed",
+  "npmCi": true,
+  "check": {
+    "tests": 310,
+    "runnerGroups": 41,
+    "failures": 0,
+    "typeScript": true,
+    "lintZeroWarnings": true,
+    "databaseTypesTables": 14,
+    "productionBuild": true
+  },
+  "mentoringBrowser": {
+    "checks": 87,
+    "axeRuns": 7,
+    "violations": 0,
+    "errors": []
+  },
+  "attendanceRegression": {
+    "checks": 84,
+    "axeRuns": 6,
+    "violations": 0,
+    "errors": []
+  },
+  "deadcodeUnreachable": [],
+  "diffCheck": true,
+  "limits": [
+    "Synthetic UI/API fixtures, not authenticated production role CRUD, physical devices or manual screen readers.",
+    "Isolated database integration does not load native pg-safeupdate C extension.",
+    "Existing active profile catalog limit and server eligibility rules preserved; missing catalog assignment IDs are never silently removed.",
+    "Normal vertical page/modal scrolling and local table scrolling remain available."
+  ],
+  "finalFocusChange": {
+    "lint": true,
+    "productionBuildWithTypeScript": true,
+    "browser": true
+  }
+}

@@ -22,6 +22,15 @@ test('OP17: own/child/homeroom scopes, two percentages and revoked substitute ca
 test('OP18: mentor assignment, other mentor denied, mandatory memorization fields, missing edit ID',async()=>{
  assert.equal((await write('mentoring',{type:'assign',teacherId:A.mentor.id,studentIds:[A.s1.id]},A.mentor)).code,'denied');assert.equal((await write('mentoring',{type:'assign',teacherId:A.mentor.id,studentIds:[A.s1.id]})).code,'saved');const cmd={type:'report',id:null,studentId:A.s1.id,date:today,kind:'memorization',catalogId:null,subject:'Al-Ikhlas',predicate:'Lancar',notes:'Empat ayat'};assert.equal((await write('mentoring',cmd,A.other)).code,'denied');assert.equal((await write('mentoring',{...cmd,subject:''},A.mentor)).code,'invalid');report=(await write('mentoring',cmd,A.mentor)).id;assert.ok(report);assert.equal((await write('mentoring',{...cmd,id:uuid(),reason:'Edit missing'},A.mentor)).code,'not_found');assert.equal((await read('mentoring',A.parent)).rows.length,1);assert.equal((await read('mentoring',A.stranger)).rows.length,0);assert.equal((await write('mentoring',{type:'void',id:report,reason:'Cannot own'},A.other)).code,'denied');
 });
+test('OP18: conflicting replacement rolls back all prior assignments and revision',async()=>{
+ assert.equal((await write('mentoring',{type:'assign',teacherId:A.other.id,studentIds:[A.s2.id]})).code,'saved');
+ const version=await rev();
+ assert.equal((await write('mentoring',{type:'assign',teacherId:A.mentor.id,studentIds:[A.s1.id,A.s2.id]})).code,'duplicate');
+ assert.equal(await rev(),version);
+ const assignments=(await read('mentoring')).extra.assignments;
+ assert.equal(assignments.find(x=>x.student_id===A.s1.id).teacher_id,A.mentor.id);
+ assert.equal(assignments.find(x=>x.student_id===A.s2.id).teacher_id,A.other.id);
+});
 test('OP18: empty replacement revokes access, report stays visible to student, admin corrections audit',async()=>{
  assert.equal((await write('mentoring',{type:'assign',teacherId:A.mentor.id,studentIds:[]})).code,'saved');assert.equal((await read('mentoring',A.mentor)).rows.length,0);assert.equal((await read('mentoring',A.s1)).rows.length,1);assert.equal((await write('mentoring',{type:'void',id:report,reason:'Reviewed duplicate'})).code,'saved');assert.equal((await read('mentoring',A.s1)).rows.length,0);
 });
