@@ -1,0 +1,452 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "normal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "empty 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "empty 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "empty 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "large 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "large 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "large 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "readonly 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "readonly 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "loading 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "loading 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "loading 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "loading 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "error 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "error 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "error 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "error 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "full-week roster survives day filter",
+      "passed": true
+    },
+    {
+      "name": "inactive roster cleanup is explicit",
+      "passed": true
+    },
+    {
+      "name": "duty editor axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "duty editor no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "full-week duty save includes Sunday",
+      "passed": true
+    },
+    {
+      "name": "inactive student cannot be assigned",
+      "passed": true
+    },
+    {
+      "name": "computed end includes break",
+      "passed": true
+    },
+    {
+      "name": "cross-midnight prevented",
+      "passed": true
+    },
+    {
+      "name": "pending disables resubmit",
+      "passed": true
+    },
+    {
+      "name": "lesson submits once with rest preserved",
+      "passed": true
+    },
+    {
+      "name": "edit focuses first field",
+      "passed": true
+    },
+    {
+      "name": "edit retains break",
+      "passed": true
+    },
+    {
+      "name": "cancel dirty discard retains edit",
+      "passed": true
+    },
+    {
+      "name": "accepted discard returns to create",
+      "passed": true
+    },
+    {
+      "name": "class choices follow selected year",
+      "passed": true
+    },
+    {
+      "name": "selective deletion keeps untouched duty IDs",
+      "passed": true
+    },
+    {
+      "name": "selection clears after confirmed save",
+      "passed": true
+    },
+    {
+      "name": "overlap correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "overlap feedback focused",
+      "passed": true
+    },
+    {
+      "name": "overlap reload reachable",
+      "passed": true
+    },
+    {
+      "name": "overlap no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "stale correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "stale feedback focused",
+      "passed": true
+    },
+    {
+      "name": "stale reload reachable",
+      "passed": true
+    },
+    {
+      "name": "stale no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "network correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "network feedback focused",
+      "passed": true
+    },
+    {
+      "name": "network reload reachable",
+      "passed": true
+    },
+    {
+      "name": "network no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "malformed correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "malformed feedback focused",
+      "passed": true
+    },
+    {
+      "name": "malformed reload reachable",
+      "passed": true
+    },
+    {
+      "name": "malformed no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "unavailable references require active selection",
+      "passed": true
+    },
+    {
+      "name": "missing active teacher blocks native validation",
+      "passed": true
+    },
+    {
+      "name": "large duty at short mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large duty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "landscape resize no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "desktop resize no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "keyboard Edit opens and focuses editor",
+      "passed": true
+    },
+    {
+      "name": "touch toggles lesson selection",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "large",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    },
+    {
+      "name": "duty editor",
+      "violations": []
+    },
+    {
+      "name": "large duty",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic fixtures and intercepted API writes; no authenticated production role UAT."
+  ]
+}

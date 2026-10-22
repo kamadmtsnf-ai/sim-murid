@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "baseline_commit": "085569b18a9a237ea2efa1f51d91d4b2271c4415",
+  "baseline_regression": {
+    "tests": 9,
+    "passed": 4,
+    "failed": 5,
+    "failures": [
+      "Query validation occurs after write",
+      "Malformed read snapshot classified 400",
+      "Unsafe/inconsistent snapshot accepted",
+      "Malformed write acknowledgement classified 400",
+      "Page outage swallowed instead of retry boundary"
+    ]
+  },
+  "final": {
+    "npm_run_check": {
+      "exit_code": 0,
+      "tests": 277,
+      "passed": 277,
+      "failed": 0,
+      "suites": 38,
+      "includes": [
+        "TypeScript",
+        "ESLint zero warnings",
+        "isolated database integration/RBAC",
+        "database generated type check",
+        "production build"
+      ]
+    },
+    "schedules_browser": {
+      "checks": 72,
+      "axe_runs": 8,
+      "violations": 0
+    },
+    "academic_browser": {
+      "checks": 41,
+      "axe_runs": 6,
+      "violations": 0
+    },
+    "deadcode": {
+      "unreachable": []
+    },
+    "git_diff_check": "passed"
+  },
+  "limits": [
+    "Browser records and intercepted replies are synthetic; production authenticated role UAT not performed.",
+    "PGlite does not load native pg-safeupdate; prior singleton WHERE predicates retained; no SQL changes.",
+    "Browser checks establish no page horizontal overflow in tested viewports; normal vertical scrolling remains."
+  ]
+}

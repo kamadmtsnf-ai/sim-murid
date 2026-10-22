@@ -377,3 +377,12 @@
 @media (min-width: 640px) { .classes-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .classes-year-fields > label { flex: 1 1 240px; }
+
+/* Schedules: contain dense data locally while keeping controls reachable on phones. */
+.schedules-panel { min-width: 0; overflow-wrap: anywhere; }
+.schedules-panel fieldset, .schedules-panel label { min-width: 0; }
+.schedules-panel input[type="checkbox"] { flex-shrink: 0; width: 1.125rem; height: 1.125rem; }
+.schedules-panel table { min-width: 44rem; }
+.schedules-panel th, .schedules-panel td { vertical-align: top; }
+.schedules-panel button { min-height: 2.75rem; white-space: normal; }
+.schedules-panel h2 { line-height: 1.4; }
