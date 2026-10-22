@@ -1,0 +1,376 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "normal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "normal 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly has no recording controls",
+      "passed": true
+    },
+    {
+      "name": "teacher 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "teacher axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "loading 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "expanded history 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "expanded history 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "history table remains readable on mobile",
+      "passed": true
+    },
+    {
+      "name": "teacher can cancel own active event",
+      "passed": true
+    },
+    {
+      "name": "archived event has no cancel action",
+      "passed": true
+    },
+    {
+      "name": "teacher cannot cancel another author event",
+      "passed": true
+    },
+    {
+      "name": "recording student catalog complete",
+      "passed": true
+    },
+    {
+      "name": "inactive code excluded from event input",
+      "passed": true
+    },
+    {
+      "name": "event modal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "event modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "double click creates one request",
+      "passed": true
+    },
+    {
+      "name": "event payload preserves catalog code and date",
+      "passed": true
+    },
+    {
+      "name": "catalog modal 320x568 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "catalog landscape no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 812,
+        "document": 812
+      }
+    },
+    {
+      "name": "long catalog modal footer reachable",
+      "passed": true
+    },
+    {
+      "name": "keyboard focus stays inside dialog",
+      "passed": true
+    },
+    {
+      "name": "catalog restores positive points",
+      "passed": true
+    },
+    {
+      "name": "catalog restores inactive flag",
+      "passed": true
+    },
+    {
+      "name": "catalog correction keeps original code",
+      "passed": true
+    },
+    {
+      "name": "saving inactive catalog does not activate it",
+      "passed": true
+    },
+    {
+      "name": "negative catalog points prefilled",
+      "passed": true
+    },
+    {
+      "name": "native point range blocks request",
+      "passed": true
+    },
+    {
+      "name": "settings threshold prefilled",
+      "passed": true
+    },
+    {
+      "name": "settings subject prefilled",
+      "passed": true
+    },
+    {
+      "name": "settings payload preserves subject",
+      "passed": true
+    },
+    {
+      "name": "current month cannot be archived",
+      "passed": true
+    },
+    {
+      "name": "archive sends exact first-of-month",
+      "passed": true
+    },
+    {
+      "name": "affective uses existing dedicated action",
+      "passed": true
+    },
+    {
+      "name": "class filter narrows displayed rows",
+      "passed": true
+    },
+    {
+      "name": "class filter never narrows recording catalog",
+      "passed": true
+    },
+    {
+      "name": "Escape returns focus to trigger",
+      "passed": true
+    },
+    {
+      "name": "month change refreshes recording students outside initial month",
+      "passed": true
+    },
+    {
+      "name": "failed read retains previous snapshot",
+      "passed": true
+    },
+    {
+      "name": "student pagination works",
+      "passed": true
+    },
+    {
+      "name": "search resets page",
+      "passed": true
+    },
+    {
+      "name": "search empty state",
+      "passed": true
+    },
+    {
+      "name": "cancel landscape no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "cancellation sends reason and immutable ID",
+      "passed": true
+    },
+    {
+      "name": "mutation restores stable fallback focus",
+      "passed": true
+    },
+    {
+      "name": "inactive stored subject remains selected",
+      "passed": true
+    },
+    {
+      "name": "unrelated settings update never clears inactive subject",
+      "passed": true
+    },
+    {
+      "name": "archived error retains draft",
+      "passed": true
+    },
+    {
+      "name": "pending Escape cannot discard form",
+      "passed": true
+    },
+    {
+      "name": "pending command remains single",
+      "passed": true
+    },
+    {
+      "name": "uncertain write retains form",
+      "passed": true
+    },
+    {
+      "name": "uncertain write prevents blind retry",
+      "passed": true
+    },
+    {
+      "name": "dirty dismissal cancellation retains catalog draft",
+      "passed": true
+    },
+    {
+      "name": "30 second timeout prevents blind retry",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal 320",
+      "violations": []
+    },
+    {
+      "name": "normal 1440",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "large",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "teacher",
+      "violations": []
+    },
+    {
+      "name": "expanded history 320",
+      "violations": []
+    },
+    {
+      "name": "event modal",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic fixtures and intercepted writes, not authenticated production role UAT or physical-device testing."
+  ]
+}

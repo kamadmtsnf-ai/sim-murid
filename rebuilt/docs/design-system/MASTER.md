@@ -193,3 +193,12 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Tarif punya minimum/maksimum inclusive, persentase presisi empat desimal, status aktif dan alasan koreksi. Jangan mengaktifkan tarif nonaktif ketika dibuka untuk koreksi.
 - Gunakan Dialog dan kontrol existing, dirty/pending guard, focus return/fallback, feedback lokal, controls 44px dan scroll dalam viewport. Rekening searchable/paginated; ledger scroll lokal tanpa page overflow.
 - Semua penyimpanan confirmed; stale/uncertain meminta reload. Slip memiliki aksi baca/unduh/cek status/kirim terpisah. Sending/ambiguous tidak diulang otomatis; status SMTP accepted tidak menjamin penerimaan inbox atau pencatatan database berhasil.
+
+## Poin Siswa — 23 Oktober 2026
+
+- Pisahkan bulan laporan, filter kelas, pencarian tampilan dan katalog siswa pencatatan. Katalog mengikuti enrollment bulan yang dipilih serta cakupan akses, tetapi tidak menyempit mengikuti filter kelas/siswa laporan. Konteks ganda wajib bulan/revision sama.
+- Saldo/level/pengali berasal dari replay server. Tampilkan sebelum/sesudah/delta, status arsip dan R02/R03 secara eksplisit; R03 bukan pengeluaran siswa otomatis. Riwayat memakai deskripsi/konsekuensi snapshot saat kejadian dicatat.
+- Modal khusus kejadian/katalog/pengaturan/arsip/cancel menggunakan Dialog existing, controls 44px, dirty/pending guard, return/fallback focus dan scroll dalam viewport. Riwayat scroll lokal, siswa searchable/paginated.
+- Katalog mendukung poin negatif dan status nonaktif. Kode asal terkunci ketika edit. Mapel afektif tersimpan yang tidak lagi aktif harus tetap terlihat dan tidak boleh dihapus diam-diam saat pengaturan lain disimpan.
+- Pembatalan mengikuti admin atau pembuat yang masih dapat mencatat dan belum diarsipkan; alasan dan konfirmasi wajib. Arsip/sinkronisasi menyebut bulan/tindakan, added 0 tetap ditampilkan. Pencarian lokal tidak mengubah cakupan ekspor tanpa pemberitahuan.
+- Write confirmed, timeout dan reload untuk hasil tak pasti. Read gagal mempertahankan snapshot, konteks bertentangan ditolak. Sertifikat kosong memberi pesan yang jelas; PDF membungkus token panjang tanpa keluar halaman.

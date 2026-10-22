@@ -17,18 +17,21 @@ export default async function ServicesPage({
   try {
     data = await servicesData(caller.principal.id, caller.sessionId, m.data);
   } catch {
-    if(m.data === "notifications") throw new Error("Notifications unavailable");
+    if (m.data === "notifications" || m.data === "discipline")
+      throw new Error(
+        m.data === "notifications"
+          ? "Notifications unavailable"
+          : "Discipline unavailable",
+      );
     return (
       <main id="main-content" className="p-8">
         <h1>{titles[m.data]}</h1>
         <p>Layanan belum tersedia atau izin tidak mencukupi.</p>
-        
       </main>
     );
   }
   return (
-    <main id="main-content" className="mx-auto max-w-7xl space-y-6 p-6">
-      
+    <main id="main-content" className="mx-auto min-w-0 max-w-7xl space-y-6 p-6">
       <h1 className="text-3xl font-semibold">{titles[m.data]}</h1>
       <ServicesPanel initial={data} userId={caller.principal.id} />
     </main>
