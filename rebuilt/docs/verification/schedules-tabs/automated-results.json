@@ -3,8 +3,8 @@
   "base": "7d2431cf7a33adeabc789a8465c2039f9edf61c1",
   "checks": {
     "npm_run_check": {
-      "tests": 279,
-      "passed": 279,
+      "tests": 280,
+      "passed": 280,
       "failed": 0,
       "suites": 38,
       "typecheck": "passed",
@@ -13,8 +13,8 @@
       "production_build": "passed"
     },
     "schedule_route_page_schema": {
-      "tests": 11,
-      "passed": 11
+      "tests": 12,
+      "passed": 12
     },
     "schedules_browser": {
       "checks": 145,

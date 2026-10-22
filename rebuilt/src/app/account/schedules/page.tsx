@@ -35,6 +35,9 @@ export default async function SchedulesPage({
       caller.sessionId,
       filters,
     );
+    // Both RPCs share education_state; never edit a roster from mixed revisions.
+    if (classes.revision !== schedules.revision)
+      throw new Error("Education snapshot changed");
   } catch (error) {
     if (!(error instanceof AccessDenied))
       throw new Error("Schedules unavailable");

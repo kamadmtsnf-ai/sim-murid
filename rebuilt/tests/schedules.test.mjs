@@ -323,3 +323,13 @@ test("unknown or repeated tab query safely defaults to KBM", async () => {
     assert.equal(result.props.children[1].props.initialTab, "kbm");
   }
 });
+
+test("mixed class/schedule revisions fail closed before rendering an editable roster", async () => {
+  const m = setup();
+  m.snapshot.revision = 1;
+  await assert.rejects(
+    () => page({ searchParams: Promise.resolve({}) }),
+    /Schedules unavailable/,
+  );
+  assert.equal(writes(m).length, 0);
+});

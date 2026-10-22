@@ -6,6 +6,8 @@
 
 Implementasi PR18 telah memvalidasi URL sebelum write, memisahkan kegagalan upstream, memeriksa snapshot, menjaga revision/idempotency dan mengunci hasil simpan tak pasti. Pemeriksaan ulang tidak menemukan alasan mengganti aturan database/API tersebut.
 
+Temuan race yang diperbaiki: classesData dan schedulesData dibaca berurutan melalui RPC terpisah. Mutasi di antara kedua read dapat membuat daftar anggota kelas lama dipasangkan dengan roster/revision jadwal baru. Halaman sekarang membandingkan revision dari education_state dan menolak snapshot campuran menuju retry boundary sebelum editor dirender. Tes actual page mereproduksi mismatch tanpa menulis data.
+
 Kebutuhan baru: dua jenis jadwal dan dua editor sebelumnya tampil sekaligus sehingga halaman padat. Pemindahan editor ke modal memerlukan penanganan risiko berikut, bukan perubahan aturan bisnis:
 
 - Seleksi dua jenis data pada tampilan terpisah dapat menyembunyikan ID yang ikut terhapus.
@@ -41,7 +43,7 @@ Alur UI baru: filter bersama → Radix Tabs → daftar dan tombol input sesuai i
 | src/app/account/schedules/schedule-panel.tsx | Tabs, tombol, Dialog, satu editor, state/feedback/fokus/seleksi aman; kedua form existing digunakan ulang |
 | src/app/account/schedules/page.tsx | Tab awal dari query view yang dinormalisasi dan key sinkron |
 | src/app/globals.css | Tampilan tab dan batas/gulir modal khusus schedules |
-| tests/schedules.test.mjs | Dua tes actual page untuk persistensi/fallback tab; sembilan tes API/schema sebelumnya tetap dijalankan |
+| tests/schedules.test.mjs | Tiga tes actual page untuk persistensi/fallback tab; sembilan tes API/schema sebelumnya tetap dijalankan, plus guard revision kelas/jadwal |
 | tests/ui/schedules-fixture.tsx | Tab awal dan kelas kedua sintetis untuk empty/dirty class switch |
 | scripts/verify-schedules.mjs | Browser regression modal/tab, hasil mesin dan screenshot sementara |
 | docs/design-system/MASTER.md | Mengganti aturan editor inline dengan tab/modal saat ini |
@@ -51,8 +53,8 @@ Tidak ada perubahan dependency/lockfile, migrasi, data produksi, role/grant/RLS,
 
 ## D. Validasi yang benar-benar dijalankan
 
-- npm run check: **279/279 tes**, 38 kelompok test runner; TypeScript, ESLint tanpa warning, integrasi database terisolasi, generated database types dan production build lulus.
-- npm run test:schedules: **11/11**; filter sebelum write, actor/session, foreign Origin, gate, ketiga command, snapshot invalid, uncertain read-after-write, konflik dan tab query.
+- npm run check: **280/280 tes**, 38 kelompok test runner; TypeScript, ESLint tanpa warning, integrasi database terisolasi, generated database types dan production build lulus.
+- npm run test:schedules: **12/12**; filter sebelum write, actor/session, foreign Origin, gate, ketiga command, snapshot invalid, uncertain read-after-write, konflik dan tab query.
 - npm run test:schedules:browser: **145 pemeriksaan**, **14 axe runs**, nol pelanggaran. Viewport 320/375/768/1440; short mobile 320×568, resize landscape 812×375 dan desktop 1440×900.
 - Browser: normal/kosong/75 pelajaran/80 siswa/read-only/loading/error; kedua tab; modal KBM/Piket; keyboard panah/Home/Enter/Escape/Tab; touch selection; trigger return focus; dirty close/class switch; kelas tanpa siswa; roster seluruh minggu dengan filter satu hari; empty replacement; break/edit; midnight; pending close lock; overlap/stale/denied/network/malformed reply; 30 detik timeout tanpa retry; hapus perjenis; initial Piket query dan filter tahun.
 - Seluruh modal yang diuji berada dalam viewport dan footer dapat digulir untuk dijangkau; tidak ditemukan horizontal overflow halaman/modal atau uncaught JavaScript error pada skenario tersebut. Gulir vertikal normal tetap tersedia.

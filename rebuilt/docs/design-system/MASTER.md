@@ -146,6 +146,7 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Pilihan hapus dikosongkan ketika tab berubah; command hapus hanya memuat ID jenis jadwal pada tab aktif. Filter GET mempertahankan tab via view=kbm/piket. Tahun berpasangan, kelas mengikuti tahun, waktu mengikuti WIB.
 - Tutup/Escape/Batal menghormati draf. Saat pending, modal tetap terbuka dan kontrol simpan terkunci. Sukses memerlukan snapshot tervalidasi sebelum menutup modal. Konflik/hasil tak pasti mempertahankan isian; feedback dan reload tersedia di dalam focus trap.
 - Dialog mengembalikan fokus ke pemicu input atau Edit. Lebar modal mengikuti viewport dan tinggi maksimal 100dvh-32px; gulir vertikal modal membuat header, form dan tombol akhir tetap dapat dijangkau pada layar pendek.
+- Sebelum render, revision kelas dan jadwal dari dua RPC harus sama. Snapshot campuran masuk retry boundary agar editor tidak menghapus penugasan dari roster/anggota yang tidak sinkron.
 - Piket memuat seluruh tujuh hari dari duty_roster meskipun filter daftar satu hari. Penggantian/pengosongan dikonfirmasi; cleanup penugasan siswa nonaktif dijelaskan. Istirahat, deteksi benturan dan larangan melewati tengah malam dipertahankan.
 - Tabel menggulir lokal, teks panjang membungkus, kontrol sentuh minimal 44px. Tidak menggunakan overflow hidden untuk menyembunyikan konten halaman.
 - Bukti terbaru: docs/verification/schedules-tabs-audit.md; audit sebelum tab/modal tetap tercatat pada schedules-audit.md.
