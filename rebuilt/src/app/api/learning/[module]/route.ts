@@ -1,3 +1,4 @@
+import { gradeFilters } from "@/lib/learning/grades";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
 import { sameOrigin, privateJson } from "@/lib/auth/http";
@@ -70,7 +71,11 @@ export async function POST(
   try {
     const domain = learningModules.parse((await params).module),
       body = mutationEnvelope.parse(await jsonBody(request)),
-      command = commands[domain].parse(body.command);
+      command = commands[domain].parse(body.command),
+      filters =
+        domain === "grades"
+          ? gradeFilters.parse(Object.fromEntries(request.nextUrl.searchParams))
+          : undefined;
     const r = await createAuthAdmin().rpc("app_learning_write", {
       p_actor: caller.principal.id,
       p_session: caller.sessionId,
@@ -80,10 +85,41 @@ export async function POST(
       p_command: command as Json,
     });
     if (r.error) throw new Error("Unavailable");
+    if (
+      domain === "grades" &&
+      !z
+        .object({
+          code: z.enum([
+            "saved",
+            "denied",
+            "invalid",
+            "stale",
+            "request_conflict",
+            "not_found",
+            "duplicate",
+            "published",
+            "incomplete",
+          ]),
+        })
+        .safeParse(r.data).success
+    )
+      throw Error("Uncertain grade acknowledgement");
     const result = z.object({ code: z.string() }).passthrough().parse(r.data);
+    const data =
+      domain === "grades" && result.code === "saved"
+        ? await learningData(
+            caller.principal.id,
+            caller.sessionId,
+            domain,
+            filters,
+          )
+        : undefined;
     return reply(
       {
         result,
+        ...(domain === "grades"
+          ? { code: result.code, ...(data ? { data } : {}) }
+          : {}),
         message: messages[result.code] ?? "Permintaan belum berhasil.",
       },
       result.code === "saved" ? 200 : result.code === "denied" ? 403 : 409,

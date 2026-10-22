@@ -21,6 +21,7 @@ export default async function LearningPage({
       domain.data,
     );
   } catch {
+    if(domain.data === "grades")throw Error("Grades unavailable");
     return (
       <main className="mx-auto max-w-xl p-8" id="main-content">
         <h1>{titles[domain.data]}</h1>
@@ -30,7 +31,7 @@ export default async function LearningPage({
     );
   }
   return (
-    <main id="main-content" className="mx-auto max-w-7xl space-y-6 p-6">
+    <main id="main-content" className="mx-auto min-w-0 max-w-7xl space-y-6 p-6">
       
       <h1 className="text-3xl font-semibold">{titles[domain.data]}</h1>
       <LearningPanel initial={data} />

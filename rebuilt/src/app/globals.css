@@ -428,3 +428,10 @@
 .discipline-panel input, .discipline-panel select, .discipline-dialog input, .discipline-dialog select { min-height: 44px; max-width: 100%; }
 .discipline-panel table { overflow-wrap: anywhere; }
 .discipline-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+
+/* Penilaian: bounded dialogs and local table scrolling keep all scores reachable. */
+.grades-panel fieldset, .grades-dialog fieldset { min-inline-size: 0; }
+.grades-panel input, .grades-panel select, .grades-dialog input, .grades-dialog select { min-height: 44px; max-width: 100%; }
+.grades-dialog label { overflow-wrap: anywhere; }
+.grades-panel table { overflow-wrap: anywhere; }
+.grades-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }

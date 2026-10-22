@@ -1,9 +1,5 @@
 "use client";
-import {
-  formatAcademicYear,
-  defaultSemesterDate,
-  semesterPeriod,
-} from "@/lib/academic/period";
+import { formatAcademicYear, semesterPeriod } from "@/lib/academic/period";
 import { TableRegion } from "@/components/ui/data-table";
 
 import { useRef, useState, type FormEvent } from "react";
@@ -19,6 +15,8 @@ import {
   learningSnapshot,
   type LearningSnapshot,
 } from "@/lib/learning/validation";
+import { GradesPanel } from "./grades-panel";
+import { gradesSnapshot } from "@/lib/learning/grades";
 import { BookReader } from "./reader";
 type Row = Record<string, unknown>;
 const text = (v: Row, k: string) => String(v[k] ?? ""),
@@ -26,6 +24,16 @@ const text = (v: Row, k: string) => String(v[k] ?? ""),
   obj = (v: unknown): Row =>
     typeof v === "object" && v !== null ? (v as Row) : {};
 export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
+  if (initial.module === "grades")
+    return (
+      <GradesPanel
+        key={`${initial.revision}:${initial.semester}`}
+        initial={gradesSnapshot.parse(initial)}
+      />
+    );
+  return <LearningModulesPanel initial={initial} />;
+}
+function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
   const [data, setData] = useState(initial),
     [filters, setFilters] = useState<Record<string, string>>({
       semester: String(initial.semester),
@@ -36,25 +44,15 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
     [message, setMessage] = useState(""),
     [book, setBook] = useState<Row | null>(null),
     [selected, setSelected] = useState<string[]>([]),
-    [reportKind, setReportKind] = useState("combined"),
-    [historyKind, setHistoryKind] = useState(""),
-    [phFilter, setPhFilter] = useState("");
+    [reportKind, setReportKind] = useState("combined");
   const lock = useRef(false),
     domain = data.module,
     api = "/api/learning/" + domain;
   const people = [
       ...new Map(data.people.map((p) => [text(p, "id"), p])).values(),
     ],
-    students = people.filter((p) =>
-      ["student", "alumni"].includes(text(p, "role_code")),
-    ),
     alumni = data.rows.filter((r) => r.role === "alumni");
-  const classRow = data.classes.find((c) => c.id === filters.classId),
-    gradeDate = defaultSemesterDate(
-      classRow?.year,
-      filters.semester,
-      data.today,
-    );
+  const classRow = data.classes.find((c) => c.id === filters.classId);
   const selectedPeriod = semesterPeriod(classRow?.year, filters.semester);
 
   async function load(f = filters) {
@@ -123,32 +121,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
       get = (k: string) => String(f.get(k) ?? ""),
       reason = get("reason");
     let c: unknown;
-    if (domain === "grades") {
-      if (tab === "kkm")
-        c = {
-          type: "kkm",
-          classId: filters.classId,
-          subjectId: filters.subjectId,
-          date: get("date"),
-          value: Number(get("value")),
-        };
-      else
-        c = {
-          type: "batch",
-          id: edit?.id ?? null,
-          classId: filters.classId,
-          subjectId: filters.subjectId,
-          date: get("date"),
-          kind: get("kind"),
-          items: students.map((s) => ({
-            studentId: s.id,
-            value:
-              get("value-" + s.id) === "" ? null : Number(get("value-" + s.id)),
-            notes: get("notes-" + s.id),
-          })),
-          ...(edit ? { reason } : {}),
-        };
-    } else if (domain === "reports")
+    if (domain === "reports")
       c = {
         type: "publish",
         classId: filters.classId,
@@ -332,7 +305,7 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
             </SelectField>
           </>
         )}
-        {(domain === "grades" || domain === "books") && (
+        {domain === "books" && (
           <SelectField
             label="Mata pelajaran"
             name="subjectId"
@@ -356,220 +329,6 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
         )}
         <Button disabled={busy}>Tampilkan</Button>
       </form>
-      {domain === "grades" && (
-        <>
-          <p className="text-sm">
-            Nilai 0 sah; kosong berarti belum diisi. Nomor PH tidak dipakai
-            ulang setelah pembatalan. KKM baru tidak mengubah snapshot nilai
-            lama.
-          </p>
-          {data.canWrite && filters.classId && filters.subjectId && (
-            <section className="space-y-3 rounded border p-4">
-              <div className="flex gap-3">
-                <Button
-                  type="button"
-                  variant={tab === "main" ? "default" : "outline"}
-                  onClick={() => setTab("main")}
-                >
-                  Input nilai
-                </Button>
-                <Button
-                  type="button"
-                  variant={tab === "kkm" ? "default" : "outline"}
-                  onClick={() => setTab("kkm")}
-                >
-                  KKM
-                </Button>
-              </div>
-              <form
-                key={[
-                  tab,
-                  edit?.id ?? "new",
-                  filters.classId,
-                  filters.subjectId,
-                  filters.semester,
-                ].join("-")}
-                onSubmit={submit}
-                className="space-y-3"
-              >
-                <label className="block text-sm">
-                  Tanggal penilaian / periode KKM
-                  <input
-                    className={controlClass}
-                    name="date"
-                    type="date"
-                    defaultValue={
-                      text(edit ?? {}, "assessment_date") || gradeDate
-                    }
-                    min={selectedPeriod?.start}
-                    max={selectedPeriod?.end}
-                    required
-                  />
-                </label>
-                {tab === "kkm" ? (
-                  <TextField
-                    label="KKM (0–100)"
-                    name="value"
-                    type="number"
-                    value={String(data.extra.kkm ?? 75)}
-                    required
-                  />
-                ) : (
-                  <>
-                    <SelectField
-                      label="Jenis penilaian"
-                      name="kind"
-                      value={text(edit ?? {}, "kind") || "PH"}
-                    >
-                      {["PH", "ATS", "ASAS", "Praktik"].map((k) => (
-                        <option key={k}>{k}</option>
-                      ))}
-                    </SelectField>
-                    <div className="max-h-96 overflow-auto">
-                      {students.map((p) => {
-                        const sc = list(edit?.scores).find(
-                          (s) => s.student_id === p.id,
-                        );
-                        return (
-                          <div
-                            key={text(p, "id")}
-                            className="grid gap-2 border-b p-2 sm:grid-cols-3"
-                          >
-                            <span>{text(p, "full_name")}</span>
-                            <input
-                              className={controlClass}
-                              aria-label={"Nilai " + text(p, "full_name")}
-                              name={"value-" + p.id}
-                              type="number"
-                              min="0"
-                              max="100"
-                              step="0.01"
-                              defaultValue={
-                                sc?.value === null
-                                  ? ""
-                                  : String(sc?.value ?? "")
-                              }
-                            />
-                            <input
-                              className={controlClass}
-                              aria-label={"Catatan " + text(p, "full_name")}
-                              name={"notes-" + p.id}
-                              maxLength={2000}
-                              defaultValue={text(sc ?? {}, "notes")}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                    {edit && (
-                      <TextField
-                        label="Alasan koreksi"
-                        name="reason"
-                        required
-                      />
-                    )}
-                  </>
-                )}
-                <Button disabled={busy}>Simpan</Button>
-                {edit && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setEdit(null)}
-                  >
-                    Input baru
-                  </Button>
-                )}
-              </form>
-            </section>
-          )}
-          <section className="space-y-3">
-            <h2 className="text-xl font-semibold">Riwayat penilaian</h2>
-            <label>
-              Jenis
-              <select
-                className={controlClass}
-                value={historyKind}
-                onChange={(e) => setHistoryKind(e.target.value)}
-              >
-                <option value="">Semua</option>
-                {["PH", "ATS", "ASAS", "Praktik"].map((k) => (
-                  <option key={k}>{k}</option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Nomor PH
-              <input
-                type="number"
-                min="1"
-                className={controlClass}
-                value={phFilter}
-                onChange={(e) => setPhFilter(e.target.value)}
-              />
-            </label>
-            {data.rows
-              .filter(
-                (r) =>
-                  (!historyKind || r.kind === historyKind) &&
-                  (!phFilter || String(r.ph_number) === phFilter),
-              )
-              .map((r) => (
-                <article className="rounded border p-4" key={text(r, "id")}>
-                  <h3>
-                    {text(r, "subject_name")} — {text(r, "kind")}
-                    {r.ph_number ? " " + text(r, "ph_number") : ""} —{" "}
-                    {text(r, "assessment_date")}
-                  </h3>
-                  <p>
-                    KKM snapshot {text(r, "kkm_snapshot")}
-                    {r.kkm_fallback ? " (default75)" : ""}
-                  </p>
-                  <ul>
-                    {list(r.scores).map((sc) => (
-                      <li key={text(sc, "student_id")}>
-                        {text(sc, "name")}:{" "}
-                        {sc.value === null ? "belum diisi" : text(sc, "value")}{" "}
-                        — {text(sc, "notes")}
-                      </li>
-                    ))}
-                  </ul>
-                  {r.can_edit === true && (
-                    <div className="flex gap-3">
-                      <Button
-                        variant="outline"
-                        onClick={() => {
-                          if (!filters.classId || !filters.subjectId) {
-                            setMessage(
-                              "Pilih kelas dan mapel sebelum mengoreksi nilai.",
-                            );
-                            return;
-                          }
-                          setEdit(r);
-                          setTab("main");
-                        }}
-                      >
-                        Koreksi
-                      </Button>
-                      <Button
-                        variant="destructive"
-                        onClick={() => {
-                          const reason = window.prompt(
-                            "Alasan pembatalan penilaian (min.3 karakter)",
-                          );
-                          if (reason)
-                            void mutate({ type: "void", id: r.id, reason });
-                        }}
-                      >
-                        Batalkan
-                      </Button>
-                    </div>
-                  )}
-                </article>
-              ))}
-          </section>
-        </>
-      )}
       {domain === "reports" && (
         <>
           <p>

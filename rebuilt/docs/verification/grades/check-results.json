@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "date": "2026-10-23",
+  "timezone": "Asia/Jakarta",
+  "npmCi": "passed",
+  "npmCheck": "passed on final code",
+  "tests": 369,
+  "runnerGroups": 45,
+  "newGradesTests": 16,
+  "newDatabaseRegressionTests": 1,
+  "finalTargetedRepeats": [
+    "typecheck",
+    "lint",
+    "production build",
+    "test:learning (Practice 0/100, immutable report assertions)"
+  ],
+  "databaseTypeReplay": "14 public tables passed",
+  "gradesBrowser": {
+    "checks": 61,
+    "axeRuns": 7,
+    "errors": 0
+  },
+  "academicRegression": {
+    "checks": 41,
+    "axeRuns": 6
+  },
+  "deadcodeUnreachable": [],
+  "limits": [
+    "Synthetic browser/Auth/SDK data; no authenticated production role CRUD, physical-device or manual screen reader UAT.",
+    "PGlite does not load native pg-safeupdate extension; singleton predicates are regression tested.",
+    "D10 policy unchanged; no published archive rewrite."
+  ]
+}
