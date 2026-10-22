@@ -1,0 +1,10 @@
+{
+  "sqlstate": "21000",
+  "function": "app_classes_write",
+  "statement": "update sim_murid_private.education_state set revision=revision+1",
+  "occurrences": 2,
+  "preload": "authenticator: supautils, safeupdate",
+  "year_count_before": 0,
+  "semester_count_before": 0,
+  "education_revision_before": 0
+}

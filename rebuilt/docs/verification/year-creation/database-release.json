@@ -1,0 +1,89 @@
+{
+  "denied": {
+    "code": "denied"
+  },
+  "preload": [
+    "session_preload_libraries=supautils, safeupdate",
+    "statement_timeout=8s",
+    "lock_timeout=8s"
+  ],
+  "version": "20261022101238",
+  "functions": [
+    {
+      "name": "app_classes_write",
+      "anon_execute": false,
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": false,
+      "matchesTestedBody": true,
+      "grantsUnchanged": true
+    },
+    {
+      "name": "app_family_write",
+      "anon_execute": false,
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": false,
+      "matchesTestedBody": true,
+      "grantsUnchanged": true
+    },
+    {
+      "name": "app_learning_write",
+      "anon_execute": false,
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": false,
+      "matchesTestedBody": true,
+      "grantsUnchanged": true
+    },
+    {
+      "name": "app_operations_write",
+      "anon_execute": false,
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": false,
+      "matchesTestedBody": true,
+      "grantsUnchanged": true
+    },
+    {
+      "name": "app_point_admin",
+      "anon_execute": false,
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": false,
+      "matchesTestedBody": true,
+      "grantsUnchanged": true
+    },
+    {
+      "name": "app_schedules_write",
+      "anon_execute": false,
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": false,
+      "matchesTestedBody": true,
+      "grantsUnchanged": true
+    },
+    {
+      "name": "app_services_write",
+      "anon_execute": false,
+      "service_execute": true,
+      "security_definer": false,
+      "authenticated_execute": false,
+      "matchesTestedBody": true,
+      "grantsUnchanged": true
+    }
+  ],
+  "year_count": 0,
+  "semester_count": 0,
+  "migration_count": 38,
+  "advisors": {
+    "before": {
+      "rls_enabled_no_policy": 1,
+      "auth_leaked_password_protection": 1
+    },
+    "after": {
+      "rls_enabled_no_policy": 1,
+      "auth_leaked_password_protection": 1
+    }
+  }
+}

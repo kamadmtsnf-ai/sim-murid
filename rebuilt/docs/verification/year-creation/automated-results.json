@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "check": "npm run check",
+  "tests": 268,
+  "failures": 0,
+  "typecheck": "passed",
+  "lint": "passed",
+  "production_build": "passed",
+  "database_types": "passed",
+  "new_regressions": 2,
+  "limits": [
+    "PGlite does not load native safeupdate; explicit function-definition contract plus real isolated service_role RPC transactions are tested.",
+    "No authenticated production admin browser UAT or real production account/year creation performed."
+  ]
+}
