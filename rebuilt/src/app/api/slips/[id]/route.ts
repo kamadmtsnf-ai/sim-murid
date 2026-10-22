@@ -37,7 +37,7 @@ export async function GET(
       });
     if (request.nextUrl.searchParams.get("format") === "html")
       return new Response(
-        '<!doctype html><html lang="id"><meta charset="utf-8"><title>Slip penarikan</title><body><main><pre style="font:16px/1.7 sans-serif;white-space:pre-wrap">' +
+        '<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Slip penarikan</title><body><main style="max-width:60rem;margin:auto;padding:1rem"><h1>Slip penarikan</h1><pre style="font:16px/1.7 sans-serif;white-space:pre-wrap;overflow-wrap:anywhere">' +
           htmlEscape(slipText(r.data)) +
           "</pre></main></body></html>",
         {
@@ -85,6 +85,13 @@ export async function POST(
         { message: "Belum ada email Admin/Pengelola yang terverifikasi." },
         409,
       );
+    const slip = await admin.rpc("app_slip_read", {
+      p_actor: args.p_actor,
+      p_session: args.p_session,
+      p_id: id,
+    });
+    if (slip.error || !slip.data) throw new Error("Slip unavailable");
+    const attachment = Buffer.from(await slipPdf(slip.data));
     const claimed = await admin.rpc("app_slip_delivery", {
       ...args,
       p_action: "claim",
@@ -101,16 +108,11 @@ export async function POST(
       return reply({
         message: "Tidak ada pengiriman baru; periksa status slip.",
       });
-    const slip = await admin.rpc("app_slip_read", {
-      p_actor: args.p_actor,
-      p_session: args.p_session,
-      p_id: id,
-    });
-    if (slip.error || !slip.data) throw new Error("Slip unavailable");
-    const transport = nodemailer.createTransport(gmailTransportOptions(env));
+    let transport: ReturnType<typeof nodemailer.createTransport> | undefined;
     let status: "sent" | "failed" | "ambiguous" = "ambiguous",
       provider = "";
     try {
+      transport = nodemailer.createTransport(gmailTransportOptions(env));
       const result = await transport.sendMail({
         from: { name: env.name, address: env.email },
         to: claim.email,
@@ -119,7 +121,7 @@ export async function POST(
         attachments: [
           {
             filename: "slip.pdf",
-            content: Buffer.from(await slipPdf(slip.data)),
+            content: attachment,
           },
         ],
         disableFileAccess: true,
@@ -133,15 +135,27 @@ export async function POST(
       status =
         gmailFailureReason(error) === "connection" ? "ambiguous" : "failed";
     } finally {
-      transport.close();
+      transport?.close();
     }
-    await admin.rpc("app_slip_delivery", {
+    const completed = await admin.rpc("app_slip_delivery", {
       ...args,
       p_action: "complete",
       p_delivery: claim.id,
       p_status: status,
       p_provider: provider,
     });
+    if (
+      completed.error ||
+      !z.object({ code: z.literal("saved") }).safeParse(completed.data).success
+    )
+      return reply(
+        {
+          status: "ambiguous",
+          message:
+            "Pengiriman diproses, tetapi pencatatan status belum dapat dipastikan. Periksa status slip sebelum mencoba lagi.",
+        },
+        503,
+      );
     return reply({
       message:
         status === "sent"

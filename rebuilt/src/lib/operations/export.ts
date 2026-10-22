@@ -14,7 +14,10 @@ const labels: Record<string, string> = {
   notes: "Catatan",
   amount: "Nominal",
   delta: "Perubahan saldo",
+  balance_before: "Saldo sebelum",
   balance: "Saldo sesudah",
+  fee: "Biaya penarikan",
+  cash_received: "Tunai diterima",
   reversed: "Sudah dibalik",
 };
 export function exportRows(snapshot: OperationsSnapshot) {
@@ -120,7 +123,7 @@ export async function operationsExport(
     s.normalize("NFKD").replace(/[^\x20-\x7E\n]/g, "?");
   const write = (s: string, bold = false) => {
     const size = bold ? 13 : 8, text = plain(s), lines:string[]=[];
-    if(snapshot.module==='fees'){
+    if(snapshot.module==='fees'||snapshot.module==='savings'){
       let line='';for(const character of text){if(character==='\n'||font.widthOfTextAtSize(line+character,size)>772){lines.push(line);line=character==='\n'?'':character;}else line+=character;}lines.push(line);
     }else lines.push(text);
     for(const line of lines){if(y<45){page=pdf.addPage([842,595]);y=555;}page.drawText(line,{x:35,y,size,font,color:rgb(.1,.15,.2)});y-=bold?24:14;}

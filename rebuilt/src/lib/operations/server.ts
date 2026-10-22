@@ -1,3 +1,4 @@
+import {savingsSnapshot} from './savings';
 import {committeeSnapshot} from './committee';
 import {mentoringSnapshot} from './mentoring';
 import "server-only";
@@ -39,6 +40,7 @@ export async function operationsData(
   }
   if(module==="mentoring"){const result=mentoringSnapshot.safeParse(r.data);if(!result.success)throw new Error("Mentoring data unavailable");return result.data;}
   if(module==="fees"){const result=committeeSnapshot.safeParse(r.data);if(!result.success)throw new Error("Committee data unavailable");return result.data;}
+  if(module==="savings"){const result=savingsSnapshot.safeParse(r.data);if(!result.success)throw new Error("Savings data unavailable");return result.data;}
   return operationsSnapshot.parse(r.data);
 }
 export const operationMessages: Record<string, string> = {

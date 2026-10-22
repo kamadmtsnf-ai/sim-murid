@@ -1,222 +1,140 @@
 "use client";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { TextField, controlClass } from "@/components/domain-controls";
-type Row = Record<string, unknown>;
-export function FeeBrackets({
-  brackets,
-  busy,
-  onSave,
-}: {
-  brackets: Row[];
-  busy: boolean;
-  onSave: (command: unknown) => Promise<void>;
-}) {
-  const [edit, setEdit] = useState<Row | null>(null);
-  function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    void onSave({
-      type: "bracket",
-      id: edit?.id ?? null,
-      minimum: Number(f.get("minimum")),
-      maximum:
-        String(f.get("maximum")) === "" ? null : Number(f.get("maximum")),
-      percent: Number(f.get("percent")),
-      active: f.has("active"),
-      ...(edit ? { reason: String(f.get("reason")) } : {}),
-    });
-  }
-  return (
-    <section className="space-y-3 rounded border p-4">
-      <h2 className="font-semibold">Tarif biaya penarikan</h2>
-      <p className="text-sm">
-        Batas bawah dan atas termasuk dalam rentang. Maksimum kosong berarti
-        tanpa batas. Rentang aktif tidak boleh bertumpang tindih.
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {brackets.map((b) => (
-          <Button
-            key={String(b.id)}
-            variant="outline"
-            type="button"
-            onClick={() => setEdit(b)}
-          >
-            {String(b.minimum)}–{String(b.maximum ?? "∞")} / {String(b.percent)}
-            % {b.active ? "aktif" : "nonaktif"}
-          </Button>
-        ))}
-      </div>
-      <form
-        key={String(edit?.id ?? "new")}
-        onSubmit={submit}
-        className="grid gap-3 sm:grid-cols-3"
-      >
-        <TextField
-          label="Minimum Rp"
-          name="minimum"
-          type="number"
-          value={String(edit?.minimum ?? 0)}
-          required
-        />
-        <TextField
-          label="Maksimum Rp"
-          name="maximum"
-          type="number"
-          value={edit?.maximum === null ? "" : String(edit?.maximum ?? "")}
-        />
-        <label>
-          Persentase
-          <input
-            name="percent"
-            type="number"
-            min="0"
-            max="100"
-            step="0.0001"
-            defaultValue={String(edit?.percent ?? 0)}
-            required
-            className={controlClass}
-          />
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="active"
-            defaultChecked={edit ? edit.active === true : true}
-          />{" "}
-          Aktif
-        </label>
-        {edit && <TextField label="Alasan perubahan" name="reason" required />}
-        <Button disabled={busy}>Simpan tarif</Button>
-        {edit && (
-          <Button type="button" variant="outline" onClick={() => setEdit(null)}>
-            Tarif baru
-          </Button>
-        )}
-      </form>
-    </section>
-  );
-}
-export function FeePreview() {
-  const [message, setMessage] = useState("");
-  return (
-    <div className="space-y-2">
-      <label>
-        <input type="checkbox" name="feeApplied" /> Terapkan biaya pada
-        penarikan
-      </label>
-      <Button
-        type="button"
-        variant="outline"
-        onClick={async (e) => {
-          const f = e.currentTarget.closest("form");
-          if (!f) return;
-          const data = new FormData(f);
-          try {
-            const r = await fetch(
-                "/api/slips/quote?amount=" +
-                  String(data.get("amount")) +
-                  "&apply=" +
-                  String(data.has("feeApplied")),
-              ),
-              body = await r.json();
-            if (!r.ok) throw new Error(body.message);
-            setMessage(
-              "Biaya Rp" +
-                String(body.quote.fee) +
-                "; uang diterima Rp" +
-                String(body.quote.cash) +
-                (body.quote.matched ? "" : " (tidak ada tarif yang cocok)"),
-            );
-          } catch {
-            setMessage("Periksa nominal dan akses Anda.");
-          }
-        }}
-      >
-        Hitung biaya di server
-      </Button>
-      <p role="status">{message}</p>
-    </div>
-  );
-}
+import { slipDeliverySchema } from "@/lib/operations/savings";
+/** Delivery actions never retry ambiguous sends automatically. They do not alter the savings ledger. */
 export function SlipActions({ id, canSend }: { id: string; canSend: boolean }) {
   const [message, setMessage] = useState(""),
-    [busy, setBusy] = useState(false);
+    [busy, setBusy] = useState(false),
+    [uncertain, setUncertain] = useState(false),
+    [reversed, setReversed] = useState(false);
+  const lock = useRef(false),
+    mounted = useRef(true),
+    controller = useRef<AbortController | null>(null);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      controller.current?.abort();
+    };
+  }, []);
+  async function action(send: boolean) {
+    if (lock.current || (send && (uncertain || reversed))) return;
+    lock.current = true;
+    setBusy(true);
+    setMessage(send ? "Memproses antrean email…" : "Memuat status email…");
+    const abort = new AbortController();
+    controller.current = abort;
+    const timer = setTimeout(() => abort.abort(), 30000);
+    try {
+      let acknowledgement = "";
+      if (send) {
+        const r = await fetch("/api/slips/" + id, {
+            method: "POST",
+            signal: abort.signal,
+          }),
+          body = await r.json();
+        if (!r.ok || body.status === "ambiguous") throw Error("Uncertain send");
+        acknowledgement =
+          typeof body.message === "string" ? body.message : "Antrean diproses.";
+      }
+      const response = await fetch("/api/slips/" + id, {
+        cache: "no-store",
+        signal: abort.signal,
+      });
+      if (!response.ok) throw Error("Unavailable");
+      const slip = slipDeliverySchema.parse((await response.json()).slip);
+      if (!mounted.current) return;
+      setReversed(slip.reversed);
+      setUncertain(
+        slip.deliveries.some(
+          (d) => d.status === "sending" || d.status === "ambiguous",
+        ),
+      );
+      const labels = {
+        queued: "Dalam antrean",
+        sending: "Sedang dikirim",
+        sent: "Diterima server email",
+        failed: "Gagal",
+        ambiguous: "Hasil belum pasti",
+      };
+      setMessage(
+        [
+          acknowledgement,
+          slip.reversed
+            ? "Slip telah dibatalkan/dibalik."
+            : slip.deliveries.length
+              ? slip.deliveries
+                  .map(
+                    (d) =>
+                      d.email +
+                      ": " +
+                      labels[d.status] +
+                      " (" +
+                      d.attempts +
+                      " percobaan)",
+                  )
+                  .join("; ")
+              : "Belum ada antrean email.",
+        ]
+          .filter(Boolean)
+          .join(" "),
+      );
+    } catch {
+      if (mounted.current) {
+        if (send) setUncertain(true);
+        setMessage(
+          send
+            ? "Hasil pengiriman belum dapat dipastikan. Periksa status sebelum melanjutkan; jangan mengirim ulang otomatis."
+            : "Status email belum dapat dibaca. Coba periksa status kembali.",
+        );
+      }
+    } finally {
+      clearTimeout(timer);
+      lock.current = false;
+      controller.current = null;
+      if (mounted.current) setBusy(false);
+    }
+  }
   return (
-    <div className="space-y-2">
+    <div className="min-w-0 space-y-2">
       <a
-        className="block underline"
+        className="inline-flex min-h-11 items-center underline"
         href={"/api/slips/" + id + "?format=html"}
         target="_blank"
         rel="noreferrer"
       >
         Lihat slip
       </a>
-      <a className="block underline" href={"/api/slips/" + id + "?format=pdf"}>
+      <a
+        className="ml-3 inline-flex min-h-11 items-center underline"
+        href={"/api/slips/" + id + "?format=pdf"}
+      >
         PDF slip
       </a>
       {canSend && (
-        <Button
-          type="button"
-          variant="outline"
-          disabled={busy}
-          onClick={async () => {
-            setBusy(true);
-            try {
-              const r = await fetch("/api/slips/" + id, { method: "POST" }),
-                b = await r.json();
-              setMessage(String(b.message));
-            } catch {
-              setMessage(
-                "Hasil pengiriman belum pasti. Periksa status sebelum mengulang.",
-              );
-            } finally {
-              setBusy(false);
-            }
-          }}
-        >
-          Kirim / lanjutkan antrean email
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            disabled={busy || uncertain || reversed}
+            onClick={() => void action(true)}
+          >
+            Kirim / lanjutkan antrean email
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            disabled={busy}
+            onClick={() => void action(false)}
+          >
+            Status email
+          </Button>
+        </div>
       )}
-      {canSend && (
-        <Button
-          type="button"
-          variant="outline"
-          disabled={busy}
-          onClick={async () => {
-            try {
-              const r = await fetch("/api/slips/" + id, { cache: "no-store" }),
-                b = await r.json();
-              if (!r.ok) throw new Error();
-              const d = b.slip.deliveries as {
-                email: string;
-                status: string;
-                attempts: number;
-              }[];
-              setMessage(
-                d.length
-                  ? d
-                      .map(
-                        (x) =>
-                          x.email +
-                          ": " +
-                          x.status +
-                          " (" +
-                          x.attempts +
-                          " percobaan)",
-                      )
-                      .join("; ")
-                  : "Belum ada antrean email.",
-              );
-            } catch {
-              setMessage("Status email belum dapat dibaca.");
-            }
-          }}
-        >
-          Status email
-        </Button>
-      )}
-      <p role="status">{message}</p>
+      <p role="status" className="break-words text-sm">
+        {message}
+      </p>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export const commandSchemas={
  z.object({type:z.literal('tariff'),classId:id,month,amount:money.or(z.literal(0))}).strict(),
  z.object({type:z.literal('payment'),id:nullableId,studentId:id,date,allocations:z.array(z.object({month,amount:money}).strict()).min(1).max(12).refine(v=>new Set(v.map(x=>x.month)).size===v.length),notes,reason:reason.optional()}).strict().refine(x=>!x.id||(x.reason?.length??0)>=3,'Alasan koreksi minimal 3 karakter.'),z.object({type:z.literal('void'),id,reason}).strict()]),
  savings:z.discriminatedUnion('type',[
- z.object({type:z.literal('bracket'),id:nullableId,minimum:z.number().int().min(0).max(1e12),maximum:z.number().int().min(0).max(1e12).nullable(),percent:z.number().min(0).max(100),active:z.boolean(),reason:reason.optional()}).strict().refine(x=>x.maximum===null||x.maximum>=x.minimum),
+ z.object({type:z.literal('bracket'),id:nullableId,minimum:z.number().int().min(0).max(1e12),maximum:z.number().int().min(0).max(1e12).nullable(),percent:z.number().min(0).max(100).multipleOf(0.0001),active:z.boolean(),reason:reason.optional()}).strict().refine(x=>x.maximum===null||x.maximum>=x.minimum).refine(x=>!x.id||(x.reason?.length??0)>=3,'Alasan perubahan tarif minimal 3 karakter.'),
  z.object({type:z.literal('account'),ownerId:id,category:z.enum(['S','G','N'])}).strict(),
  z.object({type:z.literal('transaction'),id:nullableId,accountId:id,date,kind:z.enum(['deposit','withdrawal']),amount:money.min(1000).multipleOf(1000),feeApplied:z.boolean().default(false),reason}).strict(),z.object({type:z.literal('void'),id,reason}).strict()])
 };

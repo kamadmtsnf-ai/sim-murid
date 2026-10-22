@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "date": "2026-10-22",
+  "timezone": "Asia/Jakarta",
+  "npmCi": "passed",
+  "npmCheck": "passed",
+  "tests": 336,
+  "runnerGroups": 43,
+  "typescript": "passed",
+  "eslint": "passed, zero warnings",
+  "databaseIntegration": "passed",
+  "databaseTypeReplay": "14 public tables passed",
+  "productionBuild": "passed",
+  "deadcodeUnreachable": [],
+  "savingsBrowser": {
+    "checks": 47,
+    "axeRuns": 6,
+    "errors": 0
+  },
+  "committeeRegression": {
+    "checks": 86,
+    "axeRuns": 6
+  },
+  "limits": [
+    "Synthetic browser/Auth/SDK/SMTP boundaries; no real production CRUD, physical-device or inbox-delivery UAT.",
+    "PGlite does not load native pg-safeupdate extension; predicate regression suite passes."
+  ]
+}

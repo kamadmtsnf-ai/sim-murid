@@ -417,3 +417,8 @@
 .committee-panel :is(input,select), .committee-dialog :is(input:not([type=checkbox]),select) { min-height: 44px; max-width: 100%; }
 .committee-panel :is(td,th) { overflow-wrap: anywhere; }
 .committee-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+
+.savings-panel fieldset, .savings-dialog fieldset { min-inline-size: 0; }
+.savings-panel :is(input,select), .savings-dialog :is(input:not([type=checkbox]),select) { min-height: 44px; max-width: 100%; }
+.savings-panel :is(td,th) { overflow-wrap: anywhere; }
+.savings-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }

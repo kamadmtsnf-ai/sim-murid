@@ -184,3 +184,12 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Bedakan kas, pembebasan Rp0, tarif nol, tarif belum ditetapkan dan tunggakan yang belum dapat dihitung. Uang masuk mengikuti tanggal pembayaran; rekap mengikuti bulan alokasi. Selalu tampilkan nilai rupiah integer tanpa membulatkan data yang tidak valid.
 - Gunakan Dialog existing, konfirmasi tarif/void, alasan koreksi, dirty/pending guard, feedback dan fallback focus ketika baris hilang. Kontrol 44px, wrap, tabel scroll lokal, rekap paginated, modal maksimum viewport dengan footer terjangkau.
 - Penyimpanan confirmed dan timeout/reload untuk hasil tak pasti. Ekspor mencantumkan alokasi lintas tahun; jangan memotong rekap diam-diam ketika batas ekspor terlampaui.
+
+## Tabungan — 22 Oktober 2026
+
+- Pisahkan katalog rekening input dari filter riwayat. Setelah pembukaan rekening, segarkan katalog pada revision yang sama sebelum sukses. Kategori S/G/N terpisah dari role; jangan menampilkan saldo katalog awal sebagai saldo terkini.
+- Form transaksi/koreksi mempertahankan rekening asal, gross, jenis, tanggal dan flag biaya immutable. Fee nol tidak sama dengan biaya nonaktif. Quote server hanya berlaku pada nominal dan flag yang sama; perubahan input menyembunyikan quote lama.
+- Bedakan saldo keseluruhan, mutasi bersih signed, setoran/penarikan aktif periode serta transaksi pembalik. Tampilkan gross/biaya/tunai dengan rupiah integer; biaya tidak didebit dua kali.
+- Tarif punya minimum/maksimum inclusive, persentase presisi empat desimal, status aktif dan alasan koreksi. Jangan mengaktifkan tarif nonaktif ketika dibuka untuk koreksi.
+- Gunakan Dialog dan kontrol existing, dirty/pending guard, focus return/fallback, feedback lokal, controls 44px dan scroll dalam viewport. Rekening searchable/paginated; ledger scroll lokal tanpa page overflow.
+- Semua penyimpanan confirmed; stale/uncertain meminta reload. Slip memiliki aksi baca/unduh/cek status/kirim terpisah. Sending/ambiguous tidak diulang otomatis; status SMTP accepted tidak menjamin penerimaan inbox atau pencatatan database berhasil.
