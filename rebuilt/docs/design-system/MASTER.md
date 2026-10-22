@@ -150,3 +150,14 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Piket memuat seluruh tujuh hari dari duty_roster meskipun filter daftar satu hari. Penggantian/pengosongan dikonfirmasi; cleanup penugasan siswa nonaktif dijelaskan. Istirahat, deteksi benturan dan larangan melewati tengah malam dipertahankan.
 - Tabel menggulir lokal, teks panjang membungkus, kontrol sentuh minimal 44px. Tidak menggunakan overflow hidden untuk menyembunyikan konten halaman.
 - Bukti terbaru: docs/verification/schedules-tabs-audit.md; audit sebelum tab/modal tetap tercatat pada schedules-audit.md.
+
+## Guru Piket — audit 22 Oktober 2026
+
+- Gunakan DutyPanel khusus; panel operasi umum tetap menangani absensi, bimbingan, iuran dan tabungan. Hapus cabang formulir Duty lama agar tidak ada dua implementasi.
+- Radix Tabs memisahkan jadwal mingguan dan riwayat. Jadwal dikelompokkan Senin–Sabtu; riwayat menampilkan tanggal, guru, jenis, status serta tindakan yang relevan, tanpa kolom keuangan.
+- Dialog existing memuat konfirmasi utama, penunjukan pengganti, jadwal mingguan dan koreksi status. Hari lama diprefill ketika guru dipilih. Ganti guru/tutup modal menghormati draf; pending mengunci tutup/simpan; error dan reload berada dalam focus trap.
+- Pilihan tindakan mengikuti status, tanggal WIB dan can_edit dari server. Catatan dibatalkan/historis tidak ditawarkan koreksi. Guru pengganti tidak boleh sama dengan guru yang digantikan; konfirmasi pengganti tetap terpisah.
+- Simpan memakai mode confirmed bersama. Duty POST tetap memiliki result/message dan menambah data snapshot serta code untuk kompatibilitas hook. Hasil tak pasti/stale tetap terkunci sampai reload. Respons modul lain tetap sama.
+- Filter riwayat hanya tahun kalender dan rentang tanggal yang benar-benar dipakai server, maksimum 366 hari. Input tanggal kosong dinormalisasi; view=history, pagination dan ekspor mempertahankan filter. Filter riwayat tidak mengubah roster mingguan.
+- Nama panjang membungkus, kontrol sentuh minimal 44px, tabel menggulir lokal dan modal dibatasi viewport dengan gulir vertikal normal. Tidak menyembunyikan overflow halaman.
+- Bukti: docs/verification/teacher-duty-audit.md; keterbatasan role UAT dan emulasi browser dijelaskan di sana.

@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "base": "dd6fb9e18a44c89cc9b7250a0d4594870e5c00c5",
+  "checks": {
+    "npm_run_check": {
+      "tests": 293,
+      "passed": 293,
+      "failed": 0,
+      "suites": 39,
+      "typecheck": "passed",
+      "lint": "passed",
+      "database_types": "passed",
+      "production_build": "passed"
+    },
+    "duty_routes_page_schema_export": {
+      "tests": 13,
+      "passed": 13
+    },
+    "duty_browser": {
+      "checks": 131,
+      "axe_runs": 9,
+      "violations": 0
+    },
+    "deadcode_unreachable": [],
+    "diff_check": "passed"
+  },
+  "limits": [
+    "Actual components with synthetic fixtures and intercepted replies; no authenticated production role UAT or physical device/screen-reader tests.",
+    "No SQL migration or real production records written for QA; existing isolated database role/expiry/attendance tests passed.",
+    "Normal vertical scrolling remains available; page/modal horizontal overflow absent in tested viewports."
+  ]
+}

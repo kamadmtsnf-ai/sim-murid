@@ -394,3 +394,9 @@
 .schedules-dialog { display: block; overflow-y: auto; max-height: calc(100dvh - 32px); width: calc(100% - 32px); overflow-wrap: anywhere; }
 .schedules-dialog input:not([type="checkbox"]), .schedules-dialog select { min-height: 44px; max-width: 100%; }
 .schedules-dialog > div:first-child > button { flex-shrink: 0; }
+
+.duty-panel { min-width: 0; overflow-wrap: anywhere; }
+.duty-panel :is(fieldset,label,input,select,textarea) { min-width: 0; max-width: 100%; }
+.duty-panel button { min-height: 44px; white-space: normal; }
+.duty-panel input[type=checkbox] { flex-shrink: 0; width: 18px; height: 18px; }
+.duty-dialog { display: block; overflow-y: auto; max-height: calc(100dvh - 32px); width: calc(100% - 32px); }
