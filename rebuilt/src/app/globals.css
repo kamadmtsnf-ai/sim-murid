@@ -471,3 +471,8 @@
 .survey-editor progress::-webkit-progress-value { background:var(--primary); }
 .survey-editor progress::-moz-progress-bar { background:var(--primary); }
 @media (max-width:639px) { .survey-form > article,.survey-editor,.survey-editor label[for] { padding:12px; } }
+
+/* Family relationships: preserve readable controls and content on narrow screens. */
+.families-panel :is(button,a) { max-width:100%; min-height:44px; height:auto; white-space:normal; overflow-wrap:anywhere; }
+.families-panel [data-slot="card-content"],.families-panel [data-slot="card-header"] { min-width:0; padding-inline:16px; }
+@media(min-width:640px) { .families-panel [data-slot="card-content"],.families-panel [data-slot="card-header"] { padding-inline:24px; } }
