@@ -53,9 +53,11 @@ Advisor produksi sebelum migrasi menunjukkan INFO RLS tanpa policy pada tabel pr
 ## Hasil verifikasi yang dijalankan
 
 - `npm run check`: lulus, 443 tes dalam 50 kelompok runner; TypeScript, lint nol warning, tipe database 14 tabel public dan production build berhasil.
-- `scripts/verify-insights.mjs`: 27 pemeriksaan berhasil, 3 audit axe (320/768/1440), tanpa pageerror JavaScript. Termasuk plan empat poin tersimpan, klik ganda, filter setelah AI, catatan terkonfirmasi, pagination, kegagalan 503 dan recovery, keyboard, resize/orientasi serta mengosongkan periode.
+- `scripts/verify-insights.mjs`: 28 pemeriksaan berhasil, 3 audit axe (320/768/1440), tanpa pageerror JavaScript. Termasuk plan empat poin tersimpan, klik ganda, filter setelah AI, catatan terkonfirmasi, pagination, kegagalan 503 dan recovery, keyboard, resize/orientasi serta mengosongkan periode.
 - `scripts/verify-academic.mjs`: 41 pemeriksaan dan 6 audit axe berhasil; regresi label/rentang tahun ajaran dan semester.
 - `npm run audit:deadcode`: 130 entry, 191 source files, unreachable kosong.
 - Screenshot desktop/mobile diperiksa. Mock 503 sengaja digunakan pada skenario kegagalan, bukan gangguan produksi.
 
 Tidak menyatakan seluruh kemungkinan bug atau seluruh perangkat telah diuji; batas pengujian nyata tetap sebagaimana bagian di atas.
+
+Migrasi provider/cache telah diterapkan ke project produksi `sim-muridv2`; verifikasi SQL sesudahnya mengonfirmasi provider `openai`, invalidasi berdasarkan scope dan completion not_found. Fungsi tetap SECURITY INVOKER dengan search_path kosong, anon/authenticated tidak diberi EXECUTE dan service_role tetap memiliki akses. Penyesuaian jumlah poin existing diuji dari empat ke tiga setelah konfirmasi agar fitur pengurangan tetap tersedia.

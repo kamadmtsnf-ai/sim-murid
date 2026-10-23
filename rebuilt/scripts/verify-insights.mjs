@@ -205,6 +205,12 @@ try {
       fullPage: true,
     });
   }
+  await page.getByLabel("Jumlah poin").fill("3");
+  check(
+    (await page.getByRole("textbox", { name: /^Deskripsi/ }).count()) === 3,
+    "existing plan can reduce to three points after confirmation",
+  );
+  await page.getByLabel("Jumlah poin").fill("4");
   await page.getByRole("combobox", { name: /^Peran/ }).selectOption("teacher");
   check(
     await page

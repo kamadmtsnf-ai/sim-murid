@@ -61,6 +61,10 @@
       "passed": true
     },
     {
+      "name": "existing plan can reduce to three points after confirmation",
+      "passed": true
+    },
+    {
       "name": "unapplied scope blocks AI",
       "passed": true
     },

@@ -91,15 +91,13 @@ export function InsightsPanel({
     void mutate({
       type: "plan",
       periodId: period,
-      items: Array.from(
-        { length: Math.max(points, list(data.extra.plan).length) },
-        (_, i) =>
-          Object.fromEntries(
-            ["description", "owner", "target", "aspect", "status"].map((k) => [
-              k,
-              String(f.get(k + i) ?? ""),
-            ]),
-          ),
+      items: Array.from({ length: points }, (_, i) =>
+        Object.fromEntries(
+          ["description", "owner", "target", "aspect", "status"].map((k) => [
+            k,
+            String(f.get(k + i) ?? ""),
+          ]),
+        ),
       ),
     });
   }
@@ -457,95 +455,102 @@ export function InsightsPanel({
                     type="number"
                     min="3"
                     max="7"
-                    value={Math.max(points, list(data.extra.plan).length)}
+                    value={points}
                     className={controlClass}
-                    onChange={(e) =>
-                      setPoints(
-                        Math.max(3, Math.min(7, Number(e.target.value) || 3)),
+                    onChange={(e) => {
+                      const next = Math.max(
+                        3,
+                        Math.min(7, Number(e.target.value) || 3),
+                      );
+                      if (
+                        next < points &&
+                        !window.confirm(
+                          "Kurangi jumlah poin dan abaikan isian pada poin terakhir?",
+                        )
                       )
-                    }
+                        return;
+                      dirty.current = true;
+                      setPoints(next);
+                    }}
                   />
                 </label>
-                {Array.from(
-                  { length: Math.max(points, list(data.extra.plan).length) },
-                  (_, i) => (
-                    <fieldset
-                      key={period + ":" + i}
-                      className="grid gap-3 border p-3 sm:grid-cols-3"
+                {Array.from({ length: points }, (_, i) => (
+                  <fieldset
+                    key={period + ":" + i}
+                    className="grid gap-3 border p-3 sm:grid-cols-3"
+                  >
+                    <legend>Poin {i + 1}</legend>
+                    <TextField
+                      label="Deskripsi"
+                      name={"description" + i}
+                      value={String(
+                        list(data.extra.plan)[i]?.description ?? "",
+                      )}
+                      required
+                      max={2000}
+                    />
+                    <TextField
+                      label="Penanggung jawab"
+                      name={"owner" + i}
+                      value={String(list(data.extra.plan)[i]?.owner ?? "")}
+                      required
+                    />
+                    <TextField
+                      label="Target waktu"
+                      name={"target" + i}
+                      value={String(list(data.extra.plan)[i]?.target ?? "")}
+                      type="date"
+                      required
+                    />
+                    <SelectField
+                      label="Aspek"
+                      name={"aspect" + i}
+                      value={String(
+                        list(data.extra.plan)[i]?.aspect ?? "Pengajaran",
+                      )}
                     >
-                      <legend>Poin {i + 1}</legend>
-                      <TextField
-                        label="Deskripsi"
-                        name={"description" + i}
-                        value={String(
-                          list(data.extra.plan)[i]?.description ?? "",
-                        )}
-                        required
-                        max={2000}
-                      />
-                      <TextField
-                        label="Penanggung jawab"
-                        name={"owner" + i}
-                        value={String(list(data.extra.plan)[i]?.owner ?? "")}
-                        required
-                      />
-                      <TextField
-                        label="Target waktu"
-                        name={"target" + i}
-                        value={String(list(data.extra.plan)[i]?.target ?? "")}
-                        type="date"
-                        required
-                      />
-                      <SelectField
-                        label="Aspek"
-                        name={"aspect" + i}
-                        value={String(
-                          list(data.extra.plan)[i]?.aspect ?? "Pengajaran",
-                        )}
-                      >
-                        {[
-                          "Pengajaran",
-                          "Fasilitas",
-                          "Kurikulum",
-                          "Karakter",
-                          "Disiplin",
-                          "Budaya",
-                        ].map((k) => (
-                          <option key={k} value={k}>
-                            {{
-                              student: "Siswa",
-                              teacher: "Guru",
-                              parent: "Orang tua",
-                              belum: "Belum dimulai",
-                              proses: "Dalam proses",
-                              selesai: "Selesai",
-                            }[k] ?? k}
-                          </option>
-                        ))}
-                      </SelectField>
-                      <SelectField
-                        label="Ketercapaian"
-                        name={"status" + i}
-                        value={String(
-                          list(data.extra.plan)[i]?.status ?? "belum",
-                        )}
-                      >
-                        {["belum", "proses", "selesai"].map((k) => (
-                          <option key={k} value={k}>
-                            {{
-                              student: "Siswa",
-                              teacher: "Guru",
-                              parent: "Orang tua",
-                              belum: "Belum dimulai",
-                              proses: "Dalam proses",
-                              selesai: "Selesai",
-                            }[k] ?? k}
-                          </option>
-                        ))}
-                      </SelectField>
-                    </fieldset>
-                  ),
-                )}
+                      {[
+                        "Pengajaran",
+                        "Fasilitas",
+                        "Kurikulum",
+                        "Karakter",
+                        "Disiplin",
+                        "Budaya",
+                      ].map((k) => (
+                        <option key={k} value={k}>
+                          {{
+                            student: "Siswa",
+                            teacher: "Guru",
+                            parent: "Orang tua",
+                            belum: "Belum dimulai",
+                            proses: "Dalam proses",
+                            selesai: "Selesai",
+                          }[k] ?? k}
+                        </option>
+                      ))}
+                    </SelectField>
+                    <SelectField
+                      label="Ketercapaian"
+                      name={"status" + i}
+                      value={String(
+                        list(data.extra.plan)[i]?.status ?? "belum",
+                      )}
+                    >
+                      {["belum", "proses", "selesai"].map((k) => (
+                        <option key={k} value={k}>
+                          {{
+                            student: "Siswa",
+                            teacher: "Guru",
+                            parent: "Orang tua",
+                            belum: "Belum dimulai",
+                            proses: "Dalam proses",
+                            selesai: "Selesai",
+                          }[k] ?? k}
+                        </option>
+                      ))}
+                    </SelectField>
+                  </fieldset>
+                ))}
                 <Button disabled={disabled}>Simpan rencana</Button>
               </form>
             )}
