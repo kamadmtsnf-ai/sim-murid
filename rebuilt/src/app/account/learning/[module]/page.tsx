@@ -21,18 +21,17 @@ export default async function LearningPage({
       domain.data,
     );
   } catch {
-    if(domain.data === "grades")throw Error("Grades unavailable");
+    if (["grades", "reports"].includes(domain.data))
+      throw Error("Grades unavailable");
     return (
       <main className="mx-auto max-w-xl p-8" id="main-content">
         <h1>{titles[domain.data]}</h1>
         <p>Periksa keamanan akun atau muat ulang layanan.</p>
-        
       </main>
     );
   }
   return (
     <main id="main-content" className="mx-auto min-w-0 max-w-7xl space-y-6 p-6">
-      
       <h1 className="text-3xl font-semibold">{titles[domain.data]}</h1>
       <LearningPanel initial={data} />
     </main>

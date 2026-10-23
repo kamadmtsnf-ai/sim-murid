@@ -1,4 +1,6 @@
-import {formatAcademicYear,semesterLabel} from '../academic/period.ts';
+import { grade } from "./grade.ts";
+import { reportValue } from "./reports.ts";
+import { formatAcademicYear, semesterLabel } from "../academic/period.ts";
 export function terbilang(n: number): string {
   return n === 0 ? "nol" : spell(n);
 }
@@ -97,6 +99,35 @@ export function htmlEscape(s: string) {
       ] ?? x,
   );
 }
+/** Wrap both words and uninterrupted identifiers to the printable width. */
+export function wrapPdfLine(
+  line: string,
+  width: (value: string) => number,
+  maxWidth = 510,
+): string[] {
+  const lines: string[] = [];
+  let part = "";
+  for (const word of line.split(" ")) {
+    const joined = part + (part ? " " : "") + word;
+    if (width(joined) <= maxWidth) {
+      part = joined;
+      continue;
+    }
+    if (part) {
+      lines.push(part);
+      part = "";
+    }
+    for (const char of word) {
+      if (part && width(part + char) > maxWidth) {
+        lines.push(part);
+        part = "";
+      }
+      part += char;
+    }
+  }
+  lines.push(part);
+  return lines;
+}
 export async function textPdf(sections: string[][]) {
   const pdf = await PDFDocument.create(),
     font = await pdf.embedFont(StandardFonts.Helvetica);
@@ -105,7 +136,6 @@ export async function textPdf(sections: string[][]) {
       y = 795;
     for (const [index, line] of lines.entries()) {
       const safe = line.normalize("NFKD").replace(/[^\x20-\x7E]/g, "?");
-      let part = "";
       const draw = (s: string) => {
         if (y < 50) {
           page = pdf.addPage([595, 842]);
@@ -120,13 +150,11 @@ export async function textPdf(sections: string[][]) {
         });
         y -= index === 0 ? 28 : 18;
       };
-      for (const word of safe.split(" ")) {
-        if (font.widthOfTextAtSize(part + " " + word, 10) > 510 && part) {
-          draw(part);
-          part = word;
-        } else part += (part ? " " : "") + word;
-      }
-      draw(part);
+      const size = index === 0 ? 15 : 10;
+      for (const segment of wrapPdfLine(safe, (value) =>
+        font.widthOfTextAtSize(value, size),
+      ))
+        draw(segment);
     }
   }
   return pdf.save();
@@ -134,12 +162,7 @@ export async function textPdf(sections: string[][]) {
 export async function slipPdf(input: unknown) {
   return textPdf([slipText(input).split("\n")]);
 }
-export function grade(value: number, kkm: number) {
-  if (value < kkm) return "D";
-  if (value >= kkm + (2 * (100 - kkm)) / 3) return "A";
-  if (value >= kkm + (100 - kkm) / 3) return "B";
-  return "C";
-}
+export { grade } from "./grade.ts";
 export async function reportsPdf(
   rows: Record<string, unknown>[],
   kind = "combined",
@@ -162,19 +185,7 @@ export async function reportsPdf(
       "Mata pelajaran | Nilai | KKM | Predikat",
     ];
     for (const v of s.subjects as Record<string, unknown>[]) {
-      const value =
-        kind === "combined"
-          ? v.final
-          : v[
-              (
-                {
-                  PH: "ph",
-                  ATS: "ats",
-                  ASAS: "asas",
-                  Praktik: "practice",
-                } as Record<string, string>
-              )[kind] ?? kind
-            ];
+      const value = reportValue(v, kind);
       lines.push(
         `${String(v.name)} | ${value === null || value === undefined ? "belum diisi" : String(value)} | ${String(v.kkm)} | ${value === null || value === undefined ? "-" : grade(Number(value), Number(v.kkm))}${v.complete ? "" : " (belum lengkap)"}`,
       );

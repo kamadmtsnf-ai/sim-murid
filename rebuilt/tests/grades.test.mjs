@@ -335,8 +335,9 @@ test("invalid upstream enters retry boundary and anonymous page retains login re
   setup().caller = null;
   await assert.rejects(page(params), (e) => e.url === "/login?expired=1");
 });
-test("report publishing retains its existing result/message-only contract", async () => {
+test("report rejection retains result/message with additive acknowledgement code", async () => {
   const m = setup();
+  m.code = "incomplete";
   const r = await POST(
     request({
       type: "publish",
@@ -346,8 +347,12 @@ test("report publishing retains its existing result/message-only contract", asyn
     }),
     { params: Promise.resolve({ module: "reports" }) },
   );
-  assert.equal(r.status, 200);
-  assert.deepEqual(Object.keys(await r.json()).sort(), ["message", "result"]);
+  assert.equal(r.status, 409);
+  assert.deepEqual(Object.keys(await r.json()).sort(), [
+    "code",
+    "message",
+    "result",
+  ]);
   assert.equal(m.calls.filter((c) => c[0] === "app_learning_read").length, 0);
 });
 

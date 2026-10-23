@@ -435,3 +435,9 @@
 .grades-dialog label { overflow-wrap: anywhere; }
 .grades-panel table { overflow-wrap: anywhere; }
 .grades-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+
+.reports-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+
+.reports-panel { min-width: 0; overflow-wrap: anywhere; }
+.reports-panel :is(button,a), .reports-dialog button { max-width:100%; min-height:44px; height:auto; white-space:normal; overflow-wrap:anywhere; }
+.reports-panel th[scope="row"] { white-space:normal; overflow-wrap:anywhere; max-width:18rem; }

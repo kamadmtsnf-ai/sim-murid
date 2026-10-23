@@ -1,6 +1,5 @@
 "use client";
 import { formatAcademicYear, semesterPeriod } from "@/lib/academic/period";
-import { TableRegion } from "@/components/ui/data-table";
 
 import { useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,8 @@ import {
   learningSnapshot,
   type LearningSnapshot,
 } from "@/lib/learning/validation";
+import { ReportsPanel } from "./reports-panel";
+import { reportsSnapshot } from "@/lib/learning/reports";
 import { GradesPanel } from "./grades-panel";
 import { gradesSnapshot } from "@/lib/learning/grades";
 import { BookReader } from "./reader";
@@ -31,6 +32,8 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
         initial={gradesSnapshot.parse(initial)}
       />
     );
+  if (initial.module === "reports")
+    return <ReportsPanel initial={reportsSnapshot.parse(initial)} />;
   return <LearningModulesPanel initial={initial} />;
 }
 function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
@@ -42,9 +45,7 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
     [tab, setTab] = useState("main"),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [book, setBook] = useState<Row | null>(null),
-    [selected, setSelected] = useState<string[]>([]),
-    [reportKind, setReportKind] = useState("combined");
+    [book, setBook] = useState<Row | null>(null);
   const lock = useRef(false),
     domain = data.module,
     api = "/api/learning/" + domain;
@@ -82,7 +83,7 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
       setMessage(String(body.message));
       if (r.ok) {
         setEdit(null);
-        setSelected([]);
+
         await load();
       }
     } catch {
@@ -108,7 +109,6 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
       await load(next);
       setFilters(next);
       setEdit(null);
-      setSelected([]);
     } catch {
       setMessage("Data belum tersedia atau akses tidak diizinkan.");
     } finally {
@@ -121,16 +121,7 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
       get = (k: string) => String(f.get(k) ?? ""),
       reason = get("reason");
     let c: unknown;
-    if (domain === "reports")
-      c = {
-        type: "publish",
-        classId: filters.classId,
-        semester: Number(filters.semester),
-        studentIds: selected.length
-          ? selected
-          : data.rows.map((r) => r.student_id),
-      };
-    else if (domain === "promotions") {
+    if (domain === "promotions") {
       if (tab === "metadata")
         c = {
           type: "diploma",
@@ -243,15 +234,6 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
       </option>
     )),
     years = list(data.extra.years);
-  const selectedUrl =
-    api +
-    "?" +
-    new URLSearchParams({
-      ...filters,
-      kind: reportKind,
-      format: "pdf",
-      ...(selected.length ? { selected: selected.join(",") } : {}),
-    });
   return (
     <div className="space-y-6" aria-busy={busy}>
       <p role="status" aria-live="polite">
@@ -329,143 +311,6 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
         )}
         <Button disabled={busy}>Tampilkan</Button>
       </form>
-      {domain === "reports" && (
-        <>
-          <p>
-            Rumus RAPOR-1.0: PH20% + ATS30% + ASAS50%. Praktik tetap terpisah.
-            Arsip terbit tidak ditimpa saat KKM atau nilai berubah.
-          </p>
-          {filters.classId && (
-            <>
-              <label>
-                Jenis rapor
-                <select
-                  className={controlClass}
-                  value={reportKind}
-                  onChange={(e) => setReportKind(e.target.value)}
-                >
-                  {["combined", "PH", "ATS", "ASAS", "Praktik"].map((k) => (
-                    <option key={k} value={k}>
-                      {k === "combined" ? "Gabungan" : k}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <a className="underline" href={selectedUrl}>
-                Unduh PDF {selected.length ? "pilihan" : "semua sesuai izin"}
-              </a>
-              {data.rows.map((r) => {
-                const published = obj(r.published),
-                  snapshot = Object.keys(published).length
-                    ? obj(published.snapshot)
-                    : obj(r.draft);
-                return (
-                  <section
-                    className="space-y-2 rounded border p-4"
-                    key={text(r, "student_id")}
-                  >
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selected.includes(text(r, "student_id"))}
-                        onChange={(e) =>
-                          setSelected((v) =>
-                            e.target.checked
-                              ? [...v, text(r, "student_id")]
-                              : v.filter((x) => x !== r.student_id),
-                          )
-                        }
-                      />{" "}
-                      {text(r, "name")} —{" "}
-                      {snapshot.draft ? "Draft / sementara" : "Terbit"}
-                    </label>
-                    <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
-                      <table className="w-full text-left text-sm">
-                        <caption className="sr-only">
-                          Data sesuai filter dan hak akses Anda
-                        </caption>
-                        <thead>
-                          <tr>
-                            {[
-                              "Mapel",
-                              "PH",
-                              "ATS",
-                              "ASAS",
-                              "Praktik",
-                              "Rapor",
-                              "KKM",
-                              "Predikat",
-                            ].map((x) => (
-                              <th scope="col" key={x} className="p-2">
-                                {x}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {list(snapshot.subjects).map((s) => (
-                            <tr key={text(s, "subject_id")}>
-                              {[
-                                "name",
-                                "ph",
-                                "ats",
-                                "asas",
-                                "practice",
-                                "final",
-                                "kkm",
-                                "grade",
-                              ].map((k) => (
-                                <td className="border-b p-2" key={k}>
-                                  {s[k] === null ? "—" : text(s, k)}
-                                  {k === "final" && !s.complete ? " *" : ""}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </TableRegion>
-                    <a
-                      className="underline"
-                      href={
-                        api +
-                        "?" +
-                        new URLSearchParams({
-                          ...filters,
-                          studentId: text(r, "student_id"),
-                          kind: reportKind,
-                          format: "pdf",
-                        })
-                      }
-                    >
-                      Unduh rapor siswa
-                    </a>
-                  </section>
-                );
-              })}
-              {data.extra.canPublish === true && (
-                <form
-                  onSubmit={submit}
-                  className="space-y-3 rounded border p-4"
-                >
-                  <label>
-                    <input type="checkbox" required /> Saya telah memeriksa
-                    komponen nilai dan identitas siswa.
-                  </label>
-                  <p>
-                    Publikasi hanya diterima bila komponen wajib lengkap. Rapor
-                    yang sudah terbit dipertahankan; penerbitan ulang menunggu
-                    kebijakan koreksi.
-                  </p>
-                  <Button disabled={busy}>
-                    Terbitkan snapshot {selected.length ? "pilihan" : "semua"}
-                  </Button>
-                </form>
-              )}
-            </>
-          )}
-        </>
-      )}
       {domain === "promotions" && (
         <>
           {data.isAdmin && (
