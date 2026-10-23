@@ -259,3 +259,7 @@ Feedback membedakan pending, hasil terkonfirmasi dan hasil ambigu yang memerluka
 ## Pemulihan Akun
 
 Antrean Admin memisahkan daftar permintaan dari verifikasi/tindak lanjut. Gunakan search/filter/pagination, identitas nama+username, label jenis Password/Sesi dan timestamp WIB. Akun sendiri dan permintaan kedaluwarsa tidak dapat diproses. Konfirmasi menyebut target dan dampak pencabutan sesi. Secret sementara memiliki panel penerima tersendiri; mutasi/refresh terkunci sampai penyerahan dikonfirmasi. Hasil ambigu membutuhkan refresh GET tervalidasi, tanpa retry mutasi otomatis. Kontrol min44px, teks/action wrapping dan padding responsif memakai token existing.
+
+## Pekerjaan
+
+Pisahkan kesiapan konfigurasi, tindakan, antrean pengiriman dan riwayat job_runs. Status memakai label Indonesia, waktu WIB, saluran dan jumlah percobaan; daftar 200 outbox/100 riwayat harus dinyatakan sebagai subset terbaru. Search/filter/pagination10 hanya pada antrean, riwayat disclosure native dengan scroll keyboard. Semua tindakan berbagi lock, feedback/focus dan konfirmasi side effect. Status sent berarti penerimaan penyedia; ambiguous/unconfirmed memerlukan pemeriksaan tanpa retry otomatis. Konfigurasi hanya boolean dan tidak mengklaim konektivitas. Token/Card/Button/Status existing, kontrol44px, wrapping dan padding responsif.

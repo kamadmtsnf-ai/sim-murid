@@ -1,3 +1,4 @@
+import { jobsAcknowledgement, jobsSnapshot } from "@/lib/services/jobs";
 import { surveysSnapshot, surveyResponse } from "@/lib/services/surveys";
 import { disciplineFilters } from "@/lib/services/discipline";
 import { z } from "zod";
@@ -95,7 +96,8 @@ export async function POST(
     if (
       (domain === "discipline" ||
         domain === "surveys" ||
-        domain === "insights") &&
+        domain === "insights" ||
+        domain === "jobs") &&
       !z
         .object({
           code: z.enum([
@@ -117,10 +119,13 @@ export async function POST(
         .safeParse(result).success
     )
       throw Error("Uncertain acknowledgement");
+    if (domain === "jobs" && !jobsAcknowledgement.safeParse(result).success)
+      throw Error("Uncertain job acknowledgement");
     const data =
       (domain === "discipline" ||
         domain === "surveys" ||
-        domain === "insights") &&
+        domain === "insights" ||
+        domain === "jobs") &&
       result.code === "saved"
         ? await servicesData(
             caller.principal.id,
@@ -129,6 +134,29 @@ export async function POST(
             readFilters,
           )
         : undefined;
+    if (domain === "jobs" && result.code === "saved") {
+      const state = jobsSnapshot.parse(data),
+        cmd = commands.jobs.parse(command),
+        ack = jobsAcknowledgement.parse(result);
+      if (state.revision !== body.revision + 1)
+        throw Error("Job revision not confirmed");
+      if (
+        cmd.type === "retry" &&
+        (ack.id !== cmd.id ||
+          !state.rows.some(
+            (r) => r.id === cmd.id && r.status === "queued" && r.attempts < 5,
+          ))
+      )
+        throw Error("Retry not confirmed");
+      if (
+        cmd.type === "tick" &&
+        (ack.dryRun !== cmd.dryRun ||
+          ack.reminderCandidates === undefined ||
+          !ack.date ||
+          ack.hourWib === undefined)
+      )
+        throw Error("Tick not confirmed");
+    }
     if (domain === "insights" && result.code === "saved") {
       const cmd = commands.insights.parse(command);
       if (!data) throw Error("Missing insight readback");
@@ -237,7 +265,8 @@ export async function POST(
         result,
         ...(domain === "discipline" ||
         domain === "surveys" ||
-        domain === "insights"
+        domain === "insights" ||
+        domain === "jobs"
           ? { code: result.code, ...(data ? { data } : {}) }
           : {}),
         message:

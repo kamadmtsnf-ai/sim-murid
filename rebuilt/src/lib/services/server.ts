@@ -1,3 +1,5 @@
+import { jobsSnapshot } from "./jobs";
+import { parseGmailEnvironment } from "@/lib/email/gmail-config";
 import "server-only";
 import { surveysSnapshot } from "./surveys";
 import { parseDiscipline } from "./discipline";
@@ -71,7 +73,9 @@ export async function servicesData(
       throw Error("Surveys unavailable");
     }
   }
-  const parsed = snapshot.parse(r.data);
+  const raw = snapshot.safeParse(r.data);
+  if (module === "jobs" && !raw.success) throw Error("Jobs unavailable");
+  const parsed = raw.success ? raw.data : snapshot.parse(r.data);
   if (module === "insights") {
     const catalog = await createAuthAdmin().rpc("app_services_read", {
       p_actor: actor,
@@ -98,12 +102,31 @@ export async function servicesData(
       throw new AccessDenied();
     parsed.extra.appliedFilters = f;
   }
-  if (module === "jobs")
+  if (module === "jobs") {
+    let gmail = false;
+    try {
+      parseGmailEnvironment(process.env);
+      gmail = true;
+    } catch {
+      /* Configuration availability only; no secrets returned. */
+    }
+    let whatsapp = false;
+    try {
+      const u = new URL(process.env.WHATSAPP_API_URL ?? "");
+      whatsapp =
+        u.protocol === "https:" &&
+        !u.username &&
+        !u.password &&
+        Boolean(process.env.WHATSAPP_API_KEY);
+    } catch {}
     parsed.extra.providers = {
-      gmail: !!process.env.GMAIL_USER && !!process.env.GMAIL_APP_PASSWORD,
-      whatsapp:
-        !!process.env.WHATSAPP_API_URL && !!process.env.WHATSAPP_API_KEY,
+      gmail,
+      whatsapp,
       scheduledDispatch: process.env.SERVICES_DISPATCH_ENABLED === "true",
     };
+    const jobs = jobsSnapshot.safeParse(parsed);
+    if (!jobs.success) throw Error("Jobs unavailable");
+    return jobs.data;
+  }
   return parsed;
 }

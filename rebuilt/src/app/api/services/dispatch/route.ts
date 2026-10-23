@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { sameOrigin, privateJson } from "@/lib/auth/http";
 import { educationContext, failure } from "@/lib/education/server";
-import { dispatchOne } from "@/lib/services/dispatch";
+import { dispatchDelivery } from "@/lib/services/dispatch";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 export async function POST(request: NextRequest) {
@@ -12,7 +12,11 @@ export async function POST(request: NextRequest) {
   if (!caller.principal.is_admin)
     return reply({ message: "Admin diperlukan." }, 403);
   try {
-    return reply({ message: await dispatchOne() });
+    // A current Admin with completed onboarding is required before claiming work.
+    const { servicesData } = await import("@/lib/services/server");
+    await servicesData(caller.principal.id, caller.sessionId, "jobs");
+    const delivery = await dispatchDelivery();
+    return reply(delivery, delivery.code === "unconfirmed" ? 503 : 200);
   } catch (error) {
     const e = failure(error);
     return reply(

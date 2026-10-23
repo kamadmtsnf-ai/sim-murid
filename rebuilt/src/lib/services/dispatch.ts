@@ -4,13 +4,13 @@ import { z } from "zod";
 import { createAuthAdmin } from "@/lib/auth/admin";
 import { emailEnvironment } from "@/lib/email/gmail";
 import { gmailTransportOptions } from "@/lib/email/gmail-config";
-export async function dispatchOne() {
+export async function dispatchDelivery() {
   const admin = createAuthAdmin(),
     r = await admin.rpc("app_delivery_worker", { p_action: "claim" });
   if (r.error) throw new Error("Unavailable");
-  const claim = z
+  const parsedClaim = z
     .object({
-      code: z.string(),
+      code: z.enum(["claimed", "empty"]),
       delivery: z
         .object({
           id: z.uuid(),
@@ -25,9 +25,15 @@ export async function dispatchOne() {
         })
         .optional(),
     })
-    .parse(r.data);
-  if (claim.code !== "claimed" || !claim.delivery)
-    return "Tidak ada pengiriman siap diproses.";
+    .safeParse(r.data);
+  if (!parsedClaim.success) throw Error("Invalid delivery acknowledgement");
+  const claim = parsedClaim.data;
+  if (claim.code === "empty")
+    return {
+      code: "empty" as const,
+      message: "Tidak ada pengiriman siap diproses.",
+    };
+  if (!claim.delivery) throw Error("Invalid delivery claim");
   const d = claim.delivery;
   let status: "sent" | "failed" | "ambiguous" = "ambiguous",
     provider = "";
@@ -94,11 +100,26 @@ export async function dispatchOne() {
     p_status: status,
     p_provider: provider,
   });
-  if (complete.error)
-    return "Hasil provider belum tercatat; jangan mengulang otomatis.";
-  return status === "sent"
-    ? "Pengiriman diterima penyedia; bukan bukti penerimaan inbox/perangkat."
-    : status === "ambiguous"
-      ? "Hasil pengiriman ambigu; tidak diulang otomatis."
-      : "Pengiriman gagal atau belum dikonfigurasi; retry dengan backoff tersedia.";
+  if (
+    complete.error ||
+    !z.object({ code: z.literal("saved") }).safeParse(complete.data).success
+  )
+    return {
+      code: "unconfirmed" as const,
+      message: "Hasil provider belum tercatat; jangan mengulang otomatis.",
+    };
+  return {
+    code: status,
+    message:
+      status === "sent"
+        ? "Pengiriman diterima penyedia; bukan bukti penerimaan inbox/perangkat."
+        : status === "ambiguous"
+          ? "Hasil pengiriman ambigu; tidak diulang otomatis."
+          : "Pengiriman gagal atau belum dikonfigurasi; retry dengan backoff tersedia.",
+  };
+}
+
+/** Preserve the scheduled worker response contract. */
+export async function dispatchOne() {
+  return (await dispatchDelivery()).message;
 }

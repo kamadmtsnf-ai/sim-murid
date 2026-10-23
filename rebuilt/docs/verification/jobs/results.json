@@ -1,0 +1,215 @@
+{
+  "checks": [
+    {
+      "name": "jobs 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "jobs 320 axe",
+      "passed": true
+    },
+    {
+      "name": "expanded history 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded history 320 axe",
+      "passed": true
+    },
+    {
+      "name": "jobs 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "jobs 768 axe",
+      "passed": true
+    },
+    {
+      "name": "expanded history 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded history 768 axe",
+      "passed": true
+    },
+    {
+      "name": "jobs 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "jobs 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "expanded history 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded history 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded pagination",
+      "passed": true
+    },
+    {
+      "name": "next page",
+      "passed": true
+    },
+    {
+      "name": "search includes one visible queue row plus separate history",
+      "passed": true
+    },
+    {
+      "name": "search empty state",
+      "passed": true
+    },
+    {
+      "name": "status filter",
+      "passed": true
+    },
+    {
+      "name": "exhausted attempts explain limit",
+      "passed": true
+    },
+    {
+      "name": "retry only failed eligible rows",
+      "passed": true
+    },
+    {
+      "name": "retry correct row",
+      "passed": true
+    },
+    {
+      "name": "ambiguous cannot retry",
+      "passed": true
+    },
+    {
+      "name": "double click one tick",
+      "passed": true
+    },
+    {
+      "name": "preview never enqueues",
+      "passed": true
+    },
+    {
+      "name": "cancel queue confirmation",
+      "passed": true
+    },
+    {
+      "name": "queue explicit non-preview",
+      "passed": true
+    },
+    {
+      "name": "dispatch shares synchronous lock",
+      "passed": true
+    },
+    {
+      "name": "empty delivery permits next action",
+      "passed": true
+    },
+    {
+      "name": "ambiguous dispatch locks",
+      "passed": true
+    },
+    {
+      "name": "bad locks mutation",
+      "passed": true
+    },
+    {
+      "name": "GET no replay bad",
+      "passed": true
+    },
+    {
+      "name": "503 locks mutation",
+      "passed": true
+    },
+    {
+      "name": "GET no replay 503",
+      "passed": true
+    },
+    {
+      "name": "409 locks mutation",
+      "passed": true
+    },
+    {
+      "name": "GET no replay 409",
+      "passed": true
+    },
+    {
+      "name": "network locks mutation",
+      "passed": true
+    },
+    {
+      "name": "GET no replay network",
+      "passed": true
+    },
+    {
+      "name": "failed refresh locks dispatcher",
+      "passed": true
+    },
+    {
+      "name": "unconfirmed provider commit locks",
+      "passed": true
+    },
+    {
+      "name": "mobile touch preview",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "keyboard action order",
+      "passed": true
+    },
+    {
+      "name": "empty queue",
+      "passed": true
+    },
+    {
+      "name": "empty history",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "jobs 320",
+      "violations": []
+    },
+    {
+      "label": "expanded history 320",
+      "violations": []
+    },
+    {
+      "label": "jobs 768",
+      "violations": []
+    },
+    {
+      "label": "expanded history 768",
+      "violations": []
+    },
+    {
+      "label": "jobs 1440",
+      "violations": []
+    },
+    {
+      "label": "expanded history 1440",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
