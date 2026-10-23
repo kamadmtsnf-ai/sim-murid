@@ -345,7 +345,9 @@ test("page preserves redirects and exposes outages to error boundary", async () 
   await assert.rejects(page(), (e) => e.url === "/login?expired=1");
   m = setup();
   m.state = null;
-  await assert.rejects(page(), (e) => e.url === "/account/security");
+  const blocked=await page();
+  assert.equal(blocked.props.children[0].props.children,'Verifikasi email');
+  assert.ok(JSON.stringify(blocked).includes('Selesaikan langkah wajib'));
   m = setup();
   m.redirect = "/account/services/surveys";
   await assert.rejects(page(), (e) => e.url === m.redirect);

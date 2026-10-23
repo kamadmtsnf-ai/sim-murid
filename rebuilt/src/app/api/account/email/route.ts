@@ -31,7 +31,7 @@ async function handle(request: NextRequest, mutate = false) {
       return respond(
         {
           message:
-            "Selesaikan langkah akun sebelumnya. Verifikasi email ini tersedia untuk Guru.",
+            "Selesaikan langkah keamanan akun sebelumnya untuk menggunakan verifikasi email.",
           destination: "/account/security",
         },
         403,

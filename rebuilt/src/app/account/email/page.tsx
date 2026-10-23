@@ -12,7 +12,15 @@ export default async function EmailPage() {
     p_session: caller.sessionId,
   });
   if (r.error) throw new Error("Email state unavailable");
-  if (r.data === null) redirect("/account/security");
+  if (r.data === null) return (
+    <main id="main-content" tabIndex={-1} className="mx-auto w-full min-w-0 max-w-2xl space-y-4 px-4 py-6 sm:px-6 sm:py-10">
+      <h1 className="text-2xl font-semibold">Verifikasi email</h1>
+      <p role="status" className="rounded-lg border p-4 text-sm">
+        Verifikasi email belum tersedia pada tahap akun ini. Selesaikan langkah wajib
+        melalui menu Keamanan akun di sidebar, lalu buka kembali Verifikasi email.
+      </p>
+    </main>
+  );
   const state = emailStateSchema.parse(r.data);
   return (
     <main
@@ -25,7 +33,7 @@ export default async function EmailPage() {
           Verifikasi email
         </h1>
         <p className="text-sm leading-6 text-muted-foreground">
-          Pastikan email kontak akun Guru aktif dan dapat menerima kode
+          Pastikan email kontak akun Anda aktif dan dapat menerima kode
           verifikasi.
         </p>
       </header>

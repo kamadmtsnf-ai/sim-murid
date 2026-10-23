@@ -279,3 +279,7 @@ Editor profil sendiri memakai kartu satu kolom dengan header grid minmax(0,1fr),
 ## Verifikasi email — 23 Oktober 2026
 
 Kartu kontak memakai header grid minmax(0,1fr) dan email wrapping. Bedakan status verified, belum ada kode, queued, accepted, failed, expired dan locked. Kode memakai input teks 6 digit (nol awal tetap ada), numeric keyboard, one-time-code, label, error/fokus dan paste terkontrol. Jangan menghapus kode ketika permintaan gagal. Countdown tidak memakai live region per detik. Kirim/verify dikunci sampai state terbaru diperiksa ketika hasil belum pasti; tidak boleh otomatis mengirim ulang OTP. CTA sentuh 44–48 px dan tombol countdown wrapping. Lihat `../verification/email-verification-audit.md`.
+
+## Akses Verifikasi email — 24 Oktober 2026
+
+Menu Verifikasi email tersedia untuk seluruh pemilik akun. Akun yang sudah menyelesaikan password, biodata wajib dan pertanyaan keamanan dapat memverifikasi email kontaknya; kewajiban verifikasi tetap khusus Guru. Jika syarat belum terpenuhi, tampilkan penjelasan di halaman yang sama tanpa redirect otomatis ke Keamanan akun. Status verified selalu berasal dari bukti email aktual, bukan gate ready. Rincian: `../verification/email-verification-access-fix.md`.

@@ -89,7 +89,7 @@
     "test:biodata:browser": "node scripts/verify-biodata.mjs",
     "test:personal-profile": "node --test tests/personal-profile.test.mjs",
     "test:personal-profile:browser": "node scripts/verify-personal-profile.mjs",
-    "test:email-verification": "node --test tests/email-verification.test.mjs",
+    "test:email-verification": "node --test tests/email-verification.test.mjs && node --test tests/database/email-access.test.mjs",
     "test:email-verification:browser": "node scripts/verify-email-verification.mjs"
   },
   "license": "UNLICENSED",
