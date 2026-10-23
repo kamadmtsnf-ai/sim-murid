@@ -21,13 +21,8 @@ export default async function LearningPage({
       domain.data,
     );
   } catch {
-    if (["grades", "reports", "promotions"].includes(domain.data))
-      throw Error("Grades unavailable");
-    return (
-      <main className="mx-auto max-w-xl p-8" id="main-content">
-        <h1>{titles[domain.data]}</h1>
-        <p>Periksa keamanan akun atau muat ulang layanan.</p>
-      </main>
+    throw Error(
+      domain.data === "books" ? "Books unavailable" : "Grades unavailable",
     );
   }
   return (

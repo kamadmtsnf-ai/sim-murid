@@ -1,4 +1,5 @@
 import "server-only";
+import { booksSnapshot } from "./books";
 import { promotionsSnapshot } from "./promotions";
 import { reportFilters, reportsSnapshot } from "./reports";
 import { gradesSnapshot, gradeFilters } from "./grades";
@@ -87,5 +88,9 @@ export async function learningData(
       throw Error("Promotions unavailable");
     }
   }
-  return learningSnapshot.parse(r.data);
+  try {
+    return booksSnapshot.parse(r.data);
+  } catch {
+    throw Error("Books unavailable");
+  }
 }

@@ -221,3 +221,11 @@ Rapor memakai panel khusus dengan kelas/tahun ajaran + semester sebagai scope ya
 ## Kenaikan dan ijazah — 23 Oktober 2026
 
 PromotionsPanel memisahkan pemetaan siswa, alumni/dokumen, dan policy akses. Kenaikan memakai tahun ajaran berpasangan, tujuan eksplisit dan kelas aktif yang sesuai tahun/jenjang; placeholder tidak boleh berarti kelulusan. Pertahankan seluruh pilihan lintas pencarian/pagination20, validasi seluruh batch sebelum konfirmasi. Kartu menampilkan ringkasan nomor/tahun/nilai; rincian10 field lain tersedia melalui details native yang dapat dibuka dengan keyboard. Metadata13 field dibuka dari alumni tertentu, tidak memakai dropdown target dengan defaultValues lama. Scope akses global/individual ditampilkan terpisah; view/download independen, allow/deny/inherit eksplisit. Upload/replace/delete memakai modal konfirmasi/status dan readback, dengan recovery reload untuk hasil tak pasti. `.promotions-dialog` scroll penuh di dalam viewport, teks panjang wrapping dan kontrol44px. Read-only hanya dokumen sesuai capability. Jangan menimpa arsip atau mengubah rule kenaikan, default deny alumni baru, signed upload/content inspection dan authorization server.
+
+## Audit Buku Digital — 23 Oktober 2026
+
+Katalog buku memakai kartu metadata dan badge tekstual Umum/Premium, PDF/Sumber eksternal/Belum ada berkas. Form tambah/edit dan unggah berada pada Dialog Radix existing, dengan draft guard dan feedback pending/error/saved/uncertain. Judul panjang memiliki ringkasan dengan disclosure judul lengkap; tidak memotong akses ke metadata. Tahun terbit tetap tahun kalender. Filter dan pagination tetap di server (50 buku/halaman) serta tunduk pada izin premium.
+
+Reader mempertahankan mode halaman/gulir/native, zoom, navigasi dan fallback URL lama. Canvas menyesuaikan lebar container melalui ResizeObserver dan gulir hanya terjadi di area dokumen yang dapat difokus keyboard. PDF.js dimuat saat buku dibuka; halaman mode gulir dirender mendekati viewport dengan batas resolusi canvas. Rule CSS hanya `.books-*`/`.book-*`; identitas teal, token semantik, kontrol 44px, shell dan navigasi sidebar tetap sama.
+
+Rincian audit dan batas bukti: `docs/verification/books-audit.md` serta `docs/verification/books/`.
