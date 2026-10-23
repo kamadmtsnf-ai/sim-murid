@@ -124,6 +124,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
       "data",
       (next) => {
         setData(next);
+        setPage(1);
         setMode(null);
         setDirty(false);
         setMapping({});
@@ -234,6 +235,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
       const next = await read(abort.signal);
       if (mounted.current) {
         setData(next);
+        setPage(1);
         setMapping({});
         setSelected([]);
         setReason("");
@@ -426,6 +428,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
         throw Error();
       if (mounted.current) {
         setData(next);
+        setPage(1);
         setMode(null);
         setDirty(false);
         setNotice("Berkas berhasil diperbarui.");

@@ -422,6 +422,10 @@
       }
     },
     {
+      "name": "pagination resets after refreshed roster shrinks",
+      "passed": true
+    },
+    {
       "name": "empty alumni state",
       "passed": true
     },

@@ -730,6 +730,23 @@ try {
   );
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
   await geometry(page, "large alumni");
+  await page.evaluate(() => {
+    window.promotionsFixture.rows = window.promotionsFixture.rows.filter(
+      (r) =>
+        r.role !== "alumni" ||
+        r.student_id === "00000000-0000-4000-8000-000000000103",
+    );
+  });
+  await page
+    .getByRole("button", { name: "Muat ulang data", exact: true })
+    .click();
+  await page.getByText("Data berhasil diperbarui.", { exact: true }).waitFor();
+  check(
+    await page
+      .getByRole("button", { name: "Sebelumnya", exact: true })
+      .isDisabled(),
+    "pagination resets after refreshed roster shrinks",
+  );
   await visit("empty", 320);
   await documents();
   check(

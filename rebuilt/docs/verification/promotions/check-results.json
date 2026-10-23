@@ -7,7 +7,7 @@
   "databaseTypes": "14 public tables match fresh migration replay",
   "buildRecovery": "Initial check build failed on corrupt local Turbopack persistence. Generated cache removed; subsequent production build passed.",
   "limitations": "Synthetic Auth/HTTP/Storage boundaries in browser; actual migrations in PGlite. No production mutations, physical device or manual screen reader testing.",
-  "browserChecks": 103,
+  "browserChecks": 104,
   "browserAxeRuns": 13,
   "academicRegressionChecks": 41,
   "academicAxeRuns": 6,
