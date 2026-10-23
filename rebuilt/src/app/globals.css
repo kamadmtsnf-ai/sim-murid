@@ -447,3 +447,13 @@
 .promotions-panel label, .promotions-dialog label { min-width:0; overflow-wrap:anywhere; }
 .promotions-dialog { display:block; overflow-y:auto; overflow-wrap:anywhere; }
 .promotions-panel input[type="file"], .promotions-dialog input[type="file"] { max-width:100%; min-width:0; }
+
+/* Book catalog and reader: local overflow stays inside the document viewport. */
+.books-panel,.books-dialog { min-width:0; overflow-wrap:anywhere; }
+.books-panel button,.books-dialog button { max-width:100%; height:auto; min-height:44px; white-space:normal; }
+.books-panel input,.books-panel select,.books-dialog input,.books-dialog select { max-width:100%; min-width:0; min-height:44px; }
+.books-dialog { display:block; overflow-y:auto; }
+.books-reader-dialog { max-width:72rem; }
+.book-viewport { max-width:100%; min-width:0; overflow:auto; max-height:65dvh; background:var(--muted); padding:8px; }
+.book-canvas { width:max-content; min-width:100%; }
+.book-canvas canvas { display:block; margin-inline:auto; background:white; }

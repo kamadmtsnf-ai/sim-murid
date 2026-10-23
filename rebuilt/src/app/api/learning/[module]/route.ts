@@ -139,7 +139,7 @@ export async function POST(
     });
     if (r.error) throw new Error("Unavailable");
     if (
-      ["grades", "reports", "promotions"].includes(domain) &&
+      ["grades", "reports", "promotions", "books"].includes(domain) &&
       !z
         .object({
           code: z.enum([
@@ -158,6 +158,13 @@ export async function POST(
     )
       throw Error("Uncertain grade acknowledgement");
     const result = z.object({ code: z.string() }).passthrough().parse(r.data);
+    if (domain === "books" && result.code === "saved") {
+      const saved = z.object({ id: z.uuid() }).safeParse(result);
+      if (!saved.success) throw Error("Book acknowledgement missing ID");
+      const requested = commands.books.parse(command).id;
+      if (requested && saved.data.id !== requested)
+        throw Error("Book acknowledgement mismatch");
+    }
     const data =
       ["grades", "reports", "promotions"].includes(domain) &&
       result.code === "saved"
@@ -193,7 +200,7 @@ export async function POST(
     return reply(
       {
         result,
-        ...(["grades", "reports", "promotions"].includes(domain)
+        ...(["grades", "reports", "promotions", "books"].includes(domain)
           ? { code: result.code, ...(data ? { data } : {}) }
           : {}),
         message: messages[result.code] ?? "Permintaan belum berhasil.",

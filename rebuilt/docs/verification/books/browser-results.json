@@ -1,0 +1,272 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "long title remains readable on touch disclosure",
+      "passed": true
+    },
+    {
+      "name": "expanded title 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "catalog 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "catalog 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "catalog 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "catalog 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "catalog 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "catalog 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "editing retains stored external URL",
+      "passed": true
+    },
+    {
+      "name": "title supports full server limit",
+      "passed": true
+    },
+    {
+      "name": "edit mobile no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "edit mobile axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "keyboard focus stays in edit dialog",
+      "passed": true
+    },
+    {
+      "name": "dirty draft survives rejected discard",
+      "passed": true
+    },
+    {
+      "name": "double submit sends one mutation",
+      "passed": true
+    },
+    {
+      "name": "metadata save preserves URL payload",
+      "passed": true
+    },
+    {
+      "name": "out of range year blocked before request",
+      "passed": true
+    },
+    {
+      "name": "create sends null identity",
+      "passed": true
+    },
+    {
+      "name": "archive retains audited soft-deactivation command",
+      "passed": true
+    },
+    {
+      "name": "signed PDF upload prepares and finalizes once",
+      "passed": true
+    },
+    {
+      "name": "one signed storage upload",
+      "passed": true
+    },
+    {
+      "name": "actual PDF.js renders 25-page document",
+      "passed": true
+    },
+    {
+      "name": "reader 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "reader 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "next PDF page renders",
+      "passed": true
+    },
+    {
+      "name": "zoom confined to reader no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "scroll mode chunk stays within document bounds",
+      "passed": true
+    },
+    {
+      "name": "reader landscape resize no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 740,
+        "document": 740
+      }
+    },
+    {
+      "name": "native fallback uses authorized private endpoint",
+      "passed": true
+    },
+    {
+      "name": "reader restores opener focus",
+      "passed": true
+    },
+    {
+      "name": "legacy Drive locator has preview fallback",
+      "passed": true
+    },
+    {
+      "name": "external source clearly identified",
+      "passed": true
+    },
+    {
+      "name": "filtered empty state is explicit",
+      "passed": true
+    },
+    {
+      "name": "catalog server pagination advances with same scope",
+      "passed": true
+    },
+    {
+      "name": "pagination failure retains previous data",
+      "passed": true
+    },
+    {
+      "name": "large catalog no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 740,
+        "document": 740
+      }
+    },
+    {
+      "name": "reader role has no admin creation",
+      "passed": true
+    },
+    {
+      "name": "reader role has no edit controls",
+      "passed": true
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty catalog pagination disabled",
+      "passed": true
+    },
+    {
+      "name": "stale write blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "stale recovers after explicit reload",
+      "passed": true
+    },
+    {
+      "name": "malformed write blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "malformed recovers after explicit reload",
+      "passed": true
+    },
+    {
+      "name": "saved but unreadable catalog blocks duplicate write",
+      "passed": true
+    },
+    {
+      "name": "write timeout blocks retry",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "axe": [
+    {
+      "name": "catalog 320",
+      "violations": []
+    },
+    {
+      "name": "catalog 768",
+      "violations": []
+    },
+    {
+      "name": "catalog 1440",
+      "violations": []
+    },
+    {
+      "name": "edit mobile",
+      "violations": []
+    },
+    {
+      "name": "reader 320",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    }
+  ]
+}
