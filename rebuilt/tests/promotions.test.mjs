@@ -14,7 +14,7 @@ const mocks = {
   "@/lib/auth/read-server": `export const readServerPrincipal=async()=>globalThis.promotionsMocks.caller;`,
   "@/lib/auth/http": `export const privateJson=(body,status=200)=>globalThis.promotionsMocks.reply(body,status);export const requestAuth=()=>({});export const verifiedPrincipal=async()=>globalThis.promotionsMocks.caller;export const sameOrigin=r=>r.headers.get('origin')===r.nextUrl.origin;`,
   "@/lib/auth/admin": `export const createAuthAdmin=()=>({rpc:async(fn,args)=>{const m=globalThis.promotionsMocks;m.calls.push([fn,args]);if(fn==='app_survey_required')return {data:m.survey,error:null};if(fn==='app_learning_write')return {data:{code:m.code},error:m.writeError};if(fn==='app_asset_cleanup')return {data:[],error:null};if(fn==='app_asset_admin'||fn==='app_asset_get')return {data:m.assetMeta,error:null};if(fn==='app_asset_write')return {data:{code:m.assetCode,id:args.p_data.id},error:m.assetError};return {data:m.readSnapshots?.shift()??m.snapshot,error:m.readError};},storage:{from:()=>({remove:async paths=>{globalThis.promotionsMocks.removed.push(paths);return {error:null};},createSignedUploadUrl:async()=>({data:{token:'signed-token'},error:null}),download:async()=>({data:globalThis.promotionsMocks.blob,error:null})})}});`,
-  "@/lib/settings/server": `export const readBounded=async r=>new Uint8Array(await r.arrayBuffer());`,
+  "@/lib/settings/server": `export const readBounded=async(r,max)=>{const bytes=new Uint8Array(await r.arrayBuffer());if(bytes.byteLength>max)throw new RangeError("Too large");return bytes;};`,
 };
 registerHooks({
   resolve(s, c, next) {
@@ -467,5 +467,80 @@ test("all legacy promotion command variants parse without duplicate discriminato
       download: "deny",
     }).success,
     false,
+  );
+});
+
+test("valid 500-student batch fits the promotions-specific bounded body budget", async () => {
+  const m = setup();
+  const before = snapshot();
+  before.rows = Array.from({ length: 500 }, (_, i) => row(1000 + i));
+  const after = structuredClone(before);
+  after.revision = 2;
+  after.rows.forEach((r) => {
+    r.class_id = id(31);
+  });
+  m.readSnapshots = [before, after];
+  const command = {
+    ...mapping,
+    items: before.rows.map((r) => ({
+      studentId: r.student_id,
+      expectedClassId: r.class_id,
+      classId: id(31),
+    })),
+  };
+  const req = request(command);
+  const bytes = new TextEncoder().encode(await req.clone().text()).length;
+  assert.ok(bytes > 65536 && bytes < 131072);
+  const r = await POST(req, params);
+  assert.equal(r.status, 200);
+  assert.equal((await r.json()).data.rows.length, 500);
+  const excessive = new NextRequest(
+    "https://example.test/api/learning/promotions",
+    {
+      method: "POST",
+      headers: {
+        origin: "https://example.test",
+        "Content-Type": "application/json",
+      },
+      body: " ".repeat(131073),
+    },
+  );
+  setup();
+  assert.equal((await POST(excessive, params)).status, 413);
+  const gradeOversize = new NextRequest(
+    "https://example.test/api/learning/grades",
+    {
+      method: "POST",
+      headers: {
+        origin: "https://example.test",
+        "Content-Type": "application/json",
+      },
+      body: " ".repeat(65537),
+    },
+  );
+  setup();
+  assert.equal(
+    (
+      await POST(gradeOversize, {
+        params: Promise.resolve({ module: "grades" }),
+      })
+    ).status,
+    413,
+  );
+  setup();
+  assert.equal(
+    (
+      await POST(
+        request({
+          ...command,
+          items: [
+            ...command.items,
+            { studentId: id(9999), expectedClassId: id(30), classId: id(31) },
+          ],
+        }),
+        params,
+      )
+    ).status,
+    400,
   );
 });
