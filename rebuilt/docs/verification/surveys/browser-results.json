@@ -1,0 +1,283 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "survey 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "survey 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "survey 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "survey 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "survey 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "survey 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "new respondent starts through service command",
+      "passed": true
+    },
+    {
+      "name": "required validation blocks premature final",
+      "passed": true
+    },
+    {
+      "name": "missing question receives focus",
+      "passed": true
+    },
+    {
+      "name": "double submit sends one write",
+      "passed": true
+    },
+    {
+      "name": "empty Likert does not become zero",
+      "passed": true
+    },
+    {
+      "name": "cancelled discard keeps questionnaire open",
+      "passed": true
+    },
+    {
+      "name": "closing and reopening preserves versioned local draft",
+      "passed": true
+    },
+    {
+      "name": "typing during save stays in editor",
+      "passed": true
+    },
+    {
+      "name": "new draft survives old acknowledgement",
+      "passed": true
+    },
+    {
+      "name": "queued autosave uses new respondent revision",
+      "passed": true
+    },
+    {
+      "name": "main final locks answers",
+      "passed": true
+    },
+    {
+      "name": "final clears device draft",
+      "passed": true
+    },
+    {
+      "name": "empty peer selection never becomes zero",
+      "passed": true
+    },
+    {
+      "name": "peer draft recovers after reload",
+      "passed": true
+    },
+    {
+      "name": "optional peer essay recovers",
+      "passed": true
+    },
+    {
+      "name": "all peer dimensions required",
+      "passed": true
+    },
+    {
+      "name": "peer final locks peer controls",
+      "passed": true
+    },
+    {
+      "name": "peer lock leaves main editable",
+      "passed": true
+    },
+    {
+      "name": "teacher can finalize after peer final",
+      "passed": true
+    },
+    {
+      "name": "ten questions per page",
+      "passed": true
+    },
+    {
+      "name": "question pagination works",
+      "passed": true
+    },
+    {
+      "name": "large landscape no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 740,
+        "document": 740
+      }
+    },
+    {
+      "name": "large landscape axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "closed survey offers read-only review",
+      "passed": true
+    },
+    {
+      "name": "action plan retained",
+      "passed": true
+    },
+    {
+      "name": "admin has no respondent action outside target role",
+      "passed": true
+    },
+    {
+      "name": "micro creation keeps academic period and questions",
+      "passed": true
+    },
+    {
+      "name": "manager axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "manager close command retained",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty state explicit",
+      "passed": true
+    },
+    {
+      "name": "stale device draft does not overwrite server",
+      "passed": true
+    },
+    {
+      "name": "storage failure shown honestly",
+      "passed": true
+    },
+    {
+      "name": "server save survives denied local storage",
+      "passed": true
+    },
+    {
+      "name": "offline draft synchronizes on reconnect",
+      "passed": true
+    },
+    {
+      "name": "stale blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "stale retains draft",
+      "passed": true
+    },
+    {
+      "name": "stale failed reload retains editor",
+      "passed": true
+    },
+    {
+      "name": "stale reload recovers",
+      "passed": true
+    },
+    {
+      "name": "malformed blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "malformed retains draft",
+      "passed": true
+    },
+    {
+      "name": "malformed failed reload retains editor",
+      "passed": true
+    },
+    {
+      "name": "malformed reload recovers",
+      "passed": true
+    },
+    {
+      "name": "readback-failure blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "readback-failure retains draft",
+      "passed": true
+    },
+    {
+      "name": "readback-failure failed reload retains editor",
+      "passed": true
+    },
+    {
+      "name": "readback-failure reload recovers",
+      "passed": true
+    },
+    {
+      "name": "logout prevents in-flight save recreating draft",
+      "passed": true
+    },
+    {
+      "name": "logout preserves unrelated preferences",
+      "passed": true
+    },
+    {
+      "name": "timeout blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "axe": [
+    {
+      "name": "survey 320",
+      "violations": []
+    },
+    {
+      "name": "survey 768",
+      "violations": []
+    },
+    {
+      "name": "survey 1440",
+      "violations": []
+    },
+    {
+      "name": "large landscape",
+      "violations": []
+    },
+    {
+      "name": "manager",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    }
+  ]
+}

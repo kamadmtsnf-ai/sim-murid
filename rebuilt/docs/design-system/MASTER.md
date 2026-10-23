@@ -229,3 +229,11 @@ Katalog buku memakai kartu metadata dan badge tekstual Umum/Premium, PDF/Sumber 
 Reader mempertahankan mode halaman/gulir/native, zoom, navigasi dan fallback URL lama. Canvas menyesuaikan lebar container melalui ResizeObserver dan gulir hanya terjadi di area dokumen yang dapat difokus keyboard. PDF.js dimuat saat buku dibuka; halaman mode gulir dirender mendekati viewport dengan batas resolusi canvas. Rule CSS hanya `.books-*`/`.book-*`; identitas teal, token semantik, kontrol 44px, shell dan navigasi sidebar tetap sama.
 
 Rincian audit dan batas bukti: `docs/verification/books-audit.md` serta `docs/verification/books/`.
+
+## Audit Survei — 23 Oktober 2026
+
+Survei panjang tetap di halaman, dengan kartu periode, indikator wajib, progress dan 10 pertanyaan per halaman. Formulir periode mempertahankan kontrol tahun ajaran/semester dan menampilkan pertanyaan mikro hanya untuk tipe mikro. Pengisian peer memakai disclosure per rekan; enam dimensi wajib, TT sah, PTS-7 opsional. Final dan periode tertutup tersedia untuk review read-only. Tombol tutup jawaban mempunyai draft guard.
+
+Status membedakan perubahan menunggu sinkronisasi, storage tidak tersedia, draft tersimpan, final, konflik dan hasil ambigu. Canonical draft utama/peer tidak dibersihkan oleh acknowledgement request lama. Timer/listener dibersihkan dan logout dari shell menghapus cache Survei tanpa menyentuh preferensi lain. Styling dibatasi pada Survei; padding nested form dikurangi pada ponsel, kontrol 44px, teks wrap dan progress memakai token existing. Instrumen/rotasi/revisi server tetap menjadi sumber kebenaran.
+
+Bukti dan batas verifikasi: `docs/verification/surveys-audit.md`, `docs/verification/surveys/`.
