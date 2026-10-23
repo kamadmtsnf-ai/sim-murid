@@ -1,8 +1,8 @@
 "use client";
-import { useRef, useState } from "react";
+import { JobsPanel } from "./jobs-panel";
 import { Button } from "@/components/ui/button";
 import { TextField, SelectField } from "@/components/domain-controls";
-import { snapshot, type ServiceSnapshot } from "@/lib/services/validation";
+import { type ServiceSnapshot } from "@/lib/services/validation";
 import { SurveysPanel } from "./surveys-panel";
 import { InsightsWorkspace } from "./insights-workspace";
 import { DisciplinePanel } from "./discipline-panel";
@@ -13,11 +13,12 @@ export const obj = (v: unknown): Row =>
   v && typeof v === "object" && !Array.isArray(v) ? (v as Row) : {};
 export const list = (v: unknown): Row[] =>
   Array.isArray(v) ? (v as Row[]) : [];
-const text = (r: Row, k: string) => String(r[k] ?? "");
 export function ServicesPanel(props: {
   initial: ServiceSnapshot;
   userId: string;
 }) {
+  if (props.initial.module === "jobs")
+    return <JobsPanel initial={props.initial} />;
   if (props.initial.module === "insights")
     return <InsightsWorkspace initial={props.initial} />;
   if (props.initial.module === "surveys")
@@ -50,106 +51,10 @@ function ServiceModulesPanel({
   initial: ServiceSnapshot;
   userId: string;
 }) {
-  const [data, setData] = useState(initial),
-    [filters] = useState<Record<string, string>>({}),
-    [busy, setBusy] = useState(false),
-    [message, setMessage] = useState("");
-  const lock = useRef(false),
+  const data = initial,
     api = "/api/services/" + data.module;
-  async function load(f = filters) {
-    const r = await fetch(api + "?" + new URLSearchParams(f), {
-        cache: "no-store",
-      }),
-      b = await r.json();
-    if (!r.ok) throw new Error(b.message);
-    setData(snapshot.parse(b.data));
-  }
-  async function mutate(command: unknown) {
-    if (lock.current) return false;
-    lock.current = true;
-    setBusy(true);
-    try {
-      const r = await fetch(api, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            requestId: crypto.randomUUID(),
-            revision: data.revision,
-            command,
-          }),
-        }),
-        b = await r.json();
-      setMessage(
-        String(b.message) +
-          (b.result?.missing ? " " + b.result.missing.join(", ") : ""),
-      );
-      if (r.ok) await load();
-      return r.ok;
-    } catch {
-      setMessage("Koneksi terputus. Muat ulang untuk memastikan hasil.");
-      return false;
-    } finally {
-      lock.current = false;
-      setBusy(false);
-    }
-  }
   return (
-    <div className="space-y-6" aria-busy={busy}>
-      <p role="status" aria-live="polite">
-        {message}
-      </p>
-      {data.module === "jobs" && (
-        <>
-          <p>
-            Pengiriman aktual membutuhkan konfigurasi penyedia. Status ambigu
-            tidak diulang otomatis.
-          </p>
-          <div className="flex gap-3">
-            <Button
-              disabled={busy}
-              onClick={() => void mutate({ type: "tick", dryRun: true })}
-            >
-              Pratinjau pekerjaan
-            </Button>
-            <Button
-              disabled={busy}
-              onClick={() => {
-                if (window.confirm("Antrekan pekerjaan yang memenuhi syarat?"))
-                  void mutate({ type: "tick", dryRun: false });
-              }}
-            >
-              Antrekan pekerjaan
-            </Button>
-            <Button
-              disabled={busy}
-              onClick={async () => {
-                const r = await fetch("/api/services/dispatch", {
-                    method: "POST",
-                  }),
-                  b = await r.json();
-                setMessage(String(b.message));
-                await load();
-              }}
-            >
-              Proses satu email antrean
-            </Button>
-          </div>
-          {data.rows.map((r) => (
-            <article className="rounded border p-3" key={text(r, "id")}>
-              {text(r, "event_type")}: {text(r, "status")} — percobaan{" "}
-              {text(r, "attempts")}{" "}
-              {r.status === "failed" && (
-                <Button
-                  disabled={busy}
-                  onClick={() => void mutate({ type: "retry", id: r.id })}
-                >
-                  Antre ulang
-                </Button>
-              )}
-            </article>
-          ))}
-        </>
-      )}
+    <div className="space-y-6">
       {data.module === "reconciliation" && (
         <>
           <form

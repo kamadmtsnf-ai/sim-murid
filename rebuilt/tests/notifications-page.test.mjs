@@ -4,6 +4,7 @@ import {registerHooks} from 'node:module';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const sources={
+ '@/lib/auth/authorization':`export class AccessDenied extends Error{};`,
  'next/navigation':`export const redirect=url=>{const e=new Error('redirect');e.url=url;throw e};export const notFound=()=>{throw Error('not found')};`,
  '@/lib/auth/read-server':`export const readServerPrincipal=async()=>globalThis.notificationPage.caller;`,
  '@/lib/services/server':`export const servicesData=async(...args)=>{globalThis.notificationPage.args=args;if(globalThis.notificationPage.fail)throw Error('private database detail');return globalThis.notificationPage.data};`,
@@ -15,4 +16,4 @@ function reset(){return globalThis.notificationPage={caller:{principal:{id:'synt
 const params=module=>({params:Promise.resolve({module})});
 test('Notifications page preserves identity/session and successful server data',async()=>{const state=reset();const output=await page(params('notifications'));assert.deepEqual(state.args,['synthetic-user','synthetic-session','notifications']);assert.equal(output.type,'main');assert.equal(output.props.children[1].props.initial,state.data);});
 test('Notifications page retains login redirect and invalid-module boundary',async()=>{reset().caller=null;await assert.rejects(()=>page(params('notifications')),error=>error.url==='/login?expired=1');reset();await assert.rejects(()=>page(params('invalid')),/not found/);});
-test('Notifications load failures enter existing retry boundary; other service fallback is unchanged',async()=>{reset().fail=true;await assert.rejects(()=>page(params('notifications')),error=>error.message==='Notifications unavailable');reset().fail=true;const output=await page(params('jobs'));assert.equal(output.type,'main');assert.doesNotMatch(JSON.stringify(output),/private database detail/);});
+test('Notifications load failures enter existing retry boundary; other service fallback is unchanged',async()=>{reset().fail=true;await assert.rejects(()=>page(params('notifications')),error=>error.message==='Notifications unavailable');reset().fail=true;await assert.rejects(()=>page(params('jobs')),/Jobs unavailable/);const output=await page(params('reconciliation')); assert.equal(output.type,'main');assert.doesNotMatch(JSON.stringify(output),/private database detail/);});

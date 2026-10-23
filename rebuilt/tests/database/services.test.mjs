@@ -733,3 +733,18 @@ test('Insights: OpenAI configuration is allowed, cache invalidation is provider 
   assert.equal(await val("select count(*)::int from sim_murid_private.ai_analyses where id=$1",[other]),1);
   assert.equal((await val("select public.app_ai_run($1,$2,'prepare',$3::jsonb)", [...args(A.s1),JSON.stringify({provider:'openai',periodId:period})])).code,'denied');
 });
+
+test('Jobs audit: retry only a failed row below ceiling; preserve ambiguity and require real completion',async()=>{
+ const id=uuid();await db.query("insert into sim_murid_private.outbox(id,idempotency_key,channel,event_type,aggregate_type,aggregate_id,payload,status,attempts) values($1::uuid,$1::text,'email','test','profile',$2::uuid,'{}','failed',5)",[id,A.admin.id]);
+ assert.equal((await service('jobs',{type:'retry',id})).code,'not_found');
+ await db.query("update sim_murid_private.outbox set attempts=2 where id=$1",[id]);
+ const saved=await service('jobs',{type:'retry',id});assert.equal(saved.code,'saved');assert.equal(saved.id,id);
+ assert.equal(await val('select attempts from sim_murid_private.outbox where id=$1',[id]),2);
+ assert.equal((await service('jobs',{type:'retry',id})).code,'not_found');
+ await db.query("update sim_murid_private.outbox set status='ambiguous' where id=$1",[id]);assert.equal((await service('jobs',{type:'retry',id})).code,'not_found');
+ assert.equal((await val("select public.app_delivery_worker('complete',$1,'sent','synthetic')",[id])).code,'not_found');
+ await db.query("update sim_murid_private.outbox set status='processing' where id=$1",[id]);
+ assert.equal((await val("select public.app_delivery_worker('complete',$1,'sent','synthetic')",[id])).code,'saved');
+ assert.equal((await val("select public.app_delivery_worker('complete',$1,'sent','synthetic')",[id])).code,'not_found');
+ assert.equal((await service('jobs',{type:'retry',id},A.s1)).code,'denied');
+});

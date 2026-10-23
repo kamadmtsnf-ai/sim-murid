@@ -488,3 +488,10 @@
  .account-recovery-panel [data-slot="card-header"],
  .account-recovery-panel [data-slot="card-content"] { padding-inline: 1.5rem; }
 }
+
+/* Pekerjaan: wrap long queue identities and action labels without clipping. */
+.jobs-panel [data-slot="card"] { min-width: 0; }
+.jobs-panel [data-slot="card-header"], .jobs-panel [data-slot="card-content"] { min-width: 0; padding-inline: 1rem; }
+.jobs-panel button { min-height: 2.75rem; max-width: 100%; height: auto; white-space: normal; overflow-wrap: anywhere; }
+.jobs-panel input, .jobs-panel select { min-height: 2.75rem; }
+@media (min-width:640px) { .jobs-panel [data-slot="card-header"], .jobs-panel [data-slot="card-content"] { padding-inline: 1.5rem; } }
