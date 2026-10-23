@@ -1,3 +1,7 @@
+import {
+  reconciliationSnapshot,
+  reconciliationMetrics,
+} from "./reconciliation.ts";
 import { formatAcademicYear, semesterLabel } from "../academic/period.ts";
 import ExcelJS from "exceljs";
 import { z } from "zod";
@@ -6,6 +10,26 @@ import type { ServiceSnapshot } from "./validation.ts";
 export function serviceExportRows(data: ServiceSnapshot) {
   if (data.rows.length > 10000)
     throw new RangeError("Ekspor melebihi batas; persempit filter.");
+  if (data.module === "reconciliation") {
+    const state = reconciliationSnapshot.parse(data);
+    return {
+      columns: ["Metrik", "Nilai"],
+      rows: [
+        ...reconciliationMetrics.map(([key, label]) => [
+          label,
+          state.extra[key],
+        ]),
+        [
+          "Sumber pembanding tersedia",
+          state.extra.sourceAvailable ? "Ya" : "Tidak",
+        ],
+        [
+          "Cakupan",
+          "Ringkasan keseluruhan data aplikasi; bukan hasil pencocokan sumber.",
+        ],
+      ],
+    };
+  }
   if (data.module === "discipline")
     return {
       columns: [
@@ -143,7 +167,9 @@ export async function exportServices(data: ServiceSnapshot, input: string) {
       sections = [
         [
           `SiM-Murid — ${data.module}`,
-          `Periode ${data.month}`,
+          data.module === "reconciliation"
+            ? "Cakupan seluruh data aplikasi"
+            : `Periode ${data.month}`,
           ...(data.module === "discipline" ? [table.columns.join(" | ")] : []),
           ...table.rows.map((r) => r.map((v) => String(v ?? "")).join(" | ")),
         ],

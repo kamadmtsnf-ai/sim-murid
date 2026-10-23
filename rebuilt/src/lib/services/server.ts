@@ -1,3 +1,4 @@
+import { reconciliationSnapshot } from "./reconciliation";
 import { jobsSnapshot } from "./jobs";
 import { parseGmailEnvironment } from "@/lib/email/gmail-config";
 import "server-only";
@@ -74,7 +75,8 @@ export async function servicesData(
     }
   }
   const raw = snapshot.safeParse(r.data);
-  if (module === "jobs" && !raw.success) throw Error("Jobs unavailable");
+  if ((module === "jobs" || module === "reconciliation") && !raw.success)
+    throw Error("Jobs unavailable");
   const parsed = raw.success ? raw.data : snapshot.parse(r.data);
   if (module === "insights") {
     const catalog = await createAuthAdmin().rpc("app_services_read", {
@@ -101,6 +103,11 @@ export async function servicesData(
     if (f.periodId && !parsed.rows.some((p) => p.id === f.periodId))
       throw new AccessDenied();
     parsed.extra.appliedFilters = f;
+  }
+  if (module === "reconciliation") {
+    const state = reconciliationSnapshot.safeParse(parsed);
+    if (!state.success) throw Error("Reconciliation unavailable");
+    return state.data;
   }
   if (module === "jobs") {
     let gmail = false;

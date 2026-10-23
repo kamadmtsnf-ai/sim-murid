@@ -1,7 +1,7 @@
-import {formatAcademicYear,semesterLabel} from '@/lib/academic/period';
+import { packageQuery } from "@/lib/services/reconciliation";
+import { formatAcademicYear, semesterLabel } from "@/lib/academic/period";
 import type { NextRequest } from "next/server";
 import ExcelJS from "exceljs";
-import { z } from "zod";
 import { educationContext, failure } from "@/lib/education/server";
 import { operationsData } from "@/lib/operations/server";
 import { exportRows } from "@/lib/operations/export";
@@ -11,43 +11,17 @@ import { learningData } from "@/lib/learning/server";
 import { object } from "@/lib/learning/print";
 export const runtime = "nodejs";
 export const maxDuration = 60;
-const querySchema = z
-  .object({
-    domains: z
-      .string()
-      .default("attendance,mentoring,fees,savings,discipline")
-      .transform((v) => v.split(","))
-      .pipe(
-        z
-          .array(
-            z.enum([
-              "attendance",
-              "mentoring",
-              "fees",
-              "savings",
-              "discipline",
-              "reports",
-              "survey-results",
-            ]),
-          )
-          .min(1)
-          .max(7),
-      )
-      .refine((v) => new Set(v).size === v.length),
-    start: z.iso.date().optional(),
-    end: z.iso.date().optional(),
-    month: z.iso.date().optional(),
-    classId: z.uuid().optional(),
-    studentId: z.uuid().optional(),
-    semester: z.coerce.number().int().min(1).max(2).optional(),
-    periodId: z.uuid().optional(),
-  })
-  .strict();
 export async function GET(request: NextRequest) {
   const { caller, reply } = await educationContext(request);
   if (!caller) return reply({ message: "Silakan masuk." }, 401);
   try {
-    const f = querySchema.parse(
+    const seen = new Set<string>();
+    for (const [key] of request.nextUrl.searchParams) {
+      if (seen.has(key))
+        return reply({ message: "Parameter filter duplikat." }, 400);
+      seen.add(key);
+    }
+    const f = packageQuery.parse(
         Object.fromEntries(
           [...request.nextUrl.searchParams].filter(([, v]) => v !== ""),
         ),
@@ -55,6 +29,14 @@ export async function GET(request: NextRequest) {
       book = new ExcelJS.Workbook(),
       actor = caller.principal.id,
       session = caller.sessionId;
+    let revision: number | undefined;
+    function confirmRevision(value: number) {
+      if (!Number.isSafeInteger(value) || value < 0)
+        throw Error("Invalid export revision");
+      if (revision !== undefined && revision !== value)
+        throw Error("Export data changed");
+      revision = value;
+    }
     function sheet(name: string, headers: string[], rows: unknown[][]) {
       if (rows.length > 10000)
         throw new RangeError("Ekspor melebihi batas; persempit filter.");
@@ -80,6 +62,7 @@ export async function GET(request: NextRequest) {
           domain as "attendance" | "mentoring" | "fees" | "savings",
           { ...base, export: true },
         );
+        confirmRevision(data.revision);
         if (data.total > data.rows.length)
           throw new RangeError("Hasil parsial ditolak. Persempit filter.");
         const rows = exportRows(data);
@@ -112,6 +95,7 @@ export async function GET(request: NextRequest) {
             ...(f.studentId ? { studentId: f.studentId } : {}),
           }),
           rows = serviceExportRows(data);
+        confirmRevision(data.revision);
         sheet(domain, rows.columns, rows.rows);
       } else if (domain === "reports") {
         if (!f.classId) throw new RangeError("Pilih kelas untuk ekspor rapor.");
@@ -164,6 +148,7 @@ export async function GET(request: NextRequest) {
         const d = await servicesData(actor, session, "insights", {
           periodId: f.periodId,
         });
+        confirmRevision(d.revision);
         if (!d.isManager)
           return reply({ message: "Akses agregat ditolak." }, 403);
         const aggregates = Array.isArray(d.extra.aggregates)
@@ -181,7 +166,7 @@ export async function GET(request: NextRequest) {
     info.addRow(["Filter", JSON.stringify(f)]);
     info.addRow([
       "Batas",
-      "Hasil parsial ditolak; maksimum10.000baris per sheet",
+      "Hasil parsial ditolak; maksimum 10.000 baris per sheet",
     ]);
     const bytes = new Uint8Array(await book.xlsx.writeBuffer());
     return new Response(

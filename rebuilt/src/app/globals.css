@@ -495,3 +495,10 @@
 .jobs-panel button { min-height: 2.75rem; max-width: 100%; height: auto; white-space: normal; overflow-wrap: anywhere; }
 .jobs-panel input, .jobs-panel select { min-height: 2.75rem; }
 @media (min-width:640px) { .jobs-panel [data-slot="card-header"], .jobs-panel [data-slot="card-content"] { padding-inline: 1.5rem; } }
+
+/* Rekonsiliasi: allow long metrics and native date/month controls to fit mobile. */
+.reconciliation-panel [data-slot="card"] { min-width: 0; }
+.reconciliation-panel [data-slot="card-header"], .reconciliation-panel [data-slot="card-content"] { min-width: 0; padding-inline: 1rem; }
+.reconciliation-panel button { min-height: 2.75rem; max-width: 100%; height: auto; white-space: normal; overflow-wrap: anywhere; }
+.reconciliation-panel input, .reconciliation-panel select { min-width: 0; max-width: 100%; min-height: 2.75rem; }
+@media (min-width:640px) { .reconciliation-panel [data-slot="card-header"], .reconciliation-panel [data-slot="card-content"] { padding-inline: 1.5rem; } }

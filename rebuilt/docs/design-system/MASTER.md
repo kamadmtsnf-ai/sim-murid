@@ -263,3 +263,7 @@ Antrean Admin memisahkan daftar permintaan dari verifikasi/tindak lanjut. Gunaka
 ## Pekerjaan
 
 Pisahkan kesiapan konfigurasi, tindakan, antrean pengiriman dan riwayat job_runs. Status memakai label Indonesia, waktu WIB, saluran dan jumlah percobaan; daftar 200 outbox/100 riwayat harus dinyatakan sebagai subset terbaru. Search/filter/pagination10 hanya pada antrean, riwayat disclosure native dengan scroll keyboard. Semua tindakan berbagi lock, feedback/focus dan konfirmasi side effect. Status sent berarti penerimaan penyedia; ambiguous/unconfirmed memerlukan pemeriksaan tanpa retry otomatis. Konfigurasi hanya boolean dan tidak mengklaim konektivitas. Token/Card/Button/Status existing, kontrol44px, wrapping dan padding responsif.
+
+## Rekonsiliasi
+
+Pisahkan ringkasan global dari filter paket ekspor. Gunakan label metrik Indonesia, rupiah untuk saldo, nilai nol yang eksplisit, dan status ketersediaan sumber yang tidak mengklaim pencocokan selesai. Form inline berisi rentang operasional, bulan SPK dan kelas dengan label tahun ajaran; bulan SPK dinormalisasi ke tanggal1. Unduhan di halaman sama memiliki lock/loading/error/focus, pemeriksaan MIME/signature dan cleanup Blob URL. Refresh mempertahankan draft; kelas yang hilang tidak boleh memperlebar cakupan diam-diam. Card/Status/Button/token existing, h2/dl/fieldset/legend semantik, kontrol44px dan wrapping mobile.
