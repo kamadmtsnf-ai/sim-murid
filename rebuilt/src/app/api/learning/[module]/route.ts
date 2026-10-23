@@ -83,7 +83,9 @@ export async function POST(
   if (!caller) return reply({ message: "Silakan masuk." }, 401);
   try {
     const domain = learningModules.parse((await params).module),
-      body = mutationEnvelope.parse(await jsonBody(request)),
+      body = mutationEnvelope.parse(
+        await jsonBody(request, domain === "promotions" ? 131072 : 65536),
+      ),
       command = commands[domain].parse(body.command),
       filters =
         domain === "grades"
