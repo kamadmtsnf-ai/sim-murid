@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "tests": 388,
+  "runnerGroups": 46,
+  "failed": 0,
+  "reportsTests": 19,
+  "typecheck": "passed",
+  "lint": "passed",
+  "databaseTypes": "14 public tables match fresh migration replay",
+  "productionBuild": "passed",
+  "deadcode": "no unreachable source",
+  "browser": "62 checks / 7 axe runs",
+  "academicRegression": "41 checks / 6 axe runs",
+  "limitations": "Synthetic Auth/HTTP boundaries in browser; actual migration replay in PGlite. No authenticated production mutations or physical-device/manual screen reader testing."
+}

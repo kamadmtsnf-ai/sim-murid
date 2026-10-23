@@ -32,6 +32,7 @@ const learning = learningSnapshot.parse({
   semester: 1,
   rows: [],
   extra: {
+    canPublish: true,
     kkm: null,
     entryPeople: [],
     scope: { semester: 1 },

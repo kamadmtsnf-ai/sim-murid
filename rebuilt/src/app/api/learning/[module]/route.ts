@@ -1,3 +1,4 @@
+import { reportFilters } from "@/lib/learning/reports";
 import { gradeFilters } from "@/lib/learning/grades";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
@@ -34,7 +35,12 @@ export async function GET(
     if (format === "pdf" && domain === "reports") {
       const { reportsPdf } = await import("@/lib/learning/print");
       const ids = selected
-        ? z.array(z.uuid()).min(1).max(500).parse(selected.split(","))
+        ? z
+            .array(z.uuid())
+            .min(1)
+            .max(500)
+            .refine((v) => new Set(v).size === v.length)
+            .parse(selected.split(","))
         : null;
       const rows = ids
         ? data.rows.filter((r) => ids.includes(String(r.student_id)))
@@ -45,6 +51,8 @@ export async function GET(
         .enum(["combined", "PH", "ATS", "ASAS", "Praktik"])
         .default("combined")
         .parse(kind);
+      if (!rows.length)
+        return reply({ message: "Tidak ada rapor sesuai filter." }, 404);
       const bytes = await reportsPdf(rows, reportKind);
       return new Response(bytes as BodyInit, {
         headers: {
@@ -75,7 +83,29 @@ export async function POST(
       filters =
         domain === "grades"
           ? gradeFilters.parse(Object.fromEntries(request.nextUrl.searchParams))
-          : undefined;
+          : domain === "reports"
+            ? reportFilters.parse(
+                Object.fromEntries(request.nextUrl.searchParams),
+              )
+            : undefined;
+    if (domain === "reports") {
+      const publish = commands.reports.parse(command);
+      if (filters) {
+        filters.classId ??= publish.classId;
+        filters.semester ??= publish.semester;
+      }
+      if (
+        filters?.classId !== publish.classId ||
+        Number(filters?.semester) !== publish.semester
+      )
+        return reply(
+          {
+            message: "Filter rapor berubah. Muat ulang sebelum menerbitkan.",
+            code: "stale",
+          },
+          409,
+        );
+    }
     const r = await createAuthAdmin().rpc("app_learning_write", {
       p_actor: caller.principal.id,
       p_session: caller.sessionId,
@@ -86,7 +116,7 @@ export async function POST(
     });
     if (r.error) throw new Error("Unavailable");
     if (
-      domain === "grades" &&
+      ["grades", "reports"].includes(domain) &&
       !z
         .object({
           code: z.enum([
@@ -106,7 +136,7 @@ export async function POST(
       throw Error("Uncertain grade acknowledgement");
     const result = z.object({ code: z.string() }).passthrough().parse(r.data);
     const data =
-      domain === "grades" && result.code === "saved"
+      ["grades", "reports"].includes(domain) && result.code === "saved"
         ? await learningData(
             caller.principal.id,
             caller.sessionId,
@@ -114,10 +144,21 @@ export async function POST(
             filters,
           )
         : undefined;
+    if (domain === "reports" && result.code === "saved") {
+      const publish = commands.reports.parse(command);
+      if (
+        !data ||
+        data.revision <= body.revision ||
+        !publish.studentIds.every((id) =>
+          data.rows.some((row) => row.student_id === id && row.published),
+        )
+      )
+        throw Error("Report publication not confirmed");
+    }
     return reply(
       {
         result,
-        ...(domain === "grades"
+        ...(["grades", "reports"].includes(domain)
           ? { code: result.code, ...(data ? { data } : {}) }
           : {}),
         message: messages[result.code] ?? "Permintaan belum berhasil.",

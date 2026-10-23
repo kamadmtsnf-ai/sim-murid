@@ -1,4 +1,5 @@
 import "server-only";
+import { reportFilters, reportsSnapshot } from "./reports";
 import { gradesSnapshot, gradeFilters } from "./grades";
 import { createAuthAdmin } from "@/lib/auth/admin";
 import { AccessDenied } from "@/lib/auth/authorization";
@@ -14,10 +15,12 @@ export async function learningData(
   domain: LearningModule,
   filters: unknown = {},
 ) {
-  const parsed =
+  const parsed: ReturnType<typeof learningFilters.parse> =
       domain === "grades"
         ? gradeFilters.parse(filters)
-        : learningFilters.parse(filters),
+        : domain === "reports"
+          ? reportFilters.parse(filters)
+          : learningFilters.parse(filters),
     r = await createAuthAdmin().rpc("app_learning_read", {
       p_actor: actor,
       p_session: session,
@@ -63,6 +66,17 @@ export async function learningData(
       return data;
     } catch {
       throw Error("Grades unavailable");
+    }
+  }
+  if (domain === "reports") {
+    try {
+      const raw = learningSnapshot.parse(r.data);
+      const scope = { ...reportFilters.parse(parsed), semester: raw.semester };
+      if (parsed.semester && raw.semester !== parsed.semester)
+        throw Error("Report period mismatch");
+      return reportsSnapshot.parse({ ...raw, extra: { ...raw.extra, scope } });
+    } catch {
+      throw Error("Reports unavailable");
     }
   }
   return learningSnapshot.parse(r.data);

@@ -144,7 +144,7 @@ try {
     d.semester = Number(
       new URL(route.request().url()).searchParams.get("semester") ?? 1,
     );
-    if (d.module === "grades") {
+    if (["grades", "reports"].includes(d.module)) {
       const q = new URL(route.request().url()).searchParams;
       d.extra.scope = {
         ...(q.get("classId") ? { classId: q.get("classId") } : {}),

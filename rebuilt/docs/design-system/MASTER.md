@@ -213,3 +213,7 @@ Seluruh label periode akademik menggunakan formatter bersama `src/lib/academic/p
 - Siswa filter membatasi laporan; katalog input lengkap per kelas/periode tetap. Read gagal mempertahankan data; write confirmed dengan timeout dan reload untuk hasil tak pasti.
 
 - Pada formulir penilaian berhalaman, validasi rentang/desimal harus meliputi seluruh draf, bukan hanya input yang sedang terpasang di DOM. Kolom pencarian tampilan tidak menandai draf berubah atau mengirim formulir saat Enter.
+
+## Rapor dan favicon — 23 Oktober 2026
+
+Rapor memakai panel khusus dengan kelas/tahun ajaran + semester sebagai scope yang baru diterapkan setelah read berhasil. Ringkasan status, pencarian/status, pagination 10 siswa dan pilihan eksplisit menghindari penerbitan seluruh kelas tanpa sengaja. Bedakan Terbit, Draf siap terbit, Draf belum lengkap dan Tidak tersedia. Jenis Gabungan/PH/ATS/ASAS/Praktik memengaruhi tabel dan PDF; nilai 0 tetap tampil. Tabel memakai scroll lokal berlabel, nama panjang wrapping. Modal penerbitan memuat daftar target dan acknowledgement; pending/uncertain mencegah penutupan/retry sampai hasil diperiksa. `.reports-dialog` scroll penuh dalam batas viewport. Favicon `app/icon.svg` memakai glyph sekolah putih di teal, selaras WorkspaceShell dan otomatis disajikan oleh metadata Next.
