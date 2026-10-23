@@ -1,0 +1,315 @@
+{
+  "checks": [
+    {
+      "name": "form 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "form 320 axe",
+      "passed": true
+    },
+    {
+      "name": "documents 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "documents 320 axe",
+      "passed": true
+    },
+    {
+      "name": "form 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "form 768 axe",
+      "passed": true
+    },
+    {
+      "name": "documents 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "documents 768 axe",
+      "passed": true
+    },
+    {
+      "name": "form 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "form 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "documents 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "documents 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "leading zeros retained",
+      "passed": true
+    },
+    {
+      "name": "zero siblings retained",
+      "passed": true
+    },
+    {
+      "name": "cross-section validation selects invalid field",
+      "passed": true
+    },
+    {
+      "name": "invalid field focused",
+      "passed": true
+    },
+    {
+      "name": "invalid data never sent",
+      "passed": true
+    },
+    {
+      "name": "cancel refresh retains unsaved biodata",
+      "passed": true
+    },
+    {
+      "name": "dirty data blocks upload",
+      "passed": true
+    },
+    {
+      "name": "dirty blocks delete",
+      "passed": true
+    },
+    {
+      "name": "network error preserves draft",
+      "passed": true
+    },
+    {
+      "name": "uncertain save reuses request ID",
+      "passed": true
+    },
+    {
+      "name": "synchronous save lock",
+      "passed": true
+    },
+    {
+      "name": "401 preserves draft",
+      "passed": true
+    },
+    {
+      "name": "403 preserves draft",
+      "passed": true
+    },
+    {
+      "name": "409 preserves draft",
+      "passed": true
+    },
+    {
+      "name": "503 preserves draft",
+      "passed": true
+    },
+    {
+      "name": "json preserves draft",
+      "passed": true
+    },
+    {
+      "name": "malformed preserves draft",
+      "passed": true
+    },
+    {
+      "name": "father address conditional visible",
+      "passed": true
+    },
+    {
+      "name": "foreign address hidden",
+      "passed": true
+    },
+    {
+      "name": "other guardian address visible",
+      "passed": true
+    },
+    {
+      "name": "image zoom 200% no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "preview axe",
+      "passed": true
+    },
+    {
+      "name": "preview closes",
+      "passed": true
+    },
+    {
+      "name": "PDF iframe preserved",
+      "passed": true
+    },
+    {
+      "name": "PDF mobile no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "private signed download link",
+      "passed": true
+    },
+    {
+      "name": "long download name no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "wrong MIME rejected before prepare",
+      "passed": true
+    },
+    {
+      "name": "failed upload refreshes pending document list",
+      "passed": true
+    },
+    {
+      "name": "upload failure recovers controls",
+      "passed": true
+    },
+    {
+      "name": "pending uploaded document visible without page reload",
+      "passed": true
+    },
+    {
+      "name": "pending finalize recovery",
+      "passed": true
+    },
+    {
+      "name": "successful upload clears file control",
+      "passed": true
+    },
+    {
+      "name": "direct signed upload boundary called twice",
+      "passed": true
+    },
+    {
+      "name": "upload preserves selected kind",
+      "passed": true
+    },
+    {
+      "name": "unknown document state blocks subsequent writes",
+      "passed": true
+    },
+    {
+      "name": "manual refresh restores synchronized state",
+      "passed": true
+    },
+    {
+      "name": "delete action preserved",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "keyboard field navigation",
+      "passed": true
+    },
+    {
+      "name": "read-only biodata disabled",
+      "passed": true
+    },
+    {
+      "name": "read-only upload absent",
+      "passed": true
+    },
+    {
+      "name": "read-only delete absent",
+      "passed": true
+    },
+    {
+      "name": "readonly axe",
+      "passed": true
+    },
+    {
+      "name": "empty state",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "many documents render",
+      "passed": true
+    },
+    {
+      "name": "many documents no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true
+    },
+    {
+      "name": "error retry works",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "form 320",
+      "violations": []
+    },
+    {
+      "label": "documents 320",
+      "violations": []
+    },
+    {
+      "label": "form 768",
+      "violations": []
+    },
+    {
+      "label": "documents 768",
+      "violations": []
+    },
+    {
+      "label": "form 1440",
+      "violations": []
+    },
+    {
+      "label": "documents 1440",
+      "violations": []
+    },
+    {
+      "label": "preview",
+      "violations": []
+    },
+    {
+      "label": "readonly",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "loading",
+      "violations": []
+    },
+    {
+      "label": "error",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
