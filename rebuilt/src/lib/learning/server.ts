@@ -1,4 +1,5 @@
 import "server-only";
+import { promotionsSnapshot } from "./promotions";
 import { reportFilters, reportsSnapshot } from "./reports";
 import { gradesSnapshot, gradeFilters } from "./grades";
 import { createAuthAdmin } from "@/lib/auth/admin";
@@ -77,6 +78,13 @@ export async function learningData(
       return reportsSnapshot.parse({ ...raw, extra: { ...raw.extra, scope } });
     } catch {
       throw Error("Reports unavailable");
+    }
+  }
+  if (domain === "promotions") {
+    try {
+      return promotionsSnapshot.parse(r.data);
+    } catch {
+      throw Error("Promotions unavailable");
     }
   }
   return learningSnapshot.parse(r.data);

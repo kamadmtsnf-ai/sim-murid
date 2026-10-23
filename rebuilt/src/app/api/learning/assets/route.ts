@@ -112,10 +112,19 @@ export async function POST(request: NextRequest) {
         p_data: { id: cmd.id },
       });
       if (removed.error) throw new Error("Unavailable");
+      if (
+        !z.object({ code: z.literal("saved") }).safeParse(removed.data).success
+      )
+        throw Error("Delete not confirmed");
       await admin.storage.from("learning-private").remove([meta.path]);
     }
     await cleanup();
-    return reply({ message: "Berkas berhasil diperbarui." });
+    return reply({
+      message: "Berkas berhasil diperbarui.",
+      code: "saved",
+      id: cmd.id,
+      action: cmd.action,
+    });
   } catch (error) {
     const e = failure(error);
     return reply({ message: e.message }, e.status);

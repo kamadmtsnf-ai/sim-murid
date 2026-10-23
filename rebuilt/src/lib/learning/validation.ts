@@ -92,7 +92,7 @@ export const commands = {
         .refine((v) => new Set(v).size === v.length),
     })
     .strict(),
-  promotions: z.discriminatedUnion("type", [
+  promotions: z.union([
     z
       .object({
         type: z.enum(["promote", "place"]),
@@ -127,7 +127,11 @@ export const commands = {
       .object({
         type: z.literal("access"),
         scope: z.literal("individual"),
-        studentIds: z.array(id).min(1).max(500),
+        studentIds: z
+          .array(id)
+          .min(1)
+          .max(500)
+          .refine((v) => new Set(v).size === v.length),
         view: z.enum(["allow", "deny", "inherit"]),
         download: z.enum(["allow", "deny", "inherit"]),
       })

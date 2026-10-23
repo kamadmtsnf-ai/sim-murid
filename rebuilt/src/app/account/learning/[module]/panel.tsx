@@ -3,17 +3,14 @@ import { formatAcademicYear, semesterPeriod } from "@/lib/academic/period";
 
 import { useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  TextField,
-  SelectField,
-  controlClass,
-} from "@/components/domain-controls";
+import { TextField, SelectField } from "@/components/domain-controls";
 import { createClient } from "@/lib/supabase/client";
 import {
-  diplomaFields,
   learningSnapshot,
   type LearningSnapshot,
 } from "@/lib/learning/validation";
+import { PromotionsPanel } from "./promotions-panel";
+import { promotionsSnapshot } from "@/lib/learning/promotions";
 import { ReportsPanel } from "./reports-panel";
 import { reportsSnapshot } from "@/lib/learning/reports";
 import { GradesPanel } from "./grades-panel";
@@ -21,9 +18,7 @@ import { gradesSnapshot } from "@/lib/learning/grades";
 import { BookReader } from "./reader";
 type Row = Record<string, unknown>;
 const text = (v: Row, k: string) => String(v[k] ?? ""),
-  list = (v: unknown): Row[] => (Array.isArray(v) ? (v as Row[]) : []),
-  obj = (v: unknown): Row =>
-    typeof v === "object" && v !== null ? (v as Row) : {};
+  list = (v: unknown): Row[] => (Array.isArray(v) ? (v as Row[]) : []);
 export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
   if (initial.module === "grades")
     return (
@@ -34,6 +29,8 @@ export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
     );
   if (initial.module === "reports")
     return <ReportsPanel initial={reportsSnapshot.parse(initial)} />;
+  if (initial.module === "promotions")
+    return <PromotionsPanel initial={promotionsSnapshot.parse(initial)} />;
   return <LearningModulesPanel initial={initial} />;
 }
 function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
@@ -42,7 +39,6 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
       semester: String(initial.semester),
     }),
     [edit, setEdit] = useState<Row | null>(null),
-    [tab, setTab] = useState("main"),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
     [book, setBook] = useState<Row | null>(null);
@@ -50,9 +46,8 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
     domain = data.module,
     api = "/api/learning/" + domain;
   const people = [
-      ...new Map(data.people.map((p) => [text(p, "id"), p])).values(),
-    ],
-    alumni = data.rows.filter((r) => r.role === "alumni");
+    ...new Map(data.people.map((p) => [text(p, "id"), p])).values(),
+  ];
   const classRow = data.classes.find((c) => c.id === filters.classId);
   const selectedPeriod = semesterPeriod(classRow?.year, filters.semester);
 
@@ -118,61 +113,21 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget),
-      get = (k: string) => String(f.get(k) ?? ""),
-      reason = get("reason");
-    let c: unknown;
-    if (domain === "promotions") {
-      if (tab === "metadata")
-        c = {
-          type: "diploma",
-          studentId: get("studentId"),
-          metadata: Object.fromEntries(diplomaFields.map((k) => [k, get(k)])),
-        };
-      else if (tab === "access")
-        c =
-          get("scope") === "global"
-            ? {
-                type: "access",
-                scope: "global",
-                view: f.has("viewGlobal"),
-                download: f.has("downloadGlobal"),
-              }
-            : {
-                type: "access",
-                scope: "individual",
-                studentIds: f.getAll("studentIds"),
-                view: get("view"),
-                download: get("download"),
-              };
-      else
-        c = {
-          type: get("type"),
-          sourceYearId: get("sourceYearId"),
-          targetYearId: get("targetYearId"),
-          items: data.rows
-            .filter((r) => f.has("include-" + r.student_id))
-            .map((r) => ({
-              studentId: r.student_id,
-              expectedClassId: r.class_id ?? null,
-              classId: get("class-" + r.student_id) || null,
-            })),
-          reason,
-        };
-    } else
-      c = {
-        type: "book",
-        id: edit?.id ?? null,
-        title: get("title"),
-        author: get("author"),
-        publisher: get("publisher"),
-        year: get("year") ? Number(get("year")) : null,
-        version: get("version"),
-        category: get("category"),
-        subjectId: get("subjectId") || null,
-        level: get("level") ? Number(get("level")) : null,
-        url: get("url"),
-        premium: f.has("premium"),
-      };
+      get = (k: string) => String(f.get(k) ?? "");
+    const c: unknown = {
+      type: "book",
+      id: edit?.id ?? null,
+      title: get("title"),
+      author: get("author"),
+      publisher: get("publisher"),
+      year: get("year") ? Number(get("year")) : null,
+      version: get("version"),
+      category: get("category"),
+      subjectId: get("subjectId") || null,
+      level: get("level") ? Number(get("level")) : null,
+      url: get("url"),
+      premium: f.has("premium"),
+    };
     void mutate(c);
   }
   async function upload(e: FormEvent<HTMLFormElement>) {
@@ -229,11 +184,10 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
     }
   }
   const subjectOptions = list(data.extra.subjects).map((s) => (
-      <option key={text(s, "id")} value={text(s, "id")}>
-        {text(s, "name")}
-      </option>
-    )),
-    years = list(data.extra.years);
+    <option key={text(s, "id")} value={text(s, "id")}>
+      {text(s, "name")}
+    </option>
+  ));
   return (
     <div className="space-y-6" aria-busy={busy}>
       <p role="status" aria-live="polite">
@@ -311,314 +265,6 @@ function LearningModulesPanel({ initial }: { initial: LearningSnapshot }) {
         )}
         <Button disabled={busy}>Tampilkan</Button>
       </form>
-      {domain === "promotions" && (
-        <>
-          {data.isAdmin && (
-            <section className="space-y-3 rounded border p-4">
-              <div className="flex flex-wrap gap-3">
-                {[
-                  ["main", "Kenaikan / penempatan"],
-                  ["metadata", "Metadata ijazah"],
-                  ["access", "Akses ijazah"],
-                ].map(([k, v]) => (
-                  <Button
-                    key={k}
-                    type="button"
-                    variant={tab === k ? "default" : "outline"}
-                    onClick={() => setTab(k ?? "main")}
-                  >
-                    {v}
-                  </Button>
-                ))}
-              </div>
-              <form
-                onSubmit={submit}
-                key={tab + "-" + String(edit?.student_id ?? "new")}
-                className="space-y-3"
-              >
-                {tab === "metadata" ? (
-                  <>
-                    <SelectField
-                      label="Alumni"
-                      name="studentId"
-                      value={text(edit ?? {}, "student_id")}
-                      required
-                    >
-                      <option value="">Pilih alumni</option>
-                      {alumni.map((r) => (
-                        <option
-                          key={text(r, "student_id")}
-                          value={text(r, "student_id")}
-                        >
-                          {text(r, "name")}
-                        </option>
-                      ))}
-                    </SelectField>
-                    <div className="grid gap-3 sm:grid-cols-3">
-                      {diplomaFields.map((k) => (
-                        <TextField
-                          key={k}
-                          label={k.replaceAll("_", " ")}
-                          name={k}
-                          value={text(obj(obj(edit?.diploma).metadata), k)}
-                        />
-                      ))}
-                    </div>
-                  </>
-                ) : tab === "access" ? (
-                  <>
-                    <SelectField label="Cakupan" name="scope">
-                      <option value="individual">Alumni dipilih</option>
-                      <option value="global">Pengaturan global</option>
-                    </SelectField>
-                    <p>
-                      Global hanya berlaku pada override “inherit”. Alumni baru
-                      memiliki override “deny”.
-                    </p>
-                    <label className="mr-4">
-                      <input
-                        type="checkbox"
-                        name="viewGlobal"
-                        defaultChecked={
-                          obj(data.extra.access).allow_view === true
-                        }
-                      />{" "}
-                      Global boleh melihat
-                    </label>
-                    <label>
-                      <input
-                        type="checkbox"
-                        name="downloadGlobal"
-                        defaultChecked={
-                          obj(data.extra.access).allow_download === true
-                        }
-                      />{" "}
-                      Global boleh mengunduh
-                    </label>
-                    <SelectField label="Override lihat" name="view">
-                      {["deny", "inherit", "allow"].map((x) => (
-                        <option key={x}>{x}</option>
-                      ))}
-                    </SelectField>
-                    <SelectField label="Override unduh" name="download">
-                      {["deny", "inherit", "allow"].map((x) => (
-                        <option key={x}>{x}</option>
-                      ))}
-                    </SelectField>
-                    <fieldset>
-                      <legend>Alumni target</legend>
-                      {alumni.map((r) => (
-                        <label key={text(r, "student_id")} className="block">
-                          <input
-                            name="studentIds"
-                            type="checkbox"
-                            value={text(r, "student_id")}
-                          />{" "}
-                          {text(r, "name")}
-                        </label>
-                      ))}
-                    </fieldset>
-                  </>
-                ) : (
-                  <>
-                    <SelectField label="Tindakan" name="type">
-                      <option value="promote">
-                        Kenaikan tahun berikutnya (7→8→9→Alumni; calon→7)
-                      </option>
-                      <option value="place">
-                        Penempatan manual / pemulihan status
-                      </option>
-                    </SelectField>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      <SelectField
-                        label="Tahun ajaran asal"
-                        name="sourceYearId"
-                        required
-                      >
-                        <option value="">Pilih tahun asal</option>
-                        {years.map((y) => (
-                          <option value={text(y, "id")} key={text(y, "id")}>
-                            {formatAcademicYear(y.start_year)}
-                          </option>
-                        ))}
-                      </SelectField>
-                      <SelectField
-                        label="Tahun ajaran tujuan"
-                        name="targetYearId"
-                        required
-                      >
-                        <option value="">Pilih tahun tujuan</option>
-                        {years.map((y) => (
-                          <option value={text(y, "id")} key={text(y, "id")}>
-                            {formatAcademicYear(y.start_year)}
-                          </option>
-                        ))}
-                      </SelectField>
-                    </div>
-                    <p>
-                      Pilih siswa dan kelas tujuan yang sudah dibuat pada
-                      Pengelolaan Kelas. Pilihan Alumni berarti lulus. Tabel ini
-                      merupakan pratinjau pemetaan yang akan diproses.
-                    </p>
-                    <div className="max-h-96 overflow-auto">
-                      {data.rows.map((r) => (
-                        <div
-                          className="grid gap-2 border-b p-2 sm:grid-cols-2"
-                          key={text(r, "student_id")}
-                        >
-                          <label>
-                            <input
-                              type="checkbox"
-                              name={"include-" + r.student_id}
-                            />{" "}
-                            {text(r, "name")} ({text(r, "role")})
-                          </label>
-                          <label className="block text-sm">
-                            Kelas tujuan untuk {text(r, "name")}
-                            <select
-                              className={controlClass}
-                              name={"class-" + r.student_id}
-                            >
-                              <option value="">Alumni / lulus</option>
-                              {data.classes
-                                .filter((c) => !c.archived_at)
-                                .map((c) => (
-                                  <option
-                                    key={text(c, "id")}
-                                    value={text(c, "id")}
-                                  >
-                                    {text(c, "name")} —{" "}
-                                    {formatAcademicYear(c.year)}
-                                  </option>
-                                ))}
-                            </select>
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                    <TextField
-                      label="Alasan / referensi keputusan"
-                      name="reason"
-                      required
-                    />
-                    <label>
-                      <input type="checkbox" required /> Saya telah memeriksa
-                      siswa, tahun, dan kelas tujuan.
-                    </label>
-                  </>
-                )}
-                <Button disabled={busy}>
-                  Simpan {tab === "main" ? "pemetaan" : "pengaturan"}
-                </Button>
-              </form>
-            </section>
-          )}
-          <section className="space-y-3">
-            <h2 className="text-xl font-semibold">Alumni dan dokumen ijazah</h2>
-            {alumni.map((r) => (
-              <article
-                className="space-y-2 rounded border p-4"
-                key={text(r, "student_id")}
-              >
-                <h3 className="font-semibold">{text(r, "name")}</h3>
-                {r.diploma ? (
-                  <dl className="grid gap-2 sm:grid-cols-3">
-                    {Object.entries(obj(obj(r.diploma).metadata)).map(
-                      ([k, v]) => (
-                        <div key={k}>
-                          <dt className="text-xs">{k.replaceAll("_", " ")}</dt>
-                          <dd>{String(v)}</dd>
-                        </div>
-                      ),
-                    )}
-                  </dl>
-                ) : (
-                  <p>Metadata belum tersedia atau akses ditolak.</p>
-                )}
-                {data.isAdmin && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => {
-                      setEdit(r);
-                      setTab("metadata");
-                    }}
-                  >
-                    Edit metadata
-                  </Button>
-                )}
-                {list(r.assets).map((a) => (
-                  <div key={text(a, "id")}>
-                    <span>
-                      {text(a, "slot")}: {text(a, "filename")}{" "}
-                    </span>
-                    {r.canView === true && (
-                      <a
-                        className="mr-3 underline"
-                        target="_blank"
-                        rel="noreferrer"
-                        href={"/api/learning/assets/" + a.id}
-                      >
-                        Lihat
-                      </a>
-                    )}
-                    {r.canDownload === true && (
-                      <a
-                        className="underline"
-                        href={"/api/learning/assets/" + a.id + "?download=true"}
-                      >
-                        Unduh
-                      </a>
-                    )}
-                    {data.isAdmin && (
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={async () => {
-                          const response = await fetch("/api/learning/assets", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({
-                              action: "delete",
-                              id: a.id,
-                            }),
-                          });
-                          setMessage(String((await response.json()).message));
-                          await load();
-                        }}
-                      >
-                        Hapus berkas
-                      </Button>
-                    )}
-                  </div>
-                ))}
-                {data.isAdmin && (
-                  <form onSubmit={upload} className="space-y-2">
-                    <input
-                      type="hidden"
-                      name="targetId"
-                      value={text(r, "student_id")}
-                    />
-                    <SelectField label="Jenis berkas" name="slot">
-                      <option>IJAZAH</option>
-                      <option>TRANSKRIP</option>
-                      <option>SKL</option>
-                    </SelectField>
-                    <input
-                      aria-label="Berkas ijazah"
-                      type="file"
-                      name="file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      required
-                    />
-                    <Button disabled={busy}>Unggah / ganti berkas</Button>
-                  </form>
-                )}
-              </article>
-            ))}
-          </section>
-        </>
-      )}
       {domain === "books" && (
         <>
           {data.isAdmin && (
