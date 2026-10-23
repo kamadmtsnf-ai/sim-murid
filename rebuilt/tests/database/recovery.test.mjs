@@ -58,3 +58,23 @@ test('REC08: basic profile cannot complete mandatory student profile or bypass p
  assert.equal(await value('select public.app_profile_read($1,$2)',[user,us]),null);
  const sid=id(1050);await db.query('insert into auth.sessions(id,user_id) values($1,$2)',[sid,user]);await db.query('select public.app_auth_claim($1,$2,false)',[user,sid]);assert.equal((await value('select public.app_security_state($1,$2)',[user,sid])).gate,'password');assert.equal(await value('select public.app_profile_read($1,$2)',[user,sid]),null);
 });
+
+test('PROF01: name/bio-only changes retain verified email and pending OTP when contact is unchanged',async()=>{
+ const current=await value('select public.app_profile_read($1,$2)',[other,os]);
+ await db.query('update public.user_access_flags set teacher_email_verified_at=now() where user_id=$1',[other]);
+ await db.query('update sim_murid_private.auth_accounts set verified_contact_email=$2 where user_id=$1',[other,current.contact_email]);
+ await db.query("insert into sim_murid_private.email_verifications(user_id,email_target,otp_hash,expires_at) values($1,$2,repeat('2',64),now()+interval '10 minutes')",[other,current.contact_email]);
+ const verified=await value('select teacher_email_verified_at from public.user_access_flags where user_id=$1',[other]);
+ assert.equal(await value('select public.app_profile_update($1,$2,$3,$4,$5,$6,$7)',[other,os,current.updated_at,'Only name changes','+62 812',current.contact_email,'Bio\nTwo lines']),true);
+ assert.deepEqual(await value('select teacher_email_verified_at from public.user_access_flags where user_id=$1',[other]),verified);
+ assert.equal(await value('select verified_contact_email from sim_murid_private.auth_accounts where user_id=$1',[other]),current.contact_email);
+ assert.equal(await value("select count(*)::int from sim_murid_private.email_verifications where user_id=$1 and status='pending'",[other]),1);
+});
+
+test('PROF02: private profile RPCs reject public roles and mismatched/revoked sessions',async()=>{
+ for(const role of ['anon','authenticated']){await db.exec('set role '+role);await assert.rejects(db.query('select public.app_profile_read($1,$2)',[other,os]),e=>e.code==='42501');await assert.rejects(db.query('select public.app_profile_update($1,$2,now(),$3,$4,$5,$6)',[other,os,'Name','','','']),e=>e.code==='42501');await db.exec('reset role');}
+ assert.equal(await value('select public.app_profile_read($1,$2)',[other,as]),null);
+ await db.query('select public.app_auth_revoke($1,$2)',[other,os]);
+ assert.equal(await value('select public.app_profile_read($1,$2)',[other,os]),null);
+ assert.equal(await value('select public.app_profile_update($1,$2,now(),$3,$4,$5,$6)',[other,os,'Name','','','']),false);
+});
