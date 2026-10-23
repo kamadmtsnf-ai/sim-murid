@@ -5,327 +5,41 @@ import {
   semesterPeriod,
   academicPeriodForDate,
 } from "@/lib/academic/period";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  TextField,
-  SelectField,
-  controlClass,
-} from "@/components/domain-controls";
-import {
-  requiredMissing,
-  type ServiceSnapshot,
-} from "@/lib/services/validation";
-import extras from "@/lib/services/instrument-extras.json";
+import { TextField, controlClass } from "@/components/domain-controls";
+import { commands, type ServiceSnapshot } from "@/lib/services/validation";
+import { surveyResponse } from "@/lib/services/surveys";
+import { SurveyEditor } from "./survey-editor";
 type Row = Record<string, unknown>;
-const obj = (v: unknown): Row => (v && typeof v === "object" ? (v as Row) : {}),
-  list = (v: unknown): Row[] => (Array.isArray(v) ? (v as Row[]) : []);
-type Answers = Record<string, string | number>;
+const obj = (v: unknown): Row =>
+  v && typeof v === "object" && !Array.isArray(v) ? (v as Row) : {};
+const list = (v: unknown): Row[] => (Array.isArray(v) ? (v as Row[]) : []);
 type Mutate = (c: unknown) => Promise<boolean>;
-function SurveyEditor({
-  period,
-  response,
-  userId,
-  busy,
-  mutate,
-  peers,
-}: {
-  period: Row;
-  response: Row;
-  userId: string;
-  busy: boolean;
-  mutate: Mutate;
-  peers: Row[];
-}) {
-  const [answers, setAnswers] = useState<Answers>(
-      obj(response.answers) as Answers,
-    ),
-    [peerAnswers, setPeerAnswers] = useState<Record<string, Answers>>(
-      obj(response.peer_answers) as Record<string, Answers>,
-    ),
-    [status, setStatus] = useState(""),
-    [dirty, setDirty] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null),
-    latest = useRef({ response, answers, mutate });
-  useEffect(() => {
-    latest.current = { response, answers, mutate };
-  }, [response, answers, mutate]);
-  const key =
-      "sim-survey:" +
-      userId +
-      ":" +
-      String(period.id) +
-      ":" +
-      String(period.instrument_version),
-    locked = !!response.submitted_at || period.status === "closed";
-  useEffect(() => {
-    const recover = async () => {
-      try {
-        for (const k of Object.keys(localStorage))
-          if (
-            k.startsWith("sim-survey:") &&
-            !k.startsWith("sim-survey:" + userId + ":")
-          )
-            localStorage.removeItem(k);
-        const raw = localStorage.getItem(key);
-        if (raw && !locked) {
-          const saved = JSON.parse(raw);
-          if (saved.version === response.revision) {
-            setAnswers(saved.answers);
-            setDirty(true);
-            setStatus("Draft lokal dipulihkan; sinkronkan saat terhubung.");
-          } else
-            setStatus(
-              "Draft lokal berasal dari versi lama. Jawaban server dipertahankan.",
-            );
-        }
-        if (locked) localStorage.removeItem(key);
-      } catch {
-        setStatus("Penyimpanan lokal tidak tersedia. Simpan ke server.");
-      }
-    };
-    void recover();
-    return () => {
-      if (timer.current) clearTimeout(timer.current);
-    };
-  }, [key, locked, response.revision, userId]);
-  async function save(final = false) {
-    if (locked) return;
-    const s = latest.current;
-    if (final) {
-      const missing = requiredMissing(list(s.response.instrument), s.answers);
-      if (missing.length) {
-        setStatus("Pertanyaan wajib belum lengkap: " + missing.join(", "));
-        return;
-      }
-    }
-    if (
-      final &&
-      !window.confirm("Kirim jawaban final? Setelah dikirim jawaban terkunci.")
-    )
-      return;
-    const ok = await s.mutate({
-      type: final ? "submit" : "save",
-      periodId: period.id,
-      version: s.response.revision,
-      answers: s.answers,
-    });
-    if (ok) {
-      setDirty(false);
-      localStorage.removeItem(key);
-      setStatus(final ? "Jawaban dikirim." : "Tersimpan di server.");
-    } else
-      setStatus(
-        "Belum tersimpan. Periksa koneksi atau konflik versi; muat ulang untuk data terbaru.",
-      );
-  }
-  function change(code: string, value: string | number) {
-    const next = { ...answers, [code]: value };
-    setAnswers(next);
-    setDirty(true);
-    try {
-      localStorage.setItem(
-        key,
-        JSON.stringify({ version: response.revision, answers: next }),
-      );
-    } catch {}
-    setStatus(
-      navigator.onLine
-        ? "Menunggu sinkronisasi…"
-        : "Offline — draft tersimpan pada perangkat ini.",
-    );
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => {
-      if (navigator.onLine) void save();
-    }, 2000);
-  }
-  useEffect(() => {
-    const online = () => {
-      if (dirty) void save();
-    };
-    window.addEventListener("online", online);
-    const logout = (e: Event) => {
-      const form = e.target;
-      if (
-        form instanceof HTMLFormElement &&
-        form.action.endsWith("/api/auth/logout")
-      )
-        for (const k of Object.keys(localStorage))
-          if (k.startsWith("sim-survey:")) localStorage.removeItem(k);
-    };
-    document.addEventListener("submit", logout, true);
-    return () => {
-      window.removeEventListener("online", online);
-      document.removeEventListener("submit", logout, true);
-    };
-  });
-  return (
-    <section className="space-y-4">
-      <p role="status" aria-live="polite">
-        {status} {locked ? "Jawaban terkunci." : ""}
-      </p>
-      <p>
-        Isi seluruh pertanyaan wajib. Skala1–5; esai wajib sesuai instrumen.
-        Jawaban kosong tidak dianggap0.
-      </p>
-      {list(response.instrument).map((q) => (
-        <label key={String(q.code)} className="block rounded border p-3">
-          <span className="block">
-            {String(q.question)} {q.required ? "*" : ""}
-          </span>
-          {q.kind === "essay" ? (
-            <textarea
-              className={controlClass}
-              value={String(answers[String(q.code)] ?? "")}
-              onChange={(e) => change(String(q.code), e.target.value)}
-              maxLength={10000}
-              disabled={locked}
-              required={q.required === true}
-            />
-          ) : (
-            <select
-              className={controlClass}
-              disabled={locked}
-              value={String(answers[String(q.code)] ?? "")}
-              onChange={(e) => {
-                if (e.target.value)
-                  change(String(q.code), Number(e.target.value));
-              }}
-            >
-              <option value="">Pilih jawaban</option>
-              {[
-                "Sangat Tidak Setuju",
-                "Tidak Setuju",
-                "Netral",
-                "Setuju",
-                "Sangat Setuju",
-              ].map((t, i) => (
-                <option value={i + 1} key={t}>
-                  {i + 1} — {t}
-                </option>
-              ))}
-            </select>
-          )}
-        </label>
-      ))}
-      {response.role === "teacher" &&
-        Array.isArray(response.peers) &&
-        response.peers.length > 0 && (
-          <fieldset className="space-y-4 rounded border p-4">
-            <legend>Penilaian teman sejawat</legend>
-            <p>
-              Skor1–5 atau TT. Esai PTS-7 opsional. Identitas penilai tidak
-              ditampilkan pada laporan personal.
-            </p>
-            {response.peers.map((id) => (
-              <section key={String(id)} className="space-y-2 border-b py-3">
-                <h3 className="font-semibold">
-                  {String(peers.find((p) => p.id === id)?.name ?? "Rekan guru")}
-                </h3>
-                {extras.peer.map((d) => (
-                  <label key={d.kode} className="block">
-                    {d.dimensi}: {d.pertanyaan}
-                    <select
-                      className={controlClass}
-                      disabled={locked || !!response.peer_submitted_at}
-                      value={String(peerAnswers[String(id)]?.[d.kode] ?? "")}
-                      onChange={(e) =>
-                        setPeerAnswers((v) => ({
-                          ...v,
-                          [String(id)]: {
-                            ...v[String(id)],
-                            [d.kode]:
-                              e.target.value === "TT"
-                                ? "TT"
-                                : Number(e.target.value),
-                          },
-                        }))
-                      }
-                    >
-                      <option value="">Pilih</option>
-                      {[1, 2, 3, 4, 5, "TT"].map((n) => (
-                        <option key={n}>{n}</option>
-                      ))}
-                    </select>
-                  </label>
-                ))}
-                <textarea
-                  className={controlClass}
-                  aria-label="Apresiasi opsional"
-                  placeholder="Apresiasi atau masukan (opsional)"
-                  maxLength={10000}
-                  disabled={locked || !!response.peer_submitted_at}
-                  value={String(peerAnswers[String(id)]?.["PTS-7"] ?? "")}
-                  onChange={(e) =>
-                    setPeerAnswers((v) => ({
-                      ...v,
-                      [String(id)]: {
-                        ...v[String(id)],
-                        "PTS-7": e.target.value,
-                      },
-                    }))
-                  }
-                />
-              </section>
-            ))}
-            {!response.peer_submitted_at && (
-              <div className="flex gap-3">
-                <Button
-                  disabled={busy || locked}
-                  onClick={() =>
-                    void mutate({
-                      type: "peer_save",
-                      periodId: period.id,
-                      version: response.revision,
-                      answers: peerAnswers,
-                    })
-                  }
-                >
-                  Simpan draft rekan
-                </Button>
-                <Button
-                  disabled={busy || locked}
-                  onClick={() => {
-                    if (window.confirm("Kirim penilaian rekan final?"))
-                      void mutate({
-                        type: "peer_submit",
-                        periodId: period.id,
-                        version: response.revision,
-                        answers: peerAnswers,
-                      });
-                  }}
-                >
-                  Kirim penilaian rekan
-                </Button>
-              </div>
-            )}
-          </fieldset>
-        )}
-      {!locked && (
-        <div className="sticky bottom-0 flex gap-3 border-t bg-background p-3">
-          <Button disabled={busy} onClick={() => void save()}>
-            Simpan sekarang
-          </Button>
-          <Button disabled={busy} onClick={() => void save(true)}>
-            Kirim final
-          </Button>
-        </div>
-      )}
-    </section>
-  );
-}
 export function SurveyForm({
   data,
   userId,
   busy,
   mutate,
+  blocked = false,
 }: {
   data: ServiceSnapshot;
   userId: string;
   busy: boolean;
   mutate: Mutate;
+  blocked?: boolean;
 }) {
   const [active, setActive] = useState<string>("");
+  const [activeDirty, setActiveDirty] = useState(false),
+    [kind, setKind] = useState("main");
+  function maySwitch() {
+    return (
+      !activeDirty ||
+      window.confirm(
+        "Jawaban belum tersinkron. Tetap berpindah dari survei ini?",
+      )
+    );
+  }
   const [periodYear, setPeriodYear] = useState(
     String(
       data.years?.find((y) => y.is_active)?.id ?? data.years?.[0]?.id ?? "",
@@ -354,7 +68,7 @@ export function SurveyForm({
       return;
     }
     setDateError("");
-    void mutate({
+    const command = {
       type: "period",
       periodId: null,
       title: get("title"),
@@ -379,10 +93,18 @@ export function SurveyForm({
               }))
           : null,
       examOverride: get("examOverride"),
-    });
+    };
+    const valid = commands.surveys.safeParse(command);
+    if (!valid.success) {
+      setDateError(
+        "Periksa judul (minimal 3 karakter), target, serta pertanyaan mikro (1–50 pertanyaan, masing-masing 3–1000 karakter).",
+      );
+      return;
+    }
+    void mutate(valid.data);
   }
   return (
-    <div className="space-y-6">
+    <div className="survey-form space-y-6">
       {Array.isArray(data.extra.required) && data.extra.required.length > 0 && (
         <p role="alert" className="rounded border p-3">
           Ada survei wajib yang perlu diselesaikan. Jawaban dapat disimpan
@@ -392,112 +114,166 @@ export function SurveyForm({
       {data.isManager && (
         <details className="rounded border p-4">
           <summary>Buat periode survei utama / mikro</summary>
+          {!data.years?.length && (
+            <p role="status" className="text-sm">
+              Tahun ajaran belum tersedia. Siapkan tahun ajaran terlebih dahulu.
+            </p>
+          )}
           <form onSubmit={create} className="mt-3 grid gap-3 sm:grid-cols-2">
-            <TextField name="title" label="Judul" required />
-            <label className="block text-sm">
-              Tahun ajaran
-              <select
-                className={controlClass}
-                name="yearId"
-                required
-                value={periodYear}
-                onChange={(e) => {
-                  setPeriodYear(e.target.value);
-                  setDateError("");
-                }}
-              >
-                {(data.years ?? []).map((y) => (
-                  <option key={String(y.id)} value={String(y.id)}>
-                    {formatAcademicYear(y.start_year)}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="block text-sm">
-              Semester
-              <select
-                className={controlClass}
-                name="semester"
-                value={periodSemester}
-                onChange={(e) => {
-                  setPeriodSemester(Number(e.target.value));
-                  setDateError("");
-                }}
-              >
-                <option value="1">Ganjil (Juli–Desember)</option>
-                <option value="2">Genap (Januari–Juni)</option>
-              </select>
-            </label>
-            <SelectField label="Jenis" name="kind">
-              <option value="main">Survei utama</option>
-              <option value="micro">Survei mikro</option>
-            </SelectField>
-            {periodBounds && (
-              <p className="text-sm text-muted-foreground">
-                {formatAcademicYear(selectedYear?.start_year)} ·{" "}
-                {periodBounds.label}
-              </p>
-            )}
-            {dateError && <p role="alert">{dateError}</p>}
-            <div key={`${periodYear}-${periodSemester}`} className="contents">
+            <fieldset disabled={busy || blocked} className="contents">
+              <TextField name="title" label="Judul" required max={2000} />
               <label className="block text-sm">
-                Mulai
-                <input
+                Tahun ajaran
+                <select
                   className={controlClass}
-                  type="date"
-                  name="start"
-                  min={periodBounds?.start}
-                  max={periodBounds?.end}
+                  name="yearId"
                   required
-                />
+                  value={periodYear}
+                  onChange={(e) => {
+                    setPeriodYear(e.target.value);
+                    setDateError("");
+                  }}
+                >
+                  {(data.years ?? []).map((y) => (
+                    <option key={String(y.id)} value={String(y.id)}>
+                      {formatAcademicYear(y.start_year)}
+                    </option>
+                  ))}
+                </select>
               </label>
               <label className="block text-sm">
-                Selesai
-                <input
+                Semester
+                <select
                   className={controlClass}
-                  type="date"
-                  name="end"
-                  min={periodBounds?.start}
-                  max={periodBounds?.end}
-                  required
-                />
+                  name="semester"
+                  value={periodSemester}
+                  onChange={(e) => {
+                    setPeriodSemester(Number(e.target.value));
+                    setDateError("");
+                  }}
+                >
+                  <option value="1">Ganjil (Juli–Desember)</option>
+                  <option value="2">Genap (Januari–Juni)</option>
+                </select>
               </label>
-            </div>
-            <fieldset>
-              <legend>Target</legend>
-              {[
-                ["student", "Siswa"],
-                ["teacher", "Guru"],
-                ["parent", "Orangtua"],
-              ].map(([k, v]) => (
-                <label key={k} className="mr-3">
-                  <input type="checkbox" name="targets" value={k} /> {v}
+              <label className="block text-sm">
+                Jenis
+                <select
+                  className={controlClass}
+                  name="kind"
+                  value={kind}
+                  onChange={(e) => setKind(e.target.value)}
+                >
+                  <option value="main">Survei utama</option>
+                  <option value="micro">Survei mikro</option>
+                </select>
+              </label>
+              {periodBounds && (
+                <p className="text-sm text-muted-foreground">
+                  {formatAcademicYear(selectedYear?.start_year)} ·{" "}
+                  {periodBounds.label}
+                </p>
+              )}
+              {dateError && <p role="alert">{dateError}</p>}
+              <div key={`${periodYear}-${periodSemester}`} className="contents">
+                <label className="block text-sm">
+                  Mulai
+                  <input
+                    className={controlClass}
+                    type="date"
+                    name="start"
+                    min={periodBounds?.start}
+                    max={periodBounds?.end}
+                    required
+                  />
                 </label>
-              ))}
-            </fieldset>
-            <TextField
-              label="Alasan override dekat ujian (bila diperlukan)"
-              name="examOverride"
-            />
-            <label>
-              Pertanyaan mikro (satu esai wajib per baris)
-              <textarea
-                className={controlClass}
-                name="questions"
-                maxLength={20000}
+                <label className="block text-sm">
+                  Selesai
+                  <input
+                    className={controlClass}
+                    type="date"
+                    name="end"
+                    min={periodBounds?.start}
+                    max={periodBounds?.end}
+                    required
+                  />
+                </label>
+              </div>
+              <fieldset>
+                <legend>Target</legend>
+                {[
+                  ["student", "Siswa"],
+                  ["teacher", "Guru"],
+                  ["parent", "Orangtua"],
+                ].map(([k, v]) => (
+                  <label key={k} className="mr-3">
+                    <input type="checkbox" name="targets" value={k} /> {v}
+                  </label>
+                ))}
+              </fieldset>
+              <TextField
+                label="Alasan override dekat ujian (bila diperlukan)"
+                name="examOverride"
               />
-            </label>
-            <Button disabled={busy}>Buat periode</Button>
+              {kind === "micro" && (
+                <label>
+                  Pertanyaan mikro (satu esai wajib per baris)
+                  <textarea
+                    className={controlClass}
+                    name="questions"
+                    maxLength={50050}
+                    required
+                  />
+                </label>
+              )}
+              <Button disabled={busy || blocked || !periodYear}>
+                Buat periode
+              </Button>
+            </fieldset>
           </form>
         </details>
       )}
+      {!data.rows.length && (
+        <section className="rounded-xl border border-dashed bg-card p-6">
+          <h2 className="text-lg font-semibold">
+            Belum ada survei untuk akun Anda
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Survei ditampilkan sesuai target peran dan periode yang ditetapkan.
+          </p>
+        </section>
+      )}
       {data.rows.map((p) => {
-        const r = obj(p.response);
+        const r = obj(p.response),
+          parsed = surveyResponse.safeParse(p.response),
+          available =
+            p.status === "open" &&
+            String(p.starts_on) <= data.today &&
+            String(p.ends_on) >= data.today;
+        async function open() {
+          if (!maySwitch()) return;
+          if (active === String(p.id)) {
+            setActive("");
+            setActiveDirty(false);
+            return;
+          }
+          if (parsed.success) {
+            setActive(String(p.id));
+            setActiveDirty(false);
+            return;
+          }
+          const ok = await mutate({ type: "start", periodId: p.id });
+          if (ok) {
+            setActive(String(p.id));
+            setActiveDirty(false);
+          }
+        }
         return (
-          <article className="space-y-3 rounded border p-4" key={String(p.id)}>
-            <h2 className="text-xl font-semibold">
-              {String(p.title)} — {String(p.kind)}
-            </h2>
+          <article
+            className="space-y-3 rounded-xl border bg-card p-5 shadow-sm"
+            key={String(p.id)}
+          >
+            <h2 className="text-xl font-semibold">{String(p.title)}</h2>
             <p className="text-sm text-muted-foreground">
               Tahun ajaran{" "}
               {formatAcademicYear(
@@ -508,24 +284,38 @@ export function SurveyForm({
             </p>
             <p>
               {String(p.starts_on)} s.d. {String(p.ends_on)} |{" "}
-              {String(p.status)} | {r.submitted_at ? "Terkirim" : "Belum final"}
+              {p.kind === "micro" ? "Survei mikro" : "Survei utama"} ·{" "}
+              {p.status === "closed"
+                ? "Ditutup"
+                : available
+                  ? "Sedang berlangsung"
+                  : "Di luar jadwal"}{" "}
+              · {r.submitted_at ? "Terkirim" : "Belum final"}
             </p>
-            {p.status === "open" && (
+            {((available &&
+              (!data.isManager ||
+                (Array.isArray(p.targets) &&
+                  p.targets.includes(data.extra.respondentRole)))) ||
+              parsed.success) && (
               <Button
-                disabled={busy}
-                onClick={async () => {
-                  const ok = await mutate({ type: "start", periodId: p.id });
-                  if (ok) setActive(String(p.id));
-                }}
+                type="button"
+                aria-expanded={active === p.id}
+                disabled={busy || (!parsed.success && blocked)}
+                onClick={() => void open()}
               >
-                Buka / lanjutkan jawaban
+                {active === p.id
+                  ? "Tutup jawaban"
+                  : r.submitted_at || !available
+                    ? "Lihat jawaban"
+                    : "Buka / lanjutkan jawaban"}
               </Button>
             )}
             {data.isManager && p.status === "open" && (
               <Button
                 variant="outline"
-                disabled={busy}
+                disabled={busy || blocked}
                 onClick={() => {
+                  if (!maySwitch()) return;
                   if (
                     window.confirm("Tutup periode? Jawaban baru akan ditolak.")
                   )
@@ -535,12 +325,15 @@ export function SurveyForm({
                 Tutup periode
               </Button>
             )}
-            {active === p.id && typeof r.period_id === "string" && (
+            {active === p.id && parsed.success && (
               <SurveyEditor
-                period={p}
-                response={r}
+                period={{ ...p, status: available ? p.status : "closed" }}
+                key={String(p.id)}
+                response={parsed.data}
                 userId={userId}
                 busy={busy}
+                blocked={blocked}
+                onDirty={setActiveDirty}
                 mutate={mutate}
                 peers={list(data.extra.peers)}
               />

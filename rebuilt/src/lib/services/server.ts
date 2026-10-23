@@ -1,4 +1,5 @@
 import "server-only";
+import { surveysSnapshot } from "./surveys";
 import { parseDiscipline } from "./discipline";
 import { createAuthAdmin } from "@/lib/auth/admin";
 import { AccessDenied } from "@/lib/auth/authorization";
@@ -49,6 +50,25 @@ export async function servicesData(
       return data;
     } catch {
       throw Error("Discipline unavailable");
+    }
+  }
+  if (module === "surveys") {
+    try {
+      const data = surveysSnapshot.parse(r.data);
+      if (data.rows.some((p) => p.response && p.response.user_id !== actor))
+        throw Error("Wrong respondent");
+      if (data.isManager) {
+        const role = await createAuthAdmin()
+          .from("user_roles")
+          .select("role_code")
+          .eq("user_id", actor)
+          .maybeSingle();
+        if (role.error || !role.data) throw Error("Survey role unavailable");
+        data.extra.respondentRole = role.data.role_code;
+      }
+      return data;
+    } catch {
+      throw Error("Surveys unavailable");
     }
   }
   const parsed = snapshot.parse(r.data);

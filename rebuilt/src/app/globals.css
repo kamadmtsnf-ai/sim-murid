@@ -457,3 +457,17 @@
 .book-viewport { max-width:100%; min-width:0; overflow:auto; max-height:65dvh; background:var(--muted); padding:8px; }
 .book-canvas { width:max-content; min-width:100%; }
 .book-canvas canvas { display:block; margin-inline:auto; background:white; }
+
+/* Survey controls remain within their containers; long forms scroll normally. */
+.surveys-panel,.survey-form,.survey-editor { min-width:0; overflow-wrap:anywhere; }
+.survey-form button,.surveys-panel button { min-height:44px; max-width:100%; height:auto; white-space:normal; }
+.survey-form input,.survey-form textarea,.survey-form select { min-width:0; max-width:100%; }
+.survey-form select,.survey-form input:not([type=checkbox]),.survey-form textarea { min-height:44px; }
+.survey-form textarea { resize:vertical; }
+.survey-form summary { min-height:44px; cursor:pointer; }
+.survey-form fieldset label:has(input[type=checkbox]) { display:inline-flex; align-items:center; min-height:44px; gap:8px; }
+.survey-editor progress { display:block; height:8px; border:0; border-radius:999px; overflow:hidden; accent-color:var(--primary); background:var(--border); }
+.survey-editor progress::-webkit-progress-bar { background:var(--border); }
+.survey-editor progress::-webkit-progress-value { background:var(--primary); }
+.survey-editor progress::-moz-progress-bar { background:var(--primary); }
+@media (max-width:639px) { .survey-form > article,.survey-editor,.survey-editor label[for] { padding:12px; } }
