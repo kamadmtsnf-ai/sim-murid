@@ -1,0 +1,375 @@
+{
+  "checks": [
+    {
+      "name": "long profile 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "profile 320 axe",
+      "passed": true
+    },
+    {
+      "name": "long profile 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "profile 768 axe",
+      "passed": true
+    },
+    {
+      "name": "long profile 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "profile 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "phone leading zero retained",
+      "passed": true
+    },
+    {
+      "name": "empty name blocked before network",
+      "passed": true
+    },
+    {
+      "name": "name error explicit",
+      "passed": true
+    },
+    {
+      "name": "name error focused",
+      "passed": true
+    },
+    {
+      "name": "email validation explicit",
+      "passed": true
+    },
+    {
+      "name": "cancel reload preserves dirty values",
+      "passed": true
+    },
+    {
+      "name": "synchronous submit lock",
+      "passed": true
+    },
+    {
+      "name": "microsecond timestamp preserved",
+      "passed": true
+    },
+    {
+      "name": "email normalized",
+      "passed": true
+    },
+    {
+      "name": "server normalized draft applied",
+      "passed": true
+    },
+    {
+      "name": "same email does not imply lost verification",
+      "passed": true
+    },
+    {
+      "name": "shell refreshed after confirmed save",
+      "passed": true
+    },
+    {
+      "name": "email-change warning accurate",
+      "passed": true
+    },
+    {
+      "name": "400 preserves input",
+      "passed": true
+    },
+    {
+      "name": "400 controls recover",
+      "passed": true
+    },
+    {
+      "name": "403 preserves input",
+      "passed": true
+    },
+    {
+      "name": "403 controls recover",
+      "passed": true
+    },
+    {
+      "name": "ambiguous write blocks resend",
+      "passed": true
+    },
+    {
+      "name": "status check performs no write",
+      "passed": true
+    },
+    {
+      "name": "matched persisted content resolves uncertainty",
+      "passed": true
+    },
+    {
+      "name": "persisted save confirmation",
+      "passed": true
+    },
+    {
+      "name": "offline retains draft",
+      "passed": true
+    },
+    {
+      "name": "offline prevents unsafe resend",
+      "passed": true
+    },
+    {
+      "name": "offline no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "offline differing persisted data requires review",
+      "passed": true
+    },
+    {
+      "name": "offline reload restores current version",
+      "passed": true
+    },
+    {
+      "name": "json retains draft",
+      "passed": true
+    },
+    {
+      "name": "json prevents unsafe resend",
+      "passed": true
+    },
+    {
+      "name": "json no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "json differing persisted data requires review",
+      "passed": true
+    },
+    {
+      "name": "json reload restores current version",
+      "passed": true
+    },
+    {
+      "name": "malformed retains draft",
+      "passed": true
+    },
+    {
+      "name": "malformed prevents unsafe resend",
+      "passed": true
+    },
+    {
+      "name": "malformed no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "malformed differing persisted data requires review",
+      "passed": true
+    },
+    {
+      "name": "malformed reload restores current version",
+      "passed": true
+    },
+    {
+      "name": "wrong-user retains draft",
+      "passed": true
+    },
+    {
+      "name": "wrong-user prevents unsafe resend",
+      "passed": true
+    },
+    {
+      "name": "wrong-user no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "wrong-user differing persisted data requires review",
+      "passed": true
+    },
+    {
+      "name": "wrong-user reload restores current version",
+      "passed": true
+    },
+    {
+      "name": "409 retains draft",
+      "passed": true
+    },
+    {
+      "name": "409 prevents unsafe resend",
+      "passed": true
+    },
+    {
+      "name": "409 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "409 differing persisted data requires review",
+      "passed": true
+    },
+    {
+      "name": "409 reload restores current version",
+      "passed": true
+    },
+    {
+      "name": "503 retains draft",
+      "passed": true
+    },
+    {
+      "name": "503 prevents unsafe resend",
+      "passed": true
+    },
+    {
+      "name": "503 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "503 differing persisted data requires review",
+      "passed": true
+    },
+    {
+      "name": "503 reload restores current version",
+      "passed": true
+    },
+    {
+      "name": "read-offline retains draft",
+      "passed": true
+    },
+    {
+      "name": "read-offline blocks write",
+      "passed": true
+    },
+    {
+      "name": "read-malformed retains draft",
+      "passed": true
+    },
+    {
+      "name": "read-malformed blocks write",
+      "passed": true
+    },
+    {
+      "name": "reload outage preserves draft",
+      "passed": true
+    },
+    {
+      "name": "401 redirects before JSON parsing",
+      "passed": true
+    },
+    {
+      "name": "401 draft retained until navigation",
+      "passed": true
+    },
+    {
+      "name": "empty optional fields supported",
+      "passed": true
+    },
+    {
+      "name": "empty optional profile saves",
+      "passed": true
+    },
+    {
+      "name": "optional empty axe",
+      "passed": true
+    },
+    {
+      "name": "mobile touch and international phone",
+      "passed": true
+    },
+    {
+      "name": "mobile saved no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "keyboard focus sequence",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "landscape axe",
+      "passed": true
+    },
+    {
+      "name": "bio limit counter",
+      "passed": true
+    },
+    {
+      "name": "maximum bio no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "maximum bio preserved",
+      "passed": true
+    },
+    {
+      "name": "dirty draft registers exit protection",
+      "passed": true
+    },
+    {
+      "name": "late 401 after unmount does not redirect another page",
+      "passed": true
+    },
+    {
+      "name": "unmount removes dirty listener",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true
+    },
+    {
+      "name": "internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "error retry works",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "profile 320",
+      "violations": []
+    },
+    {
+      "label": "profile 768",
+      "violations": []
+    },
+    {
+      "label": "profile 1440",
+      "violations": []
+    },
+    {
+      "label": "optional empty",
+      "violations": []
+    },
+    {
+      "label": "landscape",
+      "violations": []
+    },
+    {
+      "label": "loading",
+      "violations": []
+    },
+    {
+      "label": "error",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

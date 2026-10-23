@@ -271,3 +271,7 @@ Pisahkan ringkasan global dari filter paket ekspor. Gunakan label metrik Indones
 ## Biodata dan dokumen — 23 Oktober 2026
 
 Gunakan navigasi bagian 2/3/6 kolom sesuai lebar, label eksplisit, input 44 px, dan grid form 1/2 kolom. Kelengkapan adalah snapshot tersimpan; draf ditandai terpisah dan tidak dipaksa lengkap. Error lintas bagian membuka bagian input terkait dan mengarahkan fokus. Dokumen memakai kartu dengan status ready/pending/deleting, nama berkas wrapping, pratinjau terbatas viewport dan area gulir gambar yang dapat difokuskan. Refresh dan retry mempertahankan isian ketika gagal. Lihat `../verification/biodata-audit.md` dan hasil pengujian terkait.
+
+## Profil pribadi — 23 Oktober 2026
+
+Editor profil sendiri memakai kartu satu kolom dengan header grid minmax(0,1fr), username wrapping, form 1/2 kolom dan input 44 px. Field opsional dijelaskan; bio mempunyai hitungan karakter. Error menunjuk field dan fokus pertama. Tampilkan dirty state; refresh meminta konfirmasi sebelum membuang isian. Hasil simpan belum pasti harus diperiksa melalui GET dan tidak boleh otomatis mengirim ulang penulisan. Pesan pembatalan verifikasi email hanya muncul ketika email benar berubah. Lihat `../verification/personal-profile-audit.md`.
