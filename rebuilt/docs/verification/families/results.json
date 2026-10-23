@@ -1,0 +1,163 @@
+{
+  "checks": [
+    {
+      "name": "families 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "families 320 axe",
+      "passed": true
+    },
+    {
+      "name": "expanded lists 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded lists 320 axe",
+      "passed": true
+    },
+    {
+      "name": "families 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "families 768 axe",
+      "passed": true
+    },
+    {
+      "name": "expanded lists 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded lists 768 axe",
+      "passed": true
+    },
+    {
+      "name": "families 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "families 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "expanded lists 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded lists 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "guardian pagination",
+      "passed": true
+    },
+    {
+      "name": "group pagination",
+      "passed": true
+    },
+    {
+      "name": "next group page",
+      "passed": true
+    },
+    {
+      "name": "inactive existing member retained",
+      "passed": true
+    },
+    {
+      "name": "hidden selection retained during search",
+      "passed": true
+    },
+    {
+      "name": "double group save sends one request",
+      "passed": true
+    },
+    {
+      "name": "retained legacy order before new members",
+      "passed": true
+    },
+    {
+      "name": "group save preserves guardian draft",
+      "passed": true
+    },
+    {
+      "name": "guardian command sent",
+      "passed": true
+    },
+    {
+      "name": "guardian revocation",
+      "passed": true
+    },
+    {
+      "name": "reload cancellation preserves draft",
+      "passed": true
+    },
+    {
+      "name": "uncertain write blocks retry",
+      "passed": true
+    },
+    {
+      "name": "reload never repeats write",
+      "passed": true
+    },
+    {
+      "name": "ambiguous committed group recovered once",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "keyboard reaches guardian form",
+      "passed": true
+    },
+    {
+      "name": "empty catalog disables link",
+      "passed": true
+    },
+    {
+      "name": "empty catalog disables group creation",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "families 320",
+      "violations": []
+    },
+    {
+      "label": "expanded lists 320",
+      "violations": []
+    },
+    {
+      "label": "families 768",
+      "violations": []
+    },
+    {
+      "label": "expanded lists 768",
+      "violations": []
+    },
+    {
+      "label": "families 1440",
+      "violations": []
+    },
+    {
+      "label": "expanded lists 1440",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

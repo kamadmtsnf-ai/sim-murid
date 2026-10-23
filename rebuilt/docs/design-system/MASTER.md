@@ -249,3 +249,9 @@ Hasil AI menggunakan judul tema, daftar rekomendasi dan blockquote, bukan JSON m
 Pengaturan mempertahankan empat bagian: profil/logo, mata pelajaran, hafalan dan hari libur. Navigasi berupa tombol aria-pressed dan mendukung keyboard native. Form panjang tetap di halaman; input dan aksi memiliki target sentuh 44px, layout file bertumpuk di ponsel, teks panjang wrap, dan tabel memakai TableRegion existing. Master dan hari libur dapat dicari serta dipaginasi 20 baris.
 
 Status membedakan sedang memuat/menyimpan, hasil terkonfirmasi, validasi gagal dan hasil ambigu yang memerlukan reload. Reset hanya terjadi pada formulir yang tersimpan; draft profil tetap utuh saat logo diunggah. Pergantian bagian/edit/reload memiliki guard isian. Hasil simpan memerlukan acknowledgement dan pembacaan balik yang sesuai, bukan sekadar HTTP 200. Bukti dan batas verifikasi: `docs/verification/settings-audit.md` serta `docs/verification/settings/results.json`.
+
+## Audit Relasi Keluarga — 23 Oktober 2026
+
+Relasi orang tua dan grup saudara kandung tetap dua bagian terpisah. Identitas ditampilkan dengan nama serta username, hubungan memakai label Ayah/Ibu/Wali. Referensi di luar katalog aktif diberi keterangan dan tidak dihapus otomatis. Selection anggota terpisah dari pencarian, dengan ringkasan terpilih serta batas 30 anggota. Daftar relasi/grup dibuka saat dibutuhkan, dengan jumlah data tetap terlihat, pencarian dan pagination 20 baris; teks panjang wrap, kontrol 44px, roster scroll lokal, Card dan Status menggunakan komponen existing.
+
+Feedback membedakan pending, hasil terkonfirmasi dan hasil ambigu yang memerlukan GET ulang. Reset formulir terarah menjaga draft bagian lain. Konfirmasi pemindahan/pengeluaran anggota menjelaskan dampak iuran. Bukti dan batas verifikasi: `docs/verification/families-audit.md`, `docs/verification/families/results.json`.

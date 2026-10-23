@@ -129,3 +129,16 @@ test('ED14-04: removal rejects mixed foreign/current IDs atomically; inactive ad
  assert.equal((await write('app_classes_write',{...command,studentIds:[S3.id,S2.id],remove:true})).code,'not_found');assert.equal(await val('select count(*)::int from sim_murid_private.enrollments where class_id=$1 and ended_at is null',[c]),1);
  await db.query("update public.profiles set status='inactive' where id=$1",[S2.id]);try{assert.equal((await write('app_classes_write',{...command,studentIds:[S2.id]})).code,'invalid');}finally{await db.query("update public.profiles set status='active' where id=$1",[S2.id]);}
 });
+
+test('Family audit: inactive linked accounts remain identifiable and revocable; inactive members are retained only in their existing group',async()=>{
+ const relation={type:'guardian',studentId:S2.id,parentId:P2.id,relationship:'mother',remove:false};assert.equal((await write('app_family_write',relation)).code,'saved');
+ const group=await write('app_family_write',{type:'family',id:null,name:'Retained inactive',studentIds:[S2.id,S3.id]});assert.equal(group.code,'saved');
+ const order=await val('select legacy_order::int from sim_murid_private.family_members where family_id=$1 and student_id=$2 and revoked_at is null',[group.id,S2.id]);
+ await db.query("update public.profiles set status='inactive' where id=any($1::uuid[])",[[S2.id,P2.id]]);
+ const read=await val('select public.app_family_read($1,$2)',args(A));assert.ok(read.references.some(p=>p.id===S2.id));assert.ok(read.references.some(p=>p.id===P2.id));assert.ok(!read.students.some(p=>p.id===S2.id));
+ assert.equal((await write('app_family_write',{...relation,remove:true})).code,'saved');assert.equal((await write('app_family_write',relation)).code,'invalid');
+ assert.equal((await write('app_family_write',{type:'family',id:group.id,name:'Preserved',studentIds:[S2.id,S3.id]})).code,'saved');
+ assert.equal(await val('select legacy_order::int from sim_murid_private.family_members where family_id=$1 and student_id=$2 and revoked_at is null',[group.id,S2.id]),order);
+ assert.equal((await write('app_family_write',{type:'family',id:null,name:'Invalid transfer',studentIds:[S2.id]})).code,'invalid');
+ await db.query("update public.profiles set status='active' where id=any($1::uuid[])",[[S2.id,P2.id]]);
+});
