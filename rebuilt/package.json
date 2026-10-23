@@ -21,7 +21,7 @@
     "test:security": "node --experimental-strip-types --test tests/security.test.ts && node --test tests/database/security.test.mjs",
     "test:recovery": "node --experimental-strip-types --test tests/recovery.test.ts && node --test tests/database/recovery.test.mjs",
     "test:email": "node --experimental-strip-types --test tests/email.test.ts && node --test tests/database/email.test.mjs",
-    "test:settings": "node --experimental-strip-types --test tests/settings.test.ts && node --test tests/database/settings.test.mjs",
+    "test:settings": "node --experimental-strip-types --test tests/settings.test.ts && node --test tests/database/settings.test.mjs && node --test tests/settings-routes.test.mjs",
     "test:education": "node --experimental-strip-types --test tests/education.test.ts && node --test tests/database/education.test.mjs",
     "test:operations": "node --experimental-strip-types --test tests/operations.test.ts && node --test tests/database/operations.test.mjs",
     "prebuild": "node scripts/prepare-pdf-worker.mjs",
@@ -75,7 +75,8 @@
     "test:books:browser": "node scripts/verify-books.mjs",
     "test:surveys": "node --test tests/surveys.test.mjs",
     "test:surveys:browser": "node scripts/verify-surveys.mjs",
-    "test:insights": "node --test tests/insights-provider.test.mjs"
+    "test:insights": "node --test tests/insights-provider.test.mjs",
+    "test:settings:browser": "node scripts/verify-settings.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
