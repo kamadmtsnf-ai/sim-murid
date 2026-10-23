@@ -255,3 +255,7 @@ Status membedakan sedang memuat/menyimpan, hasil terkonfirmasi, validasi gagal d
 Relasi orang tua dan grup saudara kandung tetap dua bagian terpisah. Identitas ditampilkan dengan nama serta username, hubungan memakai label Ayah/Ibu/Wali. Referensi di luar katalog aktif diberi keterangan dan tidak dihapus otomatis. Selection anggota terpisah dari pencarian, dengan ringkasan terpilih serta batas 30 anggota. Daftar relasi/grup dibuka saat dibutuhkan, dengan jumlah data tetap terlihat, pencarian dan pagination 20 baris; teks panjang wrap, kontrol 44px, roster scroll lokal, Card dan Status menggunakan komponen existing.
 
 Feedback membedakan pending, hasil terkonfirmasi dan hasil ambigu yang memerlukan GET ulang. Reset formulir terarah menjaga draft bagian lain. Konfirmasi pemindahan/pengeluaran anggota menjelaskan dampak iuran. Bukti dan batas verifikasi: `docs/verification/families-audit.md`, `docs/verification/families/results.json`.
+
+## Pemulihan Akun
+
+Antrean Admin memisahkan daftar permintaan dari verifikasi/tindak lanjut. Gunakan search/filter/pagination, identitas nama+username, label jenis Password/Sesi dan timestamp WIB. Akun sendiri dan permintaan kedaluwarsa tidak dapat diproses. Konfirmasi menyebut target dan dampak pencabutan sesi. Secret sementara memiliki panel penerima tersendiri; mutasi/refresh terkunci sampai penyerahan dikonfirmasi. Hasil ambigu membutuhkan refresh GET tervalidasi, tanpa retry mutasi otomatis. Kontrol min44px, teks/action wrapping dan padding responsif memakai token existing.

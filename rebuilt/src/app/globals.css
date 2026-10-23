@@ -476,3 +476,15 @@
 .families-panel :is(button,a) { max-width:100%; min-height:44px; height:auto; white-space:normal; overflow-wrap:anywhere; }
 .families-panel [data-slot="card-content"],.families-panel [data-slot="card-header"] { min-width:0; padding-inline:16px; }
 @media(min-width:640px) { .families-panel [data-slot="card-content"],.families-panel [data-slot="card-header"] { padding-inline:24px; } }
+
+/* Account recovery: keep identities and actions inside narrow viewports. */
+.account-recovery-panel [data-slot="card"] { min-width: 0; }
+.account-recovery-panel [data-slot="card-header"],
+.account-recovery-panel [data-slot="card-content"] { padding-inline: 1rem; min-width: 0; }
+.account-recovery-panel button { min-height: 2.75rem; max-width: 100%; height: auto; white-space: normal; overflow-wrap: anywhere; }
+.account-recovery-panel input:not([type="checkbox"]),
+.account-recovery-panel select { min-height: 2.75rem; }
+@media (min-width: 640px) {
+ .account-recovery-panel [data-slot="card-header"],
+ .account-recovery-panel [data-slot="card-content"] { padding-inline: 1.5rem; }
+}

@@ -9,7 +9,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
     "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
-    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:login && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:recovery:routes && npm run test:email && npm run test:settings && npm run test:education && npm run test:families && npm run test:singleton-writes && npm run test:academic && npm run test:schedules && npm run test:classes && npm run test:directory && npm run test:user-detail && npm run test:users && npm run test:duty && npm run test:attendance && npm run test:mentoring && npm run test:committee && npm run test:savings && npm run test:operations && npm run test:learning && npm run test:grades && npm run test:reports && npm run test:promotions && npm run test:books && npm run test:services && npm run test:surveys && npm run test:insights && npm run test:points && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
+    "check": "npm run typecheck && npm run lint && npm run test:foundation && npm run test:database && npm run test:auth && npm run test:login && npm run test:sessions && npm run test:authorization && npm run test:security && npm run test:recovery && npm run test:recovery:routes && npm run test:account-recovery && npm run test:email && npm run test:settings && npm run test:education && npm run test:families && npm run test:singleton-writes && npm run test:academic && npm run test:schedules && npm run test:classes && npm run test:directory && npm run test:user-detail && npm run test:users && npm run test:duty && npm run test:attendance && npm run test:mentoring && npm run test:committee && npm run test:savings && npm run test:operations && npm run test:learning && npm run test:grades && npm run test:reports && npm run test:promotions && npm run test:books && npm run test:services && npm run test:surveys && npm run test:insights && npm run test:points && npm run test:notifications && npm run test:ui && npm run test:dashboard && npm run test:production && npm run db:types:check && npm run build",
     "test:smoke": "node scripts/smoke.mjs",
     "db:types": "node scripts/database/generate-types.mjs",
     "db:types:check": "node scripts/database/generate-types.mjs --check",
@@ -78,7 +78,9 @@
     "test:insights": "node --test tests/insights-provider.test.mjs",
     "test:settings:browser": "node scripts/verify-settings.mjs",
     "test:families": "node --test tests/families.test.mjs",
-    "test:families:browser": "node scripts/verify-families.mjs"
+    "test:families:browser": "node scripts/verify-families.mjs",
+    "test:account-recovery": "node --test tests/account-recovery.test.mjs",
+    "test:account-recovery:browser": "node scripts/verify-account-recovery.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
