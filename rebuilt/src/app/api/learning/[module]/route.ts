@@ -1,3 +1,8 @@
+import {
+  mappingError,
+  promotionsSnapshot,
+  promotionConfirmed,
+} from "@/lib/learning/promotions";
 import { reportFilters } from "@/lib/learning/reports";
 import { gradeFilters } from "@/lib/learning/grades";
 import type { NextRequest } from "next/server";
@@ -106,6 +111,22 @@ export async function POST(
           409,
         );
     }
+    if (domain === "promotions") {
+      const current = promotionsSnapshot.parse(
+        await learningData(caller.principal.id, caller.sessionId, domain),
+      );
+      if (!current.isAdmin)
+        return reply(
+          { message: "Akses tidak diizinkan.", code: "denied" },
+          403,
+        );
+      // Stale requests still reach the RPC: it resolves an existing request UUID
+      // before its revision check, preserving legitimate idempotent replays.
+      if (current.revision === body.revision) {
+        const issue = mappingError(current, commands.promotions.parse(command));
+        if (issue) return reply({ message: issue, code: "invalid" }, 409);
+      }
+    }
     const r = await createAuthAdmin().rpc("app_learning_write", {
       p_actor: caller.principal.id,
       p_session: caller.sessionId,
@@ -116,7 +137,7 @@ export async function POST(
     });
     if (r.error) throw new Error("Unavailable");
     if (
-      ["grades", "reports"].includes(domain) &&
+      ["grades", "reports", "promotions"].includes(domain) &&
       !z
         .object({
           code: z.enum([
@@ -136,7 +157,8 @@ export async function POST(
       throw Error("Uncertain grade acknowledgement");
     const result = z.object({ code: z.string() }).passthrough().parse(r.data);
     const data =
-      ["grades", "reports"].includes(domain) && result.code === "saved"
+      ["grades", "reports", "promotions"].includes(domain) &&
+      result.code === "saved"
         ? await learningData(
             caller.principal.id,
             caller.sessionId,
@@ -144,6 +166,17 @@ export async function POST(
             filters,
           )
         : undefined;
+    if (
+      domain === "promotions" &&
+      result.code === "saved" &&
+      (!data ||
+        data.revision <= body.revision ||
+        !promotionConfirmed(
+          promotionsSnapshot.parse(data),
+          commands.promotions.parse(command),
+        ))
+    )
+      throw Error("Promotion readback not confirmed");
     if (domain === "reports" && result.code === "saved") {
       const publish = commands.reports.parse(command);
       if (
@@ -158,7 +191,7 @@ export async function POST(
     return reply(
       {
         result,
-        ...(["grades", "reports"].includes(domain)
+        ...(["grades", "reports", "promotions"].includes(domain)
           ? { code: result.code, ...(data ? { data } : {}) }
           : {}),
         message: messages[result.code] ?? "Permintaan belum berhasil.",

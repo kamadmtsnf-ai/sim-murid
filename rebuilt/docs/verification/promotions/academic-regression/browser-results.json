@@ -1,0 +1,278 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "grades 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "grades axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "grades 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "grades 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "reports 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "reports axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "reports 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "reports 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "promotions 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "promotions axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "promotions 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "promotions 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "survey 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "survey axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "survey 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "survey 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "insights 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "insights axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "insights 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "insights 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "schedule 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "schedule axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "schedule 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "schedule 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "grades class year is paired",
+      "passed": true
+    },
+    {
+      "name": "browser test performs reads only",
+      "passed": true
+    },
+    {
+      "name": "Ganjil date bounds",
+      "passed": true
+    },
+    {
+      "name": "browser test performs reads only",
+      "passed": true
+    },
+    {
+      "name": "Genap input after period change uses the correct academic year",
+      "passed": true
+    },
+    {
+      "name": "Genap ends in June of second year",
+      "passed": true
+    },
+    {
+      "name": "selected period description synchronized",
+      "passed": true
+    },
+    {
+      "name": "promotion years use full ranges",
+      "passed": true
+    },
+    {
+      "name": "survey year labels paired",
+      "passed": true
+    },
+    {
+      "name": "survey Genap period synchronized",
+      "passed": true
+    },
+    {
+      "name": "survey cannot submit outside selected semester",
+      "passed": true
+    },
+    {
+      "name": "valid survey submits once",
+      "passed": true
+    },
+    {
+      "name": "survey request keeps correct year identity and Genap dates",
+      "passed": true
+    },
+    {
+      "name": "year change clears old survey date",
+      "passed": true
+    },
+    {
+      "name": "previous academic year Genap uses previous second calendar year",
+      "passed": true
+    },
+    {
+      "name": "schedule class labels show complete year",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "grades",
+      "violations": []
+    },
+    {
+      "name": "reports",
+      "violations": []
+    },
+    {
+      "name": "promotions",
+      "violations": []
+    },
+    {
+      "name": "survey",
+      "violations": []
+    },
+    {
+      "name": "insights",
+      "violations": []
+    },
+    {
+      "name": "schedule",
+      "violations": []
+    }
+  ],
+  "issues": [],
+  "limits": [
+    "Synthetic components and intercepted GETs; no real account/student mutations or role UAT."
+  ]
+}

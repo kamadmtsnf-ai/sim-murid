@@ -441,3 +441,9 @@
 .reports-panel { min-width: 0; overflow-wrap: anywhere; }
 .reports-panel :is(button,a), .reports-dialog button { max-width:100%; min-height:44px; height:auto; white-space:normal; overflow-wrap:anywhere; }
 .reports-panel th[scope="row"] { white-space:normal; overflow-wrap:anywhere; max-width:18rem; }
+
+.promotions-panel { min-width:0; overflow-wrap:anywhere; }
+.promotions-panel :is(button,a), .promotions-dialog button { max-width:100%; min-height:44px; height:auto; white-space:normal; overflow-wrap:anywhere; }
+.promotions-panel label, .promotions-dialog label { min-width:0; overflow-wrap:anywhere; }
+.promotions-dialog { display:block; overflow-y:auto; overflow-wrap:anywhere; }
+.promotions-panel input[type="file"], .promotions-dialog input[type="file"] { max-width:100%; min-width:0; }

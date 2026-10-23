@@ -1,0 +1,22 @@
+{
+  "automatedTests": 405,
+  "runnerGroups": 47,
+  "failedTests": 0,
+  "promotionsTests": 17,
+  "finalRouteRegression": "17 promotions + 16 grades + 19 reports passed",
+  "databaseTypes": "14 public tables match fresh migration replay",
+  "buildRecovery": "Initial check build failed on corrupt local Turbopack persistence. Generated cache removed; subsequent production build passed.",
+  "limitations": "Synthetic Auth/HTTP/Storage boundaries in browser; actual migrations in PGlite. No production mutations, physical device or manual screen reader testing.",
+  "browserChecks": 103,
+  "browserAxeRuns": 13,
+  "academicRegressionChecks": 41,
+  "academicAxeRuns": 6,
+  "uncaughtBrowserErrors": 0,
+  "horizontalPageOverflow": false,
+  "status": "passed",
+  "typecheck": "passed",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "deadcode": "no unreachable source",
+  "diffCheck": "passed"
+}

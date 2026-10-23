@@ -18,8 +18,20 @@ const years = [
     { id: id(11), start_year: 2025, is_active: false },
   ],
   classes = [
-    { id: id(20), name: "VII A", year: 2026, academic_year_id: id(10) },
-    { id: id(21), name: "VII Lama", year: 2025, academic_year_id: id(11) },
+    {
+      id: id(20),
+      name: "VII A",
+      level: 7,
+      year: 2026,
+      academic_year_id: id(10),
+    },
+    {
+      id: id(21),
+      name: "VII Lama",
+      level: 7,
+      year: 2025,
+      academic_year_id: id(11),
+    },
   ];
 const learning = learningSnapshot.parse({
   module: ["grades", "reports", "promotions"].includes(view) ? view : "grades",
@@ -33,6 +45,7 @@ const learning = learningSnapshot.parse({
   rows: [],
   extra: {
     canPublish: true,
+    access: { allow_view: false, allow_download: false },
     kkm: null,
     entryPeople: [],
     scope: { semester: 1 },

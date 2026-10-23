@@ -21,7 +21,7 @@ export default async function LearningPage({
       domain.data,
     );
   } catch {
-    if (["grades", "reports"].includes(domain.data))
+    if (["grades", "reports", "promotions"].includes(domain.data))
       throw Error("Grades unavailable");
     return (
       <main className="mx-auto max-w-xl p-8" id="main-content">
