@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { TextField, SelectField } from "@/components/domain-controls";
 import { snapshot, type ServiceSnapshot } from "@/lib/services/validation";
-import { SurveyForm } from "./survey-form";
+import { SurveysPanel } from "./surveys-panel";
 import { InsightsPanel } from "./insights";
 import { DisciplinePanel } from "./discipline-panel";
 import { disciplineSnapshot } from "@/lib/services/discipline";
@@ -18,6 +18,13 @@ export function ServicesPanel(props: {
   initial: ServiceSnapshot;
   userId: string;
 }) {
+  if (props.initial.module === "surveys")
+    return (
+      <SurveysPanel
+        key={props.userId + ":" + props.initial.revision}
+        {...props}
+      />
+    );
   if (props.initial.module === "discipline")
     return (
       <DisciplinePanel
@@ -37,7 +44,6 @@ export function ServicesPanel(props: {
 }
 function ServiceModulesPanel({
   initial,
-  userId,
 }: {
   initial: ServiceSnapshot;
   userId: string;
@@ -90,9 +96,6 @@ function ServiceModulesPanel({
       <p role="status" aria-live="polite">
         {message}
       </p>
-      {data.module === "surveys" && (
-        <SurveyForm data={data} userId={userId} busy={busy} mutate={mutate} />
-      )}
       {data.module === "insights" && (
         <InsightsPanel
           data={data}

@@ -1,3 +1,4 @@
+import { surveysSnapshot, surveyResponse } from "@/lib/services/surveys";
 import { disciplineFilters } from "@/lib/services/discipline";
 import { z } from "zod";
 import type { NextRequest } from "next/server";
@@ -60,7 +61,9 @@ export async function POST(
     const domain = modules
         .exclude(["reconciliation"])
         .parse((await params).module),
-      body = mutationEnvelope.parse(await jsonBody(request)),
+      body = mutationEnvelope.parse(
+        await jsonBody(request, domain === "surveys" ? 4194304 : 65536),
+      ),
       command = commands[domain].parse(body.command),
       readFilters =
         domain === "discipline"
@@ -77,9 +80,13 @@ export async function POST(
         p_command: command as Json,
       });
     if (r.error) throw new Error("Unavailable");
-    const result = r.data as { code: string; added?: number };
+    const result = r.data as {
+      code: string;
+      added?: number;
+      response?: Record<string, unknown>;
+    };
     if (
-      domain === "discipline" &&
+      (domain === "discipline" || domain === "surveys") &&
       !z
         .object({
           code: z.enum([
@@ -93,13 +100,17 @@ export async function POST(
             "not_configured",
             "duplicate",
             "request_conflict",
+            ...(domain === "surveys"
+              ? (["incomplete", "peer_incomplete", "exam_warning"] as const)
+              : []),
           ]),
         })
         .safeParse(result).success
     )
       throw Error("Uncertain acknowledgement");
     const data =
-      domain === "discipline" && result.code === "saved"
+      (domain === "discipline" || domain === "surveys") &&
+      result.code === "saved"
         ? await servicesData(
             caller.principal.id,
             caller.sessionId,
@@ -107,10 +118,83 @@ export async function POST(
             readFilters,
           )
         : undefined;
+    if (domain === "surveys" && result.code === "saved") {
+      const cmd = commands.surveys.parse(command),
+        state = surveysSnapshot.parse(data);
+      const ack = z
+        .object({
+          id: z.uuid().optional(),
+          version: z.number().int().optional(),
+        })
+        .safeParse(result);
+      if (!ack.success) throw Error("Invalid survey acknowledgement");
+      const period = state.rows.find(
+        (p) => p.id === (cmd.type === "period" ? ack.data.id : cmd.periodId),
+      );
+      if (!period) throw Error("Missing survey readback");
+      if (
+        cmd.type === "period" &&
+        (!ack.data.id || (cmd.periodId && cmd.periodId !== ack.data.id))
+      )
+        throw Error("Wrong period");
+      if (
+        cmd.type === "period" &&
+        (period.title !== cmd.title ||
+          period.academic_year_id !== cmd.yearId ||
+          period.semester !== cmd.semester ||
+          period.starts_on !== cmd.start ||
+          period.ends_on !== cmd.end)
+      )
+        throw Error("Period not confirmed");
+      if (
+        cmd.type === "close" &&
+        (ack.data.id !== cmd.periodId || period.status !== "closed")
+      )
+        throw Error("Close not confirmed");
+      if (cmd.type === "start") {
+        const r = surveyResponse.safeParse(result.response);
+        if (
+          !r.success ||
+          r.data.user_id !== caller.principal.id ||
+          r.data.period_id !== cmd.periodId ||
+          !period.response
+        )
+          throw Error("Start not confirmed");
+      }
+      if ("version" in cmd) {
+        const r = period.response;
+        if (
+          !r ||
+          ack.data.version !== cmd.version + 1 ||
+          r.revision !== ack.data.version
+        )
+          throw Error("Version not confirmed");
+        const actual = cmd.type.startsWith("peer_")
+          ? r.peer_answers
+          : r.answers;
+        const equal = (a: unknown, b: unknown): boolean =>
+          a === b ||
+          (!!a &&
+            !!b &&
+            typeof a === "object" &&
+            typeof b === "object" &&
+            Object.keys(a).length === Object.keys(b).length &&
+            Object.entries(a).every(([k, v]) =>
+              equal(v, (b as Record<string, unknown>)[k]),
+            ));
+        if (!equal(actual, cmd.answers)) throw Error("Answers not confirmed");
+        if (cmd.type === "submit" && !r.submitted_at)
+          throw Error("Final not confirmed");
+        if (cmd.type === "peer_submit" && !r.peer_submitted_at)
+          throw Error("Peer final not confirmed");
+      }
+    }
+    if (domain === "surveys" && result.response)
+      delete result.response.admin_note;
     return reply(
       {
         result,
-        ...(domain === "discipline"
+        ...(domain === "discipline" || domain === "surveys"
           ? { code: result.code, ...(data ? { data } : {}) }
           : {}),
         message:

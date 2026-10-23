@@ -17,11 +17,17 @@ export default async function ServicesPage({
   try {
     data = await servicesData(caller.principal.id, caller.sessionId, m.data);
   } catch {
-    if (m.data === "notifications" || m.data === "discipline")
+    if (
+      m.data === "notifications" ||
+      m.data === "discipline" ||
+      m.data === "surveys"
+    )
       throw new Error(
         m.data === "notifications"
           ? "Notifications unavailable"
-          : "Discipline unavailable",
+          : m.data === "surveys"
+            ? "Surveys unavailable"
+            : "Discipline unavailable",
       );
     return (
       <main id="main-content" className="p-8">
