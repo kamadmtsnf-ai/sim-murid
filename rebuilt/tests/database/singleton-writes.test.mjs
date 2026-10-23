@@ -18,3 +18,10 @@ test('service-role year creation commits both semesters, confirms snapshot, and 
   const dates=(await db.query('select number,starts_on::text,ends_on::text from public.semesters where academic_year_id=$1 order by number',[result.id])).rows;assert.deepEqual(dates,[{number:1,starts_on:'2026-07-01',ends_on:'2026-12-31'},{number:2,starts_on:'2027-01-01',ends_on:'2027-06-30'}]);assert.equal((await write(uuid(),1)).code,'duplicate');assert.equal((await write(uuid(),0)).code,'stale');assert.equal((await val('select public.app_classes_read($1,$2)',[actor,session])).revision,1);
  }finally{await db.exec('reset role');}
 });
+
+
+test('settings writes scope singleton state and logo metadata for production safeupdate',async()=>{
+ const source=await val("select prosrc from pg_proc where oid='public.app_settings_write(uuid,uuid,uuid,bigint,jsonb)'::regprocedure");
+ assert.match(source,/update sim_murid_private\.settings_state set revision=revision\+1 where singleton=true returning/i);
+ assert.match(source,/update public\.school_profile set asset_data=[^;]+where singleton_key='main' returning/i);
+});

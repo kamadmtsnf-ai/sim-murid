@@ -26,3 +26,23 @@ test('School logo decodes/re-encodes real images and rejects SVG, forged MIME, d
  await assert.rejects(normalizeSchoolLogo(png,'image/jpeg'));await assert.rejects(normalizeSchoolLogo(Buffer.from('<svg onload="alert(1)"/>'),'image/svg+xml'));await assert.rejects(normalizeSchoolLogo(new Uint8Array(0),'image/png'));await assert.rejects(normalizeSchoolLogo(new Uint8Array(2097153),'image/png'));
  const huge=await sharp({create:{width:4097,height:1,channels:3,background:'#fff'}}).png().toBuffer();await assert.rejects(normalizeSchoolLogo(huge,'image/png'));
 });
+
+
+test('Settings acknowledgement requires known status and safe revision; readback matches command content', async()=>{
+ const {settingsAcknowledgement,confirmSettings}=await import('../src/lib/settings/confirmation.ts');
+ for(const ack of [{code:'saved'},{code:'unknown'},{code:'saved',revision:-1},{code:'saved',revision:Number.MAX_SAFE_INTEGER+1}])assert.equal(settingsAcknowledgement.safeParse(ack).success,false);
+ const profile={...emptySchool,name:'Madrasah',identity_data:{...emptySchool.identity_data,npsn:'00001'}};
+ const data={revision:1,school:{...profile,id,asset_data:{school:id+'.png'},updated_at:'2026-10-23'},subjects:[{id,code:'IPS',sort_order:1,name:'IPS',active:true}],memorization:[],holidays:[{id,holiday_date:'2028-02-29',description:'Existing'}]};
+ assert.doesNotThrow(()=>confirmSettings(data,{type:'profile',profile},1));
+ assert.throws(()=>confirmSettings(data,{type:'profile',profile:{...profile,name:'Other'}},1));
+ assert.throws(()=>confirmSettings(data,{type:'profile',profile},2));
+ assert.doesNotThrow(()=>confirmSettings(data,{type:'subject',id:null,name:'IPS',active:true},1));
+ assert.throws(()=>confirmSettings(data,{type:'subject',id:null,name:'IPA',active:true},1));
+ assert.throws(()=>confirmSettings(data,{type:'deactivate',catalog:'subject',id},1));
+ assert.doesNotThrow(()=>confirmSettings(data,{type:'holiday',id:null,start:'2028-02-29',end:'2028-02-29',description:'Skipped preserves original'},1));
+ assert.throws(()=>confirmSettings(data,{type:'holiday',id:null,start:'2028-02-29',end:'2028-03-01',description:'Missing date'},1));
+ assert.throws(()=>confirmSettings(data,{type:'holiday_delete',id},1));
+ assert.doesNotThrow(()=>confirmSettings(data,{type:'logo',slot:'school',path:id+'.png'},1));
+ assert.throws(()=>confirmSettings(data,{type:'logo',slot:'school',path:'other.png'},1));
+ assert.throws(()=>confirmSettings(data,{type:'logo_clear',slot:'school'},1));
+});

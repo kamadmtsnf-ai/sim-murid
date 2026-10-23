@@ -1,0 +1,183 @@
+{
+  "checks": [
+    {
+      "name": "Profil dan logo 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Profil dan logo axe",
+      "passed": true
+    },
+    {
+      "name": "Mata pelajaran 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Mata pelajaran axe",
+      "passed": true
+    },
+    {
+      "name": "Hafalan 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Hafalan axe",
+      "passed": true
+    },
+    {
+      "name": "Hari libur 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Hari libur axe",
+      "passed": true
+    },
+    {
+      "name": "Profil dan logo 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Mata pelajaran 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Hafalan 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Hari libur 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Profil dan logo 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Mata pelajaran 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Hafalan 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "Hari libur 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "tab discard cancellation preserves profile",
+      "passed": true
+    },
+    {
+      "name": "logo save preserves unsaved profile",
+      "passed": true
+    },
+    {
+      "name": "uploaded file input resets",
+      "passed": true
+    },
+    {
+      "name": "synchronous double click sends one save",
+      "passed": true
+    },
+    {
+      "name": "profile confirmed value",
+      "passed": true
+    },
+    {
+      "name": "leading zeros retained",
+      "passed": true
+    },
+    {
+      "name": "master pagination limits DOM",
+      "passed": true
+    },
+    {
+      "name": "next master page",
+      "passed": true
+    },
+    {
+      "name": "master search",
+      "passed": true
+    },
+    {
+      "name": "inactive master can be edited",
+      "passed": true
+    },
+    {
+      "name": "inactive master reactivated",
+      "passed": true
+    },
+    {
+      "name": "uncertain save blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "reload never repeats write",
+      "passed": true
+    },
+    {
+      "name": "committed ambiguous save recovered once",
+      "passed": true
+    },
+    {
+      "name": "one-day holiday auto fills end",
+      "passed": true
+    },
+    {
+      "name": "holiday saved and searchable",
+      "passed": true
+    },
+    {
+      "name": "landscape orientation no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "keyboard reaches scrollable table",
+      "passed": true
+    },
+    {
+      "name": "keyboard reaches table action",
+      "passed": true
+    },
+    {
+      "name": "empty profile blocks logo",
+      "passed": true
+    },
+    {
+      "name": "empty catalog rendered",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "Profil dan logo",
+      "violations": []
+    },
+    {
+      "name": "Mata pelajaran",
+      "violations": []
+    },
+    {
+      "name": "Hafalan",
+      "violations": []
+    },
+    {
+      "name": "Hari libur",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
