@@ -275,3 +275,7 @@ Gunakan navigasi bagian 2/3/6 kolom sesuai lebar, label eksplisit, input 44 px, 
 ## Profil pribadi — 23 Oktober 2026
 
 Editor profil sendiri memakai kartu satu kolom dengan header grid minmax(0,1fr), username wrapping, form 1/2 kolom dan input 44 px. Field opsional dijelaskan; bio mempunyai hitungan karakter. Error menunjuk field dan fokus pertama. Tampilkan dirty state; refresh meminta konfirmasi sebelum membuang isian. Hasil simpan belum pasti harus diperiksa melalui GET dan tidak boleh otomatis mengirim ulang penulisan. Pesan pembatalan verifikasi email hanya muncul ketika email benar berubah. Lihat `../verification/personal-profile-audit.md`.
+
+## Verifikasi email — 23 Oktober 2026
+
+Kartu kontak memakai header grid minmax(0,1fr) dan email wrapping. Bedakan status verified, belum ada kode, queued, accepted, failed, expired dan locked. Kode memakai input teks 6 digit (nol awal tetap ada), numeric keyboard, one-time-code, label, error/fokus dan paste terkontrol. Jangan menghapus kode ketika permintaan gagal. Countdown tidak memakai live region per detik. Kirim/verify dikunci sampai state terbaru diperiksa ketika hasil belum pasti; tidak boleh otomatis mengirim ulang OTP. CTA sentuh 44–48 px dan tombol countdown wrapping. Lihat `../verification/email-verification-audit.md`.
