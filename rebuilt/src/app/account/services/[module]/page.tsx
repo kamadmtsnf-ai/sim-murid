@@ -18,47 +18,39 @@ export default async function ServicesPage({
   try {
     data = await servicesData(caller.principal.id, caller.sessionId, m.data);
   } catch (error) {
-    if (m.data === "jobs" && error instanceof AccessDenied)
+    if (
+      (m.data === "jobs" || m.data === "reconciliation") &&
+      error instanceof AccessDenied
+    )
       return (
         <main
           id="main-content"
           className="mx-auto max-w-xl space-y-4 px-4 py-8"
         >
-          <h1 className="text-2xl font-semibold">Antrean dan pekerjaan</h1>
+          <h1 className="text-2xl font-semibold">{titles[m.data]}</h1>
           <p>
             Hanya Admin yang telah menyelesaikan keamanan akun dapat mengelola
-            pekerjaan.
+            halaman ini.
           </p>
         </main>
       );
-    if (
-      m.data === "notifications" ||
-      m.data === "discipline" ||
-      m.data === "surveys" ||
-      m.data === "insights" ||
-      m.data === "jobs"
-    )
-      throw new Error(
-        m.data === "jobs"
+    throw Error(
+      m.data === "reconciliation"
+        ? "Reconciliation unavailable"
+        : m.data === "jobs"
           ? "Jobs unavailable"
           : m.data === "notifications"
             ? "Notifications unavailable"
             : m.data === "surveys" || m.data === "insights"
               ? "Surveys unavailable"
               : "Discipline unavailable",
-      );
-    return (
-      <main id="main-content" className="p-8">
-        <h1>{titles[m.data]}</h1>
-        <p>Layanan belum tersedia atau izin tidak mencukupi.</p>
-      </main>
     );
   }
   return (
     <main
       id="main-content"
       className={
-        m.data === "jobs"
+        m.data === "jobs" || m.data === "reconciliation"
           ? "mx-auto min-w-0 max-w-5xl space-y-6 px-4 py-6 sm:px-6 sm:py-10"
           : "mx-auto min-w-0 max-w-7xl space-y-6 p-6"
       }
