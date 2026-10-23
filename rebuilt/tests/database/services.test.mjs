@@ -718,3 +718,18 @@ test('Academic survey dates must stay inside the selected year and semester, inc
  assert.equal((await service('surveys',{...valid,periodId:created.id,semester:1,start:`${startYear}-07-01`,end:`${startYear}-07-02`})).code,'invalid');
  const actual=await val('select to_jsonb(p) from sim_murid_private.survey_periods p where id=$1',[created.id]);assert.equal(actual.semester,2);assert.equal(actual.starts_on,`${startYear+1}-01-01`);
 });
+
+test('Insights: OpenAI configuration is allowed, cache invalidation is provider scoped and completion cannot acknowledge missing rows', async () => {
+  await db.query("insert into sim_murid_private.ai_configs(provider,encrypted_key,model,updated_by) values('openai','synthetic-encrypted','account-model',$1)", [A.admin.id]);
+  const run = await val("select public.app_ai_run($1,$2,'prepare',$3::jsonb)", [...args(A.admin),JSON.stringify({provider:'openai',periodId:period})]);
+  assert.equal(run.code,'saved');
+  const done = await val("select public.app_ai_run($1,$2,'complete',$3::jsonb)", [...args(A.admin),JSON.stringify({id:run.id,result:{synthetic:true}})]);
+  assert.equal(done.code,'saved');
+  assert.equal((await val("select public.app_ai_run($1,$2,'complete',$3::jsonb)", [...args(A.admin),JSON.stringify({id:run.id,error:'late'})])).code,'not_found');
+  assert.equal(await val("select status from sim_murid_private.ai_analyses where id=$1",[run.id]),'succeeded');
+  const other=uuid();await db.query("insert into sim_murid_private.ai_analyses(id,period_id,scope,source_hash,status,model) values($1,$2,'gemini','independent-cache','succeeded','synthetic')",[other,period]);
+  assert.equal((await val("select public.app_ai_run($1,$2,'invalidate',$3::jsonb)", [...args(A.admin),JSON.stringify({provider:'openai',periodId:period})])).code,'saved');
+  assert.equal(await val("select count(*)::int from sim_murid_private.ai_analyses where id=$1",[run.id]),0);
+  assert.equal(await val("select count(*)::int from sim_murid_private.ai_analyses where id=$1",[other]),1);
+  assert.equal((await val("select public.app_ai_run($1,$2,'prepare',$3::jsonb)", [...args(A.s1),JSON.stringify({provider:'openai',periodId:period})])).code,'denied');
+});

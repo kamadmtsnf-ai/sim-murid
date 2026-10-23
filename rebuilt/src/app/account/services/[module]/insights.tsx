@@ -1,14 +1,15 @@
 "use client";
-import {formatAcademicYear,semesterLabel} from '@/lib/academic/period';
-import {TableRegion} from "@/components/ui/data-table";
+import { formatAcademicYear, semesterLabel } from "@/lib/academic/period";
+import { TableRegion } from "@/components/ui/data-table";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import {
   TextField,
   SelectField,
   controlClass,
 } from "@/components/domain-controls";
+import { analysisSchema } from "@/lib/services/analysis-schema";
 import type { ServiceSnapshot } from "@/lib/services/validation";
 type Row = Record<string, unknown>;
 const list = (v: unknown): Row[] => (Array.isArray(v) ? (v as Row[]) : []),
@@ -24,17 +25,43 @@ export function InsightsPanel({
   mutate: (c: unknown) => Promise<boolean>;
   load: (periodId: string, role?: string, quality?: string) => Promise<void>;
 }) {
-  const [period, setPeriod] = useState(""),
+  const applied = obj(data.extra.appliedFilters);
+  const [period, setPeriod] = useState(String(applied.periodId ?? "")),
     [message, setMessage] = useState(""),
-    [points, setPoints] = useState(3),
-    [role, setRole] = useState(""),
-    [quality, setQuality] = useState("");
+    [points, setPoints] = useState(Math.max(3, list(data.extra.plan).length)),
+    [aiBusy, setAiBusy] = useState(false),
+    [page, setPage] = useState(1),
+    [role, setRole] = useState(String(applied.role ?? "")),
+    [quality, setQuality] = useState(String(applied.quality ?? ""));
+  const aiLock = useRef(false),
+    dirty = useRef(false);
+  const scopeReady =
+    period === String(applied.periodId ?? "") &&
+    role === String(applied.role ?? "") &&
+    quality === String(applied.quality ?? "");
+  const disabled = busy || aiBusy || !scopeReady;
+  const selected = data.rows.find((p) => p.id === period);
+  const end = typeof selected?.end === "string" ? selected.end : "";
+  const planUntil = end
+    ? new Date(Date.parse(end + "T00:00:00Z") + 30 * 86400000)
+        .toISOString()
+        .slice(0, 10)
+    : "";
+  const canEditPlan =
+    selected?.status === "closed" &&
+    data.today > end &&
+    data.today <= planUntil;
   async function ai(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget),
+    if (aiLock.current || busy) return;
+    aiLock.current = true;
+    setAiBusy(true);
+    const form = e.currentTarget;
+    const f = new FormData(form),
       body = Object.fromEntries(f);
     try {
       const r = await fetch("/api/services/ai", {
+          signal: AbortSignal.timeout(55000),
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -44,14 +71,23 @@ export function InsightsPanel({
         }),
         b = await r.json();
       setMessage(String(b.message));
-      if (r.ok && period) await load(period);
+      if (r.ok) {
+        if (body.action === "configure") form.reset();
+        await load(period, role, quality);
+      }
     } catch {
-      setMessage("Penyedia belum tersedia. Hasil tidak dinyatakan berhasil.");
+      setMessage(
+        "Penyedia belum tersedia. Muat ulang hasil sebelum mencoba lagi.",
+      );
+    } finally {
+      aiLock.current = false;
+      setAiBusy(false);
     }
   }
   function plan(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
+    if (disabled || !period) return;
     void mutate({
       type: "plan",
       periodId: period,
@@ -66,26 +102,74 @@ export function InsightsPanel({
     });
   }
   return (
-    <section className="space-y-6">
-      <p role="status">{message}</p>
+    <section
+      className="min-w-0 space-y-6 wrap-anywhere"
+      aria-busy={busy || aiBusy}
+    >
+      <p role="status" aria-live="polite">
+        {aiBusy ? "Analisis sedang diproses…" : message}
+      </p>
+      {!period && (
+        <p className="rounded-lg border bg-muted/40 p-4">
+          Pilih periode untuk melihat hasil survei sesuai hak akses Anda.
+        </p>
+      )}
       <label>
         Periode
         <select
           className={controlClass}
           value={period}
+          disabled={busy || aiBusy}
           onChange={async (e) => {
+            if (
+              dirty.current &&
+              !window.confirm(
+                "Isian belum disimpan. Ganti periode dan abaikan isian?",
+              )
+            )
+              return;
+            dirty.current = false;
+            setPage(1);
             setPeriod(e.target.value);
-            if (e.target.value) await load(e.target.value);
+            setRole("");
+            setQuality("");
+            await load(e.target.value);
           }}
         >
           <option value="">Pilih periode</option>
           {data.rows.map((p) => (
             <option key={String(p.id)} value={String(p.id)}>
-              {String(p.title)} ({String(p.kind)}) · {formatAcademicYear(data.years?.find(y=>y.id===p.academic_year_id)?.start_year)} · {semesterLabel(p.semester)}
+              {String(p.title)} ({String(p.kind)}) ·{" "}
+              {formatAcademicYear(
+                data.years?.find((y) => y.id === p.academic_year_id)
+                  ?.start_year,
+              )}{" "}
+              · {semesterLabel(p.semester)}
             </option>
           ))}
         </select>
       </label>
+      {period && scopeReady && (
+        <div className="flex flex-wrap gap-3">
+          {["csv", "xlsx", "pdf"].map((format) => (
+            <a
+              key={format}
+              className="inline-flex min-h-11 items-center rounded-md border px-4 text-sm font-medium hover:bg-muted focus-visible:outline-2"
+              href={
+                "/api/services/insights?" +
+                new URLSearchParams({
+                  periodId: period,
+                  ...(role ? { role } : {}),
+                  ...(quality ? { quality } : {}),
+                  format,
+                })
+              }
+            >
+              Ekspor {format.toUpperCase()}
+            </a>
+          ))}
+        </div>
+      )}
       {data.extra.suppressed === true && (
         <p>
           Hasil personal disembunyikan sampai minimal{" "}
@@ -115,9 +199,18 @@ export function InsightsPanel({
         <form
           onSubmit={async (e) => {
             e.preventDefault();
+            if (
+              dirty.current &&
+              !window.confirm(
+                "Isian belum disimpan. Terapkan filter dan abaikan isian?",
+              )
+            )
+              return;
+            dirty.current = false;
+            setPage(1);
             await load(period, role, quality);
           }}
-          className="flex flex-wrap gap-3"
+          className="flex min-w-0 flex-wrap items-end gap-3"
         >
           <label>
             Peran
@@ -128,7 +221,16 @@ export function InsightsPanel({
             >
               <option value="">Semua</option>
               {["student", "teacher", "parent"].map((k) => (
-                <option key={k}>{k}</option>
+                <option key={k} value={k}>
+                  {{
+                    student: "Siswa",
+                    teacher: "Guru",
+                    parent: "Orang tua",
+                    belum: "Belum dimulai",
+                    proses: "Dalam proses",
+                    selesai: "Selesai",
+                  }[k] ?? k}
+                </option>
               ))}
             </select>
           </label>
@@ -141,58 +243,133 @@ export function InsightsPanel({
             >
               <option value="">Semua (termasuk flag)</option>
               {["tinggi", "sedang", "rendah"].map((k) => (
-                <option key={k}>{k}</option>
+                <option key={k} value={k}>
+                  {{
+                    student: "Siswa",
+                    teacher: "Guru",
+                    parent: "Orang tua",
+                    belum: "Belum dimulai",
+                    proses: "Dalam proses",
+                    selesai: "Selesai",
+                  }[k] ?? k}
+                </option>
               ))}
             </select>
           </label>
-          <Button disabled={!period || busy}>Terapkan filter hasil</Button>
+          <Button disabled={!period || busy || aiBusy}>
+            Terapkan filter hasil
+          </Button>
         </form>
       )}
       {data.isManager && (
         <>
-          <h2 className="font-semibold">Progres dan keandalan</h2>
-          {list(data.extra.progress).map((r) => (
-            <article key={String(r.user_id)} className="rounded border p-3">
-              <p>
-                {String(r.name)} — {r.submitted_at ? "Terkirim" : "Draft"} —{" "}
-                {String(obj(r.flags).reliability ?? "belum final")}
-              </p>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  void mutate({
-                    type: "note",
-                    periodId: period,
-                    userId: r.user_id,
-                    note: String(
-                      new FormData(e.currentTarget).get("note") ?? "",
-                    ),
-                  });
-                }}
-                className="flex gap-3"
-              >
-                <TextField
-                  label="Catatan pemantau"
-                  name="note"
-                  value={String(r.note ?? "")}
-                  max={2000}
-                />
-                <Button disabled={busy}>Simpan catatan</Button>
-              </form>
-            </article>
-          ))}
-          <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom"><table className="w-full text-left"><caption className="sr-only">Data sesuai filter dan hak akses Anda</caption>
+          {!scopeReady && (
+            <p role="status">Terapkan filter untuk memuat hasil yang sesuai.</p>
+          )}
+          <h2 className="text-lg font-semibold">Progres dan keandalan</h2>
+          {period && scopeReady && list(data.extra.progress).length === 0 && (
+            <p className="rounded-lg border p-4 text-muted-foreground">
+              Belum ada responden sesuai filter.
+            </p>
+          )}
+          <details className="rounded-lg border bg-card p-4">
+            <summary className="min-h-11 cursor-pointer font-medium">
+              Daftar responden (
+              {scopeReady ? list(data.extra.progress).length : 0})
+            </summary>
+            <div className="grid min-w-0 gap-3 pt-3 lg:grid-cols-2">
+              {(scopeReady
+                ? list(data.extra.progress).slice((page - 1) * 20, page * 20)
+                : []
+              ).map((r) => (
+                <article
+                  key={
+                    period +
+                    ":" +
+                    String(r.user_id) +
+                    ":" +
+                    String(r.note ?? "")
+                  }
+                  className="rounded border p-3"
+                >
+                  <p>
+                    {String(r.name)} — {r.submitted_at ? "Terkirim" : "Draft"} —{" "}
+                    {String(obj(r.flags).reliability ?? "belum final")}
+                  </p>
+                  <form
+                    onInputCapture={() => {
+                      dirty.current = true;
+                    }}
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      void mutate({
+                        type: "note",
+                        periodId: period,
+                        userId: r.user_id,
+                        note: String(
+                          new FormData(e.currentTarget).get("note") ?? "",
+                        ),
+                      });
+                    }}
+                    className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-end"
+                  >
+                    <TextField
+                      label="Catatan pemantau"
+                      name="note"
+                      value={String(r.note ?? "")}
+                      max={2000}
+                    />
+                    <Button disabled={disabled}>Simpan catatan</Button>
+                  </form>
+                </article>
+              ))}
+              {scopeReady && list(data.extra.progress).length > 20 && (
+                <nav
+                  aria-label="Halaman responden"
+                  className="flex flex-wrap items-center gap-3"
+                >
+                  <Button
+                    variant="outline"
+                    disabled={disabled || page <= 1}
+                    onClick={() => setPage((p) => p - 1)}
+                  >
+                    Sebelumnya
+                  </Button>
+                  <span>
+                    Halaman {page} /{" "}
+                    {Math.ceil(list(data.extra.progress).length / 20)}
+                  </span>
+                  <Button
+                    variant="outline"
+                    disabled={
+                      disabled || page * 20 >= list(data.extra.progress).length
+                    }
+                    onClick={() => setPage((p) => p + 1)}
+                  >
+                    Berikutnya
+                  </Button>
+                </nav>
+              )}
+            </div>
+          </details>
+          <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
+            <table className="w-full text-left">
+              <caption className="sr-only">
+                Data sesuai filter dan hak akses Anda
+              </caption>
               <thead>
                 <tr>
                   {["Peran", "Aspek", "Kode", "Jumlah", "Rata-rata"].map(
                     (k) => (
-                      <th scope="col" key={k}>{k}</th>
+                      <th scope="col" key={k}>
+                        {k}
+                      </th>
                     ),
                   )}
                 </tr>
               </thead>
               <tbody>
-                {list(data.extra.aggregates).map((r, i) => (
+                {(scopeReady ? list(data.extra.aggregates) : []).map((r, i) => (
                   <tr key={i}>
                     {["role", "aspect", "code", "n", "mean"].map((k) => (
                       <td className="border-b p-2" key={k}>
@@ -206,7 +383,7 @@ export function InsightsPanel({
           </TableRegion>
           <details>
             <summary>Tren lintas periode</summary>
-            {list(data.extra.trend).map((r, i) => (
+            {(scopeReady ? list(data.extra.trend) : []).map((r, i) => (
               <p key={i}>
                 {String(r.period_id)} / {String(r.role)} / {String(r.aspect)}:{" "}
                 {String(r.mean)} (n={String(r.n)})
@@ -215,16 +392,16 @@ export function InsightsPanel({
           </details>
           <details>
             <summary>Esai terotorisasi tanpa identitas responden</summary>
-            {list(data.extra.essays).map((r, i) => (
+            {(scopeReady ? list(data.extra.essays) : []).map((r, i) => (
               <p className="border-b p-3" key={i}>
                 {String(r.code)} — {String(r.text)}
               </p>
             ))}
           </details>
           {data.extra.canPlan === true &&
-            list(data.extra.plan).map((p, i) => (
+            (scopeReady ? list(data.extra.plan) : []).map((p, i) => (
               <form
-                key={i}
+                key={period + ":" + i + ":" + String(p.status)}
                 onSubmit={(e) => {
                   e.preventDefault();
                   void mutate({
@@ -234,7 +411,7 @@ export function InsightsPanel({
                     status: String(new FormData(e.currentTarget).get("status")),
                   });
                 }}
-                className="flex gap-3 rounded border p-3"
+                className="flex min-w-0 flex-col gap-3 rounded-lg border p-4 sm:flex-row sm:items-end"
               >
                 <p>{String(p.description)}</p>
                 <SelectField
@@ -243,82 +420,149 @@ export function InsightsPanel({
                   value={String(p.status)}
                 >
                   {["belum", "proses", "selesai"].map((k) => (
-                    <option key={k}>{k}</option>
+                    <option key={k} value={k}>
+                      {{
+                        student: "Siswa",
+                        teacher: "Guru",
+                        parent: "Orang tua",
+                        belum: "Belum dimulai",
+                        proses: "Dalam proses",
+                        selesai: "Selesai",
+                      }[k] ?? k}
+                    </option>
                   ))}
                 </SelectField>
-                <Button disabled={busy}>Perbarui status</Button>
+                <Button disabled={disabled}>Perbarui status</Button>
               </form>
             ))}
-          {data.extra.canPlan === true && period && (
-            <form className="space-y-3 rounded border p-4" onSubmit={plan}>
-              <h2 className="font-semibold">Rencana aksi Kepala Madrasah</h2>
-              <p>3–7poin, setelah akhir tanggal penutupan sampai H+30.</p>
-              <label>
-                Jumlah poin
-                <input
-                  type="number"
-                  min="3"
-                  max="7"
-                  value={points}
-                  className={controlClass}
-                  onChange={(e) =>
-                    setPoints(Math.max(3, Math.min(7, Number(e.target.value))))
-                  }
-                />
-              </label>
-              {Array.from({ length: points }, (_, i) => (
-                <fieldset
-                  key={i}
-                  className="grid gap-3 border p-3 sm:grid-cols-3"
-                >
-                  <legend>Poin {i + 1}</legend>
-                  <TextField
-                    label="Deskripsi"
-                    name={"description" + i}
-                    required
-                    max={2000}
+          {data.extra.canPlan === true &&
+            period &&
+            scopeReady &&
+            canEditPlan && (
+              <form
+                onInputCapture={() => {
+                  dirty.current = true;
+                }}
+                key={period + ":" + JSON.stringify(data.extra.plan)}
+                className="space-y-3 rounded-lg border p-4"
+                onSubmit={plan}
+              >
+                <h2 className="font-semibold">Rencana aksi Kepala Madrasah</h2>
+                <p>3–7 poin, setelah akhir tanggal penutupan sampai H+30.</p>
+                <label>
+                  Jumlah poin
+                  <input
+                    type="number"
+                    min="3"
+                    max="7"
+                    value={points}
+                    className={controlClass}
+                    onChange={(e) => {
+                      const next = Math.max(
+                        3,
+                        Math.min(7, Number(e.target.value) || 3),
+                      );
+                      if (
+                        next < points &&
+                        !window.confirm(
+                          "Kurangi jumlah poin dan abaikan isian pada poin terakhir?",
+                        )
+                      )
+                        return;
+                      dirty.current = true;
+                      setPoints(next);
+                    }}
                   />
-                  <TextField
-                    label="Penanggung jawab"
-                    name={"owner" + i}
-                    required
-                  />
-                  <TextField
-                    label="Target waktu"
-                    name={"target" + i}
-                    type="date"
-                    required
-                  />
-                  <SelectField label="Aspek" name={"aspect" + i}>
-                    {[
-                      "Pengajaran",
-                      "Fasilitas",
-                      "Kurikulum",
-                      "Karakter",
-                      "Disiplin",
-                      "Budaya",
-                    ].map((k) => (
-                      <option key={k}>{k}</option>
-                    ))}
-                  </SelectField>
-                  <SelectField label="Ketercapaian" name={"status" + i}>
-                    {["belum", "proses", "selesai"].map((k) => (
-                      <option key={k}>{k}</option>
-                    ))}
-                  </SelectField>
-                </fieldset>
-              ))}
-              <Button disabled={busy}>Simpan rencana</Button>
-            </form>
-          )}
+                </label>
+                {Array.from({ length: points }, (_, i) => (
+                  <fieldset
+                    key={period + ":" + i}
+                    className="grid gap-3 border p-3 sm:grid-cols-3"
+                  >
+                    <legend>Poin {i + 1}</legend>
+                    <TextField
+                      label="Deskripsi"
+                      name={"description" + i}
+                      value={String(
+                        list(data.extra.plan)[i]?.description ?? "",
+                      )}
+                      required
+                      max={2000}
+                    />
+                    <TextField
+                      label="Penanggung jawab"
+                      name={"owner" + i}
+                      value={String(list(data.extra.plan)[i]?.owner ?? "")}
+                      required
+                    />
+                    <TextField
+                      label="Target waktu"
+                      name={"target" + i}
+                      value={String(list(data.extra.plan)[i]?.target ?? "")}
+                      type="date"
+                      required
+                    />
+                    <SelectField
+                      label="Aspek"
+                      name={"aspect" + i}
+                      value={String(
+                        list(data.extra.plan)[i]?.aspect ?? "Pengajaran",
+                      )}
+                    >
+                      {[
+                        "Pengajaran",
+                        "Fasilitas",
+                        "Kurikulum",
+                        "Karakter",
+                        "Disiplin",
+                        "Budaya",
+                      ].map((k) => (
+                        <option key={k} value={k}>
+                          {{
+                            student: "Siswa",
+                            teacher: "Guru",
+                            parent: "Orang tua",
+                            belum: "Belum dimulai",
+                            proses: "Dalam proses",
+                            selesai: "Selesai",
+                          }[k] ?? k}
+                        </option>
+                      ))}
+                    </SelectField>
+                    <SelectField
+                      label="Ketercapaian"
+                      name={"status" + i}
+                      value={String(
+                        list(data.extra.plan)[i]?.status ?? "belum",
+                      )}
+                    >
+                      {["belum", "proses", "selesai"].map((k) => (
+                        <option key={k} value={k}>
+                          {{
+                            student: "Siswa",
+                            teacher: "Guru",
+                            parent: "Orang tua",
+                            belum: "Belum dimulai",
+                            proses: "Dalam proses",
+                            selesai: "Selesai",
+                          }[k] ?? k}
+                        </option>
+                      ))}
+                    </SelectField>
+                  </fieldset>
+                ))}
+                <Button disabled={disabled}>Simpan rencana</Button>
+              </form>
+            )}
           {data.isAdmin && (
             <form
               onSubmit={ai}
-              className="grid gap-3 rounded border p-4 sm:grid-cols-3"
+              className="grid min-w-0 gap-3 rounded-lg border bg-card p-4 sm:grid-cols-2 lg:grid-cols-3"
             >
               <h2 className="font-semibold">Konfigurasi penyedia AI</h2>
               <input type="hidden" name="action" value="configure" />
               <SelectField label="Penyedia" name="provider">
+                <option value="openai">OpenAI (ChatGPT)</option>
                 <option value="anthropic">Anthropic</option>
                 <option value="gemini">Gemini</option>
               </SelectField>
@@ -331,9 +575,10 @@ export function InsightsPanel({
                 label="API key baru (tidak ditampilkan ulang)"
                 name="key"
                 type="password"
+                max={1000}
                 required
               />
-              <Button disabled={busy}>Simpan terenkripsi</Button>
+              <Button disabled={busy || aiBusy}>Simpan terenkripsi</Button>
             </form>
           )}
           <p>
@@ -348,7 +593,15 @@ export function InsightsPanel({
               )
               .join("; ") || "Belum dikonfigurasi"}
           </p>
-          <form onSubmit={ai} className="flex flex-wrap gap-3">
+          <p className="text-sm text-muted-foreground">
+            Analisis AI mencakup esai seluruh periode; filter peran dan
+            keandalan hanya berlaku pada hasil terfilter. Jangan sertakan
+            informasi pribadi dalam esai.
+          </p>
+          <form
+            onSubmit={ai}
+            className="flex min-w-0 flex-wrap items-end gap-3"
+          >
             <SelectField name="action" label="Tindakan">
               <option value="analyze">Analisis esai</option>
               <option value="invalidate">
@@ -356,22 +609,28 @@ export function InsightsPanel({
               </option>
             </SelectField>
             <SelectField label="Penyedia" name="provider">
+              <option value="openai">OpenAI (ChatGPT)</option>
               <option value="anthropic">Anthropic</option>
               <option value="gemini">Gemini</option>
             </SelectField>
-            <Button disabled={busy || !period}>Jalankan</Button>
+            <Button disabled={disabled || !period}>Jalankan</Button>
           </form>
-          {list(data.extra.analyses).map((r) => (
-            <article key={String(r.id)} className="rounded border p-3">
+          {(scopeReady ? list(data.extra.analyses) : []).map((r) => (
+            <article
+              key={String(r.id)}
+              className="min-w-0 space-y-3 rounded-lg border bg-card p-4"
+            >
               <h3>
                 {String(r.model)} — {String(r.status)}
               </h3>
-              {r.result !== null &&
-                Object.entries(obj(r.result)).map(([k, v]) => (
-                  <p key={k}>
-                    {k}: {typeof v === "string" ? v : JSON.stringify(v)}
-                  </p>
-                ))}
+              {analysisSchema.safeParse(r.result).success ? (
+                <AnalysisResult value={r.result} />
+              ) : r.status === "succeeded" ? (
+                <p>
+                  Format hasil belum dapat ditampilkan. Muat ulang atau hubungi
+                  admin.
+                </p>
+              ) : null}
               {typeof r.error_code === "string" && (
                 <p>Analisis gagal: {String(r.error_code)}</p>
               )}
@@ -380,5 +639,54 @@ export function InsightsPanel({
         </>
       )}
     </section>
+  );
+}
+
+function AnalysisResult({ value }: { value: unknown }) {
+  const parsed = analysisSchema.safeParse(value);
+  if (!parsed.success) return null;
+  const result = parsed.data;
+  return (
+    <div className="space-y-4">
+      <p>{result.ringkasan_umum}</p>
+      <p className="text-sm font-medium">
+        Sentimen:{" "}
+        {
+          {
+            positif: "Positif",
+            campuran: "Campuran",
+            perlu_perhatian: "Perlu perhatian",
+          }[result.skor_sentimen_keseluruhan]
+        }
+      </p>
+      {(
+        [
+          ["Tema positif", result.tema_positif],
+          ["Perlu perhatian", result.tema_perlu_perhatian],
+          ["Rekomendasi tindakan", result.rekomendasi_tindakan],
+        ] as const
+      ).map(([title, items]) => (
+        <section key={title}>
+          <h4 className="font-medium">{title}</h4>
+          {items.length ? (
+            <ul className="list-disc space-y-1 pl-5">
+              {items.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm text-muted-foreground">Tidak ada butir.</p>
+          )}
+        </section>
+      ))}
+      {result.kutipan_representatif.map((q, i) => (
+        <blockquote key={i} className="border-l-2 pl-4">
+          {q.teks}
+          <span className="block text-sm text-muted-foreground">
+            {q.sentimen}
+          </span>
+        </blockquote>
+      ))}
+    </div>
   );
 }

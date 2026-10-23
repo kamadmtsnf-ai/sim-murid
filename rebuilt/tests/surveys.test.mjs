@@ -408,3 +408,24 @@ test("logout clears only survey cache and tolerates denied storage", async () =>
     false,
   );
 });
+
+test('Insights: catalog is available to personal users with academic metadata and scoped readback', async () => {
+  const m=setup(), base=snapshot();
+  m.readSnapshots=[{...base,module:'insights',rows:[],extra:{suppressed:true,minimum:3}},base];
+  const response=await GET(new NextRequest('https://example.test/api/services/insights?periodId='+id(10)),{params:Promise.resolve({module:'insights'})});
+  assert.equal(response.status,200);const data=(await response.json()).data;
+  assert.equal(data.rows[0].academic_year_id,id(70));assert.equal(data.rows[0].semester,1);assert.equal(data.extra.appliedFilters.periodId,id(10));assert.equal(data.extra.suppressed,true);assert.equal(data.rows[0].response,undefined);
+});
+test('Insights: mismatched catalog revision is unavailable, unknown period is denied', async () => {
+ for(const [catalog,periodId,status] of [[{...snapshot(),revision:2},id(10),503],[snapshot(),id(11),403]]){
+  const m=setup();m.readSnapshots=[{...snapshot(),module:'insights',extra:{}},catalog];
+  const response=await GET(new NextRequest('https://example.test/api/services/insights?periodId='+periodId),{params:Promise.resolve({module:'insights'})});assert.equal(response.status,status);
+ }
+});
+test('Insights: note success requires actual matching readback; missing or changed acknowledgement is never successful', async () => {
+ for(const [note,code,status] of [['Catatan baru','saved',200],['Lama','saved',503],['Catatan baru','unknown',503]]){
+  const m=setup();m.ack={code};m.readSnapshots=[{...snapshot(),module:'insights',isManager:true,extra:{progress:[{user_id:id(1),note}]}},snapshot()];
+  const response=await POST(request({type:'note',periodId:id(10),userId:id(1),note:'Catatan baru'},'insights'),{params:Promise.resolve({module:'insights'})});assert.equal(response.status,status);
+  if(status===200){const body=await response.json();assert.equal(body.code,'saved');assert.equal(body.data.extra.progress[0].note,'Catatan baru');}
+ }
+});

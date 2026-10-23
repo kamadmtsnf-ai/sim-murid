@@ -13,7 +13,7 @@ const input = z.discriminatedUnion("action", [
   z
     .object({
       action: z.literal("configure"),
-      provider: z.enum(["anthropic", "gemini"]),
+      provider: z.enum(["anthropic", "gemini", "openai"]),
       model: z.string().regex(/^[a-zA-Z0-9._:-]{1,150}$/),
       key: z.string().min(10).max(1000),
     })
@@ -21,7 +21,7 @@ const input = z.discriminatedUnion("action", [
   z
     .object({
       action: z.enum(["analyze", "invalidate"]),
-      provider: z.enum(["anthropic", "gemini"]),
+      provider: z.enum(["anthropic", "gemini", "openai"]),
       periodId: z.uuid(),
     })
     .strict(),
@@ -70,6 +70,12 @@ export async function POST(request: NextRequest) {
           .object({ encrypted_key: z.string(), model: z.string() })
           .optional(),
       })
+      .extend({
+        analysis: z
+          .object({ status: z.enum(["running", "succeeded", "failed"]) })
+          .passthrough()
+          .optional(),
+      })
       .passthrough()
       .parse(r.data);
     if (body.action === "invalidate")
@@ -84,7 +90,12 @@ export async function POST(request: NextRequest) {
       );
     if (result.code === "cached")
       return reply({
-        message: "Hasil/cache sudah tersedia. Muat ulang hasil.",
+        message:
+          result.analysis?.status === "running"
+            ? "Analisis masih berjalan. Muat ulang beberapa saat lagi."
+            : result.analysis?.status === "failed"
+              ? "Analisis sebelumnya gagal. Hapus cache gagal sebelum mencoba ulang."
+              : "Hasil analisis sudah tersedia. Muat ulang hasil.",
       });
     if (
       result.code !== "saved" ||
@@ -103,6 +114,7 @@ export async function POST(request: NextRequest) {
         },
         409,
       );
+    let generated = false;
     try {
       const output = await analyzeEssays(
         body.provider,
@@ -110,6 +122,7 @@ export async function POST(request: NextRequest) {
         result.config.model,
         result.essays,
       );
+      generated = true;
       const saved = await admin.rpc("app_ai_run", {
         ...args,
         p_action: "complete",
@@ -119,14 +132,21 @@ export async function POST(request: NextRequest) {
           tokens: output.tokens as Json,
         },
       });
-      if (saved.error || !saved.data || z.object({code:z.literal("saved")}).safeParse(saved.data).success === false) throw new Error("Result persistence failed");
+      if (
+        saved.error ||
+        !saved.data ||
+        z.object({ code: z.literal("saved") }).safeParse(saved.data).success ===
+          false
+      )
+        throw new Error("Result persistence failed");
       return reply({ message: "Analisis selesai dan hasil disimpan." });
     } catch {
-      await admin.rpc("app_ai_run", {
-        ...args,
-        p_action: "complete",
-        p_data: { id: result.id, error: "provider_or_schema_failure" },
-      });
+      if (!generated)
+        await admin.rpc("app_ai_run", {
+          ...args,
+          p_action: "complete",
+          p_data: { id: result.id, error: "provider_or_schema_failure" },
+        });
       return reply(
         {
           message:

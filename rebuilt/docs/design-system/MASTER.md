@@ -237,3 +237,9 @@ Survei panjang tetap di halaman, dengan kartu periode, indikator wajib, progress
 Status membedakan perubahan menunggu sinkronisasi, storage tidak tersedia, draft tersimpan, final, konflik dan hasil ambigu. Canonical draft utama/peer tidak dibersihkan oleh acknowledgement request lama. Timer/listener dibersihkan dan logout dari shell menghapus cache Survei tanpa menyentuh preferensi lain. Styling dibatasi pada Survei; padding nested form dikurangi pada ponsel, kontrol 44px, teks wrap dan progress memakai token existing. Instrumen/rotasi/revisi server tetap menjadi sumber kebenaran.
 
 Bukti dan batas verifikasi: `docs/verification/surveys-audit.md`, `docs/verification/surveys/`.
+
+## Audit Hasil Survei — 23 Oktober 2026
+
+Hasil Survei memisahkan pilihan filter dari scope yang sudah terkonfirmasi. Perubahan scope dan hasil ambigu mengunci tindakan sampai reload; loading/error/empty memiliki pesan yang berbeda. Responden berada pada disclosure dengan pagination 20; tabel tetap memakai region scroll lokal. Catatan dan status memakai key periode/isi, rencana aksi memuat isian tersimpan dan mengikuti tanggal server. Kontrol tetap minimal 44px dan layout form bertumpuk di ponsel.
+
+Hasil AI menggunakan judul tema, daftar rekomendasi dan blockquote, bukan JSON mentah. OpenAI (ChatGPT), Anthropic dan Gemini memakai konfigurasi admin yang sama; API key tidak ditampilkan ulang. Analisis seluruh periode diberi keterangan agar tidak disalahartikan sebagai hasil filter. Bukti dan batas verifikasi: `docs/verification/insights-audit.md` dan `docs/verification/insights/results.json`.

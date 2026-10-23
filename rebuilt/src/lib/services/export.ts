@@ -30,6 +30,31 @@ export function serviceExportRows(data: ServiceSnapshot) {
         ];
       }),
     };
+  if (data.module === "insights") {
+    const sections = [
+      "progress",
+      "aggregates",
+      "essays",
+      "peerAggregates",
+      "plan",
+      "analyses",
+    ];
+    const rows: unknown[][] = [];
+    const scope = object(data.extra.appliedFilters);
+    if (!scope.periodId) throw new RangeError("Pilih periode terlebih dahulu.");
+    for (const section of sections) {
+      const values = Array.isArray(data.extra[section])
+        ? (data.extra[section] as unknown[])
+        : [];
+      for (const value of values)
+        rows.push([scope.periodId, section, JSON.stringify(value)]);
+    }
+    if (!data.isManager && data.extra.peer)
+      rows.push([scope.periodId, "peer", JSON.stringify(data.extra.peer)]);
+    if (rows.length > 10000)
+      throw new RangeError("Ekspor melebihi batas; persempit filter.");
+    return { columns: ["Periode", "Bagian", "Hasil"], rows };
+  }
   if (data.module === "surveys")
     return {
       columns: [
