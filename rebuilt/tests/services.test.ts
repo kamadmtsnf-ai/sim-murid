@@ -136,3 +136,11 @@ test('Notification snapshots reject unsafe IDs, duplicate rows and invalid unrea
  assert.throws(()=>commands.notifications.parse({type:'read',id:undefined}));
  assert.throws(()=>commands.notifications.parse({type:'read',id:id(),actorId:id()}));
 });
+
+test('Insights exports actual scoped results instead of the period catalog', async () => {
+  const periodId=id();
+  const data=snapshot.parse({module:'insights',revision:1,today:'2026-10-23',month:'2026-10-01',isAdmin:true,isManager:true,years:[],classes:[],subjects:[],rows:[{id:periodId,title:'Catalog only'}],extra:{appliedFilters:{periodId,role:'teacher'},aggregates:[{code:'A1',mean:4.2,n:5}],progress:[],essays:[{code:'E1',text:'Esai terfilter'}],plan:[],analyses:[]}});
+  const table=serviceExportRows(data);assert.equal(table.rows.length,2);assert.ok(table.rows.every(r=>r[0]===periodId));assert.ok(JSON.stringify(table.rows).includes('Esai terfilter'));assert.ok(!JSON.stringify(table.rows).includes('Catalog only'));
+  const csv=await (await exportServices(data,'csv')).text();assert.ok(csv.includes('4.2'));assert.ok(csv.includes('Esai terfilter'));
+  assert.throws(()=>serviceExportRows({...data,extra:{appliedFilters:{}}}),/Pilih periode/);
+});

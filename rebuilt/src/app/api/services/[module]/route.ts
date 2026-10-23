@@ -70,7 +70,14 @@ export async function POST(
           ? disciplineFilters.parse(
               Object.fromEntries(request.nextUrl.searchParams),
             )
-          : undefined,
+          : domain === "insights"
+            ? {
+                ...Object.fromEntries(request.nextUrl.searchParams),
+                ...("periodId" in command
+                  ? { periodId: command.periodId }
+                  : {}),
+              }
+            : undefined,
       r = await createAuthAdmin().rpc("app_services_write", {
         p_actor: caller.principal.id,
         p_session: caller.sessionId,
@@ -86,7 +93,9 @@ export async function POST(
       response?: Record<string, unknown>;
     };
     if (
-      (domain === "discipline" || domain === "surveys") &&
+      (domain === "discipline" ||
+        domain === "surveys" ||
+        domain === "insights") &&
       !z
         .object({
           code: z.enum([
@@ -109,7 +118,9 @@ export async function POST(
     )
       throw Error("Uncertain acknowledgement");
     const data =
-      (domain === "discipline" || domain === "surveys") &&
+      (domain === "discipline" ||
+        domain === "surveys" ||
+        domain === "insights") &&
       result.code === "saved"
         ? await servicesData(
             caller.principal.id,
@@ -118,6 +129,36 @@ export async function POST(
             readFilters,
           )
         : undefined;
+    if (domain === "insights" && result.code === "saved") {
+      const cmd = commands.insights.parse(command);
+      if (!data) throw Error("Missing insight readback");
+      if (cmd.type === "note") {
+        const progress = Array.isArray(data.extra.progress)
+          ? (data.extra.progress as Record<string, unknown>[])
+          : [];
+        if (
+          !progress.some((r) => r.user_id === cmd.userId && r.note === cmd.note)
+        )
+          throw Error("Note not confirmed");
+      } else {
+        const plan = Array.isArray(data.extra.plan)
+          ? (data.extra.plan as Record<string, unknown>[])
+          : [];
+        if (
+          cmd.type === "plan_status" &&
+          plan[cmd.index]?.status !== cmd.status
+        )
+          throw Error("Plan status not confirmed");
+        if (
+          cmd.type === "plan" &&
+          (plan.length !== cmd.items.length ||
+            cmd.items.some((item, i) =>
+              Object.entries(item).some(([k, v]) => plan[i]?.[k] !== v),
+            ))
+        )
+          throw Error("Plan not confirmed");
+      }
+    }
     if (domain === "surveys" && result.code === "saved") {
       const cmd = commands.surveys.parse(command),
         state = surveysSnapshot.parse(data);
@@ -194,7 +235,9 @@ export async function POST(
     return reply(
       {
         result,
-        ...(domain === "discipline" || domain === "surveys"
+        ...(domain === "discipline" ||
+        domain === "surveys" ||
+        domain === "insights"
           ? { code: result.code, ...(data ? { data } : {}) }
           : {}),
         message:

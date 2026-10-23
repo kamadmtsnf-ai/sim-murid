@@ -1,0 +1,127 @@
+{
+  "checks": [
+    {
+      "name": "saved four-point plan 320",
+      "passed": true
+    },
+    {
+      "name": "plan values retained 320",
+      "passed": true
+    },
+    {
+      "name": "OpenAI provider available 320",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 320",
+      "passed": true
+    },
+    {
+      "name": "axe 320",
+      "passed": true
+    },
+    {
+      "name": "saved four-point plan 768",
+      "passed": true
+    },
+    {
+      "name": "plan values retained 768",
+      "passed": true
+    },
+    {
+      "name": "OpenAI provider available 768",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "name": "axe 768",
+      "passed": true
+    },
+    {
+      "name": "saved four-point plan 1440",
+      "passed": true
+    },
+    {
+      "name": "plan values retained 1440",
+      "passed": true
+    },
+    {
+      "name": "OpenAI provider available 1440",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "axe 1440",
+      "passed": true
+    },
+    {
+      "name": "unapplied scope blocks AI",
+      "passed": true
+    },
+    {
+      "name": "double submit sends one AI request",
+      "passed": true
+    },
+    {
+      "name": "AI reload preserves role",
+      "passed": true
+    },
+    {
+      "name": "double save sends one mutation",
+      "passed": true
+    },
+    {
+      "name": "confirmed note readback",
+      "passed": true
+    },
+    {
+      "name": "respondent pagination",
+      "passed": true
+    },
+    {
+      "name": "failed read blocks changes",
+      "passed": true
+    },
+    {
+      "name": "explicit reload recovers",
+      "passed": true
+    },
+    {
+      "name": "orientation change does not overflow",
+      "passed": true
+    },
+    {
+      "name": "keyboard reaches export action",
+      "passed": true
+    },
+    {
+      "name": "clearing period removes export links",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 320,
+      "violations": []
+    },
+    {
+      "width": 768,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "violations": []
+    }
+  ],
+  "errors": []
+}

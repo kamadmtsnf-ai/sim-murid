@@ -192,7 +192,7 @@
       "passed": true
     },
     {
-      "name": "semester change resets old dirty date into correct Genap year",
+      "name": "Genap input after period change uses the correct academic year",
       "passed": true
     },
     {

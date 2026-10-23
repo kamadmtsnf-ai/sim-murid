@@ -20,12 +20,13 @@ export default async function ServicesPage({
     if (
       m.data === "notifications" ||
       m.data === "discipline" ||
-      m.data === "surveys"
+      m.data === "surveys" ||
+      m.data === "insights"
     )
       throw new Error(
         m.data === "notifications"
           ? "Notifications unavailable"
-          : m.data === "surveys"
+          : m.data === "surveys" || m.data === "insights"
             ? "Surveys unavailable"
             : "Discipline unavailable",
       );

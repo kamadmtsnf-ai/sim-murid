@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { TextField, SelectField } from "@/components/domain-controls";
 import { snapshot, type ServiceSnapshot } from "@/lib/services/validation";
 import { SurveysPanel } from "./surveys-panel";
-import { InsightsPanel } from "./insights";
+import { InsightsWorkspace } from "./insights-workspace";
 import { DisciplinePanel } from "./discipline-panel";
 import { disciplineSnapshot } from "@/lib/services/discipline";
 import { NotificationsPanel } from "./notifications-panel";
@@ -18,6 +18,8 @@ export function ServicesPanel(props: {
   initial: ServiceSnapshot;
   userId: string;
 }) {
+  if (props.initial.module === "insights")
+    return <InsightsWorkspace initial={props.initial} />;
   if (props.initial.module === "surveys")
     return (
       <SurveysPanel
@@ -49,7 +51,7 @@ function ServiceModulesPanel({
   userId: string;
 }) {
   const [data, setData] = useState(initial),
-    [filters, setFilters] = useState<Record<string, string>>({}),
+    [filters] = useState<Record<string, string>>({}),
     [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
   const lock = useRef(false),
@@ -96,22 +98,6 @@ function ServiceModulesPanel({
       <p role="status" aria-live="polite">
         {message}
       </p>
-      {data.module === "insights" && (
-        <InsightsPanel
-          data={data}
-          busy={busy}
-          mutate={mutate}
-          load={async (periodId, role, quality) => {
-            const f: Record<string, string> = {
-              periodId,
-              ...(role ? { role } : {}),
-              ...(quality ? { quality } : {}),
-            };
-            await load(f);
-            setFilters(f);
-          }}
-        />
-      )}
       {data.module === "jobs" && (
         <>
           <p>

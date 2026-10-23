@@ -72,6 +72,32 @@ export async function servicesData(
     }
   }
   const parsed = snapshot.parse(r.data);
+  if (module === "insights") {
+    const catalog = await createAuthAdmin().rpc("app_services_read", {
+      p_actor: actor,
+      p_session: session,
+      p_module: "surveys",
+      p_filters: {},
+    });
+    if (catalog.error || !catalog.data)
+      throw Error("Survey catalog unavailable");
+    const periods = surveysSnapshot.parse(catalog.data);
+    if (periods.revision !== parsed.revision)
+      throw Error("Survey catalog changed");
+    parsed.rows = periods.rows.map((p) => ({
+      id: p.id,
+      title: p.title,
+      kind: p.kind,
+      status: p.status,
+      start: p.starts_on,
+      end: p.ends_on,
+      academic_year_id: p.academic_year_id,
+      semester: p.semester,
+    }));
+    if (f.periodId && !parsed.rows.some((p) => p.id === f.periodId))
+      throw new AccessDenied();
+    parsed.extra.appliedFilters = f;
+  }
   if (module === "jobs")
     parsed.extra.providers = {
       gmail: !!process.env.GMAIL_USER && !!process.env.GMAIL_APP_PASSWORD,
