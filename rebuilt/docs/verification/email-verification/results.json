@@ -1,0 +1,383 @@
+{
+  "checks": [
+    {
+      "name": "long email 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "email 320 axe",
+      "passed": true
+    },
+    {
+      "name": "long email 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "email 768 axe",
+      "passed": true
+    },
+    {
+      "name": "long email 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "email 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "invalid OTP rejected without request",
+      "passed": true
+    },
+    {
+      "name": "OTP field error explicit",
+      "passed": true
+    },
+    {
+      "name": "OTP error focus",
+      "passed": true
+    },
+    {
+      "name": "paste trims outer whitespace without dropping OTP zeros",
+      "passed": true
+    },
+    {
+      "name": "synchronous verify lock",
+      "passed": true
+    },
+    {
+      "name": "OTP leading zero retained",
+      "passed": true
+    },
+    {
+      "name": "wrong OTP not erased",
+      "passed": true
+    },
+    {
+      "name": "wrong attempt updates count",
+      "passed": true
+    },
+    {
+      "name": "same challenge refresh retains input",
+      "passed": true
+    },
+    {
+      "name": "mutations reconcile via read-only status",
+      "passed": true
+    },
+    {
+      "name": "fifth wrong attempt blocks verify",
+      "passed": true
+    },
+    {
+      "name": "locked guidance",
+      "passed": true
+    },
+    {
+      "name": "no challenge has no OTP form",
+      "passed": true
+    },
+    {
+      "name": "synchronous send lock",
+      "passed": true
+    },
+    {
+      "name": "accepted send enables OTP",
+      "passed": true
+    },
+    {
+      "name": "new OTP receives focus",
+      "passed": true
+    },
+    {
+      "name": "resend cooldown after send",
+      "passed": true
+    },
+    {
+      "name": "accepted send axe",
+      "passed": true
+    },
+    {
+      "name": "verified snapshot permits navigation",
+      "passed": true
+    },
+    {
+      "name": "verified state removes OTP",
+      "passed": true
+    },
+    {
+      "name": "200 without verified snapshot never navigates",
+      "passed": true
+    },
+    {
+      "name": "unconfirmed verification retains OTP",
+      "passed": true
+    },
+    {
+      "name": "unconfirmed verification requires status check",
+      "passed": true
+    },
+    {
+      "name": "network preserves OTP",
+      "passed": true
+    },
+    {
+      "name": "network blocks resend until synchronized",
+      "passed": true
+    },
+    {
+      "name": "network read refresh restores controls",
+      "passed": true
+    },
+    {
+      "name": "json preserves OTP",
+      "passed": true
+    },
+    {
+      "name": "json blocks resend until synchronized",
+      "passed": true
+    },
+    {
+      "name": "json read refresh restores controls",
+      "passed": true
+    },
+    {
+      "name": "lost verification reply recovered by GET",
+      "passed": true
+    },
+    {
+      "name": "network failed refresh retains code",
+      "passed": true
+    },
+    {
+      "name": "network failed refresh prevents stale verify",
+      "passed": true
+    },
+    {
+      "name": "malformed failed refresh retains code",
+      "passed": true
+    },
+    {
+      "name": "malformed failed refresh prevents stale verify",
+      "passed": true
+    },
+    {
+      "name": "valid refresh recovers state",
+      "passed": true
+    },
+    {
+      "name": "server Retry-After disables resend even if snapshot has older verify challenge",
+      "passed": true
+    },
+    {
+      "name": "server cooldown displayed",
+      "passed": true
+    },
+    {
+      "name": "unconfirmed delivery cannot verify",
+      "passed": true
+    },
+    {
+      "name": "queued guidance honest",
+      "passed": true
+    },
+    {
+      "name": "failed delivery cannot verify",
+      "passed": true
+    },
+    {
+      "name": "failed delivery respects consumed cooldown",
+      "passed": true
+    },
+    {
+      "name": "expired code disabled",
+      "passed": true
+    },
+    {
+      "name": "expired no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "locked code disabled",
+      "passed": true
+    },
+    {
+      "name": "locked no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "queued code disabled",
+      "passed": true
+    },
+    {
+      "name": "queued no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "failed code disabled",
+      "passed": true
+    },
+    {
+      "name": "failed no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "superseded code disabled",
+      "passed": true
+    },
+    {
+      "name": "superseded no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "changed email clears old OTP",
+      "passed": true
+    },
+    {
+      "name": "changed email invalidates old challenge controls",
+      "passed": true
+    },
+    {
+      "name": "daily limit disables send",
+      "passed": true
+    },
+    {
+      "name": "daily send limit does not block existing valid OTP",
+      "passed": true
+    },
+    {
+      "name": "daily limit axe",
+      "passed": true
+    },
+    {
+      "name": "empty contact cannot send",
+      "passed": true
+    },
+    {
+      "name": "missing contact guidance",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "verified state avoids redundant send",
+      "passed": true
+    },
+    {
+      "name": "verified axe",
+      "passed": true
+    },
+    {
+      "name": "cooldown initially active",
+      "passed": true
+    },
+    {
+      "name": "cooldown expires without reload",
+      "passed": true
+    },
+    {
+      "name": "expiry disables active form without reload",
+      "passed": true
+    },
+    {
+      "name": "401 redirects before parsing invalid JSON",
+      "passed": true
+    },
+    {
+      "name": "read 401 redirects",
+      "passed": true
+    },
+    {
+      "name": "mobile touch send works",
+      "passed": true
+    },
+    {
+      "name": "keyboard OTP to verify",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "landscape axe",
+      "passed": true
+    },
+    {
+      "name": "late response after unmount does not redirect another page",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true
+    },
+    {
+      "name": "error hides private details",
+      "passed": true
+    },
+    {
+      "name": "error retry works",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "email 320",
+      "violations": []
+    },
+    {
+      "label": "email 768",
+      "violations": []
+    },
+    {
+      "label": "email 1440",
+      "violations": []
+    },
+    {
+      "label": "accepted send",
+      "violations": []
+    },
+    {
+      "label": "daily limit",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "verified",
+      "violations": []
+    },
+    {
+      "label": "landscape",
+      "violations": []
+    },
+    {
+      "label": "loading",
+      "violations": []
+    },
+    {
+      "label": "error",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
