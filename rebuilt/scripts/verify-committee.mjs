@@ -297,7 +297,7 @@ try {
     await geometry(page, mode + " mobile");
     if (!["loading", "error"].includes(mode))
       await a11y(page, mode + " mobile");
-    for (const width of [375, 768, 1440]) {
+    for (const width of [375, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await geometry(page, mode + " " + width);
     }

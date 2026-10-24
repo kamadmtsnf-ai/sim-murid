@@ -1,4 +1,6 @@
 "use client";
+import { Pagination, FilterBar } from "@/components/ui/collection-controls";
+import { EmptyState } from "@/components/ui/content-state";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -410,52 +412,54 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
             });
           }}
         >
-          <fieldset
-            disabled={disabled}
-            className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            <label className="text-sm">
-              Tahun kalender
-              <input
-                className={controlClass}
-                name="year"
-                type="number"
-                min="2000"
-                max="2100"
-                defaultValue={filters.year}
-                required
+          <FilterBar label="Filter riwayat iuran" className="">
+            <fieldset
+              disabled={disabled}
+              className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              <label className="text-sm">
+                Tahun kalender
+                <input
+                  className={controlClass}
+                  name="year"
+                  type="number"
+                  min="2000"
+                  max="2100"
+                  defaultValue={filters.year}
+                  required
+                />
+              </label>
+              <TextField
+                label="Dari tanggal pembayaran"
+                name="start"
+                type="date"
               />
-            </label>
-            <TextField
-              label="Dari tanggal pembayaran"
-              name="start"
-              type="date"
-            />
-            <TextField
-              label="Sampai tanggal pembayaran"
-              name="end"
-              type="date"
-            />
-            <SelectField label="Kelas aktif siswa" name="classId">
-              <option value="">Semua kelas sesuai izin</option>
-              {initial.classes.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </SelectField>
-            <SelectField label="Siswa" name="studentId">
-              <option value="">Semua siswa sesuai izin</option>
-              {students.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.full_name} — {p.username}
-                </option>
-              ))}
-            </SelectField>
-            <Button type="submit" className="self-end">
-              {reading ? "Memuat…" : "Terapkan filter"}
-            </Button>
-          </fieldset>
+              <TextField
+                label="Sampai tanggal pembayaran"
+                name="end"
+                type="date"
+              />
+              <SelectField label="Kelas aktif siswa" name="classId">
+                <option value="">Semua kelas sesuai izin</option>
+                {initial.classes.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </SelectField>
+              <SelectField label="Siswa" name="studentId">
+                <option value="">Semua siswa sesuai izin</option>
+                {students.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.full_name} — {p.username}
+                  </option>
+                ))}
+              </SelectField>
+              <Button type="submit" className="self-end">
+                {reading ? "Memuat…" : "Terapkan filter"}
+              </Button>
+            </fieldset>
+          </FilterBar>
         </form>
       </section>
       <section
@@ -586,34 +590,19 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
           </table>
         </TableRegion>
         {!data.rows.length && (
-          <p className="rounded-lg border border-dashed p-6 text-center text-muted-foreground">
+          <EmptyState title="Belum ada hasil">
             Belum ada pembayaran sesuai filter dan hak akses Anda.
-          </p>
+          </EmptyState>
         )}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Button
-            variant="outline"
-            disabled={disabled || data.page <= 1}
-            onClick={() =>
-              void load({ ...filters, page: String(data.page - 1) })
-            }
-          >
-            Riwayat sebelumnya
-          </Button>
-          <span className="text-sm">
-            Halaman {data.page} dari{" "}
-            {Math.max(1, Math.ceil(data.total / data.pageSize))}
-          </span>
-          <Button
-            variant="outline"
-            disabled={disabled || data.page * data.pageSize >= data.total}
-            onClick={() =>
-              void load({ ...filters, page: String(data.page + 1) })
-            }
-          >
-            Riwayat berikutnya
-          </Button>
-        </div>
+        <Pagination
+          label="Halaman riwayat iuran"
+          page={data.page}
+          pageCount={Math.max(1, Math.ceil(data.total / data.pageSize))}
+          disabled={disabled}
+          onPageChange={(page) => void load({ ...filters, page: String(page) })}
+          previousLabel="Riwayat sebelumnya"
+          nextLabel="Riwayat berikutnya"
+        />
       </section>
       <section className="min-w-0 space-y-3" aria-labelledby="committee-recap">
         <h2 id="committee-recap" className="text-xl font-semibold">

@@ -1,0 +1,67 @@
+{
+  "group": "B",
+  "unit_tests": 77,
+  "groups": 7,
+  "types": 0,
+  "lint": 0,
+  "build": 0,
+  "browser": [
+    {
+      "suite": "attendance",
+      "checks": 90,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "classes",
+      "checks": 411,
+      "axe": 17,
+      "passed": true
+    },
+    {
+      "suite": "committee",
+      "checks": 92,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "design-system",
+      "checks": 54,
+      "axe": 9,
+      "passed": true
+    },
+    {
+      "suite": "duty",
+      "checks": 151,
+      "axe": 9,
+      "passed": true
+    },
+    {
+      "suite": "mentoring",
+      "checks": 94,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "module-states",
+      "checks": 65,
+      "axe": 16,
+      "passed": true
+    },
+    {
+      "suite": "savings",
+      "checks": 48,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "schedules",
+      "checks": 169,
+      "axe": 16,
+      "passed": true
+    }
+  ],
+  "checks": 1174,
+  "axe": 92,
+  "boundaries": "HTTP fixtures / isolated tests; viewport 390 added, no production writes."
+}

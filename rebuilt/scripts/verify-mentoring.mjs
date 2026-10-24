@@ -152,7 +152,7 @@ try {
  async function bounds(name){const r=await dialog().evaluate(e=>{const b=e.getBoundingClientRect();return {x:b.x,y:b.y,right:b.right,bottom:b.bottom,vw:innerWidth,vh:innerHeight,scroll:e.scrollWidth,client:e.clientWidth};});check(r.x>=-1&&r.y>=-1&&r.right<=r.vw+1&&r.bottom<=r.vh+1&&r.scroll<=r.client+1,name+' dialog contained',r);}
  for(const mode of ['normal','empty','large','readonly','teacher','loading','error']){
   await visit(mode,320,568);await geometry(page,mode+' mobile');if(!['loading','error'].includes(mode))await a11y(page,mode+' mobile');
-  for(const width of [375,768,1440]){await page.setViewportSize({width,height:900});await geometry(page,mode+' '+width);}
+  for(const width of [375, 390, 768, 1440]){await page.setViewportSize({width,height:900});await geometry(page,mode+' '+width);}
   if(mode==='readonly')check(await page.getByRole('button',{name:'Input laporan bimbingan',exact:true}).count()===0,'read only no report input');
   if(mode==='teacher'){check(await page.getByRole('button',{name:'Atur penugasan Guru Wali',exact:true}).count()===0,'teacher cannot assign');await openReport();check(await dialog().getByRole('combobox',{name:'Siswa',exact:true}).locator('option[value="'+id(12)+'"]').count()===0,'teacher report picker only assigned students');}
  }

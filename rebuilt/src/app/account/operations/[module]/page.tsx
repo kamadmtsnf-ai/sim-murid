@@ -45,8 +45,17 @@ export default async function OperationsPage({
       filters,
     );
   } catch (error) {
-    if ((m.data === "duty" || m.data === "attendance" || m.data === "mentoring" || m.data === "fees" || m.data === "savings") && !(error instanceof AccessDenied))
-      throw new Error(m.data === "duty" ? "Duty unavailable" : "Operations unavailable");
+    if (
+      (m.data === "duty" ||
+        m.data === "attendance" ||
+        m.data === "mentoring" ||
+        m.data === "fees" ||
+        m.data === "savings") &&
+      !(error instanceof AccessDenied)
+    )
+      throw new Error(
+        m.data === "duty" ? "Duty unavailable" : "Operations unavailable",
+      );
     return (
       <main
         id="main-content"
@@ -62,7 +71,7 @@ export default async function OperationsPage({
     <main
       id="main-content"
       tabIndex={-1}
-      className="mx-auto max-w-7xl space-y-6 p-6"
+      className="mx-auto min-w-0 max-w-7xl space-y-6 p-4 sm:p-6"
     >
       <h1 className="text-3xl font-semibold">{moduleTitles[m.data]}</h1>
       {m.data === "duty" ? (

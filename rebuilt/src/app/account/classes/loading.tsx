@@ -1,4 +1,5 @@
-export default function ClassesLoading() {
+import { LoadingState } from "@/components/ui/content-state";
+export default function Loading() {
   return (
     <main
       id="main-content"
@@ -7,12 +8,7 @@ export default function ClassesLoading() {
       className="classes-panel space-y-6"
     >
       <h1 className="text-3xl font-semibold">Kelas dan siswa</h1>
-      <p role="status">Memuat kelas dan siswa…</p>
-      <div aria-hidden="true" className="space-y-4">
-        {[0, 1, 2].map((n) => (
-          <div className="skeleton h-28" key={n} />
-        ))}
-      </div>
+      <LoadingState>Memuat kelas dan siswa…</LoadingState>
     </main>
   );
 }
