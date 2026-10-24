@@ -548,3 +548,13 @@
 }
 
 .form-navigation-notice { position: fixed; inset-block-start: 1rem; inset-inline: 1rem; width: calc(100% - 2rem); max-width: 40rem; z-index: 70; box-shadow: var(--shadow-lg); }
+
+/* P05: shared navigation and form presentation; business state stays in callers. */
+.nav-search-clear { flex-shrink:0; width:44px; height:44px; }
+.nav-search-status { margin:-.5rem 1.25rem .75rem; color:var(--muted-foreground); font-size:.8125rem; overflow-wrap:anywhere; }
+.workspace-content main { min-width:0; }
+.workspace-content main > h1 { overflow-wrap:anywhere; font-size:clamp(1.5rem,3vw,1.875rem); line-height:1.25; }
+.ds-field-control:disabled { opacity:.6; cursor:not-allowed; }
+.ds-field-control[aria-invalid="true"] { border-color:var(--destructive); }
+/* One explicit, keyboard-accessible clear control rather than two competing icons. */
+.nav-search input::-webkit-search-cancel-button { -webkit-appearance:none; appearance:none; }

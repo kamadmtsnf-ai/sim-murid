@@ -1,0 +1,191 @@
+{
+  "group": "A",
+  "baseline": "a0b8ec07b9d7bbb8af5ddd6acc59161dbfb997cc",
+  "unit_tests": 549,
+  "groups": 63,
+  "commands": {
+    "npm ci": 0,
+    "npm run check": 0,
+    "npm run lint (release)": 0
+  },
+  "browser": [
+    {
+      "suite": "access",
+      "checks": 104,
+      "axe": 8,
+      "passed": true
+    },
+    {
+      "suite": "account-recovery",
+      "checks": 46,
+      "axe": 5,
+      "passed": true
+    },
+    {
+      "suite": "account-security",
+      "checks": 80,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "attendance",
+      "checks": 84,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "biodata",
+      "checks": 66,
+      "axe": 11,
+      "passed": true
+    },
+    {
+      "suite": "books",
+      "checks": 48,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "classes",
+      "checks": 393,
+      "axe": 16,
+      "passed": true
+    },
+    {
+      "suite": "committee",
+      "checks": 86,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "design-system",
+      "checks": 54,
+      "axe": 9,
+      "passed": true
+    },
+    {
+      "suite": "duty",
+      "checks": 131,
+      "axe": 9,
+      "passed": true
+    },
+    {
+      "suite": "email-verification",
+      "checks": 84,
+      "axe": 10,
+      "passed": true
+    },
+    {
+      "suite": "families",
+      "checks": 32,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "forms",
+      "checks": 49,
+      "axe": 4,
+      "passed": true
+    },
+    {
+      "suite": "grades",
+      "checks": 61,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "insights",
+      "checks": 30,
+      "axe": 3,
+      "passed": true
+    },
+    {
+      "suite": "jobs",
+      "checks": 45,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "mentoring",
+      "checks": 87,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "notifications",
+      "checks": 55,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "personal-profile",
+      "checks": 87,
+      "axe": 8,
+      "passed": true
+    },
+    {
+      "suite": "points",
+      "checks": 66,
+      "axe": 8,
+      "passed": true
+    },
+    {
+      "suite": "promotions",
+      "checks": 104,
+      "axe": 13,
+      "passed": true
+    },
+    {
+      "suite": "reports",
+      "checks": 62,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "savings",
+      "checks": 47,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "schedules",
+      "checks": 146,
+      "axe": 14,
+      "passed": true
+    },
+    {
+      "suite": "sessions",
+      "checks": 105,
+      "axe": 13,
+      "passed": true
+    },
+    {
+      "suite": "settings",
+      "checks": 39,
+      "axe": 5,
+      "passed": true
+    },
+    {
+      "suite": "surveys",
+      "checks": 59,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "users",
+      "checks": 11,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "navigation",
+      "checks": 49,
+      "axe": 12,
+      "passed": true
+    }
+  ],
+  "total_checks": 2310,
+  "axe": 234,
+  "browser_version": 145,
+  "boundaries": "Synthetic HTTP/isolated SQL; no production mutations, real providers or UAT."
+}

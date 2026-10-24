@@ -177,7 +177,7 @@ try {
           };
         });
         if (contextReply === "incomplete") data.extra.months.pop();
-        if (contextReply === "stale") data.revision = route.request().postDataJSON().revision + 1;
+        if (contextReply === "stale") data.revision++;
         return route.fulfill({ json: { data } });
       }
       if (reply === "read-error")
