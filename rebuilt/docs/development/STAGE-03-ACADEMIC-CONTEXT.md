@@ -2,6 +2,8 @@
 
 Tanggal: 24 Oktober 2026 (WIB). Baseline main `f83e4cdd216be4c7da6c56a517210a7bad4505f0`. Branch `feat/academic-context-p03`.
 
+PR implementasi: [#47](https://github.com/kamadmtsnf-ai/sim-murid/pull/47).
+
 Status: implementasi dan verifikasi P03 selesai; preferensi diterapkan secara eksplisit pada modul yang sesuai.
 
 ## Analisis sebelum perubahan
