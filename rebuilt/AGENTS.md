@@ -11,3 +11,8 @@
 - npm ci, npm run typecheck, npm run build; cek lint bila TSX diubah. Simpan lockfile dan versi eksak.
 - Jangan commit node_modules, .next, .env.local, secret atau data pribadi produksi.
 - Jangan membuat route operasional fiktif. Modul yang belum diimplementasikan harus tercatat jujur.
+
+## Siklus pengembangan lanjutan P01–P12
+
+- Sebelum melanjutkan pengembangan profesional, baca `docs/development/ROADMAP.md`, `docs/development/STAGE-01-AUDIT.md` dan status tahap terbaru. P01–P12 berbeda dari Tahap 1–30 pembangunan ulang.
+- Verifikasi main terkini; snapshot audit bukan status produksi langsung. Perbarui laporan/status dengan bukti tes dan PR setiap tahap, tanpa menganggap persetujuan roadmap sebagai keputusan D10 atau kebijakan bisnis baru.

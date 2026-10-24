@@ -1,0 +1,344 @@
+{
+  "recorded_at": "2026-10-24",
+  "timezone": "Asia/Jakarta",
+  "baseline_sha": "9d05d4ba722474c4724b4a410b36d631ae43c7f8",
+  "method": "Filesystem inventory at baseline; presence does not prove feature completion or production deployment.",
+  "page_routes": [
+    "src/app/account/access/page.tsx",
+    "src/app/account/biodata/[id]/page.tsx",
+    "src/app/account/biodata/page.tsx",
+    "src/app/account/classes/page.tsx",
+    "src/app/account/directory/[id]/page.tsx",
+    "src/app/account/directory/page.tsx",
+    "src/app/account/email/page.tsx",
+    "src/app/account/families/page.tsx",
+    "src/app/account/learning/[module]/page.tsx",
+    "src/app/account/operations/[module]/page.tsx",
+    "src/app/account/page.tsx",
+    "src/app/account/profile/page.tsx",
+    "src/app/account/recovery/page.tsx",
+    "src/app/account/schedules/page.tsx",
+    "src/app/account/security/page.tsx",
+    "src/app/account/services/[module]/page.tsx",
+    "src/app/account/sessions/page.tsx",
+    "src/app/account/settings/page.tsx",
+    "src/app/login/page.tsx",
+    "src/app/page.tsx",
+    "src/app/recovery/email/page.tsx",
+    "src/app/recovery/page.tsx"
+  ],
+  "api_routes": [
+    "src/app/api/account/email-provider/route.ts",
+    "src/app/api/account/email/route.ts",
+    "src/app/api/account/profile/route.ts",
+    "src/app/api/account/recovery/route.ts",
+    "src/app/api/auth/access/route.ts",
+    "src/app/api/auth/email-recovery/route.ts",
+    "src/app/api/auth/login/route.ts",
+    "src/app/api/auth/logout/route.ts",
+    "src/app/api/auth/recovery/route.ts",
+    "src/app/api/auth/security/route.ts",
+    "src/app/api/auth/session/route.ts",
+    "src/app/api/auth/sessions/route.ts",
+    "src/app/api/classes/route.ts",
+    "src/app/api/directory/[id]/route.ts",
+    "src/app/api/directory/route.ts",
+    "src/app/api/directory/users/route.ts",
+    "src/app/api/families/route.ts",
+    "src/app/api/health/route.ts",
+    "src/app/api/learning/[module]/route.ts",
+    "src/app/api/learning/assets/[id]/route.ts",
+    "src/app/api/learning/assets/route.ts",
+    "src/app/api/operations/[module]/route.ts",
+    "src/app/api/schedules/route.ts",
+    "src/app/api/services/[module]/route.ts",
+    "src/app/api/services/ai/route.ts",
+    "src/app/api/services/cron/route.ts",
+    "src/app/api/services/dispatch/route.ts",
+    "src/app/api/services/exports/route.ts",
+    "src/app/api/settings/logo/route.ts",
+    "src/app/api/settings/route.ts",
+    "src/app/api/slips/[id]/route.ts",
+    "src/app/api/slips/quote/route.ts",
+    "src/app/api/student-documents/[id]/route.ts",
+    "src/app/api/student-profile/[id]/route.ts"
+  ],
+  "migrations": [
+    "supabase/migrations/20261019070313_foundation_core.sql",
+    "supabase/migrations/20261019070320_foundation_operations.sql",
+    "supabase/migrations/20261019070327_foundation_reference_data.sql",
+    "supabase/migrations/20261019083745_authentication_runtime.sql",
+    "supabase/migrations/20261019093647_session_management.sql",
+    "supabase/migrations/20261019110537_authorization_rls.sql",
+    "supabase/migrations/20261019113245_account_security_onboarding.sql",
+    "supabase/migrations/20261019115417_account_recovery_profile.sql",
+    "supabase/migrations/20261019130139_email_otp_recovery.sql",
+    "supabase/migrations/20261019155240_school_settings.sql",
+    "supabase/migrations/20261019163750_student_profiles_families.sql",
+    "supabase/migrations/20261019163753_private_student_documents.sql",
+    "supabase/migrations/20261019163756_scoped_directories.sql",
+    "supabase/migrations/20261019163758_classes_enrollment.sql",
+    "supabase/migrations/20261019163801_lesson_student_duty_schedules.sql",
+    "supabase/migrations/20261021050041_duty_confirmation.sql",
+    "supabase/migrations/20261021050044_student_attendance.sql",
+    "supabase/migrations/20261021050046_student_mentoring.sql",
+    "supabase/migrations/20261021050048_committee_payments.sql",
+    "supabase/migrations/20261021050051_savings_ledger.sql",
+    "supabase/migrations/20261021053607_withdrawal_fees_slips.sql",
+    "supabase/migrations/20261021053610_assessments_kkm.sql",
+    "supabase/migrations/20261021053613_report_snapshots.sql",
+    "supabase/migrations/20261021053616_promotions_diplomas.sql",
+    "supabase/migrations/20261021053618_digital_books.sql",
+    "supabase/migrations/20261021071406_discipline_events.sql",
+    "supabase/migrations/20261021071409_discipline_notifications.sql",
+    "supabase/migrations/20261021071411_survey_responses.sql",
+    "supabase/migrations/20261021071513_survey_analytics_jobs.sql",
+    "supabase/migrations/20261021071514_release_reconciliation.sql",
+    "supabase/migrations/20261021074458_service_analytics_filters.sql",
+    "supabase/migrations/20261021075439_action_plan_progress.sql",
+    "supabase/migrations/20261021080335_survey_concurrent_drafts.sql",
+    "supabase/migrations/20261021180621_admin_user_provisioning.sql",
+    "supabase/migrations/20261021183558_user_provision_auth_id_grant.sql",
+    "supabase/migrations/20261022091201_class_enrollment_removal.sql",
+    "supabase/migrations/20261022094510_survey_academic_period.sql",
+    "supabase/migrations/20261022101238_singleton_write_predicates.sql",
+    "supabase/migrations/20261023093953_insights_openai.sql",
+    "supabase/migrations/20261023100705_school_settings_safe_updates.sql",
+    "supabase/migrations/20261023110344_family_relations_consistency.sql",
+    "supabase/migrations/20261023143117_jobs_delivery_consistency.sql",
+    "supabase/migrations/20261023234842_email_verification_all_account_access.sql"
+  ],
+  "migration_count": 43,
+  "test_commands": {
+    "test:foundation": "node --experimental-strip-types --test tests/foundation.test.ts",
+    "test:smoke": "node scripts/smoke.mjs",
+    "test:database": "node --test tests/database/foundation.test.mjs",
+    "test:auth": "node --experimental-strip-types --test tests/auth.test.ts && node --test tests/database/auth.test.mjs",
+    "test:sessions": "node --test tests/database/sessions.test.mjs && node --test tests/sessions-page.test.mjs",
+    "test:sessions:browser": "node scripts/verify-sessions.mjs",
+    "test:authorization": "node --test tests/database/authorization.test.mjs && node --test tests/access-page.test.mjs",
+    "test:access:browser": "node scripts/verify-access.mjs",
+    "test:security:browser": "node scripts/verify-account-security.mjs",
+    "test:security": "node --experimental-strip-types --test tests/security.test.ts && node --test tests/database/security.test.mjs && node --test tests/account-security.test.mjs",
+    "test:recovery": "node --experimental-strip-types --test tests/recovery.test.ts && node --test tests/database/recovery.test.mjs",
+    "test:email": "node --experimental-strip-types --test tests/email.test.ts && node --test tests/database/email.test.mjs",
+    "test:settings": "node --experimental-strip-types --test tests/settings.test.ts && node --test tests/database/settings.test.mjs && node --test tests/settings-routes.test.mjs",
+    "test:education": "node --experimental-strip-types --test tests/education.test.ts && node --test tests/database/education.test.mjs",
+    "test:operations": "node --experimental-strip-types --test tests/operations.test.ts && node --test tests/database/operations.test.mjs",
+    "test:learning": "node --experimental-strip-types --test tests/learning.test.ts && node --test tests/database/learning.test.mjs",
+    "test:services": "node --experimental-strip-types --test tests/services.test.ts && node --test tests/database/services.test.mjs",
+    "test:ui": "node --experimental-strip-types --test tests/ui.test.ts",
+    "test:ui:browser": "node scripts/verify-ui.mjs",
+    "test:production": "node --test tests/production.test.mjs",
+    "test:dashboard": "node --test tests/dashboard.test.mjs",
+    "test:dashboard:browser": "node scripts/verify-dashboard.mjs",
+    "test:notifications:browser": "node scripts/verify-notifications.mjs",
+    "test:notifications": "node --test tests/notifications-page.test.mjs",
+    "test:directory": "node --experimental-strip-types --test tests/directory.test.ts && node --test tests/directory-server.test.mjs",
+    "test:directory:browser": "node scripts/verify-directory.mjs",
+    "test:users": "node --experimental-strip-types --test tests/users.test.ts && node --test tests/database/users.test.mjs && node --test tests/users-route.test.mjs",
+    "test:users:browser": "node scripts/verify-users.mjs",
+    "test:home:browser": "node scripts/verify-home.mjs",
+    "test:login": "node --test tests/login-route.test.mjs tests/login-page.test.mjs",
+    "test:login:browser": "node scripts/verify-login.mjs",
+    "test:recovery:routes": "node --test tests/recovery-routes.test.mjs",
+    "test:recovery:browser": "node scripts/verify-recovery.mjs",
+    "test:user-detail": "node --test tests/user-detail.test.mjs",
+    "test:user-detail:browser": "node scripts/verify-user-detail.mjs",
+    "test:classes": "node --test tests/classes.test.mjs",
+    "test:classes:browser": "node scripts/verify-classes.mjs",
+    "test:academic": "node --experimental-strip-types --test tests/academic.test.ts",
+    "test:academic:browser": "node scripts/verify-academic.mjs",
+    "test:singleton-writes": "node --test tests/database/singleton-writes.test.mjs",
+    "test:schedules": "node --test tests/schedules.test.mjs",
+    "test:schedules:browser": "node scripts/verify-schedules.mjs",
+    "test:duty": "node --test tests/duty.test.mjs",
+    "test:duty:browser": "node scripts/verify-duty.mjs",
+    "test:attendance": "node --test tests/attendance.test.mjs",
+    "test:attendance:browser": "node scripts/verify-attendance.mjs",
+    "test:mentoring": "node --test tests/mentoring.test.mjs",
+    "test:mentoring:browser": "node scripts/verify-mentoring.mjs",
+    "test:committee": "node --test tests/committee.test.mjs",
+    "test:committee:browser": "node scripts/verify-committee.mjs",
+    "test:savings": "node --test tests/savings.test.mjs",
+    "test:savings:browser": "node scripts/verify-savings.mjs",
+    "test:points": "node --test tests/points.test.mjs",
+    "test:points:browser": "node scripts/verify-points.mjs",
+    "test:grades": "node --test tests/grades.test.mjs",
+    "test:grades:browser": "node scripts/verify-grades.mjs",
+    "test:reports": "node --test tests/reports.test.mjs",
+    "test:reports:browser": "node scripts/verify-reports.mjs",
+    "test:promotions": "node --test tests/promotions.test.mjs",
+    "test:promotions:browser": "node scripts/verify-promotions.mjs",
+    "test:books": "node --test tests/books.test.mjs",
+    "test:books:browser": "node scripts/verify-books.mjs",
+    "test:surveys": "node --test tests/surveys.test.mjs",
+    "test:surveys:browser": "node scripts/verify-surveys.mjs",
+    "test:insights": "node --test tests/insights-provider.test.mjs",
+    "test:settings:browser": "node scripts/verify-settings.mjs",
+    "test:families": "node --test tests/families.test.mjs",
+    "test:families:browser": "node scripts/verify-families.mjs",
+    "test:account-recovery": "node --test tests/account-recovery.test.mjs",
+    "test:account-recovery:browser": "node scripts/verify-account-recovery.mjs",
+    "test:jobs": "node --test tests/jobs.test.mjs",
+    "test:jobs:browser": "node scripts/verify-jobs.mjs",
+    "test:reconciliation": "node --test tests/reconciliation.test.mjs",
+    "test:reconciliation:browser": "node scripts/verify-reconciliation.mjs",
+    "test:biodata": "node --test tests/biodata.test.mjs",
+    "test:biodata:browser": "node scripts/verify-biodata.mjs",
+    "test:personal-profile": "node --test tests/personal-profile.test.mjs",
+    "test:personal-profile:browser": "node scripts/verify-personal-profile.mjs",
+    "test:email-verification": "node --test tests/email-verification.test.mjs && node --test tests/database/email-access.test.mjs",
+    "test:email-verification:browser": "node scripts/verify-email-verification.mjs"
+  },
+  "roles": [
+    "admin",
+    "teacher",
+    "student",
+    "parent",
+    "alumni",
+    "customer",
+    "applicant"
+  ],
+  "runtime_uat": "not_run",
+  "restore_exercise": "not_run",
+  "authenticated_load": "not_run",
+  "github_actions_workflows": [],
+  "evidence_blob_shas": {
+    "src/config/account-navigation.ts": "a7ef026d62e928582957cd0fba2d5733d9e4721a",
+    "src/components/account-dashboard.tsx": "e8b52cc2b8dd3ffbfdc3701fb41820d8d84c73dd",
+    "src/components/workspace-shell.tsx": "2b682cc44b329de756f1cdb4251d28b9a8fd0aaa",
+    "src/lib/academic/period.ts": "8d5f08d36d60170d5e73bf407eed58e61f8dd522",
+    "src/lib/education/use-mutation.ts": "cfe6f58e675d46272c29894af54874d3c2151d70",
+    "src/lib/services/providers.ts": "bf1d9f8e7a1b0c28348e542c838fb0bf5d04edf7",
+    "src/lib/services/jobs.ts": "41ca6c168c9ebe539e51246259c4fe991eacbc0a",
+    "src/lib/services/reconciliation.ts": "26b0f0cc494b4d95ec2b86959eabee7eccdbbc93",
+    "src/lib/learning/validation.ts": "8b8aa6bd440e24b6fa5a9c4f0f26112a99348287",
+    "src/lib/auth/authorization.ts": "1d337656795945a49c261d702cb3f11b67016c0f",
+    "src/lib/users/validation.ts": "a61b2b5acebc3593fe7e5f189340e20c936ad0cd",
+    "docs/decisions/approved-business-policy.md": "d297150c20a77b01aab320802e56f079eaa43b13",
+    "docs/release/cutover-runbook.md": "5a7ce4d6dbcc21a44208881c39186e08531eadae",
+    "package.json": "29fad44ea94e9db1e6ede4f64635b80af9a96af4"
+  },
+  "navigation_items": [
+    {
+      "href": "/account",
+      "label": "Dashboard"
+    },
+    {
+      "href": "/account/services/notifications",
+      "label": "Notifikasi"
+    },
+    {
+      "href": "/account/directory",
+      "label": "Direktori pengguna"
+    },
+    {
+      "href": "/account/classes",
+      "label": "Kelas dan siswa"
+    },
+    {
+      "href": "/account/schedules",
+      "label": "Jadwal dan piket siswa"
+    },
+    {
+      "href": "/account/operations/duty",
+      "label": "Guru piket"
+    },
+    {
+      "href": "/account/operations/attendance",
+      "label": "Absensi"
+    },
+    {
+      "href": "/account/operations/mentoring",
+      "label": "Bimbingan"
+    },
+    {
+      "href": "/account/operations/fees",
+      "label": "Iuran komite"
+    },
+    {
+      "href": "/account/operations/savings",
+      "label": "Tabungan"
+    },
+    {
+      "href": "/account/services/discipline",
+      "label": "Poin siswa"
+    },
+    {
+      "href": "/account/learning/grades",
+      "label": "Penilaian dan KKM"
+    },
+    {
+      "href": "/account/learning/reports",
+      "label": "Rapor"
+    },
+    {
+      "href": "/account/learning/promotions",
+      "label": "Kenaikan dan ijazah"
+    },
+    {
+      "href": "/account/learning/books",
+      "label": "Buku digital"
+    },
+    {
+      "href": "/account/services/surveys",
+      "label": "Survei"
+    },
+    {
+      "href": "/account/services/insights",
+      "label": "Hasil survei"
+    },
+    {
+      "href": "/account/settings",
+      "label": "Pengaturan madrasah"
+    },
+    {
+      "href": "/account/families",
+      "label": "Relasi keluarga"
+    },
+    {
+      "href": "/account/recovery",
+      "label": "Pemulihan akun"
+    },
+    {
+      "href": "/account/services/jobs",
+      "label": "Pekerjaan"
+    },
+    {
+      "href": "/account/services/reconciliation",
+      "label": "Rekonsiliasi"
+    },
+    {
+      "href": "/account/biodata",
+      "label": "Biodata dan dokumen"
+    },
+    {
+      "href": "/account/profile",
+      "label": "Profil pribadi"
+    },
+    {
+      "href": "/account/email",
+      "label": "Verifikasi email"
+    },
+    {
+      "href": "/account/security",
+      "label": "Keamanan akun"
+    },
+    {
+      "href": "/account/sessions",
+      "label": "Sesi dan perangkat"
+    },
+    {
+      "href": "/account/access",
+      "label": "Hak akses saya"
+    }
+  ],
+  "navigation_item_count": 28,
+  "inventory_counts": {
+    "page_route_files": 22,
+    "api_route_files": 34,
+    "sql_migrations": 43,
+    "note": "Dynamic module routes can serve multiple validated modules; these are file counts, not completed features."
+  }
+}
