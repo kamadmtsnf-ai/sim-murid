@@ -74,4 +74,4 @@ Lihat rancangan pengukuran pada P01. Ukur waktu tugas, keberhasilan tugas, kesal
 
 - 24 Oktober 2026: P03 menambahkan preferensi akademik per akun dan transfer eksplisit pada Kelas/Jadwal/Nilai/Rapor. Kalender transaksi, periode Survei ber-ID dan dua sisi kenaikan tetap eksplisit sesuai semantik modul. P04–P12 belum dimulai.
 
-- 24 Oktober 2026: P04 selesai: acknowledgement/revisi, lock submit, timeout/unmount, perlindungan sidebar/logout dan draf selektif; controller domain dipertahankan. Bukti dan batas pada laporan P04. P05–P12 belum dimulai.
+- 24 Oktober 2026: P04 selesai: acknowledgement/revisi, lock submit, timeout/unmount, perlindungan sidebar/logout dan draf selektif; controller domain dipertahankan. Bukti dan batas pada laporan P04. P05–P12 belum dimulai. PR implementasi P04: [#48](https://github.com/kamadmtsnf-ai/sim-murid/pull/48).
