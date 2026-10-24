@@ -221,7 +221,7 @@ try {
             : row,
         );
     }
-    data.revision++;
+    data.revision = route.request().postDataJSON().revision + 1;
     await page.evaluate((d) => (window.promotionsFixture = d), data);
     await route.fulfill({
       status: 200,

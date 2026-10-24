@@ -156,7 +156,7 @@ try {
           status: 409,
           json: { code: "insufficient", message: "Saldo tidak mencukupi." },
         });
-      data.revision++;
+      data.revision = route.request().postDataJSON().revision + 1;
       if (b.command.type === "void") {
         data.rows = data.rows.filter((r) => r.id !== b.command.id);
         data.total = data.rows.length;

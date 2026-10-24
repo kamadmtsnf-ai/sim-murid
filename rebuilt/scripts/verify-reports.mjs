@@ -171,7 +171,7 @@ try {
           body.command.semester === scope.semester,
         "publish command preserves scope",
       );
-      data.revision++;
+      data.revision = route.request().postDataJSON().revision + 1;
       data.rows = data.rows.map((row) =>
         body.command.studentIds.includes(row.student_id)
           ? {

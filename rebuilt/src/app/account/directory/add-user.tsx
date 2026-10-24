@@ -1,4 +1,6 @@
-'use client';
+ 'use client';
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import {useEffect,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {UserPlus,Copy,Eye,EyeOff} from 'lucide-react';
@@ -13,7 +15,8 @@ function fresh():NewUser{
 export function AddUser(){
  const router=useRouter(),busyRef=useRef(false);
  const [open,setOpen]=useState(false),[draft,setDraft]=useState<NewUser|null>(null),[busy,setBusy]=useState(false),[locked,setLocked]=useState(false),[done,setDone]=useState(false),[message,setMessage]=useState(''),[visible,setVisible]=useState(false),[copied,setCopied]=useState(false);
- useEffect(()=>{if(!locked||done)return;const warn=(event:BeforeUnloadEvent)=>{event.preventDefault();};window.addEventListener('beforeunload',warn);return()=>window.removeEventListener('beforeunload',warn);},[locked,done]);
+ useEffect(()=>{if(!locked||done)return;const warn=(event:BeforeUnloadEvent)=>{event.preventDefault();};const stop = listenForUnsavedChanges(warn);return()=>stop();},[locked,done]);
+ useWriteGuard(()=>busyRef.current,()=>!!draft&&!done&&!!(draft.username||draft.fullName||draft.contactEmail));
  function changeOpen(next:boolean){
   if(busyRef.current)return;
   if(!next&&done){setLocked(false);setDraft(null);setOpen(false);return;}

@@ -1,4 +1,5 @@
 "use client";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -146,8 +147,8 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
     const leave = (e: BeforeUnloadEvent) => {
       if (hasDraft || busy || assetBusy) e.preventDefault();
     };
-    window.addEventListener("beforeunload", leave);
-    return () => window.removeEventListener("beforeunload", leave);
+    const stopUnloadGuard = listenForUnsavedChanges(leave);
+    return () => stopUnloadGuard();
   }, [hasDraft, busy, assetBusy]);
   const alumni = [
     ...new Map(

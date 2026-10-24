@@ -1,4 +1,5 @@
 "use client";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useRouter } from "next/navigation";
 import { AcademicContextBar } from "@/components/academic/academic-context";
 import { formatAcademicYear } from "@/lib/academic/period";
@@ -68,8 +69,8 @@ export function SchedulePanel({
         e.returnValue = "";
       }
     };
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, []);
   const query = new URLSearchParams({
     ...(filters.year ? { year: filters.year } : {}),

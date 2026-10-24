@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -44,6 +46,7 @@ export function RecoveryPanel({
     feedback = useRef<HTMLDivElement>(null),
     selectRef = useRef<HTMLSelectElement>(null),
     passwordRef = useRef<HTMLInputElement>(null);
+  useWriteGuard(() => inFlight.current, () => !!password);
   useEffect(() => {
     mounted.current = true;
     const tick = setInterval(() => setNow(Date.now()), 1000);
@@ -63,8 +66,8 @@ export function RecoveryPanel({
     const warn = (e: BeforeUnloadEvent) => {
       if (inFlight.current || password) e.preventDefault();
     };
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, [password]);
   const current = requests.find((r) => r.id === selected);
   const expired = (r: RecoveryList[number]) =>

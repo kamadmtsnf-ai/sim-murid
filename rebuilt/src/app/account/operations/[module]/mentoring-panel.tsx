@@ -1,4 +1,5 @@
 "use client";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -71,8 +72,8 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
     const leave = (e: BeforeUnloadEvent) => {
       if (dirty || busy) e.preventDefault();
     };
-    window.addEventListener("beforeunload", leave);
-    return () => window.removeEventListener("beforeunload", leave);
+    const stopUnloadGuard = listenForUnsavedChanges(leave);
+    return () => stopUnloadGuard();
   }, [dirty, busy]);
   const students = initial.people.filter((p) => p.role_code === "student"),
     teachers = initial.people.filter((p) => p.role_code === "teacher");

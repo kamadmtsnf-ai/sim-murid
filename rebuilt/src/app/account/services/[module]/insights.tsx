@@ -1,4 +1,5 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { formatAcademicYear, semesterLabel } from "@/lib/academic/period";
 import { TableRegion } from "@/components/ui/data-table";
 
@@ -34,7 +35,20 @@ export function InsightsPanel({
     [role, setRole] = useState(String(applied.role ?? "")),
     [quality, setQuality] = useState(String(applied.quality ?? ""));
   const aiLock = useRef(false),
-    dirty = useRef(false);
+    dirty = useRef(false),
+    dirtyForms = useRef(new Set<HTMLFormElement>());
+  useWriteGuard(
+    () => aiLock.current,
+    () => dirty.current,
+  );
+  async function save(command: unknown, form: HTMLFormElement) {
+    const ok = await mutate(command);
+    if (ok) {
+      dirtyForms.current.delete(form);
+      dirty.current = dirtyForms.current.size > 0;
+    }
+    return ok;
+  }
   const scopeReady =
     period === String(applied.periodId ?? "") &&
     role === String(applied.role ?? "") &&
@@ -72,7 +86,11 @@ export function InsightsPanel({
         b = await r.json();
       setMessage(String(b.message));
       if (r.ok) {
-        if (body.action === "configure") form.reset();
+        if (body.action === "configure") {
+          form.reset();
+          dirtyForms.current.delete(form);
+          dirty.current = dirtyForms.current.size > 0;
+        }
         await load(period, role, quality);
       }
     } catch {
@@ -88,18 +106,21 @@ export function InsightsPanel({
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     if (disabled || !period) return;
-    void mutate({
-      type: "plan",
-      periodId: period,
-      items: Array.from({ length: points }, (_, i) =>
-        Object.fromEntries(
-          ["description", "owner", "target", "aspect", "status"].map((k) => [
-            k,
-            String(f.get(k + i) ?? ""),
-          ]),
+    void save(
+      {
+        type: "plan",
+        periodId: period,
+        items: Array.from({ length: points }, (_, i) =>
+          Object.fromEntries(
+            ["description", "owner", "target", "aspect", "status"].map((k) => [
+              k,
+              String(f.get(k + i) ?? ""),
+            ]),
+          ),
         ),
-      ),
-    });
+      },
+      e.currentTarget,
+    );
   }
   return (
     <section
@@ -129,6 +150,7 @@ export function InsightsPanel({
             )
               return;
             dirty.current = false;
+            dirtyForms.current.clear();
             setPage(1);
             setPeriod(e.target.value);
             setRole("");
@@ -207,6 +229,7 @@ export function InsightsPanel({
             )
               return;
             dirty.current = false;
+            dirtyForms.current.clear();
             setPage(1);
             await load(period, role, quality);
           }}
@@ -297,19 +320,23 @@ export function InsightsPanel({
                     {String(obj(r.flags).reliability ?? "belum final")}
                   </p>
                   <form
-                    onInputCapture={() => {
+                    onInputCapture={(e) => {
+                      dirtyForms.current.add(e.currentTarget);
                       dirty.current = true;
                     }}
                     onSubmit={(e) => {
                       e.preventDefault();
-                      void mutate({
-                        type: "note",
-                        periodId: period,
-                        userId: r.user_id,
-                        note: String(
-                          new FormData(e.currentTarget).get("note") ?? "",
-                        ),
-                      });
+                      void save(
+                        {
+                          type: "note",
+                          periodId: period,
+                          userId: r.user_id,
+                          note: String(
+                            new FormData(e.currentTarget).get("note") ?? "",
+                          ),
+                        },
+                        e.currentTarget,
+                      );
                     }}
                     className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-end"
                   >
@@ -402,14 +429,23 @@ export function InsightsPanel({
             (scopeReady ? list(data.extra.plan) : []).map((p, i) => (
               <form
                 key={period + ":" + i + ":" + String(p.status)}
+                onInputCapture={(e) => {
+                  dirtyForms.current.add(e.currentTarget);
+                  dirty.current = true;
+                }}
                 onSubmit={(e) => {
                   e.preventDefault();
-                  void mutate({
-                    type: "plan_status",
-                    periodId: period,
-                    index: i,
-                    status: String(new FormData(e.currentTarget).get("status")),
-                  });
+                  void save(
+                    {
+                      type: "plan_status",
+                      periodId: period,
+                      index: i,
+                      status: String(
+                        new FormData(e.currentTarget).get("status"),
+                      ),
+                    },
+                    e.currentTarget,
+                  );
                 }}
                 className="flex min-w-0 flex-col gap-3 rounded-lg border p-4 sm:flex-row sm:items-end"
               >
@@ -440,7 +476,8 @@ export function InsightsPanel({
             scopeReady &&
             canEditPlan && (
               <form
-                onInputCapture={() => {
+                onInputCapture={(e) => {
+                  dirtyForms.current.add(e.currentTarget);
                   dirty.current = true;
                 }}
                 key={period + ":" + JSON.stringify(data.extra.plan)}
@@ -556,6 +593,14 @@ export function InsightsPanel({
             )}
           {data.isAdmin && (
             <form
+              onInputCapture={(e) => {
+                if (
+                  new FormData(e.currentTarget).get("action") === "configure"
+                ) {
+                  dirtyForms.current.add(e.currentTarget);
+                  dirty.current = true;
+                }
+              }}
               onSubmit={ai}
               className="grid min-w-0 gap-3 rounded-lg border bg-card p-4 sm:grid-cols-2 lg:grid-cols-3"
             >
@@ -599,6 +644,12 @@ export function InsightsPanel({
             informasi pribadi dalam esai.
           </p>
           <form
+            onInputCapture={(e) => {
+              if (new FormData(e.currentTarget).get("action") === "configure") {
+                dirtyForms.current.add(e.currentTarget);
+                dirty.current = true;
+              }
+            }}
             onSubmit={ai}
             className="flex min-w-0 flex-wrap items-end gap-3"
           >

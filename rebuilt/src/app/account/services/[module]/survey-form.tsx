@@ -1,11 +1,12 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import {
   formatAcademicYear,
   semesterLabel,
   semesterPeriod,
   academicPeriodForDate,
 } from "@/lib/academic/period";
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { TextField, controlClass } from "@/components/domain-controls";
 import { commands, type ServiceSnapshot } from "@/lib/services/validation";
@@ -29,6 +30,8 @@ export function SurveyForm({
   mutate: Mutate;
   blocked?: boolean;
 }) {
+  const periodDirty = useRef(false);
+  useWriteGuard(() => busy, () => periodDirty.current);
   const [active, setActive] = useState<string>("");
   const [activeDirty, setActiveDirty] = useState(false),
     [kind, setKind] = useState("main");
@@ -101,7 +104,7 @@ export function SurveyForm({
       );
       return;
     }
-    void mutate(valid.data);
+    void mutate(valid.data).then(ok => { if(ok) periodDirty.current = false; });
   }
   return (
     <div className="survey-form space-y-6">
@@ -119,7 +122,7 @@ export function SurveyForm({
               Tahun ajaran belum tersedia. Siapkan tahun ajaran terlebih dahulu.
             </p>
           )}
-          <form onSubmit={create} className="mt-3 grid gap-3 sm:grid-cols-2">
+          <form onInputCapture={() => { periodDirty.current = true; }} onSubmit={create} className="mt-3 grid gap-3 sm:grid-cols-2">
             <fieldset disabled={busy || blocked} className="contents">
               <TextField name="title" label="Judul" required max={2000} />
               <label className="block text-sm">

@@ -546,3 +546,5 @@
   .workspace-topbar > .academic-context-summary { order:3; flex-basis:100%; }
   @media(min-width:640px) { .workspace-topbar > .academic-context-summary { order:0; flex:1; text-align:center; } }
 }
+
+.form-navigation-notice { position: fixed; inset-block-start: 1rem; inset-inline: 1rem; width: calc(100% - 2rem); max-width: 40rem; z-index: 70; box-shadow: var(--shadow-lg); }

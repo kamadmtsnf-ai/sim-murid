@@ -164,7 +164,7 @@ try {
             message: "Bulan sudah diarsipkan. Riwayat dipertahankan.",
           },
         });
-      data.revision++;
+      data.revision = route.request().postDataJSON().revision + 1;
       if (body.command.type === "catalog") {
         const c = body.command;
         data.extra.catalog = data.extra.catalog.filter(

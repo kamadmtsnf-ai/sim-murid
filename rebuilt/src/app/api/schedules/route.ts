@@ -59,6 +59,7 @@ async function handle(request: NextRequest, mutate: boolean) {
         );
     }
     return reply({
+      ...(mutate ? {code:"saved"} : {}),
       schedules: await schedulesData(args.p_actor, args.p_session, filters),
       message: mutate ? "Data berhasil disimpan." : "",
     });

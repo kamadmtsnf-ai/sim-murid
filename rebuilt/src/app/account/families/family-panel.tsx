@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -35,6 +37,7 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
     feedback = useRef<HTMLDivElement>(null),
     groupForm = useRef<HTMLFormElement>(null);
   const busy = pending || blocked;
+  useWriteGuard(() => lock.current);
   useEffect(() => {
     mounted.current = true;
     const warn = (e: BeforeUnloadEvent) => {
@@ -43,11 +46,11 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
         e.returnValue = "";
       }
     };
-    window.addEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
     return () => {
       mounted.current = false;
       abort.current?.abort();
-      window.removeEventListener("beforeunload", warn);
+      stopUnloadGuard();
     };
   }, []);
   useEffect(() => {

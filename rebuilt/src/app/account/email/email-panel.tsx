@@ -1,4 +1,5 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useEffect, useState, useRef, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
@@ -39,6 +40,7 @@ export function EmailPanel({
     stateRef = useRef(initialState),
     offset = useRef(0),
     input = useRef<HTMLInputElement>(null);
+  useWriteGuard(() => lock.current, () => !!code || needsSync);
   useEffect(() => {
     mounted.current = true;
     const tick = () => setNow(Date.now() + offset.current),

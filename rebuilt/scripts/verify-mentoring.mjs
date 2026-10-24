@@ -143,7 +143,7 @@ try {
   if(['stale','denied','invalid','duplicate'].includes(reply))return route.fulfill({status:reply==='denied'?403:409,json:{code:reply,result:{code:reply},message:'Perubahan ditolak: '+reply}});
   if(reply==='malformed')return route.fulfill({json:{result:{code:'saved'},data:{revision:-1}}});
   if(reply==='removed'){data.rows=[];data.total=0;}
-  data.revision++;return route.fulfill({json:{result:{code:'saved'},code:'saved',data,message:'Perubahan berhasil disimpan.'}});
+  data.revision = route.request().postDataJSON().revision + 1;return route.fulfill({json:{result:{code:'saved'},code:'saved',data,message:'Perubahan berhasil disimpan.'}});
  });
  async function visit(mode='normal',width=375,height=812){reply='success';posts=[];gets=[];await page.setViewportSize({width,height});await page.goto(base+'/?mode='+mode);await page.getByRole('heading',{level:1}).waitFor();}
  const dialog=()=>page.getByRole('dialog'),history=()=>page.getByRole('region',{name:'Filter laporan'});

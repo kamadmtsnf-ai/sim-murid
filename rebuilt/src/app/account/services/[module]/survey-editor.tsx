@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useId, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { controlClass } from "@/components/domain-controls";
@@ -100,6 +102,7 @@ export function SurveyEditor({
       if (navigator.onLine && !halt.current) void actions.current.save("auto");
     }, 2000);
   }
+  useWriteGuard(() => saving.current || finalizing.current);
   useEffect(() => {
     mounted.current = true;
     void (async () => {
@@ -164,8 +167,8 @@ export function SurveyEditor({
   useEffect(() => {
     if (!dirty) return;
     const warn = (e: BeforeUnloadEvent) => e.preventDefault();
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, [dirty]);
   useEffect(() => {
     const online = () => {
@@ -173,6 +176,7 @@ export function SurveyEditor({
         void actions.current.save("auto");
     };
     const logout = (e: Event) => {
+      if (e.defaultPrevented) return;
       if (
         e.target instanceof HTMLFormElement &&
         new URL(e.target.action).pathname === "/api/auth/logout"
@@ -183,10 +187,10 @@ export function SurveyEditor({
       }
     };
     window.addEventListener("online", online);
-    document.addEventListener("submit", logout, true);
+    document.addEventListener("submit", logout);
     return () => {
       window.removeEventListener("online", online);
-      document.removeEventListener("submit", logout, true);
+      document.removeEventListener("submit", logout);
     };
   }, []);
   async function save(type: string): Promise<void> {
