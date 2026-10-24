@@ -92,6 +92,13 @@
       "cloudVersion": "20261021080428",
       "name": "survey_concurrent_drafts",
       "sha256": "fd91c59d9f62fdcfd46e118f9ed5e99fdd874372f01268b34c9875e072349060"
+    },
+    {
+      "localFile": "20261024153547_bulk_input_p08.sql",
+      "localVersion": "20261024153547",
+      "cloudVersion": "20261024165437",
+      "name": "bulk_input_p08",
+      "sha256": "c236eee721b3bd90c28b1e147dbd8ed9e6cccf0b4b237a2bfdc0262a77a68ca5"
     }
   ]
 }

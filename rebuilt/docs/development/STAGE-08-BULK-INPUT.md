@@ -4,11 +4,10 @@
 
 ## Status dan gerbang aktivasi
 
-Implementasi/QA disiapkan untuk merge; **aktivasi Supabase bersama masih diblokir persetujuan**. Auto-review menolak `apply_migration` dengan alasan: “Applying this migration directly to the shared Supabase project persistently creates an index and privileged RPCs, which is a production/shared database mutation not explicitly authorized by the user’s request to implement and merge P08; local isolated migration tests are a safer alternative.” Tidak memakai execute_sql, CLI atau jalur lain untuk mengakali penolakan. Pemeriksaan metadata read-only setelah penolakan menunjukkan kedua RPC dan indeks belum ada.
-
+Kode telah di-merge melalui PR #54. Setelah penolakan awal auto-review karena izin database belum eksplisit, pengguna menyetujui migrasi konkret dengan jawaban “ya boleh”. `apply_migration` berhasil; cloud version `20261024165437`. Dua RPC SECURITY INVOKER dengan search_path kosong, EXECUTE hanya service_role, dan indeks deduplikasi terverifikasi. Probe status tanpa principal/session sah mengembalikan denied. Tidak memakai jalur alternatif untuk menghindari penolakan.
 Kode dirilis aman dengan pemeriksaan ketersediaan server per sesi: hanya probe `status` read-only dengan principal/session nyata dan UUID permintaan baru. Respons `not_found` sah berarti RPC terpasang; error/timeout/denied/format lain menonaktifkan tombol impor. Sumber input lama tetap tersedia. Tidak memakai fake login, akun dummy produksi, feature flag berbayar atau metadata user sebagai izin.
 
-Perubahan yang menunggu persetujuan konkret: `supabase/migrations/20261024153547_bulk_input_p08.sql` pada proyek `sim-muridv2` (`qpzoukkhdxpmbtkcqemj`). Berisi dua RPC `SECURITY INVOKER`, pembatasan EXECUTE service_role, search_path kosong dan indeks unik parsial pada audit import existing. Tidak membuat tabel baru, menghapus data, mengimpor siswa produksi atau mengubah autentikasi. Setelah diterapkan, muat ulang halaman agar fitur tersedia sesuai izin. P08 belum dinyatakan aktif penuh sebelum gerbang ini selesai.
+Migrasi yang telah disetujui dan diterapkan: `supabase/migrations/20261024153547_bulk_input_p08.sql` pada proyek `sim-muridv2` (`qpzoukkhdxpmbtkcqemj`). Berisi dua RPC `SECURITY INVOKER`, pembatasan EXECUTE service_role, search_path kosong dan indeks unik parsial pada audit import existing. Tidak membuat tabel baru, menghapus data, mengimpor siswa produksi atau mengubah autentikasi. Setelah diterapkan, muat ulang halaman agar fitur tersedia sesuai izin. Gerbang migrasi selesai; UAT impor produksi dengan sesi pengguna nyata belum dijalankan.
 
 ## Analisis dan pilihan implementasi
 
@@ -42,7 +41,7 @@ Laporan kualitas adalah hasil validasi berkas dalam scope tersebut: baris, alasa
 
 ## Verifikasi dan batas bukti
 
-Lihat [bukti P08](../verification/bulk/README.md) dan `stage-08-files.json` untuk file/alasan. Tes unit parser/API/availability, actual RPC/migrasi di PGlite, browser wizard dan regresi tiga halaman; bukan impor produksi, UAT pengguna, uji beban/concurrency multi-worker produksi atau pembuktian aktivasi cloud.
+Lihat [bukti P08](../verification/bulk/README.md) dan `stage-08-files.json` untuk file/alasan. Tes unit parser/API/availability, actual RPC/migrasi di PGlite, browser wizard dan regresi tiga halaman; bukan impor produksi, UAT pengguna, uji beban/concurrency multi-worker produksi atau UAT alur impor cloud. Aktivasi skema cloud diverifikasi terpisah melalui metadata dan probe penolakan sesi tidak sah.
 
 Migrasi pertama dibuat dengan Supabase CLI `migration new bulk_input_p08`; kontrak RPC dicocokkan dengan hasil replay migrasi terisolasi. Tabel public tidak berubah. Changelog dan dokumentasi Supabase diperiksa. Advisory cloud sebelum perubahan: INFO RLS tanpa policy pada tabel private yang direct grant-nya ditolak; INFO indeks belum dipakai; WARN leaked-password protection existing, tidak diubah pada P08. Referensi: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy ; https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index ; https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection . Tidak mengubah kebijakan autentikasi sebagai efek samping impor.
 
@@ -54,4 +53,4 @@ Rollback aplikasi: revert PR dan pertahankan input lama. Bila migrasi kemudian d
 
 Percobaan awal memperbaiki tiga masalah nyata: hasil backend malformed tidak boleh menjadi error isian 400 (kini 503/uncertain); label textarea perlu nama aksesibel stabil setelah berisi CSV; semester terpilih dan awal relasi siswa harus diperiksa saat impor nilai. Uji chain awal juga memperbarui count migrasi 43→44. Percobaan browser dengan CSS cache kosong dibatalkan; hasil yang dilaporkan menggunakan CSS dari build aplikasi sebenarnya. Tidak mengklaim hasil percobaan gagal sebagai lulus.
 
-PR kode P08: [#54](https://github.com/kamadmtsnf-ai/sim-murid/pull/54). Persetujuan aktivasi database tetap terpisah dan belum diberikan.
+PR kode P08: [#54](https://github.com/kamadmtsnf-ai/sim-murid/pull/54). Persetujuan aktivasi database diberikan dan penerapan berhasil. Bukti pada schema-readiness.json; advisory setelah DDL tidak berubah dari baseline.
