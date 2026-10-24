@@ -243,7 +243,7 @@ try {
       );
   }
   await visit("normal", 320);
-  await page.locator("summary").first().click();
+  await page.locator(".grades-panel details:not(.academic-context-bar) > summary").first().click();
   await geometry(page, "expanded scores 320");
   await a11y(page, "expanded scores");
   check(

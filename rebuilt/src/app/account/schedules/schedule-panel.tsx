@@ -1,4 +1,6 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { AcademicContextBar } from "@/components/academic/academic-context";
 import { formatAcademicYear } from "@/lib/academic/period";
 import { Tabs } from "radix-ui";
 import { Dialog } from "@/components/ui/dialog";
@@ -37,6 +39,7 @@ export function SchedulePanel({
     personal?: boolean;
   };
 }) {
+  const router = useRouter();
   const [data, setData] = useState(initial),
     [editing, setEditing] = useState<string | null>(null),
     [selectedLessons, setSelectedLessons] = useState<string[]>([]),
@@ -153,6 +156,42 @@ export function SchedulePanel({
   ) : null;
   return (
     <div className="schedules-panel min-w-0 space-y-6" aria-busy={busy}>
+      <AcademicContextBar
+        current={{
+          year:
+            classes.years.find(
+              (y) =>
+                y.id ===
+                (filters.year ?? classes.years.find((y) => y.is_active)?.id),
+            )?.start_year ?? null,
+          classId: filters.classId ?? null,
+        }}
+        catalog={{
+          years: classes.years.map((y) => y.start_year),
+          classes: classes.classes
+            .filter((c) => !c.archived)
+            .map((c) => ({
+              id: c.id,
+              name: c.name,
+              year: classes.years.find((y) => y.id === c.year_id)!.start_year,
+            })),
+        }}
+        disabled={locked || !!modal}
+        onApply={(value) => {
+          if (!discard()) return;
+          const year = classes.years.find(
+            (y) => y.start_year === value.year,
+          )!.id;
+          const q = new URLSearchParams({
+            year,
+            ...(value.classId ? { class: value.classId } : {}),
+            ...(filters.weekday ? { day: String(filters.weekday) } : {}),
+            ...(filters.personal ? { personal: "1" } : {}),
+            view: activeTab,
+          });
+          router.push("/account/schedules?" + q);
+        }}
+      />
       <div className="grid grid-cols-2 gap-3" aria-label="Ringkasan jadwal">
         <div className="rounded-xl border bg-card p-4">
           <p className="text-sm text-muted-foreground">

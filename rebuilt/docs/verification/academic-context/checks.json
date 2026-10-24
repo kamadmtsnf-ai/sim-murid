@@ -1,0 +1,249 @@
+{
+  "recorded_at": "2026-10-24",
+  "timezone": "Asia/Jakarta",
+  "baseline_sha": "f83e4cdd216be4c7da6c56a517210a7bad4505f0",
+  "install": {
+    "command": "npm ci",
+    "exit_code": 0
+  },
+  "execution": "Commands from package.json check executed individually in sequence. Initial schedule loader mock lacked the newly imported useRouter; mock updated and remaining commands rerun.",
+  "check_commands": [
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:foundation",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:database",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:auth",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:login",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:sessions",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:authorization",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:security",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:recovery",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:recovery:routes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:account-recovery",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:email",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:email-verification",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:settings",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:personal-profile",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:biodata",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:education",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:families",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:singleton-writes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:academic",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:schedules",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:classes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:directory",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:user-detail",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:users",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:duty",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:attendance",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:mentoring",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:committee",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:savings",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:operations",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:learning",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:grades",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:reports",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:promotions",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:books",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:services",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:jobs",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:reconciliation",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:surveys",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:insights",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:points",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:notifications",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:ui",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:dashboard",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:production",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run db:types:check",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 1
+    }
+  ],
+  "unique_tests": 546,
+  "runner_groups": 62,
+  "initial_lint_findings": "Internal navigation changed to Next router; test-local module variable renamed. Final lint passes.",
+  "incremental_build": {
+    "exit_code": 1,
+    "reason": "Local Turbopack persistence cache invalid digit while opening database (compiler cache, not application PostgreSQL)."
+  },
+  "clean_build": {
+    "command": "npm run build after moving .next cache aside",
+    "exit_code": 0
+  },
+  "final_release_build": {
+    "command": "npm run build with fresh .next",
+    "exit_code": 0
+  },
+  "final_typecheck": {
+    "exit_code": 0
+  },
+  "final_lint": {
+    "exit_code": 0
+  },
+  "targeted_final_tests": [
+    {
+      "command": "npm run test:reports",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:academic",
+      "exit_code": 0
+    }
+  ],
+  "limits": [
+    "Browser uses actual components and synthetic HTTP/catalog boundaries, no production account UAT.",
+    "No database/schema/policy changes; no production writes or paid provider calls.",
+    "Academic preference is explicit, not an automatic replacement of date filters or survey period IDs."
+  ],
+  "browser": {
+    "checks": 706,
+    "axe_runs": 52,
+    "page_errors": []
+  }
+}

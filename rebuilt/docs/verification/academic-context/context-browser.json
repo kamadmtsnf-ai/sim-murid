@@ -1,0 +1,253 @@
+{
+  "checks": [
+    {
+      "name": "context overflow 320",
+      "passed": true
+    },
+    {
+      "name": "context 320 axe",
+      "passed": true
+    },
+    {
+      "name": "context overflow 390",
+      "passed": true
+    },
+    {
+      "name": "context 390 axe",
+      "passed": true
+    },
+    {
+      "name": "context overflow 768",
+      "passed": true
+    },
+    {
+      "name": "context 768 axe",
+      "passed": true
+    },
+    {
+      "name": "context overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "context 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "server January suggests Genap without browser clock",
+      "passed": true
+    },
+    {
+      "name": "class context remembers actual roster",
+      "passed": true
+    },
+    {
+      "name": "cancel context preserves placement draft",
+      "passed": true
+    },
+    {
+      "name": "confirmed year transfer clears dependent placement",
+      "passed": true
+    },
+    {
+      "name": "no automatic filter/write on navigation",
+      "passed": true
+    },
+    {
+      "name": "stored class/semester transferred to real grade GET",
+      "passed": true
+    },
+    {
+      "name": "grade controls synchronized after transfer",
+      "passed": true
+    },
+    {
+      "name": "stored Ganjil controls date even when server is January",
+      "passed": true
+    },
+    {
+      "name": "open entry blocks context transfer",
+      "passed": true
+    },
+    {
+      "name": "external preference never overwrites current applied scope",
+      "passed": true
+    },
+    {
+      "name": "historical Genap uses second calendar year",
+      "passed": true
+    },
+    {
+      "name": "dependent subject filter cleared on class transfer",
+      "passed": true
+    },
+    {
+      "name": "schedule transfer maps year UUID and preserves day/personal/tab",
+      "passed": true
+    },
+    {
+      "name": "same scope transfers grades to reports",
+      "passed": true
+    },
+    {
+      "name": "preference survives reload",
+      "passed": true
+    },
+    {
+      "name": "browser Back preserves stored preference",
+      "passed": true
+    },
+    {
+      "name": "revoked class cannot broaden to all",
+      "passed": true
+    },
+    {
+      "name": "revocation explanation explicit",
+      "passed": true
+    },
+    {
+      "name": "failed GET retains original scope",
+      "passed": true
+    },
+    {
+      "name": "wrong semester response never applied",
+      "passed": true
+    },
+    {
+      "name": "other account does not inherit context",
+      "passed": true
+    },
+    {
+      "name": "storage event does not alter page filter",
+      "passed": true
+    },
+    {
+      "name": "clear preference preserves current filters",
+      "passed": true
+    },
+    {
+      "name": "malformed preference visible and inert",
+      "passed": true
+    },
+    {
+      "name": "server July suggests Ganjil",
+      "passed": true
+    },
+    {
+      "name": "storage blocked has memory fallback",
+      "passed": true
+    },
+    {
+      "name": "remembered topbar overflow 320",
+      "passed": true
+    },
+    {
+      "name": "remembered context 320 axe",
+      "passed": true
+    },
+    {
+      "name": "remembered topbar overflow 390",
+      "passed": true
+    },
+    {
+      "name": "remembered context 390 axe",
+      "passed": true
+    },
+    {
+      "name": "remembered topbar overflow 768",
+      "passed": true
+    },
+    {
+      "name": "remembered context 768 axe",
+      "passed": true
+    },
+    {
+      "name": "remembered topbar overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "remembered context 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "context landscape overflow",
+      "passed": true
+    },
+    {
+      "name": "context transfer performs no mutation",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "context 320",
+      "violations": []
+    },
+    {
+      "label": "context 390",
+      "violations": []
+    },
+    {
+      "label": "context 768",
+      "violations": []
+    },
+    {
+      "label": "context 1440",
+      "violations": []
+    },
+    {
+      "label": "remembered context 320",
+      "violations": []
+    },
+    {
+      "label": "remembered context 390",
+      "violations": []
+    },
+    {
+      "label": "remembered context 768",
+      "violations": []
+    },
+    {
+      "label": "remembered context 1440",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "reads": [
+    {
+      "module": "grades",
+      "classId": "00000000-0000-4000-8000-000000000030",
+      "semester": "1"
+    },
+    {
+      "module": "grades",
+      "classId": "00000000-0000-4000-8000-000000000030",
+      "subjectId": "00000000-0000-4000-8000-000000000060",
+      "semester": "1"
+    },
+    {
+      "module": "grades",
+      "classId": "00000000-0000-4000-8000-000000000031",
+      "semester": "2"
+    },
+    {
+      "module": "reports",
+      "classId": "00000000-0000-4000-8000-000000000031",
+      "semester": "2"
+    },
+    {
+      "module": "grades",
+      "classId": "00000000-0000-4000-8000-000000000030",
+      "semester": "1"
+    },
+    {
+      "module": "grades",
+      "classId": "00000000-0000-4000-8000-000000000030",
+      "semester": "1"
+    }
+  ],
+  "writes": []
+}

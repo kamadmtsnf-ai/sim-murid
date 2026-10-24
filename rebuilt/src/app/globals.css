@@ -536,3 +536,13 @@
     .ds-pagination > button { flex:initial; }
   }
 }
+
+@layer components {
+  .academic-context-bar { min-width:0; overflow-wrap:anywhere; border:1px solid var(--border); border-radius:.75rem; background:var(--card); padding:.75rem 1rem; }
+  .academic-context-summary { min-width:0; overflow-wrap:anywhere; font-size:.8125rem; color:var(--primary); }
+  .workspace-topbar:has(.academic-context-summary) { flex-wrap:wrap; }
+}
+@layer components {
+  .workspace-topbar > .academic-context-summary { order:3; flex-basis:100%; }
+  @media(min-width:640px) { .workspace-topbar > .academic-context-summary { order:0; flex:1; text-align:center; } }
+}

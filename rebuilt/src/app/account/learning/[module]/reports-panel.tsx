@@ -1,4 +1,5 @@
 "use client";
+import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -84,8 +85,11 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
   const targets = data.rows.filter((r) => selected.includes(r.student_id)),
     publishable =
       targets.length > 0 && targets.length <= 500 && targets.every(reportReady);
-  async function load(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function load(
+    e?: FormEvent<HTMLFormElement>,
+    override?: Record<string, string>,
+  ) {
+    e?.preventDefault();
     if (lock.current || disabled) return;
     lock.current = true;
     setReading(true);
@@ -95,7 +99,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
     controller.current = abort;
     const timer = setTimeout(() => abort.abort(), 30000);
     try {
-      const next = { ...(classId ? { classId } : {}), semester };
+      const next = override ?? { ...(classId ? { classId } : {}), semester };
       reportFilters.parse(next);
       const r = await fetch(api + "?" + query(next), {
         cache: "no-store",
@@ -104,13 +108,16 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
       if (!r.ok) throw Error();
       const parsed = reportsSnapshot.parse((await r.json()).data);
       if (
+        (next.classId && !parsed.classes.some((c) => c.id === next.classId)) ||
         parsed.extra.scope?.classId !== next.classId ||
-        parsed.semester !== Number(semester)
+        parsed.semester !== Number(next.semester)
       )
         throw Error();
       if (mounted.current) {
         setData(parsed);
         setFilters(next);
+        setClassId(next.classId ?? "");
+        setSemester(next.semester!);
         setSelected([]);
         setSearch("");
         setStatus("all");
@@ -181,6 +188,32 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
   }
   return (
     <div className="reports-panel min-w-0 space-y-5">
+      <AcademicContextBar
+        current={{
+          year: currentClass?.year ?? null,
+          classId: filters.classId ?? null,
+          semester: Number(filters.semester),
+        }}
+        catalog={{
+          years: data.classes.map((c) => c.year),
+          classes: data.classes,
+        }}
+        requiresClass
+        disabled={disabled || confirm}
+        onApply={(value) => {
+          if (
+            (selected.length ||
+              classId !== (filters.classId ?? "") ||
+              semester !== filters.semester) &&
+            !window.confirm("Buang pilihan rapor sebelum mengganti konteks?")
+          )
+            return;
+          return load(undefined, {
+            classId: value.classId!,
+            semester: String(value.semester),
+          });
+        }}
+      />
       <p className="text-sm text-muted-foreground">
         Tinjau nilai siswa per kelas dan semester. Rapor terbit mempertahankan
         nilai dan KKM saat diterbitkan.
