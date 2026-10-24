@@ -295,3 +295,17 @@ Riwayat memakai Card responsif dan metadata WIB, label Aktif/Berakhir/Dicabut, p
 ## Hak akses saya — 24 Oktober 2026
 
 Inventori izin bersifat read-only. Pisahkan peran, penugasan aktif dan daftar jenis izin; scope all/own/class harus eksplisit dan kelas berbeda harus tetap dapat dibedakan. Nama/tingkat/tahun ajaran kelas dibaca melalui RLS pengguna; jika tidak tersedia pertahankan rujukan kelas, tanpa mengasumsikan akses global. Kelompokkan capability sambil mempertahankan semua scope, gunakan search/filter lokal, pagination10, counter serta empty state terpisah. Label native select menggunakan htmlFor yang terpisah dari kontrol. Kontrol44px, wrapping, min-w-0 dan disclosure penugasan mendukung mobile/keyboard. Refresh mengganti snapshot dan mengabaikan respons setelah unmount; error memberi label data terakhir. Tidak ada editor izin atau tautan navigasi tambahan. Bukti/batas: `../verification/access-audit.md`.
+
+## P02 — Kontrak komponen bersama, 24 Oktober 2026
+
+Bagian ini memperinci standar reusable terbaru di atas token dan primitive existing; tidak membentuk design system kedua. Laporan: [P02](../development/STAGE-02-DESIGN-SYSTEM.md).
+
+- `Field` menyusun label terlihat, kontrol caller, hint dan error. Caller memberi ID unik, required, aria-invalid serta `fieldDescriptionIds` yang sesuai konten. Jangan membungkus select di label atau menghubungkan describedby ke elemen yang tidak dirender. `fieldControlClass` berasal dari CSS semantik tunggal, ukuran minimal 44px.
+- `FilterBar` adalah fieldset bernama. `Pagination` memakai nilai one-based dan tombol native type=button; data/fetch/slicing/fokus tetap domain. Jangan mengasumsikan jumlah subset yang dimuat sebagai total server.
+- `Status` tetap satu komponen feedback; tone info/success/error/warning/pending selalu disertai teks. Warning untuk hasil yang perlu diperiksa; pending bukan konfirmasi berhasil. Ref/tabIndex dipakai bila alur existing perlu fokus; tidak menambahkan retry write otomatis.
+- `EmptyState` memakai judul h3 di bawah section dan alasan sesuai data/filter. `LoadingState` mempunyai status teks dan skeleton aria-hidden; tanpa metrik palsu.
+- `.ds-actions` menata tombol wrap yang minimal 44px pada area adopsi. Button/Card existing tetap dipakai; tidak mengganti style global semua tombol pada tahap pilot.
+- TableRegion dan Dialog Radix tetap satu implementasi. Tabel memakai caption/scope dan scroll lokal bernama; dialog menangani fokus/viewport serta wrapping judul di portal. Jangan mengubah form panjang menjadi modal hanya demi konsistensi visual.
+- Pilot: Hak akses saya (read-only) dan Profil pribadi (mutasi). `domain-controls.tsx` adalah adapter legacy; migrasi lain dilakukan per modul pada P05. Validasi, state dan kontrak API tidak dipindahkan ke komponen presentasi.
+
+Token warna, font, border/input dan reduced motion existing dipertahankan. Token ukuran kontrol, gap field dan gap koleksi berada hanya di `globals.css`. Penerimaan memerlukan 320/390/768/1440 px, keyboard, touch, landscape, empty/loading/error, field validation, dan regresi bisnis; hasil aktual ada pada laporan P02.

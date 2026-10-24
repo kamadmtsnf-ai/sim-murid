@@ -1,0 +1,265 @@
+{
+  "recorded_at": "2026-10-24",
+  "timezone": "Asia/Jakarta",
+  "baseline_sha": "ec436f2b59215588a13e3019a423562a453c75b7",
+  "install": {
+    "command": "npm ci",
+    "exit_code": 0
+  },
+  "check_execution": "49 package.json check commands executed sequentially with individual logs, not one invocation of npm run check.",
+  "check_commands": [
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:foundation",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:database",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:auth",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:login",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:sessions",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:authorization",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:security",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:recovery",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:recovery:routes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:account-recovery",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:email",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:email-verification",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:settings",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:personal-profile",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:biodata",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:education",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:families",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:singleton-writes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:academic",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:schedules",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:classes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:directory",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:user-detail",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:users",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:duty",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:attendance",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:mentoring",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:committee",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:savings",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:operations",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:learning",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:grades",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:reports",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:promotions",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:books",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:services",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:jobs",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:reconciliation",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:surveys",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:insights",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:points",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:notifications",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:ui",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:dashboard",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:production",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run db:types:check",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 1
+    }
+  ],
+  "tests": 543,
+  "runner_groups": 62,
+  "initial_production_build": {
+    "command": "npm run build",
+    "exit_code": 0
+  },
+  "incremental_build_failure": "Local Turbopack cache: Failed to open database / persistence directory invalid digit. This is compiler cache, not application PostgreSQL.",
+  "clean_build": {
+    "command": "npm run build",
+    "exit_code": 0
+  },
+  "final_release_build": {
+    "command": "npm run build (fresh .next)",
+    "exit_code": 0
+  },
+  "final_lint": {
+    "command": "npm run lint",
+    "exit_code": 0
+  },
+  "browser": {
+    "checks": 445,
+    "axe_runs": 46,
+    "suites": {
+      "access": {
+        "checks": 104,
+        "axe": 8
+      },
+      "profile": {
+        "checks": 87,
+        "axe": 8
+      },
+      "components": {
+        "checks": 54,
+        "axe": 9
+      },
+      "schedules": {
+        "checks": 145,
+        "axe": 14
+      },
+      "notifications": {
+        "checks": 55,
+        "axe": 7
+      }
+    },
+    "initial_findings": [
+      "Stress fixture exposed Button whitespace utility overriding scoped wrapping; fixed in CSS layer and final fixture passed.",
+      "Schedules focus assertion initially raced Radix autofocus after unmount; test now waits for actual focused row trigger; final rerun passed."
+    ],
+    "scope": "Actual components, synthetic fixtures/HTTP boundaries. Final pilot screenshots reviewed; local scroll for wide tables and normal vertical scroll preserved."
+  },
+  "not_run": [
+    "Production account UAT",
+    "Physical devices or manual screen reader",
+    "Production data mutations",
+    "Paid/external provider calls",
+    "Restore and authenticated load (P10)"
+  ]
+}
