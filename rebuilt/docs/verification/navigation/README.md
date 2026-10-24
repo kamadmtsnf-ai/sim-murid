@@ -15,3 +15,5 @@ Viewport mencakup 320/390/768/1440, landscape dan drawer saat keyboard pendek; t
 Perbaikan harness: mock stale GET pada Komite/Nilai tidak lagi membaca body POST; viewport390 ditambahkan; dua selector katalog disesuaikan ke istilah pagination bersama. Percobaan B dengan path CSS belum tersedia diulang setelah build; angka final hanya dari suite yang berhasil. PDF diuji Chromium145 yang mendukung API PDF.js. Tidak menyimpulkan UAT/performansi pengguna atau kapasitas produksi dari fixture. Batas browser Back SPA/crash P04 tetap berlaku.
 
 Lihat [laporan dan manifest](../../development/STAGE-05-NAVIGATION-UX.md). P06 Beranda sesuai peran belum dikerjakan.
+
+PR kelompok: [#49](https://github.com/kamadmtsnf-ai/sim-murid/pull/49), [#50](https://github.com/kamadmtsnf-ai/sim-murid/pull/50), [#51](https://github.com/kamadmtsnf-ai/sim-murid/pull/51).

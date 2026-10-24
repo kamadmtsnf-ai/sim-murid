@@ -108,5 +108,10 @@
   ],
   "checks": 1165,
   "axe": 176,
-  "boundaries": "Synthetic HTTP/isolated SQL; no production writes/providers/UAT. Specialized reader/survey/editor controls preserved."
+  "boundaries": "Synthetic HTTP/isolated SQL; no production writes/providers/UAT. Specialized reader/survey/editor controls preserved.",
+  "baseline": "0021a6702b5f9aa43d694e0945b7f963d17534fe",
+  "commands": {
+    "npm run check": 0,
+    "npm run lint (release)": 0
+  }
 }

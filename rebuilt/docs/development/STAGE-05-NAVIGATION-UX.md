@@ -2,13 +2,15 @@
 
 Tanggal 24 Oktober 2026 WIB. Baseline main `a0b8ec07b9d7bbb8af5ddd6acc59161dbfb997cc`. Identitas teal/Plass, stack dan aturan bisnis D01–D03/ACADEMIC-1.0 dipertahankan; D10 tetap terbuka. Tidak mengubah API, auth, RLS, database, ledger atau aturan finalisasi.
 
+Status: implementasi dan verifikasi ketiga kelompok P05 selesai. Hasil merge setiap kelompok dapat diperiksa pada PR terkait.
+
 ## Pelaksanaan per kelompok
 
 | Kelompok | Cakupan | Status |
 |---|---|---|
 | A | Sidebar, pencarian, keyboard/mobile dan adapter formulir bersama | Selesai; [PR #49](https://github.com/kamadmtsnf-ai/sim-murid/pull/49), merged |
 | B | Kelas/jadwal dan operasional siswa: filter, pagination, empty/loading/error | Selesai; [PR #50](https://github.com/kamadmtsnf-ai/sim-murid/pull/50), merged |
-| C | Akademik/evaluasi: pagination dan konsistensi state presentasi | Implementasi dan verifikasi; PR terakhir sedang disiapkan |
+| C | Akademik/evaluasi: pagination dan konsistensi state presentasi | Selesai dan diverifikasi; [PR #51](https://github.com/kamadmtsnf-ai/sim-murid/pull/51) |
 
 Setiap kelompok dirilis melalui PR dan regresi tersendiri, sesuai B04/P05. Ringkasan hasil bukan UAT pengguna produksi; batas pengujian dicatat pada bukti verifikasi.
 
