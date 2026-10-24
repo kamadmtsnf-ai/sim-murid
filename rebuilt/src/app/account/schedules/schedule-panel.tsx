@@ -1,4 +1,5 @@
 "use client";
+import { FilterBar } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useRouter } from "next/navigation";
 import { AcademicContextBar } from "@/components/academic/academic-context";
@@ -217,83 +218,89 @@ export function SchedulePanel({
         onSubmit={(e) => {
           if (locked || !discard()) e.preventDefault();
         }}
-        className="grid gap-3 rounded border p-4 sm:grid-cols-3"
+        className="min-w-0"
       >
-        <input type="hidden" name="view" value={activeTab} />
-        <label className="block text-sm">
-          Tahun ajaran
-          <select
-            name="year"
-            className={controlClass}
-            value={filterYear}
-            disabled={locked}
-            onChange={(e) => {
-              setFilterYear(e.target.value);
-              setFilterClass("");
-            }}
-          >
-            <option value="">Tahun aktif</option>
-            {classes.years.map((y) => (
-              <option key={y.id} value={y.id}>
-                {formatAcademicYear(y.start_year)}
-                {y.is_active ? " (Aktif)" : ""}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="block text-sm">
-          Kelas
-          <select
-            name="class"
-            className={controlClass}
-            value={filterClass}
-            disabled={locked}
-            onChange={(e) => setFilterClass(e.target.value)}
-          >
-            <option value="">Semua kelas yang dapat diakses</option>
-            {classes.classes
-              .filter(
-                (c) =>
-                  !c.archived &&
-                  c.year_id ===
-                    (filterYear || classes.years.find((y) => y.is_active)?.id),
-              )
-              .map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name} (
-                  {formatAcademicYear(
-                    classes.years.find((y) => y.id === c.year_id)?.start_year,
-                  )}
-                  )
+        <FilterBar
+          label="Filter jadwal dan piket siswa"
+          className="grid gap-3 rounded border p-4 sm:grid-cols-3"
+        >
+          <input type="hidden" name="view" value={activeTab} />
+          <label className="block text-sm">
+            Tahun ajaran
+            <select
+              name="year"
+              className={controlClass}
+              value={filterYear}
+              disabled={locked}
+              onChange={(e) => {
+                setFilterYear(e.target.value);
+                setFilterClass("");
+              }}
+            >
+              <option value="">Tahun aktif</option>
+              {classes.years.map((y) => (
+                <option key={y.id} value={y.id}>
+                  {formatAcademicYear(y.start_year)}
+                  {y.is_active ? " (Aktif)" : ""}
                 </option>
               ))}
-          </select>
-        </label>
-        <SelectField
-          name="day"
-          label="Hari"
-          value={String(filters.weekday ?? "")}
-        >
-          <option value="">Semua hari</option>
-          {weekdays.slice(1).map((d, i) => (
-            <option value={i + 1} key={d}>
-              {d}
-              {i + 1 === data.today ? " (Hari ini WIB)" : ""}
-            </option>
-          ))}
-        </SelectField>
-        <label className="flex items-center gap-2">
-          <input
-            type="checkbox"
-            name="personal"
-            value="1"
-            defaultChecked={filters.personal}
-          />
-          Untuk Guru: hanya pelajaran yang saya ajar
-        </label>
-        <Button disabled={locked} type="submit">
-          Terapkan filter
-        </Button>
+            </select>
+          </label>
+          <label className="block text-sm">
+            Kelas
+            <select
+              name="class"
+              className={controlClass}
+              value={filterClass}
+              disabled={locked}
+              onChange={(e) => setFilterClass(e.target.value)}
+            >
+              <option value="">Semua kelas yang dapat diakses</option>
+              {classes.classes
+                .filter(
+                  (c) =>
+                    !c.archived &&
+                    c.year_id ===
+                      (filterYear ||
+                        classes.years.find((y) => y.is_active)?.id),
+                )
+                .map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name} (
+                    {formatAcademicYear(
+                      classes.years.find((y) => y.id === c.year_id)?.start_year,
+                    )}
+                    )
+                  </option>
+                ))}
+            </select>
+          </label>
+          <SelectField
+            name="day"
+            label="Hari"
+            value={String(filters.weekday ?? "")}
+          >
+            <option value="">Semua hari</option>
+            {weekdays.slice(1).map((d, i) => (
+              <option value={i + 1} key={d}>
+                {d}
+                {i + 1 === data.today ? " (Hari ini WIB)" : ""}
+              </option>
+            ))}
+          </SelectField>
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="personal"
+              value="1"
+              defaultChecked={filters.personal}
+            />
+            Untuk Guru: hanya pelajaran yang saya ajar
+          </label>
+          <Button disabled={locked} type="submit">
+            Terapkan filter
+          </Button>
+        </FilterBar>
       </form>
       <Tabs.Root
         value={activeTab}

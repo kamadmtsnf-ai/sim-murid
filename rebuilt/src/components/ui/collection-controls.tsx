@@ -27,12 +27,18 @@ export function Pagination({
   pageCount,
   onPageChange,
   disabled = false,
+  previousLabel = "Sebelumnya",
+  nextLabel = "Berikutnya",
+  summary,
 }: {
   label: string;
   page: number;
   pageCount: number;
   onPageChange: (page: number) => void;
   disabled?: boolean;
+  previousLabel?: string;
+  nextLabel?: string;
+  summary?: ReactNode;
 }) {
   return (
     <nav aria-label={label} className="ds-pagination ds-actions">
@@ -42,10 +48,10 @@ export function Pagination({
         disabled={disabled || page <= 1}
         onClick={() => onPageChange(page - 1)}
       >
-        Sebelumnya
+        {previousLabel}
       </Button>
       <p className="text-sm tabular-nums">
-        Halaman {page} dari {pageCount}
+        {summary && <>{summary} · </>}Halaman {page} dari {pageCount}
       </p>
       <Button
         type="button"
@@ -53,7 +59,7 @@ export function Pagination({
         disabled={disabled || page >= pageCount}
         onClick={() => onPageChange(page + 1)}
       >
-        Berikutnya
+        {nextLabel}
       </Button>
     </nav>
   );

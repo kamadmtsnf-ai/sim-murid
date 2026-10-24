@@ -219,7 +219,7 @@ try {
       .click();
     await page.getByLabel("Nama kelas").fill("7 Uji");
   }
-  for (const width of [320, 375, 768, 1024, 1440]) {
+  for (const width of [320, 375, 390, 768, 1024, 1440]) {
     await visit("normal", width);
     await geometry(page, "normal " + width);
     await a11y(page, "normal " + width);

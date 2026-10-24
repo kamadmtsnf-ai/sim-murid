@@ -98,7 +98,8 @@
     "test:academic-context:browser": "node scripts/verify-academic-context.mjs",
     "test:forms": "node --experimental-strip-types --test tests/mutation-result.test.ts",
     "test:forms:browser": "node scripts/verify-forms.mjs",
-    "test:navigation:browser": "node scripts/verify-navigation.mjs"
+    "test:navigation:browser": "node scripts/verify-navigation.mjs",
+    "test:module-states:browser": "node scripts/verify-module-states.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

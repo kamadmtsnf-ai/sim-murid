@@ -558,3 +558,5 @@
 .ds-field-control[aria-invalid="true"] { border-color:var(--destructive); }
 /* One explicit, keyboard-accessible clear control rather than two competing icons. */
 .nav-search input::-webkit-search-cancel-button { -webkit-appearance:none; appearance:none; }
+
+.ds-pagination .pagination-link { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:.5rem 1rem; border:1px solid var(--input); border-radius:.65rem; background:var(--card); overflow-wrap:anywhere; }

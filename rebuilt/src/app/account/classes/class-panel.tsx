@@ -1,4 +1,5 @@
 "use client";
+import { FilterBar } from "@/components/ui/collection-controls";
 import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState } from "react";
 import type { z } from "zod";
@@ -198,7 +199,7 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
           {semesterPeriod(selectedYear.start_year, 2)?.label}.
         </Status>
       )}
-      <div className="classes-filters">
+      <FilterBar label="Filter kelas dan siswa" className="classes-filters">
         <label className="block text-sm">
           Tahun ajaran
           <select
@@ -230,7 +231,7 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
             onChange={(e) => setSearch(e.target.value)}
           />
         </label>
-      </div>
+      </FilterBar>
       {data.can_manage && (
         <Card>
           <CardHeader>

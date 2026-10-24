@@ -1,4 +1,6 @@
 "use client";
+import { Pagination, FilterBar } from "@/components/ui/collection-controls";
+import { EmptyState } from "@/components/ui/content-state";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -374,36 +376,38 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
             });
           }}
         >
-          <fieldset
-            disabled={disabled}
-            className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            <label className="text-sm">
-              Tahun kalender
-              <input
-                className={controlClass}
-                name="year"
-                type="number"
-                min="2000"
-                max="2100"
-                defaultValue={filters.year}
-                required
-              />
-            </label>
-            <TextField name="start" label="Dari tanggal" type="date" />
-            <TextField name="end" label="Sampai tanggal" type="date" />
-            <SelectField label="Siswa" name="studentId">
-              <option value="">Semua siswa sesuai izin</option>
-              {students.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.full_name} — {p.username}
-                </option>
-              ))}
-            </SelectField>
-            <Button className="sm:col-span-2 lg:col-span-4" type="submit">
-              {reading ? "Memuat…" : "Terapkan filter"}
-            </Button>
-          </fieldset>
+          <FilterBar label="Filter laporan bimbingan" className="">
+            <fieldset
+              disabled={disabled}
+              className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4"
+            >
+              <label className="text-sm">
+                Tahun kalender
+                <input
+                  className={controlClass}
+                  name="year"
+                  type="number"
+                  min="2000"
+                  max="2100"
+                  defaultValue={filters.year}
+                  required
+                />
+              </label>
+              <TextField name="start" label="Dari tanggal" type="date" />
+              <TextField name="end" label="Sampai tanggal" type="date" />
+              <SelectField label="Siswa" name="studentId">
+                <option value="">Semua siswa sesuai izin</option>
+                {students.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.full_name} — {p.username}
+                  </option>
+                ))}
+              </SelectField>
+              <Button className="sm:col-span-2 lg:col-span-4" type="submit">
+                {reading ? "Memuat…" : "Terapkan filter"}
+              </Button>
+            </fieldset>
+          </FilterBar>
         </form>
       </section>
       <section className="min-w-0 space-y-3" aria-busy={reading}>
@@ -493,34 +497,17 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
           </table>
         </TableRegion>
         {!data.rows.length && (
-          <p className="rounded-lg border border-dashed p-6 text-center text-muted-foreground">
+          <EmptyState title="Belum ada hasil">
             Belum ada laporan sesuai filter dan hak akses Anda.
-          </p>
+          </EmptyState>
         )}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Button
-            variant="outline"
-            disabled={disabled || data.page <= 1}
-            onClick={() =>
-              void load({ ...filters, page: String(data.page - 1) })
-            }
-          >
-            Sebelumnya
-          </Button>
-          <span className="text-sm">
-            Halaman {data.page} dari{" "}
-            {Math.max(1, Math.ceil(data.total / data.pageSize))}
-          </span>
-          <Button
-            variant="outline"
-            disabled={disabled || data.page * data.pageSize >= data.total}
-            onClick={() =>
-              void load({ ...filters, page: String(data.page + 1) })
-            }
-          >
-            Berikutnya
-          </Button>
-        </div>
+        <Pagination
+          label="Halaman laporan bimbingan"
+          page={data.page}
+          pageCount={Math.max(1, Math.ceil(data.total / data.pageSize))}
+          disabled={disabled}
+          onPageChange={(page) => void load({ ...filters, page: String(page) })}
+        />
       </section>
       <Dialog
         open={!!mode}

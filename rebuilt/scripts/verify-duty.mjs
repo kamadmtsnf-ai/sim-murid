@@ -233,7 +233,7 @@ try {
     "loading",
     "error",
   ])
-    for (const width of [320, 768, 1440]) {
+    for (const width of [320, 390, 768, 1440]) {
       await visit(mode, width);
       await geometry(page, mode + " " + width);
       if (width === 320) await a11y(page, mode);
@@ -251,7 +251,7 @@ try {
           );
       }
     }
-  for (const width of [320, 375, 768, 1440])
+  for (const width of [320, 375, 390, 768, 1440])
     for (const kind of ["primary", "appoint", "roster"]) {
       await visit("large", width, width === 320 ? 568 : 812);
       await open(kind);

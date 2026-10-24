@@ -1,4 +1,6 @@
 "use client";
+import { Pagination, FilterBar } from "@/components/ui/collection-controls";
+import { EmptyState } from "@/components/ui/content-state";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -290,50 +292,52 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
             void load({ ...next, page: "1" });
           }}
         >
-          <fieldset
-            disabled={disabled}
-            className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            <label className="text-sm">
-              Tahun kalender
-              <input
-                name="year"
-                type="number"
-                min="2000"
-                max="2100"
-                defaultValue={filters.year}
-                required
-                className={controlClass}
-              />
-            </label>
-            <TextField label="Dari tanggal" name="start" type="date" />
-            <TextField label="Sampai tanggal" name="end" type="date" />
-            <SelectField label="Kelas" name="classId">
-              <option value="">Semua kelas sesuai izin</option>
-              {initial.classes.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name}
-                </option>
-              ))}
-            </SelectField>
-            <SelectField label="Siswa" name="studentId">
-              <option value="">Semua siswa sesuai izin</option>
-              {people.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.full_name} — {p.username}
-                </option>
-              ))}
-            </SelectField>
-            <SelectField label="Status" name="status">
-              <option value="">Semua status</option>
-              {attendanceStatuses.map((s) => (
-                <option key={s}>{s}</option>
-              ))}
-            </SelectField>
-            <Button className="sm:col-span-2 lg:col-span-3" type="submit">
-              {reading ? "Memuat…" : "Terapkan filter"}
-            </Button>
-          </fieldset>
+          <FilterBar label="Filter riwayat absensi" className="">
+            <fieldset
+              disabled={disabled}
+              className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              <label className="text-sm">
+                Tahun kalender
+                <input
+                  name="year"
+                  type="number"
+                  min="2000"
+                  max="2100"
+                  defaultValue={filters.year}
+                  required
+                  className={controlClass}
+                />
+              </label>
+              <TextField label="Dari tanggal" name="start" type="date" />
+              <TextField label="Sampai tanggal" name="end" type="date" />
+              <SelectField label="Kelas" name="classId">
+                <option value="">Semua kelas sesuai izin</option>
+                {initial.classes.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </SelectField>
+              <SelectField label="Siswa" name="studentId">
+                <option value="">Semua siswa sesuai izin</option>
+                {people.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.full_name} — {p.username}
+                  </option>
+                ))}
+              </SelectField>
+              <SelectField label="Status" name="status">
+                <option value="">Semua status</option>
+                {attendanceStatuses.map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
+              </SelectField>
+              <Button className="sm:col-span-2 lg:col-span-3" type="submit">
+                {reading ? "Memuat…" : "Terapkan filter"}
+              </Button>
+            </fieldset>
+          </FilterBar>
         </form>
       </section>
       <section
@@ -695,34 +699,17 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
           </table>
         </TableRegion>
         {!data.rows.length && (
-          <p className="rounded-lg border border-dashed p-6 text-center text-muted-foreground">
+          <EmptyState title="Belum ada hasil">
             Belum ada absensi sesuai filter dan hak akses Anda.
-          </p>
+          </EmptyState>
         )}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Button
-            variant="outline"
-            disabled={disabled || data.page <= 1}
-            onClick={() =>
-              void load({ ...filters, page: String(data.page - 1) })
-            }
-          >
-            Sebelumnya
-          </Button>
-          <span className="text-sm">
-            Halaman {data.page} dari{" "}
-            {Math.max(1, Math.ceil(data.total / data.pageSize))}
-          </span>
-          <Button
-            variant="outline"
-            disabled={disabled || data.page * data.pageSize >= data.total}
-            onClick={() =>
-              void load({ ...filters, page: String(data.page + 1) })
-            }
-          >
-            Berikutnya
-          </Button>
-        </div>
+        <Pagination
+          label="Halaman riwayat absensi"
+          page={data.page}
+          pageCount={Math.max(1, Math.ceil(data.total / data.pageSize))}
+          disabled={disabled}
+          onPageChange={(page) => void load({ ...filters, page: String(page) })}
+        />
       </section>
       <Dialog
         open={!!edit}

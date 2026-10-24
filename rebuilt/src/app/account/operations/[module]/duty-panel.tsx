@@ -401,19 +401,30 @@ export function DutyPanel({
               </table>
             </TableRegion>
           )}
-          <div className="flex flex-wrap items-center gap-3">
+          <nav
+            aria-label="Halaman riwayat guru piket"
+            className="ds-pagination ds-actions"
+          >
             {data.page > 1 && (
-              <a className="underline" href={links(data.page - 1)}>
+              <a
+                className="pagination-link"
+                rel="prev"
+                href={links(data.page - 1)}
+              >
                 Sebelumnya
               </a>
             )}
             <span>Halaman {data.page}</span>
             {data.page * data.pageSize < data.total && (
-              <a className="underline" href={links(data.page + 1)}>
+              <a
+                className="pagination-link"
+                rel="next"
+                href={links(data.page + 1)}
+              >
                 Berikutnya
               </a>
             )}
-          </div>
+          </nav>
         </Tabs.Content>
       </Tabs.Root>
       <Button

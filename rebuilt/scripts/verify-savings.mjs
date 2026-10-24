@@ -247,7 +247,7 @@ try {
     await page.goto(base + "/?mode=" + mode);
     await page.locator("#main-content").waitFor();
   };
-  for (const width of [320, 375, 768, 1440]) {
+  for (const width of [320, 375, 390, 768, 1440]) {
     await visit("normal", width);
     await page
       .getByRole("button", { name: "Input transaksi", exact: true })
