@@ -181,7 +181,7 @@ try {
       reads.push(req.url());
       if (readFailure || (contextFailure && scope.classId === id(31)))
         return route.fulfill({ status: 503, json: { message: "Unavailable" } });
-      if (contextStale && scope.classId === id(31)) data.revision = route.request().postDataJSON().revision + 1;
+      if (contextStale && scope.classId === id(31)) data.revision++;
     }
     data.semester = scope.semester;
     data.rows = data.rows.filter(

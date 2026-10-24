@@ -49,3 +49,15 @@ test('Both endpoints of the primary control gradient preserve readable white lab
  for(const stop of ['primary','primary-to']){const a=lum(vars[stop]!),b=lum(vars['primary-foreground']!);assert.ok((Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5);}
  assert.ok(css.includes('prefers-reduced-transparency:reduce'));assert.ok(css.includes('forced-colors:active'));
 });
+
+test('Menu search supports task terms, group names and every word without broadening access',async()=>{
+ const {filterNavigation}=await import('../src/config/account-navigation.ts');
+ const allowed=navigationFor(['references.read','mentoring.read','grades.read'],false);
+ assert.ok(filterNavigation(allowed,'  JADWAL   KBM ').flatMap(g=>g.items).some(i=>i.href==='/account/schedules'));
+ assert.ok(filterNavigation(allowed,'guru wali').flatMap(g=>g.items).some(i=>i.href==='/account/operations/mentoring'));
+ assert.ok(filterNavigation(allowed,'akademik rapor').flatMap(g=>g.items).some(i=>i.href==='/account/learning/reports'));
+ assert.deepEqual(filterNavigation(allowed,'pengaturan'),[]);
+ assert.deepEqual(filterNavigation(allowed,'jadwal tabungan'),[]);
+ assert.equal(filterNavigation(allowed,'').flatMap(g=>g.items).length,allowed.flatMap(g=>g.items).length);
+ assert.ok(allowed.every(g=>g.items.every(i=>!i.adminOnly)));
+});

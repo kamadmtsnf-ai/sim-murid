@@ -324,3 +324,10 @@ Ganjil/Genap dan tahun berpasangan tetap helper tunggal. Tanggal kalender transa
 `useDomainMutation` membedakan pending, success, error yang dapat dikoreksi, blocked dan uncertain. Success memerlukan acknowledgement yang konsisten dan snapshot revisi meningkat. Jangan mengubah uncertain menjadi error biasa atau membuka submit melalui clear pesan. Timeout/aborted fetch bukan bukti rollback.
 
 Shell memakai `FormNavigationGuard`: proses aktif memblokir link akun/logout; isian belum disimpan meminta konfirmasi. Pemberitahuan warning dapat difokuskan dan ditutup tanpa membuka lock proses. Existing dialog tetap memegang focus trap/validasi/domain readback. Listener unload beradaptasi lewat `listenForUnsavedChanges`; controller khusus mengekspos boolean pending/dirty melalui `useWriteGuard`. Tidak menyalin password/OTP/dokumen/transaksi ke draf generik. Batas browser Back SPA dan pemulihan crash dicatat di [laporan P04](../development/STAGE-04-RELIABLE-FORMS.md).
+
+
+## P05A — Navigasi dan kontrol domain
+
+Sidebar menerima menu berizin dari server, lalu filterNavigation hanya menyaring array tersebut. Pencarian memahami kelompok/alias tugas dan semua kata. Label search terpisah dari tombol clear; Escape pertama menghapus query, berikutnya menutup drawer. Menu aktif digulirkan dalam sidebar/drawer sendiri.
+
+TextField/SelectField legacy menjadi adapter Field P02 dengan ID useId dan token ds-field-control; name/defaultValue/validasi native tetap. Halaman lain tidak membuat design system paralel. Laporan rollout: [P05](../development/STAGE-05-NAVIGATION-UX.md).
