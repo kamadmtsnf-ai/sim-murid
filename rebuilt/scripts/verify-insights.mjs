@@ -153,7 +153,7 @@ try {
         : { data, result: { code: "saved" }, code: "saved" },
     });
   });
-  for (const width of [320, 768, 1440]) {
+  for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base);
     await page.getByRole("combobox", { name: /^Periode/ }).selectOption(id(11));

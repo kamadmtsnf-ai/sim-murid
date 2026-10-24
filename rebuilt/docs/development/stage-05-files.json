@@ -1,0 +1,246 @@
+[
+  {
+    "path": "rebuilt/docs/design-system/MASTER.md",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/development/ROADMAP.md",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/development/STAGE-05-NAVIGATION-UX.md",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/verification/navigation/README.md",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/verification/navigation/command-evidence.json",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/verification/navigation/group-a.json",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/verification/navigation/group-b.json",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/verification/navigation/group-c.json",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/docs/verification/navigation/navigation-results.json",
+    "reason": "Standar, matriks adopsi, status, kontrak dan bukti P05."
+  },
+  {
+    "path": "rebuilt/package.json",
+    "reason": "Perintah QA browser tambahan tanpa dependency baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-attendance.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-books.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-classes.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-committee.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-duty.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-grades.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-insights.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-jobs.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-mentoring.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-module-states.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-navigation.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-notifications.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-points.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-savings.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/scripts/verify-schedules.mjs",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/src/app/account/classes/class-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/classes/loading.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/books-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/error.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/grades-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/loading.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/page.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/promotions-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/reports-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/attendance-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/committee-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/duty-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/error.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/loading.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/mentoring-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/page.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/savings-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/schedules/loading.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/schedules/schedule-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/discipline-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/error.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/insights.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/jobs-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/loading.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/notifications-panel.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/page.tsx",
+    "reason": "Adopsi presentasi filter/pagination/loading/error, parameter dan controller domain dipertahankan."
+  },
+  {
+    "path": "rebuilt/src/app/globals.css",
+    "reason": "Navigasi scoped, token/Field/Pagination bersama dan kontrol sentuh/keyboard."
+  },
+  {
+    "path": "rebuilt/src/components/domain-controls.tsx",
+    "reason": "Navigasi scoped, token/Field/Pagination bersama dan kontrol sentuh/keyboard."
+  },
+  {
+    "path": "rebuilt/src/components/ui/collection-controls.tsx",
+    "reason": "Navigasi scoped, token/Field/Pagination bersama dan kontrol sentuh/keyboard."
+  },
+  {
+    "path": "rebuilt/src/components/ui/dialog.tsx",
+    "reason": "Navigasi scoped, token/Field/Pagination bersama dan kontrol sentuh/keyboard."
+  },
+  {
+    "path": "rebuilt/src/components/workspace-shell.tsx",
+    "reason": "Navigasi scoped, token/Field/Pagination bersama dan kontrol sentuh/keyboard."
+  },
+  {
+    "path": "rebuilt/src/config/account-navigation.ts",
+    "reason": "Navigasi scoped, token/Field/Pagination bersama dan kontrol sentuh/keyboard."
+  },
+  {
+    "path": "rebuilt/tests/ui.test.ts",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/tests/ui/module-states-fixture.tsx",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/tests/ui/navigation-fixture.tsx",
+    "reason": "Regresi UI/role/fokus/FormData/state/viewport390 serta selector sesuai pagination baru."
+  },
+  {
+    "path": "rebuilt/docs/development/stage-05-files.json",
+    "reason": "Manifest perubahan seluruh kelompok P05."
+  }
+]

@@ -26,7 +26,10 @@ export default async function LearningPage({
     );
   }
   return (
-    <main id="main-content" className="mx-auto min-w-0 max-w-7xl space-y-6 p-6">
+    <main
+      id="main-content"
+      className="mx-auto min-w-0 max-w-7xl space-y-6 p-4 sm:p-6"
+    >
       <h1 className="text-3xl font-semibold">{titles[domain.data]}</h1>
       <LearningPanel initial={data} />
     </main>

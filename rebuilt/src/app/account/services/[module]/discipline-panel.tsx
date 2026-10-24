@@ -1,4 +1,5 @@
 "use client";
+import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -545,25 +546,14 @@ export function DisciplinePanel({
             Belum ada siswa sesuai periode, pencarian dan hak akses Anda.
           </p>
         )}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Button
-            variant="outline"
-            disabled={page <= 1}
-            onClick={() => setPage((p) => p - 1)}
-          >
-            Siswa sebelumnya
-          </Button>
-          <span className="text-sm">
-            Halaman {page} dari {Math.max(1, Math.ceil(filtered.length / 10))}
-          </span>
-          <Button
-            variant="outline"
-            disabled={page * 10 >= filtered.length}
-            onClick={() => setPage((p) => p + 1)}
-          >
-            Siswa berikutnya
-          </Button>
-        </div>
+        <Pagination
+          label="Halaman poin siswa"
+          page={page}
+          pageCount={Math.max(1, Math.ceil(filtered.length / 10))}
+          onPageChange={setPage}
+          previousLabel="Siswa sebelumnya"
+          nextLabel="Siswa berikutnya"
+        />
       </section>
       {data.isAdmin && (
         <section className="space-y-3 rounded-xl border bg-card p-4 sm:p-5">

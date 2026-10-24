@@ -227,7 +227,7 @@ try {
       .getByText("Data penilaian diperbarui.", { exact: true })
       .waitFor();
   };
-  for (const width of [320, 375, 768, 1440]) {
+  for (const width of [320, 375, 390, 768, 1440]) {
     await visit("normal", width);
     await geometry(page, "normal " + width);
     if (width === 320 || width === 1440) await a11y(page, "normal " + width);

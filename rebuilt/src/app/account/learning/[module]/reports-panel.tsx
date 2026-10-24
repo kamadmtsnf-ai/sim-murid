@@ -1,4 +1,5 @@
 "use client";
+import { Pagination } from "@/components/ui/collection-controls";
 import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -578,33 +579,14 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
             );
           })}
           {filtered.length > 0 && (
-            <nav
-              aria-label="Pagination rapor"
-              className="flex flex-wrap items-center justify-between gap-3"
-            >
-              <span className="text-sm">
-                {filtered.length} siswa · Halaman {Math.min(page, pages)} dari{" "}
-                {pages}
-              </span>
-              <div className="flex gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={disabled || page <= 1}
-                  onClick={() => setPage((p) => p - 1)}
-                >
-                  Sebelumnya
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  disabled={disabled || page >= pages}
-                  onClick={() => setPage((p) => p + 1)}
-                >
-                  Berikutnya
-                </Button>
-              </div>
-            </nav>
+            <Pagination
+              label="Pagination rapor"
+              page={Math.min(page, pages)}
+              pageCount={pages}
+              disabled={disabled}
+              onPageChange={setPage}
+              summary={`${filtered.length} siswa`}
+            />
           )}
         </>
       )}

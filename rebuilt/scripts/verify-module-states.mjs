@@ -92,7 +92,7 @@ function check(ok, name) {
 }
 try{
  browser=await chromium.launch({headless:true,executablePath:process.env.UI_CHROMIUM_EXECUTABLE,args:['--no-sandbox']});page=await browser.newPage();page.on('pageerror',e=>errors.push(String(e)));
- const modes=['classes','schedules','operations','operations-error'];
+ const modes=['classes','schedules','operations','operations-error','learning','learning-error','services','services-error'];
  for(const mode of modes){for(const width of [320,390,768,1440]){
   await page.setViewportSize({width,height:700});await page.goto(base+'?mode='+mode);await page.getByRole('heading',{level:1}).waitFor();check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),mode+' no overflow '+width);check(!(await page.getByText('Private implementation detail').count()),mode+' no internal error detail');
   if(mode.endsWith('error')){await page.getByRole('button',{name:'Coba kembali',exact:true}).click();check(await page.evaluate(()=>window.resetCount===1),mode+' retry callback '+width);}else{check(await page.locator('main[aria-busy=true]').count()===1,mode+' loading state '+width);}

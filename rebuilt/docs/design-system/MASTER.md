@@ -331,3 +331,10 @@ Shell memakai `FormNavigationGuard`: proses aktif memblokir link akun/logout; is
 Sidebar menerima menu berizin dari server, lalu filterNavigation hanya menyaring array tersebut. Pencarian memahami kelompok/alias tugas dan semua kata. Label search terpisah dari tombol clear; Escape pertama menghapus query, berikutnya menutup drawer. Menu aktif digulirkan dalam sidebar/drawer sendiri.
 
 TextField/SelectField legacy menjadi adapter Field P02 dengan ID useId dan token ds-field-control; name/defaultValue/validasi native tetap. Halaman lain tidak membuat design system paralel. Laporan rollout: [P05](../development/STAGE-05-NAVIGATION-UX.md).
+
+
+## P05B/C — Koleksi dan state antarmodul
+
+FilterBar dipakai Kelas/Jadwal serta form filter riwayat operasional; caller tetap memegang handler/disabled/filter/payload. Pagination one-based dipakai pada koleksi operasional, akademik, evaluasi, notifikasi dan jobs. Prop previousLabel/nextLabel/summary opsional mempertahankan konteks domain. Gunakan “Halaman x dari y”; jumlah data adalah total dari scope caller. Link GET guru piket tetap link, tidak diganti mutasi atau fetch client.
+
+LoadingState dan error boundary memakai komponen existing, retry Next dan pesan aman. EmptyState tidak menyamakan “belum ada data” dengan “tidak berizin”; penjelasan scope domain dipertahankan. Tabel memakai TableRegion existing dan tidak menyembunyikan kolom bisnis. Pager pertanyaan Survei, batch siswa dan PDF tetap khusus untuk menjaga autosave/dirty/final/reader. Laporan dan matriks rollout ada pada P05.

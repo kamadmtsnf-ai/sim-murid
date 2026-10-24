@@ -1,0 +1,38 @@
+{
+  "a-check": {
+    "exit_code": 0,
+    "sha256": "01773df2b7b7e371242ba4f2bc84647b0e54d0be52fffb5c1cae6deb65b36d57"
+  },
+  "a-final-lint": {
+    "exit_code": 0,
+    "sha256": "5ede756e0b792a9f2a57a682866fd95f6116c651991c4eaf92c447a6af5734c6"
+  },
+  "a-release-build": {
+    "exit_code": 0,
+    "sha256": "fb75cf4c89e7e892ae897d049ae883d630a4bb0e75a7a1b6f6abb06e3193ff23"
+  },
+  "b-types": {
+    "exit_code": 0,
+    "sha256": "a31979fd547891b92d0322bf3d540310e7bc94e916016fbfb633d24382111417"
+  },
+  "b-final-lint": {
+    "exit_code": 0,
+    "sha256": "5ede756e0b792a9f2a57a682866fd95f6116c651991c4eaf92c447a6af5734c6"
+  },
+  "b-tests": {
+    "exit_code": 0,
+    "sha256": "9a5759752af4d4cc758471fc2a913ecc3d5497e11a39bbb686f050c92fb4d209"
+  },
+  "b-build": {
+    "exit_code": 0,
+    "sha256": "bdff209cd503fdd7edb8c3d3ee4a4e41dcf65004b6d58cf5f5b6d0b093039bd3"
+  },
+  "c-check": {
+    "exit_code": 0,
+    "sha256": "4df36c52cb9d4e1d8f723116783c30032f99eee7ec3cc6d66b1b737275a4d0d7"
+  },
+  "c-release-lint": {
+    "exit_code": 0,
+    "sha256": "5ede756e0b792a9f2a57a682866fd95f6116c651991c4eaf92c447a6af5734c6"
+  }
+}
