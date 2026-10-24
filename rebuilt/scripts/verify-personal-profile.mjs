@@ -208,7 +208,7 @@ try {
     await field("full_name").waitFor();
     mode = "ok";
   }
-  for (const width of [320, 768, 1440]) {
+  for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await fresh("/?long=1");
     await geometry("long profile " + width);

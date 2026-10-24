@@ -17,8 +17,10 @@ import {
   scopeLabels,
   uniqueAssignments,
 } from "@/lib/auth/access-view";
-const control =
-  "min-h-11 w-full min-w-0 rounded-md border bg-background px-3 py-2 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring";
+import { Field, fieldControlClass } from "@/components/ui/field";
+import { FilterBar, Pagination } from "@/components/ui/collection-controls";
+import { EmptyState } from "@/components/ui/content-state";
+import { Status } from "@/components/ui/status";
 export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
   const router = useRouter();
   const [data, setData] = useState<AccessPageData | null>(initialData),
@@ -143,7 +145,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
           server.
         </p>
       </header>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="ds-actions items-center justify-between">
         <p className="text-sm text-muted-foreground">
           Muat ulang untuk memeriksa perubahan peran atau penugasan.
         </p>
@@ -157,20 +159,15 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
           {busy ? "Memeriksa akses…" : "Muat ulang hak akses"}
         </Button>
       </div>
-      <div
-        ref={notice}
-        tabIndex={-1}
-        role={failed ? "alert" : "status"}
-        aria-live={failed ? "assertive" : "polite"}
-        className={
-          message
-            ? "rounded-lg border p-4 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring " +
-              (failed ? "border-destructive text-destructive" : "bg-muted/20")
-            : ""
-        }
-      >
-        {message}
-      </div>
+      {message && (
+        <Status
+          ref={notice}
+          tabIndex={-1}
+          tone={failed ? "error" : busy ? "pending" : "success"}
+        >
+          {message}
+        </Status>
+      )}
       {!data ? (
         <p role="status" className="text-sm text-muted-foreground">
           Mengarahkan ke pemeriksaan akun…
@@ -218,13 +215,10 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
             </CardContent>
           </Card>
           {!data.details_available && (
-            <p
-              role="status"
-              className="rounded-lg border bg-muted/20 p-4 text-sm"
-            >
+            <Status tone="warning">
               Nama beberapa kelas belum dapat dimuat. Cakupan izin tetap
               ditampilkan berdasarkan rujukan kelas yang diterima.
-            </p>
+            </Status>
           )}
           <details className="min-w-0 rounded-xl border bg-card p-4 sm:p-5">
             <summary className="min-h-11 cursor-pointer rounded-md py-3 font-semibold outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -282,14 +276,15 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
               </p>
             </CardHeader>
             <CardContent className="min-w-0 space-y-5 px-4 sm:px-6">
-              <div className="grid min-w-0 gap-4 sm:grid-cols-2">
-                <div className="min-w-0 space-y-2 text-sm font-medium sm:col-span-2">
-                  <label className="block" htmlFor="access-search">
-                    Cari izin
-                  </label>
+              <FilterBar label="Filter cakupan izin">
+                <Field
+                  id="access-search"
+                  label="Cari izin"
+                  className="sm:col-span-2"
+                >
                   <input
                     id="access-search"
-                    className={control}
+                    className={fieldControlClass}
                     type="search"
                     maxLength={200}
                     value={query}
@@ -299,14 +294,11 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                     }}
                     placeholder="Nama layanan, tindakan, atau kelas"
                   />
-                </div>
-                <div className="min-w-0 space-y-2 text-sm font-medium">
-                  <label className="block" htmlFor="access-resource">
-                    Layanan
-                  </label>
+                </Field>
+                <Field id="access-resource" label="Layanan">
                   <select
                     id="access-resource"
-                    className={control}
+                    className={fieldControlClass}
                     value={resource}
                     onChange={(e) => {
                       setResource(e.target.value);
@@ -320,14 +312,11 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                       </option>
                     ))}
                   </select>
-                </div>
-                <div className="min-w-0 space-y-2 text-sm font-medium">
-                  <label className="block" htmlFor="access-scope">
-                    Cakupan
-                  </label>
+                </Field>
+                <Field id="access-scope" label="Cakupan">
                   <select
                     id="access-scope"
-                    className={control}
+                    className={fieldControlClass}
                     value={scope}
                     onChange={(e) => {
                       setScope(e.target.value);
@@ -341,9 +330,9 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                       </option>
                     ))}
                   </select>
-                </div>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                </Field>
+              </FilterBar>
+              <div className="ds-actions items-center justify-between">
                 <p role="status" className="text-sm text-muted-foreground">
                   {filtered.length
                     ? `Menampilkan ${current * 10 + 1}–${Math.min(current * 10 + 10, filtered.length)} dari ${filtered.length} jenis izin`
@@ -387,44 +376,27 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                   ))}
                 </ul>
               ) : (
-                <div className="rounded-lg border border-dashed p-5 text-center">
-                  <h3 className="font-semibold">
-                    {rows.length
+                <EmptyState
+                  title={
+                    rows.length
                       ? "Tidak ada izin yang cocok"
-                      : "Belum ada izin untuk ditampilkan"}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted-foreground">
+                      : "Belum ada izin untuk ditampilkan"
+                  }
+                >
+                  <p>
                     {rows.length
                       ? "Ubah pencarian atau reset filter untuk melihat izin lainnya."
                       : "Hubungi administrator jika peran akun atau cakupan izin perlu diperiksa."}
                   </p>
-                </div>
+                </EmptyState>
               )}
               {pages > 1 && (
-                <nav
-                  aria-label="Halaman daftar izin"
-                  className="flex flex-wrap items-center justify-between gap-3"
-                >
-                  <Button
-                    type="button"
-                    variant="outline"
-                    disabled={current === 0}
-                    onClick={() => turn(current - 1)}
-                  >
-                    Sebelumnya
-                  </Button>
-                  <p className="text-sm">
-                    Halaman {current + 1} dari {pages}
-                  </p>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    disabled={current >= pages - 1}
-                    onClick={() => turn(current + 1)}
-                  >
-                    Berikutnya
-                  </Button>
-                </nav>
+                <Pagination
+                  label="Halaman daftar izin"
+                  page={current + 1}
+                  pageCount={pages}
+                  onPageChange={(next) => turn(next - 1)}
+                />
               )}
             </CardContent>
           </Card>

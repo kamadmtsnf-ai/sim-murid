@@ -417,6 +417,8 @@ try {
   );
   await page.keyboard.press("Escape");
   await dialog().waitFor({ state: "hidden" });
+  // Radix restores focus after unmount; hidden alone does not await autofocus.
+  await page.waitForFunction(() => Array.from(document.querySelectorAll("button")).some(e => e.textContent === "Edit" && e === document.activeElement));
   check(
     await page
       .getByRole("button", { name: "Edit", exact: true })

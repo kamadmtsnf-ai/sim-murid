@@ -502,3 +502,37 @@
 .reconciliation-panel button { min-height: 2.75rem; max-width: 100%; height: auto; white-space: normal; overflow-wrap: anywhere; }
 .reconciliation-panel input, .reconciliation-panel select { min-width: 0; max-width: 100%; min-height: 2.75rem; }
 @media (min-width:640px) { .reconciliation-panel [data-slot="card-header"], .reconciliation-panel [data-slot="card-content"] { padding-inline: 1.5rem; } }
+
+/* P02: shared presentation contracts; adoption is scoped to pilot components. */
+:root {
+  --control-min-height: 2.75rem;
+  --field-gap: .5rem;
+  --collection-gap: 1rem;
+}
+@layer components {
+  .ds-field { display:flex; min-width:0; flex-direction:column; gap:var(--field-gap); overflow-wrap:anywhere; }
+  .ds-field-label { font-size:.875rem; font-weight:600; line-height:1.5; }
+  .ds-field-control { display:block; width:100%; min-width:0; min-height:var(--control-min-height); border:1px solid var(--input); border-radius:.65rem; background:var(--card); padding:.5rem .75rem; font-size:1rem; line-height:1.5; }
+  .ds-field-control:focus-visible { outline:2px solid var(--primary); outline-offset:3px; }
+  .ds-field-help { color:var(--muted-foreground); font-size:.8125rem; line-height:1.5; }
+  .ds-field-error { color:var(--destructive); font-size:.875rem; line-height:1.5; }
+  .ds-filter-bar { display:grid; min-width:0; grid-template-columns:minmax(0,1fr); gap:var(--collection-gap); }
+  .ds-pagination { display:flex; min-width:0; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.75rem; }
+  .ds-actions { display:flex; min-width:0; flex-wrap:wrap; gap:.75rem; }
+  .ds-empty-state { min-width:0; overflow-wrap:anywhere; border:1px dashed var(--input); border-radius:.75rem; background:var(--card); padding:1.5rem; text-align:center; }
+  .ds-status { overflow-wrap:anywhere; }
+  @media(min-width:640px) { .ds-filter-bar { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+}
+
+/* Same layer as Button utilities: scoped action labels must be able to wrap. */
+@layer utilities {
+  .ds-actions [data-slot="button"] { min-width:0; max-width:100%; min-height:var(--control-min-height); white-space:normal; overflow-wrap:anywhere; }
+}
+@layer components {
+  .ds-pagination > p { flex:1 0 100%; order:-1; text-align:center; }
+  .ds-pagination > button { flex:1 1 7rem; }
+  @media(min-width:640px) {
+    .ds-pagination > p { flex:initial; order:0; }
+    .ds-pagination > button { flex:initial; }
+  }
+}

@@ -24,7 +24,7 @@ Instruksi terbaru pengguna → keputusan bisnis disepakati → spesifikasi exist
 | ID | Tahap | Ruang lingkup dan hasil wajib | Gerbang selesai | Status |
 |---|---|---|---|---|
 | P01 | Audit kondisi awal dan rencana kerja | Inventaris fitur existing; dependency UI/API/data; skenario peran; gap dan prioritas; ukuran keberhasilan; batas perubahan | Bukti sumber, backlog berurutan, kriteria penerimaan, risiko dan batas verifikasi terdokumentasi | Selesai; lihat laporan P01 |
-| P02 | Penyatuan design system | Evaluasi MASTER existing; satukan token, tombol, tabel, filter, formulir, dialog, pagination, loading/error/empty; pilot halaman read-only dan mutasi | Pilot konsisten pada 320/390/768/1440 px; keyboard/fokus/axe; error/loading/empty; tidak mengubah hasil bisnis | Belum dimulai |
+| P02 | Penyatuan design system | Evaluasi MASTER existing; satukan token, tombol, tabel, filter, formulir, dialog, pagination, loading/error/empty; pilot halaman read-only dan mutasi | Pilot konsisten pada 320/390/768/1440 px; keyboard/fokus/axe; error/loading/empty; tidak mengubah hasil bisnis | Selesai; lihat [laporan P02](STAGE-02-DESIGN-SYSTEM.md) |
 | P03 | Konteks akademik global | Tahun ajaran/semester/kelas konsisten dan dapat dipertahankan lintas modul relevan; validasi scope dan fallback eksplisit | Periode lintas halaman benar; pilihan usang/kelas dicabut ditangani; tanggal WIB dan server tetap otoritas | Belum dimulai |
 | P04 | Keandalan formulir dan penyimpanan | Standar pending/saved/error/uncertain, readback aman, lock submit, perlindungan isian dan draf selektif | Timeout/offline/konflik/submit ganda tidak menyebabkan duplikasi atau kehilangan draf; tidak retry mutasi ambigu otomatis | Belum dimulai |
 | P05 | Navigasi dan UI/UX antarmodul | Terapkan standar per kelompok modul; sidebar, istilah, hierarki, tabel dan mobile | Peran/scope tetap; navigasi sidebar; kontrol sentuh/fokus; tidak ada overflow halaman atau elemen terpotong pada skenario uji | Belum dimulai |
@@ -69,3 +69,5 @@ Lihat rancangan pengukuran pada P01. Ukur waktu tugas, keberhasilan tugas, kesal
 ## Riwayat
 
 - 24 Oktober 2026: rencana 12 tahap disimpan berdasarkan persetujuan pengguna; P01 dilaksanakan sebagai audit sumber dan rencana kerja. Tidak mengimplementasikan P02–P12 dalam tahap ini.
+
+- 24 Oktober 2026: P02 selesai pada pilot Hak akses saya dan Profil pribadi; standar dan bukti pada laporan P02. P03–P12 belum dimulai.

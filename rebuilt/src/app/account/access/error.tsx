@@ -1,4 +1,5 @@
 "use client";
+import { Status } from "@/components/ui/status";
 import { Button } from "@/components/ui/button";
 export default function AccessError({
   reset,
@@ -15,10 +16,10 @@ export default function AccessError({
       <h1 className="text-2xl font-semibold">
         Hak akses saya belum dapat dimuat
       </h1>
-      <p role="alert" className="text-sm text-muted-foreground">
+      <Status tone="error">
         Koneksi atau layanan sedang bermasalah. Coba kembali untuk memeriksa
         status terbaru.
-      </p>
+      </Status>
       <Button onClick={reset}>Coba lagi</Button>
     </main>
   );

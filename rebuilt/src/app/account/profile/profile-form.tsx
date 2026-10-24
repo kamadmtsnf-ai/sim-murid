@@ -18,8 +18,12 @@ const labels: Record<ProfileField, string> = {
   contact_email: "Email kontak",
   bio: "Bio",
 };
-const field =
-  "mt-2 min-h-11 w-full min-w-0 rounded-md border bg-background px-3 py-2 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring";
+import {
+  Field,
+  fieldControlClass,
+  fieldDescriptionIds,
+} from "@/components/ui/field";
+import { Status } from "@/components/ui/status";
 export function ProfileForm({
   initialProfile,
 }: {
@@ -247,8 +251,19 @@ export function ProfileForm({
           >
             <legend className="sr-only">Edit profil pribadi</legend>
             {profileFields.map((name) => (
-              <div
+              <Field
                 key={name}
+                id={"profile-" + name}
+                label={labels[name]}
+                required={name === "full_name"}
+                error={errors[name]}
+                description={
+                  name === "contact_email"
+                    ? "Jika email kontak berubah atau dihapus, verifikasi email lama dibatalkan. Email kontak berbeda dari username untuk masuk."
+                    : name === "bio"
+                      ? `${draft.bio.length.toLocaleString("id-ID")} / 2.000 karakter`
+                      : undefined
+                }
                 className={
                   "min-w-0 " +
                   (name === "bio" || name === "contact_email"
@@ -256,18 +271,11 @@ export function ProfileForm({
                     : "")
                 }
               >
-                <label
-                  htmlFor={"profile-" + name}
-                  className="text-sm font-medium"
-                >
-                  {labels[name]}
-                  {name === "full_name" ? " *" : ""}
-                </label>
                 {name === "bio" ? (
                   <textarea
                     id={"profile-" + name}
                     name={name}
-                    className={field + " min-h-32 resize-y"}
+                    className={fieldControlClass + " min-h-32 resize-y"}
                     value={draft[name]}
                     onChange={(e) => {
                       setDraft((d) => ({ ...d, [name]: e.target.value }));
@@ -280,18 +288,17 @@ export function ProfileForm({
                     maxLength={2000}
                     rows={4}
                     aria-invalid={!!errors[name]}
-                    aria-describedby={
-                      "profile-" +
-                      name +
-                      "-help" +
-                      (errors[name] ? " profile-" + name + "-error" : "")
-                    }
+                    aria-describedby={fieldDescriptionIds(
+                      "profile-" + name,
+                      true,
+                      errors[name],
+                    )}
                   />
                 ) : (
                   <input
                     id={"profile-" + name}
                     name={name}
-                    className={field}
+                    className={fieldControlClass}
                     type={
                       name === "phone"
                         ? "tel"
@@ -312,13 +319,11 @@ export function ProfileForm({
                     }
                     required={name === "full_name"}
                     aria-invalid={!!errors[name]}
-                    aria-describedby={
-                      (name === "contact_email"
-                        ? "profile-contact_email-help"
-                        : "") +
-                        (errors[name] ? " profile-" + name + "-error" : "") ||
-                      undefined
-                    }
+                    aria-describedby={fieldDescriptionIds(
+                      "profile-" + name,
+                      name === "contact_email",
+                      errors[name],
+                    )}
                     onChange={(e) => {
                       setDraft((d) => ({ ...d, [name]: e.target.value }));
                       setErrors((s) => {
@@ -329,33 +334,7 @@ export function ProfileForm({
                     }}
                   />
                 )}
-                {name === "contact_email" && (
-                  <p
-                    id="profile-contact_email-help"
-                    className="mt-2 text-xs text-muted-foreground"
-                  >
-                    Jika email kontak berubah atau dihapus, verifikasi email
-                    lama dibatalkan. Email kontak berbeda dari username untuk
-                    masuk.
-                  </p>
-                )}
-                {name === "bio" && (
-                  <p
-                    id="profile-bio-help"
-                    className="mt-2 text-xs text-muted-foreground"
-                  >
-                    {draft.bio.length.toLocaleString("id-ID")} / 2.000 karakter
-                  </p>
-                )}
-                {errors[name] && (
-                  <p
-                    id={"profile-" + name + "-error"}
-                    className="mt-2 text-sm text-destructive"
-                  >
-                    {errors[name]}
-                  </p>
-                )}
-              </div>
+              </Field>
             ))}
           </fieldset>
           {dirty && (
@@ -363,21 +342,12 @@ export function ProfileForm({
               Ada perubahan yang belum disimpan.
             </p>
           )}
-          <div
-            role={failed ? "alert" : "status"}
-            aria-live={failed ? "assertive" : "polite"}
-            className={
-              message
-                ? "rounded-lg border p-3 text-sm break-words " +
-                  (failed
-                    ? "border-destructive text-destructive"
-                    : "bg-muted/30")
-                : ""
-            }
-          >
-            {message}
-          </div>
-          <div className="flex flex-col flex-wrap gap-3 sm:flex-row">
+          {message && (
+            <Status tone={failed ? "error" : busy ? "pending" : "success"}>
+              {message}
+            </Status>
+          )}
+          <div className="ds-actions flex-col sm:flex-row">
             <Button type="submit" disabled={busy || !!pending}>
               {busy ? "Memproses…" : "Simpan profil"}
             </Button>
