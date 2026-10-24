@@ -342,3 +342,7 @@ LoadingState dan error boundary memakai komponen existing, retry Next dan pesan 
 ## P06 — ringkasan beranda sesuai peran
 
 Beranda `/account` memakai Card, Status, Button dan token existing. Ringkasan selalu menyertakan periode dan sumber; kegagalan sumber menghasilkan nilai tidak tersedia, bukan nol. Prioritas bersifat informasi dan mengarahkan melalui sidebar. Snapshot lama diberi waktu pembaruan; akses kedaluwarsa/pergantian akun menghapus data operasional. Grid satu kolom mobile dan agenda dapat wrapping. Lihat laporan P06 dan bukti `docs/verification/overview`.
+
+## P07 — pusat tindak lanjut
+
+Notifikasi memakai tab Radix Kotak masuk/Tindak lanjut, filter dan pagination existing. Kedua panel dipertahankan saat berganti tab; panel tidak aktif disembunyikan. Card menampilkan modul, urgensi, status, penanggung jawab dan target sumber. Target tidak diketahui ditulis eksplisit; status tidak tersedia berbeda dari selesai. Fokus hasil setelah refresh/pagination hanya diarahkan ke panel terlihat. Preferensi tampilan per akun/perangkat tidak mengubah kanal kiriman atau pengamanan wajib. Komponen mengikuti grid satu kolom mobile/dua kolom desktop dan wrapping konten panjang.

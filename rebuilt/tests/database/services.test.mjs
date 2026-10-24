@@ -748,3 +748,13 @@ test('Jobs audit: retry only a failed row below ceiling; preserve ambiguity and 
  assert.equal((await val("select public.app_delivery_worker('complete',$1,'sent','synthetic')",[id])).code,'not_found');
  assert.equal((await service('jobs',{type:'retry',id},A.s1)).code,'denied');
 });
+
+
+test('P07: repeated notification event keeps one inbox and outbox entry per recipient/channel',async()=>{
+ const row=(await db.query("select id,student_id,date_trunc('month',event_date)::date as month from sim_murid_private.point_events where base_points<0 and cancelled_at is null limit 1")).rows[0];assert.ok(row);
+ await db.exec("update sim_murid_private.service_settings set email_enabled=true,whatsapp_enabled=true,point_threshold=0");
+ await val('select public.app_point_notify($1,$2,$3)',[row.student_id,row.month,row.id]);
+ const inbox=await val('select count(*)::int from sim_murid_private.inbox'),outbox=await val('select count(*)::int from sim_murid_private.outbox');
+ await Promise.all([val('select public.app_point_notify($1,$2,$3)',[row.student_id,row.month,row.id]),val('select public.app_point_notify($1,$2,$3)',[row.student_id,row.month,row.id])]);
+ assert.equal(await val('select count(*)::int from sim_murid_private.inbox'),inbox);assert.equal(await val('select count(*)::int from sim_murid_private.outbox'),outbox);
+});

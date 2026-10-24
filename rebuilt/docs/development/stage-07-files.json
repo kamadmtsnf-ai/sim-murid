@@ -1,0 +1,22 @@
+{
+  "rebuilt/docs/development/STAGE-07-FOLLOW-UP.md": "Dokumentasi tahap/design system dan perintah verifikasi",
+  "rebuilt/docs/verification/follow-up/README.md": "Pengujian dan bukti regresi P07",
+  "rebuilt/docs/verification/follow-up/browser-results.json": "Pengujian dan bukti regresi P07",
+  "rebuilt/docs/verification/follow-up/notifications-regression.json": "Pengujian dan bukti regresi P07",
+  "rebuilt/docs/verification/follow-up/overview-regression.json": "Pengujian dan bukti regresi P07",
+  "rebuilt/scripts/verify-follow-up.mjs": "Pengujian dan bukti regresi P07",
+  "rebuilt/src/app/api/account/follow-up/route.ts": "Implementasi komposisi baca, status sumber, gate dan UI tindak lanjut",
+  "rebuilt/src/components/dashboard/follow-up-center.tsx": "Implementasi komposisi baca, status sumber, gate dan UI tindak lanjut",
+  "rebuilt/src/lib/dashboard/follow-up-server.ts": "Implementasi komposisi baca, status sumber, gate dan UI tindak lanjut",
+  "rebuilt/src/lib/dashboard/follow-up.ts": "Implementasi komposisi baca, status sumber, gate dan UI tindak lanjut",
+  "rebuilt/tests/follow-up-route.test.mjs": "Pengujian dan bukti regresi P07",
+  "rebuilt/tests/follow-up.test.mjs": "Pengujian dan bukti regresi P07",
+  "rebuilt/tests/ui/follow-up-fixture.tsx": "Pengujian dan bukti regresi P07",
+  "rebuilt/docs/design-system/MASTER.md": "Dokumentasi tahap/design system dan perintah verifikasi",
+  "rebuilt/docs/development/ROADMAP.md": "Dokumentasi tahap/design system dan perintah verifikasi",
+  "rebuilt/package.json": "Dokumentasi tahap/design system dan perintah verifikasi",
+  "rebuilt/src/app/account/services/[module]/panel.tsx": "Implementasi komposisi baca, status sumber, gate dan UI tindak lanjut",
+  "rebuilt/tests/database/overview.test.mjs": "Pengujian dan bukti regresi P07",
+  "rebuilt/tests/database/services.test.mjs": "Pengujian dan bukti regresi P07",
+  "rebuilt/docs/development/stage-07-files.json": "Manifest file dan alasan perubahan P07"
+}
