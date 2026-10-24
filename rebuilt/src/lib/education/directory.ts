@@ -51,6 +51,7 @@ export function directoryDate(value: string) {
 export function assignmentLabel(code: string) {
   const labels: Record<string, string> = {
     school_head: "Kepala madrasah",
+    homeroom_teacher: "Wali kelas",
     duty_teacher: "Guru piket",
     student_mentor: "Pembimbing siswa",
     committee_treasurer: "Bendahara komite",
