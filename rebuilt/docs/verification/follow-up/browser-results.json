@@ -1,0 +1,399 @@
+{
+  "checks": [
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320 actual overdue visible",
+      "passed": true
+    },
+    {
+      "name": "loaded 320 axe",
+      "passed": true
+    },
+    {
+      "name": "320 required remains after preference",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "390 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "390 actual overdue visible",
+      "passed": true
+    },
+    {
+      "name": "loaded 390 axe",
+      "passed": true
+    },
+    {
+      "name": "390 required remains after preference",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "768 actual overdue visible",
+      "passed": true
+    },
+    {
+      "name": "loaded 768 axe",
+      "passed": true
+    },
+    {
+      "name": "768 required remains after preference",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440 actual overdue visible",
+      "passed": true
+    },
+    {
+      "name": "loaded 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "1440 required remains after preference",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "teacher no plan disclosure",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "student no plan disclosure",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "parent no plan disclosure",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "customer no plan disclosure",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "alumni no plan disclosure",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "applicant no plan disclosure",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "empty no overflow",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "partial axe",
+      "passed": true
+    },
+    {
+      "name": "partial no overflow",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "unavailable axe",
+      "passed": true
+    },
+    {
+      "name": "unavailable no overflow",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "many axe",
+      "passed": true
+    },
+    {
+      "name": "many no overflow",
+      "passed": true
+    },
+    {
+      "name": "many plans paginated",
+      "passed": true
+    },
+    {
+      "name": "pagination advances",
+      "passed": true
+    },
+    {
+      "name": "search empty state",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "double submit lock",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "completion follows refreshed source",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "offline previous snapshot marked stale",
+      "passed": true
+    },
+    {
+      "name": "offline private error redacted",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "503 previous snapshot marked stale",
+      "passed": true
+    },
+    {
+      "name": "503 private error redacted",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "malformed previous snapshot marked stale",
+      "passed": true
+    },
+    {
+      "name": "malformed private error redacted",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "401 clears private snapshot",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "403 clears private snapshot",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "wrong-owner clears private snapshot",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "account remount clears old data",
+      "passed": true
+    },
+    {
+      "name": "preference restored per account",
+      "passed": true
+    },
+    {
+      "name": "other tab preference sync",
+      "passed": true
+    },
+    {
+      "name": "storage contains no operational snapshots",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "timeout never retries",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "unmount ignores late response",
+      "passed": true
+    },
+    {
+      "name": "inbox unchanged and independently accessible",
+      "passed": true
+    },
+    {
+      "name": "keyboard tab activation",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "urgency filter isolates overdue source",
+      "passed": true
+    },
+    {
+      "name": "keyboard result focus remains usable",
+      "passed": true
+    },
+    {
+      "name": "blocked storage uses temporary preference",
+      "passed": true
+    },
+    {
+      "name": "inbox request reached handler",
+      "passed": true
+    },
+    {
+      "name": "tab switching preserves pending inbox write without duplicate submission",
+      "passed": true
+    },
+    {
+      "name": "read-only request, no claimed actor/scope",
+      "passed": true
+    },
+    {
+      "name": "read acknowledgement does not complete source tasks",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "loaded 320",
+      "violations": []
+    },
+    {
+      "label": "loaded 390",
+      "violations": []
+    },
+    {
+      "label": "loaded 768",
+      "violations": []
+    },
+    {
+      "label": "loaded 1440",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "partial",
+      "violations": []
+    },
+    {
+      "label": "unavailable",
+      "violations": []
+    },
+    {
+      "label": "many",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

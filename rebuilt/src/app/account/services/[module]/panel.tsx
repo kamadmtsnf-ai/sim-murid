@@ -1,4 +1,5 @@
 "use client";
+import { FollowUpCenter } from "@/components/dashboard/follow-up-center";
 import { ReconciliationPanel } from "./reconciliation-panel";
 import { JobsPanel } from "./jobs-panel";
 import { type ServiceSnapshot } from "@/lib/services/validation";
@@ -38,9 +39,10 @@ export function ServicesPanel(props: {
       />
     );
   return props.initial.module === "notifications" ? (
-    <NotificationsPanel
+    <FollowUpCenter
       key={`${props.userId}:${props.initial.revision}`}
-      initial={props.initial}
+      userId={props.userId}
+      inbox={<NotificationsPanel initial={props.initial} />}
     />
   ) : null;
 }
