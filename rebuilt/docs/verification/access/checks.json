@@ -1,0 +1,223 @@
+{
+  "install": {
+    "command": "npm ci",
+    "exit_code": 0
+  },
+  "check_commands": [
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:foundation",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:database",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:auth",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:login",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:sessions",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:authorization",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:security",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:recovery",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:recovery:routes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:account-recovery",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:email",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:email-verification",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:settings",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:personal-profile",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:biodata",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:education",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:families",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:singleton-writes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:academic",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:schedules",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:classes",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:directory",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:user-detail",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:users",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:duty",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:attendance",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:mentoring",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:committee",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:savings",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:operations",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:learning",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:grades",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:reports",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:promotions",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:books",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:services",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:jobs",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:reconciliation",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:surveys",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:insights",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:points",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:notifications",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:ui",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:dashboard",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:production",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run db:types:check",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0
+    }
+  ],
+  "unique_regression_tests": 543,
+  "unique_groups": 62,
+  "later_incremental_build": {
+    "exit_code": 1,
+    "reason": "Local Turbopack persistence cache could not be opened."
+  },
+  "clean_release_build": {
+    "command": "npm run build",
+    "exit_code": 0,
+    "note": "Generated local .next cache moved aside. No application database changes."
+  },
+  "final_changed_file_lint": {
+    "exit_code": 0
+  },
+  "browser": {
+    "checks": 104,
+    "axe_runs": 8,
+    "errors": []
+  }
+}
