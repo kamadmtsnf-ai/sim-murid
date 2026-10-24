@@ -79,3 +79,5 @@ Lihat rancangan pengukuran pada P01. Ukur waktu tugas, keberhasilan tugas, kesal
 - 24 Oktober 2026: P05 selesai melalui tiga kelompok: [PR #49](https://github.com/kamadmtsnf-ai/sim-murid/pull/49) navigasi/kontrol, [PR #50](https://github.com/kamadmtsnf-ai/sim-murid/pull/50) kelas/jadwal/operasional, dan [PR #51](https://github.com/kamadmtsnf-ai/sim-murid/pull/51) akademik/evaluasi/state. Validasi, manifest dan batas pada laporan P05. P06–P12 belum dimulai.
 
 - 24 Oktober 2026: P06 beranda sesuai peran selesai. Bukti dan batas verifikasi pada laporan P06; P07–P12 belum dimulai.
+
+PR implementasi: [#52](https://github.com/kamadmtsnf-ai/sim-murid/pull/52).

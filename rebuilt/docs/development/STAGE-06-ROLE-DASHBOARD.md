@@ -65,3 +65,5 @@ Sumber dibaca independen, bukan satu transaksi lintas modul. Angka dapat berubah
 ## Hasil verifikasi
 
 `npm run check` exit 0: 576 tes/65 kelompok, typecheck, lint, production build. Browser: 529 pemeriksaan/71 axe dalam tujuh suite; rincian dan artefak JSON pada [bukti P06](../verification/overview/README.md). Tidak ada pengujian langsung akun produksi atau pengiriman provider.
+
+PR implementasi: [#52](https://github.com/kamadmtsnf-ai/sim-murid/pull/52).
