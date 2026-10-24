@@ -269,7 +269,7 @@ try {
     page.locator("article").filter({
       has: page.getByRole("heading", { name: "Buku 1", exact: true }),
     });
-  for (const width of [320, 768, 1440]) {
+  for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await visit();
     if (width === 320) {
@@ -458,7 +458,7 @@ try {
   await page.locator("article").first().waitFor();
   await visit("large");
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
-  await page.getByText("Halaman 2 / 3", { exact: true }).waitFor();
+  await page.getByRole("navigation", {name:"Halaman katalog",exact:true}).getByText("Halaman 2 dari 3", {exact:true}).waitFor();
   check(true, "catalog server pagination advances with same scope");
   readFailure = true;
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
@@ -466,7 +466,7 @@ try {
     .getByText("Katalog belum dapat dimuat.", { exact: false })
     .waitFor();
   check(
-    await page.getByText("Halaman 2 / 3", { exact: true }).isVisible(),
+    await page.getByRole("navigation", {name:"Halaman katalog",exact:true}).getByText("Halaman 2 dari 3", {exact:true}).isVisible(),
     "pagination failure retains previous data",
   );
   readFailure = false;

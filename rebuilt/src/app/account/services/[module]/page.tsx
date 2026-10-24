@@ -52,7 +52,7 @@ export default async function ServicesPage({
       className={
         m.data === "jobs" || m.data === "reconciliation"
           ? "mx-auto min-w-0 max-w-5xl space-y-6 px-4 py-6 sm:px-6 sm:py-10"
-          : "mx-auto min-w-0 max-w-7xl space-y-6 p-6"
+          : "mx-auto min-w-0 max-w-7xl space-y-6 p-4 sm:p-6"
       }
     >
       <h1 className="text-3xl font-semibold">{titles[m.data]}</h1>

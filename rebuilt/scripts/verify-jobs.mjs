@@ -199,7 +199,7 @@ try {
     await refresh().click();
     await page.getByText(/^Antrean diperbarui/).waitFor();
   }
-  for (const width of [320, 768, 1440]) {
+  for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base);
     await preview().waitFor();

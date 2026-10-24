@@ -1,4 +1,5 @@
 "use client";
+import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
@@ -488,32 +489,14 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
   function pagination() {
     return (
       rows.length > 0 && (
-        <nav
-          aria-label="Pagination data"
-          className="flex flex-wrap items-center justify-between gap-3"
-        >
-          <p className="text-sm">
-            {rows.length} data · Halaman {Math.min(page, pages)} dari {pages}
-          </p>
-          <div className="flex gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              disabled={disabled || page <= 1}
-              onClick={() => setPage((v) => v - 1)}
-            >
-              Sebelumnya
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              disabled={disabled || page >= pages}
-              onClick={() => setPage((v) => v + 1)}
-            >
-              Berikutnya
-            </Button>
-          </div>
-        </nav>
+        <Pagination
+          label="Pagination data"
+          page={Math.min(page, pages)}
+          pageCount={pages}
+          disabled={disabled}
+          onPageChange={setPage}
+          summary={`${rows.length} data`}
+        />
       )
     );
   }

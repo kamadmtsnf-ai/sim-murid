@@ -7,8 +7,8 @@ Tanggal 24 Oktober 2026 WIB. Baseline main `a0b8ec07b9d7bbb8af5ddd6acc59161dbfb9
 | Kelompok | Cakupan | Status |
 |---|---|---|
 | A | Sidebar, pencarian, keyboard/mobile dan adapter formulir bersama | Selesai; [PR #49](https://github.com/kamadmtsnf-ai/sim-murid/pull/49), merged |
-| B | Kelas/jadwal dan operasional siswa: filter, pagination, empty/loading/error | Selesai dan diverifikasi; PR dicatat setelah dibuat |
-| C | Akademik/evaluasi: pagination dan konsistensi state presentasi | Berikutnya |
+| B | Kelas/jadwal dan operasional siswa: filter, pagination, empty/loading/error | Selesai; [PR #50](https://github.com/kamadmtsnf-ai/sim-murid/pull/50), merged |
+| C | Akademik/evaluasi: pagination dan konsistensi state presentasi | Implementasi dan verifikasi; PR terakhir sedang disiapkan |
 
 Setiap kelompok dirilis melalui PR dan regresi tersendiri, sesuai B04/P05. Ringkasan hasil bukan UAT pengguna produksi; batas pengujian dicatat pada bukti verifikasi.
 
@@ -41,3 +41,29 @@ EmptyState operasional mempertahankan penjelasan domain dan scope. Loading Kelas
 File B: collection-controls (prop label/summary additive), kelas/jadwal panel dan loading, lima panel operasi, operations page/loading/error, CSS tautan pagination, fixture/module-state browser dan perluasan 390px pada tujuh suite. Tidak mengubah request/API/SQL/state simpan.
 
 Hasil B: 77 tes terkait/7 kelompok, TypeScript/lint/build lulus; 1174 cek browser/92 axe pada 9 suite lulus, termasuk 16 pemeriksaan state loading/error pada empat viewport.
+
+## C — Akademik dan evaluasi
+
+Pagination katalog Buku, riwayat Nilai, Rapor, Kenaikan/Ijazah, Poin, responden Hasil Survei, Notifikasi dan antrean Pekerjaan memakai satu Pagination. Label domain/total, halaman/ukuran dan callback domain dipertahankan. Notifikasi tetap mengembalikan fokus hasil; katalog Buku tetap fetch scoped dan mempertahankan data bila baca gagal. Teks halaman kini konsisten “Halaman x dari y”; selector katalog tes diperbarui tanpa melonggarkan pembuktian page/scope atau recovery.
+
+Alur batch siswa Nilai, langkah pertanyaan/autosave/final Survei dan kontrol halaman/zoom PDF tetap khusus karena memiliki state dan side effect berbeda. Tidak mengganti ke pagination generik secara membabi buta. TableRegion existing menjaga seluruh kolom bisnis dan gulir lokal; tidak menyembunyikan data pada mobile.
+
+Route Akademik dan Layanan mempunyai LoadingState/error boundary sendiri yang menggunakan komponen existing; judul konteks tetap pada breadcrumb dan error tidak mengekspos detail internal. Padding halaman menyesuaikan viewport. Kondisi empty/error/success/pending domain, RBAC, validasi, provider, final lock, arsip dan rumus tidak berubah.
+
+File C: delapan panel pagination, learning/services page/loading/error, fixture state, penambahan viewport390 dan selector katalog pada skrip terkait. Tidak ada perubahan API/SQL/dependency/framework.
+
+### Matriks adopsi dan yang dipertahankan
+
+| Kelompok | Adopsi P05 | Yang tetap khusus |
+|---|---|---|
+| Akun/pengguna | Navigasi scoped, pencarian/fokus, Field adapter, heading/mobile | Validasi/security/OTP/provisioning/sesi/dokumen dan guard P04 |
+| Kelas/jadwal | FilterBar, Field, LoadingState | Parameter tahun ajaran UUID, tab KBM/Piket, placement/dirty/modal |
+| Operasional | FilterBar, Pagination/tautan GET, EmptyState, Loading/error | Tanggal kalender, scope penugasan, audit koreksi, ledger/fee/readback |
+| Nilai/Rapor/Kelulusan/Buku | Pager koleksi, kontrol bersama, padding/state route | Batch nilai, arsip/D10, terbit snapshot, PDF dan private storage |
+| Evaluasi/notifikasi/admin | Pager koleksi, state route, adapter Field | Survei autosave/final, rencana/AI, jobs/recovery dan filter khusus |
+
+Standar tabel, dialog, status, token dan fokus yang sudah layak tetap dipakai. Tidak semua kontrol khusus dipaksa menggunakan satu wrapper; kesetaraan perilaku dan aksesibilitas lebih penting daripada jumlah komponen yang diganti. P06 berikutnya adalah Beranda sesuai peran, belum dikerjakan.
+
+Hasil browser C: 1165 pemeriksaan/176 axe pada 17 suite lulus. Tambahan regresi Direktori, Detail pengguna, Dashboard, konteks akademik, guard formulir, Survei dan design system tetap lulus.
+
+Pemeriksaan akhir kelompok C: `npm run check` selesai exit 0, 549 tes/63 kelompok tanpa gagal, termasuk TypeScript/lint, SQL terisolasi, drift tipe dan production build. Lint release juga exit 0. Tes awal Buku masih mengharapkan teks slash; kedua assertion katalog diubah ke region Halaman katalog dan “Halaman 2 dari 3”, kemudian seluruh 50 cek Buku lulus. Percobaan awal B memakai path CSS yang belum tersedia; suite diulang dengan CSS produksi yang telah dibangun. Jumlah per kelompok mencakup regresi berulang, bukan jumlah skenario unik seluruh tahap.

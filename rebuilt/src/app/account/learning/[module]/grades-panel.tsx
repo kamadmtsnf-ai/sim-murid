@@ -1,4 +1,5 @@
 "use client";
+import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -776,26 +777,14 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
             Belum ada penilaian sesuai pilihan dan hak akses Anda.
           </p>
         )}
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Button
-            variant="outline"
-            disabled={historyPage <= 1}
-            onClick={() => setHistoryPage((p) => p - 1)}
-          >
-            Penilaian sebelumnya
-          </Button>
-          <span className="text-sm">
-            Halaman {historyPage} dari{" "}
-            {Math.max(1, Math.ceil(history.length / 10))}
-          </span>
-          <Button
-            variant="outline"
-            disabled={historyPage * 10 >= history.length}
-            onClick={() => setHistoryPage((p) => p + 1)}
-          >
-            Penilaian berikutnya
-          </Button>
-        </div>
+        <Pagination
+          label="Halaman riwayat penilaian"
+          page={historyPage}
+          pageCount={Math.max(1, Math.ceil(history.length / 10))}
+          onPageChange={setHistoryPage}
+          previousLabel="Penilaian sebelumnya"
+          nextLabel="Penilaian berikutnya"
+        />
       </section>
       <Dialog
         open={mode !== null}

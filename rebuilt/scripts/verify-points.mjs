@@ -221,7 +221,7 @@ try {
     await page.locator("#main-content").waitFor();
   };
   const dialog = page.getByRole("dialog");
-  for (const width of [320, 375, 768, 1440]) {
+  for (const width of [320, 375, 390, 768, 1440]) {
     await visit("normal", width);
     await page
       .getByRole("button", { name: "Catat kejadian", exact: true })

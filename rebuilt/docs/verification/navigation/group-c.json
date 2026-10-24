@@ -1,0 +1,112 @@
+{
+  "group": "C",
+  "unit_tests": 549,
+  "groups": 63,
+  "browser": [
+    {
+      "suite": "academic-context",
+      "checks": 45,
+      "axe": 8,
+      "passed": true
+    },
+    {
+      "suite": "books",
+      "checks": 50,
+      "axe": 8,
+      "passed": true
+    },
+    {
+      "suite": "dashboard",
+      "checks": 75,
+      "axe": 11,
+      "passed": true
+    },
+    {
+      "suite": "design-system",
+      "checks": 54,
+      "axe": 9,
+      "passed": true
+    },
+    {
+      "suite": "directory",
+      "checks": 71,
+      "axe": 13,
+      "passed": true
+    },
+    {
+      "suite": "forms",
+      "checks": 49,
+      "axe": 4,
+      "passed": true
+    },
+    {
+      "suite": "grades",
+      "checks": 62,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "insights",
+      "checks": 35,
+      "axe": 4,
+      "passed": true
+    },
+    {
+      "suite": "jobs",
+      "checks": 49,
+      "axe": 9,
+      "passed": true
+    },
+    {
+      "suite": "module-states",
+      "checks": 129,
+      "axe": 32,
+      "passed": true
+    },
+    {
+      "suite": "navigation",
+      "checks": 49,
+      "axe": 12,
+      "passed": true
+    },
+    {
+      "suite": "notifications",
+      "checks": 59,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "points",
+      "checks": 67,
+      "axe": 8,
+      "passed": true
+    },
+    {
+      "suite": "promotions",
+      "checks": 104,
+      "axe": 13,
+      "passed": true
+    },
+    {
+      "suite": "reports",
+      "checks": 62,
+      "axe": 7,
+      "passed": true
+    },
+    {
+      "suite": "surveys",
+      "checks": 59,
+      "axe": 6,
+      "passed": true
+    },
+    {
+      "suite": "user-detail",
+      "checks": 146,
+      "axe": 18,
+      "passed": true
+    }
+  ],
+  "checks": 1165,
+  "axe": 176,
+  "boundaries": "Synthetic HTTP/isolated SQL; no production writes/providers/UAT. Specialized reader/survey/editor controls preserved."
+}

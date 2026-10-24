@@ -1,4 +1,5 @@
 "use client";
+import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -47,7 +48,10 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
     opener = useRef<HTMLElement | null>(null),
     refresh = useRef<HTMLButtonElement>(null),
     feedback = useRef<HTMLParagraphElement>(null);
-  useWriteGuard(() => lock.current, () => blocked);
+  useWriteGuard(
+    () => lock.current,
+    () => blocked,
+  );
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -530,35 +534,13 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
           </article>
         ))}
       </div>
-      <nav
-        aria-label="Halaman katalog"
-        className="flex flex-wrap items-center justify-between gap-3"
-      >
-        <Button
-          type="button"
-          variant="outline"
-          disabled={busy || data.extra.page <= 1}
-          onClick={() =>
-            void reload({ ...filters, page: String(data.extra.page - 1) })
-          }
-        >
-          Sebelumnya
-        </Button>
-        <span className="text-sm">
-          Halaman {data.extra.page} /{" "}
-          {Math.max(1, Math.ceil(data.extra.total / 50))}
-        </span>
-        <Button
-          type="button"
-          variant="outline"
-          disabled={busy || data.extra.page * 50 >= data.extra.total}
-          onClick={() =>
-            void reload({ ...filters, page: String(data.extra.page + 1) })
-          }
-        >
-          Berikutnya
-        </Button>
-      </nav>
+      <Pagination
+        label="Halaman katalog"
+        page={data.extra.page}
+        pageCount={Math.max(1, Math.ceil(data.extra.total / 50))}
+        disabled={busy}
+        onPageChange={(page) => void reload({ ...filters, page: String(page) })}
+      />
       <Dialog
         open={dialog !== null}
         onOpenChange={(v) => {

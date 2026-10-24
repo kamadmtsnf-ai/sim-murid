@@ -1,4 +1,5 @@
 "use client";
+import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { formatAcademicYear, semesterLabel } from "@/lib/academic/period";
 import { TableRegion } from "@/components/ui/data-table";
@@ -351,31 +352,13 @@ export function InsightsPanel({
                 </article>
               ))}
               {scopeReady && list(data.extra.progress).length > 20 && (
-                <nav
-                  aria-label="Halaman responden"
-                  className="flex flex-wrap items-center gap-3"
-                >
-                  <Button
-                    variant="outline"
-                    disabled={disabled || page <= 1}
-                    onClick={() => setPage((p) => p - 1)}
-                  >
-                    Sebelumnya
-                  </Button>
-                  <span>
-                    Halaman {page} /{" "}
-                    {Math.ceil(list(data.extra.progress).length / 20)}
-                  </span>
-                  <Button
-                    variant="outline"
-                    disabled={
-                      disabled || page * 20 >= list(data.extra.progress).length
-                    }
-                    onClick={() => setPage((p) => p + 1)}
-                  >
-                    Berikutnya
-                  </Button>
-                </nav>
+                <Pagination
+                  label="Halaman responden"
+                  page={page}
+                  pageCount={Math.ceil(list(data.extra.progress).length / 20)}
+                  disabled={disabled}
+                  onPageChange={setPage}
+                />
               )}
             </div>
           </details>

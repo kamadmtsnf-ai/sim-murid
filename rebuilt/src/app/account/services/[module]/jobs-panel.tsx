@@ -1,4 +1,5 @@
 "use client";
+import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState } from "react";
@@ -36,7 +37,10 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
     mounted = useRef(true),
     controller = useRef<AbortController | null>(null),
     feedback = useRef<HTMLDivElement>(null);
-  useWriteGuard(() => !!active.current, () => locked);
+  useWriteGuard(
+    () => !!active.current,
+    () => locked,
+  );
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -459,30 +463,13 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
                   </li>
                 ))}
               </ul>
-              <nav
-                aria-label="Halaman antrean pengiriman"
-                className="flex flex-wrap items-center justify-between gap-3"
-              >
-                <p className="text-sm text-muted-foreground">
-                  {filtered.length} hasil · Halaman {current} dari {pages}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Button
-                    variant="outline"
-                    disabled={current === 1}
-                    onClick={() => setPage(current - 1)}
-                  >
-                    Sebelumnya
-                  </Button>
-                  <Button
-                    variant="outline"
-                    disabled={current === pages}
-                    onClick={() => setPage(current + 1)}
-                  >
-                    Berikutnya
-                  </Button>
-                </div>
-              </nav>
+              <Pagination
+                label="Halaman antrean pengiriman"
+                page={current}
+                pageCount={pages}
+                onPageChange={setPage}
+                summary={`${filtered.length} hasil`}
+              />
             </>
           )}
         </CardContent>

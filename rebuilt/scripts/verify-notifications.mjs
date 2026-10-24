@@ -56,7 +56,7 @@ try{
  async function settled(){await page.waitForFunction(()=>document.querySelector('section[aria-labelledby="notification-results-title"]')?.getAttribute('aria-busy')==='false');}
  for(const width of [320,360,375,390,768,1024,1280,1440]){await visit('normal',width,900);await overflow(page,'normal '+width);await page.screenshot({path:join(out,'notifications-'+width+'.png'),fullPage:true});}
  for(const scenario of ['empty','many','long','invalid-date']){
-  for(const width of [320,768,1440]){await visit(scenario,width,900);await overflow(page,scenario+' '+width);}
+  for(const width of [320, 390, 768, 1440]){await visit(scenario,width,900);await overflow(page,scenario+' '+width);}
   await a11y(page,scenario);
   if(scenario==='empty'){await page.getByText('Belum ada notifikasi.',{exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Tandai semua dibaca'}).isDisabled(),true);pass('Empty inbox disables mark-all and explains empty state');}
   if(scenario==='invalid-date'){assert.equal(await page.locator('time').count(),0);assert.equal(await page.getByText('Waktu tidak tersedia',{exact:true}).count(),3);pass('Invalid dates render a safe fallback');}
