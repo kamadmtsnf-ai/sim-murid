@@ -87,3 +87,5 @@ PR implementasi: [#52](https://github.com/kamadmtsnf-ai/sim-murid/pull/52).
 PR implementasi P07: [#53](https://github.com/kamadmtsnf-ai/sim-murid/pull/53).
 
 - 24 Oktober 2026: Kode P08 dan QA diselesaikan untuk rilis aman. Migrasi additive Supabase ditolak auto-review karena izin mutasi database bersama belum eksplisit. Aktivasi P08 tetap tertunda; input lama aktif, tombol impor dilindungi readiness gate. P09–P12 belum dijalankan.
+
+PR kode P08: [#54](https://github.com/kamadmtsnf-ai/sim-murid/pull/54). Persetujuan aktivasi database tetap terpisah dan belum diberikan.
