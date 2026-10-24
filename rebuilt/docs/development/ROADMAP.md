@@ -83,3 +83,5 @@ Lihat rancangan pengukuran pada P01. Ukur waktu tugas, keberhasilan tugas, kesal
 PR implementasi: [#52](https://github.com/kamadmtsnf-ai/sim-murid/pull/52).
 
 - 24 Oktober 2026: P07 selesai: pusat tindak lanjut pada Notifikasi, status/owner/target dari sumber, filter urgensi/modul, preferensi tampilan aman dan dedup existing teruji. Laporan dan batas bukti pada P07. P08–P12 belum dimulai.
+
+PR implementasi P07: [#53](https://github.com/kamadmtsnf-ai/sim-murid/pull/53).

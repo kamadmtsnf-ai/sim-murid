@@ -39,3 +39,5 @@ Daftar file dan alasan: `stage-07-files.json`. Tidak ada perubahan dependency ru
 - Browser P07: 90 pemeriksaan, 8 axe, tanpa JavaScript error; regresi dashboard P06: 120 pemeriksaan/20 axe; regresi Kotak masuk: 59 pemeriksaan/7 axe. Total tiga suite: 269 pemeriksaan dan 35 axe.
 - Skenario: tujuh peran, assignment dicabut di sela baca, sumber unavailable, deadline WIB dan pergantian hari, status selesai mengikuti sumber, prioritas sebelum cap, 320/390/768/1440 dan landscape, kata panjang, pagination/filter/search, lock request, offline/5xx/malformed, 401/403 non-JSON, akun berubah, timeout/unmount, preferensi tersimpan/dua tab/storage diblokir, keyboard tab, dan write inbox yang tetap berjalan saat pindah tab.
 - Tidak menjalankan scheduler, provider email/WA, migrasi, produksi write, UAT pengguna atau load test. Tidak mengklaim angka waktu tugas/kapasitas layanan.
+
+PR implementasi P07: [#53](https://github.com/kamadmtsnf-ai/sim-murid/pull/53).
