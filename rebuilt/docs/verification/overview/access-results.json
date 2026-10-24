@@ -1,0 +1,455 @@
+{
+  "checks": [
+    {
+      "name": "320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "320 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded page 320",
+      "passed": true
+    },
+    {
+      "name": "assignments-320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "assignments-320 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "assignment disclosure 320",
+      "passed": true
+    },
+    {
+      "name": "390 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "390 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "390 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded page 390",
+      "passed": true
+    },
+    {
+      "name": "assignments-390 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "assignments-390 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "assignment disclosure 390",
+      "passed": true
+    },
+    {
+      "name": "768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "768 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "768 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded page 768",
+      "passed": true
+    },
+    {
+      "name": "assignments-768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "assignments-768 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "assignment disclosure 768",
+      "passed": true
+    },
+    {
+      "name": "1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "1440 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded page 1440",
+      "passed": true
+    },
+    {
+      "name": "assignments-1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "assignments-1440 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "assignment disclosure 1440",
+      "passed": true
+    },
+    {
+      "name": "844 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "844 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "844 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded page 844",
+      "passed": true
+    },
+    {
+      "name": "assignments-844 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "assignments-844 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "assignment disclosure 844",
+      "passed": true
+    },
+    {
+      "name": "pagination next",
+      "passed": true
+    },
+    {
+      "name": "pagination focuses heading",
+      "passed": true
+    },
+    {
+      "name": "pagination previous",
+      "passed": true
+    },
+    {
+      "name": "search filters labels",
+      "passed": true
+    },
+    {
+      "name": "search result",
+      "passed": true
+    },
+    {
+      "name": "filters intersect",
+      "passed": true
+    },
+    {
+      "name": "reset search",
+      "passed": true
+    },
+    {
+      "name": "class scope filter",
+      "passed": true
+    },
+    {
+      "name": "different class scopes remain visible",
+      "passed": true
+    },
+    {
+      "name": "empty grants explicit",
+      "passed": true
+    },
+    {
+      "name": "empty assignments",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "metadata warning",
+      "passed": true
+    },
+    {
+      "name": "missing names retain exact class reference",
+      "passed": true
+    },
+    {
+      "name": "missing metadata no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "missing metadata controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "role label admin",
+      "passed": true
+    },
+    {
+      "name": "role label teacher",
+      "passed": true
+    },
+    {
+      "name": "role label student",
+      "passed": true
+    },
+    {
+      "name": "role label parent",
+      "passed": true
+    },
+    {
+      "name": "role label applicant",
+      "passed": true
+    },
+    {
+      "name": "role label customer",
+      "passed": true
+    },
+    {
+      "name": "role label alumni",
+      "passed": true
+    },
+    {
+      "name": "network explicit error",
+      "passed": true
+    },
+    {
+      "name": "network focus error",
+      "passed": true
+    },
+    {
+      "name": "network retains marked snapshot",
+      "passed": true
+    },
+    {
+      "name": "network recovery",
+      "passed": true
+    },
+    {
+      "name": "network clears stale error",
+      "passed": true
+    },
+    {
+      "name": "503 explicit error",
+      "passed": true
+    },
+    {
+      "name": "503 focus error",
+      "passed": true
+    },
+    {
+      "name": "503 retains marked snapshot",
+      "passed": true
+    },
+    {
+      "name": "503 recovery",
+      "passed": true
+    },
+    {
+      "name": "503 clears stale error",
+      "passed": true
+    },
+    {
+      "name": "bad explicit error",
+      "passed": true
+    },
+    {
+      "name": "bad focus error",
+      "passed": true
+    },
+    {
+      "name": "bad retains marked snapshot",
+      "passed": true
+    },
+    {
+      "name": "bad recovery",
+      "passed": true
+    },
+    {
+      "name": "bad clears stale error",
+      "passed": true
+    },
+    {
+      "name": "json explicit error",
+      "passed": true
+    },
+    {
+      "name": "json focus error",
+      "passed": true
+    },
+    {
+      "name": "json retains marked snapshot",
+      "passed": true
+    },
+    {
+      "name": "json recovery",
+      "passed": true
+    },
+    {
+      "name": "json clears stale error",
+      "passed": true
+    },
+    {
+      "name": "foreign explicit error",
+      "passed": true
+    },
+    {
+      "name": "foreign focus error",
+      "passed": true
+    },
+    {
+      "name": "foreign retains marked snapshot",
+      "passed": true
+    },
+    {
+      "name": "foreign recovery",
+      "passed": true
+    },
+    {
+      "name": "foreign clears stale error",
+      "passed": true
+    },
+    {
+      "name": "role change refreshes state",
+      "passed": true
+    },
+    {
+      "name": "removed grants disappear",
+      "passed": true
+    },
+    {
+      "name": "same tick duplicate refresh locked",
+      "passed": true
+    },
+    {
+      "name": "401 redirects safely",
+      "passed": true
+    },
+    {
+      "name": "401 clears snapshot",
+      "passed": true
+    },
+    {
+      "name": "gate redirects safely",
+      "passed": true
+    },
+    {
+      "name": "gate clears snapshot",
+      "passed": true
+    },
+    {
+      "name": "late response after unmount ignored",
+      "passed": true
+    },
+    {
+      "name": "touch refresh",
+      "passed": true
+    },
+    {
+      "name": "orientation no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "orientation controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "keyboard filter order",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "loading controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "error controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true
+    },
+    {
+      "name": "error hides details",
+      "passed": true
+    },
+    {
+      "name": "error retry",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "320",
+      "violations": []
+    },
+    {
+      "name": "390",
+      "violations": []
+    },
+    {
+      "name": "768",
+      "violations": []
+    },
+    {
+      "name": "1440",
+      "violations": []
+    },
+    {
+      "name": "844",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
