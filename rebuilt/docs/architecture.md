@@ -1,4 +1,6 @@
-# Arsitektur fondasi
+# Arsitektur fondasi — catatan historis
+
+> Dokumen ini merekam kondisi Tahap 3–4, bukan status runtime terkini. Implementasi Auth, API, modul dan deployment telah berkembang setelahnya. Untuk inventaris terkini yang dapat ditelusuri ke commit, baca [audit P01](development/STAGE-01-AUDIT.md) dan [roadmap](development/ROADMAP.md). Batas layer dan aturan data di bawah tetap menjadi acuan; pernyataan “belum dikonfigurasi” hanya berlaku pada waktu fondasi dibuat.
 
 Tahap 3 bootstrap framework; Tahap 4 menambahkan fondasi schema dan SDK Supabase. src/app untuk routing dan composition; src/components/ui untuk komponen shadcn yang dimiliki proyek; src/config untuk metadata/kebijakan yang telah disepakati; src/lib untuk kontrak dan validasi umum; src/modules untuk domain yang diimplementasikan bertahap.
 

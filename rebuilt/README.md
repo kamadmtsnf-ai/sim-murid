@@ -2,6 +2,10 @@
 
 Next.js App Router + TypeScript strict + Tailwind CSS + shadcn/ui + Zod + Supabase; hosting Vercel. Produksi: https://sim-muridv2.vercel.app . Kode GitHub berada di `rebuilt/`, yang menjadi Root Directory Vercel. Aplikasi GAS lama tetap dipertahankan di root repositori.
 
+## Rencana pengembangan lanjutan
+
+Rencana siklus baru 12 tahap (P01–P12): [Roadmap](docs/development/ROADMAP.md). Mulai sesi lanjutan dari dokumen tersebut dan [hasil audit P01](docs/development/STAGE-01-AUDIT.md). Nomornya terpisah dari Tahap 1–30 pembangunan ulang.
+
 ## Status saat ini
 
 Kode Tahap26–30 menambahkan SPK, notifikasi, arsip/reset bulanan, SoTM/afektif, survei utama/peer/mikro, analitik berizin, rencana aksi, adapter penyedia dan paket ekspor lintas modul. Lihat [laporan Tahap26–30](docs/verification/stages-26-30.md).
@@ -12,7 +16,7 @@ Tahap30 cutover belum dinyatakan selesai: ekspor sumber, rekonsiliasi aktual, pe
 
 Node24.x/npm11. Jalankan `npm ci`, isi `.env.local` dari `.env.example`, lalu `npm run dev`. Gunakan proyek Supabase khusus SiM-Murid. Secret Auth/Gmail/HMAC hanya di server, tidak pada NEXT_PUBLIC atau git. Preview/development harus memakai konfigurasi uji tersendiri.
 
-`npm run check` menjalankan typecheck, lint,159 test, drift tipe dan build. `npm run test:smoke` memeriksa lima alur HTTP build. 33 migrasi replayable,79 tabel RLS; RPC keamanan hanya service_role. Tipe cloud berasal dari Supabase dan snapshot lokal dari PGlite. Pengujian lokal bukan pengganti bukti pengiriman aktual; status dan batas integrasi dicatat dalam docs/verification.
+`npm run check` menjalankan typecheck, lint, suite regresi, drift tipe dan build; daftar perintah aktual berada di `package.json`. Jumlah tes/migrasi berubah seiring pengembangan: lihat [snapshot P01](docs/development/stage-01-baseline.json) dan laporan verifikasi bertanggal. `npm run test:smoke` menjalankan pemeriksaan HTTP build. Tipe cloud berasal dari Supabase dan snapshot lokal dari PGlite. Pengujian lokal bukan pengganti bukti pengiriman aktual; status dan batas integrasi dicatat dalam docs/verification.
 
 Sesi biasa1jam atau Ingat saya168jam, tidak diperpanjang oleh refresh. Cookie HttpOnly; tidak memakai browser Auth SDK untuk sesi ini. Tidak ada signup publik atau password default bersama. `/api/health` hanya liveness, bukan readiness database/email.
 
