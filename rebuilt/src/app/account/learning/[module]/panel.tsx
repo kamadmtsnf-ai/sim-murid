@@ -8,11 +8,18 @@ import { GradesPanel } from "./grades-panel";
 import { gradesSnapshot } from "@/lib/learning/grades";
 import { BooksPanel } from "./books-panel";
 import { booksSnapshot } from "@/lib/learning/books";
-export function LearningPanel({ initial }: { initial: LearningSnapshot }) {
+export function LearningPanel({
+  initial,
+  bulkAvailable = false,
+}: {
+  initial: LearningSnapshot;
+  bulkAvailable?: boolean;
+}) {
   if (initial.module === "grades")
     return (
       <GradesPanel
         key={`${initial.revision}:${initial.semester}`}
+        bulkAvailable={bulkAvailable}
         initial={gradesSnapshot.parse(initial)}
       />
     );

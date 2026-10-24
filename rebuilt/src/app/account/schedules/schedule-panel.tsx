@@ -1,4 +1,5 @@
 "use client";
+import { BulkImport } from "@/components/bulk/bulk-import";
 import { FilterBar } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useRouter } from "next/navigation";
@@ -30,8 +31,10 @@ export function SchedulePanel({
   classes,
   filters,
   initialTab = "kbm",
+  bulkAvailable = false,
 }: {
   initialTab?: "kbm" | "piket";
+  bulkAvailable?: boolean;
   initial: Schedule;
   classes: Classes;
   filters: {
@@ -158,6 +161,17 @@ export function SchedulePanel({
   ) : null;
   return (
     <div className="schedules-panel min-w-0 space-y-6" aria-busy={busy}>
+      {bulkAvailable && writable.length ? (
+        <BulkImport
+          domain="schedules"
+          disabled={locked || !!modal}
+          classes={writable.map((c) => ({
+            id: c.id,
+            label: `${c.name} · ${formatAcademicYear(classes.years.find((y) => y.id === c.year_id)!.start_year)}`,
+          }))}
+          onFinished={() => router.refresh()}
+        />
+      ) : null}
       <AcademicContextBar
         current={{
           year:

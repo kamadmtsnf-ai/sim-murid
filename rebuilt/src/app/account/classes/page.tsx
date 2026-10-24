@@ -1,3 +1,4 @@
+import { bulkImportAvailable } from "@/lib/bulk/availability";
 import { redirect } from "next/navigation";
 import { readServerPrincipal } from "@/lib/auth/read-server";
 import { AccessDenied } from "@/lib/auth/authorization";
@@ -37,7 +38,13 @@ export default async function ClassesPage() {
           Anda.
         </p>
       </header>
-      <ClassPanel initial={data} />
+      <ClassPanel
+        initial={data}
+        bulkAvailable={
+          data.can_manage &&
+          (await bulkImportAvailable(caller.principal.id, caller.sessionId))
+        }
+      />
     </main>
   );
 }

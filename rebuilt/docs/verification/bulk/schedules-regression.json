@@ -1,0 +1,1084 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "normal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal piket 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal piket panel 320",
+      "passed": true
+    },
+    {
+      "name": "normal 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "normal piket 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "normal piket panel 390",
+      "passed": true
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal piket 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal piket panel 768",
+      "passed": true
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "normal piket 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "normal piket panel 1440",
+      "passed": true
+    },
+    {
+      "name": "empty 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty piket 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty piket panel 320",
+      "passed": true
+    },
+    {
+      "name": "empty 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "empty piket 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "empty piket panel 390",
+      "passed": true
+    },
+    {
+      "name": "empty 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "empty piket 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "empty piket panel 768",
+      "passed": true
+    },
+    {
+      "name": "empty 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "empty piket 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "empty piket panel 1440",
+      "passed": true
+    },
+    {
+      "name": "large 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large piket 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large piket panel 320",
+      "passed": true
+    },
+    {
+      "name": "large 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "large piket 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "large piket panel 390",
+      "passed": true
+    },
+    {
+      "name": "large 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "large piket 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "large piket panel 768",
+      "passed": true
+    },
+    {
+      "name": "large 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "large piket 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "large piket panel 1440",
+      "passed": true
+    },
+    {
+      "name": "readonly 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly piket 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly piket panel 320",
+      "passed": true
+    },
+    {
+      "name": "readonly hides input actions 320",
+      "passed": true
+    },
+    {
+      "name": "readonly 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "readonly piket 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "readonly piket panel 390",
+      "passed": true
+    },
+    {
+      "name": "readonly hides input actions 390",
+      "passed": true
+    },
+    {
+      "name": "readonly 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "readonly piket 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "readonly piket panel 768",
+      "passed": true
+    },
+    {
+      "name": "readonly hides input actions 768",
+      "passed": true
+    },
+    {
+      "name": "readonly 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly piket 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly piket panel 1440",
+      "passed": true
+    },
+    {
+      "name": "readonly hides input actions 1440",
+      "passed": true
+    },
+    {
+      "name": "loading 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "loading 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "loading 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "loading 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "error 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "error 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "error 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "error 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "kbm 320 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 304,
+        "bottom": 552,
+        "width": 288,
+        "height": 536,
+        "viewportWidth": 320,
+        "viewportHeight": 568,
+        "client": 286,
+        "scroll": 286
+      }
+    },
+    {
+      "name": "kbm modal 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "kbm footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "kbm restores trigger focus 320",
+      "passed": true
+    },
+    {
+      "name": "piket 320 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 304,
+        "bottom": 552,
+        "width": 288,
+        "height": 536,
+        "viewportWidth": 320,
+        "viewportHeight": 568,
+        "client": 286,
+        "scroll": 286
+      }
+    },
+    {
+      "name": "piket modal 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "piket footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "piket restores trigger focus 320",
+      "passed": true
+    },
+    {
+      "name": "kbm 375 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 359,
+        "bottom": 796,
+        "width": 343,
+        "height": 780,
+        "viewportWidth": 375,
+        "viewportHeight": 812,
+        "client": 341,
+        "scroll": 341
+      }
+    },
+    {
+      "name": "kbm modal 375 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "kbm footer reachable 375",
+      "passed": true
+    },
+    {
+      "name": "kbm restores trigger focus 375",
+      "passed": true
+    },
+    {
+      "name": "piket 375 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 359,
+        "bottom": 796,
+        "width": 343,
+        "height": 780,
+        "viewportWidth": 375,
+        "viewportHeight": 812,
+        "client": 341,
+        "scroll": 341
+      }
+    },
+    {
+      "name": "piket modal 375 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "piket footer reachable 375",
+      "passed": true
+    },
+    {
+      "name": "piket restores trigger focus 375",
+      "passed": true
+    },
+    {
+      "name": "kbm 390 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 374,
+        "bottom": 796,
+        "width": 358,
+        "height": 780,
+        "viewportWidth": 390,
+        "viewportHeight": 812,
+        "client": 356,
+        "scroll": 356
+      }
+    },
+    {
+      "name": "kbm modal 390 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "kbm footer reachable 390",
+      "passed": true
+    },
+    {
+      "name": "kbm restores trigger focus 390",
+      "passed": true
+    },
+    {
+      "name": "piket 390 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 374,
+        "bottom": 796,
+        "width": 358,
+        "height": 780,
+        "viewportWidth": 390,
+        "viewportHeight": 812,
+        "client": 356,
+        "scroll": 356
+      }
+    },
+    {
+      "name": "piket modal 390 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "piket footer reachable 390",
+      "passed": true
+    },
+    {
+      "name": "piket restores trigger focus 390",
+      "passed": true
+    },
+    {
+      "name": "kbm 768 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 48,
+        "y": 174.703125,
+        "right": 720,
+        "bottom": 637.296875,
+        "width": 672,
+        "height": 462.59375,
+        "viewportWidth": 768,
+        "viewportHeight": 812,
+        "client": 670,
+        "scroll": 670
+      }
+    },
+    {
+      "name": "kbm modal 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "kbm footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "kbm restores trigger focus 768",
+      "passed": true
+    },
+    {
+      "name": "piket 768 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 48,
+        "y": 16,
+        "right": 720,
+        "bottom": 796,
+        "width": 672,
+        "height": 780,
+        "viewportWidth": 768,
+        "viewportHeight": 812,
+        "client": 670,
+        "scroll": 670
+      }
+    },
+    {
+      "name": "piket modal 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "piket footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "piket restores trigger focus 768",
+      "passed": true
+    },
+    {
+      "name": "kbm 1440 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 174.703125,
+        "right": 1056,
+        "bottom": 637.296875,
+        "width": 672,
+        "height": 462.59375,
+        "viewportWidth": 1440,
+        "viewportHeight": 812,
+        "client": 670,
+        "scroll": 670
+      }
+    },
+    {
+      "name": "kbm modal 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "kbm footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "kbm restores trigger focus 1440",
+      "passed": true
+    },
+    {
+      "name": "piket 1440 dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 16,
+        "right": 1056,
+        "bottom": 796,
+        "width": 672,
+        "height": 780,
+        "viewportWidth": 1440,
+        "viewportHeight": 812,
+        "client": 670,
+        "scroll": 670
+      }
+    },
+    {
+      "name": "piket modal 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "piket footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "piket restores trigger focus 1440",
+      "passed": true
+    },
+    {
+      "name": "forms unmounted until opened",
+      "passed": true
+    },
+    {
+      "name": "KBM tab shows lessons",
+      "passed": true
+    },
+    {
+      "name": "arrow key activates Piket tab",
+      "passed": true
+    },
+    {
+      "name": "Piket hides lesson table",
+      "passed": true
+    },
+    {
+      "name": "filter GET retains active tab",
+      "passed": true
+    },
+    {
+      "name": "Home activates first tab",
+      "passed": true
+    },
+    {
+      "name": "tab switch clears hidden lesson selection",
+      "passed": true
+    },
+    {
+      "name": "returning tab starts with no old selection",
+      "passed": true
+    },
+    {
+      "name": "computed time retains break",
+      "passed": true
+    },
+    {
+      "name": "cross-midnight cannot submit",
+      "passed": true
+    },
+    {
+      "name": "dirty Escape cancellation retains modal",
+      "passed": true
+    },
+    {
+      "name": "dirty cancellation retains values",
+      "passed": true
+    },
+    {
+      "name": "pending modal cannot close",
+      "passed": true
+    },
+    {
+      "name": "pending disables submit",
+      "passed": true
+    },
+    {
+      "name": "confirmed lesson saves once and closes modal",
+      "passed": true
+    },
+    {
+      "name": "keyboard Edit uses same modal",
+      "passed": true
+    },
+    {
+      "name": "edit retains original break",
+      "passed": true
+    },
+    {
+      "name": "edit close restores row trigger",
+      "passed": true
+    },
+    {
+      "name": "day filter still loads all-week duty roster",
+      "passed": true
+    },
+    {
+      "name": "inactive cleanup explicit",
+      "passed": true
+    },
+    {
+      "name": "dirty class-switch cancellation preserves class",
+      "passed": true
+    },
+    {
+      "name": "dirty class-switch preserves choices",
+      "passed": true
+    },
+    {
+      "name": "empty student state shown",
+      "passed": true
+    },
+    {
+      "name": "full-week duties retain Sunday on save",
+      "passed": true
+    },
+    {
+      "name": "inactive student cannot be assigned",
+      "passed": true
+    },
+    {
+      "name": "explicit empty roster remains supported",
+      "passed": true
+    },
+    {
+      "name": "overlap feedback focused inside modal",
+      "passed": true
+    },
+    {
+      "name": "overlap correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "overlap values retained",
+      "passed": true
+    },
+    {
+      "name": "overlap no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "stale feedback focused inside modal",
+      "passed": true
+    },
+    {
+      "name": "stale correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "stale values retained",
+      "passed": true
+    },
+    {
+      "name": "stale reload reachable inside trap",
+      "passed": true
+    },
+    {
+      "name": "stale no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "denied feedback focused inside modal",
+      "passed": true
+    },
+    {
+      "name": "denied correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "denied values retained",
+      "passed": true
+    },
+    {
+      "name": "denied reload reachable inside trap",
+      "passed": true
+    },
+    {
+      "name": "denied no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "network feedback focused inside modal",
+      "passed": true
+    },
+    {
+      "name": "network correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "network values retained",
+      "passed": true
+    },
+    {
+      "name": "network reload reachable inside trap",
+      "passed": true
+    },
+    {
+      "name": "network no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "malformed feedback focused inside modal",
+      "passed": true
+    },
+    {
+      "name": "malformed correct retry lock",
+      "passed": true
+    },
+    {
+      "name": "malformed values retained",
+      "passed": true
+    },
+    {
+      "name": "malformed reload reachable inside trap",
+      "passed": true
+    },
+    {
+      "name": "malformed no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "timeout request observed before advancing clock",
+      "passed": true
+    },
+    {
+      "name": "30-second timeout retains write lock",
+      "passed": true
+    },
+    {
+      "name": "timeout performs no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "inactive references require active choice",
+      "passed": true
+    },
+    {
+      "name": "year-scoped filter choices preserved",
+      "passed": true
+    },
+    {
+      "name": "kbm delete only visible domain",
+      "passed": true
+    },
+    {
+      "name": "piket delete only visible domain",
+      "passed": true
+    },
+    {
+      "name": "initial Piket view preserved",
+      "passed": true
+    },
+    {
+      "name": "landscape resize dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 70,
+        "y": 16,
+        "right": 742,
+        "bottom": 359,
+        "width": 672,
+        "height": 343,
+        "viewportWidth": 812,
+        "viewportHeight": 375,
+        "client": 670,
+        "scroll": 670
+      }
+    },
+    {
+      "name": "desktop resize dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 16,
+        "right": 1056,
+        "bottom": 884,
+        "width": 672,
+        "height": 868,
+        "viewportWidth": 1440,
+        "viewportHeight": 900,
+        "client": 670,
+        "scroll": 670
+      }
+    },
+    {
+      "name": "keyboard focus stays in dialog",
+      "passed": true
+    },
+    {
+      "name": "KBM short mobile dialog contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 304,
+        "bottom": 552,
+        "width": 288,
+        "height": 536,
+        "viewportWidth": 320,
+        "viewportHeight": 568,
+        "client": 286,
+        "scroll": 286
+      }
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "large",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    },
+    {
+      "name": "kbm modal 320",
+      "violations": []
+    },
+    {
+      "name": "piket modal 320",
+      "violations": []
+    },
+    {
+      "name": "kbm modal 375",
+      "violations": []
+    },
+    {
+      "name": "piket modal 375",
+      "violations": []
+    },
+    {
+      "name": "kbm modal 390",
+      "violations": []
+    },
+    {
+      "name": "piket modal 390",
+      "violations": []
+    },
+    {
+      "name": "kbm modal 768",
+      "violations": []
+    },
+    {
+      "name": "piket modal 768",
+      "violations": []
+    },
+    {
+      "name": "kbm modal 1440",
+      "violations": []
+    },
+    {
+      "name": "piket modal 1440",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Actual components with synthetic fixtures/intercepted API writes; authenticated production role UAT not performed."
+  ]
+}

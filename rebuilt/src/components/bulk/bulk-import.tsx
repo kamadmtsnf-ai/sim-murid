@@ -1,0 +1,732 @@
+"use client";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Dialog } from "@/components/ui/dialog";
+import { Status } from "@/components/ui/status";
+import { TableRegion } from "@/components/ui/data-table";
+import { Pagination } from "@/components/ui/collection-controls";
+import { controlClass } from "@/components/domain-controls";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import {
+  bulkCatalog,
+  type BulkCatalog,
+  bulkInput,
+  bulkResult,
+  bulkTemplates,
+  headers,
+  outcomeLabels,
+  type BulkDomain,
+  type BulkResult,
+} from "@/lib/bulk/validation";
+import { parseBulkCsv } from "@/lib/bulk/csv";
+const titles = {
+  enrollment: "Impor penempatan siswa",
+  schedules: "Impor jadwal KBM",
+  grades: "Impor nilai",
+};
+type Phase = "editing" | "ready" | "uncertain" | "saved" | "blocked";
+export function BulkImport({
+  domain,
+  classes,
+  subjectId,
+  semester,
+  subjectLabel,
+  onFinished,
+  disabled = false,
+}: {
+  domain: BulkDomain;
+  classes: { id: string; label: string }[];
+  subjectId?: string;
+  semester?: 1 | 2;
+  subjectLabel?: string | undefined;
+  onFinished: () => void;
+  disabled?: boolean;
+}) {
+  const [catalog, setCatalog] = useState<BulkCatalog | null>(null),
+    [referenceSearch, setReferenceSearch] = useState("");
+  const [open, setOpen] = useState(false),
+    [csv, setCsv] = useState(""),
+    [classId, setClassId] = useState(""),
+    [date, setDate] = useState(""),
+    [kind, setKind] = useState<"PH" | "ATS" | "ASAS" | "Praktik">("PH");
+  const [requestId, setRequestId] = useState(""),
+    [result, setResult] = useState<BulkResult | null>(null),
+    [phase, setPhase] = useState<Phase>("editing"),
+    [pending, setPending] = useState(false),
+    [message, setMessage] = useState(""),
+    [checked, setChecked] = useState(false),
+    [missing, setMissing] = useState(false),
+    [page, setPage] = useState(1);
+  const active = useRef<AbortController | null>(null),
+    mounted = useRef(false),
+    feedback = useRef<HTMLDivElement>(null),
+    opener = useRef<HTMLButtonElement>(null),
+    fileRead = useRef(0);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      active.current?.abort();
+    };
+  }, []);
+  useWriteGuard(
+    () => !!active.current,
+    () => open && !!csv && phase !== "saved",
+  );
+  const preview = useMemo(() => {
+    if (!csv) return null;
+    try {
+      return { ...parseBulkCsv(csv, domain), error: "" };
+    } catch (e) {
+      return {
+        rows: [],
+        issues: [],
+        count: 0,
+        error: e instanceof Error ? e.message : "CSV tidak valid.",
+      };
+    }
+  }, [csv, domain]);
+  const options = {
+    classId,
+    ...(domain !== "schedules" ? { date } : {}),
+    ...(domain === "grades" ? { subjectId, kind, semester } : {}),
+  };
+  function edit() {
+    setPhase("editing");
+    setResult(null);
+    setChecked(false);
+    setMissing(false);
+    setMessage("");
+    setRequestId(crypto.randomUUID());
+    setPage(1);
+  }
+  function reset() {
+    fileRead.current++;
+    setCsv("");
+    setClassId(classes.length === 1 ? classes[0]!.id : "");
+    setDate("");
+    setKind("PH");
+    edit();
+  }
+  function changeOpen(value: boolean) {
+    if (active.current) return;
+    if (!value && phase === "saved") {
+      fileRead.current++;
+      setCsv("");
+      setOpen(false);
+      onFinished();
+      return;
+    }
+    if (
+      !value &&
+      csv &&
+      phase !== "saved" &&
+      !window.confirm(
+        phase === "uncertain"
+          ? "Hasil belum dipastikan. Simpan ID permintaan dan periksa hasil sebelum mengulang. Tutup dan hapus isian?"
+          : "Tutup dan hapus isian impor yang belum disimpan?",
+      )
+    )
+      return;
+    if (value) reset();
+    else {
+      fileRead.current++;
+      setCsv("");
+      setResult(null);
+    }
+    setOpen(value);
+  }
+  function template() {
+    const url = URL.createObjectURL(
+      new Blob([bulkTemplates[domain]], { type: "text/csv;charset=utf-8" }),
+    );
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `template-${domain}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  async function file(file: File | undefined) {
+    const epoch = ++fileRead.current;
+    if (!file) return;
+    setCsv("");
+    edit();
+    if (file.size > 65536 || !file.name.toLowerCase().endsWith(".csv")) {
+      setMessage("Pilih CSV UTF-8 maksimal 64 KiB.");
+      return;
+    }
+    try {
+      const text = new TextDecoder("utf-8", { fatal: true }).decode(
+        await file.arrayBuffer(),
+      );
+      if (mounted.current && fileRead.current === epoch) {
+        setCsv(text);
+        edit();
+      }
+    } catch {
+      if (mounted.current && fileRead.current === epoch)
+        setMessage("Berkas bukan teks UTF-8 yang dapat dibaca.");
+    }
+  }
+  async function send(action: "preview" | "commit" | "status") {
+    if (active.current) return;
+    if (
+      action !== "status" &&
+      (!preview || preview.error || preview.issues.length)
+    ) {
+      setMessage("Perbaiki seluruh baris CSV sebelum melanjutkan.");
+      return;
+    }
+    if (
+      action === "commit" &&
+      phase !== "uncertain" &&
+      (!checked || phase !== "ready")
+    )
+      return;
+    const input =
+      action === "status"
+        ? null
+        : bulkInput.safeParse({
+            action,
+            requestId,
+            domain,
+            options,
+            csv,
+            ...(action === "commit" ? { revision: result?.revision } : {}),
+          });
+    if (input && !input.success) {
+      setMessage(input.error.issues[0]?.message ?? "Periksa konteks impor.");
+      return;
+    }
+    const c = new AbortController();
+    active.current = c;
+    setPending(true);
+    setMessage("");
+    const timer = setTimeout(() => c.abort("timeout"), 35000);
+    try {
+      const response = await fetch(
+        action === "status"
+          ? "/api/bulk-input?" + new URLSearchParams({ requestId })
+          : "/api/bulk-input",
+        {
+          ...(action !== "status"
+            ? {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(input && input.success ? input.data : {}),
+              }
+            : {}),
+          cache: "no-store",
+          signal: c.signal,
+        },
+      );
+      if (!mounted.current || c.signal.aborted) return;
+      if (response.status === 401 || response.status === 403) {
+        setCsv("");
+        setResult(null);
+        setPhase("blocked");
+        setMessage(
+          "Sesi atau akses berubah. Masuk kembali dan periksa hak akses sebelum mengimpor.",
+        );
+        return;
+      }
+      if (action === "status" && !response.ok) throw Error("Unconfirmed");
+      const body = await response.json();
+      if (!body.result) {
+        if (action === "commit" || action === "status")
+          throw Error("Unconfirmed");
+        setPhase("editing");
+        setMessage(
+          typeof body.message === "string"
+            ? body.message
+            : "Pratinjau ditolak. Tidak ada data disimpan.",
+        );
+        return;
+      }
+      const fresh = bulkResult.parse(body.result);
+      if (
+        (fresh.code === "saved" || fresh.code === "ready") &&
+        (fresh.requestId !== requestId || fresh.rows?.length !== preview?.count)
+      )
+        throw Error("Unconfirmed");
+      if (!response.ok && ["ready", "saved"].includes(fresh.code))
+        throw Error("Unconfirmed");
+      if (
+        (fresh.code === "ready" && action !== "preview") ||
+        (action === "status" && !["saved", "not_found"].includes(fresh.code))
+      )
+        throw Error("Unconfirmed");
+      if (fresh.code !== "not_found") setResult(fresh);
+      setPage(1);
+      if (fresh.code === "saved") {
+        setPhase("saved");
+        setMessage(
+          "Seluruh batch tersimpan. Periksa hasil per baris sebelum menutup.",
+        );
+      } else if (fresh.code === "ready" && action === "preview") {
+        setPhase("ready");
+        setChecked(false);
+        setMessage(
+          "Validasi sumber berhasil. Belum ada data disimpan; periksa pratinjau sebelum konfirmasi.",
+        );
+      } else if (fresh.code === "not_found" && action === "status") {
+        setPhase("uncertain");
+        setMissing(true);
+        setMessage(
+          "Belum ada hasil tersimpan. Anda dapat memeriksa lagi atau mencoba penyimpanan dengan ID dan isian yang sama.",
+        );
+      } else {
+        setPhase("editing");
+        setChecked(false);
+        setMessage(
+          outcomeLabels[fresh.code] ??
+            "Batch ditolak. Tidak ada data disimpan.",
+        );
+      }
+      requestAnimationFrame(() => feedback.current?.focus());
+    } catch {
+      if (mounted.current) {
+        if (action === "commit" || action === "status") {
+          setPhase("uncertain");
+          setMissing(false);
+          setMessage(
+            "Hasil penyimpanan belum dapat dipastikan. Isian dan ID permintaan dipertahankan. Periksa hasil; jangan mengunggah ulang sebagai batch baru.",
+          );
+        } else {
+          setPhase("editing");
+          setMessage(
+            "Pratinjau belum tersedia. Tidak ada data disimpan; coba validasi kembali.",
+          );
+        }
+      }
+    } finally {
+      clearTimeout(timer);
+      if (active.current === c) active.current = null;
+      if (mounted.current) setPending(false);
+    }
+  }
+  async function references() {
+    if (active.current || !classId) return;
+    const c = new AbortController();
+    active.current = c;
+    setPending(true);
+    setMessage("");
+    const timer = setTimeout(() => c.abort(), 20000);
+    try {
+      const r = await fetch(
+        "/api/bulk-input?" +
+          new URLSearchParams({
+            catalog: "1",
+            domain,
+            classId,
+            ...(subjectId ? { subjectId } : {}),
+          }),
+        { cache: "no-store", signal: c.signal },
+      );
+      if (!mounted.current || c.signal.aborted) return;
+      if (r.status === 401 || r.status === 403) {
+        setCatalog(null);
+        setCsv("");
+        setResult(null);
+        setPhase("blocked");
+        setMessage(
+          "Sesi atau akses berubah. Periksa hak akses sebelum melanjutkan.",
+        );
+        return;
+      }
+      if (!r.ok) throw Error();
+      const fresh = bulkCatalog.parse((await r.json()).catalog);
+      if (fresh.classId !== classId || fresh.domain !== domain) throw Error();
+      setCatalog(fresh);
+      setReferenceSearch("");
+    } catch {
+      if (mounted.current)
+        setMessage("Referensi belum dapat dimuat. Tidak ada data disimpan.");
+    } finally {
+      clearTimeout(timer);
+      if (active.current === c) active.current = null;
+      if (mounted.current) setPending(false);
+    }
+  }
+  const frozen =
+    pending ||
+    phase === "uncertain" ||
+    phase === "saved" ||
+    phase === "blocked";
+  const count = preview?.count ?? 0,
+    pages = Math.max(1, Math.ceil(count / 10)),
+    current = Math.min(page, pages);
+  return (
+    <>
+      <Button
+        ref={opener}
+        type="button"
+        variant="outline"
+        disabled={disabled || !classes.length}
+        onClick={() => changeOpen(true)}
+      >
+        {titles[domain]}
+      </Button>
+      <Dialog
+        open={open}
+        onOpenChange={changeOpen}
+        returnFocusRef={opener}
+        closeDisabled={pending}
+        title={titles[domain]}
+        description="Unggah → validasi → pratinjau → konfirmasi → hasil per baris. Seluruh batch dibatalkan bila ada isian yang salah."
+      >
+        <div className="min-w-0 space-y-5">
+          <ol
+            aria-label="Tahapan impor"
+            className="flex flex-wrap gap-2 text-xs text-muted-foreground"
+          >
+            {[
+              "1 Unggah",
+              "2 Validasi",
+              "3 Pratinjau",
+              "4 Konfirmasi",
+              "5 Hasil",
+            ].map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ol>
+          <p className="text-sm text-muted-foreground">
+            CSV UTF-8 dengan pemisah koma, maksimal 64 KiB dan 100 baris.
+            Username adalah teks persis, termasuk nol awal dan minus. Atur kolom
+            username sebagai teks di spreadsheet. Akun baru tidak dibuat melalui
+            impor ini.{" "}
+            {domain === "grades"
+              ? "Nilai kosong berbeda dari 0. Impor hanya membuat penilaian baru, bukan koreksi atau penimpaan."
+              : domain === "enrollment"
+                ? "Siswa yang sudah ditempatkan pada tahun ajaran ini ditolak; pemindahan tetap melalui alur penempatan existing."
+                : "Gunakan kode mapel resmi (misalnya IPS); waktu selesai termasuk JTM dan istirahat."}
+          </p>
+          <Button
+            type="button"
+            variant="outline"
+            disabled={pending || phase !== "editing" || !classId}
+            onClick={() => void references()}
+          >
+            Tampilkan referensi kelas
+          </Button>
+          {catalog?.classId === classId ? (
+            <details className="rounded-lg border p-3">
+              <summary className="min-h-11 cursor-pointer text-sm font-medium">
+                Referensi username dan kode mapel
+              </summary>
+              <p className="text-xs text-muted-foreground">
+                Maksimal 500 akun aktif dan 100 mapel; validasi akhir tetap
+                memeriksa data sumber lengkap.
+              </p>
+              <label className="mt-3 block text-sm">
+                Cari referensi
+                <input
+                  type="search"
+                  className={controlClass}
+                  value={referenceSearch}
+                  maxLength={100}
+                  onChange={(e) => setReferenceSearch(e.target.value)}
+                />
+              </label>
+              <ul className="mt-3 space-y-2 text-sm">
+                {catalog.people
+                  .filter((p) =>
+                    `${p.username} ${p.name}`
+                      .toLowerCase()
+                      .includes(referenceSearch.toLowerCase()),
+                  )
+                  .slice(0, 20)
+                  .map((p) => (
+                    <li className="[overflow-wrap:anywhere]" key={p.username}>
+                      <code>{p.username}</code> · {p.name}
+                    </li>
+                  ))}
+              </ul>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Menampilkan hingga 20 akun sesuai pencarian.
+              </p>
+              {catalog.subjects.length ? (
+                <ul className="mt-3 space-y-1 text-sm">
+                  {catalog.subjects.map((s) => (
+                    <li key={s.code}>
+                      <code>{s.code}</code> · {s.name}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </details>
+          ) : null}
+          <Button type="button" variant="outline" onClick={template}>
+            Unduh template CSV
+          </Button>
+          <fieldset
+            disabled={frozen}
+            className="grid min-w-0 gap-4 sm:grid-cols-2"
+          >
+            <legend className="sr-only">Konteks dan berkas impor</legend>
+            <label className="min-w-0 text-sm">
+              Kelas dan tahun ajaran
+              <select
+                className={controlClass}
+                value={classId}
+                onChange={(e) => {
+                  setClassId(e.target.value);
+                  edit();
+                }}
+              >
+                <option value="">Pilih kelas</option>
+                {classes.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {subjectId ? (
+              <p className="self-center text-sm">
+                Mata pelajaran: {subjectLabel ?? "Sesuai filter penilaian"} ·
+                Semester {semester === 1 ? "Ganjil" : "Genap"}
+              </p>
+            ) : null}
+            {domain !== "schedules" ? (
+              <label className="text-sm">
+                {domain === "enrollment"
+                  ? "Tanggal mulai penempatan"
+                  : "Tanggal penilaian"}
+                <input
+                  className={controlClass}
+                  type="date"
+                  value={date}
+                  onChange={(e) => {
+                    setDate(e.target.value);
+                    edit();
+                  }}
+                />
+              </label>
+            ) : null}
+            {domain === "grades" ? (
+              <label className="text-sm">
+                Jenis penilaian
+                <select
+                  className={controlClass}
+                  value={kind}
+                  onChange={(e) => {
+                    setKind(e.target.value as typeof kind);
+                    edit();
+                  }}
+                >
+                  {["PH", "ATS", "ASAS", "Praktik"].map((k) => (
+                    <option key={k}>{k}</option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
+            <label className="min-w-0 text-sm sm:col-span-2">
+              Unggah CSV
+              <input
+                type="file"
+                accept=".csv,text/csv"
+                className={controlClass}
+                onChange={(e) => void file(e.target.files?.[0])}
+              />
+            </label>
+            <label className="min-w-0 text-sm sm:col-span-2">
+              Isi CSV
+              <textarea
+                className={`${controlClass} min-h-36 font-mono text-sm`}
+                aria-label="Isi CSV"
+                value={csv}
+                maxLength={65536}
+                spellCheck={false}
+                onChange={(e) => {
+                  fileRead.current++;
+                  setCsv(e.target.value);
+                  edit();
+                }}
+                placeholder={bulkTemplates[domain]}
+              />
+            </label>
+          </fieldset>
+          {message ? (
+            <div ref={feedback} tabIndex={-1}>
+              <Status
+                tone={
+                  phase === "saved"
+                    ? "success"
+                    : phase === "ready"
+                      ? "info"
+                      : "error"
+                }
+              >
+                {message}
+              </Status>
+            </div>
+          ) : null}
+          {pending ? (
+            <p role="status">
+              {phase === "ready"
+                ? "Menyimpan seluruh batch…"
+                : "Memeriksa permintaan…"}
+            </p>
+          ) : null}
+          {preview?.error ? (
+            <Status tone="error">{preview.error}</Status>
+          ) : null}
+          {preview?.issues.length ? (
+            <ul aria-label="Masalah CSV" className="space-y-2 text-sm">
+              {preview.issues.map((i) => (
+                <li key={i.row}>
+                  Baris {i.row}: {i.code}. Tidak disimpan.
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          {preview && !preview.error && !preview.issues.length ? (
+            <>
+              <h3 className="font-semibold">Pratinjau · {count} baris</h3>
+              <p className="text-sm text-muted-foreground">
+                Kelas:{" "}
+                {classes.find((c) => c.id === classId)?.label ??
+                  "Belum dipilih"}
+                {domain !== "schedules"
+                  ? ` · Tanggal: ${date || "Belum diisi"}`
+                  : ""}
+                {domain === "grades" ? ` · ${kind}` : ""}.{" "}
+                {result?.code !== "saved"
+                  ? "Tampilan ini belum merupakan bukti penyimpanan."
+                  : ""}
+              </p>
+              <TableRegion label="Pratinjau dan hasil impor">
+                <table className="w-full text-left text-sm">
+                  <thead>
+                    <tr>
+                      <th className="p-2">Baris</th>
+                      {headers[domain].map((h) => (
+                        <th className="p-2" key={h}>
+                          {h}
+                        </th>
+                      ))}
+                      <th className="p-2">Hasil sumber</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {preview.rows
+                      .slice((current - 1) * 10, current * 10)
+                      .map((r, index) => {
+                        const n = (current - 1) * 10 + index + 2;
+                        const outcome = result?.rows?.find((x) => x.row === n);
+                        return (
+                          <tr key={n}>
+                            <td className="p-2">{n}</td>
+                            {headers[domain].map((h) => (
+                              <td
+                                key={h}
+                                className="max-w-60 whitespace-pre-wrap p-2 [overflow-wrap:anywhere]"
+                              >
+                                {r[h] === null ? "Kosong" : String(r[h] ?? "")}
+                              </td>
+                            ))}
+                            <td className="p-2">
+                              {outcome
+                                ? (outcomeLabels[outcome.code] ??
+                                  "Tidak disimpan; periksa data sumber")
+                                : "Belum divalidasi sumber"}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </TableRegion>
+              {pages > 1 ? (
+                <Pagination
+                  label="Halaman pratinjau impor"
+                  page={current}
+                  pageCount={pages}
+                  disabled={pending}
+                  onPageChange={setPage}
+                />
+              ) : null}
+            </>
+          ) : null}
+          {phase === "ready" ? (
+            <label className="flex min-h-11 items-center gap-3 text-sm">
+              <input
+                type="checkbox"
+                className="size-5 shrink-0"
+                checked={checked}
+                disabled={pending}
+                onChange={(e) => setChecked(e.target.checked)}
+              />
+              Saya sudah memeriksa kelas, periode, isi dan seluruh hasil
+              validasi; simpan seluruh batch.
+            </label>
+          ) : null}
+          {phase === "uncertain" ? (
+            <p className="break-all text-xs">
+              ID permintaan: {requestId}. Isian dikunci sampai hasil diperiksa.
+            </p>
+          ) : null}
+          <div className="flex flex-wrap gap-3">
+            {phase === "editing" ? (
+              <Button
+                type="button"
+                disabled={
+                  pending ||
+                  !csv ||
+                  !!preview?.error ||
+                  !!preview?.issues.length
+                }
+                onClick={() => void send("preview")}
+              >
+                Validasi dan pratinjau
+              </Button>
+            ) : null}
+            {phase === "ready" ? (
+              <Button
+                type="button"
+                disabled={pending || !checked}
+                onClick={() => void send("commit")}
+              >
+                Konfirmasi simpan batch
+              </Button>
+            ) : null}
+            {phase === "uncertain" ? (
+              <>
+                <Button
+                  type="button"
+                  disabled={pending}
+                  onClick={() => void send("status")}
+                >
+                  Periksa hasil
+                </Button>
+                {missing ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    disabled={pending}
+                    onClick={() => void send("commit")}
+                  >
+                    Coba simpan dengan ID sama
+                  </Button>
+                ) : null}
+              </>
+            ) : null}
+            {phase === "saved" ? (
+              <Button
+                type="button"
+                onClick={() => {
+                  setCsv("");
+                  setOpen(false);
+                  onFinished();
+                }}
+              >
+                Selesai dan perbarui tampilan
+              </Button>
+            ) : null}
+          </div>
+        </div>
+      </Dialog>
+    </>
+  );
+}

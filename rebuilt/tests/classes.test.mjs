@@ -97,6 +97,8 @@ test("anonymous and survey-required mutations never write", async () => {
   m.survey = true;
   assert.equal((await POST(req())).status, 403);
   assert.equal(writes(m).length, 0);
+  for(const value of [null,{},'false',0]){m=setup();m.survey=value;assert.equal((await POST(req())).status,503);assert.equal(writes(m).length,0);}
+
 });
 test("foreign Origin is rejected before context or RPC", async () => {
   const m = setup();
