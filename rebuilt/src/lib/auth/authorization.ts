@@ -5,8 +5,10 @@ export { accessSchema } from "./access-validation";
 /** A user-scoped request client is required. Never call with a service-role client. */
 export async function loadAccessContext(
   client: ReturnType<typeof requestAuth>,
+  signal?: AbortSignal,
 ) {
-  const { data, error } = await client.rpc("app_access_context");
+  const query = client.rpc("app_access_context");
+  const { data, error } = await (signal ? query.abortSignal(signal) : query);
   if (error) throw new Error("Authorization service unavailable");
   return data === null ? null : accessSchema.parse(data);
 }

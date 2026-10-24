@@ -102,12 +102,17 @@ export function calendarSnapshot(
     throw Error("Kalender belum lengkap.");
   return data;
 }
+/** Existing school-calendar rule, shared by the calendar and daily overview. */
+export function isAttendanceHoliday(date: string, holidays: readonly string[]) {
+  return (
+    new Date(date + "T12:00:00Z").getUTCDay() === 0 || holidays.includes(date)
+  );
+}
 export function calendarStatus(data: AttendanceSnapshot, date: string) {
   const row = data.rows.find((r) => r.date === date);
   return (
     row?.status ??
-    (new Date(date + "T12:00:00Z").getUTCDay() === 0 ||
-    data.extra.holidays.includes(date)
+    (isAttendanceHoliday(date, data.extra.holidays)
       ? "Libur"
       : date > data.today
         ? "Belum berlangsung"

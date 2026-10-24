@@ -338,3 +338,7 @@ TextField/SelectField legacy menjadi adapter Field P02 dengan ID useId dan token
 FilterBar dipakai Kelas/Jadwal serta form filter riwayat operasional; caller tetap memegang handler/disabled/filter/payload. Pagination one-based dipakai pada koleksi operasional, akademik, evaluasi, notifikasi dan jobs. Prop previousLabel/nextLabel/summary opsional mempertahankan konteks domain. Gunakan “Halaman x dari y”; jumlah data adalah total dari scope caller. Link GET guru piket tetap link, tidak diganti mutasi atau fetch client.
 
 LoadingState dan error boundary memakai komponen existing, retry Next dan pesan aman. EmptyState tidak menyamakan “belum ada data” dengan “tidak berizin”; penjelasan scope domain dipertahankan. Tabel memakai TableRegion existing dan tidak menyembunyikan kolom bisnis. Pager pertanyaan Survei, batch siswa dan PDF tetap khusus untuk menjaga autosave/dirty/final/reader. Laporan dan matriks rollout ada pada P05.
+
+## P06 — ringkasan beranda sesuai peran
+
+Beranda `/account` memakai Card, Status, Button dan token existing. Ringkasan selalu menyertakan periode dan sumber; kegagalan sumber menghasilkan nilai tidak tersedia, bukan nol. Prioritas bersifat informasi dan mengarahkan melalui sidebar. Snapshot lama diberi waktu pembaruan; akses kedaluwarsa/pergantian akun menghapus data operasional. Grid satu kolom mobile dan agenda dapat wrapping. Lihat laporan P06 dan bukti `docs/verification/overview`.
