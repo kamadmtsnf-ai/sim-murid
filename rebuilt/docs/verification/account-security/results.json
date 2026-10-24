@@ -1,0 +1,355 @@
+{
+  "checks": [
+    {
+      "name": "320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320 fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "320 axe",
+      "passed": true
+    },
+    {
+      "name": "390 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "390 fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "390 axe",
+      "passed": true
+    },
+    {
+      "name": "768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "768 fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "768 axe",
+      "passed": true
+    },
+    {
+      "name": "1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440 fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "1440 axe",
+      "passed": true
+    },
+    {
+      "name": "844 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "844 fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "844 axe",
+      "passed": true
+    },
+    {
+      "name": "empty password rejected locally",
+      "passed": true
+    },
+    {
+      "name": "required error bound to field",
+      "passed": true
+    },
+    {
+      "name": "error summary receives focus",
+      "passed": true
+    },
+    {
+      "name": "confirmation mismatch rejected",
+      "passed": true
+    },
+    {
+      "name": "confirmation error associated",
+      "passed": true
+    },
+    {
+      "name": "repeated validation refocuses error summary",
+      "passed": true
+    },
+    {
+      "name": "password visibility toggle",
+      "passed": true
+    },
+    {
+      "name": "question command submitted once",
+      "passed": true
+    },
+    {
+      "name": "secret cleared on acknowledged success",
+      "passed": true
+    },
+    {
+      "name": "saved question remains selected",
+      "passed": true
+    },
+    {
+      "name": "same tick duplicate blocked",
+      "passed": true
+    },
+    {
+      "name": "network blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "network retains draft",
+      "passed": true
+    },
+    {
+      "name": "network can recover with GET",
+      "passed": true
+    },
+    {
+      "name": "malformed blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "malformed retains draft",
+      "passed": true
+    },
+    {
+      "name": "malformed can recover with GET",
+      "passed": true
+    },
+    {
+      "name": "503 blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "503 retains draft",
+      "passed": true
+    },
+    {
+      "name": "503 can recover with GET",
+      "passed": true
+    },
+    {
+      "name": "concurrent forms share lock",
+      "passed": true
+    },
+    {
+      "name": "partial password completion redirects safely",
+      "passed": true
+    },
+    {
+      "name": "failed read keeps uncertain writes blocked",
+      "passed": true
+    },
+    {
+      "name": "read 401 redirects before parsing",
+      "passed": true
+    },
+    {
+      "name": "acknowledged write clears secret despite missing status",
+      "passed": true
+    },
+    {
+      "name": "acknowledged write waits for status sync",
+      "passed": true
+    },
+    {
+      "name": "rate limited failure retains editable fields",
+      "passed": true
+    },
+    {
+      "name": "nonJSON 401 redirects",
+      "passed": true
+    },
+    {
+      "name": "password success signs out",
+      "passed": true
+    },
+    {
+      "name": "password cleared after success",
+      "passed": true
+    },
+    {
+      "name": "late response after unmount ignored",
+      "passed": true
+    },
+    {
+      "name": "password preserves question gate",
+      "passed": true
+    },
+    {
+      "name": "password no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "password fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "profile_pending preserves question gate",
+      "passed": true
+    },
+    {
+      "name": "profile_pending no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "profile_pending fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "security_question preserves question gate",
+      "passed": true
+    },
+    {
+      "name": "security_question no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "security_question fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "email_pending preserves question gate",
+      "passed": true
+    },
+    {
+      "name": "email_pending no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "email_pending fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "survey_pending preserves question gate",
+      "passed": true
+    },
+    {
+      "name": "survey_pending no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "survey_pending fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "account_pending preserves question gate",
+      "passed": true
+    },
+    {
+      "name": "account_pending no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "account_pending fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "ready preserves question gate",
+      "passed": true
+    },
+    {
+      "name": "ready no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "ready fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "mobile touch saves",
+      "passed": true
+    },
+    {
+      "name": "orientation no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "orientation fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "keyboard form order",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "loading fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "error fields and touch targets fit",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true
+    },
+    {
+      "name": "error hides private details",
+      "passed": true
+    },
+    {
+      "name": "retry boundary works",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "320",
+      "violations": []
+    },
+    {
+      "name": "390",
+      "violations": []
+    },
+    {
+      "name": "768",
+      "violations": []
+    },
+    {
+      "name": "1440",
+      "violations": []
+    },
+    {
+      "name": "844",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

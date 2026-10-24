@@ -283,3 +283,7 @@ Kartu kontak memakai header grid minmax(0,1fr) dan email wrapping. Bedakan statu
 ## Akses Verifikasi email — 24 Oktober 2026
 
 Menu Verifikasi email tersedia untuk seluruh pemilik akun. Akun yang sudah menyelesaikan password, biodata wajib dan pertanyaan keamanan dapat memverifikasi email kontaknya; kewajiban verifikasi tetap khusus Guru. Jika syarat belum terpenuhi, tampilkan penjelasan di halaman yang sama tanpa redirect otomatis ke Keamanan akun. Status verified selalu berasal dari bukti email aktual, bukan gate ready. Rincian: `../verification/email-verification-access-fix.md`.
+
+## Keamanan akun — 24 Oktober 2026
+
+Form password dan pertanyaan tetap terpisah dengan lock bersama. Gunakan ringkasan gate yang menjelaskan langkah berikutnya melalui sidebar, Card existing, heading h1/h2, input44px, padding responsif dan wrapping identitas. Pesan validasi terhubung ke field; error summary mendapat fokus setelah proses selesai. Bedakan label penyimpanan tiapform. Respons401 diarahkan ke login sebelum JSON diproses; hasil ambigu menonaktifkan mutasi sampai status GET tervalidasi, tanpa retry otomatis atau membuang draft. Secret dibersihkan hanya setelah acknowledgement sukses atau logout. Error halaman mempunyai retry dan loading memakai live status. Bukti/batas: `../verification/account-security-audit.md`.
