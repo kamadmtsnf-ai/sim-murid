@@ -51,7 +51,7 @@
     "test:user-detail:browser": "node scripts/verify-user-detail.mjs",
     "test:classes": "node --test tests/classes.test.mjs",
     "test:classes:browser": "node scripts/verify-classes.mjs",
-    "test:academic": "node --experimental-strip-types --test tests/academic.test.ts",
+    "test:academic": "node --experimental-strip-types --test tests/academic.test.ts tests/academic-context.test.ts",
     "test:academic:browser": "node scripts/verify-academic.mjs",
     "test:singleton-writes": "node --test tests/database/singleton-writes.test.mjs",
     "test:schedules": "node --test tests/schedules.test.mjs",
@@ -94,7 +94,8 @@
     "test:personal-profile:browser": "node scripts/verify-personal-profile.mjs",
     "test:email-verification": "node --test tests/email-verification.test.mjs && node --test tests/database/email-access.test.mjs",
     "test:email-verification:browser": "node scripts/verify-email-verification.mjs",
-    "test:design-system:browser": "node scripts/verify-design-system.mjs"
+    "test:design-system:browser": "node scripts/verify-design-system.mjs",
+    "test:academic-context:browser": "node scripts/verify-academic-context.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

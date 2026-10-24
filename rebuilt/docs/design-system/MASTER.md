@@ -309,3 +309,11 @@ Bagian ini memperinci standar reusable terbaru di atas token dan primitive exist
 - Pilot: Hak akses saya (read-only) dan Profil pribadi (mutasi). `domain-controls.tsx` adalah adapter legacy; migrasi lain dilakukan per modul pada P05. Validasi, state dan kontrak API tidak dipindahkan ke komponen presentasi.
 
 Token warna, font, border/input dan reduced motion existing dipertahankan. Token ukuran kontrol, gap field dan gap koleksi berada hanya di `globals.css`. Penerimaan memerlukan 320/390/768/1440 px, keyboard, touch, landscape, empty/loading/error, field validation, dan regresi bisnis; hasil aktual ada pada laporan P02.
+
+## P03 — Pilihan akademik dan konteks diterapkan
+
+Topbar menyebut **pilihan tersimpan**, bukan menyatakan semua modul disaring. Disclosure pada Kelas/Jadwal/Nilai/Rapor menyebut konteks halaman yang benar-benar diterapkan. Ingat/Terapkan/Hapus adalah tindakan pada halaman sama, bukan navigasi modul tambahan.
+
+Penerapan lintas halaman eksplisit agar reload, Back atau tab lain tidak mengganti draf. Nilai tersimpan dicek dengan katalog berizin; kelas hilang tidak diganti semua kelas. Error read mempertahankan scope lama. Kontrol dependen reset hanya setelah GET sukses. Modal aktif memblokir transfer; penempatan/pilihan rapor memakai konfirmasi existing.
+
+Ganjil/Genap dan tahun berpasangan tetap helper tunggal. Tanggal kalender transaksi, periode Survei ber-ID, dua sisi kenaikan, tahun lulus/terbit tidak dipaksa mengikuti preferensi. Penyimpanan lokal yang tidak tersedia diberi penjelasan. Lihat [laporan P03](../development/STAGE-03-ACADEMIC-CONTEXT.md).

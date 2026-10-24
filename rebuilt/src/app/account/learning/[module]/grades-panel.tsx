@@ -1,4 +1,5 @@
 "use client";
+import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -273,6 +274,14 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
         );
       if (!r.ok) throw Error();
       const value = gradesSnapshot.parse((await r.json()).data);
+      if (
+        (f.classId && !value.classes.some((c) => c.id === f.classId)) ||
+        value.semester !== f.semester ||
+        value.extra.scope?.classId !== f.classId ||
+        value.extra.scope?.subjectId !== f.subjectId ||
+        value.extra.scope?.studentId !== f.studentId
+      )
+        throw Error("Academic scope not confirmed");
       if (mounted.current) {
         setData(value);
         setFilters(next);
@@ -441,6 +450,22 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
   );
   return (
     <div className="grades-panel min-w-0 space-y-6" aria-busy={reading || busy}>
+      <AcademicContextBar
+        current={{
+          year: selectedClass?.year ?? null,
+          classId: filters.classId ?? null,
+          semester: Number(filters.semester),
+        }}
+        catalog={{
+          years: data.classes.map((c) => c.year),
+          classes: data.classes,
+        }}
+        requiresClass
+        disabled={disabled || !!mode}
+        onApply={(value) =>
+          load({ classId: value.classId!, semester: String(value.semester) })
+        }
+      />
       {!mode && feedback}
       <section className="rounded-xl border bg-card p-4 sm:p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -482,6 +507,7 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
           Filter penilaian
         </h2>
         <form
+          key={JSON.stringify(filters)}
           onSubmit={(e) => {
             e.preventDefault();
             void load(
@@ -499,7 +525,11 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
           >
             <label className="text-sm">
               Kelas / tahun ajaran
-              <select name="classId" className={controlClass} defaultValue="">
+              <select
+                name="classId"
+                className={controlClass}
+                defaultValue={filters.classId ?? ""}
+              >
                 <option value="">Semua sesuai izin</option>
                 {data.classes.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -510,7 +540,11 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
             </label>
             <label className="text-sm">
               Mata pelajaran
-              <select name="subjectId" className={controlClass} defaultValue="">
+              <select
+                name="subjectId"
+                className={controlClass}
+                defaultValue={filters.subjectId ?? ""}
+              >
                 <option value="">Semua sesuai izin</option>
                 {data.extra.subjects.map((s) => (
                   <option key={s.id} value={s.id}>
@@ -532,7 +566,11 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
             </label>
             <label className="text-sm">
               Siswa dalam laporan
-              <select name="studentId" className={controlClass}>
+              <select
+                name="studentId"
+                className={controlClass}
+                defaultValue={filters.studentId ?? ""}
+              >
                 <option value="">Semua sesuai izin</option>
                 {[...new Map(data.people.map((p) => [p.id, p])).values()].map(
                   (p) => (

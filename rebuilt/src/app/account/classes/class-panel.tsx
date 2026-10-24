@@ -1,4 +1,5 @@
 "use client";
+import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState } from "react";
 import type { z } from "zod";
 import { formatAcademicYear, semesterPeriod } from "@/lib/academic/period";
@@ -167,6 +168,28 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
   );
   return (
     <div className="classes-panel space-y-6" aria-busy={busy}>
+      <AcademicContextBar
+        current={{
+          year: selectedYear?.start_year ?? null,
+          classId: selected?.year_id === year ? roster || null : null,
+        }}
+        catalog={{
+          years: data.years.map((y) => y.start_year),
+          classes: data.classes.map((c) => ({
+            id: c.id,
+            name: c.name,
+            year: data.years.find((y) => y.id === c.year_id)!.start_year,
+          })),
+        }}
+        disabled={disabled || classOpen}
+        onApply={(value) => {
+          if (!leavePlacement()) return;
+          setYear(data.years.find((y) => y.start_year === value.year)!.id);
+          setRoster(value.classId ?? "");
+          clearPlacement();
+          setSearch("");
+        }}
+      />
       {!classOpen && feedback}
       {selectedYear && (
         <Status>

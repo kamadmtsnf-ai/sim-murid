@@ -9,7 +9,7 @@ import ts from "typescript";
 import { NextRequest, NextResponse } from "next/server.js";
 const mocks = {
   "server-only": "export {};",
-  "next/navigation": `export const redirect=url=>{const e=Error('redirect');e.url=url;throw e};`,
+  "next/navigation": `export const useRouter=()=>({push:()=>{}});export const redirect=url=>{const e=Error('redirect');e.url=url;throw e};`,
   "@/lib/auth/read-server": `export const readServerPrincipal=async()=>globalThis.schedulesMocks.caller;`,
   "@/lib/auth/http": `export const privateJson=(body,status=200)=>globalThis.schedulesMocks.reply(body,status);export const requestAuth=()=>({});export const verifiedPrincipal=async()=>globalThis.schedulesMocks.caller;export const sameOrigin=r=>r.headers.get('origin')===r.nextUrl.origin;`,
   "@/lib/auth/admin": `export const createAuthAdmin=()=>({rpc:async(fn,args)=>{const m=globalThis.schedulesMocks;m.calls.push([fn,args]);if(fn==='app_survey_required')return {data:m.survey,error:null};if(fn==='app_schedules_write')return {data:m.malformedResult?{}:{code:m.code},error:m.writeError};return {data:fn==='app_classes_read'?m.classSnapshot:m.snapshot,error:m.readError};}});`,
