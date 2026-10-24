@@ -32,3 +32,5 @@ test('Server skips plan source for unrelated role and isolates a failed plan rea
 test('Urgent plans are ranked before the display cap',()=>{const rows=Array.from({length:205},()=>item('belum','2027-01-01'));rows[204]=item('belum','2026-10-01');const out=projectFollowUp(base(),plans(rows));assert.equal(out.items.find(i=>i.source==='plans').target,'2026-10-01');});
 
 test('Cross-midnight source mismatch is unavailable, not incorrectly overdue',()=>{const p=plans([item()]);p.today='2026-10-25';assert.equal(projectFollowUp(base(),p).plans,'unavailable');});
+
+test('Accepted source descriptions and owner text remain complete beyond the title limit',()=>{const i={...item(),description:'Uraian '.repeat(250),owner:'Petugas '.repeat(200)};const out=projectFollowUp(base(),plans([i]));const p=out.items.find(i=>i.source==='plans');assert.ok(p);assert.ok(p.detail.includes(i.description.trim()));assert.equal(p.owner,i.owner.trim());assert.equal(out.plans,'ready');});

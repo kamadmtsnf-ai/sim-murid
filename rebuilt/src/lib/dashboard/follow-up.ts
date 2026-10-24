@@ -7,8 +7,8 @@ export const followUpItem = z
     source: z.string().max(100),
     module: z.string().max(100),
     title: z.string().max(250),
-    detail: z.string().max(2000),
-    owner: z.string().max(200),
+    detail: z.string().max(2500),
+    owner: z.string().max(2000),
     target: z.iso.date().nullable(),
     status: z.enum([
       "needs_action",
@@ -43,7 +43,7 @@ export type FollowUp = z.infer<typeof followUpSchema>;
 export type FollowUpItem = z.infer<typeof followUpItem>;
 const planItem = z.object({
   description: z.string().trim().min(3).max(2000),
-  owner: z.string().trim().min(1).max(200),
+  owner: z.string().trim().min(1).max(2000),
   target: z.iso.date(),
   status: z.enum(["belum", "proses", "selesai"]),
 });
@@ -104,7 +104,7 @@ export function projectFollowUp(raw: Overview, rawPlans?: unknown): FollowUp {
             source: "plans",
             module: "Hasil survei dan rencana aksi",
             title: i.description.slice(0, 250),
-            detail: `${p.title.slice(0, 200)} · Status dan target mengikuti rencana aksi pada modul sumber.`,
+            detail: `${p.title.slice(0, 200)}\n${i.description}\nStatus dan target mengikuti rencana aksi pada modul sumber.`,
             owner: i.owner,
             target: i.target,
             status:
