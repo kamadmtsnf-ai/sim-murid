@@ -346,3 +346,7 @@ Beranda `/account` memakai Card, Status, Button dan token existing. Ringkasan se
 ## P07 — pusat tindak lanjut
 
 Notifikasi memakai tab Radix Kotak masuk/Tindak lanjut, filter dan pagination existing. Kedua panel dipertahankan saat berganti tab; panel tidak aktif disembunyikan. Card menampilkan modul, urgensi, status, penanggung jawab dan target sumber. Target tidak diketahui ditulis eksplisit; status tidak tersedia berbeda dari selesai. Fokus hasil setelah refresh/pagination hanya diarahkan ke panel terlihat. Preferensi tampilan per akun/perangkat tidak mengubah kanal kiriman atau pengamanan wajib. Komponen mengikuti grid satu kolom mobile/dua kolom desktop dan wrapping konten panjang.
+
+## P08 — wizard input massal
+
+Modal reusable mengikuti unggah/validasi/pratinjau/konfirmasi/hasil, dengan template CSV, referensi berizin dan tabel dalam region gulir lokal. Konfirmasi eksplisit dibatalkan saat konteks/berkas berubah; field dikunci pada pending/uncertain dan pemulihan memakai ID yang sama. Label textarea stabil; CSV/nilai tidak masuk localStorage. Modal dibatasi viewport dengan body gulir; operasi lama dipertahankan. UI baru hanya tersedia setelah RPC siap.

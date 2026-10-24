@@ -1,6 +1,8 @@
 /** RPC contracts generated from isolated migration replay; not proof of cloud deployment. */
 import type {Database as CloudDatabase, Json} from "./cloud.types";
 export type Database = Omit<CloudDatabase,"public"> & { public: Omit<CloudDatabase["public"],"Functions"> & { Functions: {
+app_bulk_catalog: { Args: {p_actor: string; p_session: string; p_domain: string; p_class: string; p_subject?: string | null }; Returns: Json };
+app_bulk_input: { Args: {p_actor: string; p_session: string; p_request: string; p_action: string; p_domain?: string | null; p_revision?: number | null; p_options?: Json | null; p_rows?: Json | null }; Returns: Json };
 app_user_provision_begin: { Args: {p_actor:string;p_session:string;p_request:string;p_command:Json;p_fingerprint:string}; Returns:Json };
 app_user_provision_finish: { Args: {p_actor:string;p_session:string;p_request:string;p_fingerprint:string}; Returns:Json };
 app_access_check: { Args: {p_capability: string; p_owner?: string | null; p_class?: string | null }; Returns: boolean };

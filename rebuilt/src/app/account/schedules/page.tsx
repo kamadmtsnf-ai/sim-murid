@@ -1,3 +1,4 @@
+import { bulkImportAvailable } from "@/lib/bulk/availability";
 import { AccessDenied } from "@/lib/auth/authorization";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -64,6 +65,10 @@ export default async function SchedulesPage({
       <SchedulePanel
         key={JSON.stringify(filters) + schedules.revision + String(q.view)}
         initialTab={q.view === "piket" ? "piket" : "kbm"}
+        bulkAvailable={
+          classes.classes.some((c) => !c.archived && c.can_schedule) &&
+          (await bulkImportAvailable(caller.principal.id, caller.sessionId))
+        }
         initial={schedules}
         classes={classes}
         filters={filters}

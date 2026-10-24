@@ -1,4 +1,5 @@
 "use client";
+import { BulkImport } from "@/components/bulk/bulk-import";
 import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { AcademicContextBar } from "@/components/academic/academic-context";
@@ -28,7 +29,13 @@ import {
 const api = "/api/learning/grades",
   kinds = ["PH", "ATS", "ASAS", "Praktik"] as const;
 type Scope = { classId: string; subjectId: string; semester: number };
-export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
+export function GradesPanel({
+  initial,
+  bulkAvailable = false,
+}: {
+  initial: GradesSnapshot;
+  bulkAvailable?: boolean;
+}) {
   const [data, setData] = useState(initial),
     [filters, setFilters] = useState<Record<string, string>>({
       semester: String(initial.semester),
@@ -594,6 +601,25 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
             : "Pilih kelas dan mata pelajaran, lalu tampilkan data untuk melakukan input."}
         </p>
       </section>
+      {bulkAvailable && data.canWrite && selectedClass && filters.subjectId ? (
+        <BulkImport
+          key={`${selectedClass.id}:${filters.subjectId}`}
+          domain="grades"
+          disabled={disabled || !!mode}
+          classes={[
+            {
+              id: selectedClass.id,
+              label: `${selectedClass.name} · ${formatAcademicYear(selectedClass.year)}`,
+            },
+          ]}
+          semester={data.semester === 1 ? 1 : 2}
+          subjectId={filters.subjectId}
+          subjectLabel={
+            data.extra.subjects.find((s) => s.id === filters.subjectId)?.name
+          }
+          onFinished={() => void load(filters)}
+        />
+      ) : null}
       <section
         aria-label="Ringkasan penilaian"
         className="grid min-w-0 gap-3 sm:grid-cols-3"

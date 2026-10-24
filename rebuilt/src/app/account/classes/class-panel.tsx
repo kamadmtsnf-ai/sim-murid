@@ -1,4 +1,5 @@
 "use client";
+import { BulkImport } from "@/components/bulk/bulk-import";
 import { FilterBar } from "@/components/ui/collection-controls";
 import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState } from "react";
@@ -16,7 +17,13 @@ import { Status } from "@/components/ui/status";
 import { classCommand, classSnapshot } from "@/lib/education/validation";
 import { useDomainMutation } from "@/lib/education/use-mutation";
 type Snapshot = z.infer<typeof classSnapshot>;
-export function ClassPanel({ initial }: { initial: Snapshot }) {
+export function ClassPanel({
+  initial,
+  bulkAvailable = false,
+}: {
+  initial: Snapshot;
+  bulkAvailable?: boolean;
+}) {
   const classOpener = useRef<HTMLButtonElement>(null),
     rosterHeading = useRef<HTMLHeadingElement>(null);
   const [data, setData] = useState(initial),
@@ -169,6 +176,35 @@ export function ClassPanel({ initial }: { initial: Snapshot }) {
   );
   return (
     <div className="classes-panel space-y-6" aria-busy={busy}>
+      {data.can_manage && bulkAvailable ? (
+        <BulkImport
+          domain="enrollment"
+          disabled={disabled || classOpen || !!chosen.length || !!startsOn}
+          classes={data.classes
+            .filter((c) => !c.archived && c.year_id === year)
+            .map((c) => ({
+              id: c.id,
+              label: `${c.name} · ${formatAcademicYear(data.years.find((y) => y.id === c.year_id)!.start_year)}`,
+            }))}
+          onFinished={() => {
+            void (async () => {
+              try {
+                const r = await fetch(
+                  "/api/classes?" + new URLSearchParams({ year }),
+                  { cache: "no-store" },
+                );
+                if (!r.ok) throw Error();
+                setData(classSnapshot.parse((await r.json()).classes));
+                clearPlacement();
+              } catch {
+                fail(
+                  "Impor tersimpan. Tampilan belum diperbarui; muat ulang halaman sebelum mengubah data lain.",
+                );
+              }
+            })();
+          }}
+        />
+      ) : null}
       <AcademicContextBar
         current={{
           year: selectedYear?.start_year ?? null,
