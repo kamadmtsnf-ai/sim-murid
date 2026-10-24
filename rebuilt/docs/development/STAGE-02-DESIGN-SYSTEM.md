@@ -2,6 +2,8 @@
 
 Tanggal: 24 Oktober 2026 (WIB). Baseline main: `ec436f2b59215588a13e3019a423562a453c75b7`. Branch `feat/design-system-p02`.
 
+PR implementasi: [#46](https://github.com/kamadmtsnf-ai/sim-murid/pull/46).
+
 Status: selesai untuk kontrak komponen bersama dan kedua pilot. Rollout antarmodul tetap P05.
 
 ## Analisis dampak dan keputusan
