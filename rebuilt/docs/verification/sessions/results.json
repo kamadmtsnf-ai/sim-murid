@@ -1,0 +1,479 @@
+{
+  "checks": [
+    {
+      "name": "320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "320 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "320 axe",
+      "passed": true
+    },
+    {
+      "name": "twenty records 320",
+      "passed": true
+    },
+    {
+      "name": "320 dialog within viewport",
+      "passed": true
+    },
+    {
+      "name": "dialog-320 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog returns focus 320",
+      "passed": true
+    },
+    {
+      "name": "390 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "390 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "390 axe",
+      "passed": true
+    },
+    {
+      "name": "twenty records 390",
+      "passed": true
+    },
+    {
+      "name": "390 dialog within viewport",
+      "passed": true
+    },
+    {
+      "name": "dialog-390 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog returns focus 390",
+      "passed": true
+    },
+    {
+      "name": "768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "768 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "768 axe",
+      "passed": true
+    },
+    {
+      "name": "twenty records 768",
+      "passed": true
+    },
+    {
+      "name": "768 dialog within viewport",
+      "passed": true
+    },
+    {
+      "name": "dialog-768 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog returns focus 768",
+      "passed": true
+    },
+    {
+      "name": "1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "1440 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "1440 axe",
+      "passed": true
+    },
+    {
+      "name": "twenty records 1440",
+      "passed": true
+    },
+    {
+      "name": "1440 dialog within viewport",
+      "passed": true
+    },
+    {
+      "name": "dialog-1440 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog returns focus 1440",
+      "passed": true
+    },
+    {
+      "name": "844 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "844 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "844 axe",
+      "passed": true
+    },
+    {
+      "name": "twenty records 844",
+      "passed": true
+    },
+    {
+      "name": "844 dialog within viewport",
+      "passed": true
+    },
+    {
+      "name": "dialog-844 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog returns focus 844",
+      "passed": true
+    },
+    {
+      "name": "normal-320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "normal-320 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "normal-1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "normal-1440 controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "regular role has no foreign search",
+      "passed": true
+    },
+    {
+      "name": "own all warns signout",
+      "passed": true
+    },
+    {
+      "name": "escape closes dialog",
+      "passed": true
+    },
+    {
+      "name": "cancel never revokes",
+      "passed": true
+    },
+    {
+      "name": "empty state",
+      "passed": true
+    },
+    {
+      "name": "empty cannot revoke",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "empty search validated",
+      "passed": true
+    },
+    {
+      "name": "empty search does not fetch",
+      "passed": true
+    },
+    {
+      "name": "invalid search focuses username",
+      "passed": true
+    },
+    {
+      "name": "exact username search",
+      "passed": true
+    },
+    {
+      "name": "foreign revoke does not warn own logout",
+      "passed": true
+    },
+    {
+      "name": "all revoke bound to displayed owner",
+      "passed": true
+    },
+    {
+      "name": "acknowledged revoke feedback",
+      "passed": true
+    },
+    {
+      "name": "success returns focus to feedback",
+      "passed": true
+    },
+    {
+      "name": "return own account",
+      "passed": true
+    },
+    {
+      "name": "same tick one-session double click locked",
+      "passed": true
+    },
+    {
+      "name": "network requires sync",
+      "passed": true
+    },
+    {
+      "name": "network explicit error",
+      "passed": true
+    },
+    {
+      "name": "network GET recovers",
+      "passed": true
+    },
+    {
+      "name": "network no blind retry",
+      "passed": true
+    },
+    {
+      "name": "malformed requires sync",
+      "passed": true
+    },
+    {
+      "name": "malformed explicit error",
+      "passed": true
+    },
+    {
+      "name": "malformed GET recovers",
+      "passed": true
+    },
+    {
+      "name": "malformed no blind retry",
+      "passed": true
+    },
+    {
+      "name": "503 requires sync",
+      "passed": true
+    },
+    {
+      "name": "503 explicit error",
+      "passed": true
+    },
+    {
+      "name": "503 GET recovers",
+      "passed": true
+    },
+    {
+      "name": "503 no blind retry",
+      "passed": true
+    },
+    {
+      "name": "acknowledged revoke survives followup read failure",
+      "passed": true
+    },
+    {
+      "name": "followup failure blocks stale action",
+      "passed": true
+    },
+    {
+      "name": "followup recovery never resends revoke",
+      "passed": true
+    },
+    {
+      "name": "cancel disabled while revoking",
+      "passed": true
+    },
+    {
+      "name": "close disabled while revoking",
+      "passed": true
+    },
+    {
+      "name": "zero result honest feedback",
+      "passed": true
+    },
+    {
+      "name": "self revoke redirects logout",
+      "passed": true
+    },
+    {
+      "name": "401 mutation redirect",
+      "passed": true
+    },
+    {
+      "name": "401 read redirect",
+      "passed": true
+    },
+    {
+      "name": "gate mutation redirect",
+      "passed": true
+    },
+    {
+      "name": "gate read redirect",
+      "passed": true
+    },
+    {
+      "name": "bad invalid read denies stale actions",
+      "passed": true
+    },
+    {
+      "name": "bad valid read recovers",
+      "passed": true
+    },
+    {
+      "name": "owner invalid read denies stale actions",
+      "passed": true
+    },
+    {
+      "name": "owner valid read recovers",
+      "passed": true
+    },
+    {
+      "name": "network invalid read denies stale actions",
+      "passed": true
+    },
+    {
+      "name": "network valid read recovers",
+      "passed": true
+    },
+    {
+      "name": "latest owner wins overlapping requests",
+      "passed": true
+    },
+    {
+      "name": "poll paused during confirmation",
+      "passed": true
+    },
+    {
+      "name": "visibility refresh resumes",
+      "passed": true
+    },
+    {
+      "name": "late mutation after unmount does not redirect",
+      "passed": true
+    },
+    {
+      "name": "expiry disables revoke without reload",
+      "passed": true
+    },
+    {
+      "name": "expired session cannot be revoked from an older open dialog",
+      "passed": true
+    },
+    {
+      "name": "expired confirmation explains required refresh",
+      "passed": true
+    },
+    {
+      "name": "server clock offset handles incorrect device clock",
+      "passed": true
+    },
+    {
+      "name": "touch dialog within viewport",
+      "passed": true
+    },
+    {
+      "name": "orientation dialog within viewport",
+      "passed": true
+    },
+    {
+      "name": "keyboard search order",
+      "passed": true
+    },
+    {
+      "name": "loading no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "loading controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "error no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "error controls fit and touch44",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true
+    },
+    {
+      "name": "error hides details",
+      "passed": true
+    },
+    {
+      "name": "error retry",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "320",
+      "violations": []
+    },
+    {
+      "name": "dialog-320",
+      "violations": []
+    },
+    {
+      "name": "390",
+      "violations": []
+    },
+    {
+      "name": "dialog-390",
+      "violations": []
+    },
+    {
+      "name": "768",
+      "violations": []
+    },
+    {
+      "name": "dialog-768",
+      "violations": []
+    },
+    {
+      "name": "1440",
+      "violations": []
+    },
+    {
+      "name": "dialog-1440",
+      "violations": []
+    },
+    {
+      "name": "844",
+      "violations": []
+    },
+    {
+      "name": "dialog-844",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
