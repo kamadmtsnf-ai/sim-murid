@@ -5,14 +5,33 @@
   "sha256": "c236eee721b3bd90c28b1e147dbd8ed9e6cccf0b4b237a2bfdc0262a77a68ca5",
   "localMigrationReplayPassed": true,
   "localMigrationCount": 44,
-  "cloudApplied": false,
-  "cloudBulkRpc": null,
-  "cloudCatalogRpc": null,
-  "cloudDedupIndex": null,
+  "cloudApplied": true,
+  "cloudBulkRpc": "public.app_bulk_input(uuid,uuid,uuid,text,text,bigint,jsonb,jsonb)",
+  "cloudCatalogRpc": "public.app_bulk_catalog(uuid,uuid,text,uuid,uuid)",
+  "cloudDedupIndex": "sim_murid_private.import_p08_content_unique",
   "autoReview": {
-    "blocked": true,
+    "blocked": false,
     "action": "Apply additive P08 migration to shared Supabase",
-    "reason": "Production/shared database mutation was not considered explicitly authorized by the implement-and-merge request."
+    "reason": "Production/shared database mutation was not considered explicitly authorized by the implement-and-merge request.",
+    "resolution": "Explicit user approval obtained; apply_migration succeeded."
   },
-  "safeRelease": "UI enables only after read-only status probe confirms installed RPC; no DDL from page or build."
+  "safeRelease": "UI enables only after read-only status probe confirms installed RPC; no DDL from page or build.",
+  "cloudVersion": "20261024165437",
+  "userApproval": "Explicit approval: ya boleh, after concrete migration permission request",
+  "verifiedAtUtc": "2026-10-24T16:54:53Z",
+  "privileges": {
+    "securityInvoker": true,
+    "emptySearchPath": true,
+    "anonExecute": false,
+    "authenticatedExecute": false,
+    "serviceRoleExecute": true
+  },
+  "unauthenticatedStatusProbe": "denied",
+  "productionImportUat": false,
+  "advisors": {
+    "unchangedFromBaseline": true,
+    "privateRlsInfo": 66,
+    "unusedIndexInfo": 79,
+    "leakedPasswordProtectionWarning": 1
+  }
 }
