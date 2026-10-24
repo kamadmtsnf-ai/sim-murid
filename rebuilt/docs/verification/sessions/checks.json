@@ -1,0 +1,97 @@
+{
+  "npm_ci": {
+    "exit_code": 0
+  },
+  "combined_check": {
+    "exit_code": 1,
+    "completed_tests": 398,
+    "completed_groups": 48,
+    "reported_failed_tests": 0,
+    "note": "Stopped after reports; all remaining commands verified separately. Cause of aggregate runner exit not identified."
+  },
+  "reports_standalone_recheck": {
+    "exit_code": 0,
+    "tests": 19,
+    "counted_twice": false
+  },
+  "remaining_commands": [
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:promotions",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:books",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:services",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:jobs",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:reconciliation",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:surveys",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:insights",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:points",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:notifications",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:ui",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:dashboard",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run test:production",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run db:types:check",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 1
+    }
+  ],
+  "clean_build_retry": {
+    "exit_code": 0,
+    "note": "Generated local .next cache moved aside after persistence cache failure; no application database changes."
+  },
+  "final_changed_file_lint": {
+    "exit_code": 0
+  },
+  "unique_regression_tests": 533,
+  "unique_groups": 61,
+  "browser": {
+    "checks": 105,
+    "axe_runs": 13,
+    "js_errors": []
+  }
+}
