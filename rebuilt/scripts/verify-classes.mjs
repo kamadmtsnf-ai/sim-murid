@@ -196,7 +196,7 @@ try {
       });
     await route.fulfill({
       status: 200,
-      json: { message: "Data berhasil disimpan.", classes: data },
+      json: { code: "saved", message: "Data berhasil disimpan.", classes: data },
     });
   });
   async function visit(s = "normal", width = 375, height = 812) {

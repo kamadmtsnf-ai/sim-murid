@@ -1,0 +1,30 @@
+{
+  "ci": {
+    "exit_code": 0,
+    "sha256": "86e63a149df82597676e05a9955d4875719a4fc84516f12796a54b3b140fef0e"
+  },
+  "check": {
+    "exit_code": 0,
+    "sha256": "ac727764c18d970db2180b97b8fd4cd8dd4eeb2a216ef99571ad02e1915a6b3d"
+  },
+  "release-types": {
+    "exit_code": 0,
+    "sha256": "a31979fd547891b92d0322bf3d540310e7bc94e916016fbfb633d24382111417"
+  },
+  "release-lint": {
+    "exit_code": 0,
+    "sha256": "5ede756e0b792a9f2a57a682866fd95f6116c651991c4eaf92c447a6af5734c6"
+  },
+  "release-forms": {
+    "exit_code": 0,
+    "sha256": "1b031649987dc82bd57978a79a2d7226fa351dd7a273e4c698f9c19b6d65e854"
+  },
+  "final-profile-unit": {
+    "exit_code": 0,
+    "sha256": "799cd787725b8688f535d9baa9a961603827972ffe16ec3a48e659860547fd84"
+  },
+  "release-build": {
+    "exit_code": 0,
+    "sha256": "8a9084de69d7c1c5d37d87fb1762530edf533898ce2934a3f26b46167e6dfdff"
+  }
+}

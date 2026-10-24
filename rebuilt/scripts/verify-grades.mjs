@@ -172,7 +172,7 @@ try {
             message: "Data berubah. Muat ulang sebelum menyimpan.",
           },
         });
-      data.revision++;
+      data.revision = route.request().postDataJSON().revision + 1;
       if (body.command.type === "void")
         data.rows = data.rows.filter((r) => r.id !== body.command.id);
       if (body.command.type === "kkm") data.extra.kkm = body.command.value;
@@ -181,7 +181,7 @@ try {
       reads.push(req.url());
       if (readFailure || (contextFailure && scope.classId === id(31)))
         return route.fulfill({ status: 503, json: { message: "Unavailable" } });
-      if (contextStale && scope.classId === id(31)) data.revision++;
+      if (contextStale && scope.classId === id(31)) data.revision = route.request().postDataJSON().revision + 1;
     }
     data.semester = scope.semester;
     data.rows = data.rows.filter(

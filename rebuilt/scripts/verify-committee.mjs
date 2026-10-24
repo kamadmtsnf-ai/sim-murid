@@ -177,7 +177,7 @@ try {
           };
         });
         if (contextReply === "incomplete") data.extra.months.pop();
-        if (contextReply === "stale") data.revision++;
+        if (contextReply === "stale") data.revision = route.request().postDataJSON().revision + 1;
         return route.fulfill({ json: { data } });
       }
       if (reply === "read-error")
@@ -211,7 +211,7 @@ try {
       data.rows = [];
       data.total = 0;
     }
-    data.revision++;
+    data.revision = route.request().postDataJSON().revision + 1;
     await page.evaluate(next => {window.committeeFixture=next;},data);
     return route.fulfill({
       json: {

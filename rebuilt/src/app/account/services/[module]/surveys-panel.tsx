@@ -1,4 +1,5 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useEffect, useRef, useState } from "react";
 import { commands, type ServiceSnapshot } from "@/lib/services/validation";
 import { surveysSnapshot } from "@/lib/services/surveys";
@@ -19,6 +20,7 @@ export function SurveysPanel({
   const lock = useRef(false),
     mounted = useRef(true),
     pending = useRef<AbortController | null>(null);
+  useWriteGuard(() => lock.current, () => blocked);
   useEffect(() => {
     mounted.current = true;
     return () => {

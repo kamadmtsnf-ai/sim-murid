@@ -193,7 +193,7 @@ try {
       return route.fulfill({
         json: { result: { code: "saved" }, data: { revision: -1 } },
       });
-    data.revision++;
+    data.revision = route.request().postDataJSON().revision + 1;
     return route.fulfill({
       json: {
         result: { code: "saved" },

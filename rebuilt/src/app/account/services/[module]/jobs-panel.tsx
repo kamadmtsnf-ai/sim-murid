@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -34,6 +36,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
     mounted = useRef(true),
     controller = useRef<AbortController | null>(null),
     feedback = useRef<HTMLDivElement>(null);
+  useWriteGuard(() => !!active.current, () => locked);
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -48,8 +51,8 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
     const warn = (e: BeforeUnloadEvent) => {
       if (active.current) e.preventDefault();
     };
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, []);
   const disabled = Boolean(busy) || locked;
   function notify(text: string, kind: typeof tone = "error") {

@@ -1,0 +1,196 @@
+{
+  "baseline": "b863285991bb811a6b4b4257343bcb168085c93c",
+  "date": "2026-10-24",
+  "timezone": "Asia/Jakarta",
+  "full_check": {
+    "exit_code": 0,
+    "tests": 548,
+    "groups": 63,
+    "failures": 0
+  },
+  "browser": [
+    {
+      "module": "account-recovery",
+      "checks": 46,
+      "axe": 5,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "account-security",
+      "checks": 80,
+      "axe": 7,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "attendance",
+      "checks": 84,
+      "axe": 6,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "biodata",
+      "checks": 66,
+      "axe": 11,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "books",
+      "checks": 48,
+      "axe": 7,
+      "browser": 145,
+      "passed": true
+    },
+    {
+      "module": "classes",
+      "checks": 393,
+      "axe": 16,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "committee",
+      "checks": 86,
+      "axe": 6,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "duty",
+      "checks": 131,
+      "axe": 9,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "email-verification",
+      "checks": 84,
+      "axe": 10,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "families",
+      "checks": 32,
+      "axe": 7,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "forms",
+      "checks": 49,
+      "axe": 4,
+      "browser": 145,
+      "passed": true
+    },
+    {
+      "module": "grades",
+      "checks": 61,
+      "axe": 7,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "insights",
+      "checks": 30,
+      "axe": 3,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "jobs",
+      "checks": 45,
+      "axe": 7,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "mentoring",
+      "checks": 87,
+      "axe": 7,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "personal-profile",
+      "checks": 87,
+      "axe": 8,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "points",
+      "checks": 66,
+      "axe": 8,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "promotions",
+      "checks": 104,
+      "axe": 13,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "reports",
+      "checks": 62,
+      "axe": 7,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "savings",
+      "checks": 47,
+      "axe": 6,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "schedules",
+      "checks": 146,
+      "axe": 14,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "sessions",
+      "checks": 105,
+      "axe": 13,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "settings",
+      "checks": 39,
+      "axe": 5,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "surveys",
+      "checks": 59,
+      "axe": 6,
+      "browser": 141,
+      "passed": true
+    },
+    {
+      "module": "users",
+      "checks": 11,
+      "axe": 6,
+      "browser": 141,
+      "passed": true
+    }
+  ],
+  "total_browser_checks": 2048,
+  "total_axe_runs": 198,
+  "boundaries": [
+    "HTTP fixtures synthetic; no production credentials/data mutated",
+    "SQL isolated PGlite tests from existing migrations",
+    "No real email delivery or paid AI requests",
+    "SPA Back/programmatic routing and crash restoration not guaranteed by navigation guard"
+  ]
+}

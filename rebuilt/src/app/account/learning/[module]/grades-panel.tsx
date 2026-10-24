@@ -1,4 +1,5 @@
 "use client";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
@@ -86,8 +87,8 @@ export function GradesPanel({ initial }: { initial: GradesSnapshot }) {
     const leave = (e: BeforeUnloadEvent) => {
       if (dirty || busy) e.preventDefault();
     };
-    window.addEventListener("beforeunload", leave);
-    return () => window.removeEventListener("beforeunload", leave);
+    const stopUnloadGuard = listenForUnsavedChanges(leave);
+    return () => stopUnloadGuard();
   }, [dirty, busy]);
   const selectedClass = data.classes.find((c) => c.id === filters.classId),
     selectedPeriod = semesterPeriod(selectedClass?.year, filters.semester);

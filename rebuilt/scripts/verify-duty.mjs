@@ -157,7 +157,7 @@ try {
         json: { result: { code: "saved" }, data: { revision: -1 } },
       });
     const data = await page.evaluate(() => window.dutyFixture);
-    data.revision++;
+    data.revision = route.request().postDataJSON().revision + 1;
     return route.fulfill({
       status: 200,
       json: {

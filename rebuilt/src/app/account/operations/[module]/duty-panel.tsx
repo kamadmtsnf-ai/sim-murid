@@ -1,4 +1,5 @@
 "use client";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Tabs } from "radix-ui";
 import { Button } from "@/components/ui/button";
@@ -89,8 +90,8 @@ export function DutyPanel({
         e.returnValue = "";
       }
     };
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, []);
   function open(
     next: NonNullable<typeof mode>,

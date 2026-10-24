@@ -1,4 +1,5 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import {
   useCallback,
   useEffect,
@@ -178,6 +179,7 @@ export function SessionPanel({
     },
     [leave, ownUsername, tell],
   );
+  useWriteGuard(() => mutation.current);
   useEffect(() => {
     mounted.current = true;
     void load(selected.current);

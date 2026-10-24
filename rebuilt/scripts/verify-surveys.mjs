@@ -585,6 +585,23 @@ try {
   }
   await visit();
   await open();
+  await q2().fill("Draft setelah logout dibatalkan");
+  page.off("dialog", accept);
+  const cancelLeave = d => d.type() === "beforeunload" ? d.accept() : d.dismiss();
+  page.on("dialog", cancelLeave);
+  await page.evaluate(() => {
+    window.cancelledLogoutReachedTarget = false;
+    const form = document.querySelector('form[action="/api/auth/logout"]');
+    form.addEventListener("submit", e => { window.cancelledLogoutReachedTarget = true; e.preventDefault(); }, {once:true});
+    form.requestSubmit();
+  });
+  check(!(await page.evaluate(() => window.cancelledLogoutReachedTarget)), "cancelled dirty logout stops before draft cleanup");
+  await editor().getByText("Seluruh draft tersimpan di server.", {exact:true}).waitFor();
+  check((await q2().inputValue()) === "Draft setelah logout dibatalkan", "cancelled logout retains answers and autosave continues");
+  page.off("dialog", cancelLeave);
+  page.on("dialog", accept);
+  await visit();
+  await open();
   await q2().fill("Logout");
   delay = 700;
   await editor().getByRole("button", { name: "Simpan sekarang" }).click();

@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { BookOpen, Plus, RefreshCw } from "lucide-react";
@@ -45,6 +47,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
     opener = useRef<HTMLElement | null>(null),
     refresh = useRef<HTMLButtonElement>(null),
     feedback = useRef<HTMLParagraphElement>(null);
+  useWriteGuard(() => lock.current, () => blocked);
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -55,8 +58,8 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
   useEffect(() => {
     if (!dirty) return;
     const warn = (e: BeforeUnloadEvent) => e.preventDefault();
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, [dirty]);
   function close() {
     if (lock.current) return;

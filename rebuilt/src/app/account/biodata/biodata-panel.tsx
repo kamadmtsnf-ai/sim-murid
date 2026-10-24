@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import Image from "next/image";
 import { useState, useRef, useEffect, type FormEvent } from "react";
 import { createClient } from "@supabase/supabase-js";
@@ -60,6 +62,7 @@ export function BiodataPanel({
     mounted = useRef(true),
     request = useRef<{ key: string; id: string } | null>(null),
     focusField = useRef<string | null>(null);
+  useWriteGuard(() => lock.current, () => needsReload);
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -69,8 +72,8 @@ export function BiodataPanel({
   useEffect(() => {
     if (!dirty) return;
     const warn = (e: BeforeUnloadEvent) => e.preventDefault();
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, [dirty]);
   useEffect(() => {
     if (focusField.current) {

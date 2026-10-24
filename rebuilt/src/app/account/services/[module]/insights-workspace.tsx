@@ -1,4 +1,5 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { snapshot, type ServiceSnapshot } from "@/lib/services/validation";
@@ -10,6 +11,7 @@ export function InsightsWorkspace({ initial }: { initial: ServiceSnapshot }) {
     [message, setMessage] = useState("");
   const lock = useRef(false),
     scope = useRef<Record<string, string>>({});
+  useWriteGuard(() => lock.current, () => blocked);
   const api = "/api/services/insights";
   async function read(filters = scope.current) {
     const r = await fetch(api + "?" + new URLSearchParams(filters), {

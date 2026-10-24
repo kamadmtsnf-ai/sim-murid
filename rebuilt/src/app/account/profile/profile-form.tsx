@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useState, useRef, useEffect, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -41,6 +43,7 @@ export function ProfileForm({
     mounted = useRef(true),
     focus = useRef<ProfileField | null>(null);
   const dirty = profileFields.some((k) => draft[k] !== profile[k]);
+  useWriteGuard(() => lock.current, () => !!pending);
   useEffect(() => {
     mounted.current = true;
     return () => {
@@ -50,8 +53,8 @@ export function ProfileForm({
   useEffect(() => {
     if (!dirty) return;
     const warn = (e: BeforeUnloadEvent) => e.preventDefault();
-    window.addEventListener("beforeunload", warn);
-    return () => window.removeEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
+    return () => stopUnloadGuard();
   }, [dirty]);
   useEffect(() => {
     if (focus.current) {
@@ -74,7 +77,7 @@ export function ProfileForm({
     router.refresh();
   }
   async function readProfile() {
-    const r = await fetch("/api/account/profile", { cache: "no-store" });
+    const r = await fetch("/api/account/profile", { cache: "no-store", signal: AbortSignal.timeout(30000) });
     if (r.status === 401) {
       if (mounted.current) {
         router.replace("/login?expired=1");
@@ -151,6 +154,7 @@ export function ProfileForm({
     try {
       const r = await fetch("/api/account/profile", {
         method: "POST",
+        signal: AbortSignal.timeout(30000),
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(parsed.data),
       });

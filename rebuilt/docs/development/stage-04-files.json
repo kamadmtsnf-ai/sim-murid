@@ -1,0 +1,238 @@
+[
+  {
+    "path": "rebuilt/docs/design-system/MASTER.md",
+    "reason": "Kontrak, keputusan, status roadmap dan bukti verifikasi P04."
+  },
+  {
+    "path": "rebuilt/docs/development/ROADMAP.md",
+    "reason": "Kontrak, keputusan, status roadmap dan bukti verifikasi P04."
+  },
+  {
+    "path": "rebuilt/docs/development/STAGE-04-RELIABLE-FORMS.md",
+    "reason": "Kontrak, keputusan, status roadmap dan bukti verifikasi P04."
+  },
+  {
+    "path": "rebuilt/docs/verification/forms/README.md",
+    "reason": "Kontrak, keputusan, status roadmap dan bukti verifikasi P04."
+  },
+  {
+    "path": "rebuilt/docs/verification/forms/browser-results.json",
+    "reason": "Kontrak, keputusan, status roadmap dan bukti verifikasi P04."
+  },
+  {
+    "path": "rebuilt/docs/verification/forms/command-evidence.json",
+    "reason": "Kontrak, keputusan, status roadmap dan bukti verifikasi P04."
+  },
+  {
+    "path": "rebuilt/docs/verification/forms/verification.json",
+    "reason": "Kontrak, keputusan, status roadmap dan bukti verifikasi P04."
+  },
+  {
+    "path": "rebuilt/package.json",
+    "reason": "Perintah tes kontrak dan browser formulir."
+  },
+  {
+    "path": "rebuilt/scripts/verify-attendance.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-classes.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-committee.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-duty.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-forms.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-grades.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-insights.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-mentoring.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-points.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-promotions.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-reports.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-savings.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-schedules.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/scripts/verify-surveys.mjs",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/src/app/account/biodata/biodata-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/directory/add-user.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/email/email-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/families/family-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/books-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/grades-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/learning/[module]/promotions-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/attendance-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/committee-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/duty-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/mentoring-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/operations/[module]/savings-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/profile/profile-form.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/recovery/recovery-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/schedules/schedule-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/security/security-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/discipline-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/insights-workspace.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/insights.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/jobs-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/survey-editor.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/survey-form.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/services/[module]/surveys-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/sessions/session-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/account/settings/settings-panel.tsx",
+    "reason": "Integrasi guard pada controller existing; readback/validasi/domain tetap; koreksi khusus Profil/Survei/Hasil Survei dicatat dalam laporan."
+  },
+  {
+    "path": "rebuilt/src/app/api/classes/route.ts",
+    "reason": "Acknowledgement saved additive setelah RPC/readback sukses."
+  },
+  {
+    "path": "rebuilt/src/app/api/schedules/route.ts",
+    "reason": "Acknowledgement saved additive setelah RPC/readback sukses."
+  },
+  {
+    "path": "rebuilt/src/app/globals.css",
+    "reason": "Guard sidebar/logout dan warning responsif yang dapat difokuskan/ditutup."
+  },
+  {
+    "path": "rebuilt/src/components/forms/navigation-guard.tsx",
+    "reason": "Guard sidebar/logout dan warning responsif yang dapat difokuskan/ditutup."
+  },
+  {
+    "path": "rebuilt/src/components/workspace-shell.tsx",
+    "reason": "Guard sidebar/logout dan warning responsif yang dapat difokuskan/ditutup."
+  },
+  {
+    "path": "rebuilt/src/lib/education/use-mutation.ts",
+    "reason": "Ack/revisi, lock, timeout/unmount dan adapter dirty/pending bersama."
+  },
+  {
+    "path": "rebuilt/src/lib/forms/leave-guard.ts",
+    "reason": "Ack/revisi, lock, timeout/unmount dan adapter dirty/pending bersama."
+  },
+  {
+    "path": "rebuilt/src/lib/forms/mutation-result.ts",
+    "reason": "Ack/revisi, lock, timeout/unmount dan adapter dirty/pending bersama."
+  },
+  {
+    "path": "rebuilt/src/lib/forms/use-write-guard.ts",
+    "reason": "Ack/revisi, lock, timeout/unmount dan adapter dirty/pending bersama."
+  },
+  {
+    "path": "rebuilt/tests/mutation-result.test.ts",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/tests/ui/forms-fixture.tsx",
+    "reason": "Skenario fault/regresi atau mock acknowledgement dan revisi sesuai kontrak."
+  },
+  {
+    "path": "rebuilt/docs/development/stage-04-files.json",
+    "reason": "Manifest file dan alasan perubahan."
+  }
+]

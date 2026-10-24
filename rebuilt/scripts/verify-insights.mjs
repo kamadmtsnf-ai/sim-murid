@@ -239,6 +239,7 @@ try {
   check(lastQuery.includes("role=teacher"), "AI reload preserves role");
   await page.getByText(/^Daftar responden/).click();
   const note = page.getByLabel("Catatan pemantau").first();
+  await page.getByRole("textbox", {name:/^Deskripsi/}).first().fill("Draft rencana belum disimpan");
   await note.fill("Diperbarui");
   await page
     .getByRole("button", { name: "Simpan catatan" })
@@ -256,6 +257,8 @@ try {
       "Diperbarui",
     "confirmed note readback",
   );
+  check(!(await page.evaluate(() => window.dispatchEvent(new Event("sim-form-unsaved-check", {cancelable:true})))), "saving note preserves independent plan dirty guard");
+  check((await page.getByRole("textbox", {name:/^Deskripsi/}).first().inputValue()) === "Draft rencana belum disimpan", "saving note retains independent plan values");
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
   check(
     (await page.getByLabel("Catatan pemantau").count()) === 5,

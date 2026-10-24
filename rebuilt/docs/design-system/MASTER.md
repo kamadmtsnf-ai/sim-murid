@@ -317,3 +317,10 @@ Topbar menyebut **pilihan tersimpan**, bukan menyatakan semua modul disaring. Di
 Penerapan lintas halaman eksplisit agar reload, Back atau tab lain tidak mengganti draf. Nilai tersimpan dicek dengan katalog berizin; kelas hilang tidak diganti semua kelas. Error read mempertahankan scope lama. Kontrol dependen reset hanya setelah GET sukses. Modal aktif memblokir transfer; penempatan/pilihan rapor memakai konfirmasi existing.
 
 Ganjil/Genap dan tahun berpasangan tetap helper tunggal. Tanggal kalender transaksi, periode Survei ber-ID, dua sisi kenaikan, tahun lulus/terbit tidak dipaksa mengikuti preferensi. Penyimpanan lokal yang tidak tersedia diberi penjelasan. Lihat [laporan P03](../development/STAGE-03-ACADEMIC-CONTEXT.md).
+
+
+## P04 — Feedback penyimpanan dan perlindungan isian
+
+`useDomainMutation` membedakan pending, success, error yang dapat dikoreksi, blocked dan uncertain. Success memerlukan acknowledgement yang konsisten dan snapshot revisi meningkat. Jangan mengubah uncertain menjadi error biasa atau membuka submit melalui clear pesan. Timeout/aborted fetch bukan bukti rollback.
+
+Shell memakai `FormNavigationGuard`: proses aktif memblokir link akun/logout; isian belum disimpan meminta konfirmasi. Pemberitahuan warning dapat difokuskan dan ditutup tanpa membuka lock proses. Existing dialog tetap memegang focus trap/validasi/domain readback. Listener unload beradaptasi lewat `listenForUnsavedChanges`; controller khusus mengekspos boolean pending/dirty melalui `useWriteGuard`. Tidak menyalin password/OTP/dokumen/transaksi ke draf generik. Batas browser Back SPA dan pemulihan crash dicatat di [laporan P04](../development/STAGE-04-RELIABLE-FORMS.md).

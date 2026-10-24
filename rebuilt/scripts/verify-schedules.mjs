@@ -166,7 +166,7 @@ try {
     data.revision++;
     await route.fulfill({
       status: 200,
-      json: { schedules: data, message: "Data berhasil disimpan." },
+      json: { code: "saved", schedules: data, message: "Data berhasil disimpan." },
     });
   });
   const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -537,6 +537,8 @@ try {
   await dialog()
     .getByRole("button", { name: "Simpan pelajaran", exact: true })
     .click();
+  for (let attempt = 0; requests.length === 0 && attempt < 100; attempt++) await new Promise(r => setTimeout(r, 10));
+  check(requests.length === 1, "timeout request observed before advancing clock");
   await page.clock.fastForward(31000);
   await page.clock.resume();
   await dialog().getByRole("alert").waitFor();

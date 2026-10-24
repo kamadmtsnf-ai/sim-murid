@@ -1,7 +1,15 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { z } from "zod";
-type Phase = "idle" | "pending" | "success" | "error" | "blocked" | "uncertain";
+import {
+  rejectionPhase,
+  savedAcknowledgement,
+  type MutationPhase as Phase,
+} from "@/lib/forms/mutation-result";
+import {
+  listenForPendingWrite,
+  listenForUnsavedChanges,
+} from "@/lib/forms/leave-guard";
 /** Confirmed mode prevents blind retries after an indeterminate write. Other domains retain their existing behavior. */
 export function useDomainMutation<T>(
   url: string,
@@ -15,44 +23,59 @@ export function useDomainMutation<T>(
     [phase, setPhase] = useState<Phase>("idle");
   const lock = useRef(false),
     mounted = useRef(true),
-    feedbackRef = useRef<HTMLDivElement>(null);
+    feedbackRef = useRef<HTMLDivElement>(null),
+    active = useRef<AbortController | null>(null),
+    phaseRef = useRef<Phase>("idle");
   useEffect(() => {
     mounted.current = true;
+    const stopPending = listenForPendingWrite(() => active.current !== null);
+    const stopUnsaved = listenForUnsavedChanges((event) => {
+      if (["pending", "uncertain"].includes(phaseRef.current))
+        event.preventDefault();
+    });
     return () => {
       mounted.current = false;
+      active.current?.abort();
+      stopPending();
+      stopUnsaved();
     };
   }, []);
   useEffect(() => {
     if (message && phase !== "pending") feedbackRef.current?.focus();
   }, [message, phase]);
+  function transition(next: Phase, text: string) {
+    phaseRef.current = next;
+    if (mounted.current) {
+      setPhase(next);
+      setMessage(text);
+    }
+  }
   function fail(text: string) {
-    setMessage(text);
-    setPhase("error");
+    if (!lock.current) transition("error", text);
   }
   function clear() {
     if (!lock.current) {
-      setMessage("");
-      setPhase("idle");
+      transition("idle", "");
     }
   }
   async function mutate(revision: number, command: unknown) {
-    if (lock.current) return false;
+    if (lock.current || !mounted.current) return false;
     if (
-      options.commandSchema &&
-      !options.commandSchema.safeParse(command).success
+      !Number.isSafeInteger(revision) ||
+      revision < 0 ||
+      (options.commandSchema &&
+        !options.commandSchema.safeParse(command).success)
     ) {
       fail("Periksa isian. Pilih siswa, tanggal, dan referensi yang valid.");
       return false;
     }
     lock.current = true;
     setBusy(true);
-    setPhase("pending");
-    setMessage("Menyimpan…");
+    transition("pending", "Menyimpan…");
     const controller = new AbortController();
+    active.current = controller;
     let retain = false;
-    const timeout = options.confirmed
-      ? setTimeout(() => controller.abort(), 30000)
-      : undefined;
+    const timeout = setTimeout(() => controller.abort(), 30000);
     try {
       const r = await fetch(url, {
         method: "POST",
@@ -64,48 +87,61 @@ export function useDomainMutation<T>(
         }),
         signal: controller.signal,
       });
+      if (!mounted.current) return false;
+      if (options.confirmed && (r.status === 401 || r.status === 403)) {
+        retain = true;
+        transition(
+          "blocked",
+          r.status === 401
+            ? "Sesi berakhir. Masuk kembali sebelum melanjutkan."
+            : "Akses tidak diizinkan. Periksa akun dan data terbaru sebelum melanjutkan.",
+        );
+        return false;
+      }
       const body: unknown = await r.json();
       if (!mounted.current) return false;
-      if (typeof body !== "object" || body === null)
+      if (typeof body !== "object" || body === null || Array.isArray(body))
         throw Error("Invalid response");
       const data = body as Record<string, unknown>;
       if (r.ok) {
         const parsed = schema.safeParse(data[responseKey]);
-        if (!parsed.success) throw Error("Invalid snapshot");
+        if (
+          !parsed.success ||
+          (options.confirmed &&
+            !savedAcknowledgement(data, parsed.data, revision))
+        )
+          throw Error("Unconfirmed write");
         onSaved(parsed.data, command);
-        setPhase("success");
-        setMessage(
+        transition(
+          "success",
           typeof data.message === "string"
             ? data.message
             : "Data berhasil disimpan.",
         );
         return true;
       }
-      if (options.confirmed && r.status >= 500) throw Error("Uncertain write");
-      retain =
-        !!options.confirmed &&
-        ([401, 403].includes(r.status) ||
-          ["stale", "not_found", "request_conflict"].includes(
-            String(data.code),
-          ));
-      setPhase(retain ? "blocked" : "error");
-      setMessage(
+      const next = options.confirmed
+        ? rejectionPhase(r.status, data.code)
+        : "error";
+      if (next === "uncertain") throw Error("Uncertain write");
+      retain = next === "blocked";
+      transition(
+        next,
         typeof data.message === "string"
           ? data.message
-          : "Permintaan belum berhasil.",
+          : "Permintaan belum berhasil. Periksa data terbaru sebelum melanjutkan.",
       );
       return false;
     } catch {
       retain = !!options.confirmed;
-      if (mounted.current) {
-        setPhase(retain ? "uncertain" : "error");
-        setMessage(
-          "Hasil penyimpanan belum dapat dipastikan. Muat ulang untuk memeriksa data sebelum mencoba kembali.",
-        );
-      }
+      transition(
+        retain ? "uncertain" : "error",
+        "Hasil penyimpanan belum dapat dipastikan. Isian tetap dipertahankan. Periksa data terbaru sebelum mencoba kembali.",
+      );
       return false;
     } finally {
       clearTimeout(timeout);
+      if (active.current === controller) active.current = null;
       lock.current = retain;
       if (mounted.current) setBusy(false);
     }

@@ -1,4 +1,5 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { ShieldCheck, KeyRound, MessageSquareLock } from "lucide-react";
@@ -74,6 +75,7 @@ export function SecurityPanel({
     focusNotice = useRef(false);
   const busy = active !== null,
     blocked = busy || needsSync;
+  useWriteGuard(() => lock.current, () => needsSync || ["password-current", "password-new", "password-confirm", "question-current", "security-answer"].some(id => { const field = document.getElementById(id); return field instanceof HTMLInputElement && !!field.value; }));
   useEffect(() => {
     mounted.current = true;
     return () => {

@@ -1,4 +1,6 @@
 "use client";
+import { useWriteGuard } from "@/lib/forms/use-write-guard";
+import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { TableRegion } from "@/components/ui/data-table";
 
 import { useEffect, useState, useRef, type FormEvent } from "react";
@@ -76,6 +78,7 @@ export function SettingsPanel({
   const root = useRef<HTMLDivElement>(null);
   const [editing, setEditing] = useState<string | null>(null);
   const busy = pending || blocked;
+  useWriteGuard(() => sending.current);
   useEffect(() => {
     mounted.current = true;
     const warn = (event: BeforeUnloadEvent) => {
@@ -84,11 +87,11 @@ export function SettingsPanel({
         event.returnValue = "";
       }
     };
-    window.addEventListener("beforeunload", warn);
+    const stopUnloadGuard = listenForUnsavedChanges(warn);
     return () => {
       mounted.current = false;
       active.current?.abort();
-      window.removeEventListener("beforeunload", warn);
+      stopUnloadGuard();
     };
   }, []);
   function discard() {
