@@ -1,4 +1,5 @@
 "use client";
+import { requestReference, withReference } from "@/lib/observability/reference";
 import { useEffect, useRef, useState } from "react";
 import type { z } from "zod";
 import {
@@ -75,6 +76,7 @@ export function useDomainMutation<T>(
     const controller = new AbortController();
     active.current = controller;
     let retain = false;
+    let reference: string | null = null;
     const timeout = setTimeout(() => controller.abort(), 30000);
     try {
       const r = await fetch(url, {
@@ -88,6 +90,8 @@ export function useDomainMutation<T>(
         signal: controller.signal,
       });
       if (!mounted.current) return false;
+      if (r.status >= 500)
+        reference = requestReference(r.headers.get("x-request-id"));
       if (options.confirmed && (r.status === 401 || r.status === 403)) {
         retain = true;
         transition(
@@ -127,16 +131,22 @@ export function useDomainMutation<T>(
       retain = next === "blocked";
       transition(
         next,
-        typeof data.message === "string"
-          ? data.message
-          : "Permintaan belum berhasil. Periksa data terbaru sebelum melanjutkan.",
+        withReference(
+          typeof data.message === "string"
+            ? data.message
+            : "Permintaan belum berhasil. Periksa data terbaru sebelum melanjutkan.",
+          reference,
+        ),
       );
       return false;
     } catch {
       retain = !!options.confirmed;
       transition(
         retain ? "uncertain" : "error",
-        "Hasil penyimpanan belum dapat dipastikan. Isian tetap dipertahankan. Periksa data terbaru sebelum mencoba kembali.",
+        withReference(
+          "Hasil penyimpanan belum dapat dipastikan. Isian tetap dipertahankan. Periksa data terbaru sebelum mencoba kembali.",
+          reference,
+        ),
       );
       return false;
     } finally {
