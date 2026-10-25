@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
 import { FilterBar } from "@/components/ui/collection-controls";
@@ -138,20 +139,7 @@ export function ClassPanel({
   }
   const selectedYear = data.years.find((y) => y.id === year);
   const feedback = message ? (
-    <div
-      ref={feedbackRef}
-      tabIndex={-1}
-      className="rounded-lg focus-visible:outline-2 focus-visible:outline-ring"
-    >
-      <Status
-        tone={
-          phase === "success"
-            ? "success"
-            : phase === "pending"
-              ? "info"
-              : "error"
-        }
-      >
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
         {message}
         {blocked && (
           <div className="mt-3">
@@ -165,8 +153,7 @@ export function ClassPanel({
             </Button>
           </div>
         )}
-      </Status>
-    </div>
+    </MutationFeedback>
   ) : null;
   const candidates = data.students.filter(
     (p) =>
@@ -350,7 +337,7 @@ const retainedEcurrentTarget=e.currentTarget;
         )}
       </div>
       {data.can_manage && (
-        <Dialog
+        <Dialog closeDisabled={busy}
           className="classes-dialog"
           returnFocusRef={classOpener}
           open={classOpen}

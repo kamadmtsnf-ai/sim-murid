@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
 import { Pagination } from "@/components/ui/collection-controls";
@@ -439,12 +440,7 @@ const retainedEcurrentTarget=e.currentTarget;
     await mutate(data.revision, command);
   }
   const feedback = (
-    <div
-      ref={feedbackRef}
-      tabIndex={-1}
-      role={phase === "error" || blocked ? "alert" : "status"}
-      className="rounded-lg border bg-muted/30 p-3 text-sm"
-    >
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
       {message ||
         notice ||
         "Penilaian ditampilkan sesuai kelas, mapel, semester dan hak akses Anda."}
@@ -458,7 +454,7 @@ const retainedEcurrentTarget=e.currentTarget;
           Muat ulang data
         </Button>
       )}
-    </div>
+    </MutationFeedback>
   );
   return (
     <div className="grades-panel min-w-0 space-y-6" aria-busy={reading || busy}>
@@ -815,7 +811,7 @@ const retainedEcurrentTarget=e.currentTarget;
           nextLabel="Penilaian berikutnya"
         />
       </section>
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={mode !== null}
         onOpenChange={async (v) => {
           if (!v) await close();

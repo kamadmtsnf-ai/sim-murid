@@ -542,7 +542,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
         disabled={busy}
         onPageChange={(page) => void reload({ ...filters, page: String(page) })}
       />
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={dialog !== null}
         onOpenChange={async (v) => {
           if (!v) await close();

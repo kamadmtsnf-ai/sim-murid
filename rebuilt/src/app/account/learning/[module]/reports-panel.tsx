@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { AcademicContextBar } from "@/components/academic/academic-context";
@@ -51,7 +52,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
     };
   }, []);
   const query = (f = filters) => new URLSearchParams(f).toString();
-  const { busy, blocked, message, feedbackRef, clear, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, clear, mutate } =
     useDomainMutation(
       api + "?" + query(),
       reportsSnapshot,
@@ -263,12 +264,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
         </p>
       )}
       {message && (
-        <div
-          role="status"
-          tabIndex={-1}
-          ref={feedbackRef}
-          className="rounded-lg border p-3 text-sm"
-        >
+        <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
           {message}
           {blocked && (
             <Button
@@ -280,7 +276,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
               Muat ulang halaman
             </Button>
           )}
-        </div>
+        </MutationFeedback>
       )}
       {period && (
         <p className="text-sm font-medium">
@@ -591,7 +587,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
           )}
         </>
       )}
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={confirm}
         onOpenChange={(open) => {
           if (!busy && !blocked) setConfirm(open);

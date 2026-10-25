@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
 import { EmptyState } from "@/components/ui/content-state";
@@ -342,12 +343,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
     });
   }
   const feedback = (
-    <div
-      ref={feedbackRef}
-      tabIndex={-1}
-      role={phase === "error" || blocked ? "alert" : "status"}
-      className="rounded-lg border bg-muted/30 p-3 text-sm"
-    >
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
       {message ||
         notice ||
         "Saldo dan mutasi ditampilkan sesuai hak akses Anda."}
@@ -361,7 +357,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
           Muat ulang data
         </Button>
       )}
-    </div>
+    </MutationFeedback>
   );
   return (
     <div className="savings-panel min-w-0 space-y-6">
@@ -724,7 +720,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
           onPageChange={(page) => void load({ ...filters, page: String(page) })}
         />
       </section>
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={!!mode}
         onOpenChange={async (value) => {
           if (!value) await close();

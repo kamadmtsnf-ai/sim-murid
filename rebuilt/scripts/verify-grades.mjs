@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Isolated Committee browser regression suite. No real account, API mutation or production data. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -134,6 +135,7 @@ try {
     args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
   });
   const page = await browser.newPage({ hasTouch: true });
+  await installConfirmDriver(page);
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("dialog", (d) => d.accept());
   const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -222,7 +224,7 @@ try {
     await page
       .getByRole("combobox", { name: /^Siswa dalam laporan/ })
       .selectOption(student);
-    await page.getByRole("button", { name: "Tampilkan", exact: true }).click();
+    await page.getByRole("button", { name: "Tampilkan", exact: true }).click(); await settleConfirmation(page);
     await page
       .getByText("Data penilaian diperbarui.", { exact: true })
       .waitFor();
@@ -243,7 +245,7 @@ try {
       );
   }
   await visit("normal", 320);
-  await page.locator(".grades-panel details:not(.academic-context-bar) > summary").first().click();
+  await page.locator(".grades-panel details:not(.academic-context-bar) > summary").first().click(); await settleConfirmation(page);
   await geometry(page, "expanded scores 320");
   await a11y(page, "expanded scores");
   check(
@@ -263,7 +265,7 @@ try {
       .isVisible(),
     "zero KKM does not fall back to 75",
   );
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   await dialog
     .getByRole("button", { name: "Simpan nilai", exact: true })
     .waitFor();
@@ -285,7 +287,7 @@ try {
       posts.at(-1).command.items[1].value === null,
     "batch keeps zero and blank as distinct values",
   );
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   await dialog
     .getByRole("combobox", { name: /^Jenis penilaian/ })
     .selectOption("ATS");
@@ -308,14 +310,14 @@ try {
     .fill("Perbaikan nilai ATS");
   await dialog
     .getByRole("button", { name: "Simpan koreksi", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.id === id(401) &&
       posts.at(-1).command.reason === "Perbaikan nilai ATS",
     "nonPH correction submits existing ID and reason",
   );
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   await dialog
     .getByLabel("Cari siswa dalam formulir", { exact: true })
     .fill("Siswa 1");
@@ -334,7 +336,7 @@ try {
   };
   page.removeAllListeners("dialog");
   page.on("dialog", searchListener);
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     searchConfirmations === 0,
@@ -342,7 +344,7 @@ try {
   );
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.accept());
-  await page.getByRole("button", { name: "Atur KKM", exact: true }).click();
+  await page.getByRole("button", { name: "Atur KKM", exact: true }).click(); await settleConfirmation(page);
   check(
     (await dialog.getByLabel("KKM (0–100)", { exact: true }).inputValue()) ===
       "0",
@@ -350,7 +352,7 @@ try {
   );
   await dialog.getByLabel("KKM (0–100)", { exact: true }).fill("101");
   const invalidBefore = posts.length;
-  await dialog.getByRole("button", { name: "Simpan KKM" }).click();
+  await dialog.getByRole("button", { name: "Simpan KKM" }).click(); await settleConfirmation(page);
   check(posts.length === invalidBefore, "invalid KKM blocked before network");
   await dialog.getByLabel("KKM (0–100)", { exact: true }).fill("100");
   await page.setViewportSize({ width: 812, height: 375 });
@@ -364,7 +366,7 @@ try {
       .evaluate((e) => e.getBoundingClientRect().bottom <= innerHeight),
     "KKM modal submit reachable",
   );
-  await dialog.getByRole("button", { name: "Simpan KKM" }).click();
+  await dialog.getByRole("button", { name: "Simpan KKM" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.value === 100,
@@ -376,7 +378,7 @@ try {
     "old assessment KKM stays visible after KKM update",
   );
   await visit();
-  await page.getByRole("button", { name: "Koreksi PH 4", exact: true }).click();
+  await page.getByRole("button", { name: "Koreksi PH 4", exact: true }).click(); await settleConfirmation(page);
   await dialog.getByLabel("Nilai Siswa historis", { exact: true }).waitFor();
   check(
     (await dialog
@@ -399,7 +401,7 @@ try {
   await dialog
     .getByLabel("Alasan koreksi", { exact: true })
     .fill("Koreksi historis");
-  await dialog.getByRole("button", { name: "Simpan koreksi" }).click();
+  await dialog.getByRole("button", { name: "Simpan koreksi" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.classId === id(31) &&
@@ -412,7 +414,7 @@ try {
   await visit();
   await page.getByRole("combobox", { name: /^Semester/ }).selectOption("2");
   await filter();
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   const semesterDate = dialog.getByLabel("Tanggal penilaian / periode KKM", {
     exact: true,
   });
@@ -424,44 +426,44 @@ try {
   );
   await semesterDate.fill("2026-12-31");
   const dateBefore = posts.length;
-  await dialog.getByRole("button", { name: "Simpan nilai" }).click();
+  await dialog.getByRole("button", { name: "Simpan nilai" }).click(); await settleConfirmation(page);
   check(
     posts.length === dateBefore,
     "outside-semester date rejected before network",
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await visit();
   contextFailure = true;
-  await page.getByRole("button", { name: "Koreksi PH 4", exact: true }).click();
+  await page.getByRole("button", { name: "Koreksi PH 4", exact: true }).click(); await settleConfirmation(page);
   await dialog.getByText(/Konteks penilaian belum dapat dimuat/).waitFor();
   check(
     await dialog.getByRole("button", { name: "Simpan nilai" }).isDisabled(),
     "context outage never opens an editable blank correction",
   );
   contextFailure = false;
-  await dialog.getByRole("button", { name: "Muat ulang konteks" }).click();
+  await dialog.getByRole("button", { name: "Muat ulang konteks" }).click(); await settleConfirmation(page);
   await dialog.getByLabel("Nilai Siswa historis", { exact: true }).waitFor();
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await visit();
   contextStale = true;
-  await page.getByRole("button", { name: "Koreksi PH 4", exact: true }).click();
+  await page.getByRole("button", { name: "Koreksi PH 4", exact: true }).click(); await settleConfirmation(page);
   await dialog.getByText(/Konteks penilaian belum dapat dimuat/).waitFor();
   check(
     await dialog.getByRole("button", { name: "Simpan nilai" }).isDisabled(),
     "context revision conflict blocks editing",
   );
   contextStale = false;
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await filter(id(30), id(60), id(10));
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   check(
     (await dialog.getByLabel("Nilai Siswa 2", { exact: true }).count()) === 1,
     "student report filter never truncates batch roster",
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     await page
@@ -478,7 +480,7 @@ try {
   );
   await page.getByLabel("Cari mapel atau nama siswa", { exact: true }).fill("");
   readFailure = true;
-  await page.getByRole("button", { name: "Tampilkan", exact: true }).click();
+  await page.getByRole("button", { name: "Tampilkan", exact: true }).click(); await settleConfirmation(page);
   await page.getByText(/Data belum dapat dimuat/).waitFor();
   check(
     (await page.locator("article").count()) === 3,
@@ -487,11 +489,11 @@ try {
   readFailure = false;
   await visit("large");
   await filter();
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   await dialog.getByLabel("Nilai Siswa 1", { exact: true }).fill("25.5");
   await dialog
     .getByRole("button", { name: "Siswa berikutnya", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     await dialog
       .getByText("Halaman siswa 2 dari 3", { exact: true })
@@ -514,7 +516,7 @@ try {
     .getByRole("button", { name: "Simpan nilai" })
     .scrollIntoViewIfNeeded();
   const hiddenInvalidBefore = posts.length;
-  await dialog.getByRole("button", { name: "Simpan nilai" }).click();
+  await dialog.getByRole("button", { name: "Simpan nilai" }).click(); await settleConfirmation(page);
   await dialog.getByText(/Gunakan nilai 0–100/).waitFor();
   check(
     posts.length === hiddenInvalidBefore,
@@ -524,14 +526,14 @@ try {
     .getByLabel("Cari siswa dalam formulir", { exact: true })
     .fill("Siswa 21");
   await dialog.getByLabel("Nilai Siswa 21", { exact: true }).fill("25.55");
-  await dialog.getByRole("button", { name: "Simpan nilai" }).click();
+  await dialog.getByRole("button", { name: "Simpan nilai" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.items.length === 60 &&
       posts.at(-1).command.items[0].value === 25.5,
     "hidden pages all submit without loss",
   );
-  await page.getByRole("button", { name: "Penilaian berikutnya" }).click();
+  await page.getByRole("button", { name: "Penilaian berikutnya" }).click(); await settleConfirmation(page);
   check(
     await page.getByText("Halaman 2 dari 3", { exact: true }).isVisible(),
     "history pagination works",
@@ -540,11 +542,11 @@ try {
   await page
     .getByRole("button", { name: "Batalkan penilaian", exact: true })
     .first()
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog
     .getByLabel("Alasan pembatalan", { exact: true })
     .fill("Penilaian dibatalkan");
-  await dialog.getByRole("button", { name: "Konfirmasi pembatalan" }).click();
+  await dialog.getByRole("button", { name: "Konfirmasi pembatalan" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.type === "void" && posts.at(-1).command.id === id(400),
@@ -562,31 +564,31 @@ try {
   await page.screenshot({ path: join(out, "grades-desktop.png") });
   await visit();
   await filter();
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   await dialog.getByLabel("Nilai Siswa 1", { exact: true }).fill("50");
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.dismiss());
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   check(await dialog.isVisible(), "dirty close cancellation preserves form");
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.accept());
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   outcome = "slow";
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
-  await dialog.getByRole("button", { name: "Simpan nilai" }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
+  await dialog.getByRole("button", { name: "Simpan nilai" }).click(); await settleConfirmation(page);
   await page.waitForFunction(
     () => document.querySelector("[role=dialog] fieldset")?.disabled,
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   check(await dialog.isVisible(), "pending Escape cannot discard batch");
   release();
   await dialog.waitFor({ state: "hidden" });
   await visit();
   await filter();
   outcome = "uncertain";
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
-  await dialog.getByRole("button", { name: "Simpan nilai" }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
+  await dialog.getByRole("button", { name: "Simpan nilai" }).click(); await settleConfirmation(page);
   await dialog.getByText(/Hasil penyimpanan belum dapat dipastikan/).waitFor();
   check(await dialog.isVisible(), "uncertain write retains draft");
   check(
@@ -596,9 +598,9 @@ try {
   await visit();
   await filter();
   outcome = "hang";
-  await page.getByRole("button", { name: "Input nilai", exact: true }).click();
+  await page.getByRole("button", { name: "Input nilai", exact: true }).click(); await settleConfirmation(page);
   await page.clock.install();
-  await dialog.getByRole("button", { name: "Simpan nilai" }).click();
+  await dialog.getByRole("button", { name: "Simpan nilai" }).click(); await settleConfirmation(page);
   await page.clock.fastForward(31000);
   await page.clock.resume();
   await dialog.getByText(/Hasil penyimpanan belum dapat dipastikan/).waitFor();

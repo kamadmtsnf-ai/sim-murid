@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
 import { EmptyState } from "@/components/ui/content-state";
@@ -267,12 +268,7 @@ const retainedEcurrentTarget=e.currentTarget;
     }
   }
   const feedback = (
-    <div
-      ref={feedbackRef}
-      tabIndex={-1}
-      role={phase === "error" || blocked ? "alert" : "status"}
-      className="rounded-lg border bg-muted/30 p-3 text-sm"
-    >
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
       {message ||
         notice ||
         "Laporan dan penugasan ditampilkan sesuai hak akses Anda."}
@@ -286,7 +282,7 @@ const retainedEcurrentTarget=e.currentTarget;
           Muat ulang data
         </Button>
       )}
-    </div>
+    </MutationFeedback>
   );
   return (
     <div className="mentoring-panel min-w-0 space-y-6">
@@ -512,7 +508,7 @@ const retainedEcurrentTarget=e.currentTarget;
           onPageChange={(page) => void load({ ...filters, page: String(page) })}
         />
       </section>
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={!!mode}
         onOpenChange={async (value) => {
           if (!value) await close();

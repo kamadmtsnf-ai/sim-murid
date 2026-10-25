@@ -354,3 +354,9 @@ Modal reusable mengikuti unggah/validasi/pratinjau/konfirmasi/hasil, dengan temp
 ## P09 — Riwayat Admin
 
 Bagian Rekonsiliasi memakai filter modul, cursor pagination 25, shared Dialog baca-saja dan TableRegion lokal; skor 10 baris per tampilan. Waktu WIB/nama pelaku saat ini/UUID stabil; data historis yang tidak tersedia disebut eksplisit. Jangan mencetak payload JSON atau teks alasan bebas pada audit. Loading/error/denial membersihkan hasil lama; tanpa penyimpanan browser. Tidak menampilkan status approval/reopen fiktif atau tombol navigasi konten baru.
+
+## Modal dan feedback — 25 Oktober 2026
+
+Gunakan Dialog bersama untuk formulir/detail dan confirmAction untuk keputusan. Header dan close tetap terjangkau; gulirkan body, bukan seluruh panel. CloseDisabled berlaku untuk X dan Escape selama proses. Pertahankan native validation, dirty guard dan restorasi fokus. Jangan menutup modal atau menghapus isian hanya untuk menampilkan sukses.
+
+Feedback menampilkan judul status, pesan domain, lalu langkah berikutnya bila perlu. Status/tone ditentukan hasil eksplisit, tidak ditebak dari teks. Gunakan MutationFeedback dengan phase existing untuk alur mutasi; unknown/uncertain bukan gagal definitif, sehingga tidak boleh menyarankan kirim ulang tanpa pemeriksaan hasil. Jangan otomatis menghilangkan pesan penting. Konfirmasi berisiko memakai label aksi spesifik; default lama tetap kompatibel. Lihat `../development/MODAL-FEEDBACK-UPGRADE.md` untuk lingkup dan bukti pengujian.
