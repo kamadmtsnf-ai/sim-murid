@@ -2,34 +2,6 @@
   "baseline": "6bc6866574c9def35dba7c06493d8f90d7f4a37c",
   "files": [
     {
-      "path": "docs/verification/audit/README.md",
-      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
-    },
-    {
-      "path": "docs/verification/audit/browser-results.json",
-      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
-    },
-    {
-      "path": "docs/verification/audit/promotions-regression.json",
-      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
-    },
-    {
-      "path": "docs/verification/audit/reconciliation-regression.json",
-      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
-    },
-    {
-      "path": "docs/verification/audit/reports-regression.json",
-      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
-    },
-    {
-      "path": "docs/verification/audit/schema-readiness.json",
-      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
-    },
-    {
-      "path": "docs/verification/audit/surveys-regression.json",
-      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
-    },
-    {
       "path": "rebuilt/docs/design-system/MASTER.md",
       "reason": "Dokumentasi status/coverage/desain/risiko P09 dan keberlanjutan konteks."
     },
@@ -42,12 +14,48 @@
       "reason": "Dokumentasi status/coverage/desain/risiko P09 dan keberlanjutan konteks."
     },
     {
+      "path": "rebuilt/docs/development/stage-09-files.json",
+      "reason": "Manifest file perubahan P09 dan alasan untuk keberlanjutan konteks."
+    },
+    {
+      "path": "rebuilt/docs/verification/audit/README.md",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "rebuilt/docs/verification/audit/browser-results.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "rebuilt/docs/verification/audit/promotions-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "rebuilt/docs/verification/audit/reconciliation-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "rebuilt/docs/verification/audit/reports-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "rebuilt/docs/verification/audit/schema-readiness.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "rebuilt/docs/verification/audit/surveys-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
       "path": "rebuilt/package.json",
       "reason": "Daftarkan tes P09 dan check pipeline tanpa dependency baru."
     },
     {
       "path": "rebuilt/scripts/database/harness.mjs",
       "reason": "Jam tetap khusus fixture hari sekolah terisolasi."
+    },
+    {
+      "path": "rebuilt/scripts/verify-audit.mjs",
+      "reason": "Verifikasi browser actual component, viewport/keyboard/touch/states/axe."
     },
     {
       "path": "rebuilt/src/app/account/services/[module]/page.tsx",
@@ -114,11 +122,7 @@
       "reason": "Boundary readiness diisolasi pada regresi modul existing."
     },
     {
-      "path": "scripts/verify-audit.mjs",
-      "reason": "Verifikasi browser actual component, viewport/keyboard/touch/states/axe."
-    },
-    {
-      "path": "tests/ui/audit-fixture.tsx",
+      "path": "rebuilt/tests/ui/audit-fixture.tsx",
       "reason": "Skenario terisolasi P09 atau fixture UI aktual; tidak memakai data/akun produksi."
     }
   ],

@@ -41,3 +41,5 @@ Body writer cloud diperiksa read-only dan cocok dengan baseline sumber MD5 `1adf
 Kode/QA selesai untuk rilis aman, tetapi P09 belum selesai penuh: penerapan migrasi produksi masih menunggu izin eksplisit. UAT akun nyata, load/concurrency multi-worker dan restore staging belum dilakukan (P10). D10/approval/reopen universal tidak diimplementasikan tanpa kebijakan. Jangan menyatakan merge sebagai bukti aktivasi.
 
 Rollback: UI tetap tersembunyi jika RPC absen; fungsi lama berjalan. Jangan mematikan immutable triggers/menghapus log sebagai rollback. Bila perlu koreksi skema, gunakan forward migration ditinjau; jangan reset database atau linked db push tanpa rekonsiliasi cloud history.
+
+PR implementasi P09: [#56](https://github.com/kamadmtsnf-ai/sim-murid/pull/56). Aktivasi database tetap menunggu izin eksplisit; bukan tahap selesai penuh.

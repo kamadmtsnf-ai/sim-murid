@@ -93,3 +93,5 @@ PR kode P08: [#54](https://github.com/kamadmtsnf-ai/sim-murid/pull/54). Izin akt
 - Aktivasi P08: setelah pengguna menjawab “ya boleh” atas permintaan migrasi konkret, apply_migration berhasil pada sim-muridv2. Dua RPC/indeks dan pembatasan EXECUTE terverifikasi; probe tanpa sesi ditolak. Advisory tetap baseline. Muat ulang halaman untuk pemeriksaan ketersediaan sesuai sesi/izin. UAT impor produksi belum dijalankan.
 
 - 25 Oktober 2026: P09 kode/QA selesai dan dipulihkan setelah reset lingkungan. 655 tes/70 kelompok dan browser 475 checks/52 axe diulang dan lulus. Database belum berubah: migrasi diblokir auto-review sampai izin konkret; UI readiness gate menjaga fungsi lama. D10 tetap terbuka. P10–P12 belum dijalankan.
+
+PR implementasi P09: [#56](https://github.com/kamadmtsnf-ai/sim-murid/pull/56). Aktivasi database tetap menunggu izin eksplisit; bukan tahap selesai penuh.
