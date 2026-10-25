@@ -360,3 +360,7 @@ Bagian Rekonsiliasi memakai filter modul, cursor pagination 25, shared Dialog ba
 Gunakan Dialog bersama untuk formulir/detail dan confirmAction untuk keputusan. Header dan close tetap terjangkau; gulirkan body, bukan seluruh panel. CloseDisabled berlaku untuk X dan Escape selama proses. Pertahankan native validation, dirty guard dan restorasi fokus. Jangan menutup modal atau menghapus isian hanya untuk menampilkan sukses.
 
 Feedback menampilkan judul status, pesan domain, lalu langkah berikutnya bila perlu. Status/tone ditentukan hasil eksplisit, tidak ditebak dari teks. Gunakan MutationFeedback dengan phase existing untuk alur mutasi; unknown/uncertain bukan gagal definitif, sehingga tidak boleh menyarankan kirim ulang tanpa pemeriksaan hasil. Jangan otomatis menghilangkan pesan penting. Konfirmasi berisiko memakai label aksi spesifik; default lama tetap kompatibel. Lihat `../development/MODAL-FEEDBACK-UPGRADE.md` untuk lingkup dan bukti pengujian.
+
+## Shell navigasi — 25 Oktober 2026
+
+Navbar menyatakan lokasi aktif; sidebar menyaring menu dari izin server dan pencarian tidak menambah cakupan. Drawer/search mengikuti pathname termasuk Back/Forward. Header/footer mengikuti alur konten; jangan menghitung tinggi konten dari asumsi header tetap. Pada jendela pendek, seluruh sidebar dapat digulir supaya identitas dan Logout tetap terjangkau. Jaga fokus pencarian saat active-item auto-scroll. Menu kosong, tidak ada hasil pencarian dan status izin belum terverifikasi harus dibedakan. Lihat `../development/WORKSPACE-SHELL-AUDIT.md`.
