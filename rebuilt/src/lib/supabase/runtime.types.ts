@@ -8,6 +8,7 @@ app_user_provision_begin: { Args: {p_actor:string;p_session:string;p_request:str
 app_user_provision_finish: { Args: {p_actor:string;p_session:string;p_request:string;p_fingerprint:string}; Returns:Json };
 app_access_check: { Args: {p_capability: string; p_owner?: string | null; p_class?: string | null }; Returns: boolean };
 app_access_context: { Args: Record<never, never>; Returns: Json };
+app_ai_reserve: { Args: {p_actor:string;p_session:string;p_analysis:string;p_daily_limit:number}; Returns:Json };
 app_ai_run: { Args: {p_actor: string; p_session: string; p_action: string; p_data: Json }; Returns: Json };
 app_asset_admin: { Args: {p_actor: string; p_session: string; p_id: string }; Returns: Json };
 app_asset_cleanup: { Args: {p_actor: string; p_session: string }; Returns: Json };

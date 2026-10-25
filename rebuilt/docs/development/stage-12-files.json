@@ -1,0 +1,29 @@
+{
+  "baseline": "593dd9dae7a0ddc3edea3c484b684b403bdda90d",
+  "files": [
+    "rebuilt/.env.example",
+    "rebuilt/docs/ai/CONTROLLED-AI.md",
+    "rebuilt/docs/development/ROADMAP.md",
+    "rebuilt/docs/development/STAGE-12-CONTROLLED-AI.md",
+    "rebuilt/docs/development/stage-12-files.json",
+    "rebuilt/docs/verification/controlled-ai/README.md",
+    "rebuilt/docs/verification/controlled-ai/browser.json",
+    "rebuilt/docs/verification/controlled-ai/cloud.json",
+    "rebuilt/docs/verification/controlled-ai/summary.json",
+    "rebuilt/package.json",
+    "rebuilt/scripts/verify-insights.mjs",
+    "rebuilt/src/app/account/services/[module]/ai-review.tsx",
+    "rebuilt/src/app/account/services/[module]/insights.tsx",
+    "rebuilt/src/app/api/services/ai/route.ts",
+    "rebuilt/src/lib/services/ai-controls.ts",
+    "rebuilt/src/lib/services/providers.ts",
+    "rebuilt/src/lib/supabase/runtime.types.ts",
+    "rebuilt/supabase/migrations/20261025031124_controlled_ai_p12.sql",
+    "rebuilt/tests/ai-controls.test.ts",
+    "rebuilt/tests/database/ai-controls.test.mjs",
+    "rebuilt/tests/database/foundation.test.mjs",
+    "rebuilt/tests/insights-provider.test.mjs",
+    "rebuilt/tests/operational-drill.test.mjs",
+    "rebuilt/tests/production.test.mjs"
+  ]
+}

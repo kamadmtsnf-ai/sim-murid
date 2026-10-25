@@ -6,9 +6,9 @@ import ts from "typescript";
 registerHooks({
   resolve(s, c, n) {
     if (s === "server-only") return { url: "empty:server", shortCircuit: true };
-    if (s === "./analysis-schema")
+    if (s === "./analysis-schema" || s === "./ai-controls")
       return {
-        url: new URL("./analysis-schema.ts", c.parentURL).href,
+        url: new URL(s + ".ts", c.parentURL).href,
         shortCircuit: true,
       };
     return n(s, c);
@@ -128,11 +128,15 @@ test("Existing Anthropic and Gemini adapters retain schema and usage contracts",
           provider === "anthropic"
             ? {
                 content: [{ type: "text", text: JSON.stringify(output) }],
+                stop_reason: "end_turn",
                 usage: { n: 1 },
               }
             : {
                 candidates: [
-                  { content: { parts: [{ text: JSON.stringify(output) }] } },
+                  {
+                    content: { parts: [{ text: JSON.stringify(output) }] },
+                    finishReason: "STOP",
+                  },
                 ],
                 usageMetadata: { n: 1 },
               },
@@ -149,6 +153,114 @@ test("Existing Anthropic and Gemini adapters retain schema and usage contracts",
         output,
       );
     }
+  } finally {
+    globalThis.fetch = old;
+    if (seed === undefined) delete process.env.EMAIL_OTP_SECRET;
+    else process.env.EMAIL_OTP_SECRET = seed;
+  }
+});
+test("P12 provider boundary redacts identities, caps tokens, sanitizes usage and drops invented quotes", async () => {
+  const old = globalThis.fetch,
+    seed = process.env.EMAIL_OTP_SECRET;
+  process.env.EMAIL_OTP_SECRET = "d".repeat(40);
+  try {
+    let calls = 0,
+      sent;
+    globalThis.fetch = async (_url, init) => {
+      calls++;
+      sent = JSON.parse(init.body);
+      return Response.json({
+        status: "completed",
+        output: [
+          {
+            type: "message",
+            content: [
+              {
+                type: "output_text",
+                text: JSON.stringify({
+                  ...output,
+                  ringkasan_umum: "Siti Rahma perlu bantuan",
+                  kutipan_representatif: [
+                    { teks: "kutipan palsu", sentimen: "positif" },
+                  ],
+                }),
+              },
+            ],
+          },
+        ],
+        usage: { input_tokens: 20, private: "SECRET" },
+      });
+    };
+    const r = await analyzeEssays(
+      "openai",
+      encryptKey("synthetic-api-key"),
+      "approved-model",
+      Array(5).fill("Siti Rahma menyukai fasilitas. Email unit@example.org"),
+      ["Siti Rahma"],
+    );
+    assert.equal(calls, 1);
+    assert.equal(sent.max_output_tokens, 2048);
+    assert.ok(!sent.input.includes("Siti Rahma"));
+    assert.ok(!sent.input.includes("unit@example.org"));
+    assert.ok(!r.result.ringkasan_umum.includes("Siti Rahma"));
+    assert.deepEqual(r.result.kutipan_representatif, []);
+    assert.deepEqual(r.tokens, { input_tokens: 20 });
+    for (const response of [
+      Response.json({
+        status: "completed",
+        output: [
+          {
+            type: "message",
+            content: [
+              { type: "output_text", text: JSON.stringify(output) },
+              { type: "refusal", refusal: "private refusal" },
+            ],
+          },
+        ],
+      }),
+      new Response("timeout", { status: 504 }),
+    ]) {
+      globalThis.fetch = async () => {
+        calls++;
+        return response;
+      };
+      const before = calls;
+      await assert.rejects(
+        analyzeEssays(
+          "openai",
+          encryptKey("synthetic-api-key"),
+          "approved-model",
+          essays,
+        ),
+      );
+      assert.equal(calls - before, 1);
+    }
+  } finally {
+    globalThis.fetch = old;
+    if (seed === undefined) delete process.env.EMAIL_OTP_SECRET;
+    else process.env.EMAIL_OTP_SECRET = seed;
+  }
+});
+test("P12 provider aborts safely without retry or leaking raw error", async () => {
+  const old = globalThis.fetch,
+    seed = process.env.EMAIL_OTP_SECRET;
+  process.env.EMAIL_OTP_SECRET = "e".repeat(40);
+  try {
+    let calls = 0;
+    globalThis.fetch = async (_url, init) => {
+      calls++;
+      assert.ok(init.signal instanceof AbortSignal);
+      throw new DOMException("synthetic abort", "TimeoutError");
+    };
+    await assert.rejects(
+      analyzeEssays(
+        "openai",
+        encryptKey("synthetic-api-key"),
+        "approved-model",
+        essays,
+      ),
+    );
+    assert.equal(calls, 1);
   } finally {
     globalThis.fetch = old;
     if (seed === undefined) delete process.env.EMAIL_OTP_SECRET;

@@ -1,4 +1,5 @@
 "use client";
+import { AiReview } from "./ai-review";
 import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { formatAcademicYear, semesterLabel } from "@/lib/academic/period";
@@ -32,6 +33,7 @@ export function InsightsPanel({
     [message, setMessage] = useState(""),
     [points, setPoints] = useState(Math.max(3, list(data.extra.plan).length)),
     [aiBusy, setAiBusy] = useState(false),
+    [aiUncertain, setAiUncertain] = useState(false),
     [page, setPage] = useState(1),
     [role, setRole] = useState(String(applied.role ?? "")),
     [quality, setQuality] = useState(String(applied.quality ?? ""));
@@ -68,12 +70,28 @@ export function InsightsPanel({
     data.today <= planUntil;
   async function ai(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (aiLock.current || busy) return;
+    if (aiLock.current || busy || aiUncertain) return;
+    const preview = new FormData(e.currentTarget);
+    if (
+      preview.get("action") === "analyze" &&
+      preview.get("consent") !== "on"
+    ) {
+      setMessage("Konfirmasikan peninjauan data dan biaya sebelum analisis.");
+      return;
+    }
+    if (
+      preview.get("action") === "invalidate" &&
+      !window.confirm(
+        "Hapus cache hasil untuk penyedia dan periode ini? Pemakaian kuota tidak dikembalikan; analisis berikutnya dapat menimbulkan biaya baru.",
+      )
+    )
+      return;
     aiLock.current = true;
     setAiBusy(true);
     const form = e.currentTarget;
-    const f = new FormData(form),
-      body = Object.fromEntries(f);
+    const f = new FormData(form);
+    f.delete("consent");
+    const body = Object.fromEntries(f);
     try {
       const r = await fetch("/api/services/ai", {
           signal: AbortSignal.timeout(55000),
@@ -81,11 +99,14 @@ export function InsightsPanel({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             ...body,
+            ...(body.action === "analyze" ? { consent: true } : {}),
             ...(body.action === "configure" ? {} : { periodId: period }),
           }),
         }),
         b = await r.json();
-      setMessage(String(b.message));
+      if (typeof b?.message !== "string") throw Error("Invalid response");
+      setMessage(b.message);
+      if (r.status >= 500) setAiUncertain(true);
       if (r.ok) {
         if (body.action === "configure") {
           form.reset();
@@ -95,6 +116,7 @@ export function InsightsPanel({
         await load(period, role, quality);
       }
     } catch {
+      setAiUncertain(true);
       setMessage(
         "Penyedia belum tersedia. Muat ulang hasil sebelum mencoba lagi.",
       );
@@ -131,6 +153,21 @@ export function InsightsPanel({
       <p role="status" aria-live="polite">
         {aiBusy ? "Analisis sedang diproses…" : message}
       </p>
+      {aiUncertain && (
+        <div className="space-y-2 rounded-lg border p-4">
+          <p>
+            Hasil panggilan AI belum pasti. Periksa hasil sebelum menjalankan
+            analisis lain; jangan menghapus cache yang masih berjalan.
+          </p>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => window.location.reload()}
+          >
+            Muat ulang untuk memeriksa AI
+          </Button>
+        </div>
+      )}
       {!period && (
         <p className="rounded-lg border bg-muted/40 p-4">
           Pilih periode untuk melihat hasil survei sesuai hak akses Anda.
@@ -606,7 +643,9 @@ export function InsightsPanel({
                 max={1000}
                 required
               />
-              <Button disabled={busy || aiBusy}>Simpan terenkripsi</Button>
+              <Button disabled={busy || aiBusy || aiUncertain}>
+                Simpan terenkripsi
+              </Button>
             </form>
           )}
           <p>
@@ -622,9 +661,14 @@ export function InsightsPanel({
               .join("; ") || "Belum dikonfigurasi"}
           </p>
           <p className="text-sm text-muted-foreground">
-            Analisis AI mencakup esai seluruh periode; filter peran dan
-            keandalan hanya berlaku pada hasil terfilter. Jangan sertakan
-            informasi pribadi dalam esai.
+            Analisis AI memakai sampel maksimal 150 esai dari seluruh periode;
+            filter peran dan keandalan hanya berlaku pada hasil terfilter.
+            Jangan sertakan informasi pribadi dalam esai. Pengelola harus
+            mengaktifkan kontrol server dan model yang disetujui. Batas maksimum
+            20 permintaan/hari WIB untuk semua pengguna/penyedia, jeda 60 detik,
+            input 24.000 karakter JSON dan output 2.048 token. Batas harian
+            aktual dapat lebih rendah. Ini bukan batas biaya rupiah; tarif
+            mengikuti penyedia.
           </p>
           <form
             onInputCapture={(e) => {
@@ -647,7 +691,22 @@ export function InsightsPanel({
               <option value="anthropic">Anthropic</option>
               <option value="gemini">Gemini</option>
             </SelectField>
-            <Button disabled={disabled || !period}>Jalankan</Button>
+            <label className="flex min-h-11 w-full items-start gap-3">
+              <input
+                name="consent"
+                type="checkbox"
+                className="mt-1 size-5 shrink-0"
+              />
+              <span>
+                Saya memahami cakupan seluruh periode, telah meninjau data untuk
+                informasi pribadi, dan menyetujui panggilan berbiaya untuk
+                analisis ini. Penyuntingan otomatis tidak menjamin anonimitas
+                penuh. Tidak diperlukan untuk menghapus cache.
+              </span>
+            </label>
+            <Button disabled={disabled || !period || aiUncertain}>
+              Jalankan
+            </Button>
           </form>
           {(scopeReady ? list(data.extra.analyses) : []).map((r) => (
             <article
@@ -655,10 +714,39 @@ export function InsightsPanel({
               className="min-w-0 space-y-3 rounded-lg border bg-card p-4"
             >
               <h3>
-                {String(r.model)} — {String(r.status)}
+                Draf AI · {String(r.model)} — {String(r.status)}
               </h3>
+              <p className="text-sm text-muted-foreground">
+                Sumber: {String(selected?.title ?? "Periode terpilih")} ·
+                seluruh periode, bukan filter layar. Hash sumber:{" "}
+                {typeof r.source_hash === "string" &&
+                /^[a-f0-9]{32,64}$/.test(r.source_hash)
+                  ? r.source_hash
+                  : "tidak tersedia"}
+                . Sampel esai:{" "}
+                {String(
+                  obj(obj(r.tokens).control).sampleCount ??
+                    "metadata lama tidak tersedia",
+                )}
+                .
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Kontrol:{" "}
+                {String(
+                  obj(obj(r.tokens).control).policy ??
+                    "hasil lama; kontrol P12 belum terverifikasi",
+                )}
+                . Status sukses berarti hasil tersimpan, bukan telah disetujui
+                manusia.
+              </p>
               {analysisSchema.safeParse(r.result).success ? (
-                <AnalysisResult value={r.result} />
+                <>
+                  <AnalysisResult value={r.result} />
+                  <AiReview
+                    key={String(r.id) + JSON.stringify(r.result)}
+                    value={r.result}
+                  />
+                </>
               ) : r.status === "succeeded" ? (
                 <p>
                   Format hasil belum dapat ditampilkan. Muat ulang atau hubungi
@@ -666,7 +754,10 @@ export function InsightsPanel({
                 </p>
               ) : null}
               {typeof r.error_code === "string" && (
-                <p>Analisis gagal: {String(r.error_code)}</p>
+                <p>
+                  Analisis belum berhasil. Periksa konfigurasi, batas penggunaan
+                  dan status hasil sebelum mencoba kembali.
+                </p>
               )}
             </article>
           ))}

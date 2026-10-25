@@ -42,10 +42,11 @@ test('Mandatory survey blocks other APIs and allows survey completion endpoint',
  reset();globalThis.auditMocks.rpc=async()=>({data:true,error:null});let c=await educationContext(request());assert.equal(c.caller,null);const r=c.reply({},401);assert.equal(r.status,403);assert.equal((await r.json()).redirect,'/account/services/surveys');c=await educationContext(new NextRequest('https://example.test/api/services/surveys'));assert.ok(c.caller);
 });
 test('AI completion never claims success when persistence is denied, missing or malformed',async()=>{
- for(const completion of [{code:'denied'},null,{} ,{code:'saved'}]){
- reset();globalThis.auditMocks.rpc=async(name,args)=>name==='app_survey_required'?{data:false,error:null}:{error:null,data:args.p_action==='prepare'?{code:'saved',id:'00000000-0000-4000-8000-000000000002',essays:['one','two','three','four','five'],config:{encrypted_key:'synthetic',model:'test'}}:completion};
- const r=await POST(new NextRequest('https://example.test/api/services/ai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'analyze',provider:'gemini',periodId:'00000000-0000-4000-8000-000000000003'})}));assert.equal(r.status,completion?.code==='saved'?200:503);
- }
+ const oldEnv={...process.env};process.env.AI_ANALYSIS_ENABLED='true';process.env.AI_DAILY_REQUEST_LIMIT='2';process.env.AI_ALLOWED_MODELS='gemini:test';
+ try { for(const completion of [{code:'denied'},null,{} ,{code:'saved'}]){
+ reset();globalThis.auditMocks.rpc=async(name,args)=>name==='app_survey_required'?{data:false,error:null}:name==='app_ai_reserve'?{data:{code:'reserved',identifiers:[]},error:null}:{error:null,data:args.p_action==='prepare'?{code:'saved',id:'00000000-0000-4000-8000-000000000002',essays:['one','two','three','four','five'],config:{encrypted_key:'synthetic',model:'test'}}:completion};
+ const r=await POST(new NextRequest('https://example.test/api/services/ai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'analyze',consent:true,provider:'gemini',periodId:'00000000-0000-4000-8000-000000000003'})}));assert.equal(r.status,completion?.code==='saved'?200:503);
+ }} finally {for(const k of ['AI_ANALYSIS_ENABLED','AI_DAILY_REQUEST_LIMIT','AI_ALLOWED_MODELS']){if(oldEnv[k]===undefined)delete process.env[k];else process.env[k]=oldEnv[k];}}
 });
 
 const {GET:cron}=await import('../src/app/api/services/cron/route.ts');
@@ -75,4 +76,22 @@ test('Notification API preserves actor/session envelope, safe statuses and read-
  reset();globalThis.auditMocks.caller=null;assert.equal((await notificationWrite(req(),params)).status,401);
  reset();globalThis.auditMocks.originValid=false;assert.equal((await notificationWrite(req(),params)).status,403);
  reset();globalThis.auditMocks.rpc=async()=>({data:null,error:{message:'private database detail'}});const failed=await notificationWrite(req(),params);assert.equal(failed.status,503);assert.doesNotMatch(await failed.text(),/private database detail/);
+});
+test('P12 disabled policy and missing consent cannot prepare or invoke provider; cached results never reserve',async()=>{
+ const original={...process.env};
+ const req=(body)=>new NextRequest('https://example.test/api/services/ai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'analyze',provider:'openai',periodId:'00000000-0000-4000-8000-000000000003',...body})});
+ try{
+  reset();let calls=[];globalThis.auditMocks.rpc=async(name,args)=>{calls.push({name,args});return name==='app_survey_required'?{data:false,error:null}:{data:{code:'cached',analysis:{status:'succeeded'}},error:null}};
+  delete process.env.AI_ANALYSIS_ENABLED;assert.equal((await POST(req({consent:true}))).status,409);assert.ok(!calls.some(c=>c.name==='app_ai_run'));
+  Object.assign(process.env,{AI_ANALYSIS_ENABLED:'true',AI_DAILY_REQUEST_LIMIT:'2',AI_ALLOWED_MODELS:'openai:approved-model'});
+  assert.equal((await POST(req({}))).status,400);assert.ok(!calls.some(c=>c.name==='app_ai_run'));
+  assert.equal((await POST(req({consent:true}))).status,200);assert.ok(!calls.some(c=>c.name==='app_ai_reserve'));
+ }finally{for(const k of ['AI_ANALYSIS_ENABLED','AI_DAILY_REQUEST_LIMIT','AI_ALLOWED_MODELS']){if(original[k]===undefined)delete process.env[k];else process.env[k]=original[k];}}
+});
+test('P12 quota/missing migration fail closed, source data and credentials never enter response',async()=>{
+ const original={...process.env};Object.assign(process.env,{AI_ANALYSIS_ENABLED:'true',AI_DAILY_REQUEST_LIMIT:'1',AI_ALLOWED_MODELS:'openai:approved-model'});
+ try{for(const reserve of [{data:{code:'budget_exhausted'},error:null},{data:null,error:{message:'PRIVATE_DB_SECRET'}},{data:{code:'reserved',identifiers:'invalid'},error:null}]){
+  reset();const completed=[];globalThis.auditMocks.rpc=async(name,args)=>name==='app_survey_required'?{data:false,error:null}:name==='app_ai_reserve'?reserve:args.p_action==='prepare'?{data:{code:'saved',id:'00000000-0000-4000-8000-000000000002',essays:Array(5).fill('PRIVATE_ESSAY'),config:{encrypted_key:'PRIVATE_KEY',model:'approved-model'}},error:null}:(completed.push(args),{data:{code:'saved'},error:null});
+  const r=await POST(new NextRequest('https://example.test/api/services/ai',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'analyze',consent:true,provider:'openai',periodId:'00000000-0000-4000-8000-000000000003'})}));assert.equal(r.status,429);assert.doesNotMatch(await r.text(),/PRIVATE/);assert.equal(completed.length,1);assert.equal(completed[0].p_data.error,'control_unavailable_or_limit');
+ }}finally{for(const k of ['AI_ANALYSIS_ENABLED','AI_DAILY_REQUEST_LIMIT','AI_ALLOWED_MODELS']){if(original[k]===undefined)delete process.env[k];else process.env[k]=original[k];}}
 });

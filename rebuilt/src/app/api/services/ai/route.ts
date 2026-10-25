@@ -6,6 +6,11 @@ import { educationContext, jsonBody, failure } from "@/lib/education/server";
 import { createAuthAdmin } from "@/lib/auth/admin";
 import { encryptKey, analyzeEssays } from "@/lib/services/providers";
 import { servicesData } from "@/lib/services/server";
+import {
+  aiPolicy,
+  AI_POLICY,
+  prepareAiSample,
+} from "@/lib/services/ai-controls";
 import type { Json } from "@/lib/supabase/cloud.types";
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -21,6 +26,7 @@ const input = z.discriminatedUnion("action", [
   z
     .object({
       action: z.enum(["analyze", "invalidate"]),
+      consent: z.literal(true).optional(),
       provider: z.enum(["anthropic", "gemini", "openai"]),
       periodId: z.uuid(),
     })
@@ -55,6 +61,22 @@ export async function POST(request: NextRequest) {
         throw new Error("Unavailable");
       return reply({ message: "Konfigurasi terenkripsi disimpan." });
     }
+    const policy = aiPolicy();
+    if (body.action === "analyze" && body.consent !== true)
+      return reply(
+        {
+          message: "Konfirmasikan peninjauan data dan biaya sebelum analisis.",
+        },
+        400,
+      );
+    if (body.action === "analyze" && !policy)
+      return reply(
+        {
+          message:
+            "Analisis AI belum diaktifkan oleh pengelola. Hasil tersimpan tetap dapat dibaca.",
+        },
+        409,
+      );
     const r = await admin.rpc("app_ai_run", {
       ...args,
       p_action: body.action === "analyze" ? "prepare" : "invalidate",
@@ -116,11 +138,44 @@ export async function POST(request: NextRequest) {
       );
     let generated = false;
     try {
+      if (
+        !policy ||
+        !policy.models.includes(body.provider + ":" + result.config.model)
+      )
+        throw new Error("Model not approved");
+      const reservation = await admin.rpc("app_ai_reserve", {
+        ...args,
+        p_analysis: result.id,
+        p_daily_limit: policy.dailyLimit,
+      });
+      const reserved = z
+        .object({
+          code: z.literal("reserved"),
+          identifiers: z.array(z.string().max(1000)).max(450),
+        })
+        .safeParse(reservation.data);
+      if (reservation.error || !reserved.success) {
+        await admin.rpc("app_ai_run", {
+          ...args,
+          p_action: "complete",
+          p_data: { id: result.id, error: "control_unavailable_or_limit" },
+        });
+        return reply(
+          {
+            message:
+              "Analisis belum dijalankan: kontrol belum tersedia, batas harian tercapai, atau jeda 60 detik masih berlaku. Muat ulang sebelum mencoba kembali.",
+          },
+          429,
+        );
+      }
+      const identifiers = reserved.data.identifiers;
+      prepareAiSample(result.essays, identifiers);
       const output = await analyzeEssays(
         body.provider,
         result.config.encrypted_key,
         result.config.model,
         result.essays,
+        identifiers,
       );
       generated = true;
       const saved = await admin.rpc("app_ai_run", {
@@ -129,7 +184,16 @@ export async function POST(request: NextRequest) {
         p_data: {
           id: result.id,
           result: output.result,
-          tokens: output.tokens as Json,
+          tokens: {
+            usage: output.tokens,
+            control: {
+              policy: AI_POLICY,
+              review: "required",
+              sampleCount: result.essays.length,
+              scope: "whole_period",
+              redaction: "known-identifiers-and-patterns",
+            },
+          } as Json,
         },
       });
       if (
@@ -139,7 +203,10 @@ export async function POST(request: NextRequest) {
           false
       )
         throw new Error("Result persistence failed");
-      return reply({ message: "Analisis selesai dan hasil disimpan." });
+      return reply({
+        message:
+          "Draf analisis AI disimpan. Tinjau sumber dan rekomendasi sebelum digunakan.",
+      });
     } catch {
       if (!generated)
         await admin.rpc("app_ai_run", {
@@ -150,7 +217,7 @@ export async function POST(request: NextRequest) {
       return reply(
         {
           message:
-            "Analisis gagal; jawaban survei tetap tersimpan. Periksa konfigurasi atau hapus cache gagal untuk mencoba ulang.",
+            "Analisis belum dapat dikonfirmasi; jawaban survei tetap tersimpan. Muat ulang hasil sebelum mencoba lagi. Jangan ulangi jika status masih berjalan.",
         },
         503,
       );

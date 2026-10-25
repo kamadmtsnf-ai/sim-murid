@@ -92,6 +92,7 @@ try {
   let posts = 0,
     aiPosts = 0,
     failRead = false,
+    failAi = false,
     lastQuery = "";
   const progress = Array.from({ length: 25 }, (_, i) => ({
     user_id: id(100 + i),
@@ -112,10 +113,11 @@ try {
       url = new URL(request.url());
     if (url.pathname.endsWith("/ai")) {
       aiPosts++;
+      if(request.postDataJSON().action==="analyze")check(request.postDataJSON().consent===true,"explicit AI consent reaches API");
       await new Promise((r) => setTimeout(r, 150));
       await route.fulfill({
-        status: 200,
-        json: { message: "Konfigurasi tersimpan" },
+        status: failAi ? 503 : 200,
+        json: { message: failAi ? "Hasil AI belum pasti" : "Konfigurasi tersimpan" },
       });
       return;
     }
@@ -142,7 +144,7 @@ try {
             mean: 4.2,
           },
         ],
-        analyses: [],
+        analyses: [{id:id(500),model:"approved-model",status:"succeeded",source_hash:"a".repeat(32),tokens:{control:{policy:"P12-1",sampleCount:5}},result:{ringkasan_umum:"Ringkasan sintetis",tema_positif:["Fasilitas"],tema_perlu_perhatian:[],kutipan_representatif:[],rekomendasi_tindakan:["Tinjau fasilitas bersama tim"],skor_sentimen_keseluruhan:"positif"}}],
         canPlan: true,
       });
     await new Promise((r) => setTimeout(r, 80));
@@ -178,6 +180,15 @@ try {
         .count()) === 2,
       "OpenAI provider available " + width,
     );
+    check(await page.getByRole("button",{name:"Salin draf rekomendasi"}).isDisabled(),"human review required "+width);
+    await page.getByRole("checkbox",{name:/Saya telah meninjau sumber/}).check();
+    await page.evaluate(()=>Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async()=>{throw Error("denied")}}}));
+    await page.getByRole("button",{name:"Salin draf rekomendasi"}).click();
+    await page.getByText("Tidak dapat menyalin. Salin rekomendasi dari hasil secara manual.").waitFor();
+    check(posts===0,"review does not write plan "+width);
+    await page.evaluate(()=>Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async(text)=>{window.copiedDraft=text}}}));
+    await page.getByRole("button",{name:"Salin draf rekomendasi"}).click();
+    check((await page.evaluate(()=>window.copiedDraft)).includes("Tinjau fasilitas"),"reviewed draft copy "+width);
     const size = await page.evaluate(() => ({
       w: innerWidth,
       s: document.documentElement.scrollWidth,
@@ -224,6 +235,9 @@ try {
       document.querySelectorAll('input[name="description0"]').length === 1 &&
       !document.querySelector("main")?.getAttribute("aria-busy"),
   );
+  await page.getByRole("button",{name:"Jalankan",exact:true}).click();
+  check(aiPosts===0,"no request without consent");
+  await page.getByRole("checkbox", {name:/Saya memahami cakupan/}).check();
   await page
     .getByRole("button", { name: "Jalankan", exact: true })
     .evaluate((e) => {
@@ -307,6 +321,14 @@ try {
     "clearing period removes export links",
   );
   check(!errors.length, "no JavaScript errors");
+  await page.getByRole("combobox",{name:/^Periode/}).selectOption(id(11));
+  await page.getByRole("checkbox",{name:/Saya memahami cakupan/}).check();
+  failAi=true;
+  await page.getByRole("button",{name:"Jalankan",exact:true}).click();
+  await page.getByText("Hasil AI belum pasti",{exact:true}).waitFor();
+  check(await page.getByRole("button",{name:"Jalankan",exact:true}).isDisabled(),"uncertain AI locks subsequent requests");
+  check(await page.getByRole("button",{name:"Muat ulang untuk memeriksa AI"}).isVisible(),"uncertain AI offers explicit reconciliation");
+  check(!errors.length,"no JS errors after AI failure");
   await writeFile(
     join(out, "results.json"),
     JSON.stringify({ checks, accessibility, errors }, null, 2),
