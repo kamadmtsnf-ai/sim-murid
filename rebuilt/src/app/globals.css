@@ -369,7 +369,7 @@
 .classes-check input { flex: 0 0 auto; margin-top: 4px; }
 .classes-check span { min-width: 0; overflow-wrap: anywhere; }
 .classes-panel svg, .classes-dialog svg { width: 16px; height: 16px; flex-shrink: 0; }
-.classes-dialog { display: block; overflow-y: auto; max-height: calc(100dvh - 32px); width: calc(100% - 32px); overflow-wrap: anywhere; }
+.classes-dialog { display: flex; overflow: hidden; max-height: calc(100dvh - 32px); width: calc(100% - 32px); overflow-wrap: anywhere; }
 .classes-dialog > div { padding: 16px; }
 .classes-dialog > div:first-child { gap: 12px; }
 .classes-dialog > div:first-child > button { min-width: 44px; padding: 12px; }
@@ -391,7 +391,7 @@
 .schedule-tabs [role="tab"] { min-width: 0; min-height: 44px; border-radius: .65rem; padding: .65rem .75rem; font-weight: 600; color: var(--muted-foreground); }
 .schedule-tabs [role="tab"][data-state="active"] { color: var(--primary-foreground); background: var(--primary); box-shadow: 0 1px 3px #0002; }
 .schedule-tabs [role="tab"]:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
-.schedules-dialog { display: block; overflow-y: auto; max-height: calc(100dvh - 32px); width: calc(100% - 32px); overflow-wrap: anywhere; }
+.schedules-dialog { display: flex; overflow: hidden; max-height: calc(100dvh - 32px); width: calc(100% - 32px); overflow-wrap: anywhere; }
 .schedules-dialog input:not([type="checkbox"]), .schedules-dialog select { min-height: 44px; max-width: 100%; }
 .schedules-dialog > div:first-child > button { flex-shrink: 0; }
 
@@ -399,44 +399,44 @@
 .duty-panel :is(fieldset,label,input,select,textarea) { min-width: 0; max-width: 100%; }
 .duty-panel button { min-height: 44px; white-space: normal; }
 .duty-panel input[type=checkbox] { flex-shrink: 0; width: 18px; height: 18px; }
-.duty-dialog { display: block; overflow-y: auto; max-height: calc(100dvh - 32px); width: calc(100% - 32px); }
+.duty-dialog { display: flex; overflow: hidden; max-height: calc(100dvh - 32px); width: calc(100% - 32px); }
 
 /* Attendance: long names wrap; native controls and dialog remain within the viewport. */
 .attendance-panel :is(input, select, textarea) { min-height: 44px; max-width: 100%; }
 .attendance-panel fieldset { min-inline-size: 0; }
 .attendance-panel :is(td, th) { overflow-wrap: anywhere; }
-.attendance-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+.attendance-dialog { display: flex; overflow: hidden; overflow-wrap: anywhere; }
 .attendance-dialog :is(input, select) { min-height: 44px; }
 
 .mentoring-panel fieldset, .mentoring-dialog fieldset { min-inline-size: 0; }
 .mentoring-panel :is(input,select), .mentoring-dialog :is(input:not([type=checkbox]),select,textarea) { min-height: 44px; max-width: 100%; }
 .mentoring-panel :is(td,th) { overflow-wrap: anywhere; }
-.mentoring-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+.mentoring-dialog { display: flex; overflow: hidden; overflow-wrap: anywhere; }
 
 .committee-panel fieldset, .committee-dialog fieldset { min-inline-size: 0; }
 .committee-panel :is(input,select), .committee-dialog :is(input:not([type=checkbox]),select) { min-height: 44px; max-width: 100%; }
 .committee-panel :is(td,th) { overflow-wrap: anywhere; }
-.committee-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+.committee-dialog { display: flex; overflow: hidden; overflow-wrap: anywhere; }
 
 .savings-panel fieldset, .savings-dialog fieldset { min-inline-size: 0; }
 .savings-panel :is(input,select), .savings-dialog :is(input:not([type=checkbox]),select) { min-height: 44px; max-width: 100%; }
 .savings-panel :is(td,th) { overflow-wrap: anywhere; }
-.savings-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+.savings-dialog { display: flex; overflow: hidden; overflow-wrap: anywhere; }
 
 /* Poin siswa: local scrolling preserves long history without widening the page. */
 .discipline-panel fieldset { min-inline-size: 0; }
 .discipline-panel input, .discipline-panel select, .discipline-dialog input, .discipline-dialog select { min-height: 44px; max-width: 100%; }
 .discipline-panel table { overflow-wrap: anywhere; }
-.discipline-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+.discipline-dialog { display: flex; overflow: hidden; overflow-wrap: anywhere; }
 
 /* Penilaian: bounded dialogs and local table scrolling keep all scores reachable. */
 .grades-panel fieldset, .grades-dialog fieldset { min-inline-size: 0; }
 .grades-panel input, .grades-panel select, .grades-dialog input, .grades-dialog select { min-height: 44px; max-width: 100%; }
 .grades-dialog label { overflow-wrap: anywhere; }
 .grades-panel table { overflow-wrap: anywhere; }
-.grades-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+.grades-dialog { display: flex; overflow: hidden; overflow-wrap: anywhere; }
 
-.reports-dialog { display: block; overflow-y: auto; overflow-wrap: anywhere; }
+.reports-dialog { display: flex; overflow: hidden; overflow-wrap: anywhere; }
 
 .reports-panel { min-width: 0; overflow-wrap: anywhere; }
 .reports-panel :is(button,a), .reports-dialog button { max-width:100%; min-height:44px; height:auto; white-space:normal; overflow-wrap:anywhere; }
@@ -445,14 +445,14 @@
 .promotions-panel { min-width:0; overflow-wrap:anywhere; }
 .promotions-panel :is(button,a), .promotions-dialog button { max-width:100%; min-height:44px; height:auto; white-space:normal; overflow-wrap:anywhere; }
 .promotions-panel label, .promotions-dialog label { min-width:0; overflow-wrap:anywhere; }
-.promotions-dialog { display:block; overflow-y:auto; overflow-wrap:anywhere; }
+.promotions-dialog { display:flex; overflow:hidden; overflow-wrap:anywhere; }
 .promotions-panel input[type="file"], .promotions-dialog input[type="file"] { max-width:100%; min-width:0; }
 
 /* Book catalog and reader: local overflow stays inside the document viewport. */
 .books-panel,.books-dialog { min-width:0; overflow-wrap:anywhere; }
 .books-panel button,.books-dialog button { max-width:100%; height:auto; min-height:44px; white-space:normal; }
 .books-panel input,.books-panel select,.books-dialog input,.books-dialog select { max-width:100%; min-width:0; min-height:44px; }
-.books-dialog { display:block; overflow-y:auto; }
+.books-dialog { display:flex; overflow:hidden; }
 .books-reader-dialog { max-width:72rem; }
 .book-viewport { max-width:100%; min-width:0; overflow:auto; max-height:65dvh; background:var(--muted); padding:8px; }
 .book-canvas { width:max-content; min-width:100%; }
@@ -560,3 +560,12 @@
 .nav-search input::-webkit-search-cancel-button { -webkit-appearance:none; appearance:none; }
 
 .ds-pagination .pagination-link { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:.5rem 1rem; border:1px solid var(--input); border-radius:.65rem; background:var(--card); overflow-wrap:anywhere; }
+
+/* Shared modal surfaces; the navigation drawer retains its own layout. */
+@layer utilities {
+ .dialog-body [data-slot="button"], [role="alertdialog"] [data-slot="button"] { min-width:0; max-width:100%; white-space:normal; overflow-wrap:anywhere; }
+ .dialog-body form { min-width:0; }
+ .dialog-body input:not([type="checkbox"]):not([type="radio"]), .dialog-body select, .dialog-body textarea { max-width:100%; min-width:0; }
+}
+@media(prefers-reduced-transparency:reduce) { .dialog-overlay { backdrop-filter:none; } }
+@media(forced-colors:active) { .dialog-content { border:1px solid CanvasText; } }

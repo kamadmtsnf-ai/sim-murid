@@ -1,6 +1,7 @@
 "use client";
 import { createRoot } from "react-dom/client";
 import { AlertDialog } from "radix-ui";
+import { CircleAlert, Info } from "lucide-react";
 import { Button } from "./button";
 let active = false;
 let cancelActive: (() => void) | null = null;
@@ -8,7 +9,16 @@ export function cancelActiveConfirmation() {
   cancelActive?.();
 }
 /** Resolve an explicit decision once; never queue or replay mutations. */
-export function confirmAction(message: string): Promise<boolean> {
+export type ConfirmationOptions = {
+  title?: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  tone?: "default" | "danger";
+};
+export function confirmAction(
+  message: string,
+  options: ConfirmationOptions = {},
+): Promise<boolean> {
   if (typeof document === "undefined" || active) return Promise.resolve(false);
   active = true;
   const previous =
@@ -18,6 +28,7 @@ export function confirmAction(message: string): Promise<boolean> {
   const host = document.createElement("div");
   document.body.append(host);
   const root = createRoot(host);
+  const Icon = options.tone === "danger" ? CircleAlert : Info;
   return new Promise((resolve) => {
     let settled = false;
     const cancel = () => finish(false);
@@ -47,14 +58,24 @@ export function confirmAction(message: string): Promise<boolean> {
         }}
       >
         <AlertDialog.Portal>
-          <AlertDialog.Overlay className="fixed inset-0 z-[100] bg-foreground/45 backdrop-blur-sm" />
+          <AlertDialog.Overlay className="dialog-overlay fixed inset-0 z-[100] bg-foreground/45 backdrop-blur-sm" />
           <AlertDialog.Content
             className="fixed left-1/2 top-1/2 z-[101] max-h-[calc(100dvh-32px)] w-[calc(100%-32px)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border bg-card p-[clamp(16px,4vw,24px)] text-card-foreground shadow-2xl [overflow-wrap:anywhere]"
-            onCloseAutoFocus={event=>event.preventDefault()}
+            onCloseAutoFocus={(event) => event.preventDefault()}
             onEscapeKeyDown={() => finish(false)}
           >
-            <AlertDialog.Title className="text-lg font-semibold">
-              Konfirmasi tindakan
+            <div
+              className={
+                "mb-4 inline-flex size-12 items-center justify-center rounded-xl border " +
+                (options.tone === "danger"
+                  ? "bg-danger-subtle text-destructive"
+                  : "bg-secondary text-primary")
+              }
+            >
+              <Icon aria-hidden="true" className="size-6" />
+            </div>
+            <AlertDialog.Title className="text-xl font-semibold leading-snug tracking-tight">
+              {options.title ?? "Konfirmasi tindakan"}
             </AlertDialog.Title>
             <AlertDialog.Description className="mt-3 text-sm leading-6 text-muted-foreground">
               {message}
@@ -65,18 +86,23 @@ export function confirmAction(message: string): Promise<boolean> {
                   type="button"
                   className="min-w-0 max-w-full whitespace-normal"
                   variant="outline"
+                  data-confirm-action="cancel"
                   onClick={() => finish(false)}
                 >
-                  Batal
+                  {options.cancelLabel ?? "Batal"}
                 </Button>
               </AlertDialog.Cancel>
               <AlertDialog.Action asChild>
                 <Button
                   type="button"
                   className="min-w-0 max-w-full whitespace-normal"
+                  variant={
+                    options.tone === "danger" ? "destructive" : "default"
+                  }
+                  data-confirm-action="accept"
                   onClick={() => finish(true)}
                 >
-                  Lanjutkan
+                  {options.confirmLabel ?? "Lanjutkan"}
                 </Button>
               </AlertDialog.Action>
             </div>

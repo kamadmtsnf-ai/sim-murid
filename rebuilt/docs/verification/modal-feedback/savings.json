@@ -1,0 +1,282 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "normal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "normal 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "normal 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly has no transaction mutation",
+      "passed": true
+    },
+    {
+      "name": "loading 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "deposit hides withdrawal fee",
+      "passed": true
+    },
+    {
+      "name": "server quote renders fee and net cash",
+      "passed": true
+    },
+    {
+      "name": "changed amount hides stale quote",
+      "passed": true
+    },
+    {
+      "name": "transaction modal 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "transaction modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "withdrawal submits exact gross amount and fee flag",
+      "passed": true
+    },
+    {
+      "name": "new account available without reload",
+      "passed": true
+    },
+    {
+      "name": "correction preserves applied true even when original fee is zero",
+      "passed": true
+    },
+    {
+      "name": "correction cannot change original account",
+      "passed": true
+    },
+    {
+      "name": "correction prefills existing note",
+      "passed": true
+    },
+    {
+      "name": "landscape modal no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "short landscape modal submit reachable",
+      "passed": true
+    },
+    {
+      "name": "bracket precision prefills",
+      "passed": true
+    },
+    {
+      "name": "inactive bracket remains inactive",
+      "passed": true
+    },
+    {
+      "name": "bracket correction preserves status and reason",
+      "passed": true
+    },
+    {
+      "name": "ambiguous email send blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "account pagination advances",
+      "passed": true
+    },
+    {
+      "name": "search resets account pagination",
+      "passed": true
+    },
+    {
+      "name": "account search empty state",
+      "passed": true
+    },
+    {
+      "name": "owner filter narrows displayed accounts",
+      "passed": true
+    },
+    {
+      "name": "history filter retains full input catalog",
+      "passed": true
+    },
+    {
+      "name": "Escape returns focus to trigger",
+      "passed": true
+    },
+    {
+      "name": "read failure preserves previous snapshot",
+      "passed": true
+    },
+    {
+      "name": "native amount step validation prevents request",
+      "passed": true
+    },
+    {
+      "name": "definitive insufficient keeps editable draft",
+      "passed": true
+    },
+    {
+      "name": "failed command preserves amount",
+      "passed": true
+    },
+    {
+      "name": "dirty close cancellation retains dialog",
+      "passed": true
+    },
+    {
+      "name": "void sends only existing reference and reason",
+      "passed": true
+    },
+    {
+      "name": "removed row restores fallback focus",
+      "passed": true
+    },
+    {
+      "name": "uncertain write retains form",
+      "passed": true
+    },
+    {
+      "name": "uncertain write blocks new command",
+      "passed": true
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal 320",
+      "violations": []
+    },
+    {
+      "name": "normal 1440",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "large",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "transaction modal",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic fixtures and intercepted writes, not authenticated production role UAT or physical-device testing."
+  ]
+}

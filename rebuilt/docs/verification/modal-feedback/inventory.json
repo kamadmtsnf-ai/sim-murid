@@ -1,0 +1,666 @@
+{
+  "dialogs": [
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 340,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "line": 42,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/directory/import-users.tsx",
+      "line": 319,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "line": 146,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/books-panel.tsx",
+      "line": 545,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/books-panel.tsx",
+      "line": 704,
+      "closeDisabled": false
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 814,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/promotions-panel.tsx",
+      "line": 1134,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/reports-panel.tsx",
+      "line": 590,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "line": 720,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "line": 704,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/duty-panel.tsx",
+      "line": 438,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "line": 511,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "line": 723,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "line": 504,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "line": 587,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/app/account/sessions/session-panel.tsx",
+      "line": 631,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/components/audit/audit-trail.tsx",
+      "line": 325,
+      "closeDisabled": false
+    },
+    {
+      "file": "src/components/bulk/bulk-import.tsx",
+      "line": 399,
+      "closeDisabled": true
+    },
+    {
+      "file": "src/components/workspace-shell.tsx",
+      "line": 367,
+      "closeDisabled": false
+    }
+  ],
+  "statuses": [
+    {
+      "file": "src/app/account/access/access-panel.tsx",
+      "line": 163
+    },
+    {
+      "file": "src/app/account/access/access-panel.tsx",
+      "line": 218
+    },
+    {
+      "file": "src/app/account/access/error.tsx",
+      "line": 19
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 220
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 436
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 524
+    },
+    {
+      "file": "src/app/account/classes/page.tsx",
+      "line": 21
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "line": 44
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "line": 46
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "line": 52
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "line": 55
+    },
+    {
+      "file": "src/app/account/directory/directory-detail.tsx",
+      "line": 33
+    },
+    {
+      "file": "src/app/account/directory/directory-detail.tsx",
+      "line": 273
+    },
+    {
+      "file": "src/app/account/directory/import-users.tsx",
+      "line": 355
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "line": 164
+    },
+    {
+      "file": "src/app/account/directory/page.tsx",
+      "line": 14
+    },
+    {
+      "file": "src/app/account/directory/page.tsx",
+      "line": 19
+    },
+    {
+      "file": "src/app/account/error.tsx",
+      "line": 17
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "line": 318
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "line": 339
+    },
+    {
+      "file": "src/app/account/profile/error.tsx",
+      "line": 17
+    },
+    {
+      "file": "src/app/account/profile/profile-form.tsx",
+      "line": 351
+    },
+    {
+      "file": "src/app/account/recovery/recovery-panel.tsx",
+      "line": 299
+    },
+    {
+      "file": "src/app/account/recovery/recovery-panel.tsx",
+      "line": 310
+    },
+    {
+      "file": "src/app/account/services/[module]/jobs-panel.tsx",
+      "line": 280
+    },
+    {
+      "file": "src/app/account/services/[module]/notifications-panel.tsx",
+      "line": 188
+    },
+    {
+      "file": "src/app/account/services/[module]/reconciliation-panel.tsx",
+      "line": 216
+    },
+    {
+      "file": "src/app/account/services/[module]/reconciliation-panel.tsx",
+      "line": 226
+    },
+    {
+      "file": "src/app/login/login-form.tsx",
+      "line": 83
+    },
+    {
+      "file": "src/app/login/page.tsx",
+      "line": 30
+    },
+    {
+      "file": "src/app/login/page.tsx",
+      "line": 31
+    },
+    {
+      "file": "src/app/recovery/recovery-feedback.tsx",
+      "line": 22
+    },
+    {
+      "file": "src/app/recovery/recovery-shell.tsx",
+      "line": 35
+    },
+    {
+      "file": "src/components/academic/academic-context.tsx",
+      "line": 233
+    },
+    {
+      "file": "src/components/academic/academic-context.tsx",
+      "line": 239
+    },
+    {
+      "file": "src/components/academic/academic-context.tsx",
+      "line": 244
+    },
+    {
+      "file": "src/components/account-dashboard.tsx",
+      "line": 150
+    },
+    {
+      "file": "src/components/account-dashboard.tsx",
+      "line": 155
+    },
+    {
+      "file": "src/components/audit/audit-trail.tsx",
+      "line": 246
+    },
+    {
+      "file": "src/components/audit/audit-trail.tsx",
+      "line": 249
+    },
+    {
+      "file": "src/components/bulk/bulk-import.tsx",
+      "line": 566
+    },
+    {
+      "file": "src/components/bulk/bulk-import.tsx",
+      "line": 587
+    },
+    {
+      "file": "src/components/dashboard/daily-overview.tsx",
+      "line": 154
+    },
+    {
+      "file": "src/components/dashboard/daily-overview.tsx",
+      "line": 164
+    },
+    {
+      "file": "src/components/dashboard/daily-overview.tsx",
+      "line": 166
+    },
+    {
+      "file": "src/components/dashboard/daily-overview.tsx",
+      "line": 173
+    },
+    {
+      "file": "src/components/dashboard/daily-overview.tsx",
+      "line": 179
+    },
+    {
+      "file": "src/components/dashboard/daily-overview.tsx",
+      "line": 185
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "line": 214
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "line": 249
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "line": 255
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "line": 261
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "line": 393
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "line": 413
+    },
+    {
+      "file": "src/components/feedback/mutation-feedback.tsx",
+      "line": 33
+    },
+    {
+      "file": "src/components/forms/navigation-guard.tsx",
+      "line": 138
+    }
+  ],
+  "feedback": [
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 142
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 443
+    },
+    {
+      "file": "src/app/account/learning/[module]/promotions-panel.tsx",
+      "line": 570
+    },
+    {
+      "file": "src/app/account/learning/[module]/reports-panel.tsx",
+      "line": 267
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "line": 803
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "line": 341
+    },
+    {
+      "file": "src/app/account/operations/[module]/duty-panel.tsx",
+      "line": 159
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "line": 271
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "line": 346
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "line": 155
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "line": 236
+    }
+  ],
+  "confirmations": [
+    {
+      "file": "src/app/account/biodata/biodata-panel.tsx",
+      "line": 304
+    },
+    {
+      "file": "src/app/account/biodata/biodata-panel.tsx",
+      "line": 359
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 99
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 116
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 311
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 488
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 543
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "line": 579
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "line": 23
+    },
+    {
+      "file": "src/app/account/directory/import-users.tsx",
+      "line": 73
+    },
+    {
+      "file": "src/app/account/directory/import-users.tsx",
+      "line": 217
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "line": 40
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "line": 80
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "line": 259
+    },
+    {
+      "file": "src/app/account/email/email-panel.tsx",
+      "line": 126
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "line": 109
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "line": 219
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "line": 253
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "line": 353
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "line": 446
+    },
+    {
+      "file": "src/app/account/learning/[module]/books-panel.tsx",
+      "line": 71
+    },
+    {
+      "file": "src/app/account/learning/[module]/books-panel.tsx",
+      "line": 160
+    },
+    {
+      "file": "src/app/account/learning/[module]/books-panel.tsx",
+      "line": 522
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 257
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 318
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 351
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 369
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 414
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "line": 423
+    },
+    {
+      "file": "src/app/account/learning/[module]/promotions-panel.tsx",
+      "line": 187
+    },
+    {
+      "file": "src/app/account/learning/[module]/promotions-panel.tsx",
+      "line": 204
+    },
+    {
+      "file": "src/app/account/learning/[module]/reports-panel.tsx",
+      "line": 211
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "line": 120
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "line": 246
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "line": 794
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "line": 203
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "line": 282
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "line": 1022
+    },
+    {
+      "file": "src/app/account/operations/[module]/duty-panel.tsx",
+      "line": 82
+    },
+    {
+      "file": "src/app/account/operations/[module]/duty-panel.tsx",
+      "line": 146
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "line": 133
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "line": 143
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "line": 232
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "line": 791
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "line": 197
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "line": 976
+    },
+    {
+      "file": "src/app/account/profile/profile-form.tsx",
+      "line": 210
+    },
+    {
+      "file": "src/app/account/recovery/recovery-panel.tsx",
+      "line": 116
+    },
+    {
+      "file": "src/app/account/recovery/recovery-panel.tsx",
+      "line": 218
+    },
+    {
+      "file": "src/app/account/recovery/recovery-panel.tsx",
+      "line": 341
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "line": 65
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "line": 490
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "line": 824
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "line": 110
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "line": 192
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "line": 209
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "line": 222
+    },
+    {
+      "file": "src/app/account/services/[module]/insights.tsx",
+      "line": 87
+    },
+    {
+      "file": "src/app/account/services/[module]/insights.tsx",
+      "line": 190
+    },
+    {
+      "file": "src/app/account/services/[module]/insights.tsx",
+      "line": 269
+    },
+    {
+      "file": "src/app/account/services/[module]/insights.tsx",
+      "line": 531
+    },
+    {
+      "file": "src/app/account/services/[module]/jobs-panel.tsx",
+      "line": 74
+    },
+    {
+      "file": "src/app/account/services/[module]/survey-editor.tsx",
+      "line": 257
+    },
+    {
+      "file": "src/app/account/services/[module]/survey-form.tsx",
+      "line": 42
+    },
+    {
+      "file": "src/app/account/services/[module]/survey-form.tsx",
+      "line": 324
+    },
+    {
+      "file": "src/app/account/services/[module]/surveys-panel.tsx",
+      "line": 112
+    },
+    {
+      "file": "src/app/account/settings/settings-panel.tsx",
+      "line": 101
+    },
+    {
+      "file": "src/app/account/settings/settings-panel.tsx",
+      "line": 582
+    },
+    {
+      "file": "src/app/account/settings/settings-panel.tsx",
+      "line": 696
+    },
+    {
+      "file": "src/app/account/settings/settings-panel.tsx",
+      "line": 833
+    },
+    {
+      "file": "src/components/bulk/bulk-import.tsx",
+      "line": 122
+    },
+    {
+      "file": "src/components/forms/navigation-guard.tsx",
+      "line": 48
+    }
+  ]
+}

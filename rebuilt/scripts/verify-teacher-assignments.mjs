@@ -93,10 +93,10 @@ try {
   fail=true;await page.getByRole('button',{name:'Simpan penugasan',exact:true}).click();await page.getByRole('button',{name:'Coba kembali dengan permintaan yang sama',exact:true}).click();
   await page.getByText('Perubahan tugas tambahan berhasil disimpan.',{exact:false}).waitFor();assert.deepEqual(posts[0],posts[1]);
   await page.getByLabel('Alasan pencabutan').fill('Penugasan selesai');await page.getByRole('button',{name:'Cabut tugas',exact:true}).click();
-  await page.getByRole('alertdialog').getByRole('button',{name:'Lanjutkan',exact:true}).click();await page.getByText('Dicabut',{exact:false}).waitFor();
+  await page.getByRole('alertdialog').getByRole('button',{name:'Cabut tugas',exact:true}).click();await page.getByText('Dicabut',{exact:false}).waitFor();
   assert.equal(posts.at(-1).action,'revoke');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.addScriptTag({content:axe});const scan=await page.evaluate(()=>window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));assert.equal(scan.violations.length,0,JSON.stringify(scan.violations));
-  results.push({width,retry:true,revoke:true,noOverflow:true,axeViolations:0,keyboardFocus:true});await page.screenshot({path:join(out,`assignments-${width}.png`)});await page.keyboard.press('Escape');await page.getByRole('dialog').waitFor({state:'hidden'});assert.equal(await page.getByRole('button',{name:'Kelola Tugas Tambahan',exact:true}).evaluate(e=>e===document.activeElement),true);await page.close();
+  results.push({width,retry:true,revoke:true,noOverflow:true,axeViolations:0,keyboardFocus:true});await page.screenshot({path:join(out,`assignments-${width}.png`)});await page.keyboard.press('Escape');await page.getByRole('dialog').waitFor({state:'hidden'});await page.waitForFunction(()=>document.activeElement?.textContent==='Kelola Tugas Tambahan');assert.equal(await page.getByRole('button',{name:'Kelola Tugas Tambahan',exact:true}).evaluate(e=>e===document.activeElement),true);await page.close();
  }
  assert.equal(errors.length,0);await writeFile(join(out,'results.json'),JSON.stringify({results,errors},null,2));console.log(JSON.stringify({results,errors}));
 }finally{await browser?.close();server.close();}

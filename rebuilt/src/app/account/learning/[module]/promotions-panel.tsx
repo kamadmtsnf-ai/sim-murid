@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -120,7 +121,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
       abortRef.current?.abort();
     };
   }, []);
-  const { busy, blocked, message, feedbackRef, clear, fail, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, clear, fail, mutate } =
     useDomainMutation(
       api,
       promotionsSnapshot,
@@ -566,14 +567,9 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
         ))}
       </div>
       {message && (
-        <div
-          role="status"
-          tabIndex={-1}
-          ref={feedbackRef}
-          className="rounded-lg border p-3 text-sm"
-        >
+        <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
           {message}
-        </div>
+        </MutationFeedback>
       )}
       {notice && (
         <div
@@ -1135,7 +1131,7 @@ const retainedEvalue=e.target.value;
           </>
         )}
       </section>
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={!!mode}
         onOpenChange={async (open) => {
           if (!open) await close();

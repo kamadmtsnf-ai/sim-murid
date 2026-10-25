@@ -316,7 +316,7 @@ export function ImportUsers() {
       (e) => !["created", "failed"].includes(e.status),
     ).length;
   return (
-    <Dialog
+    <Dialog closeDisabled={busy}
       open={open}
       onOpenChange={changeOpen}
       title="Impor pengguna dari Excel"

@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "width": 320,
+      "retry": true,
+      "revoke": true,
+      "noOverflow": true,
+      "axeViolations": 0,
+      "keyboardFocus": true
+    },
+    {
+      "width": 390,
+      "retry": true,
+      "revoke": true,
+      "noOverflow": true,
+      "axeViolations": 0,
+      "keyboardFocus": true
+    },
+    {
+      "width": 768,
+      "retry": true,
+      "revoke": true,
+      "noOverflow": true,
+      "axeViolations": 0,
+      "keyboardFocus": true
+    },
+    {
+      "width": 1440,
+      "retry": true,
+      "revoke": true,
+      "noOverflow": true,
+      "axeViolations": 0,
+      "keyboardFocus": true
+    }
+  ],
+  "errors": []
+}

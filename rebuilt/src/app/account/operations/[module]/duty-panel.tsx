@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -155,14 +156,9 @@ const retainedEcurrentTarget=e.currentTarget;
     }
   }
   const feedback = message ? (
-    <div
-      ref={feedbackRef}
-      tabIndex={-1}
-      role={phase === "error" || blocked ? "alert" : "status"}
-      className="rounded-lg border p-4 text-sm"
-    >
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
       {message}
-    </div>
+    </MutationFeedback>
   ) : null;
   function teacherSelect(name: string, label: string, choices = teachers) {
     return (
@@ -439,7 +435,7 @@ const retainedEcurrentTarget=e.currentTarget;
       >
         Muat ulang
       </Button>
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={mode !== null}
         onOpenChange={async (v) => {
           if (!v) await close();

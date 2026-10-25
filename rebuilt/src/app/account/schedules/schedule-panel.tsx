@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
 import { FilterBar } from "@/components/ui/collection-controls";
@@ -151,14 +152,9 @@ export function SchedulePanel({
     }
   }
   const feedback = message ? (
-    <div
-      ref={feedbackRef}
-      tabIndex={-1}
-      role={phase === "error" || blocked ? "alert" : "status"}
-      className="rounded-lg border bg-muted/40 p-4 text-sm"
-    >
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
       {message}
-    </div>
+    </MutationFeedback>
   ) : null;
   return (
     <div className="schedules-panel min-w-0 space-y-6" aria-busy={busy}>
@@ -505,7 +501,7 @@ export function SchedulePanel({
           Hapus {totalSelected} jadwal terpilih
         </Button>
       )}
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={modal !== null}
         onOpenChange={async (open) => {
           if (!open) await closeModal();

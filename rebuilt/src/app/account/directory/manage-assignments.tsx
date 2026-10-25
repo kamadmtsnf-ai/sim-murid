@@ -258,6 +258,7 @@ export function ManageAssignments({ target }: { target: string }) {
                           if (
                             await confirmAction(
                               `Cabut tugas ${assignmentLabel(row.code)}? Akses dari penugasan ini akan berhenti.`,
+                              {title:"Cabut tugas tambahan?",confirmLabel:"Cabut tugas",tone:"danger"},
                             )
                           )
                             void send({

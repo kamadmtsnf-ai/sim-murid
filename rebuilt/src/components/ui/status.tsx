@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import {
   CircleAlert,
   Info,
@@ -31,22 +31,51 @@ export function Status({
   children,
   tone = "info",
   className,
+  heading,
+  hint,
   ...props
-}: Omit<ComponentProps<"div">, "role"> & { tone?: keyof typeof tones }) {
+}: Omit<ComponentProps<"div">, "role"> & {
+  tone?: keyof typeof tones;
+  heading?: ReactNode;
+  hint?: ReactNode;
+}) {
   const { icon: Icon, style } = tones[tone];
+  const label =
+    heading ??
+    (
+      {
+        info: "Informasi",
+        success: "Berhasil",
+        error: "Perlu perhatian",
+        warning: "Perlu diperiksa",
+        pending: "Sedang diproses",
+      } as const
+    )[tone];
   return (
     <div
       {...props}
       role={tone === "error" ? "alert" : "status"}
       aria-atomic="true"
       className={cn(
-        "ds-status flex min-w-0 items-start gap-3 rounded-lg border p-4 text-sm",
+        "ds-status flex min-w-0 items-start gap-3 rounded-xl border p-4 text-sm leading-relaxed",
         style,
         className,
       )}
     >
-      <Icon className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-      <div className="min-w-0 flex-1 [overflow-wrap:anywhere]">{children}</div>
+      <Icon
+        className={cn(
+          "mt-0.5 size-5 shrink-0",
+          tone === "pending" && "motion-safe:animate-spin",
+        )}
+        aria-hidden="true"
+      />
+      <div className="min-w-0 flex-1 [overflow-wrap:anywhere]">
+        {label && <p className="mb-1 font-semibold">{label}</p>}
+        <div>{children}</div>
+        {hint && (
+          <p className="mt-2 border-t border-current/15 pt-2 text-sm">{hint}</p>
+        )}
+      </div>
     </div>
   );
 }

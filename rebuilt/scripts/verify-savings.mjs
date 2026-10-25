@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Isolated Committee browser regression suite. No real account, API mutation or production data. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -134,6 +135,7 @@ try {
     args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
   });
   const page = await browser.newPage({ hasTouch: true });
+  await installConfirmDriver(page);
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("dialog", (d) => d.accept());
   const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
@@ -271,7 +273,7 @@ try {
   const dialog = page.getByRole("dialog");
   await page
     .getByRole("button", { name: "Input transaksi", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     (await dialog
       .getByRole("checkbox", { name: "Terapkan biaya penarikan" })
@@ -288,7 +290,7 @@ try {
   await dialog
     .getByRole("checkbox", { name: "Terapkan biaya penarikan" })
     .check();
-  await dialog.getByRole("button", { name: "Hitung biaya di server" }).click();
+  await dialog.getByRole("button", { name: "Hitung biaya di server" }).click(); await settleConfirmation(page);
   await dialog.getByText(/Biaya Rp1.000/).waitFor();
   check(true, "server quote renders fee and net cash");
   await dialog.getByLabel("Nominal (Rp)", { exact: true }).fill("124000");
@@ -301,7 +303,7 @@ try {
   await dialog
     .getByLabel("Keterangan / alasan transaksi", { exact: true })
     .fill("Pengambilan uang");
-  await dialog.getByRole("button", { name: "Simpan transaksi" }).click();
+  await dialog.getByRole("button", { name: "Simpan transaksi" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.amount === 124000 &&
@@ -310,15 +312,15 @@ try {
   );
   await page
     .getByRole("button", { name: "Buka rekening", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog
     .getByRole("combobox", { name: "Pemilik rekening", exact: true })
     .selectOption(id(12));
-  await dialog.getByRole("button", { name: "Simpan rekening" }).click();
+  await dialog.getByRole("button", { name: "Simpan rekening" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await page
     .getByRole("button", { name: "Input transaksi", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     (await dialog
       .getByRole("combobox", { name: "Rekening", exact: true })
@@ -326,13 +328,13 @@ try {
       .count()) === 1,
     "new account available without reload",
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   feeZero = true;
   await page
     .getByRole("button", { name: /Koreksi/ })
     .first()
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog
     .getByRole("button", { name: "Simpan koreksi" })
     .waitFor({ state: "visible" });
@@ -369,13 +371,13 @@ try {
     await dialog.getByRole("button", { name: "Simpan koreksi" }).isVisible(),
     "short landscape modal submit reachable",
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await visit();
   await page
     .getByRole("button", { name: /Ubah tarif/ })
     .first()
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     (await dialog
       .getByLabel("Persentase (%)", { exact: true })
@@ -389,14 +391,14 @@ try {
   await dialog
     .getByLabel("Alasan perubahan tarif", { exact: true })
     .fill("Penyesuaian tarif");
-  await dialog.getByRole("button", { name: "Simpan tarif" }).click();
+  await dialog.getByRole("button", { name: "Simpan tarif" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.active === false &&
       posts.at(-1).command.reason === "Penyesuaian tarif",
     "bracket correction preserves status and reason",
   );
-  await page.getByRole("button", { name: /Kirim/ }).first().click();
+  await page.getByRole("button", { name: /Kirim/ }).first().click(); await settleConfirmation(page);
   await page
     .getByText(/Hasil pengiriman belum dapat dipastikan/)
     .first()
@@ -408,7 +410,7 @@ try {
   await visit("large");
   await page
     .getByRole("button", { name: "Rekening berikutnya", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     await page
       .getByText("Halaman rekening 2 dari 4", { exact: true })
@@ -438,7 +440,7 @@ try {
     .selectOption(id(10));
   await page
     .getByRole("button", { name: "Terapkan filter", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await page.getByText("Data tabungan diperbarui.", { exact: true }).waitFor();
   check(
     await page
@@ -448,7 +450,7 @@ try {
   );
   await page
     .getByRole("button", { name: "Input transaksi", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     (await dialog
       .getByRole("combobox", { name: "Rekening", exact: true })
@@ -456,7 +458,7 @@ try {
       .count()) === 3,
     "history filter retains full input catalog",
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     await page
@@ -467,7 +469,7 @@ try {
   readFailure = true;
   await page
     .getByRole("button", { name: "Terapkan filter", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await page.getByText(/Data belum dapat dimuat/).waitFor();
   check(
     await page
@@ -480,7 +482,7 @@ try {
   outcome = "insufficient";
   await page
     .getByRole("button", { name: "Input transaksi", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog
     .getByRole("combobox", { name: "Rekening", exact: true })
     .selectOption(id(300));
@@ -489,13 +491,13 @@ try {
     .getByLabel("Keterangan / alasan transaksi", { exact: true })
     .fill("Setoran baru");
   const before = posts.length;
-  await dialog.getByRole("button", { name: "Simpan transaksi" }).click();
+  await dialog.getByRole("button", { name: "Simpan transaksi" }).click(); await settleConfirmation(page);
   check(
     posts.length === before,
     "native amount step validation prevents request",
   );
   await dialog.getByLabel("Nominal (Rp)", { exact: true }).fill("1000");
-  await dialog.getByRole("button", { name: "Simpan transaksi" }).click();
+  await dialog.getByRole("button", { name: "Simpan transaksi" }).click(); await settleConfirmation(page);
   await dialog.getByText("Saldo tidak mencukupi.", { exact: true }).waitFor();
   check(
     (await dialog.isVisible()) &&
@@ -511,24 +513,24 @@ try {
   );
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.dismiss());
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   check(await dialog.isVisible(), "dirty close cancellation retains dialog");
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.accept());
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   outcome = "success";
   await page
     .getByRole("button", { name: "Koreksi", exact: true })
     .first()
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog.getByRole("button", { name: "Simpan koreksi" }).waitFor();
   await page.waitForFunction(
     () => document.querySelector("input[type=checkbox]")?.checked === true,
   );
   await dialog
     .getByRole("button", { name: "Batalkan transaksi", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.type === "void" &&
@@ -549,7 +551,7 @@ try {
   outcome = "uncertain";
   await page
     .getByRole("button", { name: "Input transaksi", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog
     .getByRole("combobox", { name: "Rekening", exact: true })
     .selectOption(id(300));
@@ -557,8 +559,8 @@ try {
   await dialog
     .getByLabel("Keterangan / alasan transaksi", { exact: true })
     .fill("Setoran baru");
-  await dialog.getByRole("button", { name: "Simpan transaksi" }).click();
-  await page
+  await dialog.getByRole("button", { name: "Simpan transaksi" }).click(); await settleConfirmation(page);
+  await dialog
     .getByText(/belum dapat dipastikan|belum pasti/)
     .first()
     .waitFor();

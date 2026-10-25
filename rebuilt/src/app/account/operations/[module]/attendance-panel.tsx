@@ -1,4 +1,5 @@
 "use client";
+import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
 import { EmptyState } from "@/components/ui/content-state";
@@ -716,7 +717,7 @@ const retainedEvalue=e.target.value;
           onPageChange={(page) => void load({ ...filters, page: String(page) })}
         />
       </section>
-      <Dialog
+      <Dialog closeDisabled={busy}
         open={!!edit}
         onOpenChange={async (open) => {
           if (!open) await closeEdit();
@@ -799,14 +800,9 @@ const retainedEcurrentTarget=e.currentTarget;
               </div>
             </fieldset>
             {message && (
-              <div
-                ref={feedbackRef}
-                tabIndex={-1}
-                role={phase === "error" || blocked ? "alert" : "status"}
-                className="text-sm"
-              >
+              <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
                 {message}
-              </div>
+              </MutationFeedback>
             )}
             <Button
               type="button"

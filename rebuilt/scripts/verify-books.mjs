@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Actual Buku digital UI with isolated Auth/HTTP/Storage boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -150,6 +151,7 @@ try {
     args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
   });
   const page = await browser.newPage({ hasTouch: true });
+  await installConfirmDriver(page);
   page.setDefaultTimeout(15000);
   page.on("pageerror", (e) => errors.push(String(e)));
   const accept = (d) => d.accept();
@@ -293,7 +295,7 @@ try {
     });
   }
   await page.setViewportSize({ width: 320, height: 700 });
-  await card().getByRole("button", { name: "Edit", exact: true }).click();
+  await card().getByRole("button", { name: "Edit", exact: true }).click(); await settleConfirmation(page);
   const dialog = page.getByRole("dialog");
   check(
     (await dialog.getByLabel("URL buku eksternal (HTTPS)").inputValue()) ===
@@ -315,7 +317,7 @@ try {
   page.off("dialog", accept);
   const dismiss = (d) => d.dismiss();
   page.on("dialog", dismiss);
-  await dialog.getByRole("button", { name: "Batal", exact: true }).click();
+  await dialog.getByRole("button", { name: "Batal", exact: true }).click(); await settleConfirmation(page);
   check(await dialog.isVisible(), "dirty draft survives rejected discard");
   page.off("dialog", dismiss);
   page.on("dialog", accept);
@@ -332,13 +334,13 @@ try {
     posts[0].url === "https://example.org/old.pdf",
     "metadata save preserves URL payload",
   );
-  await page.getByRole("button", { name: "Tambah buku", exact: true }).click();
+  await page.getByRole("button", { name: "Tambah buku", exact: true }).click(); await settleConfirmation(page);
   await dialog.getByLabel(/^Judul/).fill("Buku baru");
   await dialog.getByLabel("Tahun terbit", { exact: true }).fill("2201");
-  await dialog.getByRole("button", { name: "Simpan buku" }).click();
+  await dialog.getByRole("button", { name: "Simpan buku" }).click(); await settleConfirmation(page);
   check(posts.length === 1, "out of range year blocked before request");
   await dialog.getByLabel("Tahun terbit", { exact: true }).fill("2026");
-  await dialog.getByRole("button", { name: "Simpan buku" }).click();
+  await dialog.getByRole("button", { name: "Simpan buku" }).click(); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(posts.at(-1).id === null, "create sends null identity");
   await page
@@ -347,7 +349,7 @@ try {
       has: page.getByRole("heading", { name: "Buku baru", exact: true }),
     })
     .getByRole("button", { name: "Nonaktifkan", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await page.waitForFunction(
     () => !window.booksFixture.rows.some((r) => r.title === "Buku baru"),
   );
@@ -358,7 +360,7 @@ try {
     posts.at(-1).type === "void" && posts.at(-1).reason.length >= 3,
     "archive retains audited soft-deactivation command",
   );
-  await card().getByRole("button", { name: "Ganti PDF" }).click();
+  await card().getByRole("button", { name: "Ganti PDF" }).click(); await settleConfirmation(page);
   await dialog.getByLabel("Berkas PDF", { exact: true }).setInputFiles({
     name: "new.pdf",
     mimeType: "application/pdf",
@@ -383,7 +385,7 @@ try {
     (await page.evaluate(() => window.storageUploads)).length === 1,
     "one signed storage upload",
   );
-  await card().getByRole("button", { name: "Baca buku" }).click();
+  await card().getByRole("button", { name: "Baca buku" }).click(); await settleConfirmation(page);
   await dialog.locator("canvas").first().waitFor({ timeout: 30000 });
   check(
     await dialog
@@ -396,15 +398,15 @@ try {
   await a11y(page, "reader 320");
   await dialog
     .getByRole("button", { name: "Halaman berikutnya", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await dialog.locator('canvas[aria-label="Halaman 2"]').waitFor();
   check(true, "next PDF page renders");
-  await dialog.getByRole("button", { name: "Perbesar", exact: true }).click();
+  await dialog.getByRole("button", { name: "Perbesar", exact: true }).click(); await settleConfirmation(page);
   await geometry(page, "zoom confined to reader");
-  await dialog.getByRole("button", { name: "Mode gulir", exact: true }).click();
+  await dialog.getByRole("button", { name: "Mode gulir", exact: true }).click(); await settleConfirmation(page);
   await dialog
     .getByRole("button", { name: "Halaman berikutnya", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     await dialog
       .getByLabel("Navigasi halaman")
@@ -414,16 +416,16 @@ try {
   );
   await dialog
     .getByRole("button", { name: "Sesuaikan lebar", exact: true })
-    .click();
+    .click(); await settleConfirmation(page);
   await page.setViewportSize({ width: 740, height: 360 });
   await geometry(page, "reader landscape resize");
-  await dialog.getByRole("button", { name: "Tampilan standar" }).click();
+  await dialog.getByRole("button", { name: "Tampilan standar" }).click(); await settleConfirmation(page);
   check(
     (await dialog.locator("iframe").getAttribute("src")) ===
       "/api/learning/assets/" + id(900),
     "native fallback uses authorized private endpoint",
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     await card()
@@ -436,7 +438,7 @@ try {
     .locator("article")
     .filter({ has: page.getByRole("heading", { name: "Buku 2", exact: true }) })
     .getByRole("button", { name: "Baca buku" })
-    .click();
+    .click(); await settleConfirmation(page);
   check(
     (await dialog.locator("iframe").getAttribute("src")) ===
       "https://drive.google.com/file/d/example123/preview",
@@ -447,21 +449,21 @@ try {
       1,
     "external source clearly identified",
   );
-  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape"); await settleConfirmation(page);
   await page.getByLabel("Cari judul atau penulis").fill("absent");
-  await page.getByRole("button", { name: "Terapkan filter" }).click();
+  await page.getByRole("button", { name: "Terapkan filter" }).click(); await settleConfirmation(page);
   await page
     .getByRole("heading", { name: "Belum ada buku yang ditampilkan" })
     .waitFor();
   check(true, "filtered empty state is explicit");
-  await page.getByRole("button", { name: "Reset filter" }).click();
+  await page.getByRole("button", { name: "Reset filter" }).click(); await settleConfirmation(page);
   await page.locator("article").first().waitFor();
   await visit("large");
-  await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
+  await page.getByRole("button", { name: "Berikutnya", exact: true }).click(); await settleConfirmation(page);
   await page.getByRole("navigation", {name:"Halaman katalog",exact:true}).getByText("Halaman 2 dari 3", {exact:true}).waitFor();
   check(true, "catalog server pagination advances with same scope");
   readFailure = true;
-  await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
+  await page.getByRole("button", { name: "Berikutnya", exact: true }).click(); await settleConfirmation(page);
   await page
     .getByText("Katalog belum dapat dimuat.", { exact: false })
     .waitFor();
@@ -495,8 +497,8 @@ try {
   for (const result of ["stale", "malformed"]) {
     await visit();
     outcome = result;
-    await card().getByRole("button", { name: "Edit", exact: true }).click();
-    await dialog.getByRole("button", { name: "Simpan buku" }).click();
+    await card().getByRole("button", { name: "Edit", exact: true }).click(); await settleConfirmation(page);
+    await dialog.getByRole("button", { name: "Simpan buku" }).click(); await settleConfirmation(page);
     await dialog
       .getByRole("button", { name: "Simpan buku", exact: true })
       .waitFor();
@@ -509,9 +511,9 @@ try {
       await dialog.getByRole("button", { name: "Simpan buku" }).isDisabled(),
       result + " write blocks blind retry",
     );
-    await page.keyboard.press("Escape");
+    await page.keyboard.press("Escape"); await settleConfirmation(page);
     outcome = "success";
-    await page.getByRole("button", { name: "Muat ulang", exact: true }).click();
+    await page.getByRole("button", { name: "Muat ulang", exact: true }).click(); await settleConfirmation(page);
     await page
       .getByText(
         "Katalog berhasil dimuat ulang. Periksa data sebelum melanjutkan.",
@@ -527,8 +529,8 @@ try {
   }
   await visit();
   readFailure = true;
-  await card().getByRole("button", { name: "Edit", exact: true }).click();
-  await dialog.getByRole("button", { name: "Simpan buku" }).click();
+  await card().getByRole("button", { name: "Edit", exact: true }).click(); await settleConfirmation(page);
+  await dialog.getByRole("button", { name: "Simpan buku" }).click(); await settleConfirmation(page);
   await page
     .getByText("Perubahan tersimpan, tetapi katalog belum dapat diperbarui.", {
       exact: false,
@@ -544,8 +546,8 @@ try {
   await visit();
   await page.clock.install();
   outcome = "hang";
-  await card().getByRole("button", { name: "Edit", exact: true }).click();
-  await dialog.getByRole("button", { name: "Simpan buku" }).click();
+  await card().getByRole("button", { name: "Edit", exact: true }).click(); await settleConfirmation(page);
+  await dialog.getByRole("button", { name: "Simpan buku" }).click(); await settleConfirmation(page);
   await page.clock.fastForward(31000);
   await dialog
     .getByText("Hasil perubahan belum dapat dipastikan.", { exact: false })
