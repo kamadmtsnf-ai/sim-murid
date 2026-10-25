@@ -16,13 +16,11 @@ export const bulkInput = z
     requestId: z.uuid(),
     domain: bulkDomains,
     options: bulkOptions,
-    csv: z.string().min(1).max(65536),
+    workbook: z.string().min(4).max(1398104),
     revision: z.number().int().nonnegative().safe().optional(),
   })
   .strict()
   .superRefine((v, c) => {
-    if (new TextEncoder().encode(v.csv).length > 65536)
-      c.addIssue({ code: "custom", message: "Berkas maksimal 64 KiB." });
     if (v.action === "commit" && v.revision === undefined)
       c.addIssue({
         code: "custom",
@@ -116,11 +114,8 @@ export const headers: Record<BulkDomain, string[]> = {
     "break_minutes",
   ],
 };
-export const bulkTemplates: Record<BulkDomain, string> = {
-  enrollment: "username\n001-02\n",
-  grades: "username,value,notes\n001-02,0,\n",
-  schedules:
-    "teacher_username,subject_code,weekday,start,duration_minutes,jtm,break_minutes\nguru-01,IPS,1,07:00,40,2,0\n",
+export const bulkTemplates:Record<BulkDomain,string[][]>={
+ enrollment:[["001-02"]],grades:[["001-02","0",""]],schedules:[["guru-01","IPS","1","07:00","40","2","0"]]
 };
 export const outcomeLabels: Record<string, string> = {
   valid: "Valid; belum disimpan",

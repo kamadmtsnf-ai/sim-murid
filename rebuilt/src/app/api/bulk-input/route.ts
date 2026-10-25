@@ -9,7 +9,9 @@ import {
   bulkCatalog,
   bulkDomains,
 } from "@/lib/bulk/validation";
-import { parseBulkCsv } from "@/lib/bulk/csv";
+import { parseBulkRows } from "@/lib/bulk/rows";
+import {readExcel,decodeWorkbook} from "@/lib/spreadsheets/read";
+import {headers} from "@/lib/bulk/validation";
 import type { Json } from "@/lib/supabase/cloud.types";
 function parseResult(value: unknown) {
   const result = bulkResult.safeParse(value);
@@ -26,15 +28,15 @@ export async function POST(request: NextRequest) {
   try {
     if (request.nextUrl.search)
       return reply({ message: "Parameter tidak valid." }, 400);
-    const input = bulkInput.parse(await jsonBody(request, 262144));
+    const input = bulkInput.parse(await jsonBody(request, 1500000));
     let parsed;
     try {
-      parsed = parseBulkCsv(input.csv, input.domain);
+      parsed = parseBulkRows(await readExcel(decodeWorkbook(input.workbook),headers[input.domain],["username","teacher_username"]), input.domain);
     } catch {
       return reply(
         {
           message:
-            "CSV tidak valid. Gunakan template, UTF-8, maksimal 64 KiB dan 100 baris.",
+            "Excel tidak valid. Gunakan template .xlsx maksimal 1 MiB dan 100 baris.",
         },
         400,
       );

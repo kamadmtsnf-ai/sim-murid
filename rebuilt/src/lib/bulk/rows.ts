@@ -46,57 +46,12 @@ const shapes = {
         endMinute(v.start, v.duration_minutes, v.jtm, v.break_minutes) < 1440,
     ),
 };
-/** Bounded RFC4180 comma-separated UTF-8 text; no type inference for identities. */
-export function parseBulkCsv(text: string, domain: BulkDomain) {
-  if (new TextEncoder().encode(text).length > 65536)
-    throw Error("Berkas maksimal 64 KiB.");
-  if (text.startsWith("\uFEFF")) text = text.slice(1);
-  const records: string[][] = [];
-  let record: string[] = [],
-    field = "",
-    quoted = false,
-    closed = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (quoted) {
-      if (c === '"') {
-        if (text[i + 1] === '"') {
-          field += '"';
-          i++;
-        } else {
-          quoted = false;
-          closed = true;
-        }
-      } else field += c;
-      continue;
-    }
-    if (c === '"') {
-      if (field !== "" || closed) throw Error("Tanda kutip CSV tidak valid.");
-      quoted = true;
-    } else if (c === "," || c === "\n" || c === "\r") {
-      record.push(field);
-      field = "";
-      closed = false;
-      if (c !== ",") {
-        records.push(record);
-        record = [];
-        if (c === "\r" && text[i + 1] === "\n") i++;
-        if (records.length > 101) throw Error("Maksimal 100 baris data.");
-      }
-    } else {
-      if (closed) throw Error("Ada karakter setelah penutup tanda kutip.");
-      field += c;
-    }
-  }
-  if (quoted) throw Error("Tanda kutip CSV belum ditutup.");
-  if (field !== "" || record.length || closed) {
-    record.push(field);
-    records.push(record);
-  }
+/** Typed worksheet rows; no identity inference. */
+export function parseBulkRows(records: string[][], domain: BulkDomain) {
   if (records.length < 2 || records.length > 101)
-    throw Error("Isi 1–100 baris data setelah header.");
+    throw Error("Isi 1–100 baris data.");
   if (JSON.stringify(records[0]) !== JSON.stringify(headers[domain]))
-    throw Error("Header harus sama dengan template CSV (pemisah koma).");
+    throw Error("Header harus sama dengan template Excel.");
   const rows: Record<string, unknown>[] = [],
     issues: { row: number; code: string }[] = [];
   const seen = new Set<string>();

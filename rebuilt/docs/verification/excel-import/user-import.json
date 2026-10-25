@@ -1,0 +1,195 @@
+{
+  "checks": [
+    {
+      "name": "no write before backup/confirmation 320",
+      "passed": true
+    },
+    {
+      "name": "preview never creates accounts 320",
+      "passed": true
+    },
+    {
+      "name": "template Excel download 320",
+      "passed": true
+    },
+    {
+      "name": "credential export preserves identity",
+      "passed": true
+    },
+    {
+      "name": "temporary credentials exported as text",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 320",
+      "passed": true
+    },
+    {
+      "name": "axe 320",
+      "passed": true
+    },
+    {
+      "name": "no write before backup/confirmation 390",
+      "passed": true
+    },
+    {
+      "name": "preview never creates accounts 390",
+      "passed": true
+    },
+    {
+      "name": "template Excel download 390",
+      "passed": true
+    },
+    {
+      "name": "credential export preserves identity",
+      "passed": true
+    },
+    {
+      "name": "temporary credentials exported as text",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 390",
+      "passed": true
+    },
+    {
+      "name": "axe 390",
+      "passed": true
+    },
+    {
+      "name": "no write before backup/confirmation 768",
+      "passed": true
+    },
+    {
+      "name": "preview never creates accounts 768",
+      "passed": true
+    },
+    {
+      "name": "template Excel download 768",
+      "passed": true
+    },
+    {
+      "name": "credential export preserves identity",
+      "passed": true
+    },
+    {
+      "name": "temporary credentials exported as text",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 768",
+      "passed": true
+    },
+    {
+      "name": "axe 768",
+      "passed": true
+    },
+    {
+      "name": "no write before backup/confirmation 1440",
+      "passed": true
+    },
+    {
+      "name": "preview never creates accounts 1440",
+      "passed": true
+    },
+    {
+      "name": "template Excel download 1440",
+      "passed": true
+    },
+    {
+      "name": "credential export preserves identity",
+      "passed": true
+    },
+    {
+      "name": "temporary credentials exported as text",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "axe 1440",
+      "passed": true
+    },
+    {
+      "name": "credential export preserves identity",
+      "passed": true
+    },
+    {
+      "name": "temporary credentials exported as text",
+      "passed": true
+    },
+    {
+      "name": "uncertain stops next row",
+      "passed": true
+    },
+    {
+      "name": "retry uses identical ID and password",
+      "passed": true
+    },
+    {
+      "name": "idempotent recovery does not duplicate account",
+      "passed": true
+    },
+    {
+      "name": "credential export preserves identity",
+      "passed": true
+    },
+    {
+      "name": "temporary credentials exported as text",
+      "passed": true
+    },
+    {
+      "name": "rate limit stops processing",
+      "passed": true
+    },
+    {
+      "name": "rate resume preserves request identity",
+      "passed": true
+    },
+    {
+      "name": "credential export preserves identity",
+      "passed": true
+    },
+    {
+      "name": "temporary credentials exported as text",
+      "passed": true
+    },
+    {
+      "name": "admin escalation requires confirmation",
+      "passed": true
+    },
+    {
+      "name": "invalid/existing rows do not create users",
+      "passed": true
+    },
+    {
+      "name": "workbook inspected before creation",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": 320,
+      "violations": []
+    },
+    {
+      "label": 390,
+      "violations": []
+    },
+    {
+      "label": 768,
+      "violations": []
+    },
+    {
+      "label": 1440,
+      "violations": []
+    }
+  ],
+  "errors": []
+}

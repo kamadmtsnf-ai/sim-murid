@@ -216,7 +216,7 @@ const retainedEvalue=e.target.value;
       </label>
       {period && scopeReady && (
         <div className="flex flex-wrap gap-3">
-          {["csv", "xlsx", "pdf"].map((format) => (
+          {["xlsx", "pdf"].map((format) => (
             <a
               key={format}
               className="inline-flex min-h-11 items-center rounded-md border px-4 text-sm font-medium hover:bg-muted focus-visible:outline-2"

@@ -111,23 +111,10 @@ export function serviceExportRows(data: ServiceSnapshot) {
   };
 }
 export async function exportServices(data: ServiceSnapshot, input: string) {
-  const format = z.enum(["csv", "xlsx", "pdf", "certificate"]).parse(input),
+  const format = z.enum(["xlsx", "pdf", "certificate"]).parse(input),
     table = serviceExportRows(data);
   let bytes: Uint8Array | string, mime: string;
-  if (format === "csv") {
-    const cell = (v: unknown) =>
-      '"' +
-      String(v ?? "")
-        .replace(/^[=+@\-\t\r]/, "'$&")
-        .replaceAll('"', '""') +
-      '"';
-    bytes =
-      "\uFEFF" +
-      [table.columns, ...table.rows]
-        .map((r) => r.map(cell).join(","))
-        .join("\r\n");
-    mime = "text/csv; charset=utf-8";
-  } else if (format === "xlsx") {
+  if (format === "xlsx") {
     const book = new ExcelJS.Workbook(),
       sheet = book.addWorksheet("Laporan");
     sheet.addRow(table.columns);

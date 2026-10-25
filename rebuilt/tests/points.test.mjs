@@ -349,13 +349,12 @@ test("malformed upstream read becomes service error and page uses retry boundary
   );
   await assert.rejects(page(params), /unavailable/i);
 });
-test("CSV guards formulas, Excel/PDF preserve numeric balance and export limits", async () => {
+test("Excel text cells guard formulas and Excel/PDF preserve numeric balance and export limits", async () => {
   const m = setup();
   m.snapshot.rows[0].name = "=INJECT";
   const data = disciplineSnapshot.parse(m.snapshot);
   assert.equal(serviceExportRows(data).rows[0][3], 48);
-  const csv = await exportServices(data, "csv");
-  assert.ok((await csv.text()).includes("'=INJECT"));
+  await assert.rejects(exportServices(data,"csv"));
   for (const f of ["xlsx", "pdf"])
     assert.ok(
       (await (await exportServices(data, f)).arrayBuffer()).byteLength > 100,

@@ -6,6 +6,7 @@ const sources={
  '@/lib/auth/read-server':`export const readServerPrincipal=async()=>globalThis.directoryMocks.caller;`,
  '@/lib/auth/admin':`export const createAuthAdmin=()=>({rpc:async(...args)=>{globalThis.directoryMocks.calls.push(args);if(globalThis.directoryMocks.failure)throw Error('private database detail');return globalThis.directoryMocks.result}});`,
  '@/lib/education/server':`export const educationContext=async()=>({caller:globalThis.directoryMocks.caller,reply:(body,status=200)=>globalThis.directoryMocks.reply(body,status)});export const failure=error=>({status:error.name==='ZodError'?400:503,message:'Safe service error'});`,
+ './import-users':`export function ImportUsers(){return null}`,
  './add-user':`export function AddUser(){return null}`,
  './directory-panel':`export const DirectoryPanel=()=>null;export const DirectoryFilters=()=>null;`,
  '../directory-detail':`export const DirectoryDetailView=()=>null;export const DirectoryDetailUnavailable=()=>null;`,
@@ -22,3 +23,5 @@ test('Directory outages use safe retry boundary and denied records remain non-en
 test('Directory API retains query validation, actor/session, denial and outage statuses',async()=>{let state=reset();const result=await GET(new NextRequest('https://example.test/api/directory?role=teacher&query=A%26B&page=2&status=all'));assert.equal(result.status,200);assert.equal(state.calls[0][1].p_actor,id);assert.equal(state.calls[0][1].p_query,'A&B');assert.equal(state.calls[0][1].p_page,2);state=reset();assert.equal((await GET(new NextRequest('https://example.test/api/directory?page=0'))).status,400);assert.equal(state.calls.length,0);reset().caller=null;assert.equal((await GET(new NextRequest('https://example.test/api/directory'))).status,401);reset().result={data:null,error:null};assert.equal((await GET(new NextRequest('https://example.test/api/directory'))).status,403);assert.equal((await detailGet(new NextRequest('https://example.test/api/directory/'+id),target())).status,404);});
 
 test('Only admin directory renders user creation control',async()=>{const has=node=>!!node&&typeof node==='object'&&(node.type?.name==='AddUser'||(Array.isArray(node.props?.children)?node.props.children.some(has):has(node.props?.children)));reset();assert.equal(has(await page(input({}))),false);reset().caller.principal.is_admin=true;assert.equal(has(await page(input({}))),true);});
+
+test('Only admin sees workbook import control',async()=>{const has=node=>!!node&&typeof node==='object'&&(node.type?.name==='ImportUsers'||(Array.isArray(node.props?.children)?node.props.children.some(has):has(node.props?.children)));reset();assert.equal(has(await page(input({}))),false);reset().caller.principal.is_admin=true;assert.equal(has(await page(input({}))),true);});

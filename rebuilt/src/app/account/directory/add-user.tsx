@@ -8,11 +8,9 @@ import {UserPlus,Copy,Eye,EyeOff} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Dialog} from '@/components/ui/dialog';
 import {Status} from '@/components/ui/status';
+import {createUserDraft} from '@/lib/users/import';
 import {newUserSchema,userRoles,type NewUser} from '@/lib/users/validation';
-function fresh():NewUser{
- const bytes=crypto.getRandomValues(new Uint8Array(24));
- return {requestId:crypto.randomUUID(),username:'',fullName:'',role:'student',contactEmail:'',password:'Aa1_'+Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('')};
-}
+function fresh():NewUser{return createUserDraft({username:'',fullName:'',role:'student',contactEmail:''});}
 export function AddUser(){
  const router=useRouter(),busyRef=useRef(false);
  const [open,setOpen]=useState(false),[draft,setDraft]=useState<NewUser|null>(null),[busy,setBusy]=useState(false),[locked,setLocked]=useState(false),[done,setDone]=useState(false),[message,setMessage]=useState(''),[visible,setVisible]=useState(false),[copied,setCopied]=useState(false);
