@@ -149,13 +149,31 @@ export async function runStagingLoad(p, approved = false) {
   };
 }
 if (import.meta.url === new URL(process.argv[1], "file:").href) {
-  const p = JSON.parse(await readFile(process.argv[2], "utf8"));
-  const result = await runStagingLoad(
-    p,
-    process.env.SIM_LOAD_EXTERNAL_APPROVED === "true",
-  );
-  if (process.argv[3])
-    await writeFile(process.argv[3], JSON.stringify(result, null, 2) + "\n");
-  console.log(JSON.stringify(result, null, 2));
-  if (result.batches.some((b) => b.errors)) process.exitCode = 1;
+  try {
+    const p = JSON.parse(await readFile(process.argv[2], "utf8"));
+    const result = await runStagingLoad(
+      p,
+      process.env.SIM_LOAD_EXTERNAL_APPROVED === "true",
+    );
+    if (process.argv[3])
+      await writeFile(process.argv[3], JSON.stringify(result, null, 2) + "\n");
+    console.log(JSON.stringify(result, null, 2));
+    if (result.batches.some((b) => b.errors)) process.exitCode = 1;
+  } catch {
+    if (process.argv[3])
+      try {
+        await writeFile(
+          process.argv[3],
+          JSON.stringify({
+            status: "failed",
+            batches: [],
+            scope: "staging verification incomplete",
+          }) + "\n",
+        );
+      } catch {}
+    console.error(
+      "Staging verification failed; inspect the private plan, session access and target metadata.",
+    );
+    process.exitCode = 1;
+  }
 }

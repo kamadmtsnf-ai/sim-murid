@@ -1,0 +1,165 @@
+{
+  "baseline": "9bf56ff2aab4ec1b7ce46e15509b94d7ab7f355b",
+  "files": [
+    {
+      "path": ".github/workflows/rebuilt-checks.yml",
+      "reason": "CI PR/main readonly, SHA-pinned, Node24/npmci/check, no production secrets/deploy."
+    },
+    {
+      "path": "rebuilt/docs/development/ROADMAP.md",
+      "reason": "Runbook, phase status, impact, limits and continuity."
+    },
+    {
+      "path": "rebuilt/docs/development/STAGE-10-OPERATIONS.md",
+      "reason": "Runbook, phase status, impact, limits and continuity."
+    },
+    {
+      "path": "rebuilt/docs/operations/OPERATIONS-RUNBOOK.md",
+      "reason": "Runbook, phase status, impact, limits and continuity."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/README.md",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/benchmark.json",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/bulk-browser.json",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/error-browser.json",
+      "reason": "Reusable validated error references and privacy-safe error experience."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/forms-browser.json",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/gates.json",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/personal-profile-browser.json",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/restore.json",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/docs/verification/operations/summary.json",
+      "reason": "Measured local evidence, schema/data reconciliation and explicit incomplete cloud gates."
+    },
+    {
+      "path": "rebuilt/package.json",
+      "reason": "Register test/verification scripts without changing dependencies."
+    },
+    {
+      "path": "rebuilt/scripts/operations/benchmark.mjs",
+      "reason": "Bounded isolated recovery/benchmark or guarded staging/evidence validation; no production mutation."
+    },
+    {
+      "path": "rebuilt/scripts/operations/release-gates.mjs",
+      "reason": "Bounded isolated recovery/benchmark or guarded staging/evidence validation; no production mutation."
+    },
+    {
+      "path": "rebuilt/scripts/operations/restore-drill.mjs",
+      "reason": "Bounded isolated recovery/benchmark or guarded staging/evidence validation; no production mutation."
+    },
+    {
+      "path": "rebuilt/scripts/operations/scenario.mjs",
+      "reason": "Bounded isolated recovery/benchmark or guarded staging/evidence validation; no production mutation."
+    },
+    {
+      "path": "rebuilt/scripts/operations/staging-load.mjs",
+      "reason": "Bounded isolated recovery/benchmark or guarded staging/evidence validation; no production mutation."
+    },
+    {
+      "path": "rebuilt/scripts/smoke.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/scripts/verify-forms.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/scripts/verify-operational-error.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/src/app/account/error.tsx",
+      "reason": "Reusable validated error references and privacy-safe error experience."
+    },
+    {
+      "path": "rebuilt/src/app/api/release/readiness/route.ts",
+      "reason": "Verified Admin-only configuration metadata for safe staging target preflight."
+    },
+    {
+      "path": "rebuilt/src/app/error.tsx",
+      "reason": "Reusable validated error references and privacy-safe error experience."
+    },
+    {
+      "path": "rebuilt/src/components/feedback/error-reference.tsx",
+      "reason": "Reusable validated error references and privacy-safe error experience."
+    },
+    {
+      "path": "rebuilt/src/instrumentation.ts",
+      "reason": "Official Next request-error hook; no raw error/request payload logging."
+    },
+    {
+      "path": "rebuilt/src/lib/auth/http.ts",
+      "reason": "Add server-generated X-Request-ID and one privacy-projected5xx event; JSON/auth/cache contracts unchanged."
+    },
+    {
+      "path": "rebuilt/src/lib/auth/read-server.ts",
+      "reason": "Fail closed for malformed survey-gate responses while preserving true/false/exempt behavior."
+    },
+    {
+      "path": "rebuilt/src/lib/education/use-mutation.ts",
+      "reason": "Display validated5xx reference while preserving uncertain state, drafts and no blind retry."
+    },
+    {
+      "path": "rebuilt/src/lib/observability/log.ts",
+      "reason": "Reusable validated error references and privacy-safe error experience."
+    },
+    {
+      "path": "rebuilt/src/lib/observability/reference.ts",
+      "reason": "Reusable validated error references and privacy-safe error experience."
+    },
+    {
+      "path": "rebuilt/tests/observability.test.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/tests/operational-drill.test.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/tests/readiness-route.test.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/tests/release-gates.test.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/tests/server-gate.test.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/tests/staging-load.test.mjs",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/tests/ui/operational-error-fixture.tsx",
+      "reason": "Actual unit/integration/browser/HTTP assertions and isolated fixtures for P10 safety/regression."
+    },
+    {
+      "path": "rebuilt/docs/development/stage-10-files.json",
+      "reason": "Manifest of changed files and technical reasons."
+    }
+  ]
+}

@@ -109,9 +109,11 @@
     "test:audit": "node --test tests/audit.test.mjs tests/audit-route.test.mjs && node --test tests/database/audit.test.mjs",
     "test:audit:browser": "node scripts/verify-audit.mjs",
     "test:observability": "node --test tests/observability.test.mjs tests/readiness-route.test.mjs tests/server-gate.test.mjs",
-    "test:operational": "node --experimental-strip-types --test tests/operational-drill.test.mjs tests/staging-load.test.mjs",
+    "test:operational": "node --experimental-strip-types --test tests/operational-drill.test.mjs tests/staging-load.test.mjs tests/release-gates.test.mjs",
     "verify:restore": "node scripts/operations/restore-drill.mjs",
-    "verify:benchmark": "node --experimental-strip-types scripts/operations/benchmark.mjs"
+    "verify:benchmark": "node --experimental-strip-types scripts/operations/benchmark.mjs",
+    "verify:release-gates": "node scripts/operations/release-gates.mjs",
+    "test:operational:browser": "node scripts/verify-operational-error.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

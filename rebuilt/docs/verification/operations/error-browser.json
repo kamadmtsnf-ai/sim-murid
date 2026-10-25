@@ -1,0 +1,299 @@
+{
+  "checks": [
+    {
+      "name": "private error hidden 320",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 320",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 320",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 320",
+      "passed": true
+    },
+    {
+      "name": "axe 320",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 320?root=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 320?root=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 320?root=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 320?root=1",
+      "passed": true
+    },
+    {
+      "name": "axe 320?root=1",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 320?bad=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 320?bad=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 320?bad=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 320?bad=1",
+      "passed": true
+    },
+    {
+      "name": "axe 320?bad=1",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 390",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 390",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 390",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 390",
+      "passed": true
+    },
+    {
+      "name": "axe 390",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 390?root=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 390?root=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 390?root=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 390?root=1",
+      "passed": true
+    },
+    {
+      "name": "axe 390?root=1",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 390?bad=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 390?bad=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 390?bad=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 390?bad=1",
+      "passed": true
+    },
+    {
+      "name": "axe 390?bad=1",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 768",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 768",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 768",
+      "passed": true
+    },
+    {
+      "name": "axe 768",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 768?root=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 768?root=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 768?root=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 768?root=1",
+      "passed": true
+    },
+    {
+      "name": "axe 768?root=1",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 768?bad=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 768?bad=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 768?bad=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 768?bad=1",
+      "passed": true
+    },
+    {
+      "name": "axe 768?bad=1",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 1440",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 1440",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 1440",
+      "passed": true
+    },
+    {
+      "name": "axe 1440",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 1440?root=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 1440?root=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 1440?root=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 1440?root=1",
+      "passed": true
+    },
+    {
+      "name": "axe 1440?root=1",
+      "passed": true
+    },
+    {
+      "name": "private error hidden 1440?bad=1",
+      "passed": true
+    },
+    {
+      "name": "valid digest only 1440?bad=1",
+      "passed": true
+    },
+    {
+      "name": "no horizontal overflow 1440?bad=1",
+      "passed": true
+    },
+    {
+      "name": "keyboard retry 1440?bad=1",
+      "passed": true
+    },
+    {
+      "name": "axe 1440?bad=1",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "320",
+      "violations": []
+    },
+    {
+      "label": "320?root=1",
+      "violations": []
+    },
+    {
+      "label": "320?bad=1",
+      "violations": []
+    },
+    {
+      "label": "390",
+      "violations": []
+    },
+    {
+      "label": "390?root=1",
+      "violations": []
+    },
+    {
+      "label": "390?bad=1",
+      "violations": []
+    },
+    {
+      "label": "768",
+      "violations": []
+    },
+    {
+      "label": "768?root=1",
+      "violations": []
+    },
+    {
+      "label": "768?bad=1",
+      "violations": []
+    },
+    {
+      "label": "1440",
+      "violations": []
+    },
+    {
+      "label": "1440?root=1",
+      "violations": []
+    },
+    {
+      "label": "1440?bad=1",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

@@ -40,7 +40,7 @@ export async function restoreDrill() {
     restored = await restoreChecked(blob, hash);
     await restored.waitReady;
     const after = await fingerprints(restored),
-      restoreAndReconcileMs = performance.now() - start;
+      restoreAndDataMs = performance.now() - start;
     assert.deepEqual(after, before);
     const schemaAfter = await schemaFingerprint(restored);
     assert.deepEqual(schemaAfter, schemaBefore);
@@ -99,6 +99,7 @@ export async function restoreDrill() {
       restored.exec("delete from sim_murid_private.report_snapshots"),
       (e) => e.code === "55000",
     );
+    const restoreAndReconcileMs = performance.now() - start;
     return {
       scope:
         "isolated PGlite physical snapshot; NOT Supabase managed backup/Auth provider/Storage recovery",
@@ -108,6 +109,7 @@ export async function restoreDrill() {
       schema: schemaBefore,
       backup: { sha256: hash, bytes: blob.size, ms: backupMs },
       restoreAndReconcileMs,
+      restoreAndDataMs,
       checks: {
         allTableCountsAndDigests: true,
         rlsPoliciesTriggersRoutineBodiesAndGrants: true,

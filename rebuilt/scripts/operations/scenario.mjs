@@ -226,6 +226,21 @@ export async function schemaFingerprint(db) {
       "select table_schema,table_name,grantee,privilege_type from information_schema.role_table_grants where table_schema in('public','sim_murid_private','auth') order by 1,2,3,4",
     )
   ).rows;
+  schema.constraints = (
+    await db.query(
+      "select n.nspname,c.relname,k.conname,pg_get_constraintdef(k.oid) definition from pg_constraint k join pg_class c on c.oid=k.conrelid join pg_namespace n on n.oid=c.relnamespace where n.nspname in('public','sim_murid_private','auth') order by 1,2,3",
+    )
+  ).rows;
+  schema.indexes = (
+    await db.query(
+      "select schemaname,tablename,indexname,indexdef from pg_indexes where schemaname in('public','sim_murid_private','auth') order by 1,2,3",
+    )
+  ).rows;
+  schema.columns = (
+    await db.query(
+      "select table_schema,table_name,column_name,data_type,is_nullable,column_default,is_generated,generation_expression from information_schema.columns where table_schema in('public','sim_murid_private','auth') order by 1,2,ordinal_position",
+    )
+  ).rows;
   return {
     sha256: createHash("sha256").update(JSON.stringify(schema)).digest("hex"),
     tables: schema.tables.length,
@@ -233,5 +248,8 @@ export async function schemaFingerprint(db) {
     triggers: schema.triggers.length,
     routines: schema.routines.length,
     grants: schema.grants.length,
+    constraints: schema.constraints.length,
+    indexes: schema.indexes.length,
+    columns: schema.columns.length,
   };
 }

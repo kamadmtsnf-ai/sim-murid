@@ -73,3 +73,39 @@ test("P10 authenticated staging transport exercises 60/132 distinct sessions and
     await new Promise((r) => server.close(r));
   }
 });
+
+test("P10 malformed private plan never prints credential fragments from JSON parser errors", async () => {
+  const { mkdtemp, writeFile, readFile, rm } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const { join } = await import("node:path");
+  const { spawnSync } = await import("node:child_process");
+  const dir = await mkdtemp(join(tmpdir(), "p10-private-"));
+  try {
+    const file = join(dir, "plan.json");
+    await writeFile(file, '{"cookie":"PRIVATE_COOKIE_SENTINEL",BROKEN');
+    for (const script of ["staging-load", "release-gates"]) {
+      const output = join(dir, script + "-report.json");
+      await writeFile(
+        output,
+        JSON.stringify({ ready: true, status: "old-success" }),
+      );
+      const r = spawnSync(
+        process.execPath,
+        [
+          "--experimental-strip-types",
+          "scripts/operations/" + script + ".mjs",
+          file,
+          output,
+        ],
+        { encoding: "utf8" },
+      );
+      assert.equal(r.status, 1);
+      const failed = JSON.parse(await readFile(output, "utf8"));
+      assert.notEqual(failed.ready, true);
+      assert.notEqual(failed.status, "old-success");
+      assert.ok(!(r.stdout + r.stderr).includes("PRIVATE_COOKIE_SENTINEL"));
+    }
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});

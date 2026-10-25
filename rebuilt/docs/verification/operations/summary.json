@@ -1,0 +1,55 @@
+{
+  "baselineMain": "9bf56ff2aab4ec1b7ce46e15509b94d7ab7f355b",
+  "pullRequest": 58,
+  "localPipeline": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "tests": 669,
+    "groups": 72,
+    "typecheck": true,
+    "lint": true,
+    "databaseTypes": true,
+    "productionBuild": true
+  },
+  "finalTargetedOperationalSuite": {
+    "exitCode": 0,
+    "tests": 7,
+    "newCasesAfterFullPipeline": 1,
+    "uniqueCasesVerified": 670,
+    "notes": "CLI privacy/stale-output case added after full pipeline; complete operational suite rerun. Final remote CI covers current source."
+  },
+  "httpSmoke": {
+    "exitCode": 0,
+    "checks": 6,
+    "correlationHeaderAndLogMatch": true,
+    "scope": "local production server; no service credentials"
+  },
+  "browser": {
+    "checks": 334,
+    "axe": 32,
+    "pageErrors": 0,
+    "scope": "actual components with HTTP fixtures, NOT production UAT"
+  },
+  "restoreScope": "PGlite physical snapshot, Auth stub and synthetic fixtures; 80 app+2 auth tables",
+  "cloudStagingBranchesObserved": 0,
+  "cloudManagedRestore": false,
+  "realSupabaseAuthenticatedMixedLoad": false,
+  "humanUat": false,
+  "productionGo": false,
+  "businessTargets": {
+    "rpoSeconds": null,
+    "rtoSeconds": null,
+    "p95Ms": null
+  },
+  "productionMutations": false,
+  "ci": {
+    "workflow": ".github/workflows/rebuilt-checks.yml",
+    "requiredBranchProtectionConfigured": false,
+    "beforeMerge": "Require successful Rebuilt check and Vercel on exact final head"
+  },
+  "limitations": [
+    "No production Auth/Storage backup downloaded or restored",
+    "No external load, SMTP/WA/AI or paid telemetry activated",
+    "No production capacity inferred from liveness or single-connection fixture"
+  ]
+}
