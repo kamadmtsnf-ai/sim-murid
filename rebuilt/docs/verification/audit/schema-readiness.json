@@ -5,24 +5,61 @@
   "sha256": "258cdecbbd6379450669a0b049445bbf38317a799d87e78e85cbdf894fdf6249",
   "localMigrationCount": 45,
   "localMigrationReplayPassed": true,
-  "cloudApplied": false,
-  "cloudReader": null,
-  "cloudIndex": null,
-  "cloudPromotionImmutableTriggerCount": 0,
+  "cloudApplied": true,
+  "cloudReader": "public.app_audit_read(uuid,uuid,text,timestamptz,uuid)",
+  "cloudIndex": "sim_murid_private.activity_logs_page_p09",
+  "cloudPromotionImmutableTriggerCount": 1,
   "writerBaselineBodyMd5": "1adfe9d6af38107a25aa5c6c47d394a6",
   "cloudWriterBaselineMatched": true,
   "autoReview": {
-    "blocked": true,
+    "blocked": false,
     "reviewedCandidate": "20261024172006_finalization_audit_p09.sql",
     "reviewedSha256": "39e6b336cef34c7c8da8ceb3b0a629d3ecec04b9f3f0dac86085b9bfc77ca499",
     "reason": "Persistent DDL replaces a production RPC and adds immutable triggers, an audit reader, indexes and service-role grants. General Stage 9 approval was not considered explicit approval of this concrete production migration.",
-    "recovery": "Workspace reset before PR; CLI regenerated current candidate and actual prefix/allowlist corrections. Not retried in production. Explicit approval remains required."
+    "recovery": "CLI-regenerated current candidate applied after explicit approval.",
+    "resolution": "User explicitly approved current concrete migration; apply_migration succeeded. Prior rejection retained for history."
   },
   "safeRelease": "Admin UI is optional behind read-only 1500 ms availability probe. No DDL from page/build; reconciliation/export remain available.",
   "productionUserUat": false,
   "advisorsBaseline": {
     "privateRlsInfo": 66,
     "unusedIndexInfo": 79,
+    "leakedPasswordProtectionWarning": 1
+  },
+  "cloudVersion": "20261025014918",
+  "cloudIndexes": [
+    "activity_logs_page_p09",
+    "activity_logs_domain_page_p09"
+  ],
+  "cloudEnabledTriggerCount": 7,
+  "userApproval": "Explicit ya boleh after concrete P09 production migration permission request",
+  "verifiedAtUtc": "2026-10-25T01:50:45.245449+00:00",
+  "cloudWriterAfterBodyMd5": "2b154bdebcf9398226908c79ddeb660e",
+  "cloudWriterAfterMatchedLocal": true,
+  "privileges": {
+    "securityInvoker": true,
+    "emptySearchPath": true,
+    "anonExecute": false,
+    "authenticatedExecute": false,
+    "serviceRoleExecute": true
+  },
+  "invalidSessionProbe": null,
+  "projectionProbe": {
+    "before": {
+      "value": 0
+    },
+    "after": {
+      "value": 82
+    },
+    "command": {
+      "type": "batch",
+      "reasonProvided": true
+    }
+  },
+  "advisorsAfter": {
+    "privateRlsInfo": 66,
+    "unusedIndexInfo": 81,
+    "newUnusedIndexes": 2,
     "leakedPasswordProtectionWarning": 1
   }
 }
