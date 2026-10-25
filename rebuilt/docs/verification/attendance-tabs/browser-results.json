@@ -1,0 +1,249 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "manager starts input 320",
+      "passed": true
+    },
+    {
+      "name": "input 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "input 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "keyboard switches tabs 320",
+      "passed": true
+    },
+    {
+      "name": "export filter 320",
+      "passed": true
+    },
+    {
+      "name": "history 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "history 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "tab retains draft 320",
+      "passed": true
+    },
+    {
+      "name": "existing batch save 320",
+      "passed": true
+    },
+    {
+      "name": "manager starts input 375",
+      "passed": true
+    },
+    {
+      "name": "input 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "input 375 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "keyboard switches tabs 375",
+      "passed": true
+    },
+    {
+      "name": "export filter 375",
+      "passed": true
+    },
+    {
+      "name": "history 375 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 375,
+        "document": 375
+      }
+    },
+    {
+      "name": "history 375 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "tab retains draft 375",
+      "passed": true
+    },
+    {
+      "name": "existing batch save 375",
+      "passed": true
+    },
+    {
+      "name": "manager starts input 768",
+      "passed": true
+    },
+    {
+      "name": "input 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "input 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "keyboard switches tabs 768",
+      "passed": true
+    },
+    {
+      "name": "export filter 768",
+      "passed": true
+    },
+    {
+      "name": "history 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "history 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "tab retains draft 768",
+      "passed": true
+    },
+    {
+      "name": "existing batch save 768",
+      "passed": true
+    },
+    {
+      "name": "manager starts input 1440",
+      "passed": true
+    },
+    {
+      "name": "input 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "input 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "keyboard switches tabs 1440",
+      "passed": true
+    },
+    {
+      "name": "export filter 1440",
+      "passed": true
+    },
+    {
+      "name": "history 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "history 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "tab retains draft 1440",
+      "passed": true
+    },
+    {
+      "name": "existing batch save 1440",
+      "passed": true
+    },
+    {
+      "name": "readonly defaults history",
+      "passed": true
+    },
+    {
+      "name": "readonly has no write controls",
+      "passed": true
+    },
+    {
+      "name": "readonly input axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "input 320",
+      "violations": []
+    },
+    {
+      "name": "history 320",
+      "violations": []
+    },
+    {
+      "name": "input 375",
+      "violations": []
+    },
+    {
+      "name": "history 375",
+      "violations": []
+    },
+    {
+      "name": "input 768",
+      "violations": []
+    },
+    {
+      "name": "history 768",
+      "violations": []
+    },
+    {
+      "name": "input 1440",
+      "violations": []
+    },
+    {
+      "name": "history 1440",
+      "violations": []
+    },
+    {
+      "name": "readonly input",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic fixtures and intercepted writes, not authenticated production role UAT or physical-device testing."
+  ]
+}
