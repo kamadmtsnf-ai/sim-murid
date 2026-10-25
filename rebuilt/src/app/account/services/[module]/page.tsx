@@ -46,6 +46,14 @@ export default async function ServicesPage({
               : "Discipline unavailable",
     );
   }
+  let audit = null;
+  if (m.data === "reconciliation") {
+    const { auditHistoryAvailable } = await import("@/lib/audit/server");
+    if (await auditHistoryAvailable(caller.principal.id, caller.sessionId)) {
+      const { AuditTrail } = await import("@/components/audit/audit-trail");
+      audit = <AuditTrail />;
+    }
+  }
   return (
     <main
       id="main-content"
@@ -57,6 +65,7 @@ export default async function ServicesPage({
     >
       <h1 className="text-3xl font-semibold">{titles[m.data]}</h1>
       <ServicesPanel initial={data} userId={caller.principal.id} />
+      {audit}
     </main>
   );
 }

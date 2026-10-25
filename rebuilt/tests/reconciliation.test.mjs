@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from "next/server.js";
 import ExcelJS from "exceljs";
 globalThis.reconciliationReply = (b, s) => NextResponse.json(b, { status: s });
 const mocks = {
+  "@/lib/audit/server": "export const auditHistoryAvailable=async()=>false;",
   "server-only": "export {};",
   panel: "export const ServicesPanel=()=>null;",
   "next/navigation": `export const redirect=url=>{const e=Error('redirect');e.url=url;throw e;};export const notFound=()=>{throw Error('not_found')};`,
