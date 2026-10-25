@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "width": 320,
+      "height": 568,
+      "status": 404,
+      "skipFocus": true,
+      "keyboard": true,
+      "noHorizontalOverflow": true,
+      "orientation": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "status": 404,
+      "skipFocus": true,
+      "keyboard": true,
+      "noHorizontalOverflow": true,
+      "orientation": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "status": 404,
+      "skipFocus": true,
+      "keyboard": true,
+      "noHorizontalOverflow": true,
+      "orientation": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "status": 404,
+      "skipFocus": true,
+      "keyboard": true,
+      "noHorizontalOverflow": true,
+      "orientation": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 932,
+      "height": 430,
+      "status": 404,
+      "skipFocus": true,
+      "keyboard": true,
+      "noHorizontalOverflow": true,
+      "orientation": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 160,
+      "height": 568,
+      "status": 404,
+      "skipFocus": true,
+      "keyboard": true,
+      "noHorizontalOverflow": true,
+      "orientation": true,
+      "axeViolations": 0
+    },
+    {
+      "javaScriptDisabled": true,
+      "status": 404,
+      "recovery": true
+    }
+  ],
+  "errors": []
+}
