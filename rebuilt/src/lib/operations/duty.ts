@@ -56,7 +56,12 @@ export const dutySnapshot = operationsSnapshot
     ),
     extra: z.object({
       roster: z.array(
-        z.object({ teacher_id: id, name: z.string(), weekday: day }),
+        z.object({
+          teacher_id: id,
+          name: z.string(),
+          weekday: day,
+          active: z.boolean().default(true),
+        }),
       ),
       confirmed: z.boolean(),
     }),

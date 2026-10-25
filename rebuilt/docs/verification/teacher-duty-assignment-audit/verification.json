@@ -1,0 +1,32 @@
+{
+  "baseline": "eca856191747249e940cf99f802af82889bdde7a",
+  "branch": "fix/teacher-duty-assignment-audit",
+  "fullCheck": {
+    "command": "npm run check",
+    "tests": 715,
+    "failed": 0,
+    "typecheck": "passed",
+    "lint": "passed",
+    "databaseTypes": "passed",
+    "productionBuild": "passed"
+  },
+  "regression": {
+    "command": "node --test tests/database/teacher-duty-guards.test.mjs",
+    "tests": 11,
+    "failed": 0
+  },
+  "browser": {
+    "checks": 155,
+    "axeScans": 9,
+    "errors": []
+  },
+  "deployment": {
+    "pr": null,
+    "merged": false,
+    "cloudMigrationApplied": false
+  },
+  "limits": [
+    "Isolated PostgreSQL PGlite replay and intercepted browser API, no production assignment or transaction mutations.",
+    "No production-account UAT, physical-device or PostgreSQL cloud concurrency test."
+  ]
+}

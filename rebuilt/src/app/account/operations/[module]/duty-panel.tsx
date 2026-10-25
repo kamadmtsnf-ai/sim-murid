@@ -1,6 +1,6 @@
 "use client";
-import {MutationFeedback} from "@/components/feedback/mutation-feedback";
-import {confirmAction} from "@/components/ui/confirm-action";
+import { MutationFeedback } from "@/components/feedback/mutation-feedback";
+import { confirmAction } from "@/components/ui/confirm-action";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Tabs } from "radix-ui";
@@ -73,13 +73,13 @@ export function DutyPanel({
   const teachers = data.people.filter((p) => p.role_code === "teacher");
   const eligible = teachers.filter((p) =>
     data.extra.roster.some(
-      (r) => r.teacher_id === p.id && r.weekday === todayDay,
+      (r) => r.teacher_id === p.id && r.weekday === todayDay && r.active,
     ),
   );
   async function discard() {
     if (
       dirty.current &&
-      !await confirmAction("Tinggalkan perubahan yang belum disimpan?")
+      !(await confirmAction("Tinggalkan perubahan yang belum disimpan?"))
     )
       return false;
     dirty.current = false;
@@ -109,12 +109,12 @@ export function DutyPanel({
     setMode(next);
   }
   async function close() {
-    if (pending.current || busy || !await discard()) return;
+    if (pending.current || busy || !(await discard())) return;
     setMode(null);
     setEdit(null);
   }
   async function submit(e: FormEvent<HTMLFormElement>) {
-const retainedEcurrentTarget=e.currentTarget;
+    const retainedEcurrentTarget = e.currentTarget;
 
     e.preventDefault();
     if (locked || pending.current) return;
@@ -143,9 +143,9 @@ const retainedEcurrentTarget=e.currentTarget;
     }
     if (
       mode === "roster" &&
-      !await confirmAction(
+      !(await confirmAction(
         "Ganti seluruh jadwal mingguan guru ini? Tanpa hari terpilih, jadwal akan dikosongkan.",
-      )
+      ))
     )
       return;
     pending.current = true;
@@ -272,6 +272,11 @@ const retainedEcurrentTarget=e.currentTarget;
                         .map((r) => (
                           <li className="break-words" key={r.teacher_id}>
                             {r.name}
+                            {!r.active && (
+                              <span className="block text-sm text-muted-foreground">
+                                Tugas Guru Piket tidak aktif
+                              </span>
+                            )}
                           </li>
                         ))}
                     </ul>
@@ -435,7 +440,8 @@ const retainedEcurrentTarget=e.currentTarget;
       >
         Muat ulang
       </Button>
-      <Dialog closeDisabled={busy}
+      <Dialog
+        closeDisabled={busy}
         open={mode !== null}
         onOpenChange={async (v) => {
           if (!v) await close();
@@ -497,7 +503,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       className={controlClass}
                       required
                       onChange={async (e) => {
-const retainedEvalue=e.target.value;
+                        const retainedEvalue = e.target.value;
 
                         if (await discard()) setTeacher(retainedEvalue);
                       }}
