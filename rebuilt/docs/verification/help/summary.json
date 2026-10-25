@@ -11,5 +11,8 @@
   "humanBaseline": null,
   "humanAfter": null,
   "humanAcceptance": false,
-  "stageComplete": false
+  "stageComplete": false,
+  "dashboardBrowserChecks": 75,
+  "dashboardAxeRuns": 11,
+  "npmCi": "passed"
 }

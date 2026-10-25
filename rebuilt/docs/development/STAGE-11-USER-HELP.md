@@ -24,4 +24,4 @@ Tidak menambah database/API/RPC/role, kontak dukungan rekaan, pengiriman pesan a
 
 ## Verifikasi
 
-`npm ci` lulus; dependensi dan lockfile tetap. `npm run check`: typecheck, lint, 673 tes/73 kelompok, DB types dan production build lulus. Browser komponen aktual dengan CSS build terbaru: 41 checks/4 axe, tanpa pageerror; empat viewport dan landscape. `git diff --check` lulus. Tugas manusia dan perbandingan baseline tetap belum tersedia.
+`npm ci` lulus; dependensi dan lockfile tetap. `npm run check`: typecheck, lint, 673 tes/73 kelompok, DB types dan production build lulus. Browser komponen aktual dengan CSS build terbaru: 41 checks/4 axe, tanpa pageerror; empat viewport dan landscape. Regresi shell/dashboard existing: 75 checks/11 axe, delapan viewport dan tiga landscape, tanpa findings/pageerror. Total browser 116 checks/15 axe. `git diff --check` lulus. Tugas manusia dan perbandingan baseline tetap belum tersedia.
