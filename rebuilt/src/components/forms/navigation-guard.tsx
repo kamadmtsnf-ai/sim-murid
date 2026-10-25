@@ -18,7 +18,8 @@ import { Status } from "@/components/ui/status";
 export function FormNavigationGuard({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState("");
   const approvedAnchor = useRef<HTMLAnchorElement | null>(null),
-    approvedSubmit = useRef<HTMLFormElement | null>(null);
+    approvedSubmit = useRef<HTMLFormElement | null>(null),
+    confirmingLogout = useRef(false);
   const notice = useRef<HTMLDivElement>(null),
     approvedNative = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -118,17 +119,38 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
         "/api/auth/logout"
     )
       return;
-    if (!pageHasPendingWrite() && !pageHasUnsavedChanges()) {
-      approveNative();
-      return;
-    }
     const form = event.target;
     event.preventDefault();
     event.stopPropagation();
-    if ((await allow()) && !pageHasPendingWrite() && form.isConnected) {
-      approveNative();
+    if (confirmingLogout.current) return;
+    confirmingLogout.current = true;
+    try {
+      if (pageHasPendingWrite()) {
+        await allow();
+        return;
+      }
+      setMessage("");
+      const confirmed = await confirmAction(
+        pageHasUnsavedChanges()
+          ? "Ada isian yang belum disimpan atau hasil penyimpanan yang perlu diperiksa. Jika keluar, isian pada halaman ini dapat hilang. Anda yakin ingin keluar dari aplikasi?"
+          : "Anda akan keluar dari akun ini. Untuk menggunakan aplikasi kembali, silakan masuk dengan akun Anda.",
+        {
+          title: "Keluar dari aplikasi?",
+          confirmLabel: "Ya, keluar",
+          cancelLabel: "Tetap di aplikasi",
+          tone: "danger",
+        },
+      );
+      if (!confirmed || !form.isConnected) return;
+      if (pageHasPendingWrite()) {
+        await allow();
+        return;
+      }
+      setMessage("");
       approvedSubmit.current = form;
       form.requestSubmit();
+    } finally {
+      confirmingLogout.current = false;
     }
   }
   return (

@@ -166,6 +166,7 @@ try {
       void window.forceFormsSave();
     });
   }
+  if (!process.argv.includes("--logout-only")) {
   await fresh();
   await page.locator("#probe-value").fill("");
   await button("Simpan isian uji").click();
@@ -376,6 +377,68 @@ try {
     )),
     "personal drafts not cached generically",
   );
+  }
+  // Exercise logout manually (no confirmation driver), including the mobile drawer.
+  for (const width of [320, 768, 1440]) {
+    const logoutPage = await browser.newPage({viewport:{width,height:700}});
+    logoutPage.on("pageerror", e=>errors.push(String(e)));
+    let logoutPosts = 0;
+    await logoutPage.route("**/api/auth/logout", async route=>{
+      check(route.request().method()==="POST", "logout keeps native POST " + width);
+      logoutPosts++;
+      await route.fulfill({contentType:"text/html",body:'<!doctype html><html lang="id"><title>Logout QA</title><h1>Logout uji selesai</h1></html>'});
+    });
+    await logoutPage.goto(base);
+    await logoutPage.getByRole("heading",{level:1}).waitFor();
+    const openNav = async()=>{
+      if(width<1024) await logoutPage.getByRole("button",{name:"Buka navigasi",exact:true}).click();
+    };
+    await openNav();
+    const logout = logoutPage.getByRole("button",{name:"Keluar dari akun",exact:true});
+    await logoutPage.evaluate(()=>{
+      window.logoutPending=true;
+      window.addEventListener("sim-form-pending-check",event=>{if(window.logoutPending)event.preventDefault();});
+    });
+    await logout.click();
+    await logoutPage.getByText(/Tunggu proses pada halaman/).waitFor();
+    check(await logoutPage.getByRole("alertdialog").count()===0 && logoutPosts===0,"pending blocks logout " + width);
+    await logoutPage.evaluate(()=>{window.logoutPending=false;});
+    await logout.click();
+    const confirmation=logoutPage.getByRole("alertdialog",{name:"Keluar dari aplikasi?"});
+    await confirmation.waitFor();
+    check(await confirmation.getByText(/Ada isian yang belum disimpan/).isVisible(),"dirty warning in single logout dialog " + width);
+    const bounds=await confirmation.evaluate(e=>{const r=e.getBoundingClientRect();return r.x>=0&&r.y>=0&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1;});
+    check(bounds,"logout modal contained " + width);
+    await logoutPage.evaluate(axe);
+    const scan=await logoutPage.evaluate(()=>window.axe.run(document,{runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa","best-practice"]}}));
+    accessibility.push({width,context:"logout",violations:scan.violations.map(v=>v.id)});
+    check(!scan.violations.length,"logout axe " + width);
+    await confirmation.getByRole("button",{name:"Tetap di aplikasi",exact:true}).click();
+    await confirmation.waitFor({state:"hidden"});
+    check(logoutPosts===0,"cancel never sends logout " + width);
+    await logoutPage.waitForFunction(()=>document.activeElement?.getAttribute("aria-label")==="Keluar dari akun");
+    await logout.click();
+    await confirmation.waitFor();
+    await logoutPage.waitForFunction(()=>!!document.activeElement?.closest('[role="alertdialog"]'));
+    await logoutPage.keyboard.press("Escape");
+    await confirmation.waitFor({state:"hidden"});
+    check(logoutPosts===0 && await logoutPage.locator("#probe-value").inputValue()==="data-uji","Escape preserves session and draft " + width);
+    await logoutPage.waitForFunction(()=>document.activeElement?.getAttribute("aria-label")==="Keluar dari akun");
+    if(width<1024) {
+      await logoutPage.getByRole("button",{name:"Tutup dialog",exact:true}).click();
+      await logoutPage.getByRole("dialog").waitFor({state:"hidden"});
+    }
+    await logoutPage.getByRole("button",{name:"Lepas probe",exact:true}).click();
+    await openNav();
+    await logout.evaluate(button=>{const form=button.closest("form");form.requestSubmit();form.requestSubmit();});
+    await confirmation.waitFor();
+    check(await logoutPage.getByRole("alertdialog").count()===1,"double submit opens one confirmation " + width);
+    check(await confirmation.getByText(/Anda akan keluar dari akun ini/).isVisible(),"clean logout still confirms " + width);
+    await confirmation.getByRole("button",{name:"Ya, keluar",exact:true}).click();
+    await logoutPage.waitForURL("**/api/auth/logout");
+    check(logoutPosts===1,"accepted logout submits once " + width);
+    await logoutPage.close();
+  }
   check(errors.length === 0, "no JavaScript page errors");
   await writeFile(
     join(out, "results.json"),

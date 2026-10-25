@@ -32,12 +32,21 @@ export function confirmAction(
   return new Promise((resolve) => {
     let settled = false;
     const cancel = () => finish(false);
+    const escape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      // This confirmation may sit above a drawer/dialog in another React root.
+      // Consume Escape here so it cannot dismiss the underlying surface.
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      finish(false);
+    };
     function finish(value: boolean) {
       if (settled) return;
       settled = true;
       cancelActive = null;
       window.removeEventListener("popstate", cancel);
       window.removeEventListener("pagehide", cancel);
+      window.removeEventListener("keydown", escape, true);
       root.render(null);
       setTimeout(() => {
         root.unmount();
@@ -50,6 +59,7 @@ export function confirmAction(
     cancelActive = cancel;
     window.addEventListener("popstate", cancel);
     window.addEventListener("pagehide", cancel);
+    window.addEventListener("keydown", escape, true);
     root.render(
       <AlertDialog.Root
         open

@@ -1,0 +1,358 @@
+{
+  "checks": [
+    {
+      "name": "invalid draft never reaches HTTP",
+      "passed": true
+    },
+    {
+      "name": "same-tick double submit sends one request",
+      "passed": true
+    },
+    {
+      "name": "safe revision and UUID envelope",
+      "passed": true
+    },
+    {
+      "name": "pending sidebar navigation is blocked",
+      "passed": true
+    },
+    {
+      "name": "pending notice wraps on mobile",
+      "passed": true
+    },
+    {
+      "name": "dismissing notice does not unlock or repeat a write",
+      "passed": true
+    },
+    {
+      "name": "one confirmed callback",
+      "passed": true
+    },
+    {
+      "name": "offline retains draft",
+      "passed": true
+    },
+    {
+      "name": "offline cannot clear lock or replay",
+      "passed": true
+    },
+    {
+      "name": "offline no false success",
+      "passed": true
+    },
+    {
+      "name": "committed-abort retains draft",
+      "passed": true
+    },
+    {
+      "name": "committed-abort cannot clear lock or replay",
+      "passed": true
+    },
+    {
+      "name": "committed-abort no false success",
+      "passed": true
+    },
+    {
+      "name": "read-only inspection never retries write",
+      "passed": true
+    },
+    {
+      "name": "P10 response reference visible without retrying the uncertain write",
+      "passed": true
+    },
+    {
+      "name": "500 retains draft",
+      "passed": true
+    },
+    {
+      "name": "500 cannot clear lock or replay",
+      "passed": true
+    },
+    {
+      "name": "500 no false success",
+      "passed": true
+    },
+    {
+      "name": "noack retains draft",
+      "passed": true
+    },
+    {
+      "name": "noack cannot clear lock or replay",
+      "passed": true
+    },
+    {
+      "name": "noack no false success",
+      "passed": true
+    },
+    {
+      "name": "mixed retains draft",
+      "passed": true
+    },
+    {
+      "name": "mixed cannot clear lock or replay",
+      "passed": true
+    },
+    {
+      "name": "mixed no false success",
+      "passed": true
+    },
+    {
+      "name": "unadvanced retains draft",
+      "passed": true
+    },
+    {
+      "name": "unadvanced cannot clear lock or replay",
+      "passed": true
+    },
+    {
+      "name": "unadvanced no false success",
+      "passed": true
+    },
+    {
+      "name": "malformed retains draft",
+      "passed": true
+    },
+    {
+      "name": "malformed cannot clear lock or replay",
+      "passed": true
+    },
+    {
+      "name": "malformed no false success",
+      "passed": true
+    },
+    {
+      "name": "401 blocks replay",
+      "passed": true
+    },
+    {
+      "name": "403 blocks replay",
+      "passed": true
+    },
+    {
+      "name": "stale blocks replay",
+      "passed": true
+    },
+    {
+      "name": "explicit correction gets a new request",
+      "passed": true
+    },
+    {
+      "name": "cancelled sidebar preserves draft",
+      "passed": true
+    },
+    {
+      "name": "cancelled logout preserves draft",
+      "passed": true
+    },
+    {
+      "name": "explicit discard permits navigation",
+      "passed": true
+    },
+    {
+      "name": "unmount ignores late response",
+      "passed": true
+    },
+    {
+      "name": "timeout retains lock without retry",
+      "passed": true
+    },
+    {
+      "name": "real profile reuses dirty navigation guard",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 320",
+      "passed": true
+    },
+    {
+      "name": "axe 320",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 390",
+      "passed": true
+    },
+    {
+      "name": "axe 390",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 768",
+      "passed": true
+    },
+    {
+      "name": "axe 768",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "axe 1440",
+      "passed": true
+    },
+    {
+      "name": "personal drafts not cached generically",
+      "passed": true
+    },
+    {
+      "name": "pending blocks logout 320",
+      "passed": true
+    },
+    {
+      "name": "dirty warning in single logout dialog 320",
+      "passed": true
+    },
+    {
+      "name": "logout modal contained 320",
+      "passed": true
+    },
+    {
+      "name": "logout axe 320",
+      "passed": true
+    },
+    {
+      "name": "cancel never sends logout 320",
+      "passed": true
+    },
+    {
+      "name": "Escape preserves session and draft 320",
+      "passed": true
+    },
+    {
+      "name": "double submit opens one confirmation 320",
+      "passed": true
+    },
+    {
+      "name": "clean logout still confirms 320",
+      "passed": true
+    },
+    {
+      "name": "logout keeps native POST 320",
+      "passed": true
+    },
+    {
+      "name": "accepted logout submits once 320",
+      "passed": true
+    },
+    {
+      "name": "pending blocks logout 768",
+      "passed": true
+    },
+    {
+      "name": "dirty warning in single logout dialog 768",
+      "passed": true
+    },
+    {
+      "name": "logout modal contained 768",
+      "passed": true
+    },
+    {
+      "name": "logout axe 768",
+      "passed": true
+    },
+    {
+      "name": "cancel never sends logout 768",
+      "passed": true
+    },
+    {
+      "name": "Escape preserves session and draft 768",
+      "passed": true
+    },
+    {
+      "name": "double submit opens one confirmation 768",
+      "passed": true
+    },
+    {
+      "name": "clean logout still confirms 768",
+      "passed": true
+    },
+    {
+      "name": "logout keeps native POST 768",
+      "passed": true
+    },
+    {
+      "name": "accepted logout submits once 768",
+      "passed": true
+    },
+    {
+      "name": "pending blocks logout 1440",
+      "passed": true
+    },
+    {
+      "name": "dirty warning in single logout dialog 1440",
+      "passed": true
+    },
+    {
+      "name": "logout modal contained 1440",
+      "passed": true
+    },
+    {
+      "name": "logout axe 1440",
+      "passed": true
+    },
+    {
+      "name": "cancel never sends logout 1440",
+      "passed": true
+    },
+    {
+      "name": "Escape preserves session and draft 1440",
+      "passed": true
+    },
+    {
+      "name": "double submit opens one confirmation 1440",
+      "passed": true
+    },
+    {
+      "name": "clean logout still confirms 1440",
+      "passed": true
+    },
+    {
+      "name": "logout keeps native POST 1440",
+      "passed": true
+    },
+    {
+      "name": "accepted logout submits once 1440",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "width": 320,
+      "violations": []
+    },
+    {
+      "width": 390,
+      "violations": []
+    },
+    {
+      "width": 768,
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "width": 320,
+      "context": "logout",
+      "violations": []
+    },
+    {
+      "width": 768,
+      "context": "logout",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "context": "logout",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
