@@ -2,6 +2,8 @@
 
 25 Oktober 2026 WIB. Baseline main `0fe007184b47cde38f774742e39a2b9814b9a2f2` (PR58). Branch `feat/user-help-p11`.
 
+PR implementasi: [#59](https://github.com/kamadmtsnf-ai/sim-murid/pull/59).
+
 Status: implementasi bantuan dan protokol evaluasi; penerimaan manusia masih terbuka. P10 tetap parsial. Tidak menjalankan P12.
 
 ## Analisis dan perubahan
@@ -22,4 +24,4 @@ Tidak menambah database/API/RPC/role, kontak dukungan rekaan, pengiriman pesan a
 
 ## Verifikasi
 
-`npm run check`: typecheck, lint, 673 tes/73 kelompok, DB types dan production build lulus. Browser komponen aktual dengan CSS build terbaru: 41 checks/4 axe, tanpa pageerror; empat viewport dan landscape. `git diff --check` lulus. Tugas manusia dan perbandingan baseline tetap belum tersedia.
+`npm ci` lulus; dependensi dan lockfile tetap. `npm run check`: typecheck, lint, 673 tes/73 kelompok, DB types dan production build lulus. Browser komponen aktual dengan CSS build terbaru: 41 checks/4 axe, tanpa pageerror; empat viewport dan landscape. `git diff --check` lulus. Tugas manusia dan perbandingan baseline tetap belum tersedia.
