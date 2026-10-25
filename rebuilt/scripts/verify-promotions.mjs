@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Actual Kenaikan dan ijazah UI with isolated Auth/HTTP/Storage boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -139,6 +140,7 @@ try {
   });
   const page = await browser.newPage({ hasTouch: true });
   page.on("pageerror", (e) => errors.push(String(e)));
+  await installConfirmDriver(page);
   page.on("dialog", (d) => d.accept());
   const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, "0")}`;
   let outcome = "success",
@@ -312,14 +314,17 @@ try {
     await page
       .getByRole("combobox", { name: "Tahun ajaran asal", exact: true })
       .selectOption(id(70));
+      await settleConfirmation(page);
     await page
       .getByRole("combobox", { name: "Tahun ajaran tujuan", exact: true })
       .selectOption(id(71));
+      await settleConfirmation(page);
   }
   async function documents() {
     await page
       .getByRole("tab", { name: "Alumni & dokumen", exact: true })
       .click();
+      await settleConfirmation(page);
   }
   async function alumni(n) {
     return page.locator("article").filter({
@@ -340,6 +345,7 @@ try {
         .getByRole("tab", { name: "Kenaikan & penempatan", exact: true })
         .focus();
       await page.keyboard.press("ArrowRight");
+      await settleConfirmation(page);
       check(
         (await page
           .getByRole("tab", { name: "Alumni & dokumen", exact: true })
@@ -347,6 +353,7 @@ try {
         "ArrowRight changes tab",
       );
       await page.keyboard.press("ArrowLeft");
+      await settleConfirmation(page);
       check(
         (await page
           .getByRole("tab", { name: "Kenaikan & penempatan", exact: true })
@@ -384,10 +391,12 @@ try {
       "destination year/level/archive filtered " + width,
     );
     await dest.selectOption(id(31));
+    await settleConfirmation(page);
     await page
       .getByLabel("Alasan / referensi keputusan")
       .fill("Keputusan rapat");
     await page.getByRole("button", { name: "Tinjau pemetaan" }).click();
+    await settleConfirmation(page);
     await page.getByRole("dialog").waitFor();
     await geometry(page, "confirm " + width);
     await a11y(page, "confirm " + width);
@@ -416,6 +425,7 @@ try {
       "footer reachable " + width,
     );
     await page.keyboard.press("Escape");
+    await settleConfirmation(page);
     check(
       await page
         .getByRole("button", { name: "Tinjau pemetaan" })
@@ -427,6 +437,7 @@ try {
     if (width === 320) {
       await card.locator("summary").focus();
       await page.keyboard.press("Enter");
+      await settleConfirmation(page);
       check(
         await card.locator("details").evaluate((e) => e.open),
         "metadata details keyboard expandable",
@@ -435,6 +446,7 @@ try {
     await card
       .getByRole("button", { name: "Edit metadata", exact: true })
       .click();
+      await settleConfirmation(page);
     await page.getByRole("dialog").waitFor();
     check(
       (await page.getByLabel("Nomor ijazah", { exact: true }).inputValue()) ===
@@ -458,6 +470,7 @@ try {
       page.removeAllListeners("dialog");
       page.on("dialog", (d) => d.dismiss());
       await page.keyboard.press("Escape");
+      await settleConfirmation(page);
       check(
         (await page.getByRole("dialog").count()) === 1,
         "dirty cancellation keeps modal open",
@@ -472,19 +485,24 @@ try {
       page.on("dialog", (d) => d.accept());
     }
     await page.keyboard.press("Escape");
+    await settleConfirmation(page);
     await (await alumni(5))
       .getByRole("button", { name: "Edit metadata", exact: true })
       .click();
+      await settleConfirmation(page);
     check(
       (await page.getByLabel("Nomor ijazah", { exact: true }).inputValue()) ===
         "IJAZAH-5",
       "switch alumni does not reuse previous metadata " + width,
     );
     await page.keyboard.press("Escape");
+    await settleConfirmation(page);
     await page.getByRole("tab", { name: "Akses ijazah", exact: true }).click();
+    await settleConfirmation(page);
     await page
       .getByRole("combobox", { name: "Cakupan", exact: true })
       .selectOption("global");
+      await settleConfirmation(page);
     check(
       await page
         .getByRole("checkbox", { name: "Global boleh mengunduh", exact: true })
@@ -519,8 +537,10 @@ try {
       exact: true,
     })
     .selectOption(id(31));
+    await settleConfirmation(page);
   await page.getByLabel("Alasan / referensi keputusan").fill("Keputusan rapat");
   await page.getByRole("button", { name: "Tinjau pemetaan" }).click();
+  await settleConfirmation(page);
   await acknowledge();
   const before = posts.length;
   await page
@@ -545,10 +565,13 @@ try {
       exact: true,
     })
     .selectOption("alumni");
+    await settleConfirmation(page);
   await page.getByLabel("Alasan / referensi keputusan").fill("Lulus kelas 9");
   await page.getByRole("button", { name: "Tinjau pemetaan" }).click();
+  await settleConfirmation(page);
   await acknowledge();
   await page.getByRole("button", { name: "Konfirmasi simpan" }).click();
+  await settleConfirmation(page);
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(
     posts.at(-1).items[0].classId === null,
@@ -558,8 +581,10 @@ try {
   await (await alumni(4))
     .getByRole("button", { name: "Edit metadata", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.getByLabel("Nomor ijazah", { exact: true }).fill("BARU-4");
   await page.getByRole("button", { name: "Simpan metadata" }).click();
+  await settleConfirmation(page);
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(
     (await (await alumni(4)).getByText("BARU-4", { exact: true }).count()) ===
@@ -568,16 +593,21 @@ try {
   );
   check(posts.at(-1).studentId === id(103), "metadata saves correct alumni");
   await page.getByRole("tab", { name: "Akses ijazah", exact: true }).click();
+  await settleConfirmation(page);
   await page.getByRole("checkbox", { name: /^Pengguna 4 / }).check();
   await page
     .getByRole("combobox", { name: "Izin melihat", exact: true })
     .selectOption("inherit");
+    await settleConfirmation(page);
   await page
     .getByRole("combobox", { name: "Izin mengunduh", exact: true })
     .selectOption("deny");
+    await settleConfirmation(page);
   await page.getByRole("button", { name: "Tinjau pengaturan akses" }).click();
+  await settleConfirmation(page);
   await acknowledge();
   await page.getByRole("button", { name: "Konfirmasi simpan" }).click();
+  await settleConfirmation(page);
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(
     posts.at(-1).view === "inherit" && posts.at(-1).download === "deny",
@@ -586,15 +616,20 @@ try {
   await page
     .getByRole("combobox", { name: "Cakupan", exact: true })
     .selectOption("global");
+    await settleConfirmation(page);
   await page
     .getByRole("checkbox", { name: "Global boleh melihat", exact: true })
     .check();
+    await settleConfirmation(page);
   await page
     .getByRole("checkbox", { name: "Global boleh mengunduh", exact: true })
     .uncheck();
+    await settleConfirmation(page);
   await page.getByRole("button", { name: "Tinjau pengaturan akses" }).click();
+  await settleConfirmation(page);
   await acknowledge();
   await page.getByRole("button", { name: "Konfirmasi simpan" }).click();
+  await settleConfirmation(page);
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(
     posts.at(-1).scope === "global" &&
@@ -606,6 +641,7 @@ try {
   await (await alumni(4))
     .getByRole("button", { name: "Unggah / ganti berkas" })
     .click();
+    await settleConfirmation(page);
   const assetCount = assetPosts.length;
   await page.getByLabel("Berkas dokumen", { exact: true }).setInputFiles({
     name: "bad.txt",
@@ -613,6 +649,7 @@ try {
     buffer: Buffer.from("not a document"),
   });
   await page.getByRole("button", { name: "Unggah dan validasi" }).click();
+  await settleConfirmation(page);
   check(
     assetPosts.length === assetCount,
     "invalid file rejected before prepare",
@@ -623,6 +660,7 @@ try {
     buffer: Buffer.from("%PDF-1.4"),
   });
   await page.getByRole("button", { name: "Unggah dan validasi" }).click();
+  await settleConfirmation(page);
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(
     assetPosts
@@ -642,12 +680,14 @@ try {
   await (await alumni(4))
     .getByRole("button", { name: "Unduh IJAZAH", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.getByText("Berkas siap diunduh.", { exact: true }).waitFor();
   check(true, "download success feedback");
   outcome = "download-error";
   await (await alumni(4))
     .getByRole("button", { name: "Unduh IJAZAH", exact: true })
     .click();
+    await settleConfirmation(page);
   await page
     .getByText("Berkas belum dapat diunduh. Periksa akses dan coba kembali.", {
       exact: true,
@@ -658,12 +698,14 @@ try {
   await (await alumni(4))
     .getByRole("button", { name: "Hapus IJAZAH", exact: true })
     .click();
+    await settleConfirmation(page);
   check(
     await page.getByRole("button", { name: "Konfirmasi hapus" }).isDisabled(),
     "delete requires acknowledgement",
   );
   await acknowledge();
   await page.getByRole("button", { name: "Konfirmasi hapus" }).click();
+  await settleConfirmation(page);
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(
     (await (await alumni(4))
@@ -675,6 +717,7 @@ try {
   await page
     .getByRole("button", { name: "Muat ulang data", exact: true })
     .click();
+    await settleConfirmation(page);
   check(
     await page.getByRole("button", { name: "Memuat…" }).isDisabled(),
     "loading locks reads",
@@ -685,6 +728,7 @@ try {
   await page
     .getByRole("button", { name: "Muat ulang data", exact: true })
     .click();
+    await settleConfirmation(page);
   await page
     .getByText("Data belum dapat dimuat. Data sebelumnya tetap ditampilkan.", {
       exact: true,
@@ -704,12 +748,15 @@ try {
       exact: true,
     })
     .selectOption(id(31));
+    await settleConfirmation(page);
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
+  await settleConfirmation(page);
   check(
     (await page.getByText(/1 siswa dipilih/).count()) === 1,
     "mapping persists across pagination",
   );
   await page.getByRole("button", { name: "Sebelumnya", exact: true }).click();
+  await settleConfirmation(page);
   check(
     await page.getByRole("checkbox", { name: /^Pengguna 1 / }).isChecked(),
     "selection restored on previous page",
@@ -729,6 +776,7 @@ try {
     "alumni pagination limits cards",
   );
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
+  await settleConfirmation(page);
   await geometry(page, "large alumni");
   await page.evaluate(() => {
     window.promotionsFixture.rows = window.promotionsFixture.rows.filter(
@@ -740,6 +788,7 @@ try {
   await page
     .getByRole("button", { name: "Muat ulang data", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.getByText("Data berhasil diperbarui.", { exact: true }).waitFor();
   check(
     await page
@@ -781,9 +830,11 @@ try {
     await (await alumni(4))
       .getByRole("button", { name: "Edit metadata", exact: true })
       .click();
+      await settleConfirmation(page);
     await page.getByLabel("Nomor ijazah", { exact: true }).fill("TEST");
     const count = posts.length;
     await page.getByRole("button", { name: "Simpan metadata" }).click();
+    await settleConfirmation(page);
     await page
       .getByRole("button", { name: "Muat ulang halaman", exact: true })
       .waitFor();
@@ -799,8 +850,10 @@ try {
   await (await alumni(4))
     .getByRole("button", { name: "Hapus IJAZAH", exact: true })
     .click();
+    await settleConfirmation(page);
   await acknowledge();
   await page.getByRole("button", { name: "Konfirmasi hapus" }).click();
+  await settleConfirmation(page);
   await page
     .getByRole("button", { name: "Muat ulang untuk memeriksa berkas" })
     .waitFor();
@@ -815,8 +868,10 @@ try {
   await (await alumni(4))
     .getByRole("button", { name: "Edit metadata", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.getByLabel("Nomor ijazah", { exact: true }).fill("TIMEOUT");
   await page.getByRole("button", { name: "Simpan metadata" }).click();
+  await settleConfirmation(page);
   await page.clock.fastForward(31000);
   await page
     .getByRole("button", { name: "Muat ulang halaman", exact: true })

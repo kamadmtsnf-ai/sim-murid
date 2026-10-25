@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Actual Hak akses saya UI with isolated HTTP boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -105,6 +106,7 @@ try {
     release,
     acceptConfirm = false;
   const stored = new Map();
+  await installConfirmDriver(page);
   page.on("dialog", (d) =>
     d.type() === "beforeunload" || acceptConfirm ? d.accept() : d.dismiss(),
   );
@@ -226,6 +228,7 @@ try {
     await page
       .getByRole("button", { name: titles[domain], exact: true })
       .click();
+      await settleConfirmation(page);
     await page.getByRole("dialog").waitFor();
   }
   async function fill(domain = "enrollment", csv = csvs[domain]) {
@@ -244,6 +247,7 @@ try {
     await page
       .getByRole("button", { name: "Validasi dan pratinjau", exact: true })
       .click();
+      await settleConfirmation(page);
     await page
       .getByText("Validasi sumber berhasil.", { exact: false })
       .waitFor();
@@ -256,6 +260,7 @@ try {
     await page
       .getByRole("button", { name: "Konfirmasi simpan batch", exact: true })
       .click();
+      await settleConfirmation(page);
   }
   async function axeCheck(label) {
     await page.addScriptTag({ content: axe });
@@ -316,6 +321,7 @@ try {
           exact: true,
         })
         .click();
+        await settleConfirmation(page);
       await page.getByRole("dialog").waitFor({ state: "hidden" });
       check(
         await page.evaluate(() => window.bulkDone === 1),
@@ -326,12 +332,14 @@ try {
   await page
     .getByRole("button", { name: "Tampilkan referensi kelas", exact: true })
     .click();
+    await settleConfirmation(page);
   await page
     .getByText("Referensi username dan kode mapel", { exact: true })
     .waitFor();
   await page
     .getByText("Referensi username dan kode mapel", { exact: true })
     .click();
+    await settleConfirmation(page);
   check(
     (await page.getByText("001-02", { exact: true }).count()) === 1,
     "reference catalog preserves exact identity",
@@ -385,6 +393,7 @@ try {
   await page
     .getByRole("button", { name: "Validasi dan pratinjau", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.getByText("Isian tidak valid", { exact: false }).first().waitFor();
   check(
     (await page
@@ -402,6 +411,7 @@ try {
   await fill();
   await validate();
   await page.getByRole("button", { name: "Tutup dialog", exact: true }).click();
+  await settleConfirmation(page);
   check(
     await page.getByRole("dialog").isVisible(),
     "cancel discard keeps dirty modal",
@@ -414,6 +424,7 @@ try {
   );
   acceptConfirm = true;
   await page.getByRole("button", { name: "Tutup dialog", exact: true }).click();
+  await settleConfirmation(page);
   acceptConfirm = false;
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(
@@ -435,6 +446,7 @@ try {
   for (let i = 0; !release && i < 100; i++) await page.waitForTimeout(10);
   check(typeof release === "function", "commit reached handler");
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   check(
     await page.getByRole("dialog").isVisible(),
     "pending commit cannot close modal",
@@ -473,6 +485,7 @@ try {
     await page
       .getByRole("button", { name: "Periksa hasil", exact: true })
       .click();
+      await settleConfirmation(page);
     if (scenario === "lost") {
       await page
         .getByText("Seluruh batch tersimpan.", { exact: false })
@@ -494,6 +507,7 @@ try {
           exact: true,
         })
         .click();
+        await settleConfirmation(page);
       await page
         .getByText("Seluruh batch tersimpan.", { exact: false })
         .waitFor();
@@ -559,6 +573,7 @@ try {
     "100 rows paginated",
   );
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
+  await settleConfirmation(page);
   check(
     (await page.getByText("Halaman 2 dari 10", { exact: false }).count()) === 1,
     "preview pagination advances",

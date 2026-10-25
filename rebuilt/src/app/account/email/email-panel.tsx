@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useEffect, useState, useRef, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
@@ -30,7 +31,7 @@ export function EmailPanel({
     [now, setNow] = useState(
       initialServerTime ? Date.parse(initialServerTime) : 0,
     ),
-    [address,setAddress]=useState(initialState.email),
+    [address, setAddress] = useState(initialState.email),
     [code, setCode] = useState(""),
     [codeError, setCodeError] = useState(""),
     [needsSync, setNeedsSync] = useState(false),
@@ -41,7 +42,10 @@ export function EmailPanel({
     stateRef = useRef(initialState),
     offset = useRef(0),
     input = useRef<HTMLInputElement>(null);
-  useWriteGuard(() => lock.current, () => !!code || address!==state.email || needsSync);
+  useWriteGuard(
+    () => lock.current,
+    () => !!code || address !== state.email || needsSync,
+  );
   useEffect(() => {
     mounted.current = true;
     const tick = () => setNow(Date.now() + offset.current),
@@ -119,6 +123,8 @@ export function EmailPanel({
   }
   async function refresh() {
     if (lock.current) return;
+    if(!needsSync && address!==state.email && !await confirmAction("Muat ulang status dan abaikan alamat email yang belum disimpan?"))return;
+    if(lock.current)return;
     lock.current = true;
     setBusy(true);
     notice("Memeriksa status email…");
@@ -141,10 +147,13 @@ export function EmailPanel({
     }
   }
   async function run(command: z.infer<typeof emailCommand>) {
-    if (lock.current || needsSync || !now || state.verified) return;
+    if (lock.current || needsSync || !now || state.verified || address.trim().toLowerCase()!==state.email) return;
     if (
       command.action === "send" &&
-      (timing.remaining > 0 || state.sent_today >= 5 || (!state.email || address.trim().toLowerCase()!==state.email))
+      (timing.remaining > 0 ||
+        state.sent_today >= 5 ||
+        !state.email ||
+        address.trim().toLowerCase() !== state.email)
     )
       return;
     if (
@@ -227,22 +236,60 @@ export function EmailPanel({
       if (mounted.current) setBusy(false);
     }
   }
-  async function saveAddress(e:FormEvent<HTMLFormElement>){
-    e.preventDefault();if(lock.current || needsSync)return;
-    const parsed=emailCommand.safeParse({action:"address",email:address.trim(),expectedEmail:state.email});
-    if(!parsed.success || parsed.data.action!=="address"){notice("Masukkan alamat email aktif yang valid.",true);return;}
-    lock.current=true;setBusy(true);
-    try{
-      const r=await fetch("/api/account/email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(parsed.data),signal:AbortSignal.timeout(30000)});
-      if(r.status===401){expiredSession();return;}
-      const b=await r.json();if(!mounted.current)return;
-      if(!r.ok){notice(typeof b.message==="string"?b.message:"Email belum tersimpan.",true);if(r.status>=409)setNeedsSync(true);return;}
-      const result=responseSchema.parse(b);
-      if(result.state.email!==parsed.data.email)throw Error("Unconfirmed email");
-      stateRef.current=result.state;setState(result.state);setAddress(result.state.email);setCode("");setCodeError("");
+  async function saveAddress(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (lock.current || needsSync) return;
+    const parsed = emailCommand.safeParse({
+      action: "address",
+      email: address.trim(),
+      expectedEmail: state.email,
+    });
+    if (!parsed.success || parsed.data.action !== "address") {
+      notice("Masukkan alamat email aktif yang valid.", true);
+      return;
+    }
+    lock.current = true;
+    setBusy(true);
+    try {
+      const r = await fetch("/api/account/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+        signal: AbortSignal.timeout(30000),
+      });
+      if (r.status === 401) {
+        expiredSession();
+        return;
+      }
+      const b = await r.json();
+      if (!mounted.current) return;
+      if (!r.ok) {
+        notice(
+          typeof b.message === "string" ? b.message : "Email belum tersimpan.",
+          true,
+        );
+        if (r.status >= 409) setNeedsSync(true);
+        return;
+      }
+      const result = responseSchema.parse(b);
+      if (result.state.email !== parsed.data.email)
+        throw Error("Unconfirmed email");
+      stateRef.current = result.state;
+      setState(result.state);
+      setAddress(result.state.email);
+      setCode("");
+      setCodeError("");
       notice("Email kontak tersimpan. Selanjutnya kirim kode verifikasi.");
-    }catch{if(mounted.current)setNeedsSync(true);notice("Hasil penyimpanan email belum pasti. Periksa status sebelum mencoba lagi.",true);}
-    finally{lock.current=false;if(mounted.current)setBusy(false);}
+    } catch {
+      if (mounted.current) setNeedsSync(true);
+      notice(
+        "Hasil penyimpanan email belum pasti. Periksa status sebelum mencoba lagi.",
+        true,
+      );
+    } finally {
+      lock.current = false;
+      if (mounted.current) setBusy(false);
+    }
   }
   function verify(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -290,10 +337,44 @@ export function EmailPanel({
         </CardHeader>
         <CardContent className="min-w-0 space-y-4 px-4 sm:px-6">
           <form onSubmit={saveAddress} className="space-y-3">
-            <label htmlFor="verification-address" className="block text-sm font-medium">Alamat email kontak</label>
-            <input id="verification-address" name="email" type="email" autoComplete="email" inputMode="email" maxLength={320} required value={address} onChange={e=>setAddress(e.target.value)} disabled={busy || needsSync} className="min-h-12 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:ring-2 focus-visible:ring-ring" aria-describedby="verification-address-help" />
-            <p id="verification-address-help" className="text-sm text-muted-foreground">Gunakan email aktif milik Anda. Mengubah email membatalkan kode lama dan memerlukan verifikasi ulang.</p>
-            <Button type="submit" variant="outline" disabled={busy || needsSync || address.trim().toLowerCase()===state.email}>Simpan email kontak</Button>
+            <label
+              htmlFor="verification-address"
+              className="block text-sm font-medium"
+            >
+              Alamat email kontak
+            </label>
+            <input
+              id="verification-address"
+              name="email"
+              type="email"
+              autoComplete="email"
+              inputMode="email"
+              maxLength={320}
+              required
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              disabled={busy || needsSync}
+              className="min-h-12 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:ring-2 focus-visible:ring-ring"
+              aria-describedby="verification-address-help"
+            />
+            <p
+              id="verification-address-help"
+              className="text-sm text-muted-foreground"
+            >
+              Gunakan email aktif milik Anda. Mengubah email membatalkan kode
+              lama dan memerlukan verifikasi ulang.
+            </p>
+            <Button
+              type="submit"
+              variant="outline"
+              disabled={
+                busy ||
+                needsSync ||
+                address.trim().toLowerCase() === state.email
+              }
+            >
+              Simpan email kontak
+            </Button>
           </form>
           {state.verified ? (
             <div className="rounded-lg border bg-muted/30 p-4">
@@ -319,7 +400,8 @@ export function EmailPanel({
                     !now ||
                     timing.remaining > 0 ||
                     state.sent_today >= 5 ||
-                    (!state.email || address.trim().toLowerCase()!==state.email)
+                    !state.email ||
+                    address.trim().toLowerCase() !== state.email
                   }
                   onClick={() => void run({ action: "send" })}
                 >

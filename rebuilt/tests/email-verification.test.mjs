@@ -401,3 +401,16 @@ test("typed state rejects invalid time/status/counters and timing enforces expir
     40,
   );
 });
+test('Address entry preserves other profile fields and does not implicitly send OTP',async()=>{
+ const m=setup();m.state.email='';m.state.challenge=null;const old=m.rpc;
+ m.rpc=async(fn,args)=>{
+  if(fn==='app_profile_read')return {data:{username:'teacher',full_name:'Guru Uji',phone:'0800',contact_email:'',bio:'Tetap',updated_at:'2026-10-25T00:00:00Z'},error:null};
+  if(fn==='app_profile_update'){m.calls.push([fn,args]);m.state.email=args.p_email;return {data:true,error:null};}return old(fn,args);
+ };
+ const r=await POST(req({action:'address',email:'New@Example.org',expectedEmail:''}));assert.equal(r.status,200);assert.equal((await r.json()).state.email,'new@example.org');assert.equal(m.emails.length,0);const a=m.calls.find(([n])=>n==='app_profile_update')[1];assert.equal(a.p_user,id(1));assert.equal(a.p_name,'Guru Uji');assert.equal(a.p_phone,'0800');assert.equal(a.p_bio,'Tetap');assert.equal(a.p_version,'2026-10-25T00:00:00Z');
+});
+test('Address entry rejects technical/invalid addresses, stale email, CAS denial and ambiguous readback',async()=>{
+ for(const email of ['bad','user@auth.sim-murid.invalid']){setup();assert.equal((await POST(req({action:'address',email,expectedEmail:'teacher@example.org'}))).status,400);}
+ setup();assert.equal((await POST(req({action:'address',email:'new@example.org',expectedEmail:'other@example.org'}))).status,409);
+ for(const ok of [false,true]){const m=setup(),old=m.rpc;m.rpc=async(fn,args)=>fn==='app_profile_read'?{data:{username:'teacher',full_name:'Guru',phone:'',contact_email:'teacher@example.org',bio:'',updated_at:'2026-10-25T00:00:00Z'},error:null}:fn==='app_profile_update'?{data:ok,error:null}:old(fn,args);const r=await POST(req({action:'address',email:'new@example.org',expectedEmail:'teacher@example.org'}));assert.equal(r.status,ok?503:409);assert.equal(m.emails.length,0);}
+});

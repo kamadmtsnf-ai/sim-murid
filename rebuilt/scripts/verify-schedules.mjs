@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Isolated Schedules tab/modal browser regression suite. No real account, API mutation or production data. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -137,6 +138,7 @@ try {
   page.on("pageerror", (e) => errors.push(String(e)));
   let requests = [],
     reply = "success";
+  await installConfirmDriver(page);
   page.on("dialog", (d) => d.accept());
   await page.route("**/api/schedules?*", async (route) => {
     const body = route.request().postDataJSON();
@@ -190,6 +192,7 @@ try {
         exact: true,
       })
       .click();
+      await settleConfirmation(page);
   }
   async function open(kind = "kbm") {
     await tab(kind);
@@ -199,17 +202,22 @@ try {
         exact: true,
       })
       .click();
+      await settleConfirmation(page);
     await dialog().waitFor();
   }
   async function lesson() {
     await dialog().locator("select[name=classId]").selectOption(id(20));
+    await settleConfirmation(page);
     await dialog().locator("select[name=subjectId]").selectOption(id(50));
+    await settleConfirmation(page);
     await dialog().locator("select[name=teacherId]").selectOption(id(30));
+    await settleConfirmation(page);
   }
   async function duty(cls = id(20)) {
     await dialog()
       .getByRole("combobox", { name: "Kelas untuk piket", exact: true })
       .selectOption(cls);
+      await settleConfirmation(page);
   }
   async function bounds(name) {
     const r = await dialog().evaluate((e) => {
@@ -284,6 +292,7 @@ try {
         kind + " footer reachable " + width,
       );
       await page.keyboard.press("Escape");
+      await settleConfirmation(page);
       await dialog().waitFor({ state: "hidden" });
       check(
         await page
@@ -304,6 +313,7 @@ try {
   check((await page.getByRole("table").count()) === 1, "KBM tab shows lessons");
   await page.getByRole("tab", { name: "Jadwal KBM", exact: true }).focus();
   await page.keyboard.press("ArrowRight");
+  await settleConfirmation(page);
   await page.waitForFunction(
     () =>
       document.querySelector("[role=tab][data-state=active]")?.textContent ===
@@ -324,6 +334,7 @@ try {
     "filter GET retains active tab",
   );
   await page.keyboard.press("Home");
+  await settleConfirmation(page);
   await page.waitForFunction(
     () =>
       document.querySelector("[role=tab][data-state=active]")?.textContent ===
@@ -370,6 +381,7 @@ try {
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.dismiss());
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   check(
     (await dialog().count()) === 1,
     "dirty Escape cancellation retains modal",
@@ -386,7 +398,9 @@ try {
   await dialog()
     .getByRole("button", { name: "Simpan pelajaran", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   check((await dialog().count()) === 1, "pending modal cannot close");
   check(
     await dialog()
@@ -402,6 +416,7 @@ try {
   );
   await page.getByRole("button", { name: "Edit", exact: true }).focus();
   await page.keyboard.press("Enter");
+  await settleConfirmation(page);
   await dialog().waitFor();
   check(
     (await dialog()
@@ -416,6 +431,7 @@ try {
     "edit retains original break",
   );
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   await dialog().waitFor({ state: "hidden" });
   // Radix restores focus after unmount; hidden alone does not await autofocus.
   await page.waitForFunction(() => Array.from(document.querySelectorAll("button")).some(e => e.textContent === "Edit" && e === document.activeElement));
@@ -465,6 +481,7 @@ try {
   await dialog()
     .getByRole("button", { name: "Simpan seluruh piket kelas", exact: true })
     .click();
+    await settleConfirmation(page);
   await dialog().waitFor({ state: "hidden" });
   check(
     requests.length === 1 &&
@@ -483,6 +500,7 @@ try {
   await dialog()
     .getByRole("button", { name: "Simpan seluruh piket kelas", exact: true })
     .click();
+    await settleConfirmation(page);
   await dialog().waitFor({ state: "hidden" });
   check(
     requests[0].command.items.length === 0,
@@ -502,6 +520,7 @@ try {
     await dialog()
       .getByRole("button", { name: "Simpan pelajaran", exact: true })
       .click();
+      await settleConfirmation(page);
     await dialog().getByRole("alert").waitFor();
     check(
       await dialog()
@@ -537,6 +556,7 @@ try {
   await dialog()
     .getByRole("button", { name: "Simpan pelajaran", exact: true })
     .click();
+    await settleConfirmation(page);
   for (let attempt = 0; requests.length === 0 && attempt < 100; attempt++) await new Promise(r => setTimeout(r, 10));
   check(requests.length === 1, "timeout request observed before advancing clock");
   await page.clock.fastForward(31000);
@@ -551,16 +571,19 @@ try {
   check(requests.length === 1, "timeout performs no automatic retry");
   await visit("unavailable");
   await page.getByRole("button", { name: "Edit", exact: true }).click();
+  await settleConfirmation(page);
   check(
     (await dialog().locator("select[name=subjectId]").inputValue()) === "" &&
       (await dialog().locator("select[name=teacherId]").inputValue()) === "",
     "inactive references require active choice",
   );
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   await visit();
   await page
     .getByRole("combobox", { name: "Tahun ajaran", exact: true })
     .selectOption(id(11));
+    await settleConfirmation(page);
   check(
     await page
       .locator("select[name=class] option")
@@ -582,9 +605,11 @@ try {
       })
       .first()
       .check();
+      await settleConfirmation(page);
     await page
       .getByRole("button", { name: "Hapus 1 jadwal terpilih", exact: true })
       .click();
+      await settleConfirmation(page);
     await page.getByText("Data berhasil disimpan.", { exact: true }).waitFor();
     check(
       requests.length === 1 &&
@@ -607,6 +632,7 @@ try {
   await page.setViewportSize({ width: 1440, height: 900 });
   await bounds("desktop resize");
   await page.keyboard.press("Tab");
+  await settleConfirmation(page);
   check(
     await dialog().evaluate((e) => e.contains(document.activeElement)),
     "keyboard focus stays in dialog",
@@ -621,6 +647,7 @@ try {
     fullPage: false,
   });
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   await visit("normal", 1440, 900);
   await open();
   await page.screenshot({

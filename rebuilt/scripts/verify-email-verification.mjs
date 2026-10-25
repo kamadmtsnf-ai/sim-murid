@@ -142,6 +142,10 @@ try {
       });
     if (mode === "malformed")
       return route.fulfill({ json: { message: "unconfirmed response" } });
+    if(lastInput.action === "address"){
+      stored.email=lastInput.email.trim().toLowerCase();stored.verified=false;stored.challenge=null;
+      return route.fulfill({json:{message:"Email kontak tersimpan.",state:stored,serverTime:new Date().toISOString()}});
+    }
     if (lastInput.action === "send") {
       stored.sent_today++;
       stored.challenge = {
@@ -467,9 +471,12 @@ try {
   await fresh("/?empty=1");
   check(await send().isDisabled(), "empty contact cannot send");
   check(
-    await page.getByText(/Isi email kontak yang valid/).isVisible(),
+    await page.getByLabel("Alamat email kontak",{exact:true}).isEnabled(),
     "missing contact guidance",
   );
+  const beforeAddressWrites=writes;
+  await page.getByLabel("Alamat email kontak",{exact:true}).fill("New@Example.org");await button("Simpan email kontak").click();await page.getByText("Email kontak tersimpan. Selanjutnya kirim kode verifikasi.",{exact:true}).waitFor();
+  check(writes===beforeAddressWrites+1 && lastInput.action==="address","email saves without OTP side effect");check(await page.getByLabel("Alamat email kontak",{exact:true}).inputValue()==="new@example.org","confirmed normalized email");check(await send().isEnabled(),"new email unlocks OTP request");
   await a11y("empty");
   await fresh("/?verified=1");
   check(

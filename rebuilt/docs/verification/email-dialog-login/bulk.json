@@ -1,0 +1,747 @@
+{
+  "checks": [
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "enrollment 320 bounded modal {\"x\":16,\"y\":16,\"width\":288,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "enrollment 320 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "enrollment 320 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "enrollment 320 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 320 one commit",
+      "passed": true
+    },
+    {
+      "name": "enrollment 320 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "enrollment 390 bounded modal {\"x\":16,\"y\":16,\"width\":358,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "enrollment 390 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "enrollment 390 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "enrollment 390 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 390 one commit",
+      "passed": true
+    },
+    {
+      "name": "enrollment 390 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 768 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "enrollment 768 bounded modal {\"x\":48,\"y\":16,\"width\":672,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "enrollment 768 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "enrollment 768 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "enrollment 768 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 768 one commit",
+      "passed": true
+    },
+    {
+      "name": "enrollment 768 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 1440 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "enrollment 1440 bounded modal {\"x\":384,\"y\":16,\"width\":672,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "enrollment 1440 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "enrollment 1440 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "enrollment 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "enrollment 1440 one commit",
+      "passed": true
+    },
+    {
+      "name": "enrollment 1440 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "schedules 320 bounded modal {\"x\":16,\"y\":16,\"width\":288,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "schedules 320 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "schedules 320 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 320 one commit",
+      "passed": true
+    },
+    {
+      "name": "schedules 320 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "schedules 390 bounded modal {\"x\":16,\"y\":16,\"width\":358,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "schedules 390 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "schedules 390 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 390 one commit",
+      "passed": true
+    },
+    {
+      "name": "schedules 390 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 768 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "schedules 768 bounded modal {\"x\":48,\"y\":16,\"width\":672,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "schedules 768 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "schedules 768 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 768 one commit",
+      "passed": true
+    },
+    {
+      "name": "schedules 768 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 1440 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "schedules 1440 bounded modal {\"x\":384,\"y\":16,\"width\":672,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "schedules 1440 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "schedules 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "schedules 1440 one commit",
+      "passed": true
+    },
+    {
+      "name": "schedules 1440 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "grades 320 bounded modal {\"x\":16,\"y\":16,\"width\":288,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "grades 320 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "grades 320 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "grades 320 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 320 one commit",
+      "passed": true
+    },
+    {
+      "name": "grades 320 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "grades 390 bounded modal {\"x\":16,\"y\":16,\"width\":358,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "grades 390 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "grades 390 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "grades 390 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 390 one commit",
+      "passed": true
+    },
+    {
+      "name": "grades 390 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 768 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "grades 768 bounded modal {\"x\":48,\"y\":16,\"width\":672,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "grades 768 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "grades 768 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "grades 768 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 768 one commit",
+      "passed": true
+    },
+    {
+      "name": "grades 768 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 1440 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "grades 1440 bounded modal {\"x\":384,\"y\":16,\"width\":672,\"height\":818}",
+      "passed": true
+    },
+    {
+      "name": "grades 1440 explicit confirmation required",
+      "passed": true
+    },
+    {
+      "name": "grades 1440 exact leading zero/minus preview",
+      "passed": true
+    },
+    {
+      "name": "grades 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "grades 1440 one commit",
+      "passed": true
+    },
+    {
+      "name": "grades 1440 successful close refreshes parent",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "reference catalog preserves exact identity",
+      "passed": true
+    },
+    {
+      "name": "local duplicate blocks preview",
+      "passed": true
+    },
+    {
+      "name": "duplicate batch never sent to mutation",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "invalid replacement file clears old ready draft",
+      "passed": true
+    },
+    {
+      "name": "invalid replacement cannot commit old preview",
+      "passed": true
+    },
+    {
+      "name": "UTF8 CSV file uploads without identity conversion",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "source validation failure prevents confirmation",
+      "passed": true
+    },
+    {
+      "name": "failed source validation retains input",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "cancel discard keeps dirty modal",
+      "passed": true
+    },
+    {
+      "name": "cancel discard keeps CSV",
+      "passed": true
+    },
+    {
+      "name": "dialog returns keyboard focus",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "commit reached handler",
+      "passed": true
+    },
+    {
+      "name": "pending commit cannot close modal",
+      "passed": true
+    },
+    {
+      "name": "double click synchronous lock",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "lost no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "lost uncertain input locked",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "readback confirms lost acknowledgement without resend",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "offline no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "offline uncertain input locked",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "offline explicit retry preserves original request id and revision",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "wrong-ack no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "wrong-ack uncertain input locked",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "wrong-ack explicit retry preserves original request id and revision",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "partial no automatic retry",
+      "passed": true
+    },
+    {
+      "name": "partial uncertain input locked",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "partial explicit retry preserves original request id and revision",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "401 clears private draft",
+      "passed": true
+    },
+    {
+      "name": "401 blocks resubmit",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "403 clears private draft",
+      "passed": true
+    },
+    {
+      "name": "403 blocks resubmit",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "stale revision requires new preview",
+      "passed": true
+    },
+    {
+      "name": "stale keeps draft for review",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "100 rows paginated",
+      "passed": true
+    },
+    {
+      "name": "preview pagination advances",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "timeout never repeats commit",
+      "passed": true
+    },
+    {
+      "name": "caller identity never supplied by browser",
+      "passed": true
+    },
+    {
+      "name": "landscape modal stays in viewport",
+      "passed": true
+    },
+    {
+      "name": "CSV and student identities not persisted in browser drafts",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "enrollment 320",
+      "violations": []
+    },
+    {
+      "label": "enrollment 390",
+      "violations": []
+    },
+    {
+      "label": "enrollment 768",
+      "violations": []
+    },
+    {
+      "label": "enrollment 1440",
+      "violations": []
+    },
+    {
+      "label": "schedules 320",
+      "violations": []
+    },
+    {
+      "label": "schedules 390",
+      "violations": []
+    },
+    {
+      "label": "schedules 768",
+      "violations": []
+    },
+    {
+      "label": "schedules 1440",
+      "violations": []
+    },
+    {
+      "label": "grades 320",
+      "violations": []
+    },
+    {
+      "label": "grades 390",
+      "violations": []
+    },
+    {
+      "label": "grades 768",
+      "violations": []
+    },
+    {
+      "label": "grades 1440",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

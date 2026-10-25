@@ -116,7 +116,8 @@
     "test:operational:browser": "node scripts/verify-operational-error.mjs",
     "test:help": "node --experimental-strip-types --test tests/contextual-help.test.ts",
     "test:help:browser": "node scripts/verify-help.mjs",
-    "test:ai-controls": "node --experimental-strip-types --test tests/ai-controls.test.ts && node --test tests/database/ai-controls.test.mjs"
+    "test:ai-controls": "node --experimental-strip-types --test tests/ai-controls.test.ts && node --test tests/database/ai-controls.test.mjs",
+    "test:confirm:browser": "node scripts/verify-confirm.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

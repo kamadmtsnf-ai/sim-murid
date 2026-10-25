@@ -39,10 +39,10 @@ export function ContextualHelp({
       className="min-w-0 rounded-xl border bg-card text-card-foreground"
     >
       <details className="group">
-        <summary className="min-h-11 cursor-pointer rounded-xl px-4 py-3 text-sm font-medium focus-visible:outline-2 focus-visible:outline-ring">
+        <summary className="min-h-11 cursor-pointer rounded-xl px-[16px] py-[12px] text-sm font-medium focus-visible:outline-2 focus-visible:outline-ring">
           Bantuan untuk {label}
         </summary>
-        <div className="space-y-4 border-t p-4 text-sm [overflow-wrap:anywhere]">
+        <div className="space-y-4 border-t p-[16px] text-sm [overflow-wrap:anywhere]">
           <h2 className="font-semibold">{topic.title}</h2>
           <ol className="list-decimal space-y-2 pl-5">
             {topic.steps.map((step) => (
@@ -85,7 +85,7 @@ export function ContextualHelp({
             </p>
             <Button
               type="button"
-              className="min-w-0 max-w-full whitespace-normal"
+              className="min-w-0 max-w-full whitespace-normal px-[12px]"
               variant="outline"
               disabled={invalid}
               onClick={() => void copy()}
@@ -99,7 +99,7 @@ export function ContextualHelp({
                 readOnly
                 value={template}
                 rows={10}
-                className="w-full min-w-0 resize-y rounded-md border bg-background p-3 text-sm"
+                className="w-full min-w-0 resize-y rounded-md border bg-background p-[12px] text-sm"
               />
             </label>
             <p role="status" aria-live="polite">

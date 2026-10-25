@@ -57,21 +57,51 @@ async function handle(request: NextRequest, mutate = false) {
       );
     }
 
-    if(command.action === "address"){
-      if(state.email!==command.expectedEmail)return respond({message:"Email berubah. Muat ulang status sebelum menyimpan."},409);
-      const readProfile=await admin.rpc("app_profile_read",args);
-      if(readProfile.error)throw Error("Profile unavailable");
-      if(!readProfile.data)return respond({message:"Selesaikan langkah keamanan akun sebelumnya."},403);
-      const profile=profileSchema.parse(readProfile.data);
-      if(profile.username!==caller.principal.username || profile.contact_email!==command.expectedEmail)return respond({message:"Profil berubah. Muat ulang status sebelum menyimpan."},409);
-      const write=await admin.rpc("app_profile_update",{...args,p_version:profile.updated_at,p_name:profile.full_name,p_phone:profile.phone,p_email:command.email,p_bio:profile.bio});
-      if(write.error)throw Error("Address unavailable");
-      if(write.data!==true)return respond({message:"Profil berubah. Muat ulang status sebelum menyimpan."},409);
-      const fresh=await admin.rpc("app_email_state",args);
-      if(fresh.error)throw Error("Readback unavailable");
-      const confirmed=emailStateSchema.parse(fresh.data);
-      if(confirmed.email!==command.email)throw Error("Unconfirmed email");
-      return respond({message:"Email kontak tersimpan. Selanjutnya kirim kode verifikasi.",state:confirmed,serverTime:new Date().toISOString()});
+    if (command.action === "address") {
+      if (state.email !== command.expectedEmail)
+        return respond(
+          { message: "Email berubah. Muat ulang status sebelum menyimpan." },
+          409,
+        );
+      const readProfile = await admin.rpc("app_profile_read", args);
+      if (readProfile.error) throw Error("Profile unavailable");
+      if (!readProfile.data)
+        return respond(
+          { message: "Selesaikan langkah keamanan akun sebelumnya." },
+          403,
+        );
+      const profile = profileSchema.parse(readProfile.data);
+      if (
+        profile.username !== caller.principal.username ||
+        profile.contact_email !== command.expectedEmail
+      )
+        return respond(
+          { message: "Profil berubah. Muat ulang status sebelum menyimpan." },
+          409,
+        );
+      const write = await admin.rpc("app_profile_update", {
+        ...args,
+        p_version: profile.updated_at,
+        p_name: profile.full_name,
+        p_phone: profile.phone,
+        p_email: command.email,
+        p_bio: profile.bio,
+      });
+      if (write.error) throw Error("Address unavailable");
+      if (write.data !== true)
+        return respond(
+          { message: "Profil berubah. Muat ulang status sebelum menyimpan." },
+          409,
+        );
+      const fresh = await admin.rpc("app_email_state", args);
+      if (fresh.error) throw Error("Readback unavailable");
+      const confirmed = emailStateSchema.parse(fresh.data);
+      if (confirmed.email !== command.email) throw Error("Unconfirmed email");
+      return respond({
+        message: "Email kontak tersimpan. Selanjutnya kirim kode verifikasi.",
+        state: confirmed,
+        serverTime: new Date().toISOString(),
+      });
     }
     if (command.action === "send") {
       if (state.verified)

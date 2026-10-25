@@ -1,0 +1,53 @@
+{
+  "baseline": "8c46be45c863a4d78d2e3077b82ec1564265a9b7",
+  "date": "2026-10-25",
+  "unitIntegrationCases": 687,
+  "groups": 75,
+  "suites": {
+    "email": {
+      "checks": 87,
+      "axe": 10
+    },
+    "confirm": {
+      "checks": 45,
+      "axe": 4
+    },
+    "login": {
+      "checks": 173,
+      "axe": 12
+    },
+    "forms": {
+      "checks": 50,
+      "axe": 4
+    },
+    "classes": {
+      "checks": 411,
+      "axe": 17
+    },
+    "committee": {
+      "checks": 92,
+      "axe": 6
+    },
+    "schedules": {
+      "checks": 169,
+      "axe": 16
+    },
+    "promotions": {
+      "checks": 104,
+      "axe": 13
+    },
+    "insights": {
+      "checks": 53,
+      "axe": 4
+    },
+    "bulk": {
+      "checks": 173,
+      "axe": 12
+    }
+  },
+  "browserChecks": 1357,
+  "axeRuns": 98,
+  "realSmtpDeliveryTested": false,
+  "productionDataMutated": false,
+  "databaseMigration": false
+}
