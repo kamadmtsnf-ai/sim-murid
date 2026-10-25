@@ -127,7 +127,11 @@ try {
         json: { code: mode, message: mode },
       });
     if (mode === "500")
-      return route.fulfill({ status: 500, json: { code: "invalid" } });
+      return route.fulfill({
+        status: 500,
+        headers: { "X-Request-ID": "00000000-0000-4000-8000-000000000123" },
+        json: { code: "invalid" },
+      });
     if (mode === "malformed") return route.fulfill({ body: "{" });
     const next = {
       revision: mode === "unadvanced" ? body.revision : body.revision + 1,
@@ -220,6 +224,13 @@ try {
     await fresh(outcome);
     await force();
     await phase("uncertain");
+    if (mode === "500")
+      check(
+        (await page.locator("main").innerText()).includes(
+          "00000000-0000-4000-8000-000000000123",
+        ),
+        "P10 response reference visible without retrying the uncertain write",
+      );
     check(
       (await page.locator("#probe-value").inputValue()) === "data-uji",
       outcome + " retains draft",

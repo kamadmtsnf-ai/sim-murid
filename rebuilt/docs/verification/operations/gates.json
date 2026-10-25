@@ -1,0 +1,11 @@
+{
+  "ready": false,
+  "blocked": [
+    "Managed staging restore + Auth/Storage/RLS/reconciliation evidence missing",
+    "Measured and accepted RPO/RTO missing or exceeded",
+    "Real-user task UAT matrix incomplete",
+    "Authenticated 60/132 mixed staging load/reconciliation evidence incomplete",
+    "Owner acceptance not recorded"
+  ],
+  "scope": "evidence validation, not production capacity or automatic cutover"
+}

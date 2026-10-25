@@ -1,0 +1,379 @@
+{
+  "scope": "isolated PGlite physical snapshot; NOT Supabase managed backup/Auth provider/Storage recovery",
+  "migrations": 45,
+  "tableCount": 82,
+  "entities": {
+    "auth.sessions": {
+      "count": 10,
+      "sha256": "de80512d3c1b4496378cba15aee0e94f9d52a31573c80a1050883a3b1f7ceeea"
+    },
+    "auth.users": {
+      "count": 10,
+      "sha256": "e310b6d0c462f6922605b9410bc0d98eae02b23b6eedcecec85851de8fbb6b7e"
+    },
+    "public.academic_years": {
+      "count": 1,
+      "sha256": "1ca75bdaa350f320ddc839ae67b494ddaec613e724f21afaecaccfe6c9e24250"
+    },
+    "public.assignment_catalog": {
+      "count": 7,
+      "sha256": "cfac339102fc4531f97ef9ee9f637bc72d5e5ceda272e6524da62a30e8faa009"
+    },
+    "public.business_policies": {
+      "count": 3,
+      "sha256": "1c2f08fa57d252f0d55c0d66c4657abaaf651b952a54291c9e1f78c0cbb871f7"
+    },
+    "public.classes": {
+      "count": 2,
+      "sha256": "4ce6bacf4c9c0ed6f4333b96839cde25275b7c02251cda8ce0f05751f122a186"
+    },
+    "public.holidays": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "public.memorization_catalog": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "public.profiles": {
+      "count": 10,
+      "sha256": "3543363a638c6f1b856f942c5bb3f0b49d57c899148c0e6b9ce19aff375a027b"
+    },
+    "public.role_catalog": {
+      "count": 7,
+      "sha256": "66e08a4012c5c29b497dd8c6d4e44ed09c7edc4306a98e7ef3b71855f5e69d22"
+    },
+    "public.school_profile": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "public.semesters": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "public.subjects": {
+      "count": 16,
+      "sha256": "bbc1bd570d23585ccbcd175bf029cb92ef616eaac2686e361c2e71b9fafc451e"
+    },
+    "public.user_access_flags": {
+      "count": 2,
+      "sha256": "37fe07c076f59b8dffcee138c41e751476dc7e5c58e47d4c08426f4ecce98366"
+    },
+    "public.user_assignments": {
+      "count": 1,
+      "sha256": "054149ded8c309f50d4fd64d8a2b583a5d2448ee9d119b7b4f7b41324f17afd3"
+    },
+    "public.user_roles": {
+      "count": 10,
+      "sha256": "4b3afe08a224513b39a308c2d53d68ca2ad94799865509e9a4ca5253c26051a2"
+    },
+    "sim_murid_private.action_plans": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.activity_logs": {
+      "count": 16,
+      "sha256": "cdd1cbf80981010989d35c8c8b9040c05e95e98746a91536be102387fe333e78"
+    },
+    "sim_murid_private.affective_scores": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.ai_analyses": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.ai_configs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.app_sessions": {
+      "count": 10,
+      "sha256": "ab3ba5835ab38aba037042d13ac98ea9038082db92c7aebbec90f8554379869b"
+    },
+    "sim_murid_private.assessment_scores": {
+      "count": 8,
+      "sha256": "a40c04d64dbbe9f2381d2bf165614997a269ade916de175b999960adccd4f9ed"
+    },
+    "sim_murid_private.assessments": {
+      "count": 4,
+      "sha256": "5aa501bd3dc32ae09dc4482ca1ee87efb7adfe144367169c0a83dba9a0e1b1c3"
+    },
+    "sim_murid_private.auth_accounts": {
+      "count": 10,
+      "sha256": "e6dcdf8ac9552ded6386a5ee108891590f8715b1fde9d3cf5739b24a441e906d"
+    },
+    "sim_murid_private.auth_attempts": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.committee_payments": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.committee_tariffs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.digital_books": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.diploma_settings": {
+      "count": 1,
+      "sha256": "7e86d3e5fccc6f0de37d5d605aae04b1fbdf4945e9840b94ee858adcc888a352"
+    },
+    "sim_murid_private.diplomas": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.education_requests": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.education_state": {
+      "count": 1,
+      "sha256": "bbcb132aa82ad35401c7fab66cdcbae9c76510054eda78ab9335ea113f18076f"
+    },
+    "sim_murid_private.email_verifications": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.enrollments": {
+      "count": 3,
+      "sha256": "5b28b9e8c9a502732957b02bc18cc5b4f39937331d8d9359c0880d639a612d4f"
+    },
+    "sim_murid_private.family_groups": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.family_members": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.fee_brackets": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.grade_counters": {
+      "count": 1,
+      "sha256": "508b0c199cec0de26b737777657657986f4eebbbb1e35f5b0b2bf6c712bec955"
+    },
+    "sim_murid_private.import_batches": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.import_rows": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.inbox": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.job_runs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.learning_assets": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.legacy_id_map": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.lesson_schedules": {
+      "count": 1,
+      "sha256": "e7433f6333df741902c4ae77a4b0256067fba57242c7a6d08edc29b3e90ec58e"
+    },
+    "sim_murid_private.mentor_students": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.mentoring_reports": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.minimum_grades": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.operations_requests": {
+      "count": 6,
+      "sha256": "82b878a9c8e1381e12fd1ed81c389cedf31e126396e9edff63da7881377acd59"
+    },
+    "sim_murid_private.operations_state": {
+      "count": 1,
+      "sha256": "89e26a002708b947d3419d7e06563a1ede6fcb3601d595e1b18442f80b5a62ce"
+    },
+    "sim_murid_private.outbox": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.payment_allocations": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.permission_rules": {
+      "count": 67,
+      "sha256": "c27f239ccba124def2dfe215e72a754ec34527f6af464b69c57502ac30e06df7"
+    },
+    "sim_murid_private.point_catalog": {
+      "count": 25,
+      "sha256": "b936abd9cccc6994a5710eb4e40281b88b830fab2be4e1fe57cb8b841d278d9e"
+    },
+    "sim_murid_private.point_events": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.point_month_snapshots": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.promotion_history": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.reconciliation_runs": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.recovery_requests": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.report_snapshots": {
+      "count": 1,
+      "sha256": "7f3f60d35286043de1c09d0e4e0d6cc3b5de2a6a583f1daed047020a5d98377c"
+    },
+    "sim_murid_private.savings_accounts": {
+      "count": 1,
+      "sha256": "011d07132f68a197358ab6eb69467e1ab68efb45c68cdfa66f162b47619e8fb1"
+    },
+    "sim_murid_private.savings_transactions": {
+      "count": 1,
+      "sha256": "f7346b11083f7926af44754a2081aa12c29ac147a5178b15a6c73c36400e3c81"
+    },
+    "sim_murid_private.school_asset_gc": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.security_questions": {
+      "count": 10,
+      "sha256": "02023e368c4b6d91acf4d018fec280ba24e43315a11322ba535f1f796ea00309"
+    },
+    "sim_murid_private.service_settings": {
+      "count": 1,
+      "sha256": "e2d3510caa74d439bfa883b8f2fbe25a0bcf5d4f6a5cc8e80f329766f0656bcb"
+    },
+    "sim_murid_private.settings_requests": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.settings_state": {
+      "count": 1,
+      "sha256": "bbcb132aa82ad35401c7fab66cdcbae9c76510054eda78ab9335ea113f18076f"
+    },
+    "sim_murid_private.slip_deliveries": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.student_attendance": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.student_documents": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.student_duty_assignments": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.student_guardians": {
+      "count": 2,
+      "sha256": "0c0c5f27786da49003df694def9abe485f673f201622f36fe6e91d676c912465"
+    },
+    "sim_murid_private.student_profiles": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.survey_periods": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.survey_questions": {
+      "count": 206,
+      "sha256": "2cbf96183f3c81edf65060dbaac6991862ef36c32c52da3c2f4ded39475fe986"
+    },
+    "sim_murid_private.survey_respondents": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.teacher_duty_roster": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.teacher_duty_sessions": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.user_provisions": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.withdrawal_sequences": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "sim_murid_private.withdrawal_slips": {
+      "count": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "schema": {
+    "sha256": "1ada243a0ce911b1f1b0e62a1c9f28dc4d1cfccbd7f22e689b6f0df47ab387cb",
+    "tables": 82,
+    "policies": 14,
+    "triggers": 26,
+    "routines": 126,
+    "grants": 900,
+    "constraints": 892,
+    "indexes": 247,
+    "columns": 574
+  },
+  "backup": {
+    "sha256": "6de7032b9825a4ab85b7646b87a2bb599b5d1f2556424ffbc8ce623238a7e49f",
+    "bytes": 5750779,
+    "ms": 606.677095
+  },
+  "restoreAndReconcileMs": 674.3425139999999,
+  "restoreAndDataMs": 585.5843849999997,
+  "checks": {
+    "allTableCountsAndDigests": true,
+    "rlsPoliciesTriggersRoutineBodiesAndGrants": true,
+    "registeredSessionRestored": true,
+    "ledgerBalance": true,
+    "report82": true,
+    "unauthorizedAuditDenied": true,
+    "rlsAndGrants": true,
+    "immutableArchive": true,
+    "corruptChecksumRejected": true,
+    "postBackupWriteAbsent": true
+  },
+  "rpo": {
+    "postBackupSyntheticWritesLost": 1,
+    "productionTarget": null
+  },
+  "rto": {
+    "measuredIsolatedMs": 674.3425139999999,
+    "productionTarget": null
+  },
+  "limitations": [
+    "No production data or remote database touched",
+    "No managed Auth/Storage objects or SMTP/WA/AI restoration",
+    "PGlite single connection; not managed Postgres capacity",
+    "Cloud staging/UAT still required"
+  ]
+}
