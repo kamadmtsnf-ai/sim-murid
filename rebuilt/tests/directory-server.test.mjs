@@ -1,6 +1,7 @@
 /** Server flow and API regressions with dependency-boundary mocks; no production identity. */
 import test from 'node:test';import assert from 'node:assert/strict';import {registerHooks} from 'node:module';import {readFileSync} from 'node:fs';import {resolve} from 'node:path';import ts from 'typescript';import {NextRequest,NextResponse} from 'next/server.js';
 const sources={
+ '../manage-assignments':`export function ManageAssignments(){return null}`,
  'server-only':'export {};',
  'next/navigation':`export const redirect=url=>{const e=new Error('redirect');e.url=url;throw e};`,
  '@/lib/auth/read-server':`export const readServerPrincipal=async()=>globalThis.directoryMocks.caller;`,
