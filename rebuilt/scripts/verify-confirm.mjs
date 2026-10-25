@@ -114,8 +114,8 @@ try {
     await page.addScriptTag({content:axe});const result=await page.evaluate(()=>window.axe.run(document.body,{runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa"]}}));accessibility.push({label:width,violations:result.violations});check(!result.violations.length,"nested axe "+width);
     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),"no overflow "+width);
     await modal.getByRole("button",{name:"Lanjutkan",exact:true}).click();await page.getByRole("dialog").waitFor({state:"hidden"});
-    await page.getByRole("button",{name:"Keluar",exact:true}).click();await modal.waitFor();await modal.getByRole("button",{name:"Batal",exact:true}).click();await modal.waitFor({state:"hidden"});check(await page.getByText("Logout: 0",{exact:true}).isVisible(),"cancelled logout skips child cleanup "+width);
-    await page.getByRole("button",{name:"Keluar",exact:true}).click();await modal.waitFor();await modal.getByRole("button",{name:"Lanjutkan",exact:true}).click();await page.getByText("Logout: 1",{exact:true}).waitFor();check(true,"approved logout runs original submit exactly once "+width);
+    await page.getByRole("button",{name:"Keluar",exact:true}).click();await modal.waitFor();await modal.getByRole("button",{name:"Tetap di aplikasi",exact:true}).click();await modal.waitFor({state:"hidden"});check(await page.getByText("Logout: 0",{exact:true}).isVisible(),"cancelled logout skips child cleanup "+width);
+    await page.getByRole("button",{name:"Keluar",exact:true}).click();await modal.waitFor();await modal.getByRole("button",{name:"Ya, keluar",exact:true}).click();await page.getByText("Logout: 1",{exact:true}).waitFor();check(true,"approved logout runs original submit exactly once "+width);
     await page.getByRole("link",{name:"Pindah halaman"}).click();await modal.waitFor();await modal.getByRole("button",{name:"Lanjutkan",exact:true}).click();await page.getByText("Navigasi: 1",{exact:true}).waitFor();check(true,"approved navigation runs original click "+width);
   }
   check(!errors.length, "no JavaScript errors");
