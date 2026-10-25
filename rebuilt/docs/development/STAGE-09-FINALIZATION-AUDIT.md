@@ -6,7 +6,7 @@ Implementasi dipulihkan setelah reset lingkungan sebelum PR dibuat. Verifikasi b
 
 Ruang lingkup: matriks state existing, promotion_history immutable, guard anti-truncate arsip, proyeksi allowlist audit baru/lama, reader Admin dengan pagination tuple waktu+UUID, viewer di Rekonsiliasi dan before/after aktual nilai/KKM. Tidak ada workflow approval/reopen universal baru; D10 tetap terbuka, rapor/ledger lama tidak ditimpa. Alasan bebas tetap pada transaksi sumber; audit hanya menyimpan reasonProvided. Nama pelaku dibaca dari profil saat ini, UUID pelaku/permintaan tetap stabil.
 
-Migrasi kandidat pertama `20261024172006_finalization_audit_p09.sql` (SHA256 39e6b336cef34c7c8da8ceb3b0a629d3ecec04b9f3f0dac86085b9bfc77ca499) ditolak auto-review karena izin Tahap 9 umum tidak dianggap izin eksplisit untuk DDL/RPC produksi konkret. Tidak menghindari penolakan lewat execute_sql/CLI atau jalur lain. Database belum diubah. Setelah reset, CLI membuat ulang berkas `20261025013536_finalization_audit_p09.sql`, dengan koreksi prefix domain dan allowlist; berkas ini belum diterapkan dan tetap memerlukan persetujuan eksplisit. UI hanya aktif setelah read-only availability probe 1500 ms berhasil; Rekonsiliasi/ekspor existing tetap tersedia.
+Migrasi kandidat pertama ditolak auto-review karena izin produksi konkret belum eksplisit. Setelah pemulihan dan merge PR #56, pengguna menjawab “ya boleh” atas permintaan konkret untuk `20261025013536_finalization_audit_p09.sql`. apply_migration berhasil pada sim-muridv2, cloud version `20261025014918`. Tidak memakai jalur alternatif untuk menghindari penolakan. UI memeriksa availability sesuai sesi saat halaman dimuat ulang; Rekonsiliasi/ekspor existing tetap tersedia.
 
 Semua fungsi baru SECURITY INVOKER, search_path kosong, EXECUTE hanya service_role; Admin/onboarding/session dari database. Client/API memakai identity server, private/no-store, timeout dan DTO ketat; tidak memakai metadata user untuk otorisasi. Tidak ada tabel baru, backfill atau rewrite log historis.
 
@@ -34,12 +34,14 @@ Viewer Admin menampilkan filter modul, waktu WIB, nama pelaku saat ini dan UUID/
 
 API GET /api/audit memakai auth/survey gate existing, query ketat, timeout 10 detik dan DTO projection tambahan. Availability 1500 ms khusus Rekonsiliasi, fail closed; import bundle hanya pada cabang Rekonsiliasi. Tidak ada mutasi audit, role baru atau tombol pindah halaman duplikat sidebar. P08 tetap native writer; preview rollback masih mencakup audit.
 
-Body writer cloud diperiksa read-only dan cocok dengan baseline sumber MD5 `1adfe9d6af38107a25aa5c6c47d394a6`. Cloud PostgreSQL 17.11. Changelog/docs Supabase diperiksa pada implementasi awal; tidak memakai ltree/legacy cipher/btree_gist/custom operator. Advisory baseline 66 private RLS INFO, 79 unused-index INFO, 1 leaked-password WARN existing; tidak ada DDL dijalankan.
+Body writer cloud diperiksa read-only dan cocok dengan baseline sumber MD5 `1adfe9d6af38107a25aa5c6c47d394a6`. Cloud PostgreSQL 17.11. Changelog/docs Supabase diperiksa pada implementasi awal; tidak memakai ltree/legacy cipher/btree_gist/custom operator. Advisory baseline 66 private RLS INFO, 79 unused-index INFO, 1 leaked-password WARN existing; DDL P09 kemudian diterapkan setelah izin eksplisit. Sesudah DDL, private RLS INFO tetap66 dan leaked-password WARN tetap1; unused-index INFO menjadi81 karena dua indeks baru belum dipakai.
 
 ## Batas dan tindak lanjut
 
-Kode/QA selesai untuk rilis aman, tetapi P09 belum selesai penuh: penerapan migrasi produksi masih menunggu izin eksplisit. UAT akun nyata, load/concurrency multi-worker dan restore staging belum dilakukan (P10). D10/approval/reopen universal tidak diimplementasikan tanpa kebijakan. Jangan menyatakan merge sebagai bukti aktivasi.
+Kode/QA dan aktivasi skema P09 selesai setelah izin eksplisit. Reader/index/proteksi terverifikasi; UAT alur dengan akun produksi belum dilakukan. UAT akun nyata, load/concurrency multi-worker dan restore staging belum dilakukan (P10). D10/approval/reopen universal tidak diimplementasikan tanpa kebijakan. Jangan menyatakan merge sebagai bukti aktivasi.
 
 Rollback: UI tetap tersembunyi jika RPC absen; fungsi lama berjalan. Jangan mematikan immutable triggers/menghapus log sebagai rollback. Bila perlu koreksi skema, gunakan forward migration ditinjau; jangan reset database atau linked db push tanpa rekonsiliasi cloud history.
 
-PR implementasi P09: [#56](https://github.com/kamadmtsnf-ai/sim-murid/pull/56). Aktivasi database tetap menunggu izin eksplisit; bukan tahap selesai penuh.
+PR implementasi P09: [#56](https://github.com/kamadmtsnf-ai/sim-murid/pull/56). Aktivasi database telah disetujui dan diterapkan; cloud version `20261025014918`.
+
+Verifikasi aktivasi: reader SECURITY INVOKER/search_path kosong, EXECUTE hanya service_role; dua indeks dan tujuh trigger enabled. Pure projection menghapus notes/password/teks alasan, mempertahankan reasonProvided serta before0/after82; invalid-session read mengembalikan null. Body writer MD5 `2b154bdebcf9398226908c79ddeb660e` cocok dengan file migrasi. Tidak menguji proteksi dengan mengubah data produksi. Bukti pada schema-readiness.json.
