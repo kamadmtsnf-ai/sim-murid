@@ -1,14 +1,9 @@
 /** RPC contracts generated from isolated migration replay; not proof of cloud deployment. */
 import type {Database as CloudDatabase, Json} from "./cloud.types";
 export type Database = Omit<CloudDatabase,"public"> & { public: Omit<CloudDatabase["public"],"Functions"> & { Functions: {
-app_audit_read: { Args: {p_actor: string; p_session: string; p_domain?: string | null; p_before?: string | null; p_before_id?: string | null }; Returns: Json };
-app_bulk_catalog: { Args: {p_actor: string; p_session: string; p_domain: string; p_class: string; p_subject?: string | null }; Returns: Json };
-app_bulk_input: { Args: {p_actor: string; p_session: string; p_request: string; p_action: string; p_domain?: string | null; p_revision?: number | null; p_options?: Json | null; p_rows?: Json | null }; Returns: Json };
-app_user_provision_begin: { Args: {p_actor:string;p_session:string;p_request:string;p_command:Json;p_fingerprint:string}; Returns:Json };
-app_user_provision_finish: { Args: {p_actor:string;p_session:string;p_request:string;p_fingerprint:string}; Returns:Json };
 app_access_check: { Args: {p_capability: string; p_owner?: string | null; p_class?: string | null }; Returns: boolean };
 app_access_context: { Args: Record<never, never>; Returns: Json };
-app_ai_reserve: { Args: {p_actor:string;p_session:string;p_analysis:string;p_daily_limit:number}; Returns:Json };
+app_ai_reserve: { Args: {p_actor: string; p_session: string; p_analysis: string; p_daily_limit: number }; Returns: Json };
 app_ai_run: { Args: {p_actor: string; p_session: string; p_action: string; p_data: Json }; Returns: Json };
 app_asset_admin: { Args: {p_actor: string; p_session: string; p_id: string }; Returns: Json };
 app_asset_cleanup: { Args: {p_actor: string; p_session: string }; Returns: Json };
@@ -16,12 +11,15 @@ app_asset_get: { Args: {p_actor: string; p_session: string; p_id: string; p_down
 app_asset_write: { Args: {p_actor: string; p_session: string; p_action: string; p_data: Json }; Returns: Json };
 app_attendance_access: { Args: {p_actor: string; p_session: string; p_student: string; p_class: string; p_date: string; p_write?: boolean | null }; Returns: boolean };
 app_attendance_mutate: { Args: {p_actor: string; p_session: string; p_command: Json }; Returns: Json };
+app_audit_read: { Args: {p_actor: string; p_session: string; p_domain?: string | null; p_before?: string | null; p_before_id?: string | null }; Returns: Json };
 app_auth_attempt: { Args: {p_key: string }; Returns: boolean };
 app_auth_claim: { Args: {p_user: string; p_session: string; p_remember: boolean }; Returns: boolean };
 app_auth_device: { Args: {p_user: string; p_session: string; p_label: string }; Returns: undefined };
 app_auth_principal: { Args: {p_user: string; p_session: string }; Returns: Json };
 app_auth_revoke: { Args: {p_user: string; p_session: string }; Returns: undefined };
 app_book_allowed: { Args: {p_actor: string; p_session: string; p_id: string }; Returns: boolean };
+app_bulk_catalog: { Args: {p_actor: string; p_session: string; p_domain: string; p_class: string; p_subject?: string | null }; Returns: Json };
+app_bulk_input: { Args: {p_actor: string; p_session: string; p_request: string; p_action: string; p_domain?: string | null; p_revision?: number | null; p_options?: Json | null; p_rows?: Json | null }; Returns: Json };
 app_class_access: { Args: {p_actor: string; p_session: string; p_class: string; p_write?: boolean | null }; Returns: boolean };
 app_classes_read: { Args: {p_actor: string; p_session: string; p_year?: string | null }; Returns: Json };
 app_classes_write: { Args: {p_actor: string; p_session: string; p_request: string; p_revision: number; p_command: Json }; Returns: Json };
@@ -119,5 +117,8 @@ app_survey_mutate: { Args: {p_actor: string; p_session: string; p_command: Json 
 app_survey_open: { Args: {p_period: string }; Returns: boolean };
 app_survey_required: { Args: {p_actor: string; p_session: string }; Returns: boolean };
 app_survey_start: { Args: {p_actor: string; p_session: string; p_period: string }; Returns: Json };
+app_teacher_assignments: { Args: {p_actor: string; p_session: string; p_target: string; p_command?: Json | null }; Returns: Json };
 app_teaching_access: { Args: {p_actor: string; p_session: string; p_class: string; p_subject: string; p_write?: boolean | null }; Returns: boolean };
+app_user_provision_begin: { Args: {p_actor: string; p_session: string; p_request: string; p_command: Json; p_fingerprint: string }; Returns: Json };
+app_user_provision_finish: { Args: {p_actor: string; p_session: string; p_request: string; p_fingerprint: string }; Returns: Json };
 } } };

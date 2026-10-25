@@ -9,6 +9,7 @@ import ts from "typescript";
 import { NextRequest, NextResponse } from "next/server.js";
 import { renderToStaticMarkup } from "react-dom/server";
 const sources = {
+  "../manage-assignments": `import {createElement} from 'react';export const ManageAssignments=()=>createElement('button',null,'Kelola Tugas Tambahan');`,
   "server-only": "export {};",
   "next/navigation": `export const redirect=url=>{const e=Error('redirect');e.url=url;throw e};`,
   "next/link": `import {createElement} from 'react';export default function Link({prefetch,children,...props}){return createElement('a',props,children)}`,
@@ -300,4 +301,10 @@ test("canonical UUID casing remains compatible with Postgres identifiers", async
     render(await page(params(target.toUpperCase()))),
     /Pengguna sintetis/,
   );
+});
+
+test('assignment management control appears only for admin viewing a teacher',async()=>{
+ let m=setup();assert.doesNotMatch(render(await page(params())),/Kelola Tugas Tambahan/);
+ m=setup();m.caller.principal.is_admin=true;assert.match(render(await page(params())),/Kelola Tugas Tambahan/);
+ m=setup();m.caller.principal.is_admin=true;m.result.data.role='student';assert.doesNotMatch(render(await page(params())),/Kelola Tugas Tambahan/);
 });
