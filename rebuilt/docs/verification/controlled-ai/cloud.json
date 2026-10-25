@@ -1,0 +1,28 @@
+{
+  "project": "qpzoukkhdxpmbtkcqemj",
+  "cloudVersion": "20261025032055",
+  "verified": {
+    "rpc": {
+      "anon": false,
+      "config": [
+        "search_path=\"\""
+      ],
+      "invoker": true,
+      "service_role": true,
+      "authenticated": false
+    },
+    "index": true,
+    "table": {
+      "rls": true,
+      "anon_select": false,
+      "service_delete": false,
+      "service_insert": true,
+      "service_select": true,
+      "service_update": false,
+      "authenticated_select": false
+    },
+    "invalid_session": {
+      "code": "denied"
+    }
+  }
+}

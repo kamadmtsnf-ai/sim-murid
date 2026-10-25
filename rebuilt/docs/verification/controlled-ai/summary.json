@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-25",
+  "baseline": "593dd9dae7a0ddc3edea3c484b684b403bdda90d",
+  "localFullCheck": {
+    "tests": 684,
+    "groups": 75,
+    "exit": 0
+  },
+  "additionalCaseVerified": 1,
+  "uniqueCasesVerified": 685,
+  "finalTargetedChecks": {
+    "controls": 8,
+    "provider": 5
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "npmCi": "passed",
+  "build": "passed",
+  "browserChecks": 53,
+  "axeRuns": 4,
+  "realProviderCalls": 0,
+  "environmentActivationPerformed": false,
+  "humanAcceptance": false,
+  "productionUsageMeasurements": null,
+  "migration": {
+    "project": "qpzoukkhdxpmbtkcqemj",
+    "name": "controlled_ai_p12",
+    "cloudVersion": "20261025032055",
+    "sha256": "8136b1b7f4c8adaf65e84dd8b52318be5604bbc68361e4da90bd950c8c5bcfd4",
+    "rpcBodyMd5": "a92755a56ec4a132a4f1c2d0c963bac8",
+    "rls": true,
+    "serviceRoleOnly": true,
+    "invalidSession": "denied"
+  },
+  "stageFullyAccepted": false
+}
