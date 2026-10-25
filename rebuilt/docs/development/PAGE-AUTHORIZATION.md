@@ -22,3 +22,7 @@ Ini pembatas halaman, bukan pengganti otorisasi per-record atau per-mutasi. Kebi
 - Setelah menghapus cache `.next`, `npm run build` dijalankan ulang dan lulus.
 - Tes pencabutan izin ditambahkan setelah suite authorization berjalan; suite khusus dijalankan ulang, 6/6 lulus (total 697 kasus setelah tambahan tersebut).
 - `git diff --check` lulus. Tidak mengklaim uji sesi nyata semua peran atau pentest produksi sudah dilakukan.
+
+## Koreksi sebelum rilis
+
+`access_snapshot` memang null sebelum onboarding selesai. Halaman akun pribadi dan dashboard yang tidak memerlukan capability tetap membutuhkan principal valid, tetapi tidak menunggu grant operasional; dashboard menerapkan redirect onboarding existing. Ini menjaga jalur ganti password, verifikasi email, dan pengamanan akun tetap dapat diakses. Halaman operasional tetap fail closed. Ditambahkan tes onboarding khusus.

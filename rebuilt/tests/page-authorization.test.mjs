@@ -35,3 +35,5 @@ test('proxy allows granted page, admin and personal pages; rejects mismatched id
 });
 test('anonymous or revoked session redirects to login and never loads permissions',async()=>{const s=reset();s.caller=null;const res=await proxy(request());assert.equal(res.status,307);assert.equal(res.headers.get('location'),'https://app.test/login?expired=1');assert.equal(s.calls,0);});
 test('revoked grants are checked again on the next request, with no cached authorization',async()=>{const s=reset();s.access.grants=[{capability:'classes.read'}];assert.equal((await proxy(request('/account/classes'))).status,200);s.access.grants=[];assert.equal((await proxy(request('/account/classes'))).status,403);assert.equal(s.calls,2);});
+
+test('onboarding account pages remain reachable when operational grants are not yet available',async()=>{for(const path of ['/account','/account/security','/account/email','/account/sessions','/account/access']){const s=reset();s.access=null;assert.equal((await proxy(request(path))).status,200,path);assert.equal(s.calls,0);}});

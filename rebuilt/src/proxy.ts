@@ -15,7 +15,7 @@ export async function proxy(request: NextRequest) {
     const caller = await verifiedPrincipal(client);
     if (!caller) {
       blocked = NextResponse.redirect(new URL("/login?expired=1", request.url));
-    } else {
+    } else if (!canAccessAccountPage(request.nextUrl.pathname, [], false)) {
       const access = await loadAccessContext(client, AbortSignal.timeout(5000));
       if (!access || access.user_id !== caller.principal.id) {
         blocked = new NextResponse("Hak akses belum dapat diverifikasi. Silakan coba kembali.", { status: 503 });
