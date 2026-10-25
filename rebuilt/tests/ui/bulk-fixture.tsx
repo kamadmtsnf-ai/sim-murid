@@ -1,12 +1,11 @@
 import { createRoot } from "react-dom/client";
 import { BulkImport } from "../../src/components/bulk/bulk-import";
-import { parseBulkCsv } from "../../src/lib/bulk/csv";
+
 import type { BulkDomain } from "../../src/lib/bulk/validation";
 const domain = (new URLSearchParams(location.search).get("domain") ??
   "enrollment") as BulkDomain;
 const id = "00000000-0000-4000-8000-000000000001";
 Object.assign(window, {
-  bulkCount: (text: string, d: BulkDomain) => parseBulkCsv(text, d).count,
   bulkDone: 0,
   unmountBulk: () => root.unmount(),
 });

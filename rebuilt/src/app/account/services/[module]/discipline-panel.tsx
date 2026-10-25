@@ -390,7 +390,6 @@ const retainedEcurrentTarget=e.currentTarget;
           <h2 className="text-xl font-semibold">Saldo dan riwayat siswa</h2>
           <div className="flex flex-wrap gap-3">
             {[
-              ["csv", "CSV"],
               ["xlsx", "Excel"],
               ["pdf", "PDF"],
               ["certificate", "Sertifikat"],

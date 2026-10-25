@@ -1,6 +1,6 @@
 "use client";
-import {confirmAction} from "@/components/ui/confirm-action";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { confirmAction } from "@/components/ui/confirm-action";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { Status } from "@/components/ui/status";
@@ -13,13 +13,13 @@ import {
   type BulkCatalog,
   bulkInput,
   bulkResult,
-  bulkTemplates,
   headers,
   outcomeLabels,
   type BulkDomain,
   type BulkResult,
 } from "@/lib/bulk/validation";
-import { parseBulkCsv } from "@/lib/bulk/csv";
+import { fileBase64 } from "@/lib/spreadsheets/client";
+import { z } from "zod";
 const titles = {
   enrollment: "Impor penempatan siswa",
   schedules: "Impor jadwal KBM",
@@ -46,7 +46,7 @@ export function BulkImport({
   const [catalog, setCatalog] = useState<BulkCatalog | null>(null),
     [referenceSearch, setReferenceSearch] = useState("");
   const [open, setOpen] = useState(false),
-    [csv, setCsv] = useState(""),
+    [workbook, setWorkbook] = useState(""),
     [classId, setClassId] = useState(""),
     [date, setDate] = useState(""),
     [kind, setKind] = useState<"PH" | "ATS" | "ASAS" | "Praktik">("PH");
@@ -72,21 +72,15 @@ export function BulkImport({
   }, []);
   useWriteGuard(
     () => !!active.current,
-    () => open && !!csv && phase !== "saved",
+    () => open && !!workbook && phase !== "saved",
   );
-  const preview = useMemo(() => {
-    if (!csv) return null;
-    try {
-      return { ...parseBulkCsv(csv, domain), error: "" };
-    } catch (e) {
-      return {
-        rows: [],
-        issues: [],
-        count: 0,
-        error: e instanceof Error ? e.message : "CSV tidak valid.",
-      };
-    }
-  }, [csv, domain]);
+  const [preview, setPreview] = useState<{
+    rows: Record<string, unknown>[];
+    issues: { row: number; code: string }[];
+    count: number;
+    error: string;
+  } | null>(null);
+  const [fileLoading, setFileLoading] = useState(false);
   const options = {
     classId,
     ...(domain !== "schedules" ? { date } : {}),
@@ -103,7 +97,9 @@ export function BulkImport({
   }
   function reset() {
     fileRead.current++;
-    setCsv("");
+    setFileLoading(false);
+    setWorkbook("");
+    setPreview(null);
     setClassId(classes.length === 1 ? classes[0]!.id : "");
     setDate("");
     setKind("PH");
@@ -113,69 +109,99 @@ export function BulkImport({
     if (active.current) return;
     if (!value && phase === "saved") {
       fileRead.current++;
-      setCsv("");
+      setWorkbook("");
+      setPreview(null);
       setOpen(false);
       onFinished();
       return;
     }
     if (
       !value &&
-      csv &&
+      workbook &&
       phase !== "saved" &&
-      !await confirmAction(
+      !(await confirmAction(
         phase === "uncertain"
           ? "Hasil belum dipastikan. Simpan ID permintaan dan periksa hasil sebelum mengulang. Tutup dan hapus isian?"
           : "Tutup dan hapus isian impor yang belum disimpan?",
-      )
+      ))
     )
       return;
     if (value) reset();
     else {
       fileRead.current++;
-      setCsv("");
+      setWorkbook("");
+      setPreview(null);
       setResult(null);
     }
     setOpen(value);
   }
   function template() {
-    const url = URL.createObjectURL(
-      new Blob([bulkTemplates[domain]], { type: "text/csv;charset=utf-8" }),
-    );
     const a = document.createElement("a");
-    a.href = url;
-    a.download = `template-${domain}.csv`;
+    a.href = "/api/bulk-input/workbook?" + new URLSearchParams({ domain });
+    a.download = `template-${domain}.xlsx`;
     a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
   async function file(file: File | undefined) {
     const epoch = ++fileRead.current;
-    if (!file) return;
-    setCsv("");
+    setWorkbook("");
+    setPreview(null);
+    setFileLoading(false);
     edit();
-    if (file.size > 65536 || !file.name.toLowerCase().endsWith(".csv")) {
-      setMessage("Pilih CSV UTF-8 maksimal 64 KiB.");
+    if (!file) return;
+    if (file.size > 1048576 || !file.name.toLowerCase().endsWith(".xlsx")) {
+      setMessage("Pilih Excel .xlsx maksimal 1 MiB.");
       return;
     }
+    setFileLoading(true);
     try {
-      const text = new TextDecoder("utf-8", { fatal: true }).decode(
-        await file.arrayBuffer(),
-      );
-      if (mounted.current && fileRead.current === epoch) {
-        setCsv(text);
-        edit();
+      const workbook = await fileBase64(file);
+      const r = await fetch("/api/bulk-input/workbook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ domain, workbook }),
+        signal: AbortSignal.timeout(30000),
+      });
+      const b = await r.json();
+      if (!mounted.current || fileRead.current !== epoch) return;
+      if (!r.ok) {
+        setMessage(
+          typeof b.message === "string" ? b.message : "Excel tidak valid.",
+        );
+        return;
       }
+      const parsed = z
+        .object({
+          rows: z.array(z.record(z.string(), z.unknown())).max(100),
+          issues: z
+            .array(
+              z.object({
+                row: z.number().int().min(2).max(101),
+                code: z.string(),
+              }),
+            )
+            .max(100),
+          count: z.number().int().min(1).max(100),
+        })
+        .parse(b.preview);
+      setWorkbook(workbook);
+      setPreview({ ...parsed, error: "" });
+      edit();
     } catch {
       if (mounted.current && fileRead.current === epoch)
-        setMessage("Berkas bukan teks UTF-8 yang dapat dibaca.");
+        setMessage(
+          "Berkas Excel belum dapat diperiksa. Gunakan template dan coba lagi.",
+        );
+    } finally {
+      if (mounted.current && fileRead.current === epoch) setFileLoading(false);
     }
   }
   async function send(action: "preview" | "commit" | "status") {
-    if (active.current) return;
+    if (active.current || fileLoading) return;
     if (
       action !== "status" &&
       (!preview || preview.error || preview.issues.length)
     ) {
-      setMessage("Perbaiki seluruh baris CSV sebelum melanjutkan.");
+      setMessage("Perbaiki seluruh baris Excel sebelum melanjutkan.");
       return;
     }
     if (
@@ -192,7 +218,7 @@ export function BulkImport({
             requestId,
             domain,
             options,
-            csv,
+            workbook,
             ...(action === "commit" ? { revision: result?.revision } : {}),
           });
     if (input && !input.success) {
@@ -223,7 +249,8 @@ export function BulkImport({
       );
       if (!mounted.current || c.signal.aborted) return;
       if (response.status === 401 || response.status === 403) {
-        setCsv("");
+        setWorkbook("");
+        setPreview(null);
         setResult(null);
         setPhase("blocked");
         setMessage(
@@ -327,7 +354,8 @@ export function BulkImport({
       if (!mounted.current || c.signal.aborted) return;
       if (r.status === 401 || r.status === 403) {
         setCatalog(null);
-        setCsv("");
+        setWorkbook("");
+        setPreview(null);
         setResult(null);
         setPhase("blocked");
         setMessage(
@@ -392,10 +420,10 @@ export function BulkImport({
             ))}
           </ol>
           <p className="text-sm text-muted-foreground">
-            CSV UTF-8 dengan pemisah koma, maksimal 64 KiB dan 100 baris.
-            Username adalah teks persis, termasuk nol awal dan minus. Atur kolom
-            username sebagai teks di spreadsheet. Akun baru tidak dibuat melalui
-            impor ini.{" "}
+            Excel .xlsx, maksimal 1 MiB dan 100 baris. Pertahankan sheet Data
+            serta username berformat Text. Username adalah teks persis, termasuk
+            nol awal dan minus. Atur kolom username sebagai teks di spreadsheet.
+            Akun baru tidak dibuat melalui impor ini.{" "}
             {domain === "grades"
               ? "Nilai kosong berbeda dari 0. Impor hanya membuat penilaian baru, bukan koreksi atau penimpaan."
               : domain === "enrollment"
@@ -458,7 +486,7 @@ export function BulkImport({
             </details>
           ) : null}
           <Button type="button" variant="outline" onClick={template}>
-            Unduh template CSV
+            Unduh template Excel
           </Button>
           <fieldset
             disabled={frozen}
@@ -523,30 +551,15 @@ export function BulkImport({
               </label>
             ) : null}
             <label className="min-w-0 text-sm sm:col-span-2">
-              Unggah CSV
+              Unggah Excel (.xlsx)
               <input
                 type="file"
-                accept=".csv,text/csv"
+                accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 className={controlClass}
                 onChange={(e) => void file(e.target.files?.[0])}
               />
             </label>
-            <label className="min-w-0 text-sm sm:col-span-2">
-              Isi CSV
-              <textarea
-                className={`${controlClass} min-h-36 font-mono text-sm`}
-                aria-label="Isi CSV"
-                value={csv}
-                maxLength={65536}
-                spellCheck={false}
-                onChange={(e) => {
-                  fileRead.current++;
-                  setCsv(e.target.value);
-                  edit();
-                }}
-                placeholder={bulkTemplates[domain]}
-              />
-            </label>
+            {fileLoading && <p role="status">Memeriksa berkas Excel…</p>}
           </fieldset>
           {message ? (
             <div ref={feedback} tabIndex={-1}>
@@ -574,7 +587,7 @@ export function BulkImport({
             <Status tone="error">{preview.error}</Status>
           ) : null}
           {preview?.issues.length ? (
-            <ul aria-label="Masalah CSV" className="space-y-2 text-sm">
+            <ul aria-label="Masalah Excel" className="space-y-2 text-sm">
               {preview.issues.map((i) => (
                 <li key={i.row}>
                   Baris {i.row}: {i.code}. Tidak disimpan.
@@ -674,7 +687,8 @@ export function BulkImport({
                 type="button"
                 disabled={
                   pending ||
-                  !csv ||
+                  fileLoading ||
+                  !workbook ||
                   !!preview?.error ||
                   !!preview?.issues.length
                 }
@@ -717,7 +731,8 @@ export function BulkImport({
               <Button
                 type="button"
                 onClick={() => {
-                  setCsv("");
+                  setWorkbook("");
+                  setPreview(null);
                   setOpen(false);
                   onFinished();
                 }}

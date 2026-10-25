@@ -80,8 +80,7 @@ test("Export scope, zero preservation, CSV injection escaping, XLSX and PDF open
     subjects: [],
   });
   assert.equal(serviceExportRows(s).rows[0]?.[3], 0);
-  const csv = await (await exportServices(s, "csv")).text();
-  assert.ok(csv.includes("'=BAD()"));
+  await assert.rejects(exportServices(s,"csv"));
   const { default: ExcelJS } = await import("exceljs"),
     book = new ExcelJS.Workbook();
   await book.xlsx.load(
@@ -141,6 +140,6 @@ test('Insights exports actual scoped results instead of the period catalog', asy
   const periodId=id();
   const data=snapshot.parse({module:'insights',revision:1,today:'2026-10-23',month:'2026-10-01',isAdmin:true,isManager:true,years:[],classes:[],subjects:[],rows:[{id:periodId,title:'Catalog only'}],extra:{appliedFilters:{periodId,role:'teacher'},aggregates:[{code:'A1',mean:4.2,n:5}],progress:[],essays:[{code:'E1',text:'Esai terfilter'}],plan:[],analyses:[]}});
   const table=serviceExportRows(data);assert.equal(table.rows.length,2);assert.ok(table.rows.every(r=>r[0]===periodId));assert.ok(JSON.stringify(table.rows).includes('Esai terfilter'));assert.ok(!JSON.stringify(table.rows).includes('Catalog only'));
-  const csv=await (await exportServices(data,'csv')).text();assert.ok(csv.includes('4.2'));assert.ok(csv.includes('Esai terfilter'));
+  const {default:ExcelJS}=await import('exceljs');const book=new ExcelJS.Workbook();await book.xlsx.load(Buffer.from(await (await exportServices(data,'xlsx')).arrayBuffer()) as never);const text=JSON.stringify(book.worksheets[0]?.getSheetValues());assert.ok(text.includes('4.2'));assert.ok(text.includes('Esai terfilter'));
   assert.throws(()=>serviceExportRows({...data,extra:{appliedFilters:{}}}),/Pilih periode/);
 });
