@@ -102,6 +102,8 @@ try {
     await opener.click();
     const dialog = page.getByRole("dialog");
     await dialog.waitFor();
+    const generatedControl = await page.getByRole("button", {name:"Buka formulir",exact:true,includeHidden:true}).getAttribute("aria-controls");
+    assert.ok(generatedControl && generatedControl === await dialog.getAttribute("id"), "default Radix trigger retains generated content ID");
     await page.getByLabel("Nama", { exact: true }).fill("Isian milik pengguna");
     await page
       .getByRole("button", { name: "Mulai proses", exact: true })
@@ -186,6 +188,7 @@ try {
     await page.getByText("Perubahan: 1", { exact: true }).waitFor();
     results.push({
       width,
+      generatedIdPreserved: true,
       busyEscapeBlocked: true,
       draftPreserved: true,
       focusRestored: true,

@@ -1,10 +1,11 @@
 "use client";
-import {cancelActiveConfirmation} from "@/components/ui/confirm-action";
+import { cancelActiveConfirmation } from "@/components/ui/confirm-action";
 import { ContextualHelp } from "@/components/help/contextual-help";
 import { FormNavigationGuard } from "@/components/forms/navigation-guard";
 import {
   createContext,
   useContext,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -62,9 +63,22 @@ export function WorkspaceShell({
     mobileSearch = useRef<HTMLInputElement>(null);
   const brandRef = useRef<HTMLAnchorElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
-  const path = usePathname(),
-    [open, setOpen] = useState(false),
-    [query, setQuery] = useState("");
+  const path = usePathname();
+  const [navState, setNavState] = useState({ path, open: false, query: "" });
+  // Reset route-owned UI before committing a new route, including back/forward.
+  if (navState.path !== path) setNavState({ path, open: false, query: "" });
+  const { open, query } = navState;
+  const setOpen = useCallback(
+    (value: boolean) => setNavState((state) => ({ ...state, open: value })),
+    [],
+  );
+  const setQuery = useCallback(
+    (value: string) => setNavState((state) => ({ ...state, query: value })),
+    [],
+  );
+  const drawerId = `${searchId}-drawer`;
+  const displayName = name.trim() || username || "Pengguna";
+  const initial = Array.from(displayName)[0]?.toLocaleUpperCase("id-ID") ?? "?";
   useEffect(() => {
     if (!open) return;
     const desktop = window.matchMedia("(min-width: 1024px)");
@@ -74,11 +88,16 @@ export function WorkspaceShell({
         setOpen(false);
       }
     };
+    closeOnDesktop();
     desktop.addEventListener("change", closeOnDesktop);
     return () => desktop.removeEventListener("change", closeOnDesktop);
-  }, [open]);
-  useEffect(()=>()=>cancelActiveConfirmation(),[path]);
-  const isDirectoryDetail = /^\/account\/directory\/[^/]+\/?$/.test(path);
+  }, [open, setOpen]);
+  useEffect(() => () => cancelActiveConfirmation(), [path]);
+  const detailLabel = /^\/account\/directory\/[^/]+\/?$/.test(path)
+    ? "Detail pengguna"
+    : /^\/account\/biodata\/[^/]+\/?$/.test(path)
+      ? "Detail biodata"
+      : null;
   const item = currentNavItem(path),
     group = navigation.find((g) => g.items.some((i) => i.href === item?.href));
   const filtered = filterNavigation(navigation, query),
@@ -95,6 +114,13 @@ export function WorkspaceShell({
           /auto|scroll/.test(getComputedStyle(scroller).overflowY) &&
           scroller.scrollHeight > scroller.clientHeight
         ) {
+          const focused = document.activeElement;
+          if (
+            focused instanceof HTMLElement &&
+            scroller.contains(focused) &&
+            !nav.contains(focused)
+          )
+            return;
           const box = scroller.getBoundingClientRect(),
             link = current.getBoundingClientRect();
           if (link.top < box.top) scroller.scrollTop -= box.top - link.top;
@@ -152,6 +178,7 @@ export function WorkspaceShell({
             type="search"
             placeholder="Cari menu…"
             maxLength={100}
+            aria-controls={`${searchId}-nav-${mobile ? "mobile" : "desktop"}`}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => {
@@ -180,7 +207,14 @@ export function WorkspaceShell({
             {resultCount} menu ditemukan
           </p>
         )}
+        {navigationUnavailable && (
+          <p className="navigation-notice" role="status">
+            Status menu belum dapat diverifikasi. Lengkapi keamanan akun bila
+            diminta; simpan pekerjaan sebelum memuat ulang.
+          </p>
+        )}
         <nav
+          id={`${searchId}-nav-${mobile ? "mobile" : "desktop"}`}
           ref={mobile ? mobileNav : desktopNav}
           aria-label={mobile ? "Navigasi utama seluler" : "Navigasi utama"}
           className="workspace-nav"
@@ -209,18 +243,23 @@ export function WorkspaceShell({
               </section>
             ))
           ) : (
-            <p className="px-3 text-sm text-muted-foreground" role="status">
-              Menu tidak ditemukan. Coba kata lain.
+            <p
+              className="px-3 text-sm text-muted-foreground"
+              role={query.trim() ? undefined : "status"}
+            >
+              {query.trim()
+                ? "Menu tidak ditemukan. Coba kata lain."
+                : "Belum ada menu yang dapat ditampilkan untuk akun ini."}
             </p>
           )}
         </nav>
         <div className="workspace-user">
           <span className="user-avatar" aria-hidden="true">
-            {name.slice(0, 1).toLocaleUpperCase("id-ID")}
+            {initial}
           </span>
           <div className="min-w-0 flex-1">
-            <strong className="block truncate text-sm" title={name}>
-              {name}
+            <strong className="block truncate text-sm" title={displayName}>
+              {displayName}
             </strong>
             <span
               className="block truncate text-xs text-muted-foreground"
@@ -281,6 +320,8 @@ export function WorkspaceShell({
                     }}
                     aria-label="Buka navigasi"
                     aria-expanded={open}
+                    aria-haspopup="dialog"
+                    aria-controls={open ? drawerId : undefined}
                   >
                     <Menu aria-hidden="true" />
                   </Button>
@@ -288,17 +329,28 @@ export function WorkspaceShell({
                     className="hidden size-4 text-muted-foreground lg:block"
                     aria-hidden="true"
                   />
-                  <span className="text-sm font-medium">
-                    Ruang kerja madrasah
-                  </span>
+                  <div className="min-w-0">
+                    <span className="block text-xs text-muted-foreground">
+                      Ruang kerja madrasah
+                    </span>
+                    <span className="block text-sm font-semibold [overflow-wrap:anywhere]">
+                      {detailLabel ?? item?.label ?? "Layanan madrasah"}
+                    </span>
+                  </div>
                 </div>
                 <AcademicContextSummary />
                 <div className="workspace-identity">
                   <span className="user-avatar" aria-hidden="true">
-                    {name.slice(0, 1).toLocaleUpperCase("id-ID")}
+                    {initial}
                   </span>
-                  <span className="hidden max-w-56 truncate text-sm sm:block">
-                    {name}
+                  <span className="sr-only sm:hidden">
+                    Masuk sebagai {displayName}
+                  </span>
+                  <span
+                    className="hidden max-w-56 truncate text-sm sm:block"
+                    title={displayName}
+                  >
+                    {displayName}
                   </span>
                 </div>
               </header>
@@ -330,18 +382,14 @@ export function WorkspaceShell({
                         )}
                         <li>
                           <ChevronRight aria-hidden="true" />
-                          <span
-                            aria-current={
-                              isDirectoryDetail ? undefined : "page"
-                            }
-                          >
+                          <span aria-current={detailLabel ? undefined : "page"}>
                             {item?.label ?? "Detail"}
                           </span>
                         </li>
-                        {isDirectoryDetail && (
+                        {detailLabel && (
                           <li>
                             <ChevronRight aria-hidden="true" />
-                            <span aria-current="page">Detail pengguna</span>
+                            <span aria-current="page">{detailLabel}</span>
                           </li>
                         )}
                       </>
@@ -351,20 +399,20 @@ export function WorkspaceShell({
                 <ContextualHelp
                   key={path}
                   href={item?.href ?? "/account"}
-                  label={
-                    isDirectoryDetail
-                      ? "Detail pengguna"
-                      : (item?.label ?? "Ruang kerja")
-                  }
+                  label={detailLabel ?? item?.label ?? "Ruang kerja"}
                 />
                 {children}
               </div>
-              <footer className="workspace-footer">
-                SiM-Murid · MTs Nurul Falah
-                <span>Data mengikuti hak akses akun Anda.</span>
+              <footer
+                className="workspace-footer"
+                aria-label="Informasi aplikasi"
+              >
+                <p className="font-medium">SiM-Murid · MTs Nurul Falah</p>
+                <p>Data mengikuti hak akses akun Anda.</p>
               </footer>
             </div>
             <Dialog
+              contentId={drawerId}
               returnFocusRef={returnFocusRef}
               open={open}
               onOpenChange={(next) => {

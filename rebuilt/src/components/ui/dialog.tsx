@@ -5,6 +5,7 @@ import type { ReactNode, RefObject } from "react";
 import { Button } from "./button";
 import { cn } from "@/lib/utils";
 export function Dialog({
+  contentId,
   open,
   onOpenChange,
   title,
@@ -16,6 +17,7 @@ export function Dialog({
   closeDisabled = false,
   onEscapeKeyDown,
 }: {
+  contentId?: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
@@ -39,6 +41,7 @@ export function Dialog({
       <Primitive.Portal>
         <Primitive.Overlay className="dialog-overlay fixed inset-0 z-40 bg-foreground/45 backdrop-blur-sm" />
         <Primitive.Content
+        {...(contentId ? { id: contentId } : {})}
           onEscapeKeyDown={(event) => {
             onEscapeKeyDown?.(event);
             if (closeDisabled) event.preventDefault();
