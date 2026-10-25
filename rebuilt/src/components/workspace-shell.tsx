@@ -1,4 +1,5 @@
 "use client";
+import { ContextualHelp } from "@/components/help/contextual-help";
 import { FormNavigationGuard } from "@/components/forms/navigation-guard";
 import {
   createContext,
@@ -137,7 +138,10 @@ export function WorkspaceShell({
             className="size-4 shrink-0 text-muted-foreground"
             aria-hidden="true"
           />
-          <label className="sr-only" htmlFor={`${searchId}-${mobile ? "mobile" : "desktop"}`}>
+          <label
+            className="sr-only"
+            htmlFor={`${searchId}-${mobile ? "mobile" : "desktop"}`}
+          >
             {mobile ? "Cari menu pada navigasi seluler" : "Cari menu navigasi"}
           </label>
           <input
@@ -342,6 +346,15 @@ export function WorkspaceShell({
                     )}
                   </ol>
                 </nav>
+                <ContextualHelp
+                  key={path}
+                  href={item?.href ?? "/account"}
+                  label={
+                    isDirectoryDetail
+                      ? "Detail pengguna"
+                      : (item?.label ?? "Ruang kerja")
+                  }
+                />
                 {children}
               </div>
               <footer className="workspace-footer">
@@ -356,7 +369,12 @@ export function WorkspaceShell({
                 setOpen(next);
                 if (!next) setQuery("");
               }}
-              onEscapeKeyDown={event => { if(query) { event.preventDefault(); clearSearch(true); } }}
+              onEscapeKeyDown={(event) => {
+                if (query) {
+                  event.preventDefault();
+                  clearSearch(true);
+                }
+              }}
               title="Navigasi"
               description="Pilih layanan madrasah"
               className="workspace-drawer translate-x-0 translate-y-0"

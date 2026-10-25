@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-25",
+  "baseline": "0fe007184b47cde38f774742e39a2b9814b9a2f2",
+  "tests": 673,
+  "groups": 73,
+  "typecheck": "passed",
+  "lint": "passed",
+  "build": "passed",
+  "browserChecks": 41,
+  "axeRuns": 4,
+  "humanBaseline": null,
+  "humanAfter": null,
+  "humanAcceptance": false,
+  "stageComplete": false,
+  "dashboardBrowserChecks": 75,
+  "dashboardAxeRuns": 11,
+  "npmCi": "passed"
+}
