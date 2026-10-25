@@ -47,7 +47,8 @@
     "20261024153547_bulk_input_p08.sql",
     "20261025013536_finalization_audit_p09.sql",
     "20261025031124_controlled_ai_p12.sql",
-    "20261025091023_teacher_assignments.sql"
+    "20261025091023_teacher_assignments.sql",
+    "20261025152242_teacher_duty_assignment_guards.sql"
   ],
   "tables": [
     {

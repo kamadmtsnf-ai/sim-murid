@@ -53,7 +53,8 @@ export function assignmentLabel(code: string) {
     school_head: "Kepala madrasah",
     homeroom_teacher: "Wali kelas",
     duty_teacher: "Guru piket",
-    student_mentor: "Pembimbing siswa",
+    student_mentor: "Guru Wali",
+    counselor: "Guru BK",
     committee_treasurer: "Bendahara komite",
     savings_manager: "Pengelola tabungan",
   };

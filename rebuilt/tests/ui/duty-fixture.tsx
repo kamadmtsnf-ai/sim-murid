@@ -53,6 +53,7 @@ const data = dutySnapshot.parse({
               teacher_id: p.id,
               name: p.full_name,
               weekday: weekday + (i % 2),
+              active: mode !== "inactive",
             })),
           ),
     confirmed: readonly,

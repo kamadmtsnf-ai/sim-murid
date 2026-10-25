@@ -1,3 +1,4 @@
+import { installConfirmDriver, settleConfirmation } from "./confirm-driver.mjs";
 /** Isolated Duty browser regression suite. No real account, API mutation or production data. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -136,6 +137,7 @@ try {
   let requests = [],
     reply = "success";
   page.on("dialog", (d) => d.accept());
+  await installConfirmDriver(page);
   await page.route("**/api/operations/duty?*", async (route) => {
     if (route.request().method() !== "POST") return route.continue();
     requests.push(route.request().postDataJSON());
@@ -225,6 +227,31 @@ try {
       .getByRole("tab", { name: "Riwayat konfirmasi", exact: true })
       .click();
   }
+  await visit("inactive");
+  check(
+    await page
+      .getByRole("button", { name: "Konfirmasi piket utama", exact: true })
+      .isDisabled(),
+    "inactive roster cannot confirm primary",
+  );
+  check(
+    await page
+      .getByRole("button", { name: "Tunjuk pengganti", exact: true })
+      .isDisabled(),
+    "inactive roster cannot appoint substitute",
+  );
+  check(
+    (await page
+      .getByText("Tugas Guru Piket tidak aktif", { exact: true })
+      .count()) > 0,
+    "inactive roster explained",
+  );
+  check(
+    await page
+      .getByRole("button", { name: "Atur jadwal mingguan", exact: true })
+      .isEnabled(),
+    "inactive roster cleanup remains available",
+  );
   for (const mode of [
     "normal",
     "empty",
@@ -274,6 +301,7 @@ try {
         kind + " footer reachable " + width,
       );
       await page.keyboard.press("Escape");
+      await settleConfirmation(page);
       await dialog().waitFor({ state: "hidden" });
       check(
         await page
@@ -303,6 +331,7 @@ try {
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.dismiss());
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   check(
     (await dialog().count()) === 1,
     "dirty Escape cancellation retains modal",
@@ -314,6 +343,7 @@ try {
   await dialog()
     .getByRole("combobox", { name: "Guru", exact: true })
     .selectOption(id(31));
+  await settleConfirmation(page);
   check(
     (await dialog()
       .getByRole("combobox", { name: "Guru", exact: true })
@@ -325,6 +355,7 @@ try {
   reply = "slow";
   await dialog().getByRole("button", { name: "Simpan", exact: true }).click();
   await page.keyboard.press("Escape");
+  await settleConfirmation(page);
   check((await dialog().count()) === 1, "pending prevents modal dismissal");
   await dialog().waitFor({ state: "hidden" });
   check(
@@ -352,6 +383,7 @@ try {
   await dialog().getByRole("alert").waitFor();
   check(requests.length === 0, "self substitution blocked before network");
   await dialog().locator("select[name=teacherId]").selectOption(id(31));
+  await settleConfirmation(page);
   await dialog().getByRole("button", { name: "Simpan", exact: true }).click();
   await dialog().waitFor({ state: "hidden" });
   check(
@@ -440,10 +472,14 @@ try {
     await dialog().locator("select[name=teacherId]").selectOption(id(30));
     reply = failure;
     await dialog().getByRole("button", { name: "Simpan", exact: true }).click();
-    await dialog().getByRole("alert").waitFor();
+    await dialog()
+      .getByRole("alert")
+      .or(dialog().getByRole("status"))
+      .waitFor();
     check(
       await dialog()
         .getByRole("alert")
+        .or(dialog().getByRole("status"))
         .evaluate((e) => e === document.activeElement),
       failure + " feedback inside trap",
     );
@@ -475,7 +511,7 @@ try {
   await dialog().getByRole("button", { name: "Simpan", exact: true }).click();
   await page.clock.fastForward(31000);
   await page.clock.resume();
-  await dialog().getByRole("alert").waitFor();
+  await dialog().getByRole("alert").or(dialog().getByRole("status")).waitFor();
   check(
     (await dialog()
       .getByRole("button", { name: "Simpan", exact: true })

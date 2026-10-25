@@ -18,7 +18,7 @@
     "test:auth": "node --experimental-strip-types --test tests/auth.test.ts && node --test tests/database/auth.test.mjs",
     "test:sessions": "node --test tests/database/sessions.test.mjs && node --test tests/sessions-page.test.mjs",
     "test:sessions:browser": "node scripts/verify-sessions.mjs",
-    "test:authorization": "node --test tests/teacher-assignments-route.test.mjs tests/page-authorization.test.mjs tests/database/teacher-assignments.test.mjs tests/database/authorization.test.mjs && node --test tests/access-page.test.mjs",
+    "test:authorization": "node --test tests/teacher-assignments-route.test.mjs tests/page-authorization.test.mjs tests/database/teacher-assignments.test.mjs tests/database/teacher-duty-guards.test.mjs tests/database/authorization.test.mjs && node --test tests/access-page.test.mjs",
     "test:teacher-assignments:browser": "node scripts/verify-teacher-assignments.mjs",
     "test:not-found:browser": "node scripts/verify-not-found.mjs",
     "test:access:browser": "node scripts/verify-access.mjs",
