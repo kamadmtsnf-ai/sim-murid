@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import {
   formatAcademicYear,
@@ -35,10 +36,10 @@ export function SurveyForm({
   const [active, setActive] = useState<string>("");
   const [activeDirty, setActiveDirty] = useState(false),
     [kind, setKind] = useState("main");
-  function maySwitch() {
+  async function maySwitch() {
     return (
       !activeDirty ||
-      window.confirm(
+      await confirmAction(
         "Jawaban belum tersinkron. Tetap berpindah dari survei ini?",
       )
     );
@@ -254,7 +255,7 @@ export function SurveyForm({
             String(p.starts_on) <= data.today &&
             String(p.ends_on) >= data.today;
         async function open() {
-          if (!maySwitch()) return;
+          if (!await maySwitch()) return;
           if (active === String(p.id)) {
             setActive("");
             setActiveDirty(false);
@@ -317,10 +318,10 @@ export function SurveyForm({
               <Button
                 variant="outline"
                 disabled={busy || blocked}
-                onClick={() => {
-                  if (!maySwitch()) return;
+                onClick={async () => {
+                  if (!await maySwitch()) return;
                   if (
-                    window.confirm("Tutup periode? Jawaban baru akan ditolak.")
+                    await confirmAction("Tutup periode? Jawaban baru akan ditolak.")
                   )
                     void mutate({ type: "close", periodId: p.id });
                 }}

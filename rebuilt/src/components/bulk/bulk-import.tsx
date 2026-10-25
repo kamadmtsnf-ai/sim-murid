@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -108,7 +109,7 @@ export function BulkImport({
     setKind("PH");
     edit();
   }
-  function changeOpen(value: boolean) {
+  async function changeOpen(value: boolean) {
     if (active.current) return;
     if (!value && phase === "saved") {
       fileRead.current++;
@@ -121,7 +122,7 @@ export function BulkImport({
       !value &&
       csv &&
       phase !== "saved" &&
-      !window.confirm(
+      !await confirmAction(
         phase === "uncertain"
           ? "Hasil belum dipastikan. Simpan ID permintaan dan periksa hasil sebelum mengulang. Tutup dan hapus isian?"
           : "Tutup dan hapus isian impor yang belum disimpan?",
@@ -363,7 +364,7 @@ export function BulkImport({
         type="button"
         variant="outline"
         disabled={disabled || !classes.length}
-        onClick={() => changeOpen(true)}
+        onClick={async () => await changeOpen(true)}
       >
         {titles[domain]}
       </Button>

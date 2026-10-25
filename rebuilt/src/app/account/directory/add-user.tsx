@@ -1,4 +1,5 @@
  'use client';
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import {useEffect,useRef,useState} from 'react';
@@ -17,11 +18,11 @@ export function AddUser(){
  const [open,setOpen]=useState(false),[draft,setDraft]=useState<NewUser|null>(null),[busy,setBusy]=useState(false),[locked,setLocked]=useState(false),[done,setDone]=useState(false),[message,setMessage]=useState(''),[visible,setVisible]=useState(false),[copied,setCopied]=useState(false);
  useEffect(()=>{if(!locked||done)return;const warn=(event:BeforeUnloadEvent)=>{event.preventDefault();};const stop = listenForUnsavedChanges(warn);return()=>stop();},[locked,done]);
  useWriteGuard(()=>busyRef.current,()=>!!draft&&!done&&!!(draft.username||draft.fullName||draft.contactEmail));
- function changeOpen(next:boolean){
+ async function changeOpen(next:boolean){
   if(busyRef.current)return;
   if(!next&&done){setLocked(false);setDraft(null);setOpen(false);return;}
   if(!next&&!done&&locked){setOpen(false);return;}
-  if(!next&&!done&&draft&&(draft.username||draft.fullName||draft.contactEmail)&&!window.confirm('Tutup formulir dan buang isian pengguna?'))return;
+  if(!next&&!done&&draft&&(draft.username||draft.fullName||draft.contactEmail)&&!await confirmAction('Tutup formulir dan buang isian pengguna?'))return;
   if(next&&!locked){setDraft(fresh());setMessage('');setLocked(false);setDone(false);setVisible(false);setCopied(false);}
   setOpen(next);if(!next&&!locked)setDraft(null);
  }
@@ -55,7 +56,7 @@ export function AddUser(){
    </fieldset>
    {message&&<Status tone="error">{message}</Status>}
    <p className="text-sm text-muted-foreground">Kata sandi sementara dibuat otomatis dan ditampilkan setelah akun berhasil dibuat. Penugasan, kelas, dan hubungan keluarga diatur melalui modul terkait.</p>
-   <div className="flex flex-wrap justify-end gap-3"><Button type="button" variant="outline" disabled={busy||locked} onClick={()=>changeOpen(false)}>Batal</Button><Button type="submit" disabled={busy}>{busy?'Memproses…':locked?'Coba kembali':'Buat pengguna'}</Button></div>
+   <div className="flex flex-wrap justify-end gap-3"><Button type="button" variant="outline" disabled={busy||locked} onClick={async ()=>await changeOpen(false)}>Batal</Button><Button type="submit" disabled={busy}>{busy?'Memproses…':locked?'Coba kembali':'Buat pengguna'}</Button></div>
   </form>)}
  </Dialog>;
 }

@@ -19,6 +19,7 @@ export function LoginForm() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [message, setMessage] = useState("");
   const [visible, setVisible] = useState(false);
+  const [capsLock,setCapsLock]=useState(false);
   useEffect(() => {
     mountedRef.current = true;
     return () => {
@@ -74,7 +75,7 @@ export function LoginForm() {
   return <form method="post" action="/api/auth/login" onSubmit={submit} className={styles.form} aria-busy={pending} aria-describedby={message ? "login-error" : undefined}>
     <fieldset disabled={phase !== "idle"} className={styles.fields}>
       <div><label htmlFor="username" className="text-sm font-medium">Username</label><input id="username" name="username" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} required maxLength={100} className={styles.input} /></div>
-      <div><label htmlFor="password" className="text-sm font-medium">Password</label><input id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" required maxLength={1024} className={styles.input} /><button type="button" aria-controls="password" aria-pressed={visible} onClick={() => setVisible(value => !value)} className={styles.passwordToggle}>{visible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}{visible ? "Sembunyikan password" : "Tampilkan password"}</button></div>
+      <div><label htmlFor="password" className="text-sm font-medium">Password</label><input id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" onKeyUp={e=>setCapsLock(e.getModifierState("CapsLock"))} onBlur={()=>setCapsLock(false)} aria-describedby={capsLock?"login-caps-lock":undefined} required maxLength={1024} className={styles.input} /><button type="button" aria-controls="password" aria-pressed={visible} onClick={() => setVisible(value => !value)} className={styles.passwordToggle}>{visible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}{visible ? "Sembunyikan password" : "Tampilkan password"}</button>{capsLock && <p id="login-caps-lock" role="status" className="text-sm text-muted-foreground">Caps Lock aktif. Periksa huruf besar pada password.</p>}</div>
       <label className={styles.remember}><input type="checkbox" name="remember" /><span>Ingat saya selama 7 hari<span className="mt-1 block text-xs text-muted-foreground">Gunakan hanya pada perangkat pribadi. Sesi biasa berlaku 1 jam.</span></span></label>
     </fieldset>
     {message && <div id="login-error" ref={errorRef} role="alert" tabIndex={-1} className={styles.error}>{message}</div>}

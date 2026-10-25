@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Isolated Classes browser regression suite. No real account, API mutation or production data. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -155,6 +156,7 @@ try {
   let writes = [],
     mode = "saved",
     release;
+  await installConfirmDriver(page);
   page.on("dialog", (d) => d.accept());
   await page.route("**/api/classes", async (route) => {
     const body = route.request().postDataJSON();
@@ -211,12 +213,14 @@ try {
       .getByRole("button", { name: "Edit", exact: true })
       .first()
       .click();
+      await settleConfirmation(page);
     await page.getByRole("dialog").waitFor();
   }
   async function fillClass() {
     await page
       .getByRole("button", { name: "Tambah kelas", exact: true })
       .click();
+      await settleConfirmation(page);
     await page.getByLabel("Nama kelas").fill("7 Uji");
   }
   for (const width of [320, 375, 390, 768, 1024, 1440]) {
@@ -242,6 +246,7 @@ try {
       );
     if (s === "error") {
       await page.getByRole("button", { name: "Coba kembali" }).click();
+      await settleConfirmation(page);
       check(
         await page.evaluate(() => window.classesRetried),
         "error retry callback",
@@ -306,6 +311,7 @@ try {
     await geometryDialog(`${w}x${h}`);
     await a11y(page, `dialog ${w}x${h}`);
     await page.keyboard.press("Tab");
+    await settleConfirmation(page);
     check(
       await page
         .getByRole("dialog")
@@ -313,6 +319,7 @@ try {
       "modal keyboard focus trapped",
     );
     await page.keyboard.press("Escape");
+    await settleConfirmation(page);
     await page.getByRole("dialog").waitFor({ state: "hidden" });
     check(
       await page
@@ -329,6 +336,7 @@ try {
   );
   await page.getByLabel("Nama kelas").fill("7 Renamed");
   await page.getByRole("button", { name: "Simpan kelas" }).click();
+  await settleConfirmation(page);
   await page.getByRole("alert").waitFor();
   check(writes.length === 0, "unavailable teacher never silently cleared");
   check(
@@ -336,7 +344,9 @@ try {
     "modal feedback stays accessible",
   );
   await page.getByLabel("Wali kelas").selectOption("");
+  await settleConfirmation(page);
   await page.getByRole("button", { name: "Simpan kelas" }).click();
+  await settleConfirmation(page);
   await page.getByRole("dialog").waitFor({ state: "hidden" });
   check(writes[0].command.teacherId === null, "explicit teacher removal kept");
   await visit();
@@ -346,6 +356,7 @@ try {
   await page
     .getByRole("button", { name: "Tambah tahun ajaran", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.getByText("Data berhasil disimpan.", { exact: true }).waitFor();
   check(
     (
@@ -364,6 +375,7 @@ try {
     .getByRole("button", { name: "Daftar siswa", exact: true })
     .first()
     .click();
+    await settleConfirmation(page);
   check(
     await page
       .getByRole("heading", { name: "Siswa kelas 7 A", exact: true })
@@ -393,6 +405,7 @@ try {
   );
   mode = "hold";
   await page.getByRole("button", { name: "Tempatkan siswa terpilih" }).click();
+  await settleConfirmation(page);
   await page.waitForFunction(() =>
     document.querySelector('[aria-busy="true"]'),
   );
@@ -418,6 +431,7 @@ try {
   await fillClass();
   mode = "duplicate";
   await page.getByRole("button", { name: "Simpan kelas" }).click();
+  await settleConfirmation(page);
   await page.getByRole("alert").waitFor();
   check(
     (await page.getByLabel("Nama kelas").inputValue()) === "7 Uji",
@@ -433,6 +447,7 @@ try {
     await fillClass();
     mode = failure;
     await page.getByRole("button", { name: "Simpan kelas" }).click();
+    await settleConfirmation(page);
     await page.getByRole("alert").waitFor();
     check(
       await page.getByRole("button", { name: "Simpan kelas" }).isDisabled(),
@@ -446,6 +461,7 @@ try {
       failure + " reload available",
     );
     await page.getByRole("button", { name: "Batal", exact: true }).click();
+    await settleConfirmation(page);
     check(
       await page
         .getByRole("button", { name: "Tambah kelas", exact: true })
@@ -457,8 +473,10 @@ try {
   await visit("probe");
   mode = "hold";
   await page.getByRole("button", { name: "Simpan probe" }).click();
+  await settleConfirmation(page);
   await page.waitForTimeout(50);
   await page.getByRole("button", { name: "Tutup panel uji" }).click();
+  await settleConfirmation(page);
   mode = "saved";
   release();
   await page.waitForTimeout(100);
@@ -468,6 +486,7 @@ try {
   );
   await visit("legacy");
   await page.getByRole("button", { name: "Simpan probe" }).click();
+  await settleConfirmation(page);
   await page.waitForFunction(() => window.classesSaved === true);
   check(
     await page.getByRole("button", { name: "Simpan probe" }).isEnabled(),
@@ -482,6 +501,7 @@ try {
   await page
     .getByRole("button", { name: "Tambah tahun ajaran", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.clock.fastForward(31000);
   await page.getByRole("alert").waitFor();
   check(

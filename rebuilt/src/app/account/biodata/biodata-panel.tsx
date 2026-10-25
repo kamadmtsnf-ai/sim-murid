@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import Image from "next/image";
@@ -300,7 +301,7 @@ export function BiodataPanel({
       return;
     if (
       action === "delete" &&
-      !window.confirm(
+      !await confirmAction(
         "Hapus dokumen ini? Kelengkapan profil akan diperiksa ulang.",
       )
     )
@@ -355,7 +356,7 @@ export function BiodataPanel({
     if (lock.current) return;
     if (
       dirty &&
-      !window.confirm(
+      !await confirmAction(
         "Muat ulang dan batalkan perubahan biodata yang belum disimpan?",
       )
     )

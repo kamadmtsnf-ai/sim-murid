@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -112,7 +113,7 @@ export function RecoveryPanel({
     if (
       !locked &&
       (selected || (evidence instanceof HTMLInputElement && evidence.value)) &&
-      !window.confirm(
+      !await confirmAction(
         "Muat ulang antrean dan kosongkan isian pemeriksaan saat ini?",
       )
     )
@@ -175,9 +176,11 @@ export function RecoveryPanel({
     }
   }
   async function submit(event: FormEvent<HTMLFormElement>) {
+const retainedEVENTcurrentTarget=event.currentTarget;
+
     event.preventDefault();
     if (inFlight.current || disabled) return;
-    const form = event.currentTarget,
+    const form = retainedEVENTcurrentTarget,
       fields = Object.fromEntries(new FormData(form));
     const submitter = (event.nativeEvent as SubmitEvent).submitter;
     const action =
@@ -212,7 +215,7 @@ export function RecoveryPanel({
           ? "Buat password sementara dan cabut seluruh sesi"
           : "Cabut seluruh sesi aplikasi";
     if (
-      !window.confirm(
+      !await confirmAction(
         `${verb} untuk ${target.full_name} (@${target.username})?`,
       )
     )
@@ -333,9 +336,9 @@ export function RecoveryPanel({
               />
             </label>
             <Button
-              onClick={() => {
+              onClick={async () => {
                 if (
-                  !window.confirm(
+                  !await confirmAction(
                     "Pastikan password telah diserahkan dengan aman. Hapus tampilan password?",
                   )
                 )

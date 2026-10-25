@@ -4,6 +4,17 @@ export const emailCommand = z.discriminatedUnion("action", [
   z.object({ action: z.literal("send") }).strict(),
   z
     .object({
+      action: z.literal("address"),
+      email: z
+        .email()
+        .max(320)
+        .transform((v) => v.toLowerCase())
+        .refine((v) => !v.endsWith("@auth.sim-murid.invalid")),
+      expectedEmail: z.string().max(320),
+    })
+    .strict(),
+  z
+    .object({
       action: z.literal("verify"),
       challengeId: z.uuid(),
       code: z.string().regex(/^\d{6}$/),

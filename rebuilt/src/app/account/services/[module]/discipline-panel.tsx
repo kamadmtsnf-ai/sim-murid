@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -103,9 +104,9 @@ export function DisciplinePanel({
     setEventCode(eligible[0]?.code ?? "");
     clear();
   }
-  function close() {
+  async function close() {
     if (busy) return;
-    if (!dirty || window.confirm("Buang perubahan yang belum disimpan?")) {
+    if (!dirty || await confirmAction("Buang perubahan yang belum disimpan?")) {
       setMode(null);
       setDirty(false);
       setCancel(null);
@@ -156,9 +157,11 @@ export function DisciplinePanel({
     if (lock.current || disabled) return;
     await mutate(data.revision, command);
   }
-  function submit(e: FormEvent<HTMLFormElement>) {
+  async function submit(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
-    const f = new FormData(e.currentTarget),
+    const f = new FormData(retainedEcurrentTarget),
       get = (k: string) => String(f.get(k) ?? "");
     let command: unknown;
     if (mode === "event") {
@@ -185,7 +188,7 @@ export function DisciplinePanel({
       };
       if (
         catalog &&
-        !window.confirm(
+        !await confirmAction(
           "Simpan perubahan katalog " +
             catalog.code +
             "? Kejadian lama tetap memakai katalog saat dicatat.",
@@ -202,7 +205,7 @@ export function DisciplinePanel({
       };
     else if (mode === "cancel" && cancel) {
       if (
-        !window.confirm(
+        !await confirmAction(
           "Batalkan kejadian ini? Saldo dan urutan kejadian akan dihitung ulang.",
         )
       )
@@ -215,7 +218,7 @@ export function DisciplinePanel({
         return;
       }
       if (
-        !window.confirm(
+        !await confirmAction(
           (get("type") === "reset"
             ? "Arsipkan bulan "
             : "Sinkronkan nilai afektif dari arsip bulan ") +
@@ -588,8 +591,8 @@ export function DisciplinePanel({
       )}
       <Dialog
         open={mode !== null}
-        onOpenChange={(v) => {
-          if (!v) close();
+        onOpenChange={async (v) => {
+          if (!v) await close();
         }}
         returnFocusRef={trigger}
         className="discipline-dialog"

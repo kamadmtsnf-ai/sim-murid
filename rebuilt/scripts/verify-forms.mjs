@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Actual Hak akses saya UI with isolated HTTP boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -102,6 +103,7 @@ try {
     posts = [],
     release,
     stored = { revision: 1, label: "awal" };
+  await installConfirmDriver(page,()=>discard);
   page.on("dialog", (dialog) =>
     dialog.type() === "beforeunload" || discard
       ? dialog.accept()
@@ -167,6 +169,7 @@ try {
   await fresh();
   await page.locator("#probe-value").fill("");
   await button("Simpan isian uji").click();
+  await settleConfirmation(page);
   await phase("error");
   check(posts.length === 0, "invalid draft never reaches HTTP");
   await fresh("hold");
@@ -183,6 +186,7 @@ try {
   await page
     .getByRole("link", { name: "Kelas dan siswa", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.getByText(/Tunggu proses pada halaman/).waitFor();
   check(
     new URL(page.url()).pathname === "/",
@@ -200,6 +204,7 @@ try {
     fullPage: true,
   });
   await button("Tutup pemberitahuan").click();
+  await settleConfirmation(page);
   check(
     (await page.locator("#probe-phase").innerText()) === "pending" &&
       posts.length === 1,
@@ -236,7 +241,9 @@ try {
       outcome + " retains draft",
     );
     await button("Ubah pesan validasi").click();
+    await settleConfirmation(page);
     await button("Bersihkan pesan").click();
+    await settleConfirmation(page);
     await force();
     check(
       (await page.locator("#probe-phase").innerText()) === "uncertain" &&
@@ -249,6 +256,7 @@ try {
     );
     if (outcome === "committed-abort") {
       await button("Periksa data tersimpan").click();
+      await settleConfirmation(page);
       await page
         .locator("#probe-inspected")
         .getByText("data-uji", { exact: true })
@@ -279,12 +287,14 @@ try {
   await page
     .getByRole("link", { name: "Kelas dan siswa", exact: true })
     .click();
+    await settleConfirmation(page);
   check(
     new URL(page.url()).pathname === "/" &&
       (await page.locator("#probe-value").inputValue()) === "data-uji",
     "cancelled sidebar preserves draft",
   );
   await button("Keluar dari akun").click();
+  await settleConfirmation(page);
   check(
     new URL(page.url()).pathname === "/" &&
       (await page.locator("#probe-value").inputValue()) === "data-uji",
@@ -294,12 +304,14 @@ try {
   await page
     .getByRole("link", { name: "Kelas dan siswa", exact: true })
     .click();
+    await settleConfirmation(page);
   await page.waitForURL("**/account/classes");
   check(true, "explicit discard permits navigation");
   await fresh("hold");
   await force();
   await phase("pending");
   await button("Lepas probe").click();
+  await settleConfirmation(page);
   release();
   await page.waitForTimeout(100);
   check(
@@ -324,6 +336,7 @@ try {
   await page
     .getByRole("link", { name: "Kelas dan siswa", exact: true })
     .click();
+    await settleConfirmation(page);
   check(
     (await page
       .getByRole("textbox", { name: "Nama lengkap", exact: true })

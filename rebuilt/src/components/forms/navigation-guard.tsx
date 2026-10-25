@@ -1,4 +1,5 @@
 "use client";
+import { confirmAction } from "@/components/ui/confirm-action";
 import {
   useEffect,
   useRef,
@@ -16,6 +17,8 @@ import { X } from "lucide-react";
 import { Status } from "@/components/ui/status";
 export function FormNavigationGuard({ children }: { children: ReactNode }) {
   const [message, setMessage] = useState("");
+  const approvedAnchor = useRef<HTMLAnchorElement | null>(null),
+    approvedSubmit = useRef<HTMLFormElement | null>(null);
   const notice = useRef<HTMLDivElement>(null),
     approvedNative = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -33,7 +36,7 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
       if (timer.current) clearTimeout(timer.current);
     };
   }, []);
-  function allow() {
+  async function allow() {
     if (pageHasPendingWrite()) {
       setMessage(
         "Tunggu proses pada halaman ini selesai sebelum berpindah. Setelah itu, pilih kembali tujuan Anda.",
@@ -42,9 +45,9 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
     }
     if (
       pageHasUnsavedChanges() &&
-      !window.confirm(
+      !(await confirmAction(
         "Ada isian yang belum disimpan atau hasil penyimpanan yang perlu diperiksa. Tinggalkan halaman? Isian halaman ini dapat hilang.",
-      )
+      ))
     )
       return false;
     setMessage("");
@@ -57,7 +60,7 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
       approvedNative.current = false;
     }, 1000);
   }
-  function click(event: MouseEvent<HTMLDivElement>) {
+  async function click(event: MouseEvent<HTMLDivElement>) {
     if (
       event.defaultPrevented ||
       event.button !== 0 ||
@@ -75,6 +78,10 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
       (anchor.target && anchor.target !== "_self")
     )
       return;
+    if (approvedAnchor.current === anchor) {
+      approvedAnchor.current = null;
+      return;
+    }
     const next = new URL(anchor.href, location.href);
     if (
       next.origin !== location.origin ||
@@ -84,12 +91,26 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
       (next.pathname === location.pathname && next.search === location.search)
     )
       return;
-    if (!allow()) {
-      event.preventDefault();
-      event.stopPropagation();
+    if (!pageHasPendingWrite() && !pageHasUnsavedChanges()) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (
+      (await allow()) &&
+      !pageHasPendingWrite() &&
+      anchor.isConnected &&
+      anchor.href === next.href
+    ) {
+      approvedAnchor.current = anchor;
+      approveNative();
+      anchor.click();
     }
   }
-  function submit(event: FormEvent<HTMLDivElement>) {
+  async function submit(event: FormEvent<HTMLDivElement>) {
+    if (approvedSubmit.current === event.target) {
+      approvedSubmit.current = null;
+      approveNative();
+      return;
+    }
     if (
       event.defaultPrevented ||
       !(event.target instanceof HTMLFormElement) ||
@@ -97,10 +118,18 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
         "/api/auth/logout"
     )
       return;
-    if (!allow()) {
-      event.preventDefault();
-      event.stopPropagation();
-    } else approveNative();
+    if (!pageHasPendingWrite() && !pageHasUnsavedChanges()) {
+      approveNative();
+      return;
+    }
+    const form = event.target;
+    event.preventDefault();
+    event.stopPropagation();
+    if ((await allow()) && !pageHasPendingWrite() && form.isConnected) {
+      approveNative();
+      approvedSubmit.current = form;
+      form.requestSubmit();
+    }
   }
   return (
     <div className="contents" onClickCapture={click} onSubmitCapture={submit}>

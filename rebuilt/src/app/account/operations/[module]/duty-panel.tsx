@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Tabs } from "radix-ui";
@@ -74,10 +75,10 @@ export function DutyPanel({
       (r) => r.teacher_id === p.id && r.weekday === todayDay,
     ),
   );
-  function discard() {
+  async function discard() {
     if (
       dirty.current &&
-      !window.confirm("Tinggalkan perubahan yang belum disimpan?")
+      !await confirmAction("Tinggalkan perubahan yang belum disimpan?")
     )
       return false;
     dirty.current = false;
@@ -106,15 +107,17 @@ export function DutyPanel({
     setEdit(row);
     setMode(next);
   }
-  function close() {
-    if (pending.current || busy || !discard()) return;
+  async function close() {
+    if (pending.current || busy || !await discard()) return;
     setMode(null);
     setEdit(null);
   }
   async function submit(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
     if (locked || pending.current) return;
-    const f = new FormData(e.currentTarget),
+    const f = new FormData(retainedEcurrentTarget),
       get = (key: string) => String(f.get(key) ?? "");
     const command =
       mode === "manage"
@@ -139,7 +142,7 @@ export function DutyPanel({
     }
     if (
       mode === "roster" &&
-      !window.confirm(
+      !await confirmAction(
         "Ganti seluruh jadwal mingguan guru ini? Tanpa hari terpilih, jadwal akan dikosongkan.",
       )
     )
@@ -430,16 +433,16 @@ export function DutyPanel({
       <Button
         disabled={busy}
         variant="outline"
-        onClick={() => {
-          if (discard()) window.location.reload();
+        onClick={async () => {
+          if (await discard()) window.location.reload();
         }}
       >
         Muat ulang
       </Button>
       <Dialog
         open={mode !== null}
-        onOpenChange={(v) => {
-          if (!v) close();
+        onOpenChange={async (v) => {
+          if (!v) await close();
         }}
         returnFocusRef={trigger}
         className="duty-dialog duty-panel"
@@ -497,8 +500,10 @@ export function DutyPanel({
                       value={teacher}
                       className={controlClass}
                       required
-                      onChange={(e) => {
-                        if (discard()) setTeacher(e.target.value);
+                      onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                        if (await discard()) setTeacher(retainedEvalue);
                       }}
                     >
                       <option value="">Pilih guru…</option>
@@ -569,8 +574,8 @@ export function DutyPanel({
           {blocked && (
             <Button
               variant="outline"
-              onClick={() => {
-                if (discard()) window.location.reload();
+              onClick={async () => {
+                if (await discard()) window.location.reload();
               }}
             >
               Muat ulang

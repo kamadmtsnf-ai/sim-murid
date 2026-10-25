@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { TableRegion } from "@/components/ui/data-table";
@@ -94,10 +95,10 @@ export function SettingsPanel({
       stopUnloadGuard();
     };
   }, []);
-  function discard() {
+  async function discard() {
     return (
       !dirty.current.size ||
-      window.confirm(
+      await confirmAction(
         "Ada isian yang belum disimpan. Abaikan perubahan dan lanjutkan?",
       )
     );
@@ -121,7 +122,7 @@ export function SettingsPanel({
     }
   }
   async function reload() {
-    if (sending.current || !discard()) return;
+    if (sending.current || !await discard()) return;
     sending.current = true;
     setPending(true);
     setMessage("Memuat pengaturan…");
@@ -169,7 +170,7 @@ export function SettingsPanel({
     if (
       ["deactivate", "holiday_delete", "logo_clear"].includes(c.type ?? "") &&
       dirty.current.has(formKey) &&
-      !discard()
+      !await discard()
     )
       return;
     const body = {
@@ -256,8 +257,8 @@ export function SettingsPanel({
       if (mounted.current) setPending(false);
     }
   }
-  function edit(id: string | null) {
-    if (sending.current || !discard()) return;
+  async function edit(id: string | null) {
+    if (sending.current || !await discard()) return;
     dirty.current.clear();
     setEditing(id);
     setVersions((v) => ({
@@ -335,8 +336,8 @@ export function SettingsPanel({
     </label>
   );
   const currentHoliday = data.holidays.find((x) => x.id === editing);
-  const section = (value: string) => {
-    if (value === tab || sending.current || !discard()) return;
+  const section = async (value: string) => {
+    if (value === tab || sending.current || !await discard()) return;
     dirty.current.clear();
     setQuery("");
     setPage(1);
@@ -366,7 +367,7 @@ export function SettingsPanel({
             disabled={pending}
             variant={tab === value ? "default" : "outline"}
             aria-pressed={tab === value}
-            onClick={() => section(value ?? "school")}
+            onClick={async () => await section(value ?? "school")}
           >
             {label}
           </Button>
@@ -577,8 +578,8 @@ export function SettingsPanel({
                         <Button
                           type="button"
                           variant="outline"
-                          onClick={() => {
-                            if (window.confirm("Hapus logo dari profil?"))
+                          onClick={async () => {
+                            if (await confirmAction("Hapus logo dari profil?"))
                               void submit({ type: "logo_clear", slot });
                           }}
                         >
@@ -647,7 +648,7 @@ export function SettingsPanel({
                     <Button
                       variant="outline"
                       type="button"
-                      onClick={() => edit(null)}
+                      onClick={async () => await edit(null)}
                     >
                       Batal edit
                     </Button>
@@ -683,7 +684,7 @@ export function SettingsPanel({
                         <Button
                           variant="outline"
                           disabled={busy}
-                          onClick={() => edit(x.id)}
+                          onClick={async () => await edit(x.id)}
                         >
                           Edit
                         </Button>
@@ -691,8 +692,8 @@ export function SettingsPanel({
                           <Button
                             variant="outline"
                             disabled={busy}
-                            onClick={() => {
-                              if (window.confirm(`Nonaktifkan ${x.name}?`))
+                            onClick={async () => {
+                              if (await confirmAction(`Nonaktifkan ${x.name}?`))
                                 void submit({
                                   type: "deactivate",
                                   catalog: type,
@@ -775,7 +776,7 @@ export function SettingsPanel({
                     <Button
                       type="button"
                       variant="outline"
-                      onClick={() => edit(null)}
+                      onClick={async () => await edit(null)}
                     >
                       Batal edit
                     </Button>
@@ -820,16 +821,16 @@ export function SettingsPanel({
                             <Button
                               variant="outline"
                               disabled={busy}
-                              onClick={() => edit(x.id)}
+                              onClick={async () => await edit(x.id)}
                             >
                               Edit
                             </Button>
                             <Button
                               variant="outline"
                               disabled={busy}
-                              onClick={() => {
+                              onClick={async () => {
                                 if (
-                                  window.confirm(
+                                  await confirmAction(
                                     `Hapus hari libur ${x.holiday_date}?`,
                                   )
                                 )

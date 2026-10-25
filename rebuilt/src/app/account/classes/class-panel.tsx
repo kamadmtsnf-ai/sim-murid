@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
 import { FilterBar } from "@/components/ui/collection-controls";
 import { AcademicContextBar } from "@/components/academic/academic-context";
@@ -91,10 +92,10 @@ export function ClassPanel({
       });
     }
   }, [roster]);
-  function leavePlacement() {
+  async function leavePlacement() {
     return (
       (!chosen.length && !startsOn) ||
-      window.confirm(
+      await confirmAction(
         "Abaikan pilihan siswa dan tanggal penempatan yang belum disimpan?",
       )
     );
@@ -106,12 +107,12 @@ export function ClassPanel({
     clear();
     setClassOpen(true);
   }
-  function closeClass(open: boolean) {
+  async function closeClass(open: boolean) {
     if (busy) return;
     if (
       !open &&
       dirty &&
-      !window.confirm(
+      !await confirmAction(
         "Tutup formulir dan abaikan perubahan kelas yang belum disimpan?",
       )
     )
@@ -122,9 +123,9 @@ export function ClassPanel({
       setDirty(false);
     }
   }
-  function showRoster(id: string) {
+  async function showRoster(id: string) {
     if (id !== roster) {
-      if (!leavePlacement()) return;
+      if (!await leavePlacement()) return;
       clearPlacement();
       setRoster(id);
     } else {
@@ -219,8 +220,8 @@ export function ClassPanel({
           })),
         }}
         disabled={disabled || classOpen}
-        onApply={(value) => {
-          if (!leavePlacement()) return;
+        onApply={async (value) => {
+          if (!await leavePlacement()) return;
           setYear(data.years.find((y) => y.start_year === value.year)!.id);
           setRoster(value.classId ?? "");
           clearPlacement();
@@ -242,9 +243,11 @@ export function ClassPanel({
             className={controlClass}
             value={year}
             disabled={disabled}
-            onChange={(e) => {
-              if (!leavePlacement()) return;
-              setYear(e.target.value);
+            onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+              if (!await leavePlacement()) return;
+              setYear(retainedEvalue);
               setRoster("");
               clearPlacement();
             }}
@@ -278,10 +281,12 @@ export function ClassPanel({
           </CardHeader>
           <CardContent className="space-y-4">
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
+const retainedEcurrentTarget=e.currentTarget;
+
                 e.preventDefault();
-                if (!leavePlacement()) return;
-                const f = new FormData(e.currentTarget);
+                if (!await leavePlacement()) return;
+                const f = new FormData(retainedEcurrentTarget);
                 void mutate(data.revision, {
                   type: "year",
                   academicYear: String(f.get("academicYear")),
@@ -314,9 +319,9 @@ export function ClassPanel({
                 data.years.some((y) => y.id === year && y.is_active)
               }
               variant="outline"
-              onClick={() => {
+              onClick={async () => {
                 if (
-                  window.confirm(
+                  await confirmAction(
                     "Aktifkan tahun ajaran terpilih? Tahun lain tetap tersimpan sebagai riwayat.",
                   )
                 )
@@ -431,7 +436,7 @@ export function ClassPanel({
                   variant="outline"
                   type="button"
                   disabled={busy}
-                  onClick={() => closeClass(false)}
+                  onClick={async () => await closeClass(false)}
                 >
                   Batal
                 </Button>
@@ -473,7 +478,7 @@ export function ClassPanel({
                   variant="outline"
                   disabled={busy}
                   aria-describedby={`class-${c.id}`}
-                  onClick={() => showRoster(c.id)}
+                  onClick={async () => await showRoster(c.id)}
                 >
                   Daftar siswa
                 </Button>
@@ -491,9 +496,9 @@ export function ClassPanel({
                       variant="outline"
                       disabled={disabled}
                       aria-describedby={`class-${c.id}`}
-                      onClick={() => {
+                      onClick={async () => {
                         if (
-                          window.confirm(
+                          await confirmAction(
                             `Arsipkan kelas ${c.name}? Riwayat tetap tersimpan.`,
                           )
                         )
@@ -546,9 +551,9 @@ export function ClassPanel({
                         variant="outline"
                         disabled={disabled}
                         aria-label={`Keluarkan ${p.name}`}
-                        onClick={() => {
+                        onClick={async () => {
                           if (
-                            window.confirm(
+                            await confirmAction(
                               `Keluarkan ${p.name} dari penempatan kelas ini? Riwayat tetap tersimpan.`,
                             )
                           )
@@ -570,7 +575,7 @@ export function ClassPanel({
             )}
             {data.can_manage && !selected.archived && (
               <form
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
                   const command = {
                     type: "enrollment" as const,
@@ -584,7 +589,7 @@ export function ClassPanel({
                     return;
                   }
                   if (
-                    window.confirm(
+                    await confirmAction(
                       `Tempatkan ${chosen.length} siswa di kelas ${selected.name}? Penempatan sebelumnya pada tahun yang sama akan diakhiri; riwayat tetap tersimpan.`,
                     )
                   )

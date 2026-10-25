@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useEffect, useRef, useState } from "react";
 import { commands, type ServiceSnapshot } from "@/lib/services/validation";
@@ -108,7 +109,7 @@ export function SurveysPanel({
   async function reload() {
     if (lock.current) return;
     if (
-      !window.confirm(
+      !await confirmAction(
         "Muat ulang jawaban dari server? Draft perangkat dengan versi berbeda tidak diterapkan otomatis.",
       )
     )

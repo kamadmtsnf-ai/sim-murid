@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
 import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -248,11 +249,11 @@ export function GradesPanel({
         "Pilih kelas, mapel dan semester, lalu tampilkan data terlebih dahulu.",
       );
   }
-  function close() {
+  async function close() {
     if (busy) return;
     if (
       !dirty ||
-      window.confirm("Buang perubahan nilai yang belum disimpan?")
+      await confirmAction("Buang perubahan nilai yang belum disimpan?")
     ) {
       controller.current?.abort();
       setMode(null);
@@ -309,11 +310,11 @@ export function GradesPanel({
       if (mounted.current) setReading(false);
     }
   }
-  function changeKind(next: Assessment["kind"]) {
+  async function changeKind(next: Assessment["kind"]) {
     if (!context || !scope) return;
     if (
       dirty &&
-      !window.confirm(
+      !await confirmAction(
         "Ganti jenis penilaian dan buang isian yang belum disimpan?",
       )
     )
@@ -333,9 +334,11 @@ export function GradesPanel({
     clear();
   }
   async function submit(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
     if (lock.current || disabled) return;
-    const f = new FormData(e.currentTarget),
+    const f = new FormData(retainedEcurrentTarget),
       reason = String(f.get("reason") ?? "").trim();
     let command: unknown;
     if (mode === "void" && edit) {
@@ -344,7 +347,7 @@ export function GradesPanel({
         return;
       }
       if (
-        !window.confirm(
+        !await confirmAction(
           "Batalkan penilaian ini? Nomor PH tidak digunakan kembali dan rapor yang sudah terbit tetap dipertahankan.",
         )
       )
@@ -362,7 +365,7 @@ export function GradesPanel({
       if (mode === "kkm") {
         const value = Number(f.get("value"));
         if (
-          !window.confirm(
+          !await confirmAction(
             `Simpan KKM ${value} untuk ${entryClass?.name}, ${semesterLabel(scope.semester)} ${formatAcademicYear(entryClass?.year)}? KKM pada penilaian lama dan rapor terbit tidak diubah. Rapor draf mengikuti KKM periode.`,
           )
         )
@@ -407,7 +410,7 @@ export function GradesPanel({
         }
         if (
           target &&
-          !window.confirm(
+          !await confirmAction(
             "Simpan koreksi " +
               target.kind +
               " ini? Isian yang ditampilkan akan diperbarui, termasuk nilai kosong.",
@@ -416,7 +419,7 @@ export function GradesPanel({
           return;
         if (
           items.every((i) => i.value === null) &&
-          !window.confirm(
+          !await confirmAction(
             "Semua nilai masih kosong. Simpan penilaian yang belum diisi?",
           )
         )
@@ -814,8 +817,8 @@ export function GradesPanel({
       </section>
       <Dialog
         open={mode !== null}
-        onOpenChange={(v) => {
-          if (!v) close();
+        onOpenChange={async (v) => {
+          if (!v) await close();
         }}
         returnFocusRef={trigger}
         className="grades-dialog"
@@ -924,8 +927,8 @@ export function GradesPanel({
                           Jenis penilaian
                           <select
                             value={kind}
-                            onChange={(e) =>
-                              changeKind(e.target.value as Assessment["kind"])
+                            onChange={async (e) =>
+                              await changeKind(e.target.value as Assessment["kind"])
                             }
                             disabled={!!edit}
                             className={controlClass}

@@ -1,3 +1,4 @@
+import {installConfirmDriver,settleConfirmation} from "./confirm-driver.mjs";
 /** Actual Survei UI with isolated Auth/HTTP/Storage boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -88,6 +89,7 @@ try {
   activePage = page;
   page.setDefaultTimeout(15000);
   page.on("pageerror", (e) => errors.push(String(e)));
+  await installConfirmDriver(page);
   page.on("dialog", (d) => d.accept());
   let posts = 0,
     aiPosts = 0,
@@ -159,6 +161,7 @@ try {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base);
     await page.getByRole("combobox", { name: /^Periode/ }).selectOption(id(11));
+    await settleConfirmation(page);
     await page
       .getByRole("textbox", { name: /^Deskripsi/ })
       .first()
@@ -184,10 +187,12 @@ try {
     await page.getByRole("checkbox",{name:/Saya telah meninjau sumber/}).check();
     await page.evaluate(()=>Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async()=>{throw Error("denied")}}}));
     await page.getByRole("button",{name:"Salin draf rekomendasi"}).click();
+    await settleConfirmation(page);
     await page.getByText("Tidak dapat menyalin. Salin rekomendasi dari hasil secara manual.").waitFor();
     check(posts===0,"review does not write plan "+width);
     await page.evaluate(()=>Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async(text)=>{window.copiedDraft=text}}}));
     await page.getByRole("button",{name:"Salin draf rekomendasi"}).click();
+    await settleConfirmation(page);
     check((await page.evaluate(()=>window.copiedDraft)).includes("Tinjau fasilitas"),"reviewed draft copy "+width);
     const size = await page.evaluate(() => ({
       w: innerWidth,
@@ -223,6 +228,7 @@ try {
   );
   await page.getByLabel("Jumlah poin").fill("4");
   await page.getByRole("combobox", { name: /^Peran/ }).selectOption("teacher");
+  await settleConfirmation(page);
   check(
     await page
       .getByRole("button", { name: "Jalankan", exact: true })
@@ -230,12 +236,14 @@ try {
     "unapplied scope blocks AI",
   );
   await page.getByRole("button", { name: "Terapkan filter hasil" }).click();
+  await settleConfirmation(page);
   await page.waitForFunction(
     () =>
       document.querySelectorAll('input[name="description0"]').length === 1 &&
       !document.querySelector("main")?.getAttribute("aria-busy"),
   );
   await page.getByRole("button",{name:"Jalankan",exact:true}).click();
+  await settleConfirmation(page);
   check(aiPosts===0,"no request without consent");
   await page.getByRole("checkbox", {name:/Saya memahami cakupan/}).check();
   await page
@@ -252,6 +260,7 @@ try {
   check(aiPosts === 1, "double submit sends one AI request");
   check(lastQuery.includes("role=teacher"), "AI reload preserves role");
   await page.getByText(/^Daftar responden/).click();
+  await settleConfirmation(page);
   const note = page.getByLabel("Catatan pemantau").first();
   await page.getByRole("textbox", {name:/^Deskripsi/}).first().fill("Draft rencana belum disimpan");
   await note.fill("Diperbarui");
@@ -274,12 +283,14 @@ try {
   check(!(await page.evaluate(() => window.dispatchEvent(new Event("sim-form-unsaved-check", {cancelable:true})))), "saving note preserves independent plan dirty guard");
   check((await page.getByRole("textbox", {name:/^Deskripsi/}).first().inputValue()) === "Draft rencana belum disimpan", "saving note retains independent plan values");
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
+  await settleConfirmation(page);
   check(
     (await page.getByLabel("Catatan pemantau").count()) === 5,
     "respondent pagination",
   );
   failRead = true;
   await page.getByRole("button", { name: "Muat ulang hasil" }).click();
+  await settleConfirmation(page);
   await page
     .getByText("Hasil belum dapat dimuat. Muat ulang sebelum melanjutkan.")
     .waitFor();
@@ -289,6 +300,7 @@ try {
   );
   failRead = false;
   await page.getByRole("button", { name: "Muat ulang hasil" }).click();
+  await settleConfirmation(page);
   await page.getByRole("combobox", { name: /^Periode/ }).waitFor();
   await page.waitForFunction(
     () => !document.querySelector("fieldset[disabled]"),
@@ -306,11 +318,13 @@ try {
   check(landscape, "orientation change does not overflow");
   await page.getByRole("combobox", { name: /^Periode/ }).focus();
   await page.keyboard.press("Tab");
+  await settleConfirmation(page);
   check(
     await page.evaluate(() => document.activeElement?.tagName === "A"),
     "keyboard reaches export action",
   );
   await page.getByRole("combobox", { name: /^Periode/ }).selectOption("");
+  await settleConfirmation(page);
   await page
     .getByText(
       "Pilih periode untuk melihat hasil survei sesuai hak akses Anda.",
@@ -322,9 +336,11 @@ try {
   );
   check(!errors.length, "no JavaScript errors");
   await page.getByRole("combobox",{name:/^Periode/}).selectOption(id(11));
+  await settleConfirmation(page);
   await page.getByRole("checkbox",{name:/Saya memahami cakupan/}).check();
   failAi=true;
   await page.getByRole("button",{name:"Jalankan",exact:true}).click();
+  await settleConfirmation(page);
   await page.getByText("Hasil AI belum pasti",{exact:true}).waitFor();
   check(await page.getByRole("button",{name:"Jalankan",exact:true}).isDisabled(),"uncertain AI locks subsequent requests");
   check(await page.getByRole("button",{name:"Muat ulang untuk memeriksa AI"}).isVisible(),"uncertain AI offers explicit reconciliation");

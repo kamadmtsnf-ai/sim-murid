@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { AiReview } from "./ai-review";
 import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
@@ -69,9 +70,11 @@ export function InsightsPanel({
     data.today > end &&
     data.today <= planUntil;
   async function ai(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
     if (aiLock.current || busy || aiUncertain) return;
-    const preview = new FormData(e.currentTarget);
+    const preview = new FormData(retainedEcurrentTarget);
     if (
       preview.get("action") === "analyze" &&
       preview.get("consent") !== "on"
@@ -81,14 +84,14 @@ export function InsightsPanel({
     }
     if (
       preview.get("action") === "invalidate" &&
-      !window.confirm(
+      !await confirmAction(
         "Hapus cache hasil untuk penyedia dan periode ini? Pemakaian kuota tidak dikembalikan; analisis berikutnya dapat menimbulkan biaya baru.",
       )
     )
       return;
     aiLock.current = true;
     setAiBusy(true);
-    const form = e.currentTarget;
+    const form = retainedEcurrentTarget;
     const f = new FormData(form);
     f.delete("consent");
     const body = Object.fromEntries(f);
@@ -180,9 +183,11 @@ export function InsightsPanel({
           value={period}
           disabled={busy || aiBusy}
           onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
             if (
               dirty.current &&
-              !window.confirm(
+              !await confirmAction(
                 "Isian belum disimpan. Ganti periode dan abaikan isian?",
               )
             )
@@ -190,10 +195,10 @@ export function InsightsPanel({
             dirty.current = false;
             dirtyForms.current.clear();
             setPage(1);
-            setPeriod(e.target.value);
+            setPeriod(retainedEvalue);
             setRole("");
             setQuality("");
-            await load(e.target.value);
+            await load(retainedEvalue);
           }}
         >
           <option value="">Pilih periode</option>
@@ -261,7 +266,7 @@ export function InsightsPanel({
             e.preventDefault();
             if (
               dirty.current &&
-              !window.confirm(
+              !await confirmAction(
                 "Isian belum disimpan. Terapkan filter dan abaikan isian?",
               )
             )
@@ -514,14 +519,16 @@ export function InsightsPanel({
                     max="7"
                     value={points}
                     className={controlClass}
-                    onChange={(e) => {
+                    onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
                       const next = Math.max(
                         3,
-                        Math.min(7, Number(e.target.value) || 3),
+                        Math.min(7, Number(retainedEvalue) || 3),
                       );
                       if (
                         next < points &&
-                        !window.confirm(
+                        !await confirmAction(
                           "Kurangi jumlah poin dan abaikan isian pada poin terakhir?",
                         )
                       )

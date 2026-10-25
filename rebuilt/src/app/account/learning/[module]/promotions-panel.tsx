@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -181,8 +182,8 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
   );
   const nameOf = (id: string) =>
     data.rows.find((r) => r.student_id === id)?.name ?? id;
-  function discard() {
-    return !hasDraft || window.confirm("Buang perubahan yang belum disimpan?");
+  async function discard() {
+    return !hasDraft || await confirmAction("Buang perubahan yang belum disimpan?");
   }
   function open(next: Mode, element: HTMLElement) {
     if (disabled) return;
@@ -193,19 +194,19 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
     if (next?.type !== "confirm") setDirty(false);
     setMode(next);
   }
-  function close() {
+  async function close() {
     if (disabled) return;
     if (mode?.type === "confirm") {
       setMode(null);
       return;
     }
-    if (dirty && !window.confirm("Buang perubahan yang belum disimpan?"))
+    if (dirty && !await confirmAction("Buang perubahan yang belum disimpan?"))
       return;
     setMode(null);
     setDirty(false);
   }
-  function changeTab(next: string) {
-    if (disabled || !discard()) return false;
+  async function changeTab(next: string) {
+    if (disabled || !await discard()) return false;
     setTab(next);
     setGlobalView(data.extra.access.allow_view);
     setGlobalDownload(data.extra.access.allow_download);
@@ -227,7 +228,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
     return promotionsSnapshot.parse((await r.json()).data);
   }
   async function refresh() {
-    if (lock.current || disabled || !discard()) return;
+    if (lock.current || disabled || !await discard()) return;
     lock.current = true;
     setReading(true);
     const abort = new AbortController();
@@ -541,7 +542,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
             tabIndex={tab === key ? 0 : -1}
             disabled={disabled}
             variant={tab === key ? "default" : "outline"}
-            onKeyDown={(e) => {
+            onKeyDown={async (e) => {
               const step =
                 e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
               const next =
@@ -554,11 +555,11 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
                       : -1;
               if (next >= 0) {
                 e.preventDefault();
-                if (changeTab(all[next]![0]!))
+                if (await changeTab(all[next]![0]!))
                   document.getElementById("tab-" + all[next]![0]!)?.focus();
               }
             }}
-            onClick={() => changeTab(key!)}
+            onClick={async () => await changeTab(key!)}
           >
             {label}
           </Button>
@@ -610,9 +611,11 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
                   className={controlClass}
                   value={action}
                   disabled={disabled}
-                  onChange={(e) => {
-                    if (!discard()) return;
-                    setAction(e.target.value as typeof action);
+                  onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                    if (!await discard()) return;
+                    setAction(retainedEvalue as typeof action);
                     setTarget("");
                     setMapping({});
                     setReason("");
@@ -631,9 +634,11 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
                   required
                   value={source}
                   disabled={disabled}
-                  onChange={(e) => {
-                    if (!discard()) return;
-                    setSource(e.target.value);
+                  onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                    if (!await discard()) return;
+                    setSource(retainedEvalue);
                     setTarget("");
                     setMapping({});
                     setReason("");
@@ -655,9 +660,11 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
                   required
                   value={target}
                   disabled={disabled}
-                  onChange={(e) => {
-                    if (!discard()) return;
-                    setTarget(e.target.value);
+                  onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                    if (!await discard()) return;
+                    setTarget(retainedEvalue);
                     setMapping({});
                     setReason("");
                   }}
@@ -879,9 +886,11 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
                     className={controlClass}
                     value={accessScope}
                     disabled={disabled}
-                    onChange={(e) => {
-                      if (!discard()) return;
-                      setAccessScope(e.target.value);
+                    onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                      if (!await discard()) return;
+                      setAccessScope(retainedEvalue);
                       setSelected([]);
                       setDirty(false);
                     }}
@@ -1128,8 +1137,8 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
       </section>
       <Dialog
         open={!!mode}
-        onOpenChange={(open) => {
-          if (!open) close();
+        onOpenChange={async (open) => {
+          if (!open) await close();
         }}
         title={
           mode?.type === "metadata"

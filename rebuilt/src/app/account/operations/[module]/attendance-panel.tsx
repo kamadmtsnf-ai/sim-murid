@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
 import { EmptyState } from "@/components/ui/content-state";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -112,10 +113,10 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
     const stopUnloadGuard = listenForUnsavedChanges(leave);
     return () => stopUnloadGuard();
   }, [draft, dirty, writeBusy]);
-  function discard() {
+  async function discard() {
     return (
       !(draft || dirty) ||
-      window.confirm("Isian belum disimpan. Buang perubahan?")
+      await confirmAction("Isian belum disimpan. Buang perubahan?")
     );
   }
   function entry(id: string, patch: Partial<Entry>) {
@@ -237,11 +238,11 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
       if (mounted.current) setCalendarBusy(false);
     }
   }
-  function closeEdit() {
+  async function closeEdit() {
     if (writeBusy) return;
     if (
       !dirty ||
-      window.confirm("Buang perubahan koreksi yang belum disimpan?")
+      await confirmAction("Buang perubahan koreksi yang belum disimpan?")
     ) {
       setEdit(null);
       setDirty(false);
@@ -412,9 +413,11 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                     min="2000-01-01"
                     max={data.today}
                     value={date}
-                    onChange={(e) => {
-                      if (discard()) {
-                        setDate(e.target.value);
+                    onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                      if (await discard()) {
+                        setDate(retainedEvalue);
                         setEntries({});
                       }
                     }}
@@ -427,9 +430,11 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                     className={controlClass}
                     required
                     value={classId}
-                    onChange={(e) => {
-                      if (discard()) {
-                        setClassId(e.target.value);
+                    onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                      if (await discard()) {
+                        setClassId(retainedEvalue);
                         setEntries({});
                       }
                     }}
@@ -713,8 +718,8 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
       </section>
       <Dialog
         open={!!edit}
-        onOpenChange={(open) => {
-          if (!open) closeEdit();
+        onOpenChange={async (open) => {
+          if (!open) await closeEdit();
         }}
         returnFocusRef={editTrigger}
         title="Koreksi absensi"
@@ -773,8 +778,10 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                 <Button
                   type="button"
                   variant="destructive"
-                  onClick={(e) => {
-                    const form = e.currentTarget.closest("form");
+                  onClick={async (e) => {
+const retainedEcurrentTarget=e.currentTarget;
+
+                    const form = retainedEcurrentTarget.closest("form");
                     if (!form || !form.reportValidity()) return;
                     const reason = String(
                       new FormData(form).get("reason") ?? "",
@@ -783,7 +790,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                       fail("Isi alasan minimal 3 karakter.");
                       return;
                     }
-                    if (window.confirm("Batalkan catatan absensi ini?"))
+                    if (await confirmAction("Batalkan catatan absensi ini?"))
                       void save({ type: "void", id: edit.id, reason });
                   }}
                 >
