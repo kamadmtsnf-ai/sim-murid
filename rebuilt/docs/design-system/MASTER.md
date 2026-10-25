@@ -350,3 +350,7 @@ Notifikasi memakai tab Radix Kotak masuk/Tindak lanjut, filter dan pagination ex
 ## P08 — wizard input massal
 
 Modal reusable mengikuti unggah/validasi/pratinjau/konfirmasi/hasil, dengan template CSV, referensi berizin dan tabel dalam region gulir lokal. Konfirmasi eksplisit dibatalkan saat konteks/berkas berubah; field dikunci pada pending/uncertain dan pemulihan memakai ID yang sama. Label textarea stabil; CSV/nilai tidak masuk localStorage. Modal dibatasi viewport dengan body gulir; operasi lama dipertahankan. UI baru hanya tersedia setelah RPC siap.
+
+## P09 — Riwayat Admin
+
+Bagian Rekonsiliasi memakai filter modul, cursor pagination 25, shared Dialog baca-saja dan TableRegion lokal; skor 10 baris per tampilan. Waktu WIB/nama pelaku saat ini/UUID stabil; data historis yang tidak tersedia disebut eksplisit. Jangan mencetak payload JSON atau teks alasan bebas pada audit. Loading/error/denial membersihkan hasil lama; tanpa penyimpanan browser. Tidak menampilkan status approval/reopen fiktif atau tombol navigasi konten baru.

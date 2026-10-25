@@ -1,0 +1,126 @@
+{
+  "baseline": "6bc6866574c9def35dba7c06493d8f90d7f4a37c",
+  "files": [
+    {
+      "path": "docs/verification/audit/README.md",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "docs/verification/audit/browser-results.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "docs/verification/audit/promotions-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "docs/verification/audit/reconciliation-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "docs/verification/audit/reports-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "docs/verification/audit/schema-readiness.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "docs/verification/audit/surveys-regression.json",
+      "reason": "Bukti pengujian ulang aktual dan blokir aktivasi, bukan klaim produksi."
+    },
+    {
+      "path": "rebuilt/docs/design-system/MASTER.md",
+      "reason": "Dokumentasi status/coverage/desain/risiko P09 dan keberlanjutan konteks."
+    },
+    {
+      "path": "rebuilt/docs/development/ROADMAP.md",
+      "reason": "Dokumentasi status/coverage/desain/risiko P09 dan keberlanjutan konteks."
+    },
+    {
+      "path": "rebuilt/docs/development/STAGE-09-FINALIZATION-AUDIT.md",
+      "reason": "Dokumentasi status/coverage/desain/risiko P09 dan keberlanjutan konteks."
+    },
+    {
+      "path": "rebuilt/package.json",
+      "reason": "Daftarkan tes P09 dan check pipeline tanpa dependency baru."
+    },
+    {
+      "path": "rebuilt/scripts/database/harness.mjs",
+      "reason": "Jam tetap khusus fixture hari sekolah terisolasi."
+    },
+    {
+      "path": "rebuilt/src/app/account/services/[module]/page.tsx",
+      "reason": "Audit hanya dimuat di Rekonsiliasi setelah readiness; halaman lain/fungsi lama tetap."
+    },
+    {
+      "path": "rebuilt/src/app/api/audit/route.ts",
+      "reason": "GET auth/survey scoped, private/no-store, identity server."
+    },
+    {
+      "path": "rebuilt/src/components/audit/audit-trail.tsx",
+      "reason": "Viewer Admin read-only, filter, cursor pagination, dialog fokus, before/after dan zero/null."
+    },
+    {
+      "path": "rebuilt/src/lib/audit/policy.ts",
+      "reason": "Satu katalog domain, proyeksi metadata dan matriks status UI; prefix native fees/settings/books."
+    },
+    {
+      "path": "rebuilt/src/lib/audit/server.ts",
+      "reason": "Reader server dan availability fail-closed 1500ms; session server dan timeout."
+    },
+    {
+      "path": "rebuilt/src/lib/audit/validation.ts",
+      "reason": "Query/DTO ketat, allowlist defensif, cursor/identity/scope dan label presentasi."
+    },
+    {
+      "path": "rebuilt/src/lib/supabase/runtime.types.ts",
+      "reason": "Kontrak RPC baru sesuai signature migrasi."
+    },
+    {
+      "path": "rebuilt/supabase/migrations/20261025013536_finalization_audit_p09.sql",
+      "reason": "Migrasi additive immutable/anti-truncate, privacy projection, Admin reader/index dan before/after native learning writer; belum diterapkan cloud."
+    },
+    {
+      "path": "rebuilt/tests/audit-loader.mjs",
+      "reason": "Skenario terisolasi P09 atau fixture UI aktual; tidak memakai data/akun produksi."
+    },
+    {
+      "path": "rebuilt/tests/audit-route.test.mjs",
+      "reason": "Skenario terisolasi P09 atau fixture UI aktual; tidak memakai data/akun produksi."
+    },
+    {
+      "path": "rebuilt/tests/audit.test.mjs",
+      "reason": "Skenario terisolasi P09 atau fixture UI aktual; tidak memakai data/akun produksi."
+    },
+    {
+      "path": "rebuilt/tests/database/audit.test.mjs",
+      "reason": "Skenario terisolasi P09 atau fixture UI aktual; tidak memakai data/akun produksi."
+    },
+    {
+      "path": "rebuilt/tests/database/foundation.test.mjs",
+      "reason": "Jumlah migrasi45; tabel tetap80."
+    },
+    {
+      "path": "rebuilt/tests/database/operations.test.mjs",
+      "reason": "Hindari ketergantungan hari nyata Minggu pada tes hari sekolah."
+    },
+    {
+      "path": "rebuilt/tests/database/overview.test.mjs",
+      "reason": "Assertion menghormati Minggu sebagai libur existing."
+    },
+    {
+      "path": "rebuilt/tests/reconciliation.test.mjs",
+      "reason": "Boundary readiness diisolasi pada regresi modul existing."
+    },
+    {
+      "path": "scripts/verify-audit.mjs",
+      "reason": "Verifikasi browser actual component, viewport/keyboard/touch/states/axe."
+    },
+    {
+      "path": "tests/ui/audit-fixture.tsx",
+      "reason": "Skenario terisolasi P09 atau fixture UI aktual; tidak memakai data/akun produksi."
+    }
+  ],
+  "manifestNote": "This manifest also documents itself."
+}
