@@ -14,7 +14,7 @@ async function rejectsCode(sql, params, code) {
 }
 
 test('DB01: migration chain creates 80 RLS-protected tables with reference catalogs only', async () => {
-  assert.equal(migrations.length, 44);
+  assert.equal(migrations.length, 45);
   const tables = await db.query(`select c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('public','sim_murid_private') and c.relkind='r'`);
   assert.equal(tables.rows.length, 80);
   assert.ok(tables.rows.every((table) => table.relrowsecurity));

@@ -32,3 +32,6 @@ export async function createIsolatedDatabase() {
   }
   return { db, migrations: names };
 }
+
+/** Only the isolated working-day fixture, never production time. */
+export async function freezeSchoolDay(db){await db.exec("create or replace function public.app_ops_today() returns date language sql stable security invoker set search_path='' as $$select date '2026-10-21'$$");}

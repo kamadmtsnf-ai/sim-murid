@@ -1,0 +1,28 @@
+{
+  "project": "sim-muridv2",
+  "projectRef": "qpzoukkhdxpmbtkcqemj",
+  "migration": "20261025013536_finalization_audit_p09.sql",
+  "sha256": "258cdecbbd6379450669a0b049445bbf38317a799d87e78e85cbdf894fdf6249",
+  "localMigrationCount": 45,
+  "localMigrationReplayPassed": true,
+  "cloudApplied": false,
+  "cloudReader": null,
+  "cloudIndex": null,
+  "cloudPromotionImmutableTriggerCount": 0,
+  "writerBaselineBodyMd5": "1adfe9d6af38107a25aa5c6c47d394a6",
+  "cloudWriterBaselineMatched": true,
+  "autoReview": {
+    "blocked": true,
+    "reviewedCandidate": "20261024172006_finalization_audit_p09.sql",
+    "reviewedSha256": "39e6b336cef34c7c8da8ceb3b0a629d3ecec04b9f3f0dac86085b9bfc77ca499",
+    "reason": "Persistent DDL replaces a production RPC and adds immutable triggers, an audit reader, indexes and service-role grants. General Stage 9 approval was not considered explicit approval of this concrete production migration.",
+    "recovery": "Workspace reset before PR; CLI regenerated current candidate and actual prefix/allowlist corrections. Not retried in production. Explicit approval remains required."
+  },
+  "safeRelease": "Admin UI is optional behind read-only 1500 ms availability probe. No DDL from page/build; reconciliation/export remain available.",
+  "productionUserUat": false,
+  "advisorsBaseline": {
+    "privateRlsInfo": 66,
+    "unusedIndexInfo": 79,
+    "leakedPasswordProtectionWarning": 1
+  }
+}
