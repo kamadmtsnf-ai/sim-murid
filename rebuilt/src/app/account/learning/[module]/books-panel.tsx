@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -65,9 +66,9 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
     const stopUnloadGuard = listenForUnsavedChanges(warn);
     return () => stopUnloadGuard();
   }, [dirty]);
-  function close() {
+  async function close() {
     if (lock.current) return;
-    if (dirty && !window.confirm("Buang isian yang belum disimpan?")) return;
+    if (dirty && !await confirmAction("Buang isian yang belum disimpan?")) return;
     setDialog(null);
     setDirty(false);
   }
@@ -156,7 +157,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
     if (
       dialog &&
       dirty &&
-      !window.confirm("Buang isian yang belum disimpan dan muat ulang?")
+      !await confirmAction("Buang isian yang belum disimpan dan muat ulang?")
     )
       return;
     await run(async () => {
@@ -517,8 +518,8 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
                     type="button"
                     variant="destructive"
                     disabled={disabled}
-                    onClick={() => {
-                      if (window.confirm(`Nonaktifkan buku “${r.title}”?`))
+                    onClick={async () => {
+                      if (await confirmAction(`Nonaktifkan buku “${r.title}”?`))
                         void save({
                           type: "void",
                           id: r.id,
@@ -543,8 +544,8 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
       />
       <Dialog
         open={dialog !== null}
-        onOpenChange={(v) => {
-          if (!v) close();
+        onOpenChange={async (v) => {
+          if (!v) await close();
         }}
         title={
           dialog === "upload"

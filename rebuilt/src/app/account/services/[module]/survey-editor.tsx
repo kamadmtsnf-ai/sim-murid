@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useId, useRef, useState } from "react";
@@ -200,8 +201,8 @@ export function SurveyEditor({
       final = type === "submit" || type === "peer_submit";
     if (type === "auto") {
       if (halt.current) return;
-      if (s.mainDirty) return save("save");
-      if (s.peerDirty && !peerLocked) return save("peer_save");
+      if (s.mainDirty) return await save("save");
+      if (s.peerDirty && !peerLocked) return await save("peer_save");
       return;
     }
     if (peer && peerLocked) return;
@@ -253,7 +254,7 @@ export function SurveyEditor({
     }
     if (
       final &&
-      !window.confirm(
+      !await confirmAction(
         peer
           ? "Kirim penilaian rekan final? Jawaban rekan akan terkunci."
           : "Kirim jawaban final? Setelah dikirim jawaban terkunci.",

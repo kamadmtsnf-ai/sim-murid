@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -102,10 +103,10 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
       guardianSearch,
     ),
   );
-  function discard() {
+  async function discard() {
     return (
       !dirty.current.size ||
-      window.confirm(
+      await confirmAction(
         "Ada isian yang belum disimpan. Abaikan perubahan dan lanjutkan?",
       )
     );
@@ -211,11 +212,11 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
     }
     void request(c.data);
   }
-  function edit(id: string | null) {
+  async function edit(id: string | null) {
     if (
       lock.current ||
       (dirty.current.has("family") &&
-        !window.confirm("Abaikan perubahan grup yang belum disimpan?"))
+        !await confirmAction("Abaikan perubahan grup yang belum disimpan?"))
     )
       return;
     dirty.current.delete("family");
@@ -231,7 +232,9 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
       groupForm.current?.querySelector("input")?.focus(),
     );
   }
-  function familySubmit(e: FormEvent<HTMLFormElement>) {
+  async function familySubmit(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
     const members = familySelection(data, editing, selected);
     if (!members.length || members.length > 30) {
@@ -247,7 +250,7 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
       current?.members.filter((m) => !members.includes(m.student_id)) ?? [];
     if (
       (moves.length || removed.length) &&
-      !window.confirm(
+      !await confirmAction(
         `Perubahan grup memengaruhi perhitungan iuran. ${moves.length ? `Pindahkan ${moves.map(name).join(", ")} dari grup lama. ` : ""}${removed.length ? `Akhiri keanggotaan ${removed.map((m) => name(m.student_id)).join(", ")}. ` : ""}Lanjutkan?`,
       )
     )
@@ -255,7 +258,7 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
     submit({
       type: "family",
       id: editing,
-      name: String(new FormData(e.currentTarget).get("name") ?? ""),
+      name: String(new FormData(retainedEcurrentTarget).get("name") ?? ""),
       studentIds: members,
     });
   }
@@ -318,8 +321,8 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
         <Button
           variant="outline"
           disabled={pending}
-          onClick={() => {
-            if (discard()) void request();
+          onClick={async () => {
+            if (await discard()) void request();
           }}
         >
           Muat ulang relasi
@@ -341,11 +344,13 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
           <form
             data-draft="guardian"
             key={formVersion.guardian}
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
+const retainedEcurrentTarget=e.currentTarget;
+
               e.preventDefault();
-              const f = new FormData(e.currentTarget);
+              const f = new FormData(retainedEcurrentTarget);
               if (
-                window.confirm(
+                await confirmAction(
                   "Identitas dan hubungan kedua akun sudah diverifikasi?",
                 )
               )
@@ -436,9 +441,9 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
                     <Button
                       variant="outline"
                       disabled={busy}
-                      onClick={() => {
+                      onClick={async () => {
                         if (
-                          window.confirm(
+                          await confirmAction(
                             `Cabut akses ${name(g.parent_id)} terhadap ${name(g.student_id)} sebagai ${relation[g.relationship]}?`,
                           )
                         )
@@ -561,7 +566,7 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => edit(null)}
+                    onClick={async () => await edit(null)}
                   >
                     Batal edit
                   </Button>
@@ -603,7 +608,7 @@ export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
                     <Button
                       variant="outline"
                       disabled={busy}
-                      onClick={() => edit(f.id)}
+                      onClick={async () => await edit(f.id)}
                     >
                       Edit grup
                     </Button>

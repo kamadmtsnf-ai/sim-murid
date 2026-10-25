@@ -11,6 +11,7 @@ import { emailCommand, emailStateSchema } from "@/lib/email/validation";
 import { emailContextSchema, reserveAndSend } from "@/lib/email/service";
 import { emailEnvironment } from "@/lib/email/gmail";
 import { otpDigest } from "@/lib/email/otp";
+import { profileSchema } from "@/lib/auth/recovery-validation";
 import type { z } from "zod";
 import { readBounded } from "@/lib/settings/server";
 async function handle(request: NextRequest, mutate = false) {
@@ -56,6 +57,22 @@ async function handle(request: NextRequest, mutate = false) {
       );
     }
 
+    if(command.action === "address"){
+      if(state.email!==command.expectedEmail)return respond({message:"Email berubah. Muat ulang status sebelum menyimpan."},409);
+      const readProfile=await admin.rpc("app_profile_read",args);
+      if(readProfile.error)throw Error("Profile unavailable");
+      if(!readProfile.data)return respond({message:"Selesaikan langkah keamanan akun sebelumnya."},403);
+      const profile=profileSchema.parse(readProfile.data);
+      if(profile.username!==caller.principal.username || profile.contact_email!==command.expectedEmail)return respond({message:"Profil berubah. Muat ulang status sebelum menyimpan."},409);
+      const write=await admin.rpc("app_profile_update",{...args,p_version:profile.updated_at,p_name:profile.full_name,p_phone:profile.phone,p_email:command.email,p_bio:profile.bio});
+      if(write.error)throw Error("Address unavailable");
+      if(write.data!==true)return respond({message:"Profil berubah. Muat ulang status sebelum menyimpan."},409);
+      const fresh=await admin.rpc("app_email_state",args);
+      if(fresh.error)throw Error("Readback unavailable");
+      const confirmed=emailStateSchema.parse(fresh.data);
+      if(confirmed.email!==command.email)throw Error("Unconfirmed email");
+      return respond({message:"Email kontak tersimpan. Selanjutnya kirim kode verifikasi.",state:confirmed,serverTime:new Date().toISOString()});
+    }
     if (command.action === "send") {
       if (state.verified)
         return respond({ message: "Email sudah terverifikasi." });
@@ -77,7 +94,7 @@ async function handle(request: NextRequest, mutate = false) {
           global_limit:
             "Kuota pengiriman aplikasi sedang penuh. Coba kembali nanti.",
           invalid_email:
-            "Isi email kontak yang valid melalui Profil pribadi terlebih dahulu.",
+            "Isi dan simpan email kontak yang valid pada halaman ini terlebih dahulu.",
           address_changed:
             "Email atau langkah akun berubah. Muat ulang sebelum meminta kode.",
           busy: "Perubahan password sedang diproses. Coba lagi setelah dua menit.",

@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
 import { EmptyState } from "@/components/ui/content-state";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -126,19 +127,19 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
     setCatalog(row?.catalog_id ?? "");
     clear();
   }
-  function close() {
+  async function close() {
     if (busy) return;
-    if (!dirty || window.confirm("Buang perubahan yang belum disimpan?")) {
+    if (!dirty || await confirmAction("Buang perubahan yang belum disimpan?")) {
       setMode(null);
       setEdit(null);
       setDirty(false);
       clear();
     }
   }
-  function chooseTeacher(value: string) {
+  async function chooseTeacher(value: string) {
     if (
       dirty &&
-      !window.confirm(
+      !await confirmAction(
         "Ganti guru dan buang perubahan penugasan yang belum disimpan?",
       )
     )
@@ -203,9 +204,11 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
       lock.current = false;
     }
   }
-  function submit(e: FormEvent<HTMLFormElement>) {
+  async function submit(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
-    const f = new FormData(e.currentTarget),
+    const f = new FormData(retainedEcurrentTarget),
       get = (k: string) => String(f.get(k) ?? "");
     if (mode === "assign") {
       if (!teacher) {
@@ -225,7 +228,7 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
       }
       if (
         !selected.length &&
-        !window.confirm("Kosongkan seluruh siswa bimbingan guru ini?")
+        !await confirmAction("Kosongkan seluruh siswa bimbingan guru ini?")
       )
         return;
       void save({
@@ -511,8 +514,8 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
       </section>
       <Dialog
         open={!!mode}
-        onOpenChange={(value) => {
-          if (!value) close();
+        onOpenChange={async (value) => {
+          if (!value) await close();
         }}
         returnFocusRef={trigger}
         title={
@@ -545,9 +548,11 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
                       className={controlClass}
                       value={teacher}
                       required
-                      onChange={(e) => {
+                      onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
                         e.stopPropagation();
-                        chooseTeacher(e.target.value);
+                        await chooseTeacher(retainedEvalue);
                       }}
                     >
                       <option value="">Pilih Guru Wali</option>
@@ -775,8 +780,10 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
                   <Button
                     type="button"
                     variant="destructive"
-                    onClick={(e) => {
-                      const form = e.currentTarget.closest("form");
+                    onClick={async (e) => {
+const retainedEcurrentTarget=e.currentTarget;
+
+                      const form = retainedEcurrentTarget.closest("form");
                       if (!form) return;
                       const reason = String(
                         new FormData(form).get("reason") ?? "",
@@ -785,7 +792,7 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
                         fail("Isi alasan pembatalan minimal 3 karakter.");
                         return;
                       }
-                      if (window.confirm("Batalkan laporan ini?"))
+                      if (await confirmAction("Batalkan laporan ini?"))
                         void save({ type: "void", id: edit.id, reason });
                     }}
                   >

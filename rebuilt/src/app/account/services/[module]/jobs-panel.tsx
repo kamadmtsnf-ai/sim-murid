@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -70,7 +71,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
     if (active.current || (locked && kind !== "refresh")) return;
     if (
       ["queue", "dispatch", "retry"].includes(kind) &&
-      !window.confirm(
+      !await confirmAction(
         kind === "queue"
           ? "Antrekan pekerjaan yang memenuhi syarat? Ini tidak langsung membuktikan pengiriman."
           : kind === "dispatch"

@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
 import { EmptyState } from "@/components/ui/content-state";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -196,9 +197,9 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
         true,
       );
   }
-  function close() {
+  async function close() {
     if (busy) return;
-    if (!dirty || window.confirm("Buang perubahan yang belum disimpan?")) {
+    if (!dirty || await confirmAction("Buang perubahan yang belum disimpan?")) {
       controller.current?.abort();
       setMode(null);
       setEdit(null);
@@ -259,9 +260,11 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
       lock.current = false;
     }
   }
-  function submit(e: FormEvent<HTMLFormElement>) {
+  async function submit(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
-    const f = new FormData(e.currentTarget),
+    const f = new FormData(retainedEcurrentTarget),
       get = (k: string) => String(f.get(k) ?? "");
     if (mode === "tariff") {
       const command = {
@@ -275,7 +278,7 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
         return;
       }
       if (
-        window.confirm(
+        await confirmAction(
           "Simpan tarif " +
             rupiah(command.amount) +
             " untuk " +
@@ -704,8 +707,8 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
       </section>
       <Dialog
         open={!!mode}
-        onOpenChange={(value) => {
-          if (!value) close();
+        onOpenChange={async (value) => {
+          if (!value) await close();
         }}
         returnFocusRef={trigger}
         title={
@@ -1007,8 +1010,10 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
                   <Button
                     type="button"
                     variant="destructive"
-                    onClick={(e) => {
-                      const form = e.currentTarget.closest("form");
+                    onClick={async (e) => {
+const retainedEcurrentTarget=e.currentTarget;
+
+                      const form = retainedEcurrentTarget.closest("form");
                       if (!form) return;
                       const reason = String(
                         new FormData(form).get("reason") ?? "",
@@ -1018,7 +1023,7 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
                         return;
                       }
                       if (
-                        window.confirm(
+                        await confirmAction(
                           "Batalkan pembayaran ini? Alokasi dan pembebasan saudara terkait akan diperbarui.",
                         )
                       )

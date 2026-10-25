@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { AcademicContextBar } from "@/components/academic/academic-context";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -201,12 +202,12 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
         }}
         requiresClass
         disabled={disabled || confirm}
-        onApply={(value) => {
+        onApply={async (value) => {
           if (
             (selected.length ||
               classId !== (filters.classId ?? "") ||
               semester !== filters.semester) &&
-            !window.confirm("Buang pilihan rapor sebelum mengganti konteks?")
+            !await confirmAction("Buang pilihan rapor sebelum mengganti konteks?")
           )
             return;
           return load(undefined, {

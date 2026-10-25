@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
 import { EmptyState } from "@/components/ui/content-state";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -190,9 +191,9 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
     clear();
     if (!ready && row) void originalFee(row);
   }
-  function close() {
+  async function close() {
     if (busy) return;
-    if (!dirty || window.confirm("Buang perubahan yang belum disimpan?")) {
+    if (!dirty || await confirmAction("Buang perubahan yang belum disimpan?")) {
       controller.current?.abort();
       setMode(null);
       setEdit(null);
@@ -725,8 +726,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
       </section>
       <Dialog
         open={!!mode}
-        onOpenChange={(value) => {
-          if (!value) close();
+        onOpenChange={async (value) => {
+          if (!value) await close();
         }}
         returnFocusRef={trigger}
         title={
@@ -963,8 +964,10 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   <Button
                     type="button"
                     variant="destructive"
-                    onClick={(e) => {
-                      const form = e.currentTarget.closest("form");
+                    onClick={async (e) => {
+const retainedEcurrentTarget=e.currentTarget;
+
+                      const form = retainedEcurrentTarget.closest("form");
                       if (!form) return;
                       const reason = String(
                         new FormData(form).get("reason") ?? "",
@@ -974,7 +977,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                         return;
                       }
                       if (
-                        window.confirm(
+                        await confirmAction(
                           "Batalkan transaksi ini melalui pembalik? Saldo akan diperiksa kembali.",
                         )
                       )

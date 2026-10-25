@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
 import { useState, useRef, useEffect, type FormEvent } from "react";
@@ -206,7 +207,7 @@ export function ProfileForm({
     if (lock.current) return;
     if (
       dirty &&
-      !window.confirm(
+      !await confirmAction(
         "Muat ulang profil dan batalkan isian yang belum disimpan?",
       )
     )

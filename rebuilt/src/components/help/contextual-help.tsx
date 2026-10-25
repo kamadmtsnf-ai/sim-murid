@@ -85,6 +85,7 @@ export function ContextualHelp({
             </p>
             <Button
               type="button"
+              className="min-w-0 max-w-full whitespace-normal"
               variant="outline"
               disabled={invalid}
               onClick={() => void copy()}

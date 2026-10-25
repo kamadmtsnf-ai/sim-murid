@@ -1,4 +1,5 @@
 "use client";
+import {cancelActiveConfirmation} from "@/components/ui/confirm-action";
 import { ContextualHelp } from "@/components/help/contextual-help";
 import { FormNavigationGuard } from "@/components/forms/navigation-guard";
 import {
@@ -76,6 +77,7 @@ export function WorkspaceShell({
     desktop.addEventListener("change", closeOnDesktop);
     return () => desktop.removeEventListener("change", closeOnDesktop);
   }, [open]);
+  useEffect(()=>()=>cancelActiveConfirmation(),[path]);
   const isDirectoryDetail = /^\/account\/directory\/[^/]+\/?$/.test(path);
   const item = currentNavItem(path),
     group = navigation.find((g) => g.items.some((i) => i.href === item?.href));

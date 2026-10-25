@@ -1,4 +1,5 @@
 "use client";
+import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
 import { FilterBar } from "@/components/ui/collection-controls";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -58,9 +59,9 @@ export function SchedulePanel({
   const [draftEpoch, setDraftEpoch] = useState(0);
   const [filterYear, setFilterYear] = useState(filters.year ?? "");
   const [filterClass, setFilterClass] = useState(filters.classId ?? "");
-  const discard = () => {
+  const discard = async () => {
     if (!dirty.current) return true;
-    if (!window.confirm("Tinggalkan perubahan yang belum disimpan?"))
+    if (!await confirmAction("Tinggalkan perubahan yang belum disimpan?"))
       return false;
     dirty.current = false;
     setDraftEpoch((n) => n + 1);
@@ -115,8 +116,8 @@ export function SchedulePanel({
       : array.length < 500
         ? [...array, id]
         : array;
-  const closeModal = () => {
-    if (saving.current || busy || !discard()) return;
+  const closeModal = async () => {
+    if (saving.current || busy || !await discard()) return;
     setModal(null);
     setEditing(null);
   };
@@ -193,8 +194,8 @@ export function SchedulePanel({
             })),
         }}
         disabled={locked || !!modal}
-        onApply={(value) => {
-          if (!discard()) return;
+        onApply={async (value) => {
+          if (!await discard()) return;
           const year = classes.years.find(
             (y) => y.start_year === value.year,
           )!.id;
@@ -229,8 +230,8 @@ export function SchedulePanel({
       <form
         action="/account/schedules"
         method="get"
-        onSubmit={(e) => {
-          if (locked || !discard()) e.preventDefault();
+        onSubmit={async (e) => {
+          if (locked || !await discard()) e.preventDefault();
         }}
         className="min-w-0"
       >
@@ -487,10 +488,10 @@ export function SchedulePanel({
         <Button
           variant="outline"
           disabled={locked}
-          onClick={() => {
+          onClick={async () => {
             if (
-              discard() &&
-              window.confirm(
+              await discard() &&
+              await confirmAction(
                 "Hapus jadwal terpilih? Seluruh pilihan diperiksa izinnya dan riwayat tetap disimpan.",
               )
             )
@@ -506,8 +507,8 @@ export function SchedulePanel({
       )}
       <Dialog
         open={modal !== null}
-        onOpenChange={(open) => {
-          if (!open) closeModal();
+        onOpenChange={async (open) => {
+          if (!open) await closeModal();
         }}
         returnFocusRef={returnFocusRef}
         className="schedules-dialog schedules-panel"
@@ -549,8 +550,10 @@ export function SchedulePanel({
                   value={dutyClass}
                   className={controlClass}
                   disabled={locked}
-                  onChange={(e) => {
-                    if (discard()) setDutyClass(e.target.value);
+                  onChange={async (e) => {
+const retainedEvalue=e.target.value;
+
+                    if (await discard()) setDutyClass(retainedEvalue);
                   }}
                 >
                   <option value="">Pilih kelas…</option>
@@ -586,8 +589,8 @@ export function SchedulePanel({
           {blocked && (
             <Button
               variant="outline"
-              onClick={() => {
-                if (discard()) window.location.reload();
+              onClick={async () => {
+                if (await discard()) window.location.reload();
               }}
             >
               Muat ulang
@@ -598,8 +601,8 @@ export function SchedulePanel({
       <Button
         variant="outline"
         disabled={busy}
-        onClick={() => {
-          if (discard()) window.location.reload();
+        onClick={async () => {
+          if (await discard()) window.location.reload();
         }}
       >
         Muat ulang
@@ -812,15 +815,17 @@ function DutyForm({
         (p) => p.id === d.student_id && p.status === "active",
       ),
   ).length;
-  function submit(e: FormEvent<HTMLFormElement>) {
+  async function submit(e: FormEvent<HTMLFormElement>) {
+const retainedEcurrentTarget=e.currentTarget;
+
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
+    const f = new FormData(retainedEcurrentTarget);
     const items = f.getAll("assignment").map((v) => {
       const [day, studentId] = String(v).split(":");
       return { weekday: Number(day), studentId };
     });
     if (
-      window.confirm(
+      await confirmAction(
         "Ganti seluruh piket aktif kelas ini dengan pilihan pada semua hari?",
       )
     )
