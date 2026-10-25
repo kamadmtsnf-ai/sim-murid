@@ -102,4 +102,4 @@ PR implementasi P09: [#56](https://github.com/kamadmtsnf-ai/sim-murid/pull/56). 
 
 - 25 Oktober 2026: P11 bantuan kontekstual dan templat laporan aman di ruang kerja, protokol evaluasi 14 tugas. Baseline/setelah dan penerimaan manusia belum tersedia; P11 parsial, P10 tetap parsial, P12 belum dijalankan.
 
-- 25 Oktober 2026: P12 kontrol AI, redaksi, consent, batas request/input/output, reservasi atomik dan human review draf diimplementasikan. Migrasi cloud `20261025032055` diterapkan dan privilege/fingerprint diverifikasi. Aktivasi provider berbayar dan evaluasi manusia belum dilakukan; P10/P11 tetap parsial, D10 tetap terbuka.
+- 25 Oktober 2026: P12 ([PR60](https://github.com/kamadmtsnf-ai/sim-murid/pull/60)) kontrol AI, redaksi, consent, batas request/input/output, reservasi atomik dan human review draf diimplementasikan. Migrasi cloud `20261025032055` diterapkan dan privilege/fingerprint diverifikasi. Aktivasi provider berbayar dan evaluasi manusia belum dilakukan; P10/P11 tetap parsial, D10 tetap terbuka.

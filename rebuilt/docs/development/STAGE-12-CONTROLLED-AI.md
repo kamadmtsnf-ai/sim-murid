@@ -2,6 +2,8 @@
 
 25 Oktober 2026 WIB. Baseline main `593dd9dae7a0ddc3edea3c484b684b403bdda90d` (PR59). Branch `feat/controlled-ai-p12`.
 
+PR implementasi: [#60](https://github.com/kamadmtsnf-ai/sim-murid/pull/60).
+
 ## Audit dan dampak
 
 Adapter OpenAI Responses, Anthropic Messages dan Gemini existing dipertahankan; tidak memasang SDK/provider baru atau mengganti model pengguna. Pembacaan services, survei final, agregat/tren deterministik dan rencana aksi Kepala tetap mengikuti kontrak existing. D01/D02/D03/D10 tidak berubah.
