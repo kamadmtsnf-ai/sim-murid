@@ -1,3 +1,4 @@
+import { securityState } from "@/lib/auth/security";
 import { redirect } from "next/navigation";
 import { readServerPrincipal } from "@/lib/auth/read-server";
 import { createAuthAdmin } from "@/lib/auth/admin";
@@ -22,6 +23,8 @@ export default async function EmailPage() {
     </main>
   );
   const state = emailStateSchema.parse(r.data);
+  const accountState = await securityState(caller.principal.id, caller.sessionId);
+  if (!accountState) redirect("/login?expired=1");
   return (
     <main
       id="main-content"
@@ -38,6 +41,7 @@ export default async function EmailPage() {
         </p>
       </header>
       <EmailPanel
+        accountState={accountState}
         initialState={state}
         initialServerTime={new Date().toISOString()}
       />

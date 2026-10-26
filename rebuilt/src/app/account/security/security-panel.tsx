@@ -1,4 +1,5 @@
 "use client";
+import { AccountCompletion } from "@/components/account/account-completion";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
@@ -57,9 +58,11 @@ type Action = "password" | "question";
 export function SecurityPanel({
   username,
   initialState,
+  emailVerified = null,
 }: {
   username: string;
   initialState: SecurityState;
+  emailVerified?: boolean | null;
 }) {
   const router = useRouter();
   const [state, setState] = useState(initialState),
@@ -260,6 +263,7 @@ export function SecurityPanel({
           <span className="font-medium text-foreground">{username}</span>.
         </p>
       </header>
+      <AccountCompletion state={state} emailVerified={emailVerified} needsSync={needsSync} />
       <section
         aria-labelledby="security-status"
         className="space-y-2 rounded-xl border bg-muted/30 p-4 sm:p-5"
