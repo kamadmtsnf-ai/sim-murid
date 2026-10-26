@@ -1,0 +1,58 @@
+/** Synthetic install boundary: never installs on a user's device or touches production data. */
+import { createRequire } from 'node:module';
+import { readFile, readdir, mkdtemp, mkdir, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { pathToFileURL } from 'node:url';
+import { createServer } from 'node:http';
+import assert from 'node:assert/strict';
+const root=process.cwd(),req=createRequire(import.meta.url),tools=process.env.UI_TEST_TOOLS||join(root,'node_modules');
+const {chromium}=req(join(tools,'playwright'));
+const {build}=await import(pathToFileURL(join(tools,'esbuild/lib/main.js')));
+const temp=await mkdtemp(join(tmpdir(),'sim-pwa-'));
+await build({entryPoints:[join(root,'tests/ui/pwa-fixture.tsx')],outfile:join(temp,'app.js'),bundle:true,platform:'browser',format:'iife',jsx:'automatic',tsconfig:join(root,'tsconfig.json'),define:{'process.env.NODE_ENV':'"production"'}});
+const cssFiles=(await readdir(join(root,'.next/static/chunks'))).filter(f=>f.endsWith('.css'));
+const css=(await Promise.all(cssFiles.map(f=>readFile(join(root,'.next/static/chunks',f),'utf8')))).join('\n');
+const script=await readFile(join(temp,'app.js'));
+const server=createServer((q,s)=>{if(q.url==='/app.js'){s.setHeader('Content-Type','text/javascript');s.end(script);}else if(q.url==='/app.css'){s.setHeader('Content-Type','text/css');s.end(css);}else{s.setHeader('Content-Type','text/html');s.end('<!doctype html><html lang="id"><head><title>PWA QA</title><link rel="stylesheet" href="/app.css"></head><body><div id="root"></div><script src="/app.js"></script></body></html>');}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));
+const browser=await chromium.launch({headless:true,executablePath:process.env.UI_CHROMIUM_EXECUTABLE,args:['--no-sandbox']});
+let checks=0,axeChecks=0; const errors=[];
+const check=(v,m)=>{assert.ok(v,m);checks++;};
+try{
+ const context=await browser.newContext();const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
+ const url=`http://127.0.0.1:${server.address().port}`;
+ await page.goto(url);await page.getByText('Pasang SiM-Murid di perangkat').click();
+ check(await page.getByRole('button',{name:'Instal aplikasi',exact:true}).count()===0,'no fake install button');
+ for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:720});check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow '+width);}
+ const offer=async(outcome)=>page.evaluate(outcome=>{window.prompts=0;const e=new Event('beforeinstallprompt',{cancelable:true});e.prompt=async()=>{window.prompts++;};e.userChoice=outcome==='reject'?Promise.resolve({outcome:'dismissed'}):Promise.resolve({outcome});if(outcome==='reject')e.prompt=async()=>{window.prompts++;throw new Error('synthetic');};window.dispatchEvent(e);return e.defaultPrevented;},outcome);
+ check(await offer('dismissed'),'prevent native unsolicited prompt');
+ await page.getByLabel('Catatan').fill('draft tetap');
+ await page.getByRole('button',{name:'Instal aplikasi',exact:true}).click();await page.getByText(/Instalasi dibatalkan/).waitFor();
+ check(await page.evaluate(()=>window.prompts)===1,'strict mode listener and single prompt');
+ check(await page.getByRole('button',{name:'Instal aplikasi',exact:true}).count()===0,'consumed event not reused');
+ check(await page.getByLabel('Catatan').inputValue()==='draft tetap','install never reloads draft');
+ await offer('reject');await page.getByRole('button',{name:'Instal aplikasi',exact:true}).click();await page.getByText(/Instalasi belum berhasil/).waitFor();checks++;
+ await offer('accepted');await page.getByRole('button',{name:'Instal aplikasi',exact:true}).click();await page.getByText(/Permintaan instalasi diterima/).waitFor();checks++;
+ await page.evaluate(()=>window.dispatchEvent(new Event('appinstalled')));
+ await page.getByText('Pasang SiM-Murid di perangkat').waitFor({state:'hidden'});checks++;
+ await page.evaluate(()=>{Object.defineProperty(navigator,'onLine',{configurable:true,value:false});window.dispatchEvent(new Event('offline'));});
+ await page.getByText(/Perangkat terdeteksi offline/).waitFor();checks++;
+ check(await page.getByLabel('Catatan').inputValue()==='draft tetap','offline keeps draft');
+ await page.evaluate(()=>{Object.defineProperty(navigator,'onLine',{configurable:true,value:true});window.dispatchEvent(new Event('online'));});
+ await page.getByText(/Perangkat terdeteksi offline/).waitFor({state:'hidden'});checks++;
+ check(await page.evaluate(async()=>!(await navigator.serviceWorker.getRegistrations()).length),'no worker registered');
+ check(await page.evaluate(async()=>!(await caches.keys()).length),'no application caches');
+ const axe=await readFile(join(tools,'axe-core/axe.min.js'),'utf8');await page.addScriptTag({content:axe});
+ check((await page.evaluate(()=>window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}))).violations.length===0,'axe installed');axeChecks++;
+ await page.reload();await page.getByText('Pasang SiM-Murid di perangkat').click();await page.addScriptTag({content:axe});
+ check((await page.evaluate(()=>window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}))).violations.length===0,'axe guide');axeChecks++;
+ await context.close();
+ const standalone=await browser.newContext();await standalone.addInitScript(()=>{const native=window.matchMedia;window.matchMedia=q=>q==='(display-mode: standalone)'?{matches:true,addEventListener(){},removeEventListener(){}}:native.call(window,q);});
+ const installed=await standalone.newPage();await installed.goto(url);await installed.getByRole('heading',{name:'SiM-Murid'}).waitFor();
+ await installed.waitForTimeout(100);
+ check(await installed.getByText('Pasang SiM-Murid di perangkat').count()===0,'standalone initial state hides guide');
+ check(errors.length===0,'no JavaScript errors');
+ const out=join(root,'docs/verification/l06-pwa');await mkdir(out,{recursive:true});await writeFile(join(out,'browser.json'),JSON.stringify({checks,axeChecks,errors,synthetic:true,physicalDeviceInstall:'not tested',privateData:'none'},null,2)+'\n');
+ console.log(JSON.stringify({checks,axeChecks,errors}));
+}finally{await browser.close();await new Promise(r=>server.close(r));}

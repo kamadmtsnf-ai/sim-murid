@@ -115,3 +115,5 @@ L03 menyatukan kontrol pagination/filter dan memperbaiki reset Buku Digital; lih
 L04 memperjelas advice per kode/fase dan mengunci tone dari evidence penyimpanan; lihat [laporan L04](L04-SAVE-FEEDBACK.md). UAT manusia L02 tetap terbuka; tidak ada migrasi database.
 
 L05 memperjelas lokasi halaman aktif dan hasil pencarian sidebar tanpa mengubah default collapsed; lihat [laporan L05](L05-SIDEBAR-WAYFINDING.md). Tidak ada migrasi; L02 UAT manusia tetap terbuka.
+
+L06 menambahkan PWA online dengan manifest/ikon dan kontrol instalasi progresif, tanpa worker/cache privat/migrasi. Lihat [laporan L06](L06-INSTALLABLE-PWA.md); penerimaan perangkat fisik belum selesai.
