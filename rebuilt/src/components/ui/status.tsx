@@ -57,14 +57,14 @@ export function Status({
       role={tone === "error" ? "alert" : "status"}
       aria-atomic="true"
       className={cn(
-        "ds-status flex min-w-0 items-start gap-3 rounded-xl border p-4 text-sm leading-relaxed",
+        "ds-status flex min-w-0 items-start gap-[12px] rounded-xl border p-[16px] text-sm leading-relaxed",
         style,
         className,
       )}
     >
       <Icon
         className={cn(
-          "mt-0.5 size-5 shrink-0",
+          "mt-0.5 size-[20px] shrink-0",
           tone === "pending" && "motion-safe:animate-spin",
         )}
         aria-hidden="true"

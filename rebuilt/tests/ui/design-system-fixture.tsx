@@ -33,7 +33,7 @@ function Fixture() {
   const hint = "Gunakan nama yang mudah dikenali.";
   return (
     <main
-      id="main-content"
+      id="main-content" tabIndex={-1}
       className="mx-auto min-w-0 max-w-4xl space-y-6 p-4 sm:p-6"
     >
       <h1 className="text-2xl font-semibold">Komponen bersama SiM-Murid</h1>

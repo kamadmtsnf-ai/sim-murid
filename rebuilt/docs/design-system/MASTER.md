@@ -394,3 +394,7 @@ Pisahkan validasi format, validasi sumber, konfirmasi dan hasil tersimpan. Perse
 ### L09 — Pemuatan panel dan klaim performa
 
 Panel opsional memakai fallback PanelLoading role=status/aria-live=polite dan tetap dirender server. Pertahankan key revisi/periode/akun dan guard existing. Ukuran bundle, lab dan field wajib dibedakan; missing metrik bukan nol. Lihat ../development/L09-MEASURED-PERFORMANCE.md.
+
+### L10 — Fokus dan pembesaran
+
+Target main-content menerima tabIndex=-1 untuk skip link. Gunakan outline focus-visible yang tetap terlihat tanpa shadow; jangan menambah positive tabindex. Varian kompak menargetkan44×44CSSpx sebagai standar produk, bukan minimum AA universal. Label dapat wrapping, gutter/ikon nonteks tidak menghabiskan ruang ketika teks diperbesar; tabel tetap gulir lokal berlabel. Laporan dan batas penerimaan: ../development/L10-ACCESSIBILITY.md.

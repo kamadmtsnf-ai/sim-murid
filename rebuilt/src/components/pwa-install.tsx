@@ -78,17 +78,17 @@ export function PwaInstall() {
   }
 
   return (
-    <aside aria-label="Pemasangan dan koneksi aplikasi" className="mx-auto w-full max-w-7xl min-w-0 space-y-3 px-4 py-4 text-sm sm:px-6">
+    <aside aria-label="Pemasangan dan koneksi aplikasi" className="mx-auto w-full max-w-7xl min-w-0 space-y-3 px-[16px] py-[16px] text-sm [overflow-wrap:anywhere] sm:px-[24px]">
       <div role="status" aria-live="polite" className="break-words">
         {offline ? <p className="rounded-lg border border-warning/40 bg-warning/10 p-3">Perangkat terdeteksi offline. Data belum dapat diperiksa atau disimpan. Sambungkan kembali lalu periksa status sebelum mengulangi penyimpanan; aplikasi tidak mengantrekan transaksi.</p> : null}
         {message ? <p className="mt-2 text-muted-foreground">{message}</p> : null}
       </div>
-      {!standalone ? <details className="rounded-xl border bg-card p-3 text-card-foreground">
+      {!standalone ? <details className="min-w-0 rounded-xl border bg-card p-[12px] text-card-foreground">
         <summary className="min-h-11 cursor-pointer content-center rounded-md font-medium outline-offset-4 focus-visible:outline-2 focus-visible:outline-primary">Pasang SiM-Murid di perangkat</summary>
         <div className="space-y-3 pt-2 leading-relaxed">
           <p>Akses aplikasi melalui ikon perangkat. Login, verifikasi email, dan seluruh penyimpanan tetap membutuhkan internet.</p>
           {available || pending ? <Button type="button" onClick={install} disabled={pending} aria-busy={pending}><Download aria-hidden="true" />{pending ? "Membuka instalasi…" : "Instal aplikasi"}</Button> : null}
-          <ul className="list-disc space-y-2 pl-5 text-muted-foreground">
+          <ul className="list-disc space-y-2 pl-[20px] text-muted-foreground">
             <li>Chrome/Edge desktop atau Android: buka menu browser dan cari “Instal aplikasi” atau “Tambahkan ke layar utama”, jika tersedia.</li>
             <li>iPhone/iPad: buka melalui Safari, pilih Bagikan, lalu “Tambahkan ke Layar Utama”. Nama menu dapat berbeda menurut versi sistem.</li>
           </ul>

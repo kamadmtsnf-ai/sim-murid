@@ -123,3 +123,5 @@ L07 menambahkan menu Kesehatan aplikasi khusus admin, agregat outbox/pekerjaan/r
 L08 memperbaiki kualitas impor Excel existing: template berversi dengan kompatibilitas lama, petunjuk per kolom, persentase valid dan laporan hasil/kesalahan tanpa password. Konfirmasi semua batch pengguna; kuota dan transaksi domain dipertahankan. Tanpa migrasi; lihat [laporan L08](L08-IMPORT-QUALITY.md).
 
 L09 siklus lanjutan: lihat [performa terukur](L09-MEASURED-PERFORMANCE.md). Optimasi panel dan lab terpisah dari penerimaan field/staging yang masih terbuka.
+
+L10 siklus lanjutan: [aksesibilitas](L10-ACCESSIBILITY.md), target fokus dan reflow diperbaiki; penerimaan AT manusia tetap terbuka.

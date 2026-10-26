@@ -186,9 +186,10 @@ try {
     );
     await a11y("dialog " + width);
     await page.getByLabel("Catatan", { exact: true }).fill("draf uji");
+    for(const key of ["Shift+Tab","Shift+Tab","Tab","Tab","Tab"]){await page.keyboard.press(key);check(await dialog.evaluate(e=>e.contains(document.activeElement)),"dialog focus contained "+width+" "+key);}
     await page.keyboard.press("Escape");
     await dialog.waitFor({state:"hidden"});
-    await page.waitForFunction(()=>document.activeElement?.textContent?.includes("Buka rincian"));
+    await page.waitForFunction(()=>document.activeElement?.tagName==="BUTTON" && document.activeElement?.textContent?.trim()==="Buka rincian");
     check(
       await button("Buka rincian").evaluate(
         (e) => e === document.activeElement,
@@ -251,6 +252,7 @@ try {
     if(forcedColors==="active")await page.screenshot({path:join(out,"forced-colors.png"),fullPage:true});
   }
   await page.emulateMedia({forcedColors:"none"});await page.goto(base);await button("Periksa isian").waitFor();await page.addStyleTag({content:"html{font-size:200%}"});await geometry("200% text320px");await a11y("200% text");await page.screenshot({path:join(out,"text200.png"),fullPage:true});
+  const wideTable=page.getByRole("region",{name:"Contoh tabel jadwal"});await wideTable.focus();await page.keyboard.press("ArrowRight");await page.waitForFunction(()=>document.querySelector('.table-region')?.scrollLeft>0);check(true,"keyboard scrolls wide table locally");
   await button("Buka rincian").click();await page.setViewportSize({width:320,height:568});const final=page.getByRole("button",{name:"Selesai",exact:true});await final.focus();check(await final.evaluate(e=>{const b=e.getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight&&e.contains(document.elementFromPoint(b.x+b.width/2,b.y+b.height/2));}),"enlarged short dialog action visible");await page.keyboard.press("Escape");await page.getByRole("dialog").waitFor({state:"hidden"});
   await page.goto(base);await button("Periksa isian").waitFor();await page.addStyleTag({content:"*{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important}p{margin-bottom:2em!important}"});await geometry("WCAG text spacing");
   check(!errors.length, "no JavaScript errors");
