@@ -50,3 +50,27 @@ test('OTP10: application rolling budget caps provider usage across users',async(
  await db.query("insert into sim_murid_private.email_verifications(user_id,email_target,otp_hash,created_at,expires_at,status) select $1,'owner@example.org',repeat('0',64),now()-interval '15 minutes',now()-interval '5 minutes','expired' from generate_series(1,250)",[user]);
  const r=await val('select public.app_email_reserve($1,$2,$3,$4,$5,$6)',[other,sid,'verify',id(1503),hash,'other@example.org']);assert.equal(r.code,'global_limit');
 });
+
+test('OTP onboarding: password completion permits contact verification before question, without granting readiness',async()=>{
+ const u=id(1901),sid=id(1902),newSid=id(1903),operation=id(1904),challenge=id(1905);
+ await db.query('insert into auth.users values($1)',[u]);await db.query('insert into auth.sessions(id,user_id) values($1,$2)',[sid,u]);
+ await db.query("insert into public.profiles(id,username,full_name) values($1,'first-login-teacher','New Teacher')",[u]);await db.query("insert into public.user_roles(user_id,role_code) values($1,'teacher')",[u]);await db.query('insert into sim_murid_private.auth_accounts(user_id,must_change_password) values($1,true)',[u]);await db.query('select public.app_auth_claim($1,$2,false)',[u,sid]);
+ assert.equal(await val('select public.app_email_state($1,$2)',[u,sid]),null);
+ assert.equal(await val('select public.app_email_address($1,$2,$3,$4)',[u,sid,'','new@example.org']),false);
+ assert.equal(await val('select public.app_password_begin($1,$2,$3)',[u,sid,operation]),true);assert.equal(await val('select public.app_password_finish($1,$2)',[u,operation]),true);
+ await db.query('insert into auth.sessions(id,user_id) values($1,$2)',[newSid,u]);await db.query('select public.app_auth_claim($1,$2,false)',[u,newSid]);
+ assert.equal((await val('select public.app_security_state($1,$2)',[u,newSid])).gate,'security_question');
+ assert.equal((await val('select public.app_email_state($1,$2)',[u,newSid])).email,'');
+ assert.equal(await val('select public.app_email_address($1,$2,$3,$4)',[u,newSid,'','new@example.org']),true);
+ assert.equal(await val('select public.app_email_address($1,$2,$3,$4)',[u,newSid,'','stale@example.org']),false);
+ assert.equal(await val('select public.app_email_address($1,$2,$3,$4)',[u,sid,'new@example.org','stale-session@example.org']),false);
+ // Earlier quota tests fill the global budget; clear only this isolated test database's synthetic history.
+ await db.query('delete from sim_murid_private.email_verifications');
+ const reserved=await val("select public.app_email_reserve($1,$2,'verify',$3,$4,$5)",[u,newSid,challenge,hash,'new@example.org']);assert.equal(reserved.code,'reserved');
+ assert.equal(await val('select public.app_email_delivery($1,$2,true,$3)',[u,challenge,'synthetic-onboarding']),true);
+ assert.equal(await val('select public.app_email_consume($1,$2,$3,$4,null)',[u,newSid,challenge,hash]),true);
+ assert.equal((await val('select public.app_email_state($1,$2)',[u,newSid])).verified,true);
+ assert.equal((await val('select public.app_security_state($1,$2)',[u,newSid])).gate,'security_question');
+ assert.equal(await val('select public.app_onboarding_ready($1,$2)',[u,newSid]),false);
+ for(const role of ['anon','authenticated']){await db.exec('set role '+role);await assert.rejects(db.query('select public.app_email_address($1,$2,$3,$4)',[u,newSid,'new@example.org','bad@example.org']),e=>e.code==='42501');await db.exec('reset role');}
+});

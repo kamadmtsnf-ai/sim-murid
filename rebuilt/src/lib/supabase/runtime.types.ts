@@ -43,6 +43,7 @@ app_email_context: { Args: {p_id: string }; Returns: Json };
 app_email_delivery: { Args: {p_user: string; p_id: string; p_accepted: boolean; p_message?: string | null }; Returns: boolean };
 app_email_recovery_identity: { Args: {p_username: string }; Returns: Json };
 app_email_reserve: { Args: {p_user: string; p_session: string; p_purpose: string; p_id: string; p_hash: string; p_expected_email: string }; Returns: Json };
+app_email_address: { Args: {p_user: string; p_session: string; p_expected_email: string; p_email: string }; Returns: boolean };
 app_email_state: { Args: {p_user: string; p_session: string }; Returns: Json };
 app_family_read: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_family_write: { Args: {p_actor: string; p_session: string; p_request: string; p_revision: number; p_command: Json }; Returns: Json };

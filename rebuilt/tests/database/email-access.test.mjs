@@ -37,14 +37,14 @@ test('contact changes remove proof for all roles; only teacher is forced through
   a.email=email;assert.equal((await state(a)).verified,false);assert.equal(await gate(a),role==='teacher'?'email_pending':'ready');
  }
 });
-test('password, biodata and security question gates still reject all OTP operations',async()=>{
+test('password gate rejects OTP; biodata and question gates permit email without granting readiness',async()=>{
  for(const role of ['admin','teacher','student']){
   const a=actors[role];await db.query('update sim_murid_private.auth_accounts set must_change_password=true where user_id=$1',[a.user]);
   assert.equal(await state(a),null);assert.equal((await reserve(a)).code,'not_allowed');
   await db.query('update sim_murid_private.auth_accounts set must_change_password=false where user_id=$1',[a.user]);
  }
- const s=actors.student;await db.query('update sim_murid_private.auth_accounts set profile_completed_at=null where user_id=$1',[s.user]);assert.equal(await state(s),null);assert.equal((await reserve(s)).code,'not_allowed');
- const a=actors.admin;await db.query('delete from sim_murid_private.security_questions where user_id=$1',[a.user]);assert.equal(await state(a),null);assert.equal((await reserve(a)).code,'not_allowed');
+ const s=actors.student;await db.query('update sim_murid_private.auth_accounts set profile_completed_at=null where user_id=$1',[s.user]);assert.equal((await state(s)).email,s.email);assert.equal(await gate(s),'profile_pending');assert.equal(await val('select public.app_onboarding_ready($1,$2)',[s.user,s.session]),false);
+ const a=actors.admin;await db.query('delete from sim_murid_private.security_questions where user_id=$1',[a.user]);assert.equal((await state(a)).email,a.email);assert.equal(await gate(a),'security_question');assert.equal(await val('select public.app_onboarding_ready($1,$2)',[a.user,a.session]),false);
 });
 test('cooldown, wrong attempts and cross-user ownership remain enforced for non-teacher',async()=>{
  const a=actors.parent;await db.query("update sim_murid_private.email_verifications set created_at=created_at-interval '61 seconds',expires_at=expires_at-interval '61 seconds' where user_id=$1",[a.user]);
