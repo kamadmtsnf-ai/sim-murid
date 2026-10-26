@@ -456,8 +456,16 @@ try {
     .getByRole("heading", { name: "Belum ada buku yang ditampilkan" })
     .waitFor();
   check(true, "filtered empty state is explicit");
+  readFailure = true;
+  await page.getByRole("button", { name: "Reset filter" }).click(); await settleConfirmation(page);
+  await page.getByText("Katalog belum dapat dimuat.", {exact:false}).waitFor();
+  check(await page.getByLabel("Cari judul atau penulis").inputValue()==="absent", "Failed reset preserves applied search field");
+  check(await page.getByRole('list',{name:'Filter aktif'}).getByText('absent',{exact:false}).count()===1, "Failed reset preserves applied filter summary");
+  readFailure = false;
   await page.getByRole("button", { name: "Reset filter" }).click(); await settleConfirmation(page);
   await page.locator("article").first().waitFor();
+  check(await page.getByLabel("Cari judul atau penulis").inputValue()==="", "Confirmed reset clears form and applied filters together");
+  await page.getByLabel("Cari judul atau penulis").fill("unsaved search");await page.getByRole("button",{name:"Reset filter",exact:true}).click();await settleConfirmation(page);await page.waitForFunction(()=>document.querySelector('input[name="query"]').value==='');check(true,'Reset also clears unsubmitted search when committed filters already empty');
   await visit("large");
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click(); await settleConfirmation(page);
   await page.getByRole("navigation", {name:"Halaman katalog",exact:true}).getByText("Halaman 2 dari 3", {exact:true}).waitFor();

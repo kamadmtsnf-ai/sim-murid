@@ -530,10 +530,10 @@
 }
 @layer components {
   .ds-pagination > p { flex:1 0 100%; order:-1; text-align:center; }
-  .ds-pagination > button { flex:1 1 7rem; }
+  .ds-pagination > :is(button,a) { flex:1 1 7rem; }
   @media(min-width:640px) {
     .ds-pagination > p { flex:initial; order:0; }
-    .ds-pagination > button { flex:initial; }
+    .ds-pagination > :is(button,a) { flex:initial; }
   }
 }
 

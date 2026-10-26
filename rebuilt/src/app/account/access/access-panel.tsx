@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useSortPreference } from "@/lib/collections/use-sort-preference";
+import { CollectionSummary } from "@/components/ui/collection-summary";
 import { useRouter } from "next/navigation";
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,6 +25,7 @@ import { EmptyState } from "@/components/ui/content-state";
 import { Status } from "@/components/ui/status";
 export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
   const router = useRouter();
+  const [sort,setSort] = useSortPreference(initialData.user_id);
   const [data, setData] = useState<AccessPageData | null>(initialData),
     [query, setQuery] = useState(""),
     [resource, setResource] = useState(""),
@@ -107,7 +110,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
     }
   }
   const rows = data ? permissionRows(data) : [],
-    filtered = data ? filterPermissions(data, { query, resource, scope }) : [],
+    filtered = data ? filterPermissions(data, { query, resource, scope }).toSorted((a,b)=>(sort==='label-desc'?-1:1)*a.label.localeCompare(b.label,'id-ID')) : [],
     assignments = data ? uniqueAssignments(data) : [];
   const pages = Math.max(1, Math.ceil(filtered.length / 10)),
     current = Math.min(page, pages - 1),
@@ -333,11 +336,8 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                 </Field>
               </FilterBar>
               <div className="ds-actions items-center justify-between">
-                <p role="status" className="text-sm text-muted-foreground">
-                  {filtered.length
-                    ? `Menampilkan ${current * 10 + 1}–${Math.min(current * 10 + 10, filtered.length)} dari ${filtered.length} jenis izin`
-                    : "0 jenis izin ditampilkan"}
-                </p>
+                <CollectionSummary total={filtered.length} page={current+1} pageSize={10} unit="jenis izin" filters={[{label:'Pencarian',value:query},{label:'Area',value:resource?(accessResources[resource]??resource):''},{label:'Cakupan',value:scope?(scopeLabels[scope as keyof typeof scopeLabels]??scope):''}]}/>
+                <Field id="access-sort" label="Urutan"><select id="access-sort" className={fieldControlClass} value={sort} onChange={e=>{setSort(e.target.value==='label-desc'?'label-desc':'label-asc');setPage(0);}}><option value="label-asc">Nama izin A–Z</option><option value="label-desc">Nama izin Z–A</option></select></Field>
                 <Button
                   type="button"
                   variant="outline"

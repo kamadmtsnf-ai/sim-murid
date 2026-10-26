@@ -27,7 +27,7 @@ const scopes = [
   "action_plan",
 ];
 const state = accessPageSchema.parse({
-  user_id: id(1),
+  user_id: id(p.get("otherAccount")==="1"?2:1),
   role: p.has("long") ? "peran-".repeat(80) : (p.get("role") ?? "teacher"),
   assignments: p.has("empty")
     ? []

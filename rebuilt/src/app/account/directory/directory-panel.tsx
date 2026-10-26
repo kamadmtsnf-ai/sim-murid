@@ -1,7 +1,10 @@
 import Link from 'next/link';
+import { ExportDirectoryPage } from './export-directory-page';
+import { CollectionSummary } from '@/components/ui/collection-summary';
+import { LinkPagination } from '@/components/ui/link-pagination';
 import {formatAcademicYear} from '@/lib/academic/period';
 import type {z} from 'zod';
-import {Users,ArrowLeft,ArrowRight,Search} from 'lucide-react';
+import {Users,ArrowRight,Search} from 'lucide-react';
 import {TableRegion} from '@/components/ui/data-table';
 import {Button} from '@/components/ui/button';
 import {TextField,SelectField} from '@/components/domain-controls';
@@ -24,6 +27,8 @@ export function DirectoryPanel({data,filter,isAdmin}:{data:z.infer<typeof direct
  const pages=directoryPageCount(data),pageUrl=(page:number)=>directoryPageUrl(filter,page);
  return <div className="directory-panel space-y-6">
   <DirectoryFilters key={directoryPageUrl(filter,1)} filter={filter} isAdmin={isAdmin}/>
+  <CollectionSummary total={data.total} page={data.page} pageSize={data.page_size} unit="pengguna" filters={[{label:'Jenis',value:directoryRoleLabel(filter.role)},{label:'Pencarian',value:filter.query},{label:'Status',value:filter.status==='all'?'Semua':filter.status==='inactive'?'Nonaktif':'Aktif'}]}/>
+  {isAdmin&&<ExportDirectoryPage page={data.page} rows={data.rows.map(p=>[p.name,p.username,directoryRoleLabel(p.role),p.status==='active'?'Aktif':'Nonaktif',p.classes.map(c=>`${c.name} (${formatAcademicYear(c.year)})`).join(', '),p.assignments.map(a=>assignmentLabel(a.code)).join(', ')])}/>}
   <section aria-labelledby="directory-results-title" className="space-y-4">
    <div className="directory-results-heading"><div><h2 id="directory-results-title" className="text-lg font-semibold">Daftar {directoryRoleLabel(filter.role).toLocaleLowerCase('id-ID')}</h2><p className="mt-1 text-sm text-muted-foreground">{data.total.toLocaleString('id-ID')} pengguna sesuai filter dan akses Anda.</p></div><p className="text-sm text-muted-foreground">Halaman {data.page} dari {pages}</p></div>
    {Math.ceil(data.total/data.page_size)>2000?<p className="text-sm text-muted-foreground">Hasil melebihi batas halaman. Gunakan pencarian untuk mempersempit daftar.</p>:null}
@@ -32,6 +37,6 @@ export function DirectoryPanel({data,filter,isAdmin}:{data:z.infer<typeof direct
     <div className="directory-table"><TableRegion label="Tabel direktori — gulir untuk melihat seluruh kolom"><table className="w-full text-left text-sm"><caption className="sr-only">Direktori {directoryRoleLabel(filter.role)}</caption><thead><tr>{['Nama / username','Status / kelengkapan','Kelas / penugasan','Detail'].map(title=><th scope="col" key={title}>{title}</th>)}</tr></thead><tbody>{data.rows.map(person=><tr key={person.id}><td><strong>{person.name}</strong><p className="mt-1 text-muted-foreground">@{person.username}</p></td><td><PersonStatus person={person}/></td><td><PersonAssignments person={person}/></td><td><DetailLink person={person}/></td></tr>)}</tbody></table></TableRegion></div>
    </>}
   </section>
-  {pages>1?<nav aria-label="Halaman direktori" className="directory-pagination">{data.page>1?<Button asChild variant="outline"><Link prefetch={false} href={pageUrl(data.page-1)}><ArrowLeft aria-hidden="true"/>Sebelumnya</Link></Button>:<Button variant="outline" disabled><ArrowLeft aria-hidden="true"/>Sebelumnya</Button>}<span className="text-sm text-muted-foreground">Halaman {data.page} dari {pages}</span>{data.page<pages?<Button asChild variant="outline"><Link prefetch={false} href={pageUrl(data.page+1)}>Berikutnya<ArrowRight aria-hidden="true"/></Link></Button>:<Button variant="outline" disabled>Berikutnya<ArrowRight aria-hidden="true"/></Button>}</nav>:null}
+  {pages>1?<LinkPagination label="Halaman direktori" page={data.page} pageCount={pages} pageUrl={pageUrl}/>:null}
  </div>;
 }

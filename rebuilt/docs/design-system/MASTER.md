@@ -364,3 +364,13 @@ Feedback menampilkan judul status, pesan domain, lalu langkah berikutnya bila pe
 ## Shell navigasi — 25 Oktober 2026
 
 Navbar menyatakan lokasi aktif; sidebar menyaring menu dari izin server dan pencarian tidak menambah cakupan. Drawer/search mengikuti pathname termasuk Back/Forward. Header/footer mengikuti alur konten; jangan menghitung tinggi konten dari asumsi header tetap. Pada jendela pendek, seluruh sidebar dapat digulir supaya identitas dan Logout tetap terjangkau. Jaga fokus pencarian saat active-item auto-scroll. Menu kosong, tidak ada hasil pencarian dan status izin belum terverifikasi harus dibedakan. Lihat `../development/WORKSPACE-SHELL-AUDIT.md`.
+
+## L03 — Kontrak koleksi dan filter
+
+- `collection-summary.tsx`: tampilkan rentang hasil dan filter **yang sudah diterapkan**, bukan isian draft. Caller tetap menentukan cakupan data; komponen tidak fetch, mengubah izin atau menyaring ulang.
+- `collections/presentation.ts`: proyeksi halaman one-based dibatasi ke range valid, hasil kosong 0–0, hitungan invalid tidak diklaim sebagai data tersedia.
+- `Pagination` dan `LinkPagination` memakai proyeksi yang sama: callback untuk koleksi client, URL GET kanonis untuk koleksi server. Fetch/slice tetap milik domain. Anchor/button memakai aturan responsive yang sama.
+- Urutan tampilan dapat disimpan per akun sebagai enum. Jangan simpan query/nama, class_id, relasi atau grants dalam preferensi. Hanya urutkan hasil yang sudah scoped saat ini.
+- Reset filter server tidak boleh mengosongkan field lalu meninggalkan hasil lama saat request gagal. Sinkronkan form/ringkasan setelah readback berhasil; paging tidak menghapus draft pencarian.
+- Ekspor harus menjelaskan apakah seluruh hasil atau hanya halaman saat ini. Direktori menyediakan admin-only “Ekspor halaman ini”; tidak fetch baris tambahan atau menambah cakupan data. Username tetap teks pada XLSX.
+- Sticky header/kolom tetap sesuai kebutuhan tabel existing; jangan menerapkan global sticky pada card/mobile atau mengubah kontrak pagination domain.
