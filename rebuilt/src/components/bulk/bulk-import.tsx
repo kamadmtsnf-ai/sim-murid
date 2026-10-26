@@ -1,4 +1,6 @@
 "use client";
+import { ImportReport } from "@/components/imports/import-report";
+import { importQuality } from "@/lib/spreadsheets/templates";
 import { confirmAction } from "@/components/ui/confirm-action";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -182,6 +184,7 @@ export function BulkImport({
             .max(100),
           count: z.number().int().min(1).max(100),
         })
+        .refine(v=>v.rows.length+new Set(v.issues.map(i=>i.row)).size===v.count && v.issues.every(i=>i.row<=v.count+1), "Ringkasan pemeriksaan Excel tidak konsisten.")
         .parse(b.preview);
       setWorkbook(workbook);
       setPreview({ ...parsed, error: "" });
@@ -311,7 +314,14 @@ export function BulkImport({
             "Batch ditolak. Tidak ada data disimpan.",
         );
       }
-      requestAnimationFrame(() => feedback.current?.focus());
+      requestAnimationFrame(() => {
+        const node = feedback.current;
+        if (!node) return;
+        // Native focus scrolling can also scroll the overflow-hidden dialog shell.
+        node.focus({ preventScroll: true });
+        const body = node.closest<HTMLElement>(".dialog-body");
+        if (body) body.scrollTop += node.getBoundingClientRect().top - body.getBoundingClientRect().top - 16;
+      });
     } catch {
       if (mounted.current) {
         if (action === "commit" || action === "status") {
@@ -586,6 +596,9 @@ export function BulkImport({
           {preview?.error ? (
             <Status tone="error">{preview.error}</Status>
           ) : null}
+          {preview && preview.count > 0 ? <p role="status" className="text-sm">Pemeriksaan Excel: {importQuality(preview.count, preview.issues.map(i=>i.row)).valid}/{preview.count} baris valid ({importQuality(preview.count, preview.issues.map(i=>i.row)).percentage}%). Pemeriksaan referensi dan izin dilakukan pada validasi sumber; belum ada data disimpan oleh pemeriksaan Excel.</p> : null}
+          {preview?.issues.length ? <ImportReport name={`kesalahan-${domain}.xlsx`} label="Unduh daftar kesalahan" headers={["baris_excel", "keterangan"]} rows={preview.issues.map(i=>[i.row,i.code])} disabled={pending||fileLoading}/> : null}
+          {result?.rows?.length ? <ImportReport name={`hasil-${domain}.xlsx`} label="Unduh laporan impor" headers={["baris_excel", "hasil", "status_batch"]} rows={result.rows.map(r=>[r.row,outcomeLabels[r.code]??"Tidak disimpan; periksa referensi dan izin", phase==="uncertain"?"Hasil penyimpanan belum dapat dipastikan":outcomeLabels[result.code]??"Belum tersimpan"])} disabled={pending||fileLoading} instructions={["Seluruh batch disimpan secara atomik. Hasil validasi per baris bukan bukti tersimpan.", "Jika status batch belum pasti, periksa hasil menggunakan permintaan yang sama sebelum mencoba kembali."]}/> : null}
           {preview?.issues.length ? (
             <ul aria-label="Masalah Excel" className="space-y-2 text-sm">
               {preview.issues.map((i) => (

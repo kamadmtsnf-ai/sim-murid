@@ -1,3 +1,4 @@
+import { bulkTemplate } from "@/lib/spreadsheets/templates";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
 import { sameOrigin, privateJson } from "@/lib/auth/http";
@@ -31,12 +32,12 @@ export async function POST(request: NextRequest) {
     const input = bulkInput.parse(await jsonBody(request, 1500000));
     let parsed;
     try {
-      parsed = parseBulkRows(await readExcel(decodeWorkbook(input.workbook),headers[input.domain],["username","teacher_username"]), input.domain);
+      parsed = parseBulkRows(await readExcel(decodeWorkbook(input.workbook),headers[input.domain],["username","teacher_username"],bulkTemplate(input.domain)), input.domain);
     } catch {
       return reply(
         {
           message:
-            "Excel tidak valid. Gunakan template .xlsx maksimal 1 MiB dan 100 baris.",
+            "Excel tidak valid. Gunakan template .xlsx terbaru maksimal 1 MiB dan 100 baris.",
         },
         400,
       );

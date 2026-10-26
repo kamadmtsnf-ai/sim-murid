@@ -6,3 +6,40 @@ test('Excel rejects formula/date/hyperlink/numeric identity values and unexpecte
 test('Excel caps actual ZIP decompression, forged archives, data rows and base64 encoding',async()=>{assert.throws(()=>inspectExcelZip(new Uint8Array(10)));assert.throws(()=>inspectExcelZip(new Uint8Array(1048577)));for(const v of ['bad','UEs=\n','!!!!'])assert.throws(()=>decodeWorkbook(v));const bytes=Buffer.from(await excelBytes(['username'],Array.from({length:101},(_,i)=>['u-'+i])));await assert.rejects(readExcel(bytes,['username'],['username']));const c=bytes.indexOf(Buffer.from([0x50,0x4b,0x01,0x02]));bytes.writeUInt32LE(0,c+24);assert.throws(()=>inspectExcelZip(bytes));});
 test('User preview rejects duplicate and invalid role rows and preserves literal identities',()=>{const data=[userHeaders,['001-02','Nama','student',''],['1-2','Guru','teacher','g@example.org']];const r=parseUserRows(data);assert.equal(r.issues.length,0);assert.equal(r.rows[0].username,'001-02');assert.equal(parseUserRows([...data,data[1]]).issues[0].row,4);assert.equal(parseUserRows([userHeaders,['a','Nama','Guru','']]).issues.length,1);assert.equal(parseUserRows([userHeaders,['a','','student','bad']]).issues.length,1);});
 test('Each user gets a fresh strong temporary credential, retained by a retry payload',()=>{const row={username:'001-02',fullName:'Nama',role:'student',contactEmail:''};const a=createUserDraft(row),b=createUserDraft(row);assert.notEqual(a.requestId,b.requestId);assert.notEqual(a.password,b.password);assert.match(a.password,/^Aa1_[a-f0-9]{48}$/);assert.equal(JSON.parse(JSON.stringify(a)).requestId,a.requestId);});
+
+const {userTemplate,bulkTemplate,templateMarker,importQuality}=await import('../src/lib/spreadsheets/templates.ts');
+test('versioned workbooks round-trip while old unversioned templates stay compatible',async()=>{
+ const rows=[['001-02','Nama','student','']];
+ for(const versioned of [true,false]){
+  const bytes=await excelBytes(userHeaders,rows,['Contoh username 001-02'],versioned?userTemplate:undefined);
+  assert.deepEqual(await readExcel(bytes,userHeaders,userHeaders,userTemplate),[userHeaders,...rows]);
+  const book=new ExcelJS.Workbook();await book.xlsx.load(Buffer.from(bytes));
+  if(versioned)assert.equal(book.getWorksheet('Panduan').getCell('A1').value,templateMarker(userTemplate));
+ }
+});
+test('wrong version/type or duplicate template markers reject without accepting data rows',async()=>{
+ for(const template of [{id:'users',version:2},bulkTemplate('grades')]){
+  const bytes=await excelBytes(userHeaders,[['001-02','Nama','student','']],[],template);
+  await assert.rejects(readExcel(bytes,userHeaders,userHeaders,userTemplate),/Versi atau jenis/);
+ }
+ const bytes=await excelBytes(userHeaders,[['001-02','Nama','student','']],[templateMarker(userTemplate)],userTemplate);
+ await assert.rejects(readExcel(bytes,userHeaders,userHeaders,userTemplate),/Versi atau jenis/);
+});
+test('ordinary exports gain no template marker or changed data structure',async()=>{
+ const bytes=await excelBytes(['baris_excel','username','status'],[[2,'001-02','Belum dapat dipastikan']]);
+ const book=new ExcelJS.Workbook();await book.xlsx.load(Buffer.from(bytes));
+ assert.equal(book.worksheets.length,1);assert.equal(book.getWorksheet('Data').getCell('B2').value,'001-02');assert.equal(book.getWorksheet('Data').getCell('B2').type,ExcelJS.ValueType.String);
+});
+test('user field diagnostics identify corrections without echoing source values',()=>{
+ const result=parseUserRows([userHeaders,[' name','','GURU','sensitive-invalid-email']]);
+ assert.equal(result.issues[0].row,2);assert.match(result.issues[0].message,/Username/);assert.match(result.issues[0].message,/Nama/);assert.match(result.issues[0].message,/kode peran/);assert.match(result.issues[0].message,/Email/);assert.doesNotMatch(result.issues[0].message,/sensitive-invalid-email/);
+});
+test('quality percentage counts distinct invalid rows and rejects impossible summaries',()=>{
+ assert.deepEqual(importQuality(4,[2,2,3]),{count:4,valid:2,invalid:2,percentage:50});assert.equal(importQuality(3,[2]).percentage,67);
+ for(const [n,issues] of [[0,[]],[101,[]],[2,[4]],[2,[-1]]])assert.throws(()=>importQuality(n,issues));
+});
+
+test('report layout wraps diagnostic cells without changing normal export defaults',async()=>{
+ const report=await excelBytes(['baris_excel','keterangan'],[[2,'Periksa isian. '.repeat(20)]],[],undefined,{wrapText:true});
+ const book=new ExcelJS.Workbook();await book.xlsx.load(Buffer.from(report));const sheet=book.getWorksheet('Data');assert.equal(sheet.getCell('B2').alignment.wrapText,true);assert.equal(sheet.getColumn(2).width,64);assert.ok(sheet.getRow(2).height>=30);assert.equal(sheet.getCell('B2').type,ExcelJS.ValueType.String);
+});

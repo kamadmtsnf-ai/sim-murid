@@ -1,4 +1,6 @@
 "use client";
+import { ImportReport } from "@/components/imports/import-report";
+import { importQuality } from "@/lib/spreadsheets/templates";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
@@ -36,6 +38,7 @@ export function ImportUsers() {
     [backedUp, setBackedUp] = useState(false),
     [started, setStarted] = useState(false),
     [page, setPage] = useState(1);
+  const [quality, setQuality] = useState<ReturnType<typeof importQuality> | null>(null);
   const current = useRef<Entry[]>([]),
     active = useRef(false),
     mounted = useRef(true),
@@ -78,6 +81,7 @@ export function ImportUsers() {
     if (next) {
       update([]);
       setIssues([]);
+      setQuality(null);
       setMessage("");
       setChecked(false);
       setBackedUp(false);
@@ -96,6 +100,7 @@ export function ImportUsers() {
     const version = ++epoch.current;
     update([]);
     setIssues([]);
+    setQuality(null);
     setChecked(false);
     setBackedUp(false);
     setMessage("");
@@ -135,10 +140,16 @@ export function ImportUsers() {
           )
           .max(100)
           .safeParse(b.issues);
-        if (i.success) setIssues(i.data);
+        if (i.success) {
+          setIssues(i.data);
+          const count = z.number().int().min(1).max(100).safeParse(b.quality?.count);
+          if (count.success && i.data.every(issue=>issue.row<=count.data+1))
+            setQuality(importQuality(count.data, i.data.map(issue=>issue.row)));
+        }
         return;
       }
       const rows = z.array(importUserRow).min(1).max(100).parse(b.rows);
+      setQuality(importQuality(rows.length, []));
       update(
         rows.map((row) => ({
           payload: createUserDraft(row),
@@ -206,20 +217,14 @@ export function ImportUsers() {
   }
   async function run() {
     if (active.current || !entries.length || !checked || !backedUp) return;
-    const admins = entries.filter(
-      (e) =>
-        e.payload.role === "admin" &&
-        e.status !== "created" &&
-        e.status !== "failed",
-    ).length;
-    if (
-      admins &&
-      !(await confirmAction(
-        `Batch ini akan membuat ${admins} akun Admin dengan kewenangan penuh. Pastikan penetapan peran sudah benar. Lanjutkan?`,
-      ))
-    )
-      return;
-    if (active.current) return;
+    const version = epoch.current;
+    const candidates = current.current.filter(e=>!["created", "failed"].includes(e.status));
+    const admins = candidates.filter(e=>e.payload.role === "admin").length;
+    if (!candidates.length || !(await confirmAction(
+      `Buat atau periksa kembali ${candidates.length} akun yang belum selesai? Akun yang berhasil dibuat tidak dikirim ulang.${admins ? ` Batch ini memuat ${admins} akun Admin dengan kewenangan penuh. Pastikan penetapan peran sudah benar.` : ""}`,
+      { title: "Konfirmasi impor pengguna", confirmLabel: "Ya, proses akun" },
+    ))) return;
+    if (active.current || epoch.current !== version || !mounted.current) return;
     active.current = true;
     stop.current = false;
     setBusy(true);
@@ -353,6 +358,8 @@ export function ImportUsers() {
           />
         </label>
         {message && <Status>{message}</Status>}
+        {quality ? <p role="status" className="text-sm">Pemeriksaan: {quality.valid}/{quality.count} baris valid ({quality.percentage}%) · {quality.invalid} perlu diperbaiki. {quality.invalid ? "Belum ada akun dibuat; perbaiki semua baris lalu unggah kembali." : "Belum merupakan bukti akun telah dibuat."}</p> : null}
+        {issues.length > 0 ? <ImportReport name="kesalahan-impor-pengguna.xlsx" label="Unduh daftar kesalahan" headers={["baris_excel", "keterangan"]} rows={issues.map(i=>[i.row,i.message])} disabled={busy}/> : null}
         {issues.length > 0 && (
           <ul aria-label="Masalah impor pengguna" className="space-y-2 text-sm">
             {issues.map((i) => (
@@ -419,6 +426,7 @@ export function ImportUsers() {
                 disabled={false}
               />
             )}
+            <ImportReport name="hasil-impor-pengguna.xlsx" label="Unduh laporan impor" headers={["baris_excel", "username", "status", "keterangan"]} rows={entries.map((e,i)=>[i+2,e.payload.username,labels[e.status],e.message])} disabled={busy} instructions={["Laporan tidak memuat kata sandi. Kredensial sementara diunduh melalui tombol terpisah dan harus disimpan pribadi.", "Pembuatan akun berjalan per baris; keberhasilan sebagian tidak berarti seluruh batch berhasil."]}/>
             <Button
               type="button"
               variant="outline"
