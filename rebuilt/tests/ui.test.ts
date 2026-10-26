@@ -61,3 +61,11 @@ test('Menu search supports task terms, group names and every word without broade
  assert.equal(filterNavigation(allowed,'').flatMap(g=>g.items).length,allowed.flatMap(g=>g.items).length);
  assert.ok(allowed.every(g=>g.items.every(i=>!i.adminOnly)));
 });
+
+test('Current menu detection can be restricted to the callers allowed navigation',()=>{
+ const scoped=navigationFor([],false);
+ assert.equal(currentNavItem('/account/settings',scoped),undefined);
+ assert.equal(currentNavItem('/account/security',scoped)?.href,'/account/security');
+ const admin=navigationFor([],true);assert.equal(currentNavItem('/account/directory/00000000-0000-4000-8000-000000000001',admin)?.href,'/account/directory');
+ assert.equal(currentNavItem('/account/security-foreign',scoped),undefined);
+});

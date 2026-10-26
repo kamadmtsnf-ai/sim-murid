@@ -65,16 +65,16 @@ export function WorkspaceShell({
   const brandRef = useRef<HTMLAnchorElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
   const path = usePathname();
-  const [navState, setNavState] = useState({ path, open: false, query: "" });
+  const [navState, setNavState] = useState({ path, open: false, query: "", searchGroups: {} as Record<string, boolean> });
   // Reset route-owned UI before committing a new route, including back/forward.
-  if (navState.path !== path) setNavState({ path, open: false, query: "" });
+  if (navState.path !== path) setNavState({ path, open: false, query: "", searchGroups: {} });
   const { open, query } = navState;
   const setOpen = useCallback(
     (value: boolean) => setNavState((state) => ({ ...state, open: value })),
     [],
   );
   const setQuery = useCallback(
-    (value: string) => setNavState((state) => ({ ...state, query: value })),
+    (value: string) => setNavState((state) => ({ ...state, query: value, searchGroups: {} })),
     [],
   );
   const drawerId = `${searchId}-drawer`;
@@ -99,7 +99,7 @@ export function WorkspaceShell({
     : /^\/account\/biodata\/[^/]+\/?$/.test(path)
       ? "Detail biodata"
       : null;
-  const item = currentNavItem(path),
+  const item = currentNavItem(path, navigation),
     group = navigation.find((g) => g.items.some((i) => i.href === item?.href));
   const filtered = filterNavigation(navigation, query),
     resultCount = filtered.reduce((count, g) => count + g.items.length, 0);
@@ -204,9 +204,11 @@ export function WorkspaceShell({
           )}
         </div>
         {query.trim() && (
-          <p role="status" className="nav-search-status">
-            {resultCount} menu ditemukan
-          </p>
+          <div role="status" className="nav-search-status space-y-1">
+            <p>{resultCount} menu ditemukan</p>
+            <p className="text-xs">Pencarian hanya mencakup menu yang diizinkan untuk akun Anda.</p>
+            {item && group && !filtered.some(g=>g.items.some(i=>i.href===item.href)) && <p className="text-xs">Halaman saat ini: {item.label}, kelompok {group.label}. Hapus pencarian untuk melihat penandanya.</p>}
+          </div>
         )}
         {navigationUnavailable && (
           <p className="navigation-notice" role="status">
@@ -222,19 +224,26 @@ export function WorkspaceShell({
         >
           {filtered.length ? (
             filtered.map((g) => {
-              const groupKey = `${query.trim() ? `search:${query.trim()}` : "browse"}:${g.label}`;
-              const expanded = expandedGroups[groupKey] ?? Boolean(query.trim());
+              const searching = Boolean(query.trim());
+              const expanded = searching ? navState.searchGroups[g.label] ?? true : expandedGroups[g.label] ?? false;
+              const currentGroup = group?.label === g.label;
               const panelId = `${searchId}-${mobile ? "mobile" : "desktop"}-group-${navigation.findIndex(group => group.label === g.label)}`;
               return (
               <section key={g.label}>
                 <h2 className="nav-group-heading"><button
                   type="button"
                   className="nav-group-toggle"
+                  aria-label={g.label}
                   aria-expanded={expanded}
                   aria-controls={panelId}
-                  onClick={() => setExpandedGroups(previous => ({ ...previous, [groupKey]: !expanded }))}
+                  aria-describedby={currentGroup ? `${panelId}-current` : undefined}
+                  data-current-group={currentGroup ? "true" : undefined}
+                  onClick={() => searching
+                    ? setNavState(previous=>({...previous,searchGroups:{...previous.searchGroups,[g.label]:!expanded}}))
+                    : setExpandedGroups(previous => ({ ...previous, [g.label]: !expanded }))}
                 >
                   <span className="min-w-0 flex-1 wrap-anywhere">{g.label}</span>
+                  {currentGroup && <><span aria-hidden="true" className="nav-current-badge">Halaman aktif</span><span id={`${panelId}-current`} className="sr-only">Halaman aktif: {item?.label}. {expanded ? "Kelompok terbuka." : "Buka kelompok untuk melihat menunya."}</span></>}
                   <ChevronRight aria-hidden="true" className={expanded ? "rotate-90" : undefined} />
                 </button></h2>
                 <ul id={panelId} hidden={!expanded}>
@@ -263,7 +272,7 @@ export function WorkspaceShell({
               role={query.trim() ? undefined : "status"}
             >
               {query.trim()
-                ? "Menu tidak ditemukan. Coba kata lain."
+                ? "Menu tidak ditemukan. Coba nama layanan atau istilah lain, atau hapus pencarian."
                 : "Belum ada menu yang dapat ditampilkan untuk akun ini."}
             </p>
           )}

@@ -2,7 +2,7 @@
 
 Versi: 1.0
 Tanggal: 26 Oktober 2026 (Asia/Jakarta)
-Status: L01 dirilis melalui PR #76. L02 tooling dan regresi otomatis dikerjakan; UAT manusia belum tersedia. L03 dirilis PR78. L04 feedback penyimpanan dikerjakan; L05–L11 belum dijalankan.
+Status: L01 dirilis melalui PR #76. L02 tooling dan regresi otomatis dikerjakan; UAT manusia belum tersedia. L03 dirilis PR78. L04 dirilis PR79. L05 orientasi sidebar dikerjakan; L06–L11 belum dijalankan.
 Repositori: https://github.com/kamadmtsnf-ai/sim-murid
 Aplikasi: rebuilt/
 Nama berkas rekomendasi di repositori: rebuilt/docs/development/ROADMAP-PROFESSIONAL-PWA.md
@@ -64,8 +64,8 @@ Roadmap P01–P12 menyatakan sebagian bukti UAT manusia, beban nyata terautentik
 | L01 | Pusat penyelesaian akun | P0 | Audit gate onboarding existing | Dirilis PR #76, commit 493971f5f001dc6c556bb46b5262b2b910c5b31a; UAT manusia pada L02. Lihat L01-ACCOUNT-COMPLETION.md |
 | L02 | Pengujian alur nyata lintas role | P0 | Skenario L01; lanjut pada setiap tahap | Tooling/bukti otomatis dalam L02-ROLE-JOURNEYS.md; penerimaan manusia tetap terbuka |
 | L03 | Standardisasi tabel dan filter | P1 | Inventaris komponen existing | Dirilis PR78, commit f29fb335118ec9b2a22b04be659c01fd742b4a85; lihat L03-TABLE-FILTERS.md |
-| L04 | Feedback dan kepastian penyimpanan | P1 | P04 existing dan temuan L02 | Implementasi/QA pada L04-SAVE-FEEDBACK.md; status rilis pada PR |
-| L05 | Penyempurnaan sidebar | P1 | Accordion PR #74 | Belum dimulai |
+| L04 | Feedback dan kepastian penyimpanan | P1 | P04 existing dan temuan L02 | Dirilis PR79, commit 7bcb57351849e074b012c383752204c3644b5737; lihat L04-SAVE-FEEDBACK.md |
+| L05 | Penyempurnaan sidebar | P1 | Accordion PR #74 | Implementasi/QA pada L05-SIDEBAR-WAYFINDING.md; status rilis pada PR |
 | L06 | PWA yang dapat dipasang | P1 | L01, L04, audit cache/session | Belum dimulai |
 | L07 | Pusat kesehatan aplikasi admin | P1 | Observability dan izin existing | Belum dimulai |
 | L08 | Pekerjaan massal dan kualitas data | P1 | L03, L04, impor Excel existing | Belum dimulai |

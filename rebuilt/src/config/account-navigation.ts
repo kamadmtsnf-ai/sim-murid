@@ -218,8 +218,8 @@ export function navigationFor(
     }))
     .filter((g) => g.items.length > 0);
 }
-export function currentNavItem(path: string) {
-  return accountNavigation
+export function currentNavItem(path: string, navigation: readonly NavGroup[] = accountNavigation) {
+  return navigation
     .flatMap((g) => g.items)
     .filter(
       (i) =>

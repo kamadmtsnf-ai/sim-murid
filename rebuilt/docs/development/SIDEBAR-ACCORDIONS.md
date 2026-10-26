@@ -11,3 +11,7 @@ Files: workspace-shell.tsx (state and markup), globals.css (header/toggle styles
 Validation: TypeScript, lint, 6 UI tests, production build passed. Browser --accordion-only: 52 checks, 3 axe scans, no JavaScript errors. Viewports 320/768/1440; default collapse, Enter/Space, independent expansion, search restoration, role restrictions and horizontal overflow checked. Initial browser harness used desktop search label on mobile; corrected the selector and reran successfully. No API/Auth/database or dependency changes. Not merged/deployed.
 
 The older default navigation suite assumes expanded group links; it has not been rerun for this change. Use --accordion-only for the recorded checks. Physical-device and assistive-technology user testing not performed.
+
+## Pembaruan L05
+
+Accordion PR74 sudah dirilis. L05 menambahkan marker halaman aktif dan memperbaiki collapse search yang terbawa saat query identik diulang. Suite legacy navigation kini menyiapkan kelompok opened secara eksplisit dan telah dijalankan ulang: 66 checks/14 axe; suite collapsed/wayfinding 91/6. Lihat L05-SIDEBAR-WAYFINDING.md untuk baseline/batas; paragraf verifikasi di atas adalah snapshot historis PR74.
