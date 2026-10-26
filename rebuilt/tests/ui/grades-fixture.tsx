@@ -1,6 +1,6 @@
 /** Real grades panel, synthetic scoped records and intercepted requests. */
 import { createRoot } from "react-dom/client";
-import { GradesPanel } from "../../src/app/account/learning/[module]/grades-panel";
+import { LearningPanel as GradesPanel } from "../../src/app/account/learning/[module]/panel";
 import { WorkspaceShell } from "../../src/components/workspace-shell";
 import { navigationFor } from "../../src/config/account-navigation";
 import { gradesSnapshot } from "../../src/lib/learning/grades";

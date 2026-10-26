@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-26 Asia/Jakarta",
+  "baseline": "e74f6281de2453def7fbbea80a3a4365d59c3313",
+  "fullCheck": {
+    "exitCode": 0,
+    "tests": 779,
+    "typecheck": true,
+    "lint": true,
+    "databaseTypesReplay": true,
+    "productionBuild": true
+  },
+  "afterAdditionalStatisticCase": {
+    "performanceTests": 4,
+    "attendanceTests": 8,
+    "typecheckExitCode": 0,
+    "lintExitCode": 0
+  },
+  "browser": {
+    "grades": 62,
+    "notifications": 59,
+    "committee": 92,
+    "total": 213,
+    "axeScreens": 20,
+    "uncaughtErrors": 0,
+    "syntheticFixturesOnly": true
+  },
+  "publicLab": {
+    "beforeVisits": 30,
+    "afterVisits": 30,
+    "errors": 0,
+    "attemptedWrites": 0
+  },
+  "migrationRequired": false,
+  "openGates": [
+    "field CWV per page/device",
+    "authenticated staging API/load",
+    "human L02 UAT"
+  ],
+  "release": "See PR for CI, merge and exact Production deployment"
+}

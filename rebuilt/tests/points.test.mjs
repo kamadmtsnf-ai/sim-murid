@@ -1,3 +1,4 @@
+import "./support/next-dynamic.mjs";
 /** Actual Poin Siswa route, schemas and server reader with synthetic Auth/SDK boundaries. */
 import test from "node:test";
 import assert from "node:assert/strict";

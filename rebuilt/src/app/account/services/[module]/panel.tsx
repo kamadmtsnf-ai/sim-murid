@@ -1,13 +1,17 @@
 "use client";
-import { FollowUpCenter } from "@/components/dashboard/follow-up-center";
-import { ReconciliationPanel } from "./reconciliation-panel";
-import { JobsPanel } from "./jobs-panel";
+import dynamic from "next/dynamic";
+import { PanelLoading } from "@/components/feedback/panel-loading";
 import { type ServiceSnapshot } from "@/lib/services/validation";
-import { SurveysPanel } from "./surveys-panel";
-import { InsightsWorkspace } from "./insights-workspace";
-import { DisciplinePanel } from "./discipline-panel";
 import { disciplineSnapshot } from "@/lib/services/discipline";
-import { NotificationsPanel } from "./notifications-panel";
+
+const FollowUpCenter = dynamic(() => import("@/components/dashboard/follow-up-center").then(m => m.FollowUpCenter), { ssr: true, loading: PanelLoading });
+const ReconciliationPanel = dynamic(() => import("./reconciliation-panel").then(m => m.ReconciliationPanel), { ssr: true, loading: PanelLoading });
+const JobsPanel = dynamic(() => import("./jobs-panel").then(m => m.JobsPanel), { ssr: true, loading: PanelLoading });
+const SurveysPanel = dynamic(() => import("./surveys-panel").then(m => m.SurveysPanel), { ssr: true, loading: PanelLoading });
+const InsightsWorkspace = dynamic(() => import("./insights-workspace").then(m => m.InsightsWorkspace), { ssr: true, loading: PanelLoading });
+const DisciplinePanel = dynamic(() => import("./discipline-panel").then(m => m.DisciplinePanel), { ssr: true, loading: PanelLoading });
+const NotificationsPanel = dynamic(() => import("./notifications-panel").then(m => m.NotificationsPanel), { ssr: true, loading: PanelLoading });
+
 type Row = Record<string, unknown>;
 export const obj = (v: unknown): Row =>
   v && typeof v === "object" && !Array.isArray(v) ? (v as Row) : {};

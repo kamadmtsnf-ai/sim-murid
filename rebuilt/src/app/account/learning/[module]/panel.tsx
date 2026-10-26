@@ -1,13 +1,17 @@
 "use client";
+import dynamic from "next/dynamic";
+import { PanelLoading } from "@/components/feedback/panel-loading";
 import { type LearningSnapshot } from "@/lib/learning/validation";
-import { PromotionsPanel } from "./promotions-panel";
 import { promotionsSnapshot } from "@/lib/learning/promotions";
-import { ReportsPanel } from "./reports-panel";
 import { reportsSnapshot } from "@/lib/learning/reports";
-import { GradesPanel } from "./grades-panel";
 import { gradesSnapshot } from "@/lib/learning/grades";
-import { BooksPanel } from "./books-panel";
 import { booksSnapshot } from "@/lib/learning/books";
+
+const PromotionsPanel = dynamic(() => import("./promotions-panel").then(m => m.PromotionsPanel), { ssr: true, loading: PanelLoading });
+const ReportsPanel = dynamic(() => import("./reports-panel").then(m => m.ReportsPanel), { ssr: true, loading: PanelLoading });
+const GradesPanel = dynamic(() => import("./grades-panel").then(m => m.GradesPanel), { ssr: true, loading: PanelLoading });
+const BooksPanel = dynamic(() => import("./books-panel").then(m => m.BooksPanel), { ssr: true, loading: PanelLoading });
+
 export function LearningPanel({
   initial,
   bulkAvailable = false,

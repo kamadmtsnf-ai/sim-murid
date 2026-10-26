@@ -1,4 +1,5 @@
 import 'server-only';
+import {withServerTiming} from '@/lib/observability/server-timing';
 import type {NextRequest} from 'next/server';
 import {z} from 'zod';
 import {privateJson,requestAuth,verifiedPrincipal} from '@/lib/auth/http';
@@ -7,8 +8,9 @@ import {AccessDenied} from '@/lib/auth/authorization';
 import {readBounded} from '@/lib/settings/server';
 import {classSnapshot,familySnapshot,scheduleSnapshot} from './validation';
 export async function educationContext(request:NextRequest){
+ const started=performance.now();
  const jar=privateJson({});
- const reply=(body:unknown,status=200)=>{const response=privateJson(body,status);jar.cookies.getAll().forEach(c=>response.cookies.set(c));return response;};
+ const reply=(body:unknown,status=200)=>{const response=privateJson(body,status);jar.cookies.getAll().forEach(c=>response.cookies.set(c));return withServerTiming(response,started);};
  try {
  const client=requestAuth(request,jar),caller=await verifiedPrincipal(client);
  if(caller&&!['/api/services/surveys','/api/services/notifications'].includes(request.nextUrl.pathname)){const gate=await createAuthAdmin().rpc('app_survey_required',{p_actor:caller.principal.id,p_session:caller.sessionId});if(gate.error||typeof gate.data!=='boolean')return {caller:null,reply:()=>reply({message:'Pemeriksaan survei belum tersedia.'},503)};if(gate.data===true)return {caller:null,reply:()=>reply({message:'Selesaikan survei wajib terlebih dahulu.',redirect:'/account/services/surveys'},403)};}

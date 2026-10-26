@@ -1,16 +1,20 @@
 "use client";
-import { CommitteePanel } from "./committee-panel";
+import dynamic from "next/dynamic";
+import { PanelLoading } from "@/components/feedback/panel-loading";
 import { committeeSnapshot } from "@/lib/operations/committee";
-import { MentoringPanel } from "./mentoring-panel";
 import { mentoringSnapshot } from "@/lib/operations/mentoring";
-import { AttendancePanel } from "./attendance-panel";
 import { attendanceSnapshot } from "@/lib/operations/attendance";
-import { DutyPanel } from "./duty-panel";
 import { dutySnapshot } from "@/lib/operations/duty";
 
-import { SavingsPanel } from "./savings-panel";
 import { savingsSnapshot } from "@/lib/operations/savings";
 import type { OperationsSnapshot } from "@/lib/operations/validation";
+
+const CommitteePanel = dynamic(() => import("./committee-panel").then(m => m.CommitteePanel), { ssr: true, loading: PanelLoading });
+const MentoringPanel = dynamic(() => import("./mentoring-panel").then(m => m.MentoringPanel), { ssr: true, loading: PanelLoading });
+const AttendancePanel = dynamic(() => import("./attendance-panel").then(m => m.AttendancePanel), { ssr: true, loading: PanelLoading });
+const DutyPanel = dynamic(() => import("./duty-panel").then(m => m.DutyPanel), { ssr: true, loading: PanelLoading });
+const SavingsPanel = dynamic(() => import("./savings-panel").then(m => m.SavingsPanel), { ssr: true, loading: PanelLoading });
+
 export function OperationsPanel({ initial }: { initial: OperationsSnapshot }) {
   switch (initial.module) {
     case "duty":

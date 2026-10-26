@@ -1,0 +1,315 @@
+{
+  "kind": "static dependency-set upper bound; compiler-specific; not whole-page/network bytes",
+  "commit": "e74f6281de2453def7fbbea80a3a4365d59c3313",
+  "buildId": "DSl3lZe26S0e9eeCXgsE6",
+  "profiles": [
+    {
+      "group": "operations",
+      "name": "duty",
+      "boundary": "[project]/src/app/account/operations/[module]/duty-panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/08oad6-1x185p.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/29u7ia_ztrw9e.js",
+        "static/chunks/2kn-9996adx5h.js",
+        "static/chunks/2ts1-wprt_bvt.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 323975,
+      "gzipBytes": 102794,
+      "unknownDeferredGroups": 1
+    },
+    {
+      "group": "operations",
+      "name": "attendance",
+      "boundary": "[project]/src/app/account/operations/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/08oad6-1x185p.js",
+        "static/chunks/0_-opgoc0oopk.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/29u7ia_ztrw9e.js",
+        "static/chunks/2kn-9996adx5h.js",
+        "static/chunks/2ts1-wprt_bvt.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 343536,
+      "gzipBytes": 109072,
+      "unknownDeferredGroups": 1
+    },
+    {
+      "group": "operations",
+      "name": "mentoring",
+      "boundary": "[project]/src/app/account/operations/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/08oad6-1x185p.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/29u7ia_ztrw9e.js",
+        "static/chunks/2kn-9996adx5h.js",
+        "static/chunks/2ts1-wprt_bvt.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js",
+        "static/chunks/43gqag0gj3_63.js"
+      ],
+      "rawBytes": 341013,
+      "gzipBytes": 108350,
+      "unknownDeferredGroups": 1
+    },
+    {
+      "group": "operations",
+      "name": "committee",
+      "boundary": "[project]/src/app/account/operations/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/08oad6-1x185p.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/29u7ia_ztrw9e.js",
+        "static/chunks/2kn-9996adx5h.js",
+        "static/chunks/2ts1-wprt_bvt.js",
+        "static/chunks/2v6yotmp_cx_i.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 345710,
+      "gzipBytes": 109534,
+      "unknownDeferredGroups": 1
+    },
+    {
+      "group": "operations",
+      "name": "savings",
+      "boundary": "[project]/src/app/account/operations/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/05ep366bvrvw3.js",
+        "static/chunks/08oad6-1x185p.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/29u7ia_ztrw9e.js",
+        "static/chunks/2kn-9996adx5h.js",
+        "static/chunks/2ts1-wprt_bvt.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 348394,
+      "gzipBytes": 110081,
+      "unknownDeferredGroups": 1
+    },
+    {
+      "group": "learning",
+      "name": "grades",
+      "boundary": "[project]/src/app/account/learning/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/0z4owxc5_9yyu.js",
+        "static/chunks/1l26xo7vsib_l.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2vk5e9ezmono1.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 336037,
+      "gzipBytes": 105955,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "learning",
+      "name": "reports",
+      "boundary": "[project]/src/app/account/learning/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2vk5e9ezmono1.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3l1l_q-4r52rx.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 307676,
+      "gzipBytes": 98036,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "learning",
+      "name": "promotions",
+      "boundary": "[project]/src/app/account/learning/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0_syzcc7kfbu6.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2vk5e9ezmono1.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 320976,
+      "gzipBytes": 101115,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "learning",
+      "name": "books",
+      "boundary": "[project]/src/app/account/learning/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1hykyb4e1qm_m.js",
+        "static/chunks/1l0e6lce-jbp2.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2n60ajekv0ept.js",
+        "static/chunks/2vk5e9ezmono1.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 568179,
+      "gzipBytes": 166910,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "services",
+      "name": "jobs",
+      "boundary": "[project]/src/app/account/services/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2jrtd77fem-75.js",
+        "static/chunks/2p0qzgd9bfi87.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 312425,
+      "gzipBytes": 99601,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "services",
+      "name": "reconciliation",
+      "boundary": "[project]/src/app/account/services/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/0hy7bprl9aoe4.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2p0qzgd9bfi87.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 307334,
+      "gzipBytes": 98335,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "services",
+      "name": "discipline",
+      "boundary": "[project]/src/app/account/services/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/24-3d5foghxh3.js",
+        "static/chunks/2p0qzgd9bfi87.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 323008,
+      "gzipBytes": 102626,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "services",
+      "name": "surveys",
+      "boundary": "[project]/src/app/account/services/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1g50ib6rph0ut.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2p0qzgd9bfi87.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 333530,
+      "gzipBytes": 103838,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "services",
+      "name": "notifications",
+      "boundary": "[project]/src/app/account/services/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/1ap43cj9j6y0i.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2p0qzgd9bfi87.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3pij1vwi31p2p.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 338540,
+      "gzipBytes": 108882,
+      "unknownDeferredGroups": 0
+    },
+    {
+      "group": "services",
+      "name": "insights-workspace",
+      "boundary": "[project]/src/app/account/services/[module]/panel.tsx",
+      "chunks": [
+        "static/chunks/0-m2v263v213-.js",
+        "static/chunks/0bw83ofmzxssy.js",
+        "static/chunks/0u3pclwgqat02.js",
+        "static/chunks/1lbm8o27h59gu.js",
+        "static/chunks/1yfpmpe48s9uv.js",
+        "static/chunks/2p0qzgd9bfi87.js",
+        "static/chunks/347xkq2213tzy.js",
+        "static/chunks/3mimyq70yenp4.js",
+        "static/chunks/3zmwxjz6wo4-3.js"
+      ],
+      "rawBytes": 319022,
+      "gzipBytes": 101494,
+      "unknownDeferredGroups": 0
+    }
+  ],
+  "selectors": {
+    "operations": "b0438b8583a02a000b6b781993df3c92e97073fdd733176162bd7f3c02842d2f",
+    "learning": "455a364d15b51ca583f15c57f93b81f7c0457bb6c8c0f42c8e569e2461963a6f",
+    "services": "8909fb3d3c3007829d4d71b196eb876e2aa1256a6eaa0b876350c77be00c00c3"
+  }
+}
