@@ -18,7 +18,13 @@ function loadCaptcha(): Promise<CaptchaApi> {
     const callbacks = window as unknown as Record<string, unknown>;
     const script = document.createElement("script");
     const cleanup = () => { clearTimeout(timer); delete callbacks[name]; script.onerror = null; };
-    const fail = () => { cleanup(); script.remove(); reject(Error("Captcha unavailable")); };
+    const fail = () => {
+      cleanup(); script.remove();
+      // Removing a script cannot cancel dependencies it already started loading.
+      // Keep a harmless callback for a late Google onload; it removes itself.
+      callbacks[name] = () => { delete callbacks[name]; };
+      reject(Error("Captcha unavailable"));
+    };
     const timer = setTimeout(fail, 15000);
     callbacks[name] = () => {
       const api = window.grecaptcha;

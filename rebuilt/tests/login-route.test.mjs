@@ -120,3 +120,20 @@ test('Google transport/JSON/configuration failures return safe 503; rate limitin
  for(outcome of ['network','bad-json','http','schema','secret','v3']){const s=reset();await safe(await POST(request({...body,captchaToken:'synthetic-token'})),503);assert.equal(calls(s,'password').length,0);assert.equal(calls(s,'lookup').length,0);}
  const before=count,s=reset();s.rate=false;await safe(await POST(request({...body,captchaToken:'synthetic-token'})),429);assert.equal(count,before);
 }));
+
+test('reCAPTCHA rejects invalid DNS labels while allowing exact localhost and valid hyphens',()=>{
+ const env={RECAPTCHA_ENABLED:'true',RECAPTCHA_SITE_KEY:'site'.repeat(10),RECAPTCHA_SECRET_KEY:'secret'.repeat(7)};
+ for(const host of ['app-.test','app.-test','a'.repeat(64)+'.test','app..test','*.test','app.test:443'])assert.equal(recaptchaConfig({...env,RECAPTCHA_ALLOWED_HOSTNAMES:host}).mode,'unavailable',host);
+ for(const host of ['localhost','sim-muridv2.vercel.app','a'.repeat(63)+'.test'])assert.equal(recaptchaConfig({...env,RECAPTCHA_ALLOWED_HOSTNAMES:host}).mode,'enabled',host);
+});
+test('oversized Google response is canceled while streaming before authentication',async t=>captchaEnvironment(async()=>{
+ let canceled=false;
+ t.mock.method(globalThis,'fetch',async()=>new Response(new ReadableStream({pull(controller){controller.enqueue(new Uint8Array(9000));},cancel(){canceled=true;}})));
+ const s=reset();await safe(await POST(request({...body,captchaToken:'synthetic-token'})),503);
+ assert.equal(canceled,true);assert.equal(calls(s,'lookup').length,0);assert.equal(calls(s,'password').length,0);
+}));
+test('malformed UTF8 and interrupted Google streams fail closed',async t=>captchaEnvironment(async()=>{
+ let interrupted=false;
+ t.mock.method(globalThis,'fetch',async()=>new Response(new ReadableStream({start(c){if(interrupted)c.error(Error('private stream failure'));else {c.enqueue(new Uint8Array([0xff]));c.close();}}})));
+ for(interrupted of [false,true]){const s=reset();await safe(await POST(request({...body,captchaToken:'synthetic-token'})),503);assert.equal(calls(s,'lookup').length,0);}
+}));

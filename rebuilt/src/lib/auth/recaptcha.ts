@@ -18,7 +18,7 @@ export function recaptchaConfig(env: NodeJS.ProcessEnv = process.env): Recaptcha
   const secret = env.RECAPTCHA_SECRET_KEY?.trim() ?? "";
   const hostnames = (env.RECAPTCHA_ALLOWED_HOSTNAMES ?? "").split(",").map(v => v.trim().toLowerCase()).filter(Boolean);
   const key = /^[A-Za-z0-9_-]{20,256}$/;
-  const hostname = /^(?=.{1,253}$)[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
+  const hostname = /^(?=.{1,253}$)[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/;
   if (!key.test(siteKey) || !key.test(secret) || !hostnames.length || hostnames.some(h => !hostname.test(h))) return { mode: "unavailable" };
   // Google's documented test keys always pass and must never protect production.
   if (env.NODE_ENV === "production" && (siteKey === "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" || secret === "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe")) return { mode: "unavailable" };
@@ -47,8 +47,26 @@ export async function verifyRecaptcha(token: string, config: Extract<RecaptchaCo
       signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(5000)]) : AbortSignal.timeout(5000),
     });
     if (!response.ok) return "unavailable";
-    const raw = await response.text();
-    if (raw.length > 16384) return "unavailable";
+    if (!response.body) return "unavailable";
+    const reader = response.body.getReader();
+    const chunks: Uint8Array[] = [];
+    let length = 0;
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        length += value.byteLength;
+        if (length > 16384) {
+          await reader.cancel();
+          return "unavailable";
+        }
+        chunks.push(value);
+      }
+    } finally { reader.releaseLock(); }
+    const bytes = new Uint8Array(length);
+    let offset = 0;
+    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+    const raw = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
     const result = verification.parse(JSON.parse(raw));
     if (result["error-codes"]?.some(code => ["missing-input-secret", "invalid-input-secret", "bad-request"].includes(code))) return "unavailable";
     if (!result.success) return "rejected";

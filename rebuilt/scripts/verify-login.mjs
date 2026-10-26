@@ -50,9 +50,9 @@ try{
  }
 
  // Synthetic Google boundary: never solves or bypasses a real reCAPTCHA challenge.
- let scriptFails=false;
+ let scriptFails=false,failedCallback="";
  await page.route('https://www.google.com/recaptcha/api.js?*',async route=>{
-  if(scriptFails)return route.abort();
+  if(scriptFails){failedCallback=new URL(route.request().url()).searchParams.get("onload");return route.abort();}
   await route.fulfill({contentType:'application/javascript',body:`
    window.captchaWidgets=[];window.captchaResets=0;
    window.grecaptcha={render:(element,options)=>{
@@ -77,7 +77,7 @@ try{
   check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Compact captcha fits viewport '+width);await a11y(page,'captcha '+width);
   await solve().click();await page.unroute('**/api/auth/login');await page.route('**/api/auth/login',route=>route.fulfill({status:200,json:{destination:'/account'}}));await submit.click();await page.getByRole('link',{name:'Lanjutkan ke akun'}).waitFor();check(JSON.stringify(await page.evaluate(()=>window.loginNavigation))==='["/account"]','Verified captcha preserves login navigation '+width);await page.unroute('**/api/auth/login');
  }
- scriptFails=true;await visitFixture('?captcha=enabled');await page.getByRole('button',{name:'Muat ulang reCAPTCHA',exact:true}).waitFor();check(await page.getByRole('button',{name:'Masuk',exact:true}).isDisabled(),'Blocked Google script never enables login');scriptFails=false;await page.getByRole('button',{name:'Muat ulang reCAPTCHA',exact:true}).click();await page.getByRole('button',{name:'Verifikasi uji reCAPTCHA',exact:true}).waitFor();check(true,'Google script load can be retried');
+ scriptFails=true;await visitFixture('?captcha=enabled');await page.getByRole('button',{name:'Muat ulang reCAPTCHA',exact:true}).waitFor();check(await page.getByRole('button',{name:'Masuk',exact:true}).isDisabled(),'Blocked Google script never enables login');await page.evaluate(name=>window[name](),failedCallback);check(await page.getByRole('button',{name:'Masuk',exact:true}).isDisabled(),'Late Google callback after load failure is harmless and cannot enable login');scriptFails=false;await page.getByRole('button',{name:'Muat ulang reCAPTCHA',exact:true}).click();await page.getByRole('button',{name:'Verifikasi uji reCAPTCHA',exact:true}).waitFor();check(true,'Google script load can be retried');
  await visitFixture('?captcha=unavailable');check(await page.getByRole('button',{name:'Masuk',exact:true}).isDisabled(),'Unavailable server configuration cannot submit');await page.getByText(/Verifikasi keamanan belum tersedia/).waitFor();
  await page.unroute('https://www.google.com/recaptcha/api.js?*');
  await actual();for(let i=0;i<3;i++){await page.setViewportSize({width:812,height:240});await page.setViewportSize({width:375,height:812});}await geometry(page,'Three orientation cycles');await page.emulateMedia({forcedColors:'active'});await a11y(page,'forced colors');check(errors.length===0,'No uncaught browser JavaScript errors',errors);await context.close();
