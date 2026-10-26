@@ -590,3 +590,7 @@
 .nav-group-toggle:focus-visible { outline:2px solid var(--ring); outline-offset:-2px; }
 .nav-group-toggle svg { inline-size:16px; block-size:16px; flex-shrink:0; }
 .workspace-nav ul[hidden] { display:none; }
+
+/* L05: location remains visible without opening collapsed navigation groups. */
+.nav-group-toggle[data-current-group="true"] { background:var(--secondary); color:var(--primary); }
+.nav-current-badge { flex:0 1 auto; max-inline-size:6rem; border:1px solid currentColor; border-radius:.4rem; padding:2px 5px; font-size:.75rem; line-height:1.4; font-weight:600; letter-spacing:normal; text-transform:none; overflow-wrap:anywhere; }

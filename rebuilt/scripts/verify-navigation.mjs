@@ -100,11 +100,17 @@ try {
   page.on("pageerror", (e) => errors.push(String(e)));
   const button = (name) => page.getByRole("button", { name, exact: true });
   async function visit(role = "admin", width = 1440, height = 900) {
-    await page.setViewportSize({ width, height });
+    await page.setViewportSize({ width:process.argv.includes("--accordion-only")?width:1440, height });
     await page.goto(base + "?role=" + role);
     await page
       .getByRole("heading", { name: "Navigasi layanan madrasah" })
       .waitFor();
+    if(!process.argv.includes('--accordion-only')){
+      // Legacy shell scenarios explicitly open groups first; collapsed defaults are tested separately.
+      const toggles=page.getByRole('navigation',{name:'Navigasi utama',exact:true}).locator('.nav-group-toggle');
+      for(let i=0;i<await toggles.count();i++)if(await toggles.nth(i).getAttribute('aria-expanded')==='false')await toggles.nth(i).click();
+      await page.setViewportSize({width,height});
+    }
   }
   async function a11y(name) {
     await page.evaluate(axe);
@@ -124,11 +130,18 @@ try {
       await visit('admin', width);
       if (width < 1024) await button('Buka navigasi').click();
       const nav = page.getByRole('navigation', {name: width < 1024 ? 'Navigasi utama seluler' : 'Navigasi utama', exact:true});
+      const surface=width<1024?page.getByRole('dialog',{name:'Navigasi',exact:true}):page.getByRole('complementary',{name:'Sidebar layanan madrasah',exact:true});
       const toggles = nav.locator('.nav-group-toggle');
       const count = await toggles.count();
       check(count > 1, 'Grouped menus exist '+width);
       for (let i=0;i<count;i++) check(await toggles.nth(i).getAttribute('aria-expanded') === 'false', 'Group defaults collapsed '+width+' '+i);
       check(await nav.getByRole('link').count() === 0, 'Collapsed links leave keyboard navigation '+width);
+      const currentGroup=nav.locator('.nav-group-toggle[data-current-group="true"]');
+      check(await currentGroup.count()===1 && await currentGroup.getAttribute('aria-expanded')==='false','Current group marked without opening '+width);
+      const description=await currentGroup.getAttribute('aria-describedby');
+      check(await page.locator(`[id="${description}"]`).textContent().then(t=>t.includes('Dashboard')),'Current group has accessible page description '+width);
+      await page.screenshot({path:join(out,'current-location-'+width+'.png'),fullPage:true});
+
       const first=toggles.first();
       await first.focus(); await page.keyboard.press('Enter');
       check(await first.getAttribute('aria-expanded') === 'true', 'Enter expands group '+width);
@@ -139,6 +152,19 @@ try {
       await search.fill('Keamanan akun');
       await nav.getByRole('link',{name:'Keamanan akun',exact:true}).waitFor();
       check(true,'Search exposes matching collapsed menu '+width);
+      await surface.getByText('Halaman saat ini: Dashboard, kelompok Ruang kerja.',{exact:false}).waitFor();
+      check(true,'Search explains current location outside results '+width);
+      await nav.locator('.nav-group-toggle').first().click();
+      check(await nav.getByRole('link').count()===0,'User can collapse matching results '+width);
+      await search.fill('');await search.fill('Keamanan akun');
+      await nav.getByRole('link',{name:'Keamanan akun',exact:true}).waitFor();
+      check(true,'Repeating search reopens matches rather than restoring stale collapse '+width);
+      await button('Hapus pencarian menu').click();
+      check(await search.evaluate(e=>e===document.activeElement),'Clear search restores input focus '+width);
+      await search.fill('zzzz-no-such-menu');await surface.getByText('Menu tidak ditemukan. Coba nama layanan atau istilah lain, atau hapus pencarian.',{exact:true}).waitFor();
+      check(await nav.getByRole('link').count()===0,'Empty search never introduces routes '+width);
+      await search.press('Escape');check(await search.inputValue()==='','Escape clears empty results '+width);
+
       await search.fill('');
       check(await nav.getByRole('link').count()===0,'Clearing search restores collapsed groups '+width);
       await first.click(); await toggles.nth(1).click();
@@ -146,8 +172,19 @@ try {
       check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow '+width);
       await a11y('accordion '+width);
       await page.screenshot({path:join(out,'accordion-'+width+'.png'),fullPage:true});
+      await page.evaluate(()=>{history.pushState({},'', '/account/security');window.dispatchEvent(new PopStateEvent('popstate'));});
+      if(width<1024){await page.getByRole('dialog').waitFor({state:'hidden'});await button('Buka navigasi').click();}
+      const securityGroup=nav.locator('.nav-group-toggle[data-current-group="true"]');
+      await securityGroup.waitFor();
+      check(await securityGroup.getAttribute('aria-expanded')==='false','Route change does not force active group open '+width);
+      check(await securityGroup.getAttribute('aria-describedby').then(id=>page.locator(`[id="${id}"]`).textContent()).then(t=>t.includes('Keamanan akun')),'Current marker follows live route '+width);
+      await page.goBack();
+      if(width<1024){await page.getByRole('dialog').waitFor({state:'hidden'});await button('Buka navigasi').click();}
+      check(await nav.locator('.nav-group-toggle[data-current-group="true"]').getAttribute('aria-describedby').then(id=>page.locator(`[id="${id}"]`).textContent()).then(t=>t.includes('Dashboard')),'Browser Back restores location marker '+width);
+      await a11y('wayfinding '+width);
+
     }
-    for(const role of ['teacher','student','parent']) {
+    for(const role of ['teacher','student','parent','alumni','customer','applicant']) {
       await visit(role);
       const nav=page.getByRole('navigation',{name:'Navigasi utama',exact:true});
       const toggles=nav.locator('.nav-group-toggle');
@@ -195,7 +232,7 @@ try {
   );
   await page.getByRole("status").getByText("1 menu ditemukan").waitFor();
   await search().fill("tidak-ditemukan");
-  await page.getByText("Menu tidak ditemukan. Coba kata lain.").waitFor();
+  await page.getByText("Menu tidak ditemukan. Coba nama layanan atau istilah lain, atau hapus pencarian.").waitFor();
   await button("Hapus pencarian menu").click();
   check(
     (await search().inputValue()) === "" &&

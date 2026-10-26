@@ -1,0 +1,32 @@
+{
+  "stage": "L05",
+  "baseline": "7bcb57351849e074b012c383752204c3644b5737",
+  "fullCheck": {
+    "exitCode": 0,
+    "tests": 748,
+    "groups": 79,
+    "fail": 0
+  },
+  "finalBuildExitCode": 0,
+  "finalLintExitCode": 0,
+  "browser": {
+    "accordion": {
+      "checks": 91,
+      "axe": 6
+    },
+    "shell": {
+      "checks": 66,
+      "axe": 14
+    },
+    "forms": {
+      "checks": 87,
+      "axe": 7
+    },
+    "totalChecks": 244,
+    "totalAxeScans": 27,
+    "javascriptErrors": 0,
+    "scope": "Actual components with synthetic HTTP/Auth fixtures; no production account mutations or human navigation timings"
+  },
+  "migrationRequired": false,
+  "humanUAT": "pending_L02"
+}

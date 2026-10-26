@@ -378,3 +378,7 @@ Navbar menyatakan lokasi aktif; sidebar menyaring menu dari izin server dan penc
 ## L04 — Feedback penyimpanan berbasis bukti
 
 MutationFeedback menentukan tone hanya dari MutationPhase; caller tidak boleh menimpa tone. Pesan domain dan hint tindakan berikutnya dipisahkan. Hook transition memperbarui keduanya dari kode/status eksplisit melalui mutationGuidance, bukan regex pesan terjemahan. Error korektif berbeda dengan stale/permission dan uncertain. HTTP408, jaringan/timeout/5xx atau acknowledgement tidak valid bukan bukti rollback: jangan auto-retry atau membuka lock. Hindari meminta pengguna menyalin isian sensitif; pertahankan halaman dan jelaskan risiko kehilangan draft saat reload. Success hanya untuk hasil terkonfirmasi sesuai kontrak domain.
+
+## L05 — Orientasi sidebar
+
+Kelompok halaman aktif diberi teks penanda dan deskripsi aksesibel pada header accordion, tanpa membuka kelompok otomatis. Label tombol stabil, expanded/controls akurat, ID panel unik per surface. Browse expansion dipertahankan; search expansion hanya milik query saat ini. Hasil pencarian menyatakan cakupan izin; empty state menawarkan tindakan jelas. Deteksi current item di shell menggunakan navigation scoped yang sudah disediakan server. Tidak mempersist query atau hak akses dan tidak menciptakan link dari hasil pencarian di luar daftar yang diizinkan.

@@ -1,0 +1,327 @@
+{
+  "checks": [
+    {
+      "name": "admin account security available",
+      "passed": true
+    },
+    {
+      "name": "admin administrative menu scope",
+      "passed": true
+    },
+    {
+      "name": "admin axe",
+      "passed": true
+    },
+    {
+      "name": "teacher account security available",
+      "passed": true
+    },
+    {
+      "name": "teacher administrative menu scope",
+      "passed": true
+    },
+    {
+      "name": "teacher axe",
+      "passed": true
+    },
+    {
+      "name": "student account security available",
+      "passed": true
+    },
+    {
+      "name": "student administrative menu scope",
+      "passed": true
+    },
+    {
+      "name": "student axe",
+      "passed": true
+    },
+    {
+      "name": "parent account security available",
+      "passed": true
+    },
+    {
+      "name": "parent administrative menu scope",
+      "passed": true
+    },
+    {
+      "name": "parent axe",
+      "passed": true
+    },
+    {
+      "name": "alumni account security available",
+      "passed": true
+    },
+    {
+      "name": "alumni administrative menu scope",
+      "passed": true
+    },
+    {
+      "name": "alumni axe",
+      "passed": true
+    },
+    {
+      "name": "customer account security available",
+      "passed": true
+    },
+    {
+      "name": "customer administrative menu scope",
+      "passed": true
+    },
+    {
+      "name": "customer axe",
+      "passed": true
+    },
+    {
+      "name": "applicant account security available",
+      "passed": true
+    },
+    {
+      "name": "applicant administrative menu scope",
+      "passed": true
+    },
+    {
+      "name": "applicant axe",
+      "passed": true
+    },
+    {
+      "name": "task alias and whitespace search",
+      "passed": true
+    },
+    {
+      "name": "clear recovers search and focus",
+      "passed": true
+    },
+    {
+      "name": "desktop Escape clears search",
+      "passed": true
+    },
+    {
+      "name": "Field adapter preserves names and native FormData/default values",
+      "passed": true
+    },
+    {
+      "name": "first Escape clears mobile search 320x700",
+      "passed": true
+    },
+    {
+      "name": "drawer 320x700 axe",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 320x700",
+      "passed": true
+    },
+    {
+      "name": "touch target 320x700",
+      "passed": true
+    },
+    {
+      "name": "first Escape clears mobile search 390x844",
+      "passed": true
+    },
+    {
+      "name": "drawer 390x844 axe",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "touch target 390x844",
+      "passed": true
+    },
+    {
+      "name": "first Escape clears mobile search 768x900",
+      "passed": true
+    },
+    {
+      "name": "drawer 768x900 axe",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "touch target 768x900",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "touch target 1440x900",
+      "passed": true
+    },
+    {
+      "name": "first Escape clears mobile search 844x390",
+      "passed": true
+    },
+    {
+      "name": "drawer 844x390 axe",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "touch target 844x390",
+      "passed": true
+    },
+    {
+      "name": "first Escape clears mobile search 568x260",
+      "passed": true
+    },
+    {
+      "name": "drawer 568x260 axe",
+      "passed": true
+    },
+    {
+      "name": "no page overflow 568x260",
+      "passed": true
+    },
+    {
+      "name": "touch target 568x260",
+      "passed": true
+    },
+    {
+      "name": "drawer closes on desktop breakpoint",
+      "passed": true
+    },
+    {
+      "name": "menu button controls its actual drawer",
+      "passed": true
+    },
+    {
+      "name": "external route change closes drawer and updates detail breadcrumb",
+      "passed": true
+    },
+    {
+      "name": "route change resets prior search",
+      "passed": true
+    },
+    {
+      "name": "browser Back updates navigation without stale drawer",
+      "passed": true
+    },
+    {
+      "name": "short page footer stays within viewport with academic summary 320",
+      "passed": true
+    },
+    {
+      "name": "no forced vertical page overflow 320",
+      "passed": true
+    },
+    {
+      "name": "short page footer stays within viewport with academic summary 1440",
+      "passed": true
+    },
+    {
+      "name": "no forced vertical page overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "logout reachable in short desktop sidebar",
+      "passed": true
+    },
+    {
+      "name": "short desktop no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "clearing search does not scroll focused header off short sidebar",
+      "passed": true
+    },
+    {
+      "name": "empty permission menu is not reported as failed search",
+      "passed": true
+    },
+    {
+      "name": "empty menu axe",
+      "passed": true
+    },
+    {
+      "name": "unicode avatar does not split surrogate pairs",
+      "passed": true
+    },
+    {
+      "name": "missing display name falls back to username",
+      "passed": true
+    },
+    {
+      "name": "footer follows long content without overlay",
+      "passed": true
+    },
+    {
+      "name": "long page axe",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "admin",
+      "violations": []
+    },
+    {
+      "name": "teacher",
+      "violations": []
+    },
+    {
+      "name": "student",
+      "violations": []
+    },
+    {
+      "name": "parent",
+      "violations": []
+    },
+    {
+      "name": "alumni",
+      "violations": []
+    },
+    {
+      "name": "customer",
+      "violations": []
+    },
+    {
+      "name": "applicant",
+      "violations": []
+    },
+    {
+      "name": "drawer 320x700",
+      "violations": []
+    },
+    {
+      "name": "drawer 390x844",
+      "violations": []
+    },
+    {
+      "name": "drawer 768x900",
+      "violations": []
+    },
+    {
+      "name": "drawer 844x390",
+      "violations": []
+    },
+    {
+      "name": "drawer 568x260",
+      "violations": []
+    },
+    {
+      "name": "empty menu",
+      "violations": []
+    },
+    {
+      "name": "long page",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

@@ -113,3 +113,5 @@ L02 menambahkan katalog tugas dan pemeriksa bukti UAT ke protokol P11; lihat [la
 L03 menyatukan kontrol pagination/filter dan memperbaiki reset Buku Digital; lihat [laporan L03](L03-TABLE-FILTERS.md). Scope/otorisasi domain tetap, UAT manusia L02 masih terbuka.
 
 L04 memperjelas advice per kode/fase dan mengunci tone dari evidence penyimpanan; lihat [laporan L04](L04-SAVE-FEEDBACK.md). UAT manusia L02 tetap terbuka; tidak ada migrasi database.
+
+L05 memperjelas lokasi halaman aktif dan hasil pencarian sidebar tanpa mengubah default collapsed; lihat [laporan L05](L05-SIDEBAR-WAYFINDING.md). Tidak ada migrasi; L02 UAT manusia tetap terbuka.
