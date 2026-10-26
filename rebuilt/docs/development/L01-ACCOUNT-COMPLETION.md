@@ -52,3 +52,7 @@ Rollback kode cukup mengembalikan komponen/proyeksi halaman; tidak ada migrasi a
 ## Status publikasi
 
 Pembuatan branch/tree remote ditolak automatic approval review karena instruksi L01 belum dianggap sebagai izin publikasi eksplisit. Tidak ada PR/merge/deployment yang dibuat. Menunggu izin pengguna untuk memublikasikan branch feat/l01-account-completion dan draft PR; tidak mencoba jalur lain.
+
+## Pembaruan setelah rilis
+
+Pengguna memberikan izin eksplisit publikasi/merge. PR #76 berhasil di-merge sebagai 493971f5f001dc6c556bb46b5262b2b910c5b31a; CI run 40259897396 lulus dan Production READY pada SHA tersebut. Tidak ada migrasi. Catatan penolakan di atas merupakan riwayat sebelum izin, bukan blocker saat ini. UAT manusia dilanjutkan melalui L02.

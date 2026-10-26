@@ -1,0 +1,17 @@
+{
+  "stage": "L02",
+  "baseline": "493971f5f001dc6c556bb46b5262b2b910c5b31a",
+  "command": "npm run check",
+  "exitCode": 0,
+  "tests": 741,
+  "groups": 78,
+  "failed": 0,
+  "userEvaluationTests": 10,
+  "humanSessions": 0,
+  "humanBaseline": null,
+  "humanAfter": null,
+  "humanAcceptance": "blocked_pending_real_sessions",
+  "productionMutations": false,
+  "databaseMigrationRequired": false,
+  "browserSuiteRunInThisStage": false
+}

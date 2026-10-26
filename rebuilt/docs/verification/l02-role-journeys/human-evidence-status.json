@@ -1,0 +1,564 @@
+{
+  "status": "blocked",
+  "ready": false,
+  "sourceKind": "human",
+  "scope": "Operator-submitted evidence validated structurally; not independent proof of human participation or production release approval.",
+  "baselineCommit": "0000000000000000000000000000000000000000",
+  "afterCommit": "1111111111111111111111111111111111111111",
+  "targetSuccessRate": 0.95,
+  "blocked": [
+    "Human staging evidence, consent and operator attestation required",
+    "A01: at least three comparable baseline/after attempts required",
+    "A02: at least three comparable baseline/after attempts required",
+    "A03: at least three comparable baseline/after attempts required",
+    "A04: at least three comparable baseline/after attempts required",
+    "A05: at least three comparable baseline/after attempts required",
+    "A06: at least three comparable baseline/after attempts required",
+    "A07: at least three comparable baseline/after attempts required",
+    "A08: at least three comparable baseline/after attempts required",
+    "A09: at least three comparable baseline/after attempts required",
+    "A10: at least three comparable baseline/after attempts required",
+    "A11: at least three comparable baseline/after attempts required",
+    "A12: at least three comparable baseline/after attempts required",
+    "A13: at least three comparable baseline/after attempts required",
+    "A14: at least three comparable baseline/after attempts required",
+    "A15: at least three comparable baseline/after attempts required",
+    "A16: at least three comparable baseline/after attempts required",
+    "A17: at least three comparable baseline/after attempts required",
+    "A18: at least three comparable baseline/after attempts required",
+    "A19: at least three comparable baseline/after attempts required",
+    "A20: at least three comparable baseline/after attempts required",
+    "A21: at least three comparable baseline/after attempts required"
+  ],
+  "tasks": [
+    {
+      "id": "A01",
+      "scenario": "admin",
+      "label": "Akun baru, password sementara, login ulang dan email/OTP",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A02",
+      "scenario": "admin",
+      "label": "Impor Excel: pratinjau, kesalahan baris dan retry tanpa akun ganda",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A03",
+      "scenario": "admin",
+      "label": "Tugas tambahan guru: beri, akhiri, lalu periksa penolakan akses",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A04",
+      "scenario": "school_head",
+      "label": "Ringkasan dan tindak lanjut sesuai cakupan",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A05",
+      "scenario": "subject_teacher",
+      "label": "Absensi pertemuan: simpan, cek riwayat, tolak kelas asing",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A06",
+      "scenario": "subject_teacher",
+      "label": "Input nilai: periode benar, hasil sesuai rumus existing",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A07",
+      "scenario": "homeroom",
+      "label": "Pratinjau rapor kelas binaan tanpa mengubah arsip terbit",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A08",
+      "scenario": "mentor",
+      "label": "Catat bimbingan siswa binaan dan tolak siswa asing",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A09",
+      "scenario": "duty",
+      "label": "Absensi harian sesuai roster dan tanggal WIB",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A10",
+      "scenario": "duty",
+      "label": "Piket pengganti: akses aktif lalu penolakan saat dibatalkan/kedaluwarsa",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A11",
+      "scenario": "counselor",
+      "label": "Tindak lanjut sesuai cakupan dan penolakan tanpa tugas aktif",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A12",
+      "scenario": "committee_treasurer",
+      "label": "Pembayaran komite: alokasi, riwayat dan retry tidak ganda",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A13",
+      "scenario": "savings_manager",
+      "label": "Setor/tarik: saldo, fee, slip dan ledger cocok",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A14",
+      "scenario": "student",
+      "label": "Onboarding biodata, email dan pertanyaan tidak saling melewati",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A15",
+      "scenario": "student",
+      "label": "Jadwal, survei dan rapor sendiri; data siswa asing ditolak",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A16",
+      "scenario": "parent_multi_child",
+      "label": "Pindah anak: cakupan benar termasuk setelah relasi dicabut",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A17",
+      "scenario": "alumni",
+      "label": "Dokumen kelulusan sesuai izin",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A18",
+      "scenario": "customer",
+      "label": "Rekening/transaksi sendiri, rekening asing ditolak",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A19",
+      "scenario": "applicant",
+      "label": "Biodata calon siswa tanpa akses akademik aktif",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A20",
+      "scenario": "admin",
+      "label": "Logout dibatalkan/disetujui serta sesi lama ditolak",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    },
+    {
+      "id": "A21",
+      "scenario": "subject_teacher",
+      "label": "Timeout/offline: status belum pasti diperiksa tanpa submit ganda",
+      "baseline": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "after": {
+        "attempts": 0,
+        "successful": 0,
+        "successRate": null,
+        "medianSeconds": null,
+        "assistance": 0,
+        "errors": 0,
+        "reentries": 0
+      },
+      "comparable": false,
+      "medianChangeSeconds": null
+    }
+  ],
+  "findings": {
+    "total": 0,
+    "open": 0
+  }
+}
