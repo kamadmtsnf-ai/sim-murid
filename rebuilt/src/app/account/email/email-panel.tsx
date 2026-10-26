@@ -1,4 +1,6 @@
 "use client";
+import { AccountCompletion } from "@/components/account/account-completion";
+import type { SecurityState } from "@/lib/auth/security-validation";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { useEffect, useState, useRef, type FormEvent } from "react";
@@ -19,8 +21,10 @@ const responseSchema = z.object({
 export function EmailPanel({
   initialState,
   initialServerTime,
+  accountState,
 }: {
   initialState: EmailState;
+  accountState?: SecurityState;
   initialServerTime?: string;
 }) {
   const router = useRouter(),
@@ -326,6 +330,7 @@ export function EmailPanel({
   }
   return (
     <div className="min-w-0 space-y-5" aria-busy={busy}>
+      {accountState && <AccountCompletion state={accountState} emailVerified={state.verified} needsSync={needsSync} />}
       <Card className="min-w-0">
         <CardHeader className="min-w-0 grid-cols-1 px-4 sm:px-6">
           <CardTitle>
