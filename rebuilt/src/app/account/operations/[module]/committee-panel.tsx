@@ -85,7 +85,7 @@ export function CommitteePanel({ initial }: { initial: CommitteeSnapshot }) {
   }, []);
   const params = (overrides: Record<string, string> = {}) =>
     new URLSearchParams({ ...filters, ...overrides }).toString();
-  const { busy, blocked, message, phase, feedbackRef, clear, fail, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, fail, mutate } =
     useDomainMutation(
       api + "?" + params(),
       committeeSnapshot,
@@ -338,7 +338,7 @@ const retainedEcurrentTarget=e.currentTarget;
     ),
     recapRows = recap.slice((monthPage - 1) * 50, monthPage * 50);
   const feedback = (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
       {message ||
         notice ||
         "Pembayaran dan rekap ditampilkan sesuai hak akses Anda."}

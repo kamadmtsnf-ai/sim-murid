@@ -129,9 +129,11 @@ try {
         .getByText("Jangan kirim ulang sekarang.", { exact: false })
         .isVisible(),
     );
+    assert.equal(await page.getByRole('status').filter({hasText:'Hasil belum terkonfirmasi'}).count(),1);
+    assert.equal(await page.locator('.ds-status').filter({hasText:'Hasil belum terkonfirmasi'}).evaluate(e=>e.className.includes('bg-success-subtle')),false);
     await page.screenshot({ path: join(out, `feedback-${width}.png`) });
     await page.getByLabel("Status feedback").selectOption("blocked");
-    await page.getByText("Tindakan dihentikan", { exact: true }).waitFor();
+    await page.getByText("Periksa sebelum melanjutkan", { exact: true }).waitFor();
     await page.getByLabel("Status feedback").selectOption("error");
     await page.getByRole("alert").waitFor();
     const last = page.getByRole("button", {

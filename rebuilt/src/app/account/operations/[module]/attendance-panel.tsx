@@ -83,7 +83,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
     blocked,
     message,
     phase,
-    feedbackRef,
+    feedbackRef, hint,
     clear,
     mutate,
     fail,
@@ -872,7 +872,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
               </div>
             </fieldset>
             {message && (
-              <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+              <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
                 {message}
               </MutationFeedback>
             )}

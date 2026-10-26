@@ -123,10 +123,10 @@ try {
     }
     if (mode === "401" || mode === "403")
       return route.fulfill({ status: Number(mode), body: "unauthorized" });
-    if (mode === "invalid" || mode === "stale")
+    if (["invalid","stale","duplicate","insufficient","rate_limited","request_conflict","408"].includes(mode))
       return route.fulfill({
-        status: 409,
-        json: { code: mode, message: mode },
+        status: mode==="408"?408:mode==="rate_limited"?429:409,
+        json: { code: mode==="408"?"invalid":mode, message: mode },
       });
     if (mode === "500")
       return route.fulfill({
@@ -154,12 +154,18 @@ try {
   const button = (name) => page.getByRole("button", { name, exact: true });
   const phase = (value) =>
     page.locator("#probe-phase").getByText(value, { exact: true }).waitFor();
+  async function expandDesktopGroups() {
+    await page.setViewportSize({width:1280,height:900});
+    const toggles=page.getByRole('navigation',{name:'Navigasi utama',exact:true}).locator('.nav-group-toggle');
+    for(let i=0;i<await toggles.count();i++)if(await toggles.nth(i).getAttribute('aria-expanded')==='false')await toggles.nth(i).click();
+  }
   async function fresh(next = "saved") {
     mode = next;
     discard = false;
     posts = [];
     await page.goto(base);
     await page.locator("#probe-value").waitFor();
+    await expandDesktopGroups();
   }
   async function force() {
     await page.evaluate(() => {
@@ -173,6 +179,11 @@ try {
   await settleConfirmation(page);
   await phase("error");
   check(posts.length === 0, "invalid draft never reaches HTTP");
+  for(const [reason,phrase] of [['duplicate','sudah tercatat'],['insufficient','saldo atau jumlah'],['rate_limited','Tunggu sesuai']]){
+    await fresh(reason);await force();await phase('error');await page.getByText(phrase,{exact:false}).waitFor();
+    check(posts.length===1 && await button('Simpan isian uji').isEnabled(),reason+' explains corrective next step without auto-retry');
+  }
+  await fresh('request_conflict');await force();await phase('blocked');await page.getByText('hasil sebelumnya',{exact:false}).waitFor();check(await button('Simpan isian uji').isDisabled(),'request conflict explains inspection and retains write lock');
   await fresh("hold");
   await page.evaluate(() => {
     window.forceFormsSave();
@@ -222,6 +233,7 @@ try {
     "offline",
     "committed-abort",
     "500",
+    "408",
     "noack",
     "mixed",
     "unadvanced",
@@ -331,6 +343,7 @@ try {
   release();
   await page.clock.resume();
   await page.goto(base + "?profile=1");
+  await expandDesktopGroups();
   await page
     .getByRole("textbox", { name: "Nama lengkap", exact: true })
     .fill("Nama belum disimpan");

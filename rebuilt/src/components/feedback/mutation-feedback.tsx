@@ -16,19 +16,19 @@ const presentation = {
   },
   blocked: {
     tone: "warning",
-    heading: "Tindakan dihentikan",
+    heading: "Periksa sebelum melanjutkan",
     hint: "Periksa sesi, hak akses, dan data terbaru sebelum melanjutkan.",
   },
   uncertain: {
     tone: "warning",
     heading: "Hasil belum terkonfirmasi",
-    hint: "Jangan kirim ulang sekarang. Catat isian sebelum memuat ulang, lalu periksa data terbaru untuk memastikan hasilnya.",
+    hint: "Jangan kirim ulang sekarang. Pertahankan halaman ini dan periksa data terbaru; memuat ulang dapat menghilangkan isian yang belum disimpan.",
   },
 } as const;
 /** Only an explicit caller phase determines outcome; never infer success from message text. */
 export function MutationFeedback({
   phase,
   ...props
-}: ComponentProps<typeof Status> & { phase: MutationPhase }) {
-  return <Status {...presentation[phase]} {...props} />;
+}: Omit<ComponentProps<typeof Status>, "tone"> & { phase: MutationPhase }) {
+  return <Status {...presentation[phase]} {...props} tone={presentation[phase].tone} />;
 }

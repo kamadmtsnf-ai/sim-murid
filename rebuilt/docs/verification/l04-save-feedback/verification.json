@@ -1,0 +1,24 @@
+{
+  "stage": "L04",
+  "baseline": "f29fb335118ec9b2a22b04be659c01fd742b4a85",
+  "fullCheck": {
+    "exitCode": 0,
+    "tests": 747,
+    "groups": 79,
+    "failed": 0
+  },
+  "finalLintExitCode": 0,
+  "formsBrowser": {
+    "checks": 87,
+    "axeScans": 7,
+    "errors": []
+  },
+  "modalBrowser": {
+    "scenarios": 16,
+    "axeScans": 4,
+    "errors": []
+  },
+  "migrationRequired": false,
+  "humanUAT": "pending_L02",
+  "scope": "Synthetic browser HTTP/provider fixtures and isolated SQL replay; no production mutation or real participant measurements"
+}

@@ -55,7 +55,7 @@ export function DisciplinePanel({
     };
   }, []);
   const query = (f = filters) => new URLSearchParams(f).toString();
-  const { busy, blocked, message, phase, feedbackRef, clear, fail, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, fail, mutate } =
     useDomainMutation(
       api + "?" + query(),
       disciplineSnapshot,
@@ -233,7 +233,7 @@ const retainedEcurrentTarget=e.currentTarget;
     void save(command);
   }
   const feedback = (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
       {message ||
         notice ||
         "Poin dan riwayat ditampilkan sesuai hak akses Anda."}
