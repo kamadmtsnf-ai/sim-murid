@@ -19,7 +19,12 @@
 .form, .fields { display: grid; gap: 1.25rem; min-inline-size: 0; }
 .fields:disabled { opacity: .8; }
 .input { display: block; min-inline-size: 0; inline-size: 100%; margin-block-start: .5rem; border: 1px solid var(--input); background: var(--card); padding: .625rem .75rem; }
-.passwordToggle { display: inline-flex; align-items: center; gap: 8px; max-inline-size: 100%; min-block-size: 44px; margin-block-start: .25rem; padding-block: .25rem; border-radius: .25rem; color: var(--primary); font-size: .875rem; text-align: start; text-decoration: underline; text-underline-offset: .2em; }
+.passwordField { position: relative; margin-block-start: .5rem; min-inline-size: 0; }
+.passwordField .input { margin-block-start: 0; padding-inline-end: 3.5rem; }
+.passwordToggle { position: absolute; inset-inline-end: 4px; inset-block-start: 4px; display: inline-flex; align-items: center; justify-content: center; inline-size: 44px; block-size: 44px; border-radius: .6rem; color: var(--muted-foreground); }
+.passwordToggle:hover { background: var(--muted); color: var(--foreground); }
+.passwordToggle:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+.passwordToggle:disabled { cursor: not-allowed; opacity: .5; }
 .passwordToggle svg { inline-size: 18px; block-size: 18px; flex-shrink: 0; }
 .remember { display: flex; align-items: start; gap: 12px; }
 .remember input { margin-block-start: .25rem; }
