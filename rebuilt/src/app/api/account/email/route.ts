@@ -11,7 +11,6 @@ import { emailCommand, emailStateSchema } from "@/lib/email/validation";
 import { emailContextSchema, reserveAndSend } from "@/lib/email/service";
 import { emailEnvironment } from "@/lib/email/gmail";
 import { otpDigest } from "@/lib/email/otp";
-import { profileSchema } from "@/lib/auth/recovery-validation";
 import type { z } from "zod";
 import { readBounded } from "@/lib/settings/server";
 async function handle(request: NextRequest, mutate = false) {
@@ -63,29 +62,10 @@ async function handle(request: NextRequest, mutate = false) {
           { message: "Email berubah. Muat ulang status sebelum menyimpan." },
           409,
         );
-      const readProfile = await admin.rpc("app_profile_read", args);
-      if (readProfile.error) throw Error("Profile unavailable");
-      if (!readProfile.data)
-        return respond(
-          { message: "Selesaikan langkah keamanan akun sebelumnya." },
-          403,
-        );
-      const profile = profileSchema.parse(readProfile.data);
-      if (
-        profile.username !== caller.principal.username ||
-        profile.contact_email !== command.expectedEmail
-      )
-        return respond(
-          { message: "Profil berubah. Muat ulang status sebelum menyimpan." },
-          409,
-        );
-      const write = await admin.rpc("app_profile_update", {
+      const write = await admin.rpc("app_email_address", {
         ...args,
-        p_version: profile.updated_at,
-        p_name: profile.full_name,
-        p_phone: profile.phone,
+        p_expected_email: command.expectedEmail,
         p_email: command.email,
-        p_bio: profile.bio,
       });
       if (write.error) throw Error("Address unavailable");
       if (write.data !== true)
