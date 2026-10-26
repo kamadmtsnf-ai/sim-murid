@@ -11,7 +11,7 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   return (
-    <main
+    <main tabIndex={-1}
       id="main-content"
       className="mx-auto flex min-h-dvh max-w-xl flex-col items-start justify-center gap-5 px-6"
     >

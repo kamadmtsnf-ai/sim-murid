@@ -29,7 +29,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return <LoginShell>
     <Card className={styles.card}><CardHeader className={styles.cardHeader}><p className="eyebrow">Akses akun</p><h1 className="text-2xl font-semibold">Masuk ke SiM-Murid</h1><CardDescription>Gunakan username dan password akun madrasah Anda.</CardDescription></CardHeader><CardContent className={styles.cardContent}>
       {notice && <div className="mb-5"><Status tone={notice.tone}>{notice.text}</Status></div>}
-      <noscript><style>{`.${styles.form}{display:none}`}</style><Status tone="error">Aktifkan JavaScript pada browser untuk menggunakan formulir login. Jika tidak dapat mengaktifkannya, hubungi administrator madrasah.</Status></noscript>
+
       <LoginForm captcha={publicRecaptcha()} />
       <p className={styles.help}>Lupa password atau tidak bisa mengakses sesi lama? <Link href="/recovery">Minta bantuan akun</Link>. Untuk akun baru, hubungi administrator madrasah.</p>
     </CardContent></Card>

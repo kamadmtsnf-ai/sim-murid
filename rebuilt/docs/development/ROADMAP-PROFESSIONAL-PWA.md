@@ -2,7 +2,7 @@
 
 Versi: 1.0
 Tanggal: 26 Oktober 2026 (Asia/Jakarta)
-Status: L01 dirilis melalui PR #76. L02 tooling dan regresi otomatis dikerjakan; UAT manusia belum tersedia. L03 dirilis PR78. L04 dirilis PR79. L05 dirilis PR80. L06 dirilis PR81; pengguna mengonfirmasi instalasi fisik berhasil (jenis perangkat/browser belum dirinci). L07 dirilis PR82. L08 dirilis PR83; kualitas impor Excel diimplementasikan; lihat L08-IMPORT-QUALITY.md dan PR untuk bukti rilis. L09 optimasi/bukti lab tersedia pada L09-MEASURED-PERFORMANCE.md; field dan beban staging tetap terbuka. L10–L11 belum dijalankan.
+Status: L01 dirilis melalui PR #76. L02 tooling dan regresi otomatis dikerjakan; UAT manusia belum tersedia. L03 dirilis PR78. L04 dirilis PR79. L05 dirilis PR80. L06 dirilis PR81; pengguna mengonfirmasi instalasi fisik berhasil (jenis perangkat/browser belum dirinci). L07 dirilis PR82. L08 dirilis PR83; kualitas impor Excel diimplementasikan; lihat L08-IMPORT-QUALITY.md dan PR untuk bukti rilis. L09 dirilis PR84; optimasi/bukti lab tersedia pada L09-MEASURED-PERFORMANCE.md; field dan beban staging tetap terbuka. L10 implementasi/verifikasi otomatis pada L10-ACCESSIBILITY.md; uji pembaca layar/perangkat manusia tetap terbuka. L11 belum dijalankan.
 Repositori: https://github.com/kamadmtsnf-ai/sim-murid
 Aplikasi: rebuilt/
 Nama berkas rekomendasi di repositori: rebuilt/docs/development/ROADMAP-PROFESSIONAL-PWA.md
@@ -70,7 +70,7 @@ Roadmap P01–P12 menyatakan sebagian bukti UAT manusia, beban nyata terautentik
 | L07 | Pusat kesehatan aplikasi admin | P1 | Observability dan izin existing | Dirilis PR82; backup/restore belum terhubung |
 | L08 | Pekerjaan massal dan kualitas data | P1 | L03, L04, impor Excel existing | Implementasi template versi1, quality, konfirmasi dan laporan; lihat L08-IMPORT-QUALITY.md dan PR |
 | L09 | Performa berbasis penggunaan nyata | P1 | Baseline L02; evaluasi ulang setelah PWA | Implementasi/lab pada L09-MEASURED-PERFORMANCE.md; penerimaan field dan staging tetap terbuka |
-| L10 | Aksesibilitas menyeluruh | P1 | Berlaku sejak L01; konsolidasi setelah L09 | Belum dimulai |
+| L10 | Aksesibilitas menyeluruh | P1 | Berlaku sejak L01; konsolidasi setelah L09 | Implementasi/QA otomatis: L10-ACCESSIBILITY.md; penerimaan manusia tetap terbuka |
 | L11 | AI untuk pekerjaan konkret | P2 | Fondasi stabil, P12 existing, evaluasi manusia | Belum dimulai |
 
 Urutan kerja utama: L01 → L02 baseline → L03/L04 → L05 → L06 → L07/L08 → L09/L10 → L11. Pengujian, aksesibilitas dan keamanan berjalan sejak awal, bukan menunggu tahap akhir.

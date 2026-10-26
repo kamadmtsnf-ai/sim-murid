@@ -1,0 +1,527 @@
+{
+  "checks": [
+    {
+      "name": "320 button labels stay within controls",
+      "passed": true
+    },
+    {
+      "name": "320 document overflow",
+      "passed": true
+    },
+    {
+      "name": "320 controls 44px",
+      "passed": true
+    },
+    {
+      "name": "components 320 axe",
+      "passed": true
+    },
+    {
+      "name": "first boundary 320",
+      "passed": true
+    },
+    {
+      "name": "last boundary 320",
+      "passed": true
+    },
+    {
+      "name": "paging preserves caller form 320",
+      "passed": true
+    },
+    {
+      "name": "table keyboard focus 320",
+      "passed": true
+    },
+    {
+      "name": "dialog viewport 320",
+      "passed": true
+    },
+    {
+      "name": "dialog 320 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 320 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 320 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 320 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 320 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 320 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog restores focus 320",
+      "passed": true
+    },
+    {
+      "name": "390 button labels stay within controls",
+      "passed": true
+    },
+    {
+      "name": "390 document overflow",
+      "passed": true
+    },
+    {
+      "name": "390 controls 44px",
+      "passed": true
+    },
+    {
+      "name": "components 390 axe",
+      "passed": true
+    },
+    {
+      "name": "first boundary 390",
+      "passed": true
+    },
+    {
+      "name": "last boundary 390",
+      "passed": true
+    },
+    {
+      "name": "paging preserves caller form 390",
+      "passed": true
+    },
+    {
+      "name": "table keyboard focus 390",
+      "passed": true
+    },
+    {
+      "name": "dialog viewport 390",
+      "passed": true
+    },
+    {
+      "name": "dialog 390 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 390 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 390 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 390 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 390 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 390 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog restores focus 390",
+      "passed": true
+    },
+    {
+      "name": "768 button labels stay within controls",
+      "passed": true
+    },
+    {
+      "name": "768 document overflow",
+      "passed": true
+    },
+    {
+      "name": "768 controls 44px",
+      "passed": true
+    },
+    {
+      "name": "components 768 axe",
+      "passed": true
+    },
+    {
+      "name": "first boundary 768",
+      "passed": true
+    },
+    {
+      "name": "last boundary 768",
+      "passed": true
+    },
+    {
+      "name": "paging preserves caller form 768",
+      "passed": true
+    },
+    {
+      "name": "table keyboard focus 768",
+      "passed": true
+    },
+    {
+      "name": "dialog viewport 768",
+      "passed": true
+    },
+    {
+      "name": "dialog 768 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 768 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 768 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 768 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 768 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 768 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog restores focus 768",
+      "passed": true
+    },
+    {
+      "name": "1440 button labels stay within controls",
+      "passed": true
+    },
+    {
+      "name": "1440 document overflow",
+      "passed": true
+    },
+    {
+      "name": "1440 controls 44px",
+      "passed": true
+    },
+    {
+      "name": "components 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "first boundary 1440",
+      "passed": true
+    },
+    {
+      "name": "last boundary 1440",
+      "passed": true
+    },
+    {
+      "name": "paging preserves caller form 1440",
+      "passed": true
+    },
+    {
+      "name": "table keyboard focus 1440",
+      "passed": true
+    },
+    {
+      "name": "dialog viewport 1440",
+      "passed": true
+    },
+    {
+      "name": "dialog 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 1440 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 1440 Shift+Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 1440 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 1440 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog focus contained 1440 Tab",
+      "passed": true
+    },
+    {
+      "name": "dialog restores focus 1440",
+      "passed": true
+    },
+    {
+      "name": "invalid field explicit",
+      "passed": true
+    },
+    {
+      "name": "hint/error references exist",
+      "passed": true
+    },
+    {
+      "name": "field error axe",
+      "passed": true
+    },
+    {
+      "name": "error clears independently of value",
+      "passed": true
+    },
+    {
+      "name": "reduced motion",
+      "passed": true
+    },
+    {
+      "name": "landscape button labels stay within controls",
+      "passed": true
+    },
+    {
+      "name": "landscape document overflow",
+      "passed": true
+    },
+    {
+      "name": "landscape controls 44px",
+      "passed": true
+    },
+    {
+      "name": "short viewport dialog scrolls to final action",
+      "passed": true
+    },
+    {
+      "name": "health skip focuses main 320",
+      "passed": true
+    },
+    {
+      "name": "health 320 axe",
+      "passed": true
+    },
+    {
+      "name": "health skip focuses main 390",
+      "passed": true
+    },
+    {
+      "name": "health 390 axe",
+      "passed": true
+    },
+    {
+      "name": "health skip focuses main 768",
+      "passed": true
+    },
+    {
+      "name": "health 768 axe",
+      "passed": true
+    },
+    {
+      "name": "health skip focuses main 1440",
+      "passed": true
+    },
+    {
+      "name": "health 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "account skip focuses main 320",
+      "passed": true
+    },
+    {
+      "name": "account 320 axe",
+      "passed": true
+    },
+    {
+      "name": "account skip focuses main 390",
+      "passed": true
+    },
+    {
+      "name": "account 390 axe",
+      "passed": true
+    },
+    {
+      "name": "account skip focuses main 768",
+      "passed": true
+    },
+    {
+      "name": "account 768 axe",
+      "passed": true
+    },
+    {
+      "name": "account skip focuses main 1440",
+      "passed": true
+    },
+    {
+      "name": "account 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "compact product targets44px",
+      "passed": true
+    },
+    {
+      "name": "none outline default",
+      "passed": true
+    },
+    {
+      "name": "none outline destructive",
+      "passed": true
+    },
+    {
+      "name": "none outline outline",
+      "passed": true
+    },
+    {
+      "name": "none outline secondary",
+      "passed": true
+    },
+    {
+      "name": "none outline ghost",
+      "passed": true
+    },
+    {
+      "name": "none outline link",
+      "passed": true
+    },
+    {
+      "name": "active outline default",
+      "passed": true
+    },
+    {
+      "name": "active outline destructive",
+      "passed": true
+    },
+    {
+      "name": "active outline outline",
+      "passed": true
+    },
+    {
+      "name": "active outline secondary",
+      "passed": true
+    },
+    {
+      "name": "active outline ghost",
+      "passed": true
+    },
+    {
+      "name": "active outline link",
+      "passed": true
+    },
+    {
+      "name": "200% text320px button labels stay within controls",
+      "passed": true
+    },
+    {
+      "name": "200% text320px document overflow",
+      "passed": true
+    },
+    {
+      "name": "200% text320px controls 44px",
+      "passed": true
+    },
+    {
+      "name": "200% text axe",
+      "passed": true
+    },
+    {
+      "name": "keyboard scrolls wide table locally",
+      "passed": true
+    },
+    {
+      "name": "enlarged short dialog action visible",
+      "passed": true
+    },
+    {
+      "name": "WCAG text spacing button labels stay within controls",
+      "passed": true
+    },
+    {
+      "name": "WCAG text spacing document overflow",
+      "passed": true
+    },
+    {
+      "name": "WCAG text spacing controls 44px",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "components 320",
+      "violations": []
+    },
+    {
+      "label": "dialog 320",
+      "violations": []
+    },
+    {
+      "label": "components 390",
+      "violations": []
+    },
+    {
+      "label": "dialog 390",
+      "violations": []
+    },
+    {
+      "label": "components 768",
+      "violations": []
+    },
+    {
+      "label": "dialog 768",
+      "violations": []
+    },
+    {
+      "label": "components 1440",
+      "violations": []
+    },
+    {
+      "label": "dialog 1440",
+      "violations": []
+    },
+    {
+      "label": "field error",
+      "violations": []
+    },
+    {
+      "label": "health 320",
+      "violations": []
+    },
+    {
+      "label": "health 390",
+      "violations": []
+    },
+    {
+      "label": "health 768",
+      "violations": []
+    },
+    {
+      "label": "health 1440",
+      "violations": []
+    },
+    {
+      "label": "account 320",
+      "violations": []
+    },
+    {
+      "label": "account 390",
+      "violations": []
+    },
+    {
+      "label": "account 768",
+      "violations": []
+    },
+    {
+      "label": "account 1440",
+      "violations": []
+    },
+    {
+      "label": "200% text",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

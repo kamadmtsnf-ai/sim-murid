@@ -1,3 +1,5 @@
+import HealthLoading from "../../src/app/account/health/loading";
+import AccountLoading from "../../src/app/account/loading";
 import { createRoot } from "react-dom/client";
 import { useState } from "react";
 import {
@@ -31,10 +33,14 @@ function Fixture() {
   const hint = "Gunakan nama yang mudah dikenali.";
   return (
     <main
-      id="main-content"
+      id="main-content" tabIndex={-1}
       className="mx-auto min-w-0 max-w-4xl space-y-6 p-4 sm:p-6"
     >
       <h1 className="text-2xl font-semibold">Komponen bersama SiM-Murid</h1>
+      <section aria-label="Uji tombol" className="ds-actions">
+        {(["default","destructive","outline","secondary","ghost","link"] as const).map(variant=><Button key={variant} variant={variant}>{variant}</Button>)}
+        {(["xs","sm","icon-xs","icon-sm"] as const).map(size=><Button key={size} size={size} aria-label={"Ukuran "+size}>{size.startsWith("icon")?"+":size}</Button>)}
+      </section>
       <Card>
         <CardHeader>
           <CardTitle>
@@ -170,4 +176,4 @@ function Fixture() {
     </main>
   );
 }
-createRoot(document.getElementById("root")!).render(<Fixture />);
+createRoot(document.getElementById("root")!).render(new URLSearchParams(location.search).get("mode")==="health"?<HealthLoading/>:new URLSearchParams(location.search).get("mode")==="account"?<AccountLoading/>:<Fixture />);

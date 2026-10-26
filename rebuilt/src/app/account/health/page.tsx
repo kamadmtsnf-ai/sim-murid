@@ -12,8 +12,8 @@ export default async function HealthPage() {
   let data;
   try { data=await readAdminHealth(caller); }
   catch(error) {
-    if(error instanceof AccessDenied) return <main id="main-content" className="mx-auto max-w-xl space-y-4 p-6"><h1 className="text-2xl font-semibold">Kesehatan aplikasi</h1><p>Hanya Admin yang telah menyelesaikan keamanan akun dapat melihat ringkasan ini.</p></main>;
+    if(error instanceof AccessDenied) return <main tabIndex={-1} id="main-content" className="mx-auto max-w-xl space-y-4 p-6"><h1 className="text-2xl font-semibold">Kesehatan aplikasi</h1><p>Hanya Admin yang telah menyelesaikan keamanan akun dapat melihat ringkasan ini.</p></main>;
     throw new Error("Health authorization unavailable");
   }
-  return <main id="main-content" className="mx-auto min-w-0 max-w-7xl space-y-6 px-4 py-6 sm:px-6 sm:py-10"><div className="space-y-2"><h1 className="text-3xl font-semibold">Kesehatan aplikasi</h1><p className="text-muted-foreground">Ringkasan sumber operasional untuk membantu admin menentukan pemeriksaan berikutnya.</p></div><AdminHealth data={data}/></main>;
+  return <main tabIndex={-1} id="main-content" className="mx-auto min-w-0 max-w-7xl space-y-6 px-4 py-6 sm:px-6 sm:py-10"><div className="space-y-2"><h1 className="text-3xl font-semibold">Kesehatan aplikasi</h1><p className="text-muted-foreground">Ringkasan sumber operasional untuk membantu admin menentukan pemeriksaan berikutnya.</p></div><AdminHealth data={data}/></main>;
 }

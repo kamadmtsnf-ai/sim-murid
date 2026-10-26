@@ -187,6 +187,8 @@ try {
     await a11y("dialog " + width);
     await page.getByLabel("Catatan", { exact: true }).fill("draf uji");
     await page.keyboard.press("Escape");
+    await dialog.waitFor({state:"hidden"});
+    await page.waitForFunction(()=>document.activeElement?.tagName==="BUTTON" && document.activeElement?.textContent?.trim()==="Buka rincian");
     check(
       await button("Buka rincian").evaluate(
         (e) => e === document.activeElement,

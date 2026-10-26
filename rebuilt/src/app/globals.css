@@ -74,7 +74,8 @@
   html { scroll-padding-block: 5rem; }
   body { line-height: 1.6; }
   :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
-  h1,h2,h3 { text-wrap: balance; line-height: 1.3; }
+  h1,h2,h3 { text-wrap: balance; line-height: 1.3; overflow-wrap:anywhere; }
+  fieldset { min-width:0; }
   input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="range"]),select,textarea { min-height: 2.75rem; border-color: var(--input); background-color: var(--card); font-size: 1rem; }
   input[type="checkbox"],input[type="radio"] { width: 1.125rem; height: 1.125rem; flex-shrink: 0; accent-color: var(--primary); }
   input:disabled,select:disabled,textarea:disabled { background-color: var(--secondary); cursor: not-allowed; opacity: .7; }
@@ -526,7 +527,7 @@
 
 /* Same layer as Button utilities: scoped action labels must be able to wrap. */
 @layer utilities {
-  .ds-actions [data-slot="button"] { min-width:0; max-width:100%; min-height:var(--control-min-height); white-space:normal; overflow-wrap:anywhere; }
+  .ds-actions [data-slot="button"] { min-width:min(100%,var(--control-min-height)); max-width:100%; min-height:var(--control-min-height); white-space:normal; overflow-wrap:anywhere; }
 }
 @layer components {
   .ds-pagination > p { flex:1 0 100%; order:-1; text-align:center; }
@@ -563,7 +564,7 @@
 
 /* Shared modal surfaces; the navigation drawer retains its own layout. */
 @layer utilities {
- .dialog-body [data-slot="button"], [role="alertdialog"] [data-slot="button"] { min-width:0; max-width:100%; white-space:normal; overflow-wrap:anywhere; }
+ .dialog-body [data-slot="button"], [role="alertdialog"] [data-slot="button"] { min-width:min(100%,var(--control-min-height)); max-width:100%; white-space:normal; overflow-wrap:anywhere; }
  .dialog-body form { min-width:0; }
  .dialog-body input:not([type="checkbox"]):not([type="radio"]), .dialog-body select, .dialog-body textarea { max-width:100%; min-width:0; }
 }
