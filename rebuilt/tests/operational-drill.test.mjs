@@ -5,7 +5,7 @@ import { benchmark } from "../scripts/operations/benchmark.mjs";
 test("P10 isolated backup restores all tables, schema/security, balances, archive, session and rejects corrupt data", async () => {
   const r = await restoreDrill();
   assert.equal(r.tableCount, 84);
-  assert.equal(r.migrations, 48);
+  assert.equal(r.migrations, 49);
   assert.ok(Object.values(r.checks).every((v) => v === true));
   assert.equal(r.rpo.postBackupSyntheticWritesLost, 1);
   assert.equal(r.rpo.productionTarget, null);
