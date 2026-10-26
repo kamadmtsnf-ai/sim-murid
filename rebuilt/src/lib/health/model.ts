@@ -25,7 +25,28 @@ export const healthSnapshot = z.object({
     pointSnapshots: count.nullable(),
     submittedSurveys: count.nullable(),
   }).strict(),
-}).strict();
+}).strict().superRefine((data, context) => {
+  const jobs = data.jobs;
+  const invalid = (path: string[], message: string) => context.addIssue({ code: "custom", path, message });
+  if (jobs.available) {
+    if (!jobs.outbox || !jobs.runs || !jobs.providers) invalid(["jobs"], "Available source requires complete aggregates");
+    if (jobs.outbox) {
+      const { sampled, ...statuses } = jobs.outbox;
+      if (sampled > 200 || Object.values(statuses).reduce((sum, value) => sum + value, 0) !== sampled)
+        invalid(["jobs", "outbox"], "Inconsistent outbox sample");
+    }
+    if (jobs.runs) {
+      const { sampled, ...statuses } = jobs.runs;
+      if (sampled > 100 || Object.values(statuses).reduce((sum, value) => sum + value, 0) !== sampled)
+        invalid(["jobs", "runs"], "Inconsistent job sample");
+    }
+  } else if ([jobs.outbox, jobs.runs, jobs.providers, jobs.oldestQueuedAt, jobs.latestProviderAcceptedAt, jobs.latestJobFinishedAt].some(value => value !== null)) {
+    invalid(["jobs"], "Unavailable source must not report measurements");
+  }
+  const r = data.reconciliation;
+  if ([r.sourceAvailable, r.tables, r.reportSnapshots, r.pointSnapshots, r.submittedSurveys].some(value => r.available ? value === null : value !== null))
+    invalid(["reconciliation"], "Availability and reconciliation measurements disagree");
+});
 export type HealthSnapshot = z.infer<typeof healthSnapshot>;
 
 /** Validate each full server snapshot, then emit only explicit aggregate fields. */

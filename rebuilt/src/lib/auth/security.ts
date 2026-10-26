@@ -3,8 +3,9 @@ import {createClient} from '@supabase/supabase-js';
 import {createAuthAdmin} from '@/lib/auth/admin';
 import {getSupabasePublicEnvironment} from '@/lib/supabase/environment';
 import {securityStateSchema} from '@/lib/auth/security-validation';
-export async function securityState(userId:string,sessionId:string){
- const {data,error}=await createAuthAdmin().rpc('app_security_state',{p_user:userId,p_session:sessionId});
+export async function securityState(userId:string,sessionId:string,signal?:AbortSignal){
+ const query=createAuthAdmin().rpc('app_security_state',{p_user:userId,p_session:sessionId});
+ const {data,error}=await (signal?query.abortSignal(signal):query);
  if(error)throw new Error('Security state unavailable');
  return data===null?null:securityStateSchema.parse(data);
 }

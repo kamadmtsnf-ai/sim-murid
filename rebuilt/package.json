@@ -129,12 +129,13 @@
     "test:collections": "node --experimental-strip-types --test tests/collection-presentation.test.ts",
     "test:pwa:browser": "node scripts/verify-pwa.mjs",
     "test:pwa": "node --test tests/pwa.test.mjs",
-    "test:health": "node --test tests/health.test.mjs tests/health-source.test.mjs",
+    "test:health": "node --test tests/health.test.mjs tests/health-source.test.mjs tests/favicon.test.mjs",
     "test:health:browser": "node scripts/verify-health.mjs",
     "test:performance": "node --experimental-strip-types --test tests/performance.test.mjs",
     "perf:bundles": "node scripts/performance/bundles.mjs",
     "test:accessibility": "node --test tests/accessibility.test.mjs",
-    "test:accessibility:browser": "node scripts/verify-accessibility.mjs"
+    "test:accessibility:browser": "node scripts/verify-accessibility.mjs",
+    "test:favicon:browser": "node scripts/verify-favicon.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
