@@ -1,0 +1,479 @@
+{
+  "checks": [
+    {
+      "name": "preview only before confirmation enrollment320",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell enrollment320",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog enrollment320",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm enrollment320",
+      "passed": true
+    },
+    {
+      "name": "no overflow enrollment320",
+      "passed": true
+    },
+    {
+      "name": "exact text identity enrollment320",
+      "passed": true
+    },
+    {
+      "name": "axe enrollment320",
+      "passed": true
+    },
+    {
+      "name": "single commit enrollment320",
+      "passed": true
+    },
+    {
+      "name": "confirmed Excel result enrollment",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation enrollment390",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell enrollment390",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog enrollment390",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm enrollment390",
+      "passed": true
+    },
+    {
+      "name": "no overflow enrollment390",
+      "passed": true
+    },
+    {
+      "name": "exact text identity enrollment390",
+      "passed": true
+    },
+    {
+      "name": "axe enrollment390",
+      "passed": true
+    },
+    {
+      "name": "single commit enrollment390",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation enrollment768",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell enrollment768",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog enrollment768",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm enrollment768",
+      "passed": true
+    },
+    {
+      "name": "no overflow enrollment768",
+      "passed": true
+    },
+    {
+      "name": "exact text identity enrollment768",
+      "passed": true
+    },
+    {
+      "name": "axe enrollment768",
+      "passed": true
+    },
+    {
+      "name": "single commit enrollment768",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "no overflow enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "exact text identity enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "axe enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "single commit enrollment1440",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation grades320",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell grades320",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog grades320",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm grades320",
+      "passed": true
+    },
+    {
+      "name": "no overflow grades320",
+      "passed": true
+    },
+    {
+      "name": "exact text identity grades320",
+      "passed": true
+    },
+    {
+      "name": "axe grades320",
+      "passed": true
+    },
+    {
+      "name": "single commit grades320",
+      "passed": true
+    },
+    {
+      "name": "confirmed Excel result grades",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation grades390",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell grades390",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog grades390",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm grades390",
+      "passed": true
+    },
+    {
+      "name": "no overflow grades390",
+      "passed": true
+    },
+    {
+      "name": "exact text identity grades390",
+      "passed": true
+    },
+    {
+      "name": "axe grades390",
+      "passed": true
+    },
+    {
+      "name": "single commit grades390",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation grades768",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell grades768",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog grades768",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm grades768",
+      "passed": true
+    },
+    {
+      "name": "no overflow grades768",
+      "passed": true
+    },
+    {
+      "name": "exact text identity grades768",
+      "passed": true
+    },
+    {
+      "name": "axe grades768",
+      "passed": true
+    },
+    {
+      "name": "single commit grades768",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation grades1440",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell grades1440",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog grades1440",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm grades1440",
+      "passed": true
+    },
+    {
+      "name": "no overflow grades1440",
+      "passed": true
+    },
+    {
+      "name": "exact text identity grades1440",
+      "passed": true
+    },
+    {
+      "name": "axe grades1440",
+      "passed": true
+    },
+    {
+      "name": "single commit grades1440",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation schedules320",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell schedules320",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog schedules320",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm schedules320",
+      "passed": true
+    },
+    {
+      "name": "no overflow schedules320",
+      "passed": true
+    },
+    {
+      "name": "axe schedules320",
+      "passed": true
+    },
+    {
+      "name": "single commit schedules320",
+      "passed": true
+    },
+    {
+      "name": "confirmed Excel result schedules",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation schedules390",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell schedules390",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog schedules390",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm schedules390",
+      "passed": true
+    },
+    {
+      "name": "no overflow schedules390",
+      "passed": true
+    },
+    {
+      "name": "axe schedules390",
+      "passed": true
+    },
+    {
+      "name": "single commit schedules390",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation schedules768",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell schedules768",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog schedules768",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm schedules768",
+      "passed": true
+    },
+    {
+      "name": "no overflow schedules768",
+      "passed": true
+    },
+    {
+      "name": "axe schedules768",
+      "passed": true
+    },
+    {
+      "name": "single commit schedules768",
+      "passed": true
+    },
+    {
+      "name": "preview only before confirmation schedules1440",
+      "passed": true
+    },
+    {
+      "name": "focus does not scroll hidden dialog shell schedules1440",
+      "passed": true
+    },
+    {
+      "name": "title and close remain inside dialog schedules1440",
+      "passed": true
+    },
+    {
+      "name": "explicit confirm schedules1440",
+      "passed": true
+    },
+    {
+      "name": "no overflow schedules1440",
+      "passed": true
+    },
+    {
+      "name": "axe schedules1440",
+      "passed": true
+    },
+    {
+      "name": "single commit schedules1440",
+      "passed": true
+    },
+    {
+      "name": "duplicate worksheet rows shown",
+      "passed": true
+    },
+    {
+      "name": "invalid sheet never calls commit",
+      "passed": true
+    },
+    {
+      "name": "duplicate error report uses original worksheet row",
+      "passed": true
+    },
+    {
+      "name": "uncertain not retried lost",
+      "passed": true
+    },
+    {
+      "name": "uncertain report does not reuse ready as saved",
+      "passed": true
+    },
+    {
+      "name": "readback reconciles without duplicate",
+      "passed": true
+    },
+    {
+      "name": "uncertain not retried wrong",
+      "passed": true
+    },
+    {
+      "name": "stale not retried",
+      "passed": true
+    },
+    {
+      "name": "revoked access blocks import",
+      "passed": true
+    },
+    {
+      "name": "workbooks not persisted in browser storage",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "enrollment320",
+      "violations": []
+    },
+    {
+      "label": "enrollment390",
+      "violations": []
+    },
+    {
+      "label": "enrollment768",
+      "violations": []
+    },
+    {
+      "label": "enrollment1440",
+      "violations": []
+    },
+    {
+      "label": "grades320",
+      "violations": []
+    },
+    {
+      "label": "grades390",
+      "violations": []
+    },
+    {
+      "label": "grades768",
+      "violations": []
+    },
+    {
+      "label": "grades1440",
+      "violations": []
+    },
+    {
+      "label": "schedules320",
+      "violations": []
+    },
+    {
+      "label": "schedules390",
+      "violations": []
+    },
+    {
+      "label": "schedules768",
+      "violations": []
+    },
+    {
+      "label": "schedules1440",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

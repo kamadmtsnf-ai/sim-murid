@@ -119,3 +119,5 @@ L05 memperjelas lokasi halaman aktif dan hasil pencarian sidebar tanpa mengubah 
 L06 menambahkan PWA online dengan manifest/ikon dan kontrol instalasi progresif, tanpa worker/cache privat/migrasi. Lihat [laporan L06](L06-INSTALLABLE-PWA.md); penerimaan perangkat fisik belum selesai.
 
 L07 menambahkan menu Kesehatan aplikasi khusus admin, agregat outbox/pekerjaan/rekonsiliasi dari sumber existing dan status backup/restore yang jujur belum dapat diverifikasi. Tanpa migrasi; lihat [laporan L07](L07-ADMIN-HEALTH.md). Instalasi PWA fisik L06 dikonfirmasi pengguna.
+
+L08 memperbaiki kualitas impor Excel existing: template berversi dengan kompatibilitas lama, petunjuk per kolom, persentase valid dan laporan hasil/kesalahan tanpa password. Konfirmasi semua batch pengguna; kuota dan transaksi domain dipertahankan. Tanpa migrasi; lihat [laporan L08](L08-IMPORT-QUALITY.md).

@@ -68,7 +68,22 @@ export function parseBulkRows(records: string[][], domain: BulkDomain) {
     if (!result.success) {
       issues.push({
         row,
-        code: "Periksa username teks, referensi, waktu, nilai 0–100 (maksimal 2 desimal), dan panjang isian",
+        code: [...new Set(result.error.issues.map(issue => {
+          const field = String(issue.path[0] ?? "");
+          return ({
+            username: "Username wajib teks tanpa spasi awal/akhir atau karakter kontrol (maksimal 100 karakter)",
+            teacher_username: "Username guru wajib teks tanpa spasi awal/akhir atau karakter kontrol (maksimal 100 karakter)",
+            value: "Nilai harus kosong atau 0–100 dengan maksimal 2 desimal; nol tetap bernilai 0",
+            notes: "Catatan maksimal 2000 karakter tanpa karakter kontrol",
+            subject_code: "Kode mapel harus sesuai referensi, memakai huruf besar, angka atau garis bawah",
+            weekday: "Hari harus berupa angka 1–7",
+            start: "Jam mulai harus berformat HH:mm, pukul 00:00–23:59",
+            duration_minutes: "Durasi per JTM harus 1–240 menit",
+            jtm: "Jumlah JTM harus 1–12",
+            break_minutes: "Jeda harus 0–240 menit",
+            "": "Jadwal tidak boleh melewati tengah malam; periksa jam, durasi, JTM dan jeda",
+          } as Record<string,string>)[field] ?? "Periksa isian sesuai panduan template";
+        }))].join(". "),
       });
       return;
     }

@@ -27,7 +27,12 @@ export function parseUserRows(records: string[][]) {
     if (!r.success || cells.length !== 4) {
       issues.push({
         row: i + 2,
-        message: "Periksa username teks, nama, kode peran dan email.",
+        message: cells.length !== 4
+          ? "Jumlah kolom harus sesuai template (4 kolom)."
+          : !r.success ? [...new Set(r.error.issues.map((issue) => {
+              const field = String(issue.path[0]);
+              return ({ username: "Username wajib teks tanpa spasi awal/akhir atau karakter kontrol (maksimal 100 karakter).", fullName: "Nama wajib diisi (maksimal 200 karakter).", role: "Gunakan kode peran yang tercantum pada panduan.", contactEmail: "Email harus valid atau dikosongkan." } as Record<string, string>)[field] ?? "Periksa isian baris ini.";
+            }))].join(" ") : "Periksa isian baris ini.",
       });
       return;
     }
@@ -41,6 +46,7 @@ export function parseUserRows(records: string[][]) {
   return { rows, issues, count: records.length - 1 };
 }
 export const userImportInstructions = [
+  "Template pengguna versi 1. Template lama tanpa penanda versi tetap diterima jika strukturnya valid.",
   "Contoh baris: 001-02 | Nama Lengkap | student | (email opsional). Isi sheet Data. Maksimal 100 baris; berkas .xlsx maksimal 1 MiB.",
   "Username wajib Text agar nol awal, tanda minus dan angka panjang tidak berubah. Jangan memakai formula atau hyperlink.",
   "Kode peran: " +

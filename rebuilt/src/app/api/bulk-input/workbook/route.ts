@@ -1,3 +1,4 @@
+import { bulkTemplate } from "@/lib/spreadsheets/templates";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
 import { sameOrigin, privateJson } from "@/lib/auth/http";
@@ -21,13 +22,14 @@ export async function POST(request: NextRequest) {
       decodeWorkbook(b.workbook),
       headers[b.domain],
       ["username", "teacher_username"],
+      bulkTemplate(b.domain),
     );
     return reply({ preview: parseBulkRows(records, b.domain) });
   } catch {
     return reply(
       {
         message:
-          "Excel tidak valid. Gunakan template .xlsx, sheet Data, tanpa formula, maksimal 1 MiB dan 100 baris. Username wajib Text.",
+          "Excel tidak valid. Gunakan template .xlsx terbaru, sheet Data, tanpa formula, maksimal 1 MiB dan 100 baris. Username wajib Text.",
       },
       400,
     );
@@ -44,7 +46,7 @@ export async function GET(request: NextRequest) {
       "Isi sheet Data. Hapus baris contoh sebelum mengimpor.",
       "Pertahankan header dan format Text untuk username, kode, serta jam HH:mm. Maksimal 100 baris, 1 MiB.",
       "Jangan gunakan formula, makro, hyperlink atau kolom tambahan.",
-    ]);
+    ], bulkTemplate(domain));
     return new Response(bytes as BodyInit, {
       headers: {
         "Content-Type": EXCEL_MIME,

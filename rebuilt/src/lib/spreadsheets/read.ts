@@ -1,4 +1,5 @@
 import "server-only";
+import { verifyTemplateMarkers, type TemplateIdentity } from "./templates.ts";
 import { crc32, inflateRawSync } from "node:zlib";
 import ExcelJS from "exceljs";
 export const MAX_EXCEL_BYTES = 1048576;
@@ -110,6 +111,7 @@ export async function readExcel(
   bytes: Uint8Array,
   headers: readonly string[],
   textColumns: readonly string[],
+  template?: TemplateIdentity,
 ) {
   inspectExcelZip(bytes);
   const book = new ExcelJS.Workbook();
@@ -123,6 +125,11 @@ export async function readExcel(
     sheet.columnCount !== headers.length
   )
     throw Error("Gunakan sheet Data dari template, maksimal 100 baris.");
+  if (template) {
+    const markers: unknown[] = [];
+    book.getWorksheet("Panduan")?.eachRow((row) => { markers.push(row.getCell(1).value); });
+    verifyTemplateMarkers(markers, template);
+  }
   const records: string[][] = [];
   sheet.eachRow({ includeEmpty: true }, (row, n) => {
     if (n > 101 || row.cellCount > headers.length)

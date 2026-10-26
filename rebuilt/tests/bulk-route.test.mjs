@@ -19,3 +19,25 @@ test('Commit cannot be acknowledged from a malformed/wrong request/partial row r
 test('Negative source results have no false saved acknowledgement and private errors stay hidden',async()=>{for(const code of ['denied','stale','duplicate','existing_assessment']){const s=reset();s.result={data:{code},error:null};const r=await POST(req());assert.equal(r.status,code==='denied'?403:409);}const s=reset();s.result={data:null,error:{message:'PRIVATE SQL'}};const r=await POST(req());assert.equal(r.status,503);assert.ok(!(await r.text()).includes('PRIVATE'));});
 test('Status read only accepts own request id and preserves no-store',async()=>{let s=reset();s.result={data:{code:'not_found'},error:null};const r=await GET(new NextRequest('https://example.test/api/bulk-input?requestId='+id));assert.equal(r.status,200);assert.equal(s.calls[0].args.p_action,'status');assert.equal(s.calls[0].args.p_actor,other);for(const q of ['?actor='+id,'?requestId='+id+'&role=admin']){s=reset();assert.equal((await GET(new NextRequest('https://example.test/api/bulk-input'+q))).status,400);assert.equal(s.calls.length,0);}});
 test('Reference catalog scope is checked, denied and mismatched data are not returned',async()=>{const query='?catalog=1&domain=schedules&classId='+id;let s=reset();s.result={data:{domain:'schedules',classId:id,people:[],subjects:[]},error:null};assert.equal((await GET(new NextRequest('https://example.test/api/bulk-input'+query))).status,200);assert.equal(s.calls[0].name,'app_bulk_catalog');s=reset();s.result={data:null,error:null};assert.equal((await GET(new NextRequest('https://example.test/api/bulk-input'+query))).status,403);s=reset();s.result={data:{domain:'schedules',classId:other,people:[],subjects:[]},error:null};assert.equal((await GET(new NextRequest('https://example.test/api/bulk-input'+query))).status,503);});
+
+test('bulk preview and commit reject mismatched template versions before RPC',async()=>{
+ for(const action of ['preview','commit']) {
+  const s=reset();const future=Buffer.from(await excelBytes(['username'],[['001-02']],[],{id:'enrollment',version:2})).toString('base64');
+  const response=await POST(req({...base(),action,...(action==='commit'?{revision:5}:{}),workbook:future}));
+  assert.equal(response.status,400);assert.equal(s.calls.length,0);
+ }
+});
+
+test('bulk workbook endpoint emits versioned examples and accepts legacy files without writes',async()=>{
+ const api=await import('../src/app/api/bulk-input/workbook/route.ts');let s=reset();
+ const response=await api.GET(new NextRequest('https://example.test/api/bulk-input/workbook?domain=enrollment'));
+ assert.equal(response.status,200);const bytes=Buffer.from(await response.arrayBuffer());
+ const book=new (await import('exceljs')).default.Workbook();await book.xlsx.load(bytes);
+ assert.equal(book.getWorksheet('Panduan').getCell('A1').value,'SIM-MURID-TEMPLATE|enrollment|1');assert.equal(book.getWorksheet('Data').getCell('A2').value,'001-02');
+ for(const data of [bytes.toString('base64'),workbook]){
+  const r=await api.POST(req({domain:'enrollment',workbook:data}));assert.equal(r.status,200);assert.equal((await r.json()).preview.rows[0].username,'001-02');
+ }
+ assert.equal(s.calls.length,0);
+ const future=Buffer.from(await excelBytes(['username'],[['001-02']],[],{id:'enrollment',version:2})).toString('base64');
+ assert.equal((await api.POST(req({domain:'enrollment',workbook:future}))).status,400);assert.equal(s.calls.length,0);
+});

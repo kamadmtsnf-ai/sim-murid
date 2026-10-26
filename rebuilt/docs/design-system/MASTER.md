@@ -386,3 +386,7 @@ Kelompok halaman aktif diberi teks penanda dan deskripsi aksesibel pada header a
 ## L07 — Kesehatan aplikasi admin
 
 Pusat kesehatan read-only memakai kartu/metrik dan timestamp WIB. Unknown dibedakan dari nol; tidak memakai warna sehat untuk sumber gagal atau belum tersedia. Konfigurasi provider, penerimaan provider dan kotak masuk adalah bukti berbeda. Sampel terbaru diberi batas200/100; angka bukan seluruh backlog. Backup/restore tanpa bukti tetap belum dapat diverifikasi. Refresh GET, tanpa retry otomatis atau navigasi konten yang menduplikasi sidebar. Loading/error/partial memakai pola existing dan whitelist server menjaga data sensitif.
+
+## L08 — Kualitas impor Excel
+
+Pisahkan validasi format, validasi sumber, konfirmasi dan hasil tersimpan. Persentase valid menyertakan pembilang/penyebut dan cakupan pemeriksaan. Error menyebut kolom dan langkah koreksi, tanpa menggemakan data pribadi. Laporan hasil/kesalahan bebas password terpisah dari kredensial sementara; unknown/pending tidak diklaim tersimpan. Konfirmasi semua batch pengguna tetap menonjolkan kewenangan Admin. Ekspor gagal dapat dicoba lagi tanpa menghapus draft atau mengirim ulang mutasi.

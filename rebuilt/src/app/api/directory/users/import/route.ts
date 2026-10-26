@@ -1,3 +1,4 @@
+import { userTemplate, importQuality } from "@/lib/spreadsheets/templates";
 import type { NextRequest } from "next/server";
 import { z } from "zod";
 import { educationContext, jsonBody, failure } from "@/lib/education/server";
@@ -30,7 +31,7 @@ async function handle(request: NextRequest, write = false) {
     if (allowed.data !== true)
       return reply({ message: "Akses admin tidak berlaku." }, 403);
     if (!write) {
-      const bytes = await excelBytes(userHeaders, [], userImportInstructions);
+      const bytes = await excelBytes(userHeaders, [], userImportInstructions, userTemplate);
       return new Response(bytes as BodyInit, {
         headers: {
           "Content-Type": EXCEL_MIME,
@@ -52,13 +53,13 @@ async function handle(request: NextRequest, write = false) {
           "full_name",
           "role",
           "contact_email",
-        ]),
+        ], userTemplate),
       );
     } catch {
       return reply(
         {
           message:
-            "Excel tidak valid. Gunakan template .xlsx tanpa formula, sheet Data, maksimal 1 MiB/100 baris. Username harus Text.",
+            "Excel tidak valid. Gunakan template .xlsx terbaru tanpa formula, sheet Data, maksimal 1 MiB/100 baris. Username harus Text.",
         },
         400,
       );
@@ -68,6 +69,7 @@ async function handle(request: NextRequest, write = false) {
         {
           message: "Perbaiki semua baris sebelum mengimpor.",
           issues: parsed.issues,
+          quality: importQuality(parsed.count, parsed.issues.map(i=>i.row)),
         },
         422,
       );
@@ -91,10 +93,11 @@ async function handle(request: NextRequest, write = false) {
           message:
             "Username existing tidak ditimpa. Hapus atau perbaiki baris tersebut.",
           issues,
+          quality: importQuality(parsed.count, issues.map(i=>i.row)),
         },
         422,
       );
-    return reply({ rows: parsed.rows, count: parsed.count });
+    return reply({ rows: parsed.rows, count: parsed.count, quality: importQuality(parsed.count, []) });
   } catch (e) {
     const err = failure(e);
     return reply({ message: err.message }, err.status);

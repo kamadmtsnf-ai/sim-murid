@@ -130,21 +130,26 @@ try {
   }
   async function preview(){await page.getByRole('button',{name:'Validasi dan pratinjau',exact:true}).click();await page.getByText('Validasi sumber berhasil.',{exact:false}).waitFor();}
   async function commit(){await page.getByLabel('Saya sudah memeriksa',{exact:false}).check();await page.getByRole('button',{name:'Konfirmasi simpan batch',exact:true}).click();}
+  async function report(label){const waiting=page.waitForEvent('download');await page.getByRole('button',{name:label,exact:true}).click();const d=await waiting;const book=new ExcelJS.Workbook();await book.xlsx.readFile(await d.path());return book.getWorksheet('Data');}
   for(const domain of ['enrollment','grades','schedules'])for(const width of [320,390,768,1440]){
    mode='ok';posts=[];await page.setViewportSize({width,height:850});await visit(domain);await preview();
+   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
    check(posts.length===1&&posts[0].action==='preview','preview only before confirmation '+domain+width);
+   check(await page.getByRole('dialog').evaluate(e=>e.scrollTop===0),'focus does not scroll hidden dialog shell '+domain+width);
+   const shell=await page.getByRole('dialog').boundingBox(),title=await page.getByRole('heading',{name:titles[domain],exact:true}).boundingBox(),close=await page.getByRole('button',{name:'Tutup dialog',exact:true}).boundingBox();check(title.y>=shell.y&&close.y>=shell.y&&title.y+title.height<=shell.y+shell.height&&close.y+close.height<=shell.y+shell.height,'title and close remain inside dialog '+domain+width);
    check(await page.getByRole('button',{name:'Konfirmasi simpan batch',exact:true}).isDisabled(),'explicit confirm '+domain+width);
    check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no overflow '+domain+width);
    if(domain!=='schedules')check(await page.locator('td').getByText('001-02',{exact:true}).count()===1,'exact text identity '+domain+width);
    await page.addScriptTag({content:axe});const result=await page.evaluate(()=>window.axe.run(document.querySelector('[role=dialog]'),{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}}));accessibility.push({label:domain+width,violations:result.violations});check(!result.violations.length,'axe '+domain+width);
-   await commit();await page.getByText('Seluruh batch tersimpan.',{exact:false}).waitFor();check(posts.filter(p=>p.action==='commit').length===1,'single commit '+domain+width);
+   if(width===320&&domain==='enrollment')await page.screenshot({path:join(out,"bulk-preview-320.png")});
+   await commit();await page.getByText('Seluruh batch tersimpan.',{exact:false}).waitFor();check(posts.filter(p=>p.action==='commit').length===1,'single commit '+domain+width);if(width===320){const saved=await report('Unduh laporan impor');check(saved.getCell('B2').value==='Tersimpan','confirmed Excel result '+domain);}
   }
-  mode='ok';posts=[];await visit('enrollment',[['a'],['a']]);check(await page.getByRole('list',{name:'Masalah Excel'}).isVisible(),'duplicate worksheet rows shown');check(posts.length===0,'invalid sheet never calls commit');
+  mode='ok';posts=[];await visit('enrollment',[['a'],['a']]);check(await page.getByRole('list',{name:'Masalah Excel'}).isVisible(),'duplicate worksheet rows shown');check(posts.length===0,'invalid sheet never calls commit');const invalid=await report('Unduh daftar kesalahan');check(invalid.getCell('A2').value===3,'duplicate error report uses original worksheet row');
   for(const scenario of ['lost','wrong','stale','denied']){
    mode='ok';posts=[];await visit();await preview();mode=scenario;await commit();
    if(scenario==='denied'){await page.getByText('Sesi atau akses berubah.',{exact:false}).waitFor();check(!await page.getByRole('button',{name:'Konfirmasi simpan batch',exact:true}).count(),'revoked access blocks import');}
    else if(scenario==='stale'){await page.getByText('Data berubah',{exact:false}).first().waitFor();check(posts.filter(p=>p.action==='commit').length===1,'stale not retried');}
-   else{await page.getByRole('button',{name:'Periksa hasil',exact:true}).waitFor();check(posts.filter(p=>p.action==='commit').length===1,'uncertain not retried '+scenario);if(scenario==='lost'){await page.getByRole('button',{name:'Periksa hasil',exact:true}).click();await page.getByText('Seluruh batch tersimpan.',{exact:false}).waitFor();check(posts.filter(p=>p.action==='commit').length===1,'readback reconciles without duplicate');}}
+   else{await page.getByRole('button',{name:'Periksa hasil',exact:true}).waitFor();check(posts.filter(p=>p.action==='commit').length===1,'uncertain not retried '+scenario);if(scenario==='lost'){const uncertain=await report('Unduh laporan impor');check(uncertain.getCell('C2').value==='Hasil penyimpanan belum dapat dipastikan','uncertain report does not reuse ready as saved');await page.getByRole('button',{name:'Periksa hasil',exact:true}).click();await page.getByText('Seluruh batch tersimpan.',{exact:false}).waitFor();check(posts.filter(p=>p.action==='commit').length===1,'readback reconciles without duplicate');}}
   }
   check((await page.evaluate(()=>Object.keys(localStorage))).every(k=>!k.includes('bulk')),'workbooks not persisted in browser storage');
   check(!errors.length, "no JavaScript errors");
