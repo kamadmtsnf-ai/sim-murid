@@ -20,7 +20,8 @@
 .fields:disabled { opacity: .8; }
 .input { display: block; min-inline-size: 0; inline-size: 100%; margin-block-start: .5rem; border: 1px solid var(--input); background: var(--card); padding: .625rem .75rem; }
 .passwordField { position: relative; margin-block-start: .5rem; min-inline-size: 0; }
-.passwordField .input { margin-block-start: 0; padding-inline-end: 3.5rem; }
+/* Match the fixed44px toggle: rem padding grows past the textbox at large text sizes. */
+.passwordField .input { margin-block-start: 0; padding-inline-end: 60px; }
 .passwordToggle { position: absolute; inset-inline-end: 4px; inset-block-start: 4px; display: inline-flex; align-items: center; justify-content: center; inline-size: 44px; block-size: 44px; border-radius: .6rem; color: var(--muted-foreground); }
 .passwordToggle:hover { background: var(--muted); color: var(--foreground); }
 .passwordToggle:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }

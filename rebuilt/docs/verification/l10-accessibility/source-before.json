@@ -1,0 +1,460 @@
+{
+  "kind": "source inventory, not full WCAG conformance",
+  "baseline": true,
+  "commit": "59ee00ca94191cf0d42e3406632242137a3bbc38",
+  "mains": [
+    {
+      "path": "src/app/account/access/access-panel.tsx",
+      "line": 132,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/access/error.tsx",
+      "line": 11,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/access/loading.tsx",
+      "line": 4,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/biodata/[id]/page.tsx",
+      "line": 28,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/biodata/[id]/page.tsx",
+      "line": 45,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/biodata/error.tsx",
+      "line": 10,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/biodata/loading.tsx",
+      "line": 3,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/biodata/page.tsx",
+      "line": 21,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/biodata/page.tsx",
+      "line": 38,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/classes/loading.tsx",
+      "line": 4,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/classes/page.tsx",
+      "line": 19,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/classes/page.tsx",
+      "line": 29,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/directory/[id]/loading.tsx",
+      "line": 3,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/directory/[id]/page.tsx",
+      "line": 30,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/directory/directory-detail.tsx",
+      "line": 25,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/directory/loading.tsx",
+      "line": 1,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/directory/page.tsx",
+      "line": 14,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/directory/page.tsx",
+      "line": 19,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/directory/page.tsx",
+      "line": 21,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/email/error.tsx",
+      "line": 10,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/email/loading.tsx",
+      "line": 3,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/email/page.tsx",
+      "line": 17,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/email/page.tsx",
+      "line": 29,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/error.tsx",
+      "line": 15,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/families/page.tsx",
+      "line": 16,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/families/page.tsx",
+      "line": 26,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/health/loading.tsx",
+      "line": 3,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/health/page.tsx",
+      "line": 15,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/health/page.tsx",
+      "line": 18,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/learning/[module]/loading.tsx",
+      "line": 4,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/learning/[module]/page.tsx",
+      "line": 30,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/loading.tsx",
+      "line": 1,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/operations/[module]/loading.tsx",
+      "line": 4,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/operations/[module]/page.tsx",
+      "line": 31,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/operations/[module]/page.tsx",
+      "line": 60,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/operations/[module]/page.tsx",
+      "line": 71,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/profile/error.tsx",
+      "line": 11,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/profile/loading.tsx",
+      "line": 4,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/profile/page.tsx",
+      "line": 27,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/recovery/page.tsx",
+      "line": 23,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/schedules/loading.tsx",
+      "line": 4,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/schedules/page.tsx",
+      "line": 46,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/schedules/page.tsx",
+      "line": 57,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/security/error.tsx",
+      "line": 10,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/security/loading.tsx",
+      "line": 3,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/security/security-panel.tsx",
+      "line": 246,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/services/[module]/loading.tsx",
+      "line": 4,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/services/[module]/page.tsx",
+      "line": 26,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/services/[module]/page.tsx",
+      "line": 58,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/sessions/error.tsx",
+      "line": 10,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/sessions/loading.tsx",
+      "line": 3,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/sessions/session-panel.tsx",
+      "line": 378,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/account/settings/page.tsx",
+      "line": 22,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/settings/page.tsx",
+      "line": 31,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/error.tsx",
+      "line": 14,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/login/login-shell.tsx",
+      "line": 13,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/not-found.tsx",
+      "line": 7,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/page.tsx",
+      "line": 27,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/app/recovery/recovery-shell.tsx",
+      "line": 22,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    },
+    {
+      "path": "src/components/account-dashboard.tsx",
+      "line": 40,
+      "id": "\"main-content\"",
+      "tabIndex": "{-1}"
+    }
+  ],
+  "missingFocusTarget": [
+    {
+      "path": "src/app/account/directory/loading.tsx",
+      "line": 1,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/directory/page.tsx",
+      "line": 19,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/families/page.tsx",
+      "line": 16,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/families/page.tsx",
+      "line": 26,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/health/loading.tsx",
+      "line": 3,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/health/page.tsx",
+      "line": 15,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/health/page.tsx",
+      "line": 18,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/learning/[module]/page.tsx",
+      "line": 30,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/loading.tsx",
+      "line": 1,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/recovery/page.tsx",
+      "line": 23,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/services/[module]/page.tsx",
+      "line": 26,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/services/[module]/page.tsx",
+      "line": 58,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/settings/page.tsx",
+      "line": 22,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/account/settings/page.tsx",
+      "line": 31,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    },
+    {
+      "path": "src/app/error.tsx",
+      "line": 14,
+      "id": "\"main-content\"",
+      "tabIndex": null
+    }
+  ],
+  "positiveTabIndex": []
+}
