@@ -3,8 +3,9 @@ import { createClient } from "@supabase/supabase-js";
 import type { NextRequest } from "next/server";
 import { createAuthAdmin } from "@/lib/auth/admin";
 import { privateJson, requestAuth, sameOrigin } from "@/lib/auth/http";
-import { loginSchema, verifiedTokenSession } from "@/lib/auth/validation";
+import { loginRequestSchema, verifiedTokenSession } from "@/lib/auth/validation";
 import { getSupabasePublicEnvironment } from "@/lib/supabase/environment";
+import { recaptchaConfig, verifyRecaptcha } from "@/lib/auth/recaptcha";
 import { deviceLabel } from "@/lib/auth/devices";
 import { readBounded } from "@/lib/settings/server";
 
@@ -16,9 +17,12 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return privateJson({ message: error instanceof RangeError ? "Permintaan terlalu besar." : "Permintaan login tidak dapat dibaca. Silakan periksa isian." }, error instanceof RangeError ? 413 : 400);
   }
-  const parsed = loginSchema.safeParse(input);
+  const parsed = loginRequestSchema.safeParse(input);
   if (!parsed.success) return privateJson({ message: "Isi username dan password dengan benar." }, 400);
-  const { username, password, remember } = parsed.data;
+  const { username, password, remember, captchaToken } = parsed.data;
+  const captcha = recaptchaConfig();
+  if (captcha.mode === "unavailable") return privateJson({ message: "Verifikasi keamanan sedang tidak tersedia. Silakan coba kembali atau hubungi administrator." }, 503);
+  if (captcha.mode === "enabled" && !captchaToken) return privateJson({ message: "Selesaikan reCAPTCHA sebelum masuk." }, 403);
   let admin: ReturnType<typeof createAuthAdmin> | undefined;
   let auth: ReturnType<typeof createClient> | undefined;
   let issued: { userId: string; sessionId?: string } | undefined;
@@ -33,6 +37,10 @@ export async function POST(request: NextRequest) {
       const { data, error } = await admin.rpc("app_auth_attempt", { p_key: createHash("sha256").update(value).digest("hex") });
       if (error) throw new Error("Rate limiter unavailable");
       if (data !== true) return privateJson({ message: "Terlalu banyak percobaan. Coba lagi setelah 15 menit." }, 429);
+    }
+    if (captcha.mode === "enabled") {
+      const verification = await verifyRecaptcha(captchaToken!, captcha, request.signal);
+      if (verification !== "verified") return privateJson({ message: verification === "rejected" ? "Verifikasi reCAPTCHA tidak berlaku atau sudah kedaluwarsa. Centang kembali dan coba masuk lagi." : "Layanan verifikasi keamanan belum tersedia. Coba kembali sebentar lagi." }, verification === "rejected" ? 403 : 503);
     }
     const { data: profile, error: lookupError } = await admin.from("profiles").select("id,status").eq("username", username).maybeSingle();
     if (lookupError) throw new Error("Account lookup unavailable");

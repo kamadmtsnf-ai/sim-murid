@@ -1,6 +1,7 @@
 /** Server Login gating and notices; verified-session implementation is tested separately. */
 import test from 'node:test';import assert from 'node:assert/strict';import {registerHooks} from 'node:module';import {readFileSync} from 'node:fs';import ts from 'typescript';
 const sources={
+ '@/lib/auth/recaptcha':`export const publicRecaptcha=()=>({mode:'disabled'});`,
  'next/headers':`export const cookies=async()=>({getAll:()=>globalThis.loginPageMocks.cookies});`,
  'next/navigation':`export const redirect=destination=>{const error=Error('redirect');error.destination=destination;throw error;};`,
  'next/link':`export default function Link(){return null;}`,

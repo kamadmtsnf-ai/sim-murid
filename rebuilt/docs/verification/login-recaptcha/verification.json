@@ -1,0 +1,17 @@
+{
+  "branch": "feat/login-recaptcha",
+  "baseline": "22c18b3832682990d6ec62761acb4ff8d55900ea",
+  "fullCheck": {
+    "command": "npm run check",
+    "exitCode": 0,
+    "tests": 721,
+    "fail": 0
+  },
+  "loginTests": 22,
+  "browserChecks": 212,
+  "axeScans": 16,
+  "recaptchaProvider": "Synthetic script and siteverify responses; no real challenge solved.",
+  "productionKeysPresent": false,
+  "enabledInProduction": false,
+  "merged": false
+}

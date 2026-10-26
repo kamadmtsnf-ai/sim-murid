@@ -7,6 +7,10 @@ export const loginSchema = z.object({
   remember: z.boolean(),
 }).strict();
 
+export const loginRequestSchema = loginSchema.extend({
+  captchaToken: z.string().min(1).max(4096).refine(v => v === v.trim()).optional(),
+});
+
 export const principalSchema = z.object({
   id: z.uuid(), username: z.string(), full_name: z.string(),
   expires_at: z.string(), must_change_password: z.boolean(),

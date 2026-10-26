@@ -80,3 +80,43 @@ test('Cleanup transport errors never hide the safe response or skip the other cl
 });
 
 test('Identity provider outage has the same status for unknown and inactive usernames',async()=>{for(const profile of [null,{id,status:'inactive'}]){const s=reset();s.profile=profile;s.identityError={status:503};await safe(await POST(request()),503);assert.equal(calls(s,'password').length,0);}});
+
+const {recaptchaConfig,publicRecaptcha}=await import('../src/lib/auth/recaptcha.ts');
+async function captchaEnvironment(fn){
+ const names=['RECAPTCHA_ENABLED','RECAPTCHA_SITE_KEY','RECAPTCHA_SECRET_KEY','RECAPTCHA_ALLOWED_HOSTNAMES'];
+ const before=Object.fromEntries(names.map(n=>[n,process.env[n]]));
+ Object.assign(process.env,{RECAPTCHA_ENABLED:'true',RECAPTCHA_SITE_KEY:'synthetic_site_key_for_tests_12345678',RECAPTCHA_SECRET_KEY:'synthetic_secret_key_for_tests_12345678',RECAPTCHA_ALLOWED_HOSTNAMES:'app.test'});
+ try{return await fn();}finally{for(const name of names){if(before[name]===undefined)delete process.env[name];else process.env[name]=before[name];}}
+}
+test('reCAPTCHA configuration exposes only site key, requires exact domains, and rejects partial/test production configuration',()=>{
+ assert.deepEqual(recaptchaConfig({}),{mode:'disabled'});
+ assert.deepEqual(recaptchaConfig({RECAPTCHA_ENABLED:'false'}),{mode:'disabled'});
+ for(const env of [{RECAPTCHA_ENABLED:'yes'},{RECAPTCHA_ENABLED:'true'},{RECAPTCHA_ENABLED:'true',RECAPTCHA_SITE_KEY:'site'.repeat(10),RECAPTCHA_SECRET_KEY:'secret'.repeat(7),RECAPTCHA_ALLOWED_HOSTNAMES:'https://app.test'}])assert.equal(recaptchaConfig(env).mode,'unavailable');
+ assert.equal(recaptchaConfig({NODE_ENV:'production',RECAPTCHA_ENABLED:'true',RECAPTCHA_SITE_KEY:'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',RECAPTCHA_SECRET_KEY:'6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',RECAPTCHA_ALLOWED_HOSTNAMES:'app.test'}).mode,'unavailable');
+ const config=recaptchaConfig({RECAPTCHA_ENABLED:'true',RECAPTCHA_SITE_KEY:'site'.repeat(10),RECAPTCHA_SECRET_KEY:'secret'.repeat(7),RECAPTCHA_ALLOWED_HOSTNAMES:'app.test, APP.TEST'});
+ assert.deepEqual(publicRecaptcha(config),{mode:'enabled',siteKey:'site'.repeat(10)});assert.deepEqual(config.hostnames,['app.test']);
+});
+test('enabled reCAPTCHA cannot be bypassed by omitting a token; invalid configuration fails closed before Auth',async()=>captchaEnvironment(async()=>{
+ let s=reset();await safe(await POST(request()),403);assert.equal(s.calls.length,0);
+ for(const value of ['',null,' '.repeat(5),'x'.repeat(4097)]){s=reset();await safe(await POST(request({...body,captchaToken:value})),400);assert.equal(s.calls.length,0);}
+ delete process.env.RECAPTCHA_SECRET_KEY;s=reset();await safe(await POST(request({...body,captchaToken:'synthetic-token'})),503);assert.equal(s.calls.length,0);
+}));
+test('valid Google token is verified before profile/password lookup and never forwarded into credentials',async t=>captchaEnvironment(async()=>{
+ const s=reset(),requests=[];
+ t.mock.method(globalThis,'fetch',async(url,options)=>{requests.push({url,options});s.calls.push(['captcha']);return Response.json({success:true,hostname:'app.test',challenge_ts:'2026-10-26T00:00:00Z'});});
+ await safe(await POST(request({...body,captchaToken:'synthetic-token'})),200);
+ assert.equal(requests.length,1);const {url,options}=requests[0];assert.equal(url,'https://www.google.com/recaptcha/api/siteverify');assert.equal(options.method,'POST');assert.equal(options.cache,'no-store');assert.equal(options.redirect,'error');
+ assert.deepEqual(Object.fromEntries(options.body),{secret:process.env.RECAPTCHA_SECRET_KEY,response:'synthetic-token'});
+ assert.equal(calls(s,'password')[0][1].password,body.password);assert.deepEqual(Object.keys(calls(s,'password')[0][1]).sort(),['email','password']);assert.ok(s.calls.findIndex(c=>c[0]==='captcha')<s.calls.findIndex(c=>c[0]==='lookup'));
+}));
+test('rejected/expired/replayed/wrong-domain tokens never reach lookup or password verification',async t=>captchaEnvironment(async()=>{
+ const responses=[{success:false,'error-codes':['timeout-or-duplicate']},{success:false,'error-codes':['invalid-input-response']},{success:true,hostname:'evil.test'},{success:true,hostname:'app.test.evil.test'},{success:true}];
+ t.mock.method(globalThis,'fetch',async()=>Response.json(responses.shift()));
+ for(let i=0;i<5;i++){const s=reset();await safe(await POST(request({...body,captchaToken:'synthetic-token'})),403);assert.equal(calls(s,'lookup').length,0);assert.equal(calls(s,'password').length,0);}
+}));
+test('Google transport/JSON/configuration failures return safe 503; rate limiting still precedes verification',async t=>captchaEnvironment(async()=>{
+ let outcome='network',count=0;
+ t.mock.method(globalThis,'fetch',async()=>{count++;if(outcome==='network')throw Error('private recaptcha transport');if(outcome==='bad-json')return new Response('{');if(outcome==='http')return new Response('private upstream',{status:503});if(outcome==='schema')return Response.json({success:'true'});if(outcome==='v3')return Response.json({success:true,hostname:'app.test',score:0.1,action:'login'});return Response.json({success:false,'error-codes':['invalid-input-secret']});});
+ for(outcome of ['network','bad-json','http','schema','secret','v3']){const s=reset();await safe(await POST(request({...body,captchaToken:'synthetic-token'})),503);assert.equal(calls(s,'password').length,0);assert.equal(calls(s,'lookup').length,0);}
+ const before=count,s=reset();s.rate=false;await safe(await POST(request({...body,captchaToken:'synthetic-token'})),429);assert.equal(count,before);
+}));
