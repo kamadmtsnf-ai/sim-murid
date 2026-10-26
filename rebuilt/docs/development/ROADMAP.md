@@ -107,3 +107,5 @@ PR implementasi P09: [#56](https://github.com/kamadmtsnf-ai/sim-murid/pull/56). 
 ## Siklus lanjutan L01–L11
 
 Lihat [rencana profesional dan PWA](ROADMAP-PROFESSIONAL-PWA.md). L01 menambahkan pusat penyelesaian akun pada Keamanan akun dan Verifikasi email; bukti serta batas ada di [laporan L01](L01-ACCOUNT-COMPLETION.md). Tidak menggantikan gerbang UAT P10/P11/P12.
+
+L02 menambahkan katalog tugas dan pemeriksa bukti UAT ke protokol P11; lihat [laporan L02](L02-ROLE-JOURNEYS.md). Kelulusan regresi otomatis tidak menutup sesi manusia/baseline/restore/load P10 yang belum tersedia. L01 telah dirilis PR76; L02 tetap parsial sampai bukti manusia ditinjau.

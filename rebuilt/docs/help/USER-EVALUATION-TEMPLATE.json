@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "kind": "human",
+  "environment": "staging",
+  "consentRecorded": false,
+  "operatorAttested": false,
+  "evidenceSha256": null,
+  "baselineCommit": "0000000000000000000000000000000000000000",
+  "afterCommit": "1111111111111111111111111111111111111111",
+  "targetSuccessRate": 0.95,
+  "observations": [],
+  "findings": []
+}
