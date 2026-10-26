@@ -1,6 +1,6 @@
 /** Actual committee UI, synthetic records; no production identity or mutation. */
 import { createRoot } from "react-dom/client";
-import { CommitteePanel } from "../../src/app/account/operations/[module]/committee-panel";
+import { OperationsPanel as CommitteePanel } from "../../src/app/account/operations/[module]/panel";
 import { WorkspaceShell } from "../../src/components/workspace-shell";
 import { navigationFor } from "../../src/config/account-navigation";
 import { committeeSnapshot } from "../../src/lib/operations/committee";

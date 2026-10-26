@@ -481,7 +481,7 @@ try {
       .getByRole("combobox", { name: "Siswa", exact: true })
       .selectOption(id(10));
       await settleConfirmation(page);
-    await dialog().getByRole("alert").waitFor();
+    await dialog().locator('[role="alert"][tabindex="-1"], [role="status"][tabindex="-1"]').filter({hasNotText: "Sedang diproses"}).waitFor();
     check(
       await dialog()
         .getByRole("button", { name: "Simpan pembayaran", exact: true })
@@ -599,7 +599,7 @@ try {
       .getByRole("button", { name: "Simpan pembayaran", exact: true })
       .click();
       await settleConfirmation(page);
-    await dialog().getByRole("alert").waitFor();
+    await dialog().locator('[role="alert"][tabindex="-1"], [role="status"][tabindex="-1"]').filter({hasNotText: "Sedang diproses"}).waitFor();
     check(
       (await dialog()
         .getByRole("button", { name: "Simpan pembayaran", exact: true })
@@ -688,7 +688,7 @@ try {
   await page.clock.fastForward(31000);
   await page.clock.resume();
   await dialog()
-    .getByRole("alert")
+    .getByRole("status")
     .filter({ hasText: "Hasil penyimpanan" })
     .waitFor();
   check(

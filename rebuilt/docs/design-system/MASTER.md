@@ -390,3 +390,7 @@ Pusat kesehatan read-only memakai kartu/metrik dan timestamp WIB. Unknown dibeda
 ## L08 — Kualitas impor Excel
 
 Pisahkan validasi format, validasi sumber, konfirmasi dan hasil tersimpan. Persentase valid menyertakan pembilang/penyebut dan cakupan pemeriksaan. Error menyebut kolom dan langkah koreksi, tanpa menggemakan data pribadi. Laporan hasil/kesalahan bebas password terpisah dari kredensial sementara; unknown/pending tidak diklaim tersimpan. Konfirmasi semua batch pengguna tetap menonjolkan kewenangan Admin. Ekspor gagal dapat dicoba lagi tanpa menghapus draft atau mengirim ulang mutasi.
+
+### L09 — Pemuatan panel dan klaim performa
+
+Panel opsional memakai fallback PanelLoading role=status/aria-live=polite dan tetap dirender server. Pertahankan key revisi/periode/akun dan guard existing. Ukuran bundle, lab dan field wajib dibedakan; missing metrik bukan nol. Lihat ../development/L09-MEASURED-PERFORMANCE.md.

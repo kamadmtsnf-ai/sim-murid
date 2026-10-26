@@ -1,3 +1,4 @@
+import "./support/next-dynamic.mjs";
 /** Actual Classes route, schemas and server reader with synthetic Auth/SDK boundaries. */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -230,6 +231,7 @@ test("calendar fetch strips history filters, requests complete scoped month incl
     params,
   );
   assert.equal(r.status, 200);
+  assert.match(r.headers.get("Server-Timing"), /^sim_app;dur=\d+\.\d$/);
   assert.deepEqual(m.calls.at(-1)[1].p_filters, {
     start: "2028-02-01",
     end: "2028-02-29",

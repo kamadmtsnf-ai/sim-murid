@@ -1,0 +1,449 @@
+{
+  "kind": "lab, public control pages only; not authenticated/field CWV",
+  "buildId": "AbykhPb3zMajnq_CTmI_K",
+  "browser": "145.0.7632.6",
+  "webVitalsVersion": "5.1.0",
+  "method": "5 fresh HTTP-cache-disabled contexts per page/device; desktop CPU1/unthrottled; mobile CPU4 RTT40ms down200000Bps up100000Bps; warmed local server; captcha disabled locally; input only, no submit; visibility flush at observation end",
+  "groups": [
+    {
+      "device": "desktop",
+      "path": "/",
+      "metrics": {
+        "LCP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 128
+        },
+        "INP": {
+          "samples": 0,
+          "missing": 5,
+          "p75": null
+        },
+        "CLS": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 0
+        },
+        "TTFB": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 11.699999999953434
+        },
+        "DOMContentLoaded": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 43.699999999953434
+        }
+      }
+    },
+    {
+      "device": "desktop",
+      "path": "/login",
+      "metrics": {
+        "LCP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 172
+        },
+        "INP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 16
+        },
+        "CLS": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 0
+        },
+        "TTFB": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 36.300000000046566
+        },
+        "DOMContentLoaded": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 146.5
+        }
+      }
+    },
+    {
+      "device": "desktop",
+      "path": "/recovery",
+      "metrics": {
+        "LCP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 100
+        },
+        "INP": {
+          "samples": 0,
+          "missing": 5,
+          "p75": null
+        },
+        "CLS": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 0
+        },
+        "TTFB": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 6.2999999999883585
+        },
+        "DOMContentLoaded": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 33.29999999998836
+        }
+      }
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/",
+      "metrics": {
+        "LCP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 716
+        },
+        "INP": {
+          "samples": 0,
+          "missing": 5,
+          "p75": null
+        },
+        "CLS": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 0
+        },
+        "TTFB": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 9.799999999988358
+        },
+        "DOMContentLoaded": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 719.9000000000233
+        }
+      }
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/login",
+      "metrics": {
+        "LCP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 668
+        },
+        "INP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 48
+        },
+        "CLS": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 0
+        },
+        "TTFB": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 24.79999999998836
+        },
+        "DOMContentLoaded": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 664.7999999999884
+        }
+      }
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/recovery",
+      "metrics": {
+        "LCP": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 664
+        },
+        "INP": {
+          "samples": 0,
+          "missing": 5,
+          "p75": null
+        },
+        "CLS": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 0
+        },
+        "TTFB": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 6.600000000034925
+        },
+        "DOMContentLoaded": {
+          "samples": 5,
+          "missing": 0,
+          "p75": 661.2999999999884
+        }
+      }
+    }
+  ],
+  "samples": [
+    {
+      "device": "desktop",
+      "path": "/",
+      "LCP": 108,
+      "CLS": 0,
+      "TTFB": 11.699999999953434,
+      "DOMContentLoaded": 41.699999999953434
+    },
+    {
+      "device": "desktop",
+      "path": "/",
+      "LCP": 128,
+      "CLS": 0,
+      "TTFB": 9.5,
+      "DOMContentLoaded": 40.09999999997672
+    },
+    {
+      "device": "desktop",
+      "path": "/",
+      "LCP": 252,
+      "CLS": 0,
+      "TTFB": 34.899999999965075,
+      "DOMContentLoaded": 104.09999999997672
+    },
+    {
+      "device": "desktop",
+      "path": "/",
+      "LCP": 116,
+      "CLS": 0,
+      "TTFB": 8.299999999988358,
+      "DOMContentLoaded": 43.699999999953434
+    },
+    {
+      "device": "desktop",
+      "path": "/",
+      "LCP": 88,
+      "CLS": 0,
+      "TTFB": 5.2000000000116415,
+      "DOMContentLoaded": 26.5
+    },
+    {
+      "device": "desktop",
+      "path": "/login",
+      "LCP": 248,
+      "CLS": 0,
+      "INP": 16,
+      "TTFB": 107.90000000002328,
+      "DOMContentLoaded": 154.5
+    },
+    {
+      "device": "desktop",
+      "path": "/login",
+      "LCP": 152,
+      "CLS": 0,
+      "INP": 16,
+      "TTFB": 26.400000000023283,
+      "DOMContentLoaded": 134.90000000002328
+    },
+    {
+      "device": "desktop",
+      "path": "/login",
+      "LCP": 120,
+      "CLS": 0,
+      "INP": 16,
+      "TTFB": 13.700000000011642,
+      "DOMContentLoaded": 36.100000000034925
+    },
+    {
+      "device": "desktop",
+      "path": "/login",
+      "LCP": 172,
+      "CLS": 0,
+      "INP": 16,
+      "TTFB": 36.300000000046566,
+      "DOMContentLoaded": 146.5
+    },
+    {
+      "device": "desktop",
+      "path": "/login",
+      "LCP": 116,
+      "CLS": 0,
+      "INP": 32,
+      "TTFB": 15.5,
+      "DOMContentLoaded": 102.29999999998836
+    },
+    {
+      "device": "desktop",
+      "path": "/recovery",
+      "LCP": 88,
+      "CLS": 0,
+      "TTFB": 6,
+      "DOMContentLoaded": 30.400000000023283
+    },
+    {
+      "device": "desktop",
+      "path": "/recovery",
+      "LCP": 92,
+      "CLS": 0,
+      "TTFB": 8.200000000011642,
+      "DOMContentLoaded": 36.09999999997672
+    },
+    {
+      "device": "desktop",
+      "path": "/recovery",
+      "LCP": 100,
+      "CLS": 0,
+      "TTFB": 5.400000000023283,
+      "DOMContentLoaded": 33.29999999998836
+    },
+    {
+      "device": "desktop",
+      "path": "/recovery",
+      "LCP": 76,
+      "CLS": 0,
+      "TTFB": 5.2999999999883585,
+      "DOMContentLoaded": 30.70000000001164
+    },
+    {
+      "device": "desktop",
+      "path": "/recovery",
+      "LCP": 108,
+      "CLS": 0,
+      "TTFB": 6.2999999999883585,
+      "DOMContentLoaded": 27.29999999998836
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/",
+      "LCP": 640,
+      "CLS": 0,
+      "TTFB": 6.7000000000116415,
+      "DOMContentLoaded": 637.0999999999767
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/",
+      "LCP": 688,
+      "CLS": 0,
+      "TTFB": 9.199999999953434,
+      "DOMContentLoaded": 683.8999999999651
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/",
+      "LCP": 792,
+      "CLS": 0,
+      "TTFB": 9.799999999988358,
+      "DOMContentLoaded": 781
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/",
+      "LCP": 716,
+      "CLS": 0,
+      "TTFB": 15,
+      "DOMContentLoaded": 715.8000000000466
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/",
+      "LCP": 716,
+      "CLS": 0,
+      "TTFB": 9.799999999988358,
+      "DOMContentLoaded": 719.9000000000233
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/login",
+      "LCP": 668,
+      "CLS": 0,
+      "INP": 32,
+      "TTFB": 43.5,
+      "DOMContentLoaded": 664.7999999999884
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/login",
+      "LCP": 660,
+      "CLS": 0,
+      "INP": 24,
+      "TTFB": 12.900000000023283,
+      "DOMContentLoaded": 654.8000000000466
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/login",
+      "LCP": 648,
+      "CLS": 0,
+      "INP": 48,
+      "TTFB": 14.200000000011642,
+      "DOMContentLoaded": 636.9000000000233
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/login",
+      "LCP": 768,
+      "CLS": 0,
+      "INP": 40,
+      "TTFB": 24.79999999998836,
+      "DOMContentLoaded": 761.1000000000349
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/login",
+      "LCP": 664,
+      "CLS": 0,
+      "INP": 48,
+      "TTFB": 22.20000000001164,
+      "DOMContentLoaded": 659.2000000000116
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/recovery",
+      "LCP": 664,
+      "CLS": 0,
+      "TTFB": 9.900000000023283,
+      "DOMContentLoaded": 661.2999999999884
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/recovery",
+      "LCP": 684,
+      "CLS": 0,
+      "TTFB": 6.2000000000116415,
+      "DOMContentLoaded": 687.4000000000233
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/recovery",
+      "LCP": 628,
+      "CLS": 0,
+      "TTFB": 5,
+      "DOMContentLoaded": 627.9000000000233
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/recovery",
+      "LCP": 644,
+      "CLS": 0,
+      "TTFB": 4.400000000023283,
+      "DOMContentLoaded": 643.2999999999884
+    },
+    {
+      "device": "mobile-emulated",
+      "path": "/recovery",
+      "LCP": 620,
+      "CLS": 0,
+      "TTFB": 6.600000000034925,
+      "DOMContentLoaded": 619.1000000000349
+    }
+  ],
+  "errors": [],
+  "blockedWrites": []
+}

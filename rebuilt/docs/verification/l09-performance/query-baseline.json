@@ -1,0 +1,110 @@
+{
+  "scope": "isolated SQL with registered synthetic sessions + service_role; NOT Supabase Auth/browser/cloud UAT",
+  "engine": "PGlite single connection: concurrency below measures queued in-flight commands, not parallel Postgres workers",
+  "migrations": 49,
+  "fixture": {
+    "actors": 10,
+    "students": 3,
+    "classes": 2,
+    "reportSnapshots": 1
+  },
+  "roleReads": {
+    "admin": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 17.18522099999973,
+      "p95Ms": 45.265949999999975,
+      "maxMs": 45.265949999999975
+    },
+    "head": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 15.20789700000023,
+      "p95Ms": 17.730650999999853,
+      "maxMs": 17.730650999999853
+    },
+    "teacher": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 17.259582000000137,
+      "p95Ms": 22.822290000000066,
+      "maxMs": 22.822290000000066
+    },
+    "student": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 10.22380899999962,
+      "p95Ms": 11.500119000000268,
+      "maxMs": 11.500119000000268
+    },
+    "parent": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 13.103791999999885,
+      "p95Ms": 20.428809999999885,
+      "maxMs": 20.428809999999885
+    },
+    "alumni": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 2.872400999999627,
+      "p95Ms": 4.243373000000247,
+      "maxMs": 4.243373000000247
+    },
+    "customer": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 3.198150999999598,
+      "p95Ms": 3.896810999999616,
+      "maxMs": 3.896810999999616
+    },
+    "applicant": {
+      "requests": 12,
+      "errors": 0,
+      "p50Ms": 3.190668999999616,
+      "p95Ms": 5.627865999999813,
+      "maxMs": 5.627865999999813
+    }
+  },
+  "revisionContention": [
+    {
+      "inFlightRequests": 60,
+      "elapsedMs": 63.60581699999966,
+      "saved": 1,
+      "expectedStale": 59,
+      "requests": 60,
+      "errors": 0,
+      "p50Ms": 35.261993000000075,
+      "p95Ms": 58.35586200000034,
+      "maxMs": 60.54595599999993
+    },
+    {
+      "inFlightRequests": 132,
+      "elapsedMs": 125.95833500000026,
+      "saved": 1,
+      "expectedStale": 131,
+      "requests": 132,
+      "errors": 0,
+      "p50Ms": 58.895392000000356,
+      "p95Ms": 118.34095799999977,
+      "maxMs": 123.46354299999985
+    }
+  ],
+  "pdfExport": {
+    "requests": 5,
+    "errors": 0,
+    "p50Ms": 3.1692970000003697,
+    "p95Ms": 24.81039200000032,
+    "maxMs": 24.81039200000032
+  },
+  "budgets": {
+    "productionP95Ms": null,
+    "productionCapacity": null
+  },
+  "limitations": [
+    "No health-endpoint capacity inference",
+    "12 role read samples and 5 PDF samples are characterization only",
+    "No real-user credentials or production data used",
+    "External 60/132 mixed-session load remains a separate staging gate"
+  ]
+}
