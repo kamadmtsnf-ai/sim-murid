@@ -7,7 +7,7 @@ import { healthFromSources } from "./model";
 /** Defense in depth: callers and ready gate are checked before operational reads. */
 export async function readAdminHealth(caller: { principal: { id: string; is_admin: boolean }; sessionId: string }) {
   if (!caller.principal.is_admin) throw new AccessDenied();
-  const state = await securityState(caller.principal.id, caller.sessionId);
+  const state = await securityState(caller.principal.id, caller.sessionId, AbortSignal.timeout(8000));
   if (state?.gate !== "ready") throw new AccessDenied();
   const results = await Promise.allSettled([
     servicesData(caller.principal.id, caller.sessionId, "jobs", {}, AbortSignal.timeout(8000)),

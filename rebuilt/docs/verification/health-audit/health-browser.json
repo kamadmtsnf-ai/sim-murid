@@ -1,0 +1,933 @@
+{
+  "checks": [
+    {
+      "name": "normal320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "normal320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "normal390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "normal390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "normal768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "normal768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "normal1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "normal1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "normal1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "normal axe",
+      "passed": true
+    },
+    {
+      "name": "normal backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "normal refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "normal refresh GET",
+      "passed": true
+    },
+    {
+      "name": "normal refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "failures aggregated",
+      "passed": true
+    },
+    {
+      "name": "OTP excluded explanation reachable",
+      "passed": true
+    },
+    {
+      "name": "delivery is not inbox confirmation",
+      "passed": true
+    },
+    {
+      "name": "empty320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "empty320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "empty320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "empty390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "empty390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "empty390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "empty768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "empty768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "empty768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "empty1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "empty1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "empty1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "empty backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "empty refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "empty refresh GET",
+      "passed": true
+    },
+    {
+      "name": "empty refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "empty distinguished from unavailable",
+      "passed": true
+    },
+    {
+      "name": "zero is not unavailable",
+      "passed": true
+    },
+    {
+      "name": "unknown320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "unknown320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "unknown320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "unknown390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "unknown390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "unknown390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "unknown768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "unknown768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "unknown768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "unknown1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "unknown1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "unknown1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "unknown axe",
+      "passed": true
+    },
+    {
+      "name": "unknown backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "unknown refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "unknown refresh GET",
+      "passed": true
+    },
+    {
+      "name": "unknown refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "all unknown summary",
+      "passed": true
+    },
+    {
+      "name": "unknown reconciliation",
+      "passed": true
+    },
+    {
+      "name": "partial320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "partial320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "partial320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "partial390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "partial390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "partial390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "partial768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "partial768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "partial768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "partial1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "partial1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "partial1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "partial axe",
+      "passed": true
+    },
+    {
+      "name": "partial backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "partial refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "partial refresh GET",
+      "passed": true
+    },
+    {
+      "name": "partial refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "jobs unavailable remains unknown",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error axe",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error refresh GET",
+      "passed": true
+    },
+    {
+      "name": "reconciliation-error refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "missing reconciliation promoted to summary",
+      "passed": true
+    },
+    {
+      "name": "providers-off320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "providers-off320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "providers-off320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "providers-off390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "providers-off390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "providers-off390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "providers-off768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "providers-off768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "providers-off768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "providers-off1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "providers-off1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "providers-off1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "providers-off axe",
+      "passed": true
+    },
+    {
+      "name": "providers-off backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "providers-off refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "providers-off refresh GET",
+      "passed": true
+    },
+    {
+      "name": "providers-off refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "source-ready320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "source-ready320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "source-ready320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "source-ready390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "source-ready390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "source-ready390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "source-ready768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "source-ready768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "source-ready768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "source-ready1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "source-ready1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "source-ready1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "source-ready axe",
+      "passed": true
+    },
+    {
+      "name": "source-ready backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "source-ready refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "source-ready refresh GET",
+      "passed": true
+    },
+    {
+      "name": "source-ready refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "large320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "large320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "large320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "large390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "large390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "large390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "large768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "large768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "large768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "large1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "large1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "large1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "large axe",
+      "passed": true
+    },
+    {
+      "name": "large backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "large refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "large refresh GET",
+      "passed": true
+    },
+    {
+      "name": "large refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "large counts preserved in full",
+      "passed": true
+    },
+    {
+      "name": "offset320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "offset320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "offset320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "offset390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "offset390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "offset390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "offset768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "offset768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "offset768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "offset1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "offset1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "offset1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "offset axe",
+      "passed": true
+    },
+    {
+      "name": "offset backup remains unknown",
+      "passed": true
+    },
+    {
+      "name": "offset refresh is submit",
+      "passed": true
+    },
+    {
+      "name": "offset refresh GET",
+      "passed": true
+    },
+    {
+      "name": "offset refresh canonical URL",
+      "passed": true
+    },
+    {
+      "name": "offset correctly formatted in WIB",
+      "passed": true
+    },
+    {
+      "name": "loading320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "loading320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "loading320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "loading390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "loading390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "loading390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "loading768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "loading768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "loading768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "loading1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "loading1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "loading1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "loading explicitly busy",
+      "passed": true
+    },
+    {
+      "name": "error320 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "error320 controls contained",
+      "passed": true
+    },
+    {
+      "name": "error320 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "error390 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "error390 controls contained",
+      "passed": true
+    },
+    {
+      "name": "error390 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "error768 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "error768 controls contained",
+      "passed": true
+    },
+    {
+      "name": "error768 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "error1440 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "error1440 controls contained",
+      "passed": true
+    },
+    {
+      "name": "error1440 internal error hidden",
+      "passed": true
+    },
+    {
+      "name": "error axe",
+      "passed": true
+    },
+    {
+      "name": "error retry invokes reset",
+      "passed": true
+    },
+    {
+      "name": "text200 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "text200 controls contained",
+      "passed": true
+    },
+    {
+      "name": "keyboard accordion at200",
+      "passed": true
+    },
+    {
+      "name": "expanded text200 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded text200 controls contained",
+      "passed": true
+    },
+    {
+      "name": "text400 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "text400 controls contained",
+      "passed": true
+    },
+    {
+      "name": "keyboard accordion at400",
+      "passed": true
+    },
+    {
+      "name": "expanded text400 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "expanded text400 controls contained",
+      "passed": true
+    },
+    {
+      "name": "text spacing no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "text spacing controls contained",
+      "passed": true
+    },
+    {
+      "name": "skip link focuses main",
+      "passed": true
+    },
+    {
+      "name": "refresh keyboard focus",
+      "passed": true
+    },
+    {
+      "name": "GET refresh receives a newer snapshot",
+      "passed": true
+    },
+    {
+      "name": "forced colors axe",
+      "passed": true
+    },
+    {
+      "name": "orientation812x375 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "orientation812x375 controls contained",
+      "passed": true
+    },
+    {
+      "name": "orientation375x812 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "orientation375x812 controls contained",
+      "passed": true
+    },
+    {
+      "name": "orientation812x240 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "orientation812x240 controls contained",
+      "passed": true
+    },
+    {
+      "name": "orientation320x568 no horizontal page overflow",
+      "passed": true
+    },
+    {
+      "name": "orientation320x568 controls contained",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    },
+    {
+      "name": "no mutations or external requests",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "normal",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "unknown",
+      "violations": []
+    },
+    {
+      "label": "partial",
+      "violations": []
+    },
+    {
+      "label": "reconciliation-error",
+      "violations": []
+    },
+    {
+      "label": "providers-off",
+      "violations": []
+    },
+    {
+      "label": "source-ready",
+      "violations": []
+    },
+    {
+      "label": "large",
+      "violations": []
+    },
+    {
+      "label": "offset",
+      "violations": []
+    },
+    {
+      "label": "loading",
+      "violations": []
+    },
+    {
+      "label": "error",
+      "violations": []
+    },
+    {
+      "label": "forced colors",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "synthetic": true,
+  "productionData": false,
+  "limits": [
+    "Actual components with synthetic sources, not an authenticated production session",
+    "No provider delivery, OTP, backup or restore performed"
+  ]
+}
