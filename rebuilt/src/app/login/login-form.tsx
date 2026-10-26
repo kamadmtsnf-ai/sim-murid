@@ -5,17 +5,21 @@ import { useRouter } from "next/navigation";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/components/ui/status";
+import type { PublicRecaptcha } from "@/lib/auth/recaptcha";
+import { RecaptchaWidget } from "./recaptcha-widget";
 import { loginSchema } from "@/lib/auth/validation";
 import styles from "./login.module.css";
 
 type Phase = "idle" | "submitting" | "success" | "uncertain";
-export function LoginForm() {
+export function LoginForm({captcha = { mode: "disabled" }}: {captcha?: PublicRecaptcha}) {
   const router = useRouter();
   const busyRef = useRef(false);
   const mountedRef = useRef(true);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const errorRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaVersion, setCaptchaVersion] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
   const [message, setMessage] = useState("");
   const [visible, setVisible] = useState(false);
@@ -40,6 +44,10 @@ export function LoginForm() {
       setMessage("Periksa username dan password. Username tidak boleh diawali atau diakhiri spasi.");
       return;
     }
+    if (captcha.mode === "unavailable" || (captcha.mode === "enabled" && !captchaToken)) {
+      setMessage(captcha.mode === "unavailable" ? "Verifikasi keamanan belum tersedia. Hubungi administrator." : "Selesaikan reCAPTCHA sebelum masuk.");
+      return;
+    }
     busyRef.current = true;
     setPhase("submitting"); setMessage(""); setVisible(false);
     const controller = new AbortController();
@@ -47,7 +55,7 @@ export function LoginForm() {
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(parsed.data), signal: controller.signal, cache: "no-store",
+        body: JSON.stringify({ ...parsed.data, ...(captcha.mode === "enabled" ? {captchaToken} : {}) }), signal: controller.signal, cache: "no-store",
       });
       const data: unknown = await response.json();
       if (!mountedRef.current) return;
@@ -58,6 +66,9 @@ export function LoginForm() {
         return;
       }
       if (typeof data !== "object" || data === null || !("message" in data) || typeof data.message !== "string" || !data.message.trim()) throw new Error("Unconfirmed login response");
+      if (captcha.mode === "enabled") {
+        setCaptchaToken(""); setCaptchaVersion(v => v + 1);
+      }
       setMessage(data.message.slice(0, 1000));
       setPhase("idle"); busyRef.current = false;
     } catch {
@@ -78,8 +89,10 @@ export function LoginForm() {
       <div><label htmlFor="password" className="text-sm font-medium">Password</label><input id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" onKeyUp={e=>setCapsLock(e.getModifierState("CapsLock"))} onBlur={()=>setCapsLock(false)} aria-describedby={capsLock?"login-caps-lock":undefined} required maxLength={1024} className={styles.input} /><button type="button" aria-controls="password" aria-pressed={visible} onClick={() => setVisible(value => !value)} className={styles.passwordToggle}>{visible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}{visible ? "Sembunyikan password" : "Tampilkan password"}</button>{capsLock && <p id="login-caps-lock" role="status" className="text-sm text-muted-foreground">Caps Lock aktif. Periksa huruf besar pada password.</p>}</div>
       <label className={styles.remember}><input type="checkbox" name="remember" /><span>Ingat saya selama 7 hari<span className="mt-1 block text-xs text-muted-foreground">Gunakan hanya pada perangkat pribadi. Sesi biasa berlaku 1 jam.</span></span></label>
     </fieldset>
+    {captcha.mode === "enabled" && <RecaptchaWidget key={captchaVersion} siteKey={captcha.siteKey} onToken={setCaptchaToken} disabled={phase !== "idle"} />}
+    {captcha.mode === "unavailable" && <Status tone="error">Verifikasi keamanan belum tersedia. Silakan coba kembali atau hubungi administrator.</Status>}
     {message && <div id="login-error" ref={errorRef} role="alert" tabIndex={-1} className={styles.error}>{message}</div>}
     {pending && <p role="status" className="sr-only">Sedang memeriksa akun.</p>}
-    {phase === "success" ? <div ref={successRef} tabIndex={-1}><Status tone="success"><p>Berhasil masuk. Membuka akun Anda…</p><a className={styles.textLink} href="/account">Lanjutkan ke akun</a></Status></div> : phase === "uncertain" ? <Button asChild className={styles.submit}><a href="/login">Periksa sesi saya</a></Button> : <Button type="submit" className={styles.submit} disabled={pending}>{pending && <LoaderCircle aria-hidden="true" className="size-4 shrink-0 animate-spin" />}{pending ? "Memeriksa akun…" : "Masuk"}</Button>}
+    {phase === "success" ? <div ref={successRef} tabIndex={-1}><Status tone="success"><p>Berhasil masuk. Membuka akun Anda…</p><a className={styles.textLink} href="/account">Lanjutkan ke akun</a></Status></div> : phase === "uncertain" ? <Button asChild className={styles.submit}><a href="/login">Periksa sesi saya</a></Button> : <Button type="submit" className={styles.submit} disabled={pending || captcha.mode === "unavailable" || (captcha.mode === "enabled" && !captchaToken)}>{pending && <LoaderCircle aria-hidden="true" className="size-4 shrink-0 animate-spin" />}{pending ? "Memeriksa akun…" : "Masuk"}</Button>}
   </form>;
 }
