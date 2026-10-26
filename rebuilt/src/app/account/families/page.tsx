@@ -13,7 +13,7 @@ export default async function FamiliesPage() {
   } catch (error) {
     if (!(error instanceof AccessDenied)) throw Error("Families unavailable");
     return (
-      <main id="main-content" className="mx-auto max-w-xl space-y-4 px-6 py-12">
+      <main tabIndex={-1} id="main-content" className="mx-auto max-w-xl space-y-4 px-6 py-12">
         <h1>Relasi keluarga belum tersedia</h1>
         <p>
           Hanya Admin yang telah menyelesaikan keamanan akun dapat memverifikasi
@@ -23,7 +23,7 @@ export default async function FamiliesPage() {
     );
   }
   return (
-    <main
+    <main tabIndex={-1}
       id="main-content"
       className="mx-auto min-w-0 max-w-5xl space-y-6 px-4 py-6 sm:px-6 sm:py-10"
     >

@@ -23,7 +23,7 @@ export default async function ServicesPage({
       error instanceof AccessDenied
     )
       return (
-        <main
+        <main tabIndex={-1}
           id="main-content"
           className="mx-auto max-w-xl space-y-4 px-4 py-8"
         >
@@ -55,7 +55,7 @@ export default async function ServicesPage({
     }
   }
   return (
-    <main
+    <main tabIndex={-1}
       id="main-content"
       className={
         m.data === "jobs" || m.data === "reconciliation"

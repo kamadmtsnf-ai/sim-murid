@@ -19,7 +19,7 @@ export default async function SettingsPage() {
   } catch (error) {
     if (!(error instanceof AccessDenied)) throw Error("Settings unavailable");
     return (
-      <main id="main-content" className="mx-auto max-w-xl space-y-4 px-6 py-12">
+      <main tabIndex={-1} id="main-content" className="mx-auto max-w-xl space-y-4 px-6 py-12">
         <h1 className="text-2xl font-semibold">Pengaturan madrasah</h1>
         <p>
           Akses khusus Admin yang telah menyelesaikan pengaturan keamanan akun.
@@ -28,7 +28,7 @@ export default async function SettingsPage() {
     );
   }
   return (
-    <main
+    <main tabIndex={-1}
       id="main-content"
       className="mx-auto min-w-0 max-w-5xl space-y-6 px-4 py-6 sm:px-6 sm:py-10"
     >

@@ -27,7 +27,7 @@ export default async function LearningPage({
     );
   }
   return (
-    <main
+    <main tabIndex={-1}
       id="main-content"
       className="mx-auto min-w-0 max-w-7xl space-y-6 p-4 sm:p-6"
     >
