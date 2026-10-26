@@ -13,14 +13,16 @@ export async function servicesData(
   session: string,
   module: ServiceModule,
   input: unknown = {},
+  signal?: AbortSignal,
 ) {
   const f = filters.parse(input),
-    r = await createAuthAdmin().rpc("app_services_read", {
+    query = createAuthAdmin().rpc("app_services_read", {
       p_actor: actor,
       p_session: session,
       p_module: module,
       p_filters: f as Json,
     });
+  const r = await (signal ? query.abortSignal(signal) : query);
   if (r.error) throw new Error("Unavailable");
   if (!r.data) throw new AccessDenied();
   if (module === "discipline") {
