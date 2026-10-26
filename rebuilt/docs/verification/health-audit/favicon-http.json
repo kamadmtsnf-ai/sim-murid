@@ -1,0 +1,102 @@
+{
+  "checks": [
+    {
+      "name": "conventional favicon200 without login",
+      "passed": true
+    },
+    {
+      "name": "ICO MIME",
+      "passed": true
+    },
+    {
+      "name": "ICO3 sizes",
+      "passed": true
+    },
+    {
+      "name": "SVG remains available",
+      "passed": true
+    },
+    {
+      "name": "/ status",
+      "passed": true
+    },
+    {
+      "name": "/ conventional icon in head",
+      "passed": true
+    },
+    {
+      "name": "/ scalable icon in head",
+      "passed": true
+    },
+    {
+      "name": "/ advertised icon loads",
+      "passed": true
+    },
+    {
+      "name": "/ advertised icon loads",
+      "passed": true
+    },
+    {
+      "name": "/login status",
+      "passed": true
+    },
+    {
+      "name": "/login conventional icon in head",
+      "passed": true
+    },
+    {
+      "name": "/login scalable icon in head",
+      "passed": true
+    },
+    {
+      "name": "/login advertised icon loads",
+      "passed": true
+    },
+    {
+      "name": "/login advertised icon loads",
+      "passed": true
+    },
+    {
+      "name": "/recovery status",
+      "passed": true
+    },
+    {
+      "name": "/recovery conventional icon in head",
+      "passed": true
+    },
+    {
+      "name": "/recovery scalable icon in head",
+      "passed": true
+    },
+    {
+      "name": "/recovery advertised icon loads",
+      "passed": true
+    },
+    {
+      "name": "/recovery advertised icon loads",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page status",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page conventional icon in head",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page scalable icon in head",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page advertised icon loads",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page advertised icon loads",
+      "passed": true
+    }
+  ],
+  "accountMutation": false,
+  "externalRequests": false
+}

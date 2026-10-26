@@ -7,7 +7,10 @@ export const metadata: Metadata = {
   title: { default: appConfig.name, template: `%s | ${appConfig.name}` },
   description: appConfig.description,
   appleWebApp: { capable: true, title: "SiM-Murid", statusBarStyle: "default" },
-  icons: { apple: "/pwa/apple-touch-icon.png" },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml", sizes: "any" }],
+    apple: "/pwa/apple-touch-icon.png",
+  },
   robots: { index: false, follow: false },
 };
 

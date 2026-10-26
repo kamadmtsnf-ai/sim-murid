@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-27 Asia/Jakarta",
+  "baseline": "8b890a603e0eb8bce1b532e5b6a46ae82218ce17",
+  "fullLocalCheck": {
+    "tests": 786,
+    "exitCode": 0,
+    "typecheck": true,
+    "lint": true,
+    "databaseTypeReplay": true,
+    "productionBuild": true,
+    "note": "Before final explicit SVG metadata; subsequent build/TypeScript, health19/PWA3/UI7 and lint passed."
+  },
+  "healthBrowser": {
+    "checks": 218,
+    "axe": 12,
+    "errors": 0,
+    "viewports": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "textPercent": [
+      200,
+      400
+    ],
+    "readOnlyGet": true
+  },
+  "navigationBrowser": {
+    "checks": 91,
+    "axe": 6,
+    "errors": 0
+  },
+  "faviconHttp": {
+    "checks": 24,
+    "icoSizes": [
+      16,
+      32,
+      48
+    ],
+    "svgPreserved": true,
+    "publicPages": [
+      "/",
+      "/login",
+      "/recovery",
+      "/not-a-real-page"
+    ]
+  },
+  "migrationRequired": false,
+  "limits": [
+    "Synthetic UI/RPC/session boundaries; not authenticated production admin UAT",
+    "No OTP/provider delivery or backup/restore verification",
+    "No physical-device/AT acceptance claim"
+  ],
+  "release": "See PR for exact-head CI, merge and Production deployment SHA"
+}

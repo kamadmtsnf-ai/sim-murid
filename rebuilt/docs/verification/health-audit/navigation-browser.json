@@ -1,0 +1,395 @@
+{
+  "checks": [
+    {
+      "name": "Grouped menus exist 320",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 0",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 1",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 2",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 3",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 4",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 5",
+      "passed": true
+    },
+    {
+      "name": "Collapsed links leave keyboard navigation 320",
+      "passed": true
+    },
+    {
+      "name": "Current group marked without opening 320",
+      "passed": true
+    },
+    {
+      "name": "Current group has accessible page description 320",
+      "passed": true
+    },
+    {
+      "name": "Enter expands group 320",
+      "passed": true
+    },
+    {
+      "name": "Expanded links available 320",
+      "passed": true
+    },
+    {
+      "name": "Space collapses group 320",
+      "passed": true
+    },
+    {
+      "name": "Search exposes matching collapsed menu 320",
+      "passed": true
+    },
+    {
+      "name": "Search explains current location outside results 320",
+      "passed": true
+    },
+    {
+      "name": "User can collapse matching results 320",
+      "passed": true
+    },
+    {
+      "name": "Repeating search reopens matches rather than restoring stale collapse 320",
+      "passed": true
+    },
+    {
+      "name": "Clear search restores input focus 320",
+      "passed": true
+    },
+    {
+      "name": "Empty search never introduces routes 320",
+      "passed": true
+    },
+    {
+      "name": "Escape clears empty results 320",
+      "passed": true
+    },
+    {
+      "name": "Clearing search restores collapsed groups 320",
+      "passed": true
+    },
+    {
+      "name": "Groups expand independently 320",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow 320",
+      "passed": true
+    },
+    {
+      "name": "accordion 320 axe",
+      "passed": true
+    },
+    {
+      "name": "Route change does not force active group open 320",
+      "passed": true
+    },
+    {
+      "name": "Current marker follows live route 320",
+      "passed": true
+    },
+    {
+      "name": "Browser Back restores location marker 320",
+      "passed": true
+    },
+    {
+      "name": "wayfinding 320 axe",
+      "passed": true
+    },
+    {
+      "name": "Grouped menus exist 768",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 0",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 1",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 2",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 3",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 4",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 5",
+      "passed": true
+    },
+    {
+      "name": "Collapsed links leave keyboard navigation 768",
+      "passed": true
+    },
+    {
+      "name": "Current group marked without opening 768",
+      "passed": true
+    },
+    {
+      "name": "Current group has accessible page description 768",
+      "passed": true
+    },
+    {
+      "name": "Enter expands group 768",
+      "passed": true
+    },
+    {
+      "name": "Expanded links available 768",
+      "passed": true
+    },
+    {
+      "name": "Space collapses group 768",
+      "passed": true
+    },
+    {
+      "name": "Search exposes matching collapsed menu 768",
+      "passed": true
+    },
+    {
+      "name": "Search explains current location outside results 768",
+      "passed": true
+    },
+    {
+      "name": "User can collapse matching results 768",
+      "passed": true
+    },
+    {
+      "name": "Repeating search reopens matches rather than restoring stale collapse 768",
+      "passed": true
+    },
+    {
+      "name": "Clear search restores input focus 768",
+      "passed": true
+    },
+    {
+      "name": "Empty search never introduces routes 768",
+      "passed": true
+    },
+    {
+      "name": "Escape clears empty results 768",
+      "passed": true
+    },
+    {
+      "name": "Clearing search restores collapsed groups 768",
+      "passed": true
+    },
+    {
+      "name": "Groups expand independently 768",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "name": "accordion 768 axe",
+      "passed": true
+    },
+    {
+      "name": "Route change does not force active group open 768",
+      "passed": true
+    },
+    {
+      "name": "Current marker follows live route 768",
+      "passed": true
+    },
+    {
+      "name": "Browser Back restores location marker 768",
+      "passed": true
+    },
+    {
+      "name": "wayfinding 768 axe",
+      "passed": true
+    },
+    {
+      "name": "Grouped menus exist 1440",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 0",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 1",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 2",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 3",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 4",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 5",
+      "passed": true
+    },
+    {
+      "name": "Collapsed links leave keyboard navigation 1440",
+      "passed": true
+    },
+    {
+      "name": "Current group marked without opening 1440",
+      "passed": true
+    },
+    {
+      "name": "Current group has accessible page description 1440",
+      "passed": true
+    },
+    {
+      "name": "Enter expands group 1440",
+      "passed": true
+    },
+    {
+      "name": "Expanded links available 1440",
+      "passed": true
+    },
+    {
+      "name": "Space collapses group 1440",
+      "passed": true
+    },
+    {
+      "name": "Search exposes matching collapsed menu 1440",
+      "passed": true
+    },
+    {
+      "name": "Search explains current location outside results 1440",
+      "passed": true
+    },
+    {
+      "name": "User can collapse matching results 1440",
+      "passed": true
+    },
+    {
+      "name": "Repeating search reopens matches rather than restoring stale collapse 1440",
+      "passed": true
+    },
+    {
+      "name": "Clear search restores input focus 1440",
+      "passed": true
+    },
+    {
+      "name": "Empty search never introduces routes 1440",
+      "passed": true
+    },
+    {
+      "name": "Escape clears empty results 1440",
+      "passed": true
+    },
+    {
+      "name": "Clearing search restores collapsed groups 1440",
+      "passed": true
+    },
+    {
+      "name": "Groups expand independently 1440",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "accordion 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "Route change does not force active group open 1440",
+      "passed": true
+    },
+    {
+      "name": "Current marker follows live route 1440",
+      "passed": true
+    },
+    {
+      "name": "Browser Back restores location marker 1440",
+      "passed": true
+    },
+    {
+      "name": "wayfinding 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope teacher",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope student",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope parent",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope alumni",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope customer",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope applicant",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "accordion 320",
+      "violations": []
+    },
+    {
+      "name": "wayfinding 320",
+      "violations": []
+    },
+    {
+      "name": "accordion 768",
+      "violations": []
+    },
+    {
+      "name": "wayfinding 768",
+      "violations": []
+    },
+    {
+      "name": "accordion 1440",
+      "violations": []
+    },
+    {
+      "name": "wayfinding 1440",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

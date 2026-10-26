@@ -398,3 +398,7 @@ Panel opsional memakai fallback PanelLoading role=status/aria-live=polite dan te
 ### L10 — Fokus dan pembesaran
 
 Target main-content menerima tabIndex=-1 untuk skip link. Gunakan outline focus-visible yang tetap terlihat tanpa shadow; jangan menambah positive tabindex. Varian kompak menargetkan44×44CSSpx sebagai standar produk, bukan minimum AA universal. Label dapat wrapping, gutter/ikon nonteks tidak menghabiskan ruang ketika teks diperbesar; tabel tetap gulir lokal berlabel. Laporan dan batas penerimaan: ../development/L10-ACCESSIBILITY.md.
+
+### Kesehatan aplikasi — audit27 Oktober2026
+
+Metrik menggunakan lebar konten; unknown tidak ditampilkan sebagai0. Utamakan status sumber gagal/parsial sebelum metrik, tampilkan empty state sampel, dan bedakan konfigurasi provider dari bukti pengiriman. Detail cakupan boleh memakai accordion native, tindakan penting tetap terlihat. Refresh nativeGET tidak memicu pekerjaan. Ikon tab memiliki SVG eksplisit dan ICO multiukuran, memakai identitas sekolah existing. Lihat ../development/HEALTH-APP-AUDIT.md.
