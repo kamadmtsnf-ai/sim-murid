@@ -1,4 +1,5 @@
 "use client";
+import { paginationView } from "@/lib/collections/presentation";
 import type { ReactNode } from "react";
 import { Button } from "./button";
 import { cn } from "@/lib/utils";
@@ -40,24 +41,25 @@ export function Pagination({
   nextLabel?: string;
   summary?: ReactNode;
 }) {
+  const view = paginationView(page, pageCount);
   return (
     <nav aria-label={label} className="ds-pagination ds-actions">
       <Button
         type="button"
         variant="outline"
-        disabled={disabled || page <= 1}
-        onClick={() => onPageChange(page - 1)}
+        disabled={disabled || !view.hasPrevious}
+        onClick={() => onPageChange(view.previous)}
       >
         {previousLabel}
       </Button>
       <p className="text-sm tabular-nums">
-        {summary && <>{summary} · </>}Halaman {page} dari {pageCount}
+        {summary && <>{summary} · </>}Halaman {view.page} dari {view.pageCount}
       </p>
       <Button
         type="button"
         variant="outline"
-        disabled={disabled || page >= pageCount}
-        onClick={() => onPageChange(page + 1)}
+        disabled={disabled || !view.hasNext}
+        onClick={() => onPageChange(view.next)}
       >
         {nextLabel}
       </Button>

@@ -1,0 +1,25 @@
+{
+  "stage": "L03",
+  "baseline": "ae8ac9fd4576e346c27b0c78d0014e1fa5e43ff9",
+  "localTests": {
+    "tests": 744,
+    "groups": 79,
+    "fail": 0,
+    "commandCompletion": "Tests passed; final build rerun separately after runtime interruption"
+  },
+  "finalChecks": {
+    "typecheck": 0,
+    "lint": 0,
+    "booksTests": 12,
+    "collectionTests": 3,
+    "cleanProductionBuild": 0
+  },
+  "browser": {
+    "checks": 235,
+    "axeScans": 29,
+    "javascriptErrors": 0,
+    "scope": "Actual components with synthetic Auth/HTTP data; no production users or human UAT"
+  },
+  "migrationRequired": false,
+  "humanUAT": "pending_L02"
+}

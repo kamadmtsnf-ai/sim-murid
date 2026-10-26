@@ -433,6 +433,13 @@ try {
       );
     }
   }
+  await page.goto(base);
+  const sort=page.getByRole('combobox',{name:'Urutan',exact:true});await sort.selectOption('label-desc');await page.reload();await sort.waitFor();
+  check(await sort.inputValue()==='label-desc','Display sort persists for this account');
+  await page.goto(base+'?otherAccount=1');await sort.waitFor();check(await sort.inputValue()==='label-asc','Other account does not inherit stored sort');
+  await page.evaluate(()=>{Storage.prototype.setItem=()=>{throw Error('Storage disabled');};});await sort.selectOption('label-desc');check(await sort.inputValue()==='label-desc','Sort remains usable when preference storage is denied');
+
+  check(await page.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('sim-collection-sort:')).every(k=>['label-asc','label-desc'].includes(localStorage.getItem(k)))),'Stored preference contains no queries or scopes');
   check(!errors.length, "no JavaScript errors");
   await writeFile(
     join(out, "results.json"),

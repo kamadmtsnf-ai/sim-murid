@@ -1,5 +1,6 @@
 "use client";
 import {confirmAction} from "@/components/ui/confirm-action";
+import { CollectionSummary } from "@/components/ui/collection-summary";
 import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -36,6 +37,7 @@ class Rejected extends Error {
 export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
   const [data, setData] = useState(initial),
     [filters, setFilters] = useState<Scope>({}),
+    [filterVersion,setFilterVersion] = useState(0),
     [busy, setBusy] = useState(false),
     [blocked, setBlocked] = useState(false),
     [message, setMessage] = useState(""),
@@ -111,7 +113,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
       if (controller.current === c) controller.current = null;
     }
   }
-  async function read(next: Scope) {
+  async function read(next: Scope, resetForm=false) {
     let result = booksSnapshot.parse(
       (await json(api + "?" + new URLSearchParams(next))).data,
     );
@@ -125,6 +127,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
     if (!mounted.current) return;
     setData(result);
     setFilters(next);
+    if(resetForm)setFilterVersion(v=>v+1);
     setBook(null);
   }
   async function run(task: () => Promise<void>, write = false) {
@@ -153,7 +156,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
       }
     }
   }
-  async function reload(next = filters) {
+  async function reload(next = filters, resetForm=false) {
     if (
       dialog &&
       dirty &&
@@ -161,7 +164,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
     )
       return;
     await run(async () => {
-      await read(next);
+      await read(next,resetForm);
       if (!mounted.current) return;
       setBlocked(false);
       setDialog(null);
@@ -243,7 +246,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
       setMessage("Periksa filter pencarian.");
       return;
     }
-    void reload(next);
+    void reload(next,true);
   }
   async function upload(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -384,17 +387,18 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
         </p>
       )}
       <form
+        key={JSON.stringify([filterVersion,filters.query,filters.subjectId,filters.category,filters.level])}
         onSubmit={filter}
         className="grid gap-3 rounded-xl border bg-card p-4 sm:grid-cols-2 lg:grid-cols-4"
         aria-label="Filter katalog"
       >
-        <TextField label="Cari judul atau penulis" name="query" max={100} />
-        <SelectField label="Mata pelajaran" name="subjectId">
+        <TextField label="Cari judul atau penulis" name="query" max={100} value={filters.query} />
+        <SelectField label="Mata pelajaran" name="subjectId" value={filters.subjectId}>
           <option value="">Semua mata pelajaran</option>
           {options}
         </SelectField>
-        <TextField label="Kategori" name="category" max={200} />
-        <SelectField label="Tingkat" name="level">
+        <TextField label="Kategori" name="category" max={200} value={filters.category} />
+        <SelectField label="Tingkat" name="level" value={filters.level}>
           <option value="">Semua tingkat</option>
           {[7, 8, 9].map((n) => (
             <option key={n}>{n}</option>
@@ -403,15 +407,16 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
         <div className="flex flex-wrap gap-2 sm:col-span-2">
           <Button disabled={busy}>Terapkan filter</Button>
           <Button
-            type="reset"
+            type="button"
             variant="outline"
             disabled={busy}
-            onClick={() => void reload({})}
+            onClick={() => void reload({},true)}
           >
             Reset filter
           </Button>
         </div>
       </form>
+      <CollectionSummary total={data.extra.total} page={data.extra.page} pageSize={50} unit="buku" filters={[{label:'Pencarian',value:filters.query??''},{label:'Kategori',value:filters.category??''},{label:'Tingkat',value:filters.level??''},{label:'Mapel',value:filters.subjectId ? data.extra.subjects.find(s=>s.id===filters.subjectId)?.name??'Pilihan tidak tersedia' : ''}]}/>
       {!data.rows.length && (
         <section className="rounded-xl border border-dashed bg-card p-6 text-center">
           <BookOpen
