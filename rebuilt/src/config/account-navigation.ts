@@ -150,6 +150,12 @@ export const accountNavigation: NavGroup[] = [
         adminOnly: true,
       },
       {
+        href: "/account/health",
+        label: "Kesehatan aplikasi",
+        description: "Status email, pekerjaan, backup dan rekonsiliasi",
+        adminOnly: true,
+      },
+      {
         href: "/account/services/jobs",
         label: "Pekerjaan",
         description: "Antrean dan status pengiriman",

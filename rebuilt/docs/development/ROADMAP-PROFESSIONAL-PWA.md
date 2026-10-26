@@ -2,7 +2,7 @@
 
 Versi: 1.0
 Tanggal: 26 Oktober 2026 (Asia/Jakarta)
-Status: L01 dirilis melalui PR #76. L02 tooling dan regresi otomatis dikerjakan; UAT manusia belum tersedia. L03 dirilis PR78. L04 dirilis PR79. L05 dirilis PR80. L06 instalasi online diimplementasikan; penerimaan perangkat fisik masih terbuka. L07–L11 belum dijalankan.
+Status: L01 dirilis melalui PR #76. L02 tooling dan regresi otomatis dikerjakan; UAT manusia belum tersedia. L03 dirilis PR78. L04 dirilis PR79. L05 dirilis PR80. L06 dirilis PR81; pengguna mengonfirmasi instalasi fisik berhasil (jenis perangkat/browser belum dirinci). L07 pusat kesehatan admin diimplementasikan dari sumber tersedia; lihat laporan dan PR. L08–L11 belum dijalankan.
 Repositori: https://github.com/kamadmtsnf-ai/sim-murid
 Aplikasi: rebuilt/
 Nama berkas rekomendasi di repositori: rebuilt/docs/development/ROADMAP-PROFESSIONAL-PWA.md
@@ -66,8 +66,8 @@ Roadmap P01–P12 menyatakan sebagian bukti UAT manusia, beban nyata terautentik
 | L03 | Standardisasi tabel dan filter | P1 | Inventaris komponen existing | Dirilis PR78, commit f29fb335118ec9b2a22b04be659c01fd742b4a85; lihat L03-TABLE-FILTERS.md |
 | L04 | Feedback dan kepastian penyimpanan | P1 | P04 existing dan temuan L02 | Dirilis PR79, commit 7bcb57351849e074b012c383752204c3644b5737; lihat L04-SAVE-FEEDBACK.md |
 | L05 | Penyempurnaan sidebar | P1 | Accordion PR #74 | Implementasi/QA pada L05-SIDEBAR-WAYFINDING.md; status rilis pada PR |
-| L06 | PWA yang dapat dipasang | P1 | L01, L04, audit cache/session | Implementasi online; lihat L06-INSTALLABLE-PWA.md dan PR untuk bukti rilis; UAT perangkat terbuka |
-| L07 | Pusat kesehatan aplikasi admin | P1 | Observability dan izin existing | Belum dimulai |
+| L06 | PWA yang dapat dipasang | P1 | L01, L04, audit cache/session | PR81 dirilis; instalasi fisik dikonfirmasi pengguna, matriks perangkat belum dirinci |
+| L07 | Pusat kesehatan aplikasi admin | P1 | Observability dan izin existing | Implementasi read-only; lihat L07-ADMIN-HEALTH.md dan PR; backup/restore belum terhubung |
 | L08 | Pekerjaan massal dan kualitas data | P1 | L03, L04, impor Excel existing | Belum dimulai |
 | L09 | Performa berbasis penggunaan nyata | P1 | Baseline L02; evaluasi ulang setelah PWA | Belum dimulai |
 | L10 | Aksesibilitas menyeluruh | P1 | Berlaku sejak L01; konsolidasi setelah L09 | Belum dimulai |

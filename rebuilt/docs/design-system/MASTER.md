@@ -382,3 +382,7 @@ MutationFeedback menentukan tone hanya dari MutationPhase; caller tidak boleh me
 ## L05 — Orientasi sidebar
 
 Kelompok halaman aktif diberi teks penanda dan deskripsi aksesibel pada header accordion, tanpa membuka kelompok otomatis. Label tombol stabil, expanded/controls akurat, ID panel unik per surface. Browse expansion dipertahankan; search expansion hanya milik query saat ini. Hasil pencarian menyatakan cakupan izin; empty state menawarkan tindakan jelas. Deteksi current item di shell menggunakan navigation scoped yang sudah disediakan server. Tidak mempersist query atau hak akses dan tidak menciptakan link dari hasil pencarian di luar daftar yang diizinkan.
+
+## L07 — Kesehatan aplikasi admin
+
+Pusat kesehatan read-only memakai kartu/metrik dan timestamp WIB. Unknown dibedakan dari nol; tidak memakai warna sehat untuk sumber gagal atau belum tersedia. Konfigurasi provider, penerimaan provider dan kotak masuk adalah bukti berbeda. Sampel terbaru diberi batas200/100; angka bukan seluruh backlog. Backup/restore tanpa bukti tetap belum dapat diverifikasi. Refresh GET, tanpa retry otomatis atau navigasi konten yang menduplikasi sidebar. Loading/error/partial memakai pola existing dan whitelist server menjaga data sensitif.

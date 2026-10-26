@@ -1,0 +1,18 @@
+{
+  "baseline": "a5baa9dbad872bf06e5165a0a9a9113aa78576e5",
+  "testsPassed": 765,
+  "healthTests": 14,
+  "typecheck": "passed",
+  "lint": "passed",
+  "databaseTypeReplay": "passed",
+  "cachedCheckBuild": "failed: local Turbopack persistence cache",
+  "cleanBuild": "passed",
+  "browserChecks": 138,
+  "axeChecks": 9,
+  "productionDataUsed": false,
+  "migrationRequired": false,
+  "backupRestoreRuntimeSource": "unavailable",
+  "otpAggregate": "not included; sender remains unchanged",
+  "physicalPwaInstall": "user reports success; device/browser unspecified",
+  "ci": "pending at commit snapshot"
+}

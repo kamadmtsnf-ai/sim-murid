@@ -117,3 +117,5 @@ L04 memperjelas advice per kode/fase dan mengunci tone dari evidence penyimpanan
 L05 memperjelas lokasi halaman aktif dan hasil pencarian sidebar tanpa mengubah default collapsed; lihat [laporan L05](L05-SIDEBAR-WAYFINDING.md). Tidak ada migrasi; L02 UAT manusia tetap terbuka.
 
 L06 menambahkan PWA online dengan manifest/ikon dan kontrol instalasi progresif, tanpa worker/cache privat/migrasi. Lihat [laporan L06](L06-INSTALLABLE-PWA.md); penerimaan perangkat fisik belum selesai.
+
+L07 menambahkan menu Kesehatan aplikasi khusus admin, agregat outbox/pekerjaan/rekonsiliasi dari sumber existing dan status backup/restore yang jujur belum dapat diverifikasi. Tanpa migrasi; lihat [laporan L07](L07-ADMIN-HEALTH.md). Instalasi PWA fisik L06 dikonfirmasi pengguna.

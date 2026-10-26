@@ -44,3 +44,7 @@ UAT manual tersisa: instal/peluncuran Chrome dan Edge desktop, Android, iOS/Safa
 - roadmaps dan laporan ini: status serta batas bukti.
 
 Status dokumen adalah snapshot sebelum publikasi. PR memuat hasil CI, merge dan deployment aktual.
+
+## Konfirmasi pengguna setelah rilis
+
+Pada 26 Oktober 2026 pengguna melaporkan instalasi perangkat fisik sudah berhasil. Ini bukti penerimaan pengguna atas instalasi, bukan hasil pengujian agent. Jenis perangkat/browser belum dirinci; tidak mengasumsikan seluruh matriks Chrome/Edge/Android/iOS atau skenario OTP/logout telah diuji.
