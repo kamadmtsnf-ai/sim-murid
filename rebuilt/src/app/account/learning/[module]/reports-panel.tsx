@@ -52,7 +52,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
     };
   }, []);
   const query = (f = filters) => new URLSearchParams(f).toString();
-  const { busy, blocked, message, phase, feedbackRef, clear, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, mutate } =
     useDomainMutation(
       api + "?" + query(),
       reportsSnapshot,
@@ -264,7 +264,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
         </p>
       )}
       {message && (
-        <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+        <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
           {message}
           {blocked && (
             <Button

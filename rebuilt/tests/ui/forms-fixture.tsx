@@ -7,7 +7,7 @@ import { WorkspaceShell } from "../../src/components/workspace-shell";
 import { navigationFor } from "../../src/config/account-navigation";
 import { ProfileForm } from "../../src/app/account/profile/profile-form";
 import { Button } from "../../src/components/ui/button";
-import { Status } from "../../src/components/ui/status";
+import { MutationFeedback } from "../../src/components/feedback/mutation-feedback";
 const snapshot = z.object({
     revision: z.number().int().nonnegative(),
     label: z.string(),
@@ -18,7 +18,7 @@ function Probe() {
     [saved, setSaved] = useState("awal"),
     [revision, setRevision] = useState(1),
     [inspected, setInspected] = useState("");
-  const { busy, message, phase, blocked, feedbackRef, fail, clear, mutate } =
+  const { busy, message, phase, blocked, feedbackRef, hint, fail, clear, mutate } =
     useDomainMutation(
       "/qa/mutation",
       snapshot,
@@ -62,19 +62,9 @@ function Probe() {
       </p>
       <p id="probe-saved">Data terkonfirmasi: {saved}</p>
       {message && (
-        <Status
-          ref={feedbackRef}
-          tabIndex={-1}
-          tone={
-            phase === "success"
-              ? "success"
-              : phase === "pending"
-                ? "pending"
-                : "error"
-          }
-        >
+        <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
           {message}
-        </Status>
+        </MutationFeedback>
       )}
       <div className="ds-actions">
         <Button

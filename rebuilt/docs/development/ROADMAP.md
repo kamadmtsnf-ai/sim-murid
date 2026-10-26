@@ -111,3 +111,5 @@ Lihat [rencana profesional dan PWA](ROADMAP-PROFESSIONAL-PWA.md). L01 menambahka
 L02 menambahkan katalog tugas dan pemeriksa bukti UAT ke protokol P11; lihat [laporan L02](L02-ROLE-JOURNEYS.md). Kelulusan regresi otomatis tidak menutup sesi manusia/baseline/restore/load P10 yang belum tersedia. L01 telah dirilis PR76; L02 tetap parsial sampai bukti manusia ditinjau.
 
 L03 menyatukan kontrol pagination/filter dan memperbaiki reset Buku Digital; lihat [laporan L03](L03-TABLE-FILTERS.md). Scope/otorisasi domain tetap, UAT manusia L02 masih terbuka.
+
+L04 memperjelas advice per kode/fase dan mengunci tone dari evidence penyimpanan; lihat [laporan L04](L04-SAVE-FEEDBACK.md). UAT manusia L02 tetap terbuka; tidak ada migrasi database.

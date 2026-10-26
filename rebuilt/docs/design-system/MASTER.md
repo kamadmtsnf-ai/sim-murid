@@ -374,3 +374,7 @@ Navbar menyatakan lokasi aktif; sidebar menyaring menu dari izin server dan penc
 - Reset filter server tidak boleh mengosongkan field lalu meninggalkan hasil lama saat request gagal. Sinkronkan form/ringkasan setelah readback berhasil; paging tidak menghapus draft pencarian.
 - Ekspor harus menjelaskan apakah seluruh hasil atau hanya halaman saat ini. Direktori menyediakan admin-only “Ekspor halaman ini”; tidak fetch baris tambahan atau menambah cakupan data. Username tetap teks pada XLSX.
 - Sticky header/kolom tetap sesuai kebutuhan tabel existing; jangan menerapkan global sticky pada card/mobile atau mengubah kontrak pagination domain.
+
+## L04 — Feedback penyimpanan berbasis bukti
+
+MutationFeedback menentukan tone hanya dari MutationPhase; caller tidak boleh menimpa tone. Pesan domain dan hint tindakan berikutnya dipisahkan. Hook transition memperbarui keduanya dari kode/status eksplisit melalui mutationGuidance, bukan regex pesan terjemahan. Error korektif berbeda dengan stale/permission dan uncertain. HTTP408, jaringan/timeout/5xx atau acknowledgement tidak valid bukan bukti rollback: jangan auto-retry atau membuka lock. Hindari meminta pengguna menyalin isian sensitif; pertahankan halaman dan jelaskan risiko kehilangan draft saat reload. Success hanya untuk hasil terkonfirmasi sesuai kontrak domain.

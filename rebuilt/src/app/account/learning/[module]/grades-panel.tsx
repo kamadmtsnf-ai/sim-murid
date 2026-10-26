@@ -76,7 +76,7 @@ export function GradesPanel({
     };
   }, []);
   const query = (f = filters) => new URLSearchParams(f).toString();
-  const { busy, blocked, message, phase, feedbackRef, clear, fail, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, fail, mutate } =
     useDomainMutation(
       api + "?" + query(),
       gradesSnapshot,
@@ -440,7 +440,7 @@ const retainedEcurrentTarget=e.currentTarget;
     await mutate(data.revision, command);
   }
   const feedback = (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
       {message ||
         notice ||
         "Penilaian ditampilkan sesuai kelas, mapel, semester dan hak akses Anda."}

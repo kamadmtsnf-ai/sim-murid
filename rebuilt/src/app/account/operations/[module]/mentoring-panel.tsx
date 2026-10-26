@@ -50,7 +50,7 @@ export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
   }, []);
   const params = (overrides: Record<string, string> = {}) =>
     new URLSearchParams({ ...filters, ...overrides }).toString();
-  const { busy, blocked, message, phase, feedbackRef, clear, fail, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, fail, mutate } =
     useDomainMutation(
       api + "?" + params(),
       mentoringSnapshot,
@@ -268,7 +268,7 @@ const retainedEcurrentTarget=e.currentTarget;
     }
   }
   const feedback = (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
       {message ||
         notice ||
         "Laporan dan penugasan ditampilkan sesuai hak akses Anda."}

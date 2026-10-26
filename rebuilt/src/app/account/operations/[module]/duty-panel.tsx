@@ -55,7 +55,7 @@ export function DutyPanel({
     Object.entries(filters).map(([k, v]) => [k, String(v)]),
   );
   const api = "/api/operations/duty";
-  const { busy, blocked, message, phase, feedbackRef, clear, mutate, fail } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, mutate, fail } =
     useDomainMutation(
       api + "?" + query,
       dutySnapshot,
@@ -156,7 +156,7 @@ export function DutyPanel({
     }
   }
   const feedback = message ? (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
       {message}
     </MutationFeedback>
   ) : null;

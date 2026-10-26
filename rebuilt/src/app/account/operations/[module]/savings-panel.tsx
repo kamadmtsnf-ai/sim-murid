@@ -78,7 +78,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
   }, []);
   const params = (overrides: Record<string, string> = {}) =>
     new URLSearchParams({ ...filters, ...overrides }).toString();
-  const { busy, blocked, message, phase, feedbackRef, clear, fail, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, fail, mutate } =
     useDomainMutation(
       api + "?" + params(),
       savingsSnapshot,
@@ -343,7 +343,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
     });
   }
   const feedback = (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
       {message ||
         notice ||
         "Saldo dan mutasi ditampilkan sesuai hak akses Anda."}

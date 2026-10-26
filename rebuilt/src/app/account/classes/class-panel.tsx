@@ -70,7 +70,7 @@ export function ClassPanel({
     },
     { confirmed: true, commandSchema: classCommand },
   );
-  const { busy, message, phase, blocked, feedbackRef, fail, clear, mutate } =
+  const { busy, message, phase, blocked, feedbackRef, hint, fail, clear, mutate } =
     mutation;
   const disabled = busy || blocked,
     current = data.classes.find((c) => c.id === editing),
@@ -139,7 +139,7 @@ export function ClassPanel({
   }
   const selectedYear = data.years.find((y) => y.id === year);
   const feedback = message ? (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
         {message}
         {blocked && (
           <div className="mt-3">

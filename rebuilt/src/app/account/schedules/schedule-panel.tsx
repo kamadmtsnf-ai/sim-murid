@@ -84,7 +84,7 @@ export function SchedulePanel({
     ...(filters.weekday ? { day: String(filters.weekday) } : {}),
     ...(filters.personal ? { personal: "1" } : {}),
   }).toString();
-  const { busy, message, mutate, blocked, phase, feedbackRef, clear } =
+  const { busy, message, mutate, blocked, phase, feedbackRef, hint, clear } =
     useDomainMutation(
       `/api/schedules?${query}`,
       scheduleSnapshot,
@@ -152,7 +152,7 @@ export function SchedulePanel({
     }
   }
   const feedback = message ? (
-    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+    <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
       {message}
     </MutationFeedback>
   ) : null;

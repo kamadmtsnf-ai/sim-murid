@@ -121,7 +121,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
       abortRef.current?.abort();
     };
   }, []);
-  const { busy, blocked, message, phase, feedbackRef, clear, fail, mutate } =
+  const { busy, blocked, message, phase, feedbackRef, hint, clear, fail, mutate } =
     useDomainMutation(
       api,
       promotionsSnapshot,
@@ -567,7 +567,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
         ))}
       </div>
       {message && (
-        <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase}>
+        <MutationFeedback ref={feedbackRef} tabIndex={-1} phase={phase} hint={hint}>
           {message}
         </MutationFeedback>
       )}

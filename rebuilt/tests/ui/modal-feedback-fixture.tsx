@@ -83,7 +83,7 @@ function Fixture() {
           >
             Mulai proses
           </Button>
-          <MutationFeedback phase={phase}>
+          <MutationFeedback {...{tone:"success" as const}} phase={phase}>
             {phase === "uncertain"
               ? "Respons server belum diterima; hasil belum dapat dipastikan."
               : phase === "success"

@@ -3,6 +3,7 @@ import { requestReference, withReference } from "@/lib/observability/reference";
 import { useEffect, useRef, useState } from "react";
 import type { z } from "zod";
 import {
+  mutationGuidance,
   rejectionPhase,
   savedAcknowledgement,
   type MutationPhase as Phase,
@@ -21,7 +22,8 @@ export function useDomainMutation<T>(
 ) {
   const [busy, setBusy] = useState(false),
     [message, setMessage] = useState(""),
-    [phase, setPhase] = useState<Phase>("idle");
+    [phase, setPhase] = useState<Phase>("idle"),
+    [hint,setHint] = useState<string | undefined>();
   const lock = useRef(false),
     mounted = useRef(true),
     feedbackRef = useRef<HTMLDivElement>(null),
@@ -44,11 +46,12 @@ export function useDomainMutation<T>(
   useEffect(() => {
     if (message && phase !== "pending") feedbackRef.current?.focus();
   }, [message, phase]);
-  function transition(next: Phase, text: string) {
+  function transition(next: Phase, text: string, code?: unknown, status?: number) {
     phaseRef.current = next;
     if (mounted.current) {
       setPhase(next);
       setMessage(text);
+      setHint(mutationGuidance(next,code,status));
     }
   }
   function fail(text: string) {
@@ -99,6 +102,7 @@ export function useDomainMutation<T>(
           r.status === 401
             ? "Sesi berakhir. Masuk kembali sebelum melanjutkan."
             : "Akses tidak diizinkan. Periksa akun dan data terbaru sebelum melanjutkan.",
+          undefined, r.status,
         );
         return false;
       }
@@ -137,6 +141,7 @@ export function useDomainMutation<T>(
             : "Permintaan belum berhasil. Periksa data terbaru sebelum melanjutkan.",
           reference,
         ),
+        data.code, r.status,
       );
       return false;
     } catch {
@@ -160,6 +165,7 @@ export function useDomainMutation<T>(
     busy,
     message,
     phase,
+    hint,
     blocked: phase === "blocked" || phase === "uncertain",
     feedbackRef,
     fail,
