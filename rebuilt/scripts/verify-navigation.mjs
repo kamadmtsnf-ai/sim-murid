@@ -119,6 +119,42 @@ try {
     accessibility.push({ name, violations: r.violations.map((v) => v.id) });
     check(!r.violations.length, name + " axe");
   }
+  if (process.argv.includes('--accordion-only')) {
+    for (const width of [320, 768, 1440]) {
+      await visit('admin', width);
+      if (width < 1024) await button('Buka navigasi').click();
+      const nav = page.getByRole('navigation', {name: width < 1024 ? 'Navigasi utama seluler' : 'Navigasi utama', exact:true});
+      const toggles = nav.locator('.nav-group-toggle');
+      const count = await toggles.count();
+      check(count > 1, 'Grouped menus exist '+width);
+      for (let i=0;i<count;i++) check(await toggles.nth(i).getAttribute('aria-expanded') === 'false', 'Group defaults collapsed '+width+' '+i);
+      check(await nav.getByRole('link').count() === 0, 'Collapsed links leave keyboard navigation '+width);
+      const first=toggles.first();
+      await first.focus(); await page.keyboard.press('Enter');
+      check(await first.getAttribute('aria-expanded') === 'true', 'Enter expands group '+width);
+      check(await nav.getByRole('link').count()>0, 'Expanded links available '+width);
+      await page.keyboard.press('Space');
+      check(await first.getAttribute('aria-expanded') === 'false', 'Space collapses group '+width);
+      const search=page.getByRole('searchbox',{name:width < 1024 ? 'Cari menu pada navigasi seluler' : 'Cari menu navigasi',exact:true});
+      await search.fill('Keamanan akun');
+      await nav.getByRole('link',{name:'Keamanan akun',exact:true}).waitFor();
+      check(true,'Search exposes matching collapsed menu '+width);
+      await search.fill('');
+      check(await nav.getByRole('link').count()===0,'Clearing search restores collapsed groups '+width);
+      await first.click(); await toggles.nth(1).click();
+      check(await first.getAttribute('aria-expanded')==='true' && await toggles.nth(1).getAttribute('aria-expanded')==='true','Groups expand independently '+width);
+      check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No horizontal overflow '+width);
+      await a11y('accordion '+width);
+      await page.screenshot({path:join(out,'accordion-'+width+'.png'),fullPage:true});
+    }
+    for(const role of ['teacher','student','parent']) {
+      await visit(role);
+      const nav=page.getByRole('navigation',{name:'Navigasi utama',exact:true});
+      const toggles=nav.locator('.nav-group-toggle');
+      for(let i=0;i<await toggles.count();i++) await toggles.nth(i).click();
+      check(await nav.getByRole('link',{name:'Pengaturan madrasah',exact:true}).count()===0,'Accordion preserves restricted menu scope '+role);
+    }
+  } else {
   for (const role of [
     "admin",
     "teacher",
@@ -415,6 +451,7 @@ try {
     "footer follows long content without overlay",
   );
   await a11y("long page");
+  }
   check(errors.length === 0, "no JavaScript page errors");
   await writeFile(
     join(out, "results.json"),

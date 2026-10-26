@@ -56,6 +56,7 @@ export function WorkspaceShell({
   children,
 }: Workspace & { children: ReactNode }) {
   const searchId = useId();
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const menuRef = useRef<HTMLButtonElement>(null);
   const desktopNav = useRef<HTMLElement>(null),
     mobileNav = useRef<HTMLElement>(null),
@@ -107,7 +108,7 @@ export function WorkspaceShell({
     const frame = requestAnimationFrame(() => {
       const nav = open ? mobileNav.current : desktopNav.current;
       const current = nav?.querySelector<HTMLElement>('[aria-current="page"]');
-      if (!nav || !current) return;
+      if (!nav || !current || !current.getClientRects().length) return;
       let scroller: HTMLElement | null = nav;
       while (scroller) {
         if (
@@ -220,10 +221,23 @@ export function WorkspaceShell({
           className="workspace-nav"
         >
           {filtered.length ? (
-            filtered.map((g) => (
+            filtered.map((g) => {
+              const groupKey = `${query.trim() ? `search:${query.trim()}` : "browse"}:${g.label}`;
+              const expanded = expandedGroups[groupKey] ?? Boolean(query.trim());
+              const panelId = `${searchId}-${mobile ? "mobile" : "desktop"}-group-${navigation.findIndex(group => group.label === g.label)}`;
+              return (
               <section key={g.label}>
-                <h2>{g.label}</h2>
-                <ul>
+                <h2 className="nav-group-heading"><button
+                  type="button"
+                  className="nav-group-toggle"
+                  aria-expanded={expanded}
+                  aria-controls={panelId}
+                  onClick={() => setExpandedGroups(previous => ({ ...previous, [groupKey]: !expanded }))}
+                >
+                  <span className="min-w-0 flex-1 wrap-anywhere">{g.label}</span>
+                  <ChevronRight aria-hidden="true" className={expanded ? "rotate-90" : undefined} />
+                </button></h2>
+                <ul id={panelId} hidden={!expanded}>
                   {g.items.map((i) => (
                     <li key={i.href}>
                       <Link
@@ -241,7 +255,8 @@ export function WorkspaceShell({
                   ))}
                 </ul>
               </section>
-            ))
+              );
+            })
           ) : (
             <p
               className="px-3 text-sm text-muted-foreground"

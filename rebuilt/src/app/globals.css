@@ -582,3 +582,11 @@
   .workspace-sidebar .workspace-nav { flex:none; overflow:visible; }
  }
 }
+
+/* Sidebar groups start closed; keyboard-accessible buttons control their own lists. */
+.workspace-nav h2.nav-group-heading { padding:0; }
+.nav-group-toggle { display:flex; align-items:center; gap:8px; inline-size:100%; min-block-size:44px; padding:10px 12px; border-radius:.7rem; text-align:start; font:inherit; color:inherit; letter-spacing:inherit; text-transform:inherit; }
+.nav-group-toggle:hover { background:var(--background); color:var(--foreground); }
+.nav-group-toggle:focus-visible { outline:2px solid var(--ring); outline-offset:-2px; }
+.nav-group-toggle svg { inline-size:16px; block-size:16px; flex-shrink:0; }
+.workspace-nav ul[hidden] { display:none; }
