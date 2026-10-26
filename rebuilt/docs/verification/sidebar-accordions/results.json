@@ -1,0 +1,227 @@
+{
+  "checks": [
+    {
+      "name": "Grouped menus exist 320",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 0",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 1",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 2",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 3",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 4",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 320 5",
+      "passed": true
+    },
+    {
+      "name": "Collapsed links leave keyboard navigation 320",
+      "passed": true
+    },
+    {
+      "name": "Enter expands group 320",
+      "passed": true
+    },
+    {
+      "name": "Expanded links available 320",
+      "passed": true
+    },
+    {
+      "name": "Space collapses group 320",
+      "passed": true
+    },
+    {
+      "name": "Search exposes matching collapsed menu 320",
+      "passed": true
+    },
+    {
+      "name": "Clearing search restores collapsed groups 320",
+      "passed": true
+    },
+    {
+      "name": "Groups expand independently 320",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow 320",
+      "passed": true
+    },
+    {
+      "name": "accordion 320 axe",
+      "passed": true
+    },
+    {
+      "name": "Grouped menus exist 768",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 0",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 1",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 2",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 3",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 4",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 768 5",
+      "passed": true
+    },
+    {
+      "name": "Collapsed links leave keyboard navigation 768",
+      "passed": true
+    },
+    {
+      "name": "Enter expands group 768",
+      "passed": true
+    },
+    {
+      "name": "Expanded links available 768",
+      "passed": true
+    },
+    {
+      "name": "Space collapses group 768",
+      "passed": true
+    },
+    {
+      "name": "Search exposes matching collapsed menu 768",
+      "passed": true
+    },
+    {
+      "name": "Clearing search restores collapsed groups 768",
+      "passed": true
+    },
+    {
+      "name": "Groups expand independently 768",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow 768",
+      "passed": true
+    },
+    {
+      "name": "accordion 768 axe",
+      "passed": true
+    },
+    {
+      "name": "Grouped menus exist 1440",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 0",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 1",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 2",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 3",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 4",
+      "passed": true
+    },
+    {
+      "name": "Group defaults collapsed 1440 5",
+      "passed": true
+    },
+    {
+      "name": "Collapsed links leave keyboard navigation 1440",
+      "passed": true
+    },
+    {
+      "name": "Enter expands group 1440",
+      "passed": true
+    },
+    {
+      "name": "Expanded links available 1440",
+      "passed": true
+    },
+    {
+      "name": "Space collapses group 1440",
+      "passed": true
+    },
+    {
+      "name": "Search exposes matching collapsed menu 1440",
+      "passed": true
+    },
+    {
+      "name": "Clearing search restores collapsed groups 1440",
+      "passed": true
+    },
+    {
+      "name": "Groups expand independently 1440",
+      "passed": true
+    },
+    {
+      "name": "No horizontal overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "accordion 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope teacher",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope student",
+      "passed": true
+    },
+    {
+      "name": "Accordion preserves restricted menu scope parent",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "name": "accordion 320",
+      "violations": []
+    },
+    {
+      "name": "accordion 768",
+      "violations": []
+    },
+    {
+      "name": "accordion 1440",
+      "violations": []
+    }
+  ],
+  "errors": []
+}
