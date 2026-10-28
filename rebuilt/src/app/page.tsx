@@ -1,3 +1,4 @@
+import { PwaInstallButton } from "@/components/pwa-install";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Check, School } from "lucide-react";
@@ -53,7 +54,7 @@ export default function HomePage() {
           </Card>
         </section>
       </main>
-      <footer className={styles.footer}><div className={styles.container}>MTs Nurul Falah · SiM-Murid</div></footer>
+      <footer className={styles.footer}><div className={`${styles.container} flex flex-wrap items-center justify-between gap-3`}><span>MTs Nurul Falah · SiM-Murid</span><PwaInstallButton /></div></footer>
     </div>
   );
 }

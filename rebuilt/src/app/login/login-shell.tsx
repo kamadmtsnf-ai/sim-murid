@@ -1,3 +1,4 @@
+import { PwaInstallButton } from "@/components/pwa-install";
 import type {ReactNode} from 'react';
 import Link from 'next/link';
 import {School,ShieldCheck,BookOpen,Users} from 'lucide-react';
@@ -17,5 +18,6 @@ export function LoginShell({children}:{children:ReactNode}){
    <Link href="/" prefetch={false} className={styles.backLink}>Kembali ke beranda</Link>
    {children}
   </main>
+  <footer className="public-app-footer"><span>SiM-Murid · MTs Nurul Falah</span><PwaInstallButton /></footer>
  </div>;
 }

@@ -1,4 +1,5 @@
 "use client";
+import { PwaInstallButton, PwaRequirement } from "@/components/pwa-install";
 import { cancelActiveConfirmation } from "@/components/ui/confirm-action";
 import { ContextualHelp } from "@/components/help/contextual-help";
 import { FormNavigationGuard } from "@/components/forms/navigation-guard";
@@ -44,6 +45,7 @@ type Workspace = {
   username: string;
   academicToday?: string;
   navigationUnavailable?: boolean;
+  pwaRequired?: boolean;
 };
 const WorkspaceContext = createContext<Workspace | null>(null);
 export const useWorkspace = () => useContext(WorkspaceContext);
@@ -52,6 +54,7 @@ export function WorkspaceShell({
   name,
   username,
   navigationUnavailable = false,
+  pwaRequired = false,
   academicToday,
   children,
 }: Workspace & { children: ReactNode }) {
@@ -141,6 +144,27 @@ export function WorkspaceShell({
   function finishNavigation() {
     setOpen(false);
     setQuery("");
+  }
+  function signOut(compact: boolean) {
+    return (
+    <form
+            action="/api/auth/logout"
+            method="post"
+            onSubmit={() => {
+              clearSurveyDrafts();
+              clearAcademicPreference(username);
+            }}
+          >
+            <Button
+              type="submit"
+              size={compact ? "icon" : "default"}
+              variant="ghost"
+              aria-label="Keluar dari akun"
+            >
+              <LogOut aria-hidden="true" />{!compact && "Keluar akun"}
+            </Button>
+          </form>
+    );
   }
   function navigationContent(mobile: boolean) {
     return (
@@ -292,23 +316,7 @@ export function WorkspaceShell({
               {username}
             </span>
           </div>
-          <form
-            action="/api/auth/logout"
-            method="post"
-            onSubmit={() => {
-              clearSurveyDrafts();
-              clearAcademicPreference(username);
-            }}
-          >
-            <Button
-              type="submit"
-              size="icon"
-              variant="ghost"
-              aria-label="Keluar dari akun"
-            >
-              <LogOut aria-hidden="true" />
-            </Button>
-          </form>
+          {signOut(true)}
         </div>
       </>
     );
@@ -320,6 +328,7 @@ export function WorkspaceShell({
       today={academicToday}
     >
       <FormNavigationGuard>
+        <PwaRequirement required={pwaRequired} signOut={signOut(false)}>
         <WorkspaceContext.Provider
           value={{ navigation, name, username, navigationUnavailable }}
         >
@@ -433,6 +442,7 @@ export function WorkspaceShell({
               >
                 <p className="font-medium">SiM-Murid · MTs Nurul Falah</p>
                 <p>Data mengikuti hak akses akun Anda.</p>
+                <PwaInstallButton />
               </footer>
             </div>
             <Dialog
@@ -457,6 +467,7 @@ export function WorkspaceShell({
             </Dialog>
           </div>
         </WorkspaceContext.Provider>
+        </PwaRequirement>
       </FormNavigationGuard>
     </AcademicContextProvider>
   );

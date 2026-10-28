@@ -1,3 +1,4 @@
+import { PwaInstallButton } from "@/components/pwa-install";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import {
@@ -41,6 +42,7 @@ export function RecoveryShell({
           </CardContent>
         </Card>
       </main>
+      <footer className="public-app-footer"><span>SiM-Murid · MTs Nurul Falah</span><PwaInstallButton /></footer>
     </div>
   );
 }

@@ -16,8 +16,10 @@ export function Dialog({
   returnFocusRef,
   closeDisabled = false,
   onEscapeKeyDown,
+  headerScrollLabel,
 }: {
   contentId?: string;
+  headerScrollLabel?: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
@@ -59,7 +61,10 @@ export function Dialog({
           }}
         >
           <div className="dialog-header flex shrink-0 items-start justify-between gap-4 border-b p-5 sm:p-6">
-            <div className="min-w-0 max-h-[35dvh] overflow-y-auto overscroll-contain">
+            <div
+              className="min-w-0 max-h-[35dvh] overflow-y-auto overscroll-contain"
+              {...(headerScrollLabel ? { tabIndex: 0, role: "region", "aria-label": headerScrollLabel } : {})}
+            >
               <Primitive.Title className="text-lg font-semibold leading-snug tracking-tight sm:text-xl">
                 {title}
               </Primitive.Title>

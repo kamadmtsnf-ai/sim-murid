@@ -1,0 +1,277 @@
+{
+  "checks": [
+    {
+      "name": "no unsolicited guide",
+      "passed": true
+    },
+    {
+      "name": "prevent unsolicited browser prompt",
+      "passed": true
+    },
+    {
+      "name": "offer keeps work focus",
+      "passed": true
+    },
+    {
+      "name": "button in real footer 320",
+      "passed": true
+    },
+    {
+      "name": "no separate footer strip 320",
+      "passed": true
+    },
+    {
+      "name": "footer320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "button in real footer 390",
+      "passed": true
+    },
+    {
+      "name": "no separate footer strip 390",
+      "passed": true
+    },
+    {
+      "name": "footer390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "button in real footer 768",
+      "passed": true
+    },
+    {
+      "name": "no separate footer strip 768",
+      "passed": true
+    },
+    {
+      "name": "footer768 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "button in real footer 1280",
+      "passed": true
+    },
+    {
+      "name": "no separate footer strip 1280",
+      "passed": true
+    },
+    {
+      "name": "footer1280 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "one prompt in StrictMode",
+      "passed": true
+    },
+    {
+      "name": "event consumed once",
+      "passed": true
+    },
+    {
+      "name": "closing guide retains draft",
+      "passed": true
+    },
+    {
+      "name": "native prompt error explained",
+      "passed": true
+    },
+    {
+      "name": "pending locked",
+      "passed": true
+    },
+    {
+      "name": "pending Escape stable",
+      "passed": true
+    },
+    {
+      "name": "double prompt locked",
+      "passed": true
+    },
+    {
+      "name": "blocked content not mounted",
+      "passed": true
+    },
+    {
+      "name": "skip link reaches required screen",
+      "passed": true
+    },
+    {
+      "name": "localStorage and fullscreen cannot bypass gate",
+      "passed": true
+    },
+    {
+      "name": "accepted prompt does not unlock",
+      "passed": true
+    },
+    {
+      "name": "appinstalled in browser does not unlock",
+      "passed": true
+    },
+    {
+      "name": "installed browser gives launch instructions",
+      "passed": true
+    },
+    {
+      "name": "gate320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "gate320 axe []",
+      "passed": true
+    },
+    {
+      "name": "gate390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "gate390 axe []",
+      "passed": true
+    },
+    {
+      "name": "gate768 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "gate768 axe []",
+      "passed": true
+    },
+    {
+      "name": "gate1280 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "gate1280 axe []",
+      "passed": true
+    },
+    {
+      "name": "gate text200 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "gate text400 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "standalone admission restores main focus after guide closes",
+      "passed": true
+    },
+    {
+      "name": "standalone hides install button",
+      "passed": true
+    },
+    {
+      "name": "standalone admits non-admin",
+      "passed": true
+    },
+    {
+      "name": "mode loss blocks interaction",
+      "passed": true
+    },
+    {
+      "name": "mode loss has no duplicate DOM IDs",
+      "passed": true
+    },
+    {
+      "name": "mode loss axe []",
+      "passed": true
+    },
+    {
+      "name": "mode loss preserves mounted draft",
+      "passed": true
+    },
+    {
+      "name": "offline retains draft",
+      "passed": true
+    },
+    {
+      "name": "admin/public requirement=false admits browser",
+      "passed": true
+    },
+    {
+      "name": "iOS instructions",
+      "passed": true
+    },
+    {
+      "name": "Android instructions",
+      "passed": true
+    },
+    {
+      "name": "guide axe []",
+      "passed": true
+    },
+    {
+      "name": "guide text200 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "guide content text200",
+      "passed": true
+    },
+    {
+      "name": "guide text400 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "guide content text400",
+      "passed": true
+    },
+    {
+      "name": "cancel logout never sends",
+      "passed": true
+    },
+    {
+      "name": "confirmed logout sends once",
+      "passed": true
+    },
+    {
+      "name": "iOS standalone admitted",
+      "passed": true
+    },
+    {
+      "name": "no worker registered",
+      "passed": true
+    },
+    {
+      "name": "no private application caches",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "axe": [
+    {
+      "label": "gate320",
+      "violations": []
+    },
+    {
+      "label": "gate390",
+      "violations": []
+    },
+    {
+      "label": "gate768",
+      "violations": []
+    },
+    {
+      "label": "gate1280",
+      "violations": []
+    },
+    {
+      "label": "mode loss",
+      "violations": []
+    },
+    {
+      "label": "guide",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "synthetic": true,
+  "physicalDeviceInstall": "not tested",
+  "limits": [
+    "Display mode is a client usage signal, not proof of OS installation or an authorization credential",
+    "No authenticated production role UAT or real installation"
+  ]
+}
