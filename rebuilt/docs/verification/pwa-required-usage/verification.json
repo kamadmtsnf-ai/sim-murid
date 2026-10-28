@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Jakarta",
+  "baseline": "bda1db2140f8cfb3e259042b27951d3be743075b",
+  "local": {
+    "check": "passed",
+    "unitIntegrationTests": 789,
+    "typecheck": "passed",
+    "lint": "passed",
+    "dbTypesReplay": "passed",
+    "productionBuild": "passed; final source rebuilt after focus/skip-link changes"
+  },
+  "browser": {
+    "checks": 406,
+    "axeScans": 37,
+    "summaries": [
+      {
+        "suite": "pwa",
+        "result": {
+          "checks": 60,
+          "axe": 6,
+          "errors": []
+        }
+      },
+      {
+        "suite": "pwa-pages",
+        "result": {
+          "checks": 65,
+          "errors": []
+        }
+      },
+      {
+        "suite": "navigation",
+        "result": {
+          "checks": 66,
+          "axe": 14,
+          "errors": []
+        }
+      },
+      {
+        "suite": "login",
+        "result": {
+          "status": "passed",
+          "checks": 215,
+          "issues": [],
+          "axeViews": 17
+        }
+      }
+    ]
+  },
+  "policy": [
+    "Exemption only from verified server principal.is_admin",
+    "Non-admin UI requires actual standalone display mode or iOS navigator.standalone",
+    "Accepted/appinstalled/fullscreen/localStorage do not admit ordinary browser UI",
+    "Logout retains existing confirmation and endpoint",
+    "Installed status is separate from actual launch mode",
+    "Drafts stay mounted but hidden/inert on mode loss; unique main IDs and skip link target preserved"
+  ],
+  "unchanged": [
+    "Auth/RBAC/RPC/RLS/API contracts",
+    "Manifest identity, scope, protected account start URL and icons",
+    "No SW/private cache/background write/automatic reload/session transfer",
+    "No database schema, migration, dependency or environment changes"
+  ],
+  "limits": [
+    "Client usage policy, not OS attestation or tamper-proof security; APIs retain existing server permissions",
+    "Synthetic roles/events and real local public pages; no physical installation, human screen-reader or production-account UAT",
+    "Existing open tabs may keep loaded frontend until navigation/reopen; no forced reload that could discard work"
+  ],
+  "release": "Exact-head CI, PR/merge SHA and production readiness are recorded on PR"
+}

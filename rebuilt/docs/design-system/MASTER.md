@@ -417,3 +417,7 @@ Lihat `docs/development/UI-READABILITY-AUDIT.md` untuk cakupan, pengukuran terba
 ## Pemasangan PWA tanpa gangguan — 28 Oktober 2026
 
 Ajakan pemasangan adalah utilitas sekunder di akhir dokumen, berupa tombol ghost “Pasang aplikasi”; bukan accordion besar/floating banner di area kerja. Panduan menggunakan Dialog bersama dan hanya terbuka atas klik/keyboard pengguna. Offline bukan promosi instalasi dan tetap tersedia di luar dialog. Fokus kembali ke pemicu atau main jika pemasangan menghapus pemicu. Jangan membuka modal otomatis dari event browser atau melakukan reload/cache transaksi. Lihat `docs/development/PWA-INSTALL-PLACEMENT.md`.
+
+## Footer asli dan kewajiban PWA — 28 Oktober 2026
+
+Menggantikan penempatan PR88: tombol Pasang aplikasi berada **di dalam footer** setiap shell, tanpa strip tambahan. Satu provider root mengelola state; komponen footer tidak mendaftarkan listener sendiri. Admin terverifikasi dapat memakai browser. Non-admin mendapat layar persiapan penuh sampai benar-benar standalone/iOS standalone; pemasangan diterima/selesai tidak otomatis membuka layanan. Panduan tiga langkah, perangkat pilihan, mode check dan logout tetap jelas. Mode browser adalah sinyal penggunaan client, bukan kredensial atau pengganti RBAC. Lihat `docs/development/PWA-REQUIRED-USAGE.md` dan keputusan PWA-USAGE-20261028.

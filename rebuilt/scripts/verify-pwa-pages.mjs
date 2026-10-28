@@ -22,7 +22,7 @@ try{
    const launcher=page.getByRole('button',{name:'Pasang aplikasi',exact:true});await launcher.waitFor();
    check(await launcher.count()===1,path+width+' one global install control');
    check(await page.getByRole('dialog').count()===0,path+width+' no unsolicited modal');
-   check(await launcher.evaluate(e=>{const main=document.querySelector('main');return main&&e.getBoundingClientRect().top>=main.getBoundingClientRect().bottom-1&&getComputedStyle(e.parentElement).position==='static';}),path+width+' utility after work content, not floating');
+   check(await launcher.evaluate(e=>Boolean(e.closest('footer'))),path+width+' control inside real footer');check(await page.locator('.pwa-install-footer').count()===0,path+width+' no appended utility strip');
    check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),path+width+' no page overflow');
    await launcher.click();const dialog=page.getByRole('dialog',{name:'Pasang SiM-Murid di perangkat',exact:true});await dialog.waitFor();
    check(await dialog.getByText(/Login, verifikasi email/).isVisible(),path+width+' guide opens on request');

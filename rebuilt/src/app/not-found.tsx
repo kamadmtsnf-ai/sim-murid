@@ -1,9 +1,11 @@
+import { PwaInstallButton } from "@/components/pwa-install";
 import Link from "next/link";
 import { ArrowLeft, FileSearch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
+    <>
     <main
       id="main-content"
       tabIndex={-1}
@@ -41,5 +43,7 @@ export default function NotFound() {
         </p>
       </section>
     </main>
+    <footer className="public-app-footer"><span>SiM-Murid · MTs Nurul Falah</span><PwaInstallButton /></footer>
+    </>
   );
 }

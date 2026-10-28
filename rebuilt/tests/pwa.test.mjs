@@ -24,3 +24,17 @@ test('maskable artwork stays in safe circle on an opaque brand background',async
   if(Math.hypot(x-255.5,y-255.5)>204.8)assert.ok([...data.subarray(offset,offset+3)].every((v,i)=>Math.abs(v-[15,118,110][i])<=2),'only brand background outside safe circle');
  }
 });
+
+test('installation guidance chooses iOS, desktop-style iPad, Android and desktop without changing access policy', async()=>{
+ const {installPlatform,installInstructions}=await import('../src/lib/pwa/presentation.ts');
+ assert.equal(installPlatform('iPhone'), 'ios');assert.equal(installPlatform('Macintosh',5),'ios');
+ assert.equal(installPlatform('Macintosh',0),'desktop');assert.equal(installPlatform('Android'),'android');
+ for(const platform of ['android','ios','desktop'])assert.equal(installInstructions[platform].length,3);
+ assert.ok(installInstructions.ios.some(s=>s.includes('Safari')));
+ assert.ok(installInstructions.desktop.some(s=>s.includes('ikon aplikasi')));
+});
+test('PWA manifest keeps session-protected launch and consistent brand metadata',()=>{
+ assert.equal(manifest.start_url,'/account');assert.equal(manifest.display,'standalone');
+ assert.equal(manifest.theme_color,'#125e64');assert.equal(manifest.orientation,'any');
+ assert.ok(manifest.categories.includes('education'));
+});

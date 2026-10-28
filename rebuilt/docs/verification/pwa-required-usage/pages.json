@@ -1,0 +1,266 @@
+{
+  "checks": [
+    {
+      "name": "/390 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/390 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/390 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/390 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/390 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/390 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/390 focus restored",
+      "passed": true
+    },
+    {
+      "name": "/1280 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/1280 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/1280 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/1280 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/1280 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/1280 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/1280 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/1280 focus restored",
+      "passed": true
+    },
+    {
+      "name": "/login390 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/login390 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/login390 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/login390 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/login390 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/login390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/login390 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/login390 focus restored",
+      "passed": true
+    },
+    {
+      "name": "/login1280 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/login1280 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/login1280 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/login1280 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/login1280 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/login1280 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/login1280 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/login1280 focus restored",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/recovery390 focus restored",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/recovery1280 focus restored",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page390 focus restored",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 HTTP status",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 one global install control",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 no unsolicited modal",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 control inside real footer",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 no appended utility strip",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 guide opens on request",
+      "passed": true
+    },
+    {
+      "name": "/not-a-real-page1280 focus restored",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "scope": "Actual local Next production pages; GET navigation and UI only; no account/provider mutation"
+}
