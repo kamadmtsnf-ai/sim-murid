@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { Tabs } from "radix-ui";
 import { ChevronDown } from "lucide-react";
 import { MutationFeedback } from "@/components/feedback/mutation-feedback";
@@ -582,11 +583,13 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
               </div>
             ))}
           </section>
-          <p className="text-sm text-muted-foreground">
-            Persentase tercatat memakai jumlah absensi; persentase hari efektif
-            memakai hari sekolah selama siswa terdaftar. Minggu dan hari libur
-            dikecualikan. Tanggal tanpa absensi tidak otomatis menjadi Alpha.
-          </p>
+          <Guidance summary="Cara membaca persentase absensi">
+            <p className="text-sm text-muted-foreground">
+              Persentase tercatat memakai jumlah absensi; persentase hari efektif
+              memakai hari sekolah selama siswa terdaftar. Minggu dan hari libur
+              dikecualikan. Tanggal tanpa absensi tidak otomatis menjadi Alpha.
+            </p>
+          </Guidance>
           {data.extra.trend.length > 0 && (
             <section className="rounded-xl border bg-card p-4">
               <h2 className="font-semibold">Tren jumlah hadir</h2>
@@ -704,10 +707,12 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                 </a>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Ekspor mengikuti filter dan hak akses yang sama, maksimal 10.000
-              catatan. Persempit periode bila batas terlampaui.
-            </p>
+            <Guidance summary="Ketentuan ekspor absensi">
+              <p className="text-sm text-muted-foreground">
+                Ekspor mengikuti filter dan hak akses yang sama, maksimal 10.000
+                catatan. Persempit periode bila batas terlampaui.
+              </p>
+            </Guidance>
             <TableRegion label="Riwayat absensi — gulir untuk melihat seluruh kolom">
               <table className="w-full text-left text-sm">
                 <caption className="sr-only">

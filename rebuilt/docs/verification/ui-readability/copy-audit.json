@@ -1,0 +1,125 @@
+{
+  "method": "Exact hand-reviewed static paragraph replacements; whitespace-delimited word counts. Not a whole-app usability measure. Full text retained on expansion.",
+  "items": [
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "summary": "Panduan tindak lanjut",
+      "originalWords": 21,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/components/audit/audit-trail.tsx",
+      "summary": "Tentang riwayat perubahan",
+      "originalWords": 18,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/sessions/session-panel.tsx",
+      "summary": "Ketentuan sesi akun",
+      "originalWords": 26,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "summary": "Panduan penugasan guru",
+      "originalWords": 26,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "summary": "Cara menghitung jadwal",
+      "originalWords": 23,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/access/access-panel.tsx",
+      "summary": "Cara kerja hak akses",
+      "originalWords": 20,
+      "summaryWords": 4
+    },
+    {
+      "file": "src/app/account/access/access-panel.tsx",
+      "summary": "Arti cakupan izin",
+      "originalWords": 24,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "summary": "Tentang relasi keluarga",
+      "originalWords": 24,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/services/[module]/reconciliation-panel.tsx",
+      "summary": "Cakupan ringkasan",
+      "originalWords": 14,
+      "summaryWords": 2
+    },
+    {
+      "file": "src/app/account/services/[module]/reconciliation-panel.tsx",
+      "summary": "Cakupan paket ekspor",
+      "originalWords": 16,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/services/[module]/jobs-panel.tsx",
+      "summary": "Panduan proses pekerjaan",
+      "originalWords": 19,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "summary": "Ketentuan ekspor bimbingan",
+      "originalWords": 16,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "summary": "Ketentuan ekspor tabungan",
+      "originalWords": 14,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "summary": "Tentang rekening tabungan",
+      "originalWords": 12,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "summary": "Cara membaca persentase absensi",
+      "originalWords": 26,
+      "summaryWords": 4
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "summary": "Ketentuan ekspor absensi",
+      "originalWords": 16,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/operations/[module]/duty-panel.tsx",
+      "summary": "Ketentuan ekspor Guru Piket",
+      "originalWords": 15,
+      "summaryWords": 4
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "summary": "Ketentuan ekspor pembayaran",
+      "originalWords": 15,
+      "summaryWords": 3
+    },
+    {
+      "file": "src/app/account/learning/[module]/promotions-panel.tsx",
+      "summary": "Tentang halaman kenaikan dan ijazah",
+      "originalWords": 19,
+      "summaryWords": 5
+    },
+    {
+      "file": "src/app/account/learning/[module]/reports-panel.tsx",
+      "summary": "Tentang halaman rapor",
+      "originalWords": 15,
+      "summaryWords": 3
+    }
+  ]
+}

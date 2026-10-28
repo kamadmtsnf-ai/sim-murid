@@ -402,3 +402,14 @@ Target main-content menerima tabIndex=-1 untuk skip link. Gunakan outline focus-
 ### Kesehatan aplikasi — audit27 Oktober2026
 
 Metrik menggunakan lebar konten; unknown tidak ditampilkan sebagai0. Utamakan status sumber gagal/parsial sebelum metrik, tampilkan empty state sampel, dan bedakan konfigurasi provider dari bukti pengiriman. Detail cakupan boleh memakai accordion native, tindakan penting tetap terlihat. Refresh nativeGET tidak memicu pekerjaan. Ikon tab memiliki SVG eksplisit dan ICO multiukuran, memakai identitas sekolah existing. Lihat ../development/HEALTH-APP-AUDIT.md.
+
+
+## Tampilan ringkas — 28 Oktober 2026
+
+Instruksi terbaru pengguna memprioritaskan kenyamanan membaca: data dan tindakan utama dahulu, petunjuk tambahan saat dibutuhkan. Ini memperbarui presentasi Plass sebelumnya: kartu konten opaque dengan bayangan lebih ringan, menu aktif memakai teal semantik tanpa gradasi, padding kartu 16px pada mobile/24px pada desktop. Ukuran teks, kontras, target sentuh dan focus tetap dipertahankan; jangan mengatasi kepadatan dengan mengecilkan teks atau line-clamp.
+
+`components/ui/guidance.tsx` adalah disclosure native bersama untuk penjelasan **opsional**. Ringkasan menyebut topik dengan jelas; isi lengkap tetap tersedia melalui keyboard/sentuhan. Hindari accordion bersarang untuk satu tugas. Tidak ada penyimpanan preferensi atau fetch baru.
+
+Jangan masukkan pesan error/loading/success, hasil ambigu, label/batas isian wajib, konsekuensi penghapusan, biaya transaksi, kode kredensial, atau peringatan AI ke disclosure tertutup. Data yang hilang tetap unknown, bukan nol atau sukses. Dashboard menempatkan ringkasan akun dan inventaris layanan pada disclosure; keadaan akses gagal/kosong tetap terlihat. Detail layanan tetap dibuka melalui sidebar sesuai kontrak navigasi existing.
+
+Lihat `docs/development/UI-READABILITY-AUDIT.md` untuk cakupan, pengukuran terbatas, dan hasil QA aktual. Pengurangan kata pada petunjuk terpilih bukan pengukuran kenyamanan pengguna atau persentase seluruh aplikasi.

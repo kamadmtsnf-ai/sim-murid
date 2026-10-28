@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { useEffect, useRef, useState } from "react";
 import { useSortPreference } from "@/lib/collections/use-sort-preference";
 import { CollectionSummary } from "@/components/ui/collection-summary";
@@ -142,11 +143,13 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
           />
           Hak akses saya
         </h1>
-        <p className="text-sm leading-6 text-muted-foreground">
-          Periksa peran, penugasan aktif, dan cakupan izin akun Anda. Setiap
-          layanan tetap memeriksa sesi, kepemilikan, serta hubungan data di
-          server.
-        </p>
+        <Guidance summary="Cara kerja hak akses">
+          <p className="text-sm leading-6 text-muted-foreground">
+            Periksa peran, penugasan aktif, dan cakupan izin akun Anda. Setiap
+            layanan tetap memeriksa sesi, kepemilikan, serta hubungan data di
+            server.
+          </p>
+        </Guidance>
       </header>
       <div className="ds-actions items-center justify-between">
         <p className="text-sm text-muted-foreground">
@@ -272,11 +275,13 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                   Cakupan izin
                 </h2>
               </CardTitle>
-              <p className="text-sm leading-6 text-muted-foreground">
-                Seluruh data berarti cakupan layanan yang disebutkan. Data
-                sendiri mengikuti kepemilikan atau relasi yang diperiksa
-                layanan. Izin kelas hanya berlaku pada kelas yang tercantum.
-              </p>
+              <Guidance summary="Arti cakupan izin">
+                <p className="text-sm leading-6 text-muted-foreground">
+                  Seluruh data berarti cakupan layanan yang disebutkan. Data
+                  sendiri mengikuti kepemilikan atau relasi yang diperiksa
+                  layanan. Izin kelas hanya berlaku pada kelas yang tercantum.
+                </p>
+              </Guidance>
             </CardHeader>
             <CardContent className="min-w-0 space-y-5 px-4 sm:px-6">
               <FilterBar label="Filter cakupan izin">

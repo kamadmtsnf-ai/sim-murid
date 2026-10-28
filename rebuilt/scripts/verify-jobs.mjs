@@ -257,6 +257,7 @@ try {
     .getByRole("button", { name: "Antre ulang", exact: true })
     .first()
     .click();
+  await page.getByRole("alertdialog").getByRole("button",{name:"Lanjutkan",exact:true}).click();
   await page.getByText(/^Pekerjaan diantre ulang/).waitFor();
   check(
     lastCommand.type === "retry" && lastCommand.id === id(1),
@@ -283,9 +284,12 @@ try {
   page.once("dialog", (d) => d.dismiss());
   const before = writes;
   await queue().click();
+  await page.getByRole("alertdialog").getByRole("button",{name:"Batal",exact:true}).click();
+  await page.getByRole("alertdialog").waitFor({state:"hidden"});
   check(writes === before, "cancel queue confirmation");
   page.on("dialog", accept);
   await queue().click();
+  await page.getByRole("alertdialog").getByRole("button",{name:"Lanjutkan",exact:true}).click();
   await page.getByText(/^Pemeriksaan dan pengantrean/).waitFor();
   check(lastCommand.dryRun === false, "queue explicit non-preview");
   const beforeDispatch = dispatches;
@@ -293,6 +297,7 @@ try {
     e.click();
     e.click();
   });
+  await page.getByRole("alertdialog").getByRole("button",{name:"Lanjutkan",exact:true}).click();
   await page
     .getByText("Pengiriman diterima penyedia.", { exact: true })
     .waitFor();
@@ -302,6 +307,7 @@ try {
   check(dispatches === beforeDispatch + 1, "dispatch shares synchronous lock");
   dispatchMode = "empty";
   await dispatch().click();
+  await page.getByRole("alertdialog").getByRole("button",{name:"Lanjutkan",exact:true}).click();
   await page
     .getByText("Tidak ada pengiriman siap diproses.", { exact: true })
     .waitFor();
@@ -311,6 +317,7 @@ try {
   check(await preview().isEnabled(), "empty delivery permits next action");
   dispatchMode = "ambiguous";
   await dispatch().click();
+  await page.getByRole("alertdialog").getByRole("button",{name:"Lanjutkan",exact:true}).click();
   await page.getByText(/^Hasil pengiriman ambigu/).waitFor();
   check(await queue().isDisabled(), "ambiguous dispatch locks");
   await reload();
@@ -330,6 +337,7 @@ try {
   await reload();
   dispatchMode = "unconfirmed";
   await dispatch().click();
+  await page.getByRole("alertdialog").getByRole("button",{name:"Lanjutkan",exact:true}).click();
   await page.getByText(/^Hasil tindakan belum dapat dipastikan/).waitFor();
   check(await dispatch().isDisabled(), "unconfirmed provider commit locks");
   await reload();

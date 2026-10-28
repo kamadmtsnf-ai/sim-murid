@@ -27,11 +27,11 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     : query.expired === "1" ? {tone:"info" as const,text:"Sesi tidak berlaku. Silakan masuk kembali."}
     : query.logout === "1" ? {tone:"success" as const,text:"Anda berhasil keluar."} : null;
   return <LoginShell>
-    <Card className={styles.card}><CardHeader className={styles.cardHeader}><p className="eyebrow">Akses akun</p><h1 className="text-2xl font-semibold">Masuk ke SiM-Murid</h1><CardDescription>Gunakan username dan password akun madrasah Anda.</CardDescription></CardHeader><CardContent className={styles.cardContent}>
+    <Card className={styles.card}><CardHeader className={styles.cardHeader}><p className="eyebrow">Akses akun</p><h1 className="text-2xl font-semibold">Masuk ke SiM-Murid</h1><CardDescription>Masuk dengan akun madrasah Anda.</CardDescription></CardHeader><CardContent className={styles.cardContent}>
       {notice && <div className="mb-5"><Status tone={notice.tone}>{notice.text}</Status></div>}
 
       <LoginForm captcha={publicRecaptcha()} />
-      <p className={styles.help}>Lupa password atau tidak bisa mengakses sesi lama? <Link href="/recovery">Minta bantuan akun</Link>. Untuk akun baru, hubungi administrator madrasah.</p>
+      <p className={styles.help}>Kesulitan masuk? <Link href="/recovery">Minta bantuan akun</Link>. Akun baru? Hubungi admin madrasah.</p>
     </CardContent></Card>
   </LoginShell>;
 }

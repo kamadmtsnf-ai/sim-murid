@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
@@ -625,10 +626,12 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
             </a>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground">
-          Ekspor mengikuti filter dan izin yang sama, maksimal 10.000 mutasi.
-          Persempit periode bila diperlukan.
-        </p>
+        <Guidance summary="Ketentuan ekspor tabungan">
+          <p className="text-sm text-muted-foreground">
+            Ekspor mengikuti filter dan izin yang sama, maksimal 10.000 mutasi.
+            Persempit periode bila diperlukan.
+          </p>
+        </Guidance>
         <TableRegion label="Mutasi tabungan — gulir untuk melihat seluruh kolom">
           <table className="w-full text-left text-sm">
             <caption className="sr-only">
@@ -765,10 +768,12 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                     <option value="G">Guru</option>
                     <option value="N">Nasabah</option>
                   </SelectField>
-                  <p className="text-sm text-muted-foreground">
-                    Kategori rekening disimpan terpisah dari role pemilik. Satu
-                    pemilik memiliki satu rekening.
-                  </p>
+                  <Guidance summary="Tentang rekening tabungan">
+                    <p className="text-sm text-muted-foreground">
+                      Kategori rekening disimpan terpisah dari role pemilik. Satu
+                      pemilik memiliki satu rekening.
+                    </p>
+                  </Guidance>
                 </>
               ) : mode === "bracket" ? (
                 <>

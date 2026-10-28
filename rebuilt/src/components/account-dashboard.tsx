@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "./ui/guidance";
 import { DailyOverview } from "./dashboard/daily-overview";
 import type { Overview } from "@/lib/dashboard/overview";
 import {
@@ -43,8 +44,7 @@ export function AccountDashboard({
           <p className="eyebrow">Ruang kerja Anda</p>
           <h1>Selamat datang, {name}</h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Satu ruang kerja untuk mendampingi murid dan mengelola layanan
-            madrasah.
+            Ringkasan aktivitas dan layanan Anda.
           </p>
         </div>
         <span className="workspace-status">
@@ -58,66 +58,68 @@ export function AccountDashboard({
           initial={overview}
         />
       )}
-      <section aria-labelledby="account-summary-title" className="space-y-4">
-        <h2 id="account-summary-title" className="text-lg font-semibold">
-          Ringkasan akun
-        </h2>
-        <div className="account-summary-grid">
-          <Card className="min-w-0 py-5">
-            <CardContent className="min-w-0 px-5">
-              <div className="summary-icon">
-                <UserRound aria-hidden="true" />
-              </div>
-              <h3 className="mt-4 text-sm font-medium text-muted-foreground">
-                Identitas akun
-              </h3>
-              <p className="mt-1 font-semibold wrap-anywhere">{name}</p>
-              <p className="mt-1 text-sm text-muted-foreground wrap-anywhere">
-                {workspace?.username
-                  ? `@${workspace.username}`
-                  : "Username belum tersedia"}
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="min-w-0 py-5">
-            <CardContent className="min-w-0 px-5">
-              <div className="summary-icon">
-                <Clock3 aria-hidden="true" />
-              </div>
-              <h3 className="mt-4 text-sm font-medium text-muted-foreground">
-                Sesi berlaku sampai
-              </h3>
-              {sessionTime ? (
-                <time
-                  dateTime={expiresAt}
-                  className="mt-1 block font-semibold tabular-nums"
-                >
-                  {sessionTime} WIB
-                </time>
-              ) : (
-                <p className="mt-1 font-semibold">Waktu sesi belum tersedia</p>
-              )}
-              <p className="mt-2 text-sm text-muted-foreground">
-                Keluar dari akun setelah memakai perangkat bersama.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="min-w-0 py-5">
-            <CardContent className="min-w-0 px-5">
-              <div className="summary-icon">
-                <ShieldCheck aria-hidden="true" />
-              </div>
-              <h3 className="mt-4 text-sm font-medium text-muted-foreground">
-                Privasi dan akses
-              </h3>
-              <p className="mt-1 font-semibold">Sesuai tanggung jawab Anda</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Data dan tindakan diperiksa menurut peran dan hubungan akun.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      <Guidance summary="Ringkasan akun">
+        <section aria-labelledby="account-summary-title" className="space-y-4">
+          <h2 id="account-summary-title" className="text-lg font-semibold">
+            Ringkasan akun
+          </h2>
+          <div className="account-summary-grid">
+            <Card className="min-w-0 py-5">
+              <CardContent className="min-w-0 px-5">
+                <div className="summary-icon">
+                  <UserRound aria-hidden="true" />
+                </div>
+                <h3 className="mt-4 text-sm font-medium text-muted-foreground">
+                  Identitas akun
+                </h3>
+                <p className="mt-1 font-semibold wrap-anywhere">{name}</p>
+                <p className="mt-1 text-sm text-muted-foreground wrap-anywhere">
+                  {workspace?.username
+                    ? `@${workspace.username}`
+                    : "Username belum tersedia"}
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="min-w-0 py-5">
+              <CardContent className="min-w-0 px-5">
+                <div className="summary-icon">
+                  <Clock3 aria-hidden="true" />
+                </div>
+                <h3 className="mt-4 text-sm font-medium text-muted-foreground">
+                  Sesi berlaku sampai
+                </h3>
+                {sessionTime ? (
+                  <time
+                    dateTime={expiresAt}
+                    className="mt-1 block font-semibold tabular-nums"
+                  >
+                    {sessionTime} WIB
+                  </time>
+                ) : (
+                  <p className="mt-1 font-semibold">Waktu sesi belum tersedia</p>
+                )}
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Keluar dari akun setelah memakai perangkat bersama.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="min-w-0 py-5">
+              <CardContent className="min-w-0 px-5">
+                <div className="summary-icon">
+                  <ShieldCheck aria-hidden="true" />
+                </div>
+                <h3 className="mt-4 text-sm font-medium text-muted-foreground">
+                  Privasi dan akses
+                </h3>
+                <p className="mt-1 font-semibold">Sesuai tanggung jawab Anda</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Data dan tindakan diperiksa menurut peran dan hubungan akun.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </Guidance>
       <div className="sidebar-guidance">
         <PanelLeft
           className="size-5 shrink-0 text-primary"
@@ -126,8 +128,7 @@ export function AccountDashboard({
         <div className="min-w-0">
           <p className="font-medium">Buka layanan melalui sidebar</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Pilih atau cari menu pada sidebar. Di ponsel, buka navigasi melalui
-            tombol menu di bagian atas.
+            Cari layanan di sidebar atau buka tombol Menu di ponsel.
           </p>
         </div>
       </div>
@@ -141,9 +142,6 @@ export function AccountDashboard({
             <h2 id="available-services-title" className="text-lg font-semibold">
               Layanan sesuai akses Anda
             </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Lihat layanan yang tersedia, lalu buka melalui sidebar.
-            </p>
           </div>
         </div>
         {!workspace ? (
@@ -159,26 +157,28 @@ export function AccountDashboard({
           </Status>
         ) : null}
         {groups.length ? (
-          <div className="dashboard-grid">
-            {groups.map((g) => (
-              <section key={g.label} className="dashboard-group">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <h3 className="min-w-0 flex-1 font-semibold">{g.label}</h3>
-                  <span className="service-count">
-                    {g.items.length} layanan
-                  </span>
-                </div>
-                <ul className="dashboard-services">
-                  {g.items.map((i) => (
-                    <li key={i.href}>
-                      <NavigationIcon href={i.href} />
-                      <span className="min-w-0">{i.label}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ))}
-          </div>
+          <Guidance summary={`Lihat daftar layanan (${groups.reduce((total, group) => total + group.items.length, 0)})`}>
+            <div className="dashboard-grid">
+              {groups.map((g) => (
+                <section key={g.label} className="dashboard-group">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <h3 className="min-w-0 flex-1 font-semibold">{g.label}</h3>
+                    <span className="service-count">
+                      {g.items.length} layanan
+                    </span>
+                  </div>
+                  <ul className="dashboard-services">
+                    {g.items.map((i) => (
+                      <li key={i.href}>
+                        <NavigationIcon href={i.href} />
+                        <span className="min-w-0">{i.label}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </Guidance>
         ) : workspace && !workspace.navigationUnavailable ? (
           <div className="empty-state">
             <p className="font-medium">Belum ada layanan untuk ditampilkan.</p>

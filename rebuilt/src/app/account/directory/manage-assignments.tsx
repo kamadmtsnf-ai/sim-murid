@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -156,11 +157,13 @@ export function ManageAssignments({ target }: { target: string }) {
       }
     >
       <div className="min-w-0 space-y-5" aria-busy={busy}>
-        <p className="text-sm text-muted-foreground">
-          Seorang guru dapat memiliki beberapa tugas. Wali kelas ditetapkan pada
-          Kelas dan siswa; Guru Piket melalui jadwal Guru Piket. Penugasan di
-          sini berlaku untuk tingkat madrasah.
-        </p>
+        <Guidance summary="Panduan penugasan guru">
+          <p className="text-sm text-muted-foreground">
+            Seorang guru dapat memiliki beberapa tugas. Wali kelas ditetapkan pada
+            Kelas dan siswa; Guru Piket melalui jadwal Guru Piket. Penugasan di
+            sini berlaku untuk tingkat madrasah.
+          </p>
+        </Guidance>
         {message && <Status>{message}</Status>}
         {!loaded && !busy && (
           <Button type="button" onClick={() => void load()}>

@@ -64,7 +64,7 @@ export function AdminHealth({ data }: { data: HealthSnapshot }) {
       <div className="space-y-1"><p className="text-sm font-medium">Pemeriksaan terakhir</p><p className="text-sm text-muted-foreground"><Time value={data.checkedAt} /></p></div>
       <form action="/account/health" method="get"><Button type="submit" variant="outline"><RefreshCw className="size-[16px]" aria-hidden="true" />Perbarui status</Button></form>
     </div>
-    <Status tone={unavailable || (issues ?? 0) > 0 ? "warning" : "info"} heading={unavailable === 2 ? "Data operasional belum tersedia" : unavailable === 1 ? "Sebagian data belum tersedia" : "Ringkasan operasional"} hint="Ringkasan sampel bukan pemeriksaan kesehatan seluruh layanan. Gunakan menu Pekerjaan atau Rekonsiliasi di sidebar untuk penanganan lebih lanjut.">{summary}</Status>
+    <Status tone={unavailable || (issues ?? 0) > 0 ? "warning" : "info"} heading={unavailable === 2 ? "Data operasional belum tersedia" : unavailable === 1 ? "Sebagian data belum tersedia" : "Ringkasan operasional"} hint="Sampel operasional, bukan pemeriksaan seluruh layanan. Tindak lanjuti melalui sidebar.">{summary}</Status>
     <div className="grid min-w-0 items-stretch gap-6 xl:grid-cols-2">
       <HealthCard id="health-delivery" title="Email dan pengiriman" icon={Mail} available={!!(delivery && providers)}>
         {delivery && providers ? <>
@@ -72,12 +72,12 @@ export function AdminHealth({ data }: { data: HealthSnapshot }) {
           <Metrics items={[["Menunggu", delivery.queued], ["Diproses", delivery.processing], ["Diterima penyedia", delivery.sent], ["Gagal", delivery.failed], ["Perlu pemeriksaan", delivery.ambiguous], ["Dibatalkan", delivery.cancelled]]} />
           <p className="text-muted-foreground">{delivery.sampled.toLocaleString("id-ID")} pengiriman dalam sampel. Pengiriman menunggu tertua dibuat: <Time value={jobs.oldestQueuedAt} />.</p>
           <dl className="space-y-3 rounded-xl border p-[12px]">
-            <div><dt className="font-medium">Konfigurasi Gmail</dt><dd className="text-muted-foreground">{providers.gmail ? "Tersedia; koneksi dan penerimaan email belum dibuktikan." : "Belum tersedia atau tidak valid; periksa konfigurasi server."}</dd></div>
-            <div><dt className="font-medium">Konfigurasi WhatsApp</dt><dd className="text-muted-foreground">{providers.whatsapp ? "Tersedia; pengiriman belum dibuktikan." : "Opsional · belum tersedia atau tidak valid. Abaikan jika kanal tidak digunakan."}</dd></div>
-            <div><dt className="font-medium">Dispatch terjadwal</dt><dd className="text-muted-foreground">{providers.scheduledDispatch ? "Diaktifkan pada konfigurasi; eksekusi aktual belum dibuktikan." : "Belum diaktifkan pada konfigurasi."}</dd></div>
+            <div><dt className="font-medium">Konfigurasi Gmail</dt><dd className="text-muted-foreground">{providers.gmail ? "Dikonfigurasi · koneksi belum diuji" : "Konfigurasi belum valid"}</dd></div>
+            <div><dt className="font-medium">Konfigurasi WhatsApp</dt><dd className="text-muted-foreground">{providers.whatsapp ? "Dikonfigurasi · pengiriman belum diuji" : "Opsional · belum dikonfigurasi"}</dd></div>
+            <div><dt className="font-medium">Dispatch terjadwal</dt><dd className="text-muted-foreground">{providers.scheduledDispatch ? "Diaktifkan · eksekusi belum diuji" : "Belum diaktifkan"}</dd></div>
           </dl>
           <Note title="Cakupan data pengiriman"><p>Pemeriksaan: <Time value={jobs.checkedAt} />. Maksimal 200 outbox terbaru, semua kanal; bukan total seluruh antrean. Statistik ini tidak mencakup OTP verifikasi dan pemulihan akun yang dikirim langsung.</p><p>Diterima penyedia bukan bukti tiba di kotak masuk. Waktu penerimaan penyedia belum tersedia pada sumber ini. Periksa juga spam dan laporan penyedia jika pengguna belum menerima email.</p></Note>
-          <NextStep>Periksa pekerjaan gagal atau belum pasti pada menu Pekerjaan. Jangan mengulang pengiriman berstatus belum pasti sebelum memeriksa hasilnya.</NextStep>
+          <NextStep>Buka Pekerjaan di sidebar. Periksa hasil pengiriman belum pasti sebelum mencoba ulang.</NextStep>
         </> : <Status tone="warning" heading="Data pengiriman tidak tersedia">Perbarui status. Jika tetap gagal, periksa layanan database dan log server. Kegagalan baca tidak berarti tidak ada antrean.</Status>}
       </HealthCard>
       <HealthCard id="health-runs" title="Pekerjaan terjadwal" icon={Clock3} available={!!runs}>
@@ -86,20 +86,20 @@ export function AdminHealth({ data }: { data: HealthSnapshot }) {
           <Metrics items={[["Menunggu", runs.queued], ["Berjalan", runs.running], ["Selesai", runs.succeeded], ["Gagal", runs.failed], ["Dilewati", runs.skipped]]} />
           <p className="text-muted-foreground">{runs.sampled.toLocaleString("id-ID")} pekerjaan dalam sampel. Berakhir terakhir: <Time value={jobs.latestJobFinishedAt} />.</p>
           <Note title="Cakupan pekerjaan terjadwal"><p>Pemeriksaan: <Time value={jobs.checkedAt} />. Maksimal 100 pekerjaan terbaru. Waktu selesai mencakup semua hasil akhir, termasuk gagal.</p><p>Halaman ini hanya membaca status, tidak menjalankan atau mengirim ulang pekerjaan.</p></Note>
-          <NextStep>Periksa antrean yang tertahan dan pekerjaan gagal melalui menu Pekerjaan. Periksa hasil sebelumnya sebelum mencoba ulang.</NextStep>
+          <NextStep>Periksa antrean dan hasil sebelumnya melalui menu Pekerjaan sebelum mencoba ulang.</NextStep>
         </> : <Status tone="warning" heading="Data pekerjaan tidak tersedia">Perbarui status dan periksa sumber sebelum mengambil tindakan.</Status>}
       </HealthCard>
       <HealthCard id="health-backup" title="Backup dan pemulihan" icon={ArchiveRestore} available={null}>
         <dl className="space-y-3"><div><dt className="font-medium">Backup produksi terakhir</dt><dd className="text-muted-foreground">Belum tersedia; sumber metadata backup belum terhubung.</dd></div><div><dt className="font-medium">Restore produksi terakhir</dt><dd className="text-muted-foreground">Belum tersedia; keberhasilan restore belum dibuktikan.</dd></div></dl>
         <p>Keberadaan file backup atau hasil latihan database lokal tidak membuktikan backup produksi dapat dipulihkan.</p>
-        <NextStep>Admin operasional memeriksa backup pada penyedia database, mencatat waktu dan cakupan, lalu menguji restore pada lingkungan terisolasi. Jangan menguji restore pada database produksi.</NextStep>
+        <NextStep>Admin: periksa backup pada penyedia dan catat buktinya. Uji restore di lingkungan terisolasi, jangan di produksi.</NextStep>
       </HealthCard>
       <HealthCard id="health-reconciliation" title="Rekonsiliasi" icon={Files} available={reconciliationReady}>
         {reconciliationItems ? <>
           <Metrics items={reconciliationItems} />
           <p>{r.sourceAvailable ? "Sumber pembanding tersedia; angka ringkasan belum membuktikan data cocok." : "Sumber pembanding belum tersedia; kesesuaian data belum dapat diverifikasi."}</p>
           <Note title="Cakupan rekonsiliasi"><p>Pemeriksaan: <Time value={r.checkedAt} />. Jumlah arsip bukan bukti kesetaraan data atau kesiapan migrasi.</p></Note>
-          <NextStep>Gunakan menu Rekonsiliasi untuk memeriksa bukti dan paket data sebelum menyimpulkan kesesuaian.</NextStep>
+          <NextStep>Periksa bukti dan paket data melalui menu Rekonsiliasi.</NextStep>
         </> : <Status tone="warning" heading="Data rekonsiliasi tidak tersedia">Perbarui status dan periksa sumber. Kegagalan baca bukan hasil rekonsiliasi berhasil.</Status>}
       </HealthCard>
     </div>

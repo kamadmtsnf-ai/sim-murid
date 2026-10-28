@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
@@ -505,11 +506,13 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
   return (
     <div className="promotions-panel min-w-0 space-y-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
-        <p className="max-w-3xl text-sm text-muted-foreground">
-          Kelola kenaikan dan penempatan siswa serta dokumen kelulusan. Data
-          nilai, keuangan, dan arsip siswa tetap dipertahankan ketika status
-          berubah.
-        </p>
+        <Guidance summary="Tentang halaman kenaikan dan ijazah">
+          <p className="max-w-3xl text-sm text-muted-foreground">
+            Kelola kenaikan dan penempatan siswa serta dokumen kelulusan. Data
+            nilai, keuangan, dan arsip siswa tetap dipertahankan ketika status
+            berubah.
+          </p>
+        </Guidance>
         <Button
           id="promotions-refresh"
           type="button"

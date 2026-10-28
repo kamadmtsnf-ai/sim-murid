@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
@@ -217,11 +218,13 @@ export function SchedulePanel({
           <p className="mt-1 text-2xl font-semibold">{data.duties.length}</p>
         </div>
       </div>
-      <p className="text-sm text-muted-foreground">
-        Waktu selesai dihitung dari durasi × JTM + istirahat. Jadwal yang
-        bertabrakan untuk kelas atau guru ditolak. Penggantian piket tidak
-        mengubah jadwal pelajaran.
-      </p>
+      <Guidance summary="Cara menghitung jadwal">
+        <p className="text-sm text-muted-foreground">
+          Waktu selesai dihitung dari durasi × JTM + istirahat. Jadwal yang
+          bertabrakan untuk kelas atau guru ditolak. Penggantian piket tidak
+          mengubah jadwal pelajaran.
+        </p>
+      </Guidance>
       {!modal && feedback}
       <form
         action="/account/schedules"
