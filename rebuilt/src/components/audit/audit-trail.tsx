@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -183,10 +184,12 @@ export function AuditTrail() {
         <h2 className="text-xl font-semibold">
           Finalisasi dan jejak perubahan
         </h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Tinjau tindakan yang tercatat beserta pelaku, waktu WIB, dan perubahan
-          yang tersedia. Riwayat hanya dapat dibaca oleh Admin.
-        </p>
+        <Guidance summary="Tentang riwayat perubahan">
+          <p className="mt-2 text-sm text-muted-foreground">
+            Tinjau tindakan yang tercatat beserta pelaku, waktu WIB, dan perubahan
+            yang tersedia. Riwayat hanya dapat dibaca oleh Admin.
+          </p>
+        </Guidance>
       </div>
       <details className="rounded-lg border p-4">
         <summary className="cursor-pointer rounded text-sm font-medium focus-visible:outline-2 focus-visible:outline-ring">

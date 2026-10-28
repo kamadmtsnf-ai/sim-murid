@@ -213,12 +213,20 @@ try {
     await page.getByRole("heading", { level: 1 }).waitFor();
   }
   const input = () =>
-      page.getByRole("region", { name: "Input absensi per kelas" }),
+      page.getByRole("region", { name: "Input absensi per kelas", includeHidden:true }),
     history = () => page.getByRole("region", { name: "Filter riwayat" }),
     cal = () => page.getByRole("region", { name: "Kalender kehadiran siswa" }),
     dialog = () => page.getByRole("dialog");
+  async function showHistory() {
+    const tab = page.getByRole("tab", {name:"Riwayat absensi",exact:true});
+    if (await tab.count()) await tab.click();
+    const summary = page.locator('summary').filter({hasText:"Filter riwayat"});
+    if (await summary.count() && !await summary.evaluate(e=>e.parentElement.open)) await summary.click();
+  }
   async function prepare() {
-    await input().getByLabel("Kelas untuk input").selectOption(id(20));
+    const tab = page.getByRole("tab", {name:"Input absensi",exact:true});
+    if (await tab.count()) await tab.click();
+    if (await input().getByLabel("Kelas untuk input").inputValue() !== id(20)) await input().getByLabel("Kelas untuk input").selectOption(id(20));
     await input().getByRole("button", { name: "Tandai semua Hadir" }).click();
   }
   async function bounds(label) {
@@ -319,9 +327,11 @@ try {
   check((await status.inputValue()) === "", "successful save clears statuses");
   // History filtering must not narrow the independent batch input catalog or calendar.
   await visit();
+  await showHistory();
   await history()
     .getByRole("combobox", { name: "Status", exact: true })
     .selectOption("Alpha");
+  await showHistory();
   await history().getByRole("button", { name: "Terapkan filter" }).click();
   await page
     .getByRole("status")
@@ -329,16 +339,20 @@ try {
     .waitFor();
   await prepare();
   check(
-    (await input().getByRole("combobox").count()) === 3,
+    (await input().getByRole("combobox", {includeHidden:true}).count()) === 3,
     "filtered history retains full selected class roster",
   );
+  await showHistory();
   const excel = page.getByRole("link", { name: "Ekspor Excel" });
   check(
     (await excel.getAttribute("href")).includes("status=Alpha"),
     "export preserves history filter",
   );
+  await showHistory();
   await cal().getByLabel("Siswa / anak").selectOption(id(10));
+  await showHistory();
   await cal().getByRole("button", { name: "Tampilkan kalender" }).click();
+  await showHistory();
   await cal().getByRole("heading", { level: 3 }).waitFor();
   check(
     (await cal().locator("time").count()) === 31,
@@ -359,7 +373,7 @@ try {
   );
   check(
     (await input()
-      .getByRole("combobox", { name: "Status Siswa 1", exact: true })
+      .getByRole("combobox", { name: "Status Siswa 1", exact: true, includeHidden:true })
       .inputValue()) === "Hadir",
     "calendar does not reset batch draft",
   );
@@ -367,8 +381,10 @@ try {
   await geometry(page, "calendar mobile");
   for (const result of ["error", "incomplete"]) {
     calendarReply = result;
-    await cal().getByRole("button", { name: "Tampilkan kalender" }).click();
-    await cal().getByRole("alert").waitFor();
+    await showHistory();
+  await cal().getByRole("button", { name: "Tampilkan kalender" }).click();
+    await showHistory();
+  await cal().getByRole("alert").waitFor();
     check(
       (await cal().locator("time").count()) === 0,
       "calendar " + result + " never displays false unrecorded days",
@@ -380,6 +396,7 @@ try {
   await input()
     .getByLabel("Keterangan Siswa 1", { exact: true })
     .fill("Draft batch dipertahankan");
+  await showHistory();
   const trigger = page
     .getByRole("button", { name: "Koreksi", exact: true })
     .first();
@@ -433,6 +450,7 @@ try {
   await dialog()
     .getByRole("button", { name: "Batalkan catatan", exact: true })
     .click();
+  await page.getByRole("alertdialog").getByRole("button", {name:"Lanjutkan",exact:true}).click();
   await dialog().waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.type === "void",
@@ -482,6 +500,8 @@ try {
   page.removeAllListeners("dialog");
   page.on("dialog", (d) => d.dismiss());
   await input().getByLabel("Kelas untuk input").selectOption(id(21));
+  await page.getByRole("alertdialog").getByRole("button", {name:"Batal",exact:true}).click();
+  await page.getByRole("alertdialog").waitFor({state:"hidden"});
   check(
     (await input().getByLabel("Kelas untuk input").inputValue()) === id(20),
     "declined class change preserves selection",
@@ -518,7 +538,7 @@ try {
     );
     check(
       (await input()
-        .getByRole("combobox", { name: "Status Siswa 1", exact: true })
+        .getByRole("combobox", { name: "Status Siswa 1", exact: true, includeHidden:true })
         .inputValue()) === "Hadir",
       failure + " preserves draft",
     );
@@ -530,8 +550,8 @@ try {
     .getByRole("button", { name: "Simpan absensi", exact: true })
     .click();
   check(
-    await history()
-      .getByRole("button", { name: "Terapkan filter" })
+    await page.locator('[aria-label="Filter riwayat"]')
+      .getByRole("button", { name: "Terapkan filter", includeHidden:true })
       .isDisabled(),
     "pending write disables competing history read",
   );
@@ -540,6 +560,7 @@ try {
     .filter({ hasText: "Perubahan berhasil" })
     .waitFor();
   await visit("large");
+  await showHistory();
   await page.getByRole("button", { name: "Berikutnya", exact: true }).click();
   await page
     .getByRole("status")

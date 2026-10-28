@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -303,11 +304,13 @@ const retainedEcurrentTarget=e.currentTarget;
         if (f?.dataset.draft) dirty.current.add(f.dataset.draft);
       }}
     >
-      <p className="text-sm text-muted-foreground">
-        Relasi orang tua memberi akses baca anak. Grup saudara kandung digunakan
-        terpisah untuk perhitungan iuran. Nama atau KK yang sama tidak otomatis
-        menghubungkan akun.
-      </p>
+      <Guidance summary="Tentang relasi keluarga">
+        <p className="text-sm text-muted-foreground">
+          Relasi orang tua memberi akses baca anak. Grup saudara kandung digunakan
+          terpisah untuk perhitungan iuran. Nama atau KK yang sama tidak otomatis
+          menghubungkan akun.
+        </p>
+      </Guidance>
       <div className="flex flex-wrap items-start gap-3">
         <div
           ref={feedback}

@@ -90,8 +90,7 @@ try {
   page = await browser.newPage();
   page.setDefaultTimeout(15000);
   page.on("pageerror", (e) => errors.push(String(e)));
-  const accept = (d) => d.accept();
-  page.on("dialog", accept);
+
   let writes = 0,
     mode = "ok",
     lastCommand;
@@ -274,6 +273,7 @@ try {
       e.click();
       e.click();
     });
+  await page.getByRole("alertdialog").getByRole("button", {name:"Lanjutkan",exact:true}).click();
   await page
     .getByText("Perubahan tersimpan dan relasi telah dikonfirmasi.")
     .waitFor();
@@ -292,6 +292,7 @@ try {
   await page
     .getByRole("button", { name: "Verifikasi dan hubungkan", exact: true })
     .click();
+  await page.getByRole("alertdialog").getByRole("button", {name:"Lanjutkan",exact:true}).click();
   await page.waitForFunction(
     () =>
       document.querySelector("div[aria-busy]")?.getAttribute("aria-busy") ===
@@ -302,6 +303,7 @@ try {
     .getByRole("searchbox", { name: "Cari relasi", exact: true })
     .fill("Siswa 1 (001)");
   await page.getByRole("button", { name: "Cabut relasi", exact: true }).click();
+  await page.getByRole("alertdialog").getByRole("button", {name:"Lanjutkan",exact:true}).click();
   await page.waitForFunction(
     () =>
       document.querySelector("div[aria-busy]")?.getAttribute("aria-busy") ===
@@ -309,18 +311,17 @@ try {
   );
   check(lastCommand.remove === true, "guardian revocation");
   await input().fill("Draft group");
-  page.off("dialog", accept);
-  const dismiss = (d) => d.dismiss();
-  page.on("dialog", dismiss);
+
   await page
     .getByRole("button", { name: "Muat ulang relasi", exact: true })
     .click();
+  await page.getByRole("alertdialog").getByRole("button", {name:"Batal",exact:true}).click();
+  await page.getByRole("alertdialog").waitFor({state:"hidden"});
   check(
     (await input().inputValue()) === "Draft group",
     "reload cancellation preserves draft",
   );
-  page.off("dialog", dismiss);
-  page.on("dialog", accept);
+
   await page
     .getByRole("checkbox", { name: "Siswa 44 (0044)", exact: true })
     .check();
@@ -342,6 +343,8 @@ try {
   await page
     .getByRole("button", { name: "Muat ulang relasi", exact: true })
     .click();
+  await page.getByRole("alertdialog").getByRole("button", {name:"Lanjutkan",exact:true}).click();
+  await page.getByRole("alertdialog").waitFor({state:"hidden"});
   await page.getByText("Relasi berhasil dimuat ulang.").waitFor();
   check(saved === writes, "reload never repeats write");
   await page

@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Tabs } from "radix-ui";
 import { Button } from "@/components/ui/button";
@@ -187,11 +188,13 @@ export function FollowUpCenter({
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="min-w-0">
               <h2 className="text-xl font-semibold">Pusat tindak lanjut</h2>
-              <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                Prioritas harian dan rencana aksi sesuai akses Anda. Lakukan
-                tindakan melalui modul pada sidebar; status diperbarui dari
-                sumber saat daftar dimuat.
-              </p>
+              <Guidance summary="Panduan tindak lanjut">
+                <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                  Prioritas harian dan rencana aksi sesuai akses Anda. Lakukan
+                  tindakan melalui modul pada sidebar; status diperbarui dari
+                  sumber saat daftar dimuat.
+                </p>
+              </Guidance>
             </div>
             <Button
               type="button"

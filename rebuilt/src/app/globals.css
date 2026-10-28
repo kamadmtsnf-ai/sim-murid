@@ -595,3 +595,22 @@
 /* L05: location remains visible without opening collapsed navigation groups. */
 .nav-group-toggle[data-current-group="true"] { background:var(--secondary); color:var(--primary); }
 .nav-current-badge { flex:0 1 auto; max-inline-size:6rem; border:1px solid currentColor; border-radius:.4rem; padding:2px 5px; font-size:.75rem; line-height:1.4; font-weight:600; letter-spacing:normal; text-transform:none; overflow-wrap:anywhere; }
+
+/* Quieter, content-first surfaces. Information is never clipped or line-clamped. */
+@layer components {
+  .ui-guidance { min-width:0; border:1px solid var(--border); border-radius:.75rem; background:var(--card); overflow-wrap:anywhere; }
+  .ui-guidance > summary { display:flex; align-items:center; gap:10px; min-height:44px; cursor:pointer; padding:10px 14px; list-style:none; font-size:.875rem; font-weight:500; color:var(--muted-foreground); }
+  .ui-guidance > summary::-webkit-details-marker { display:none; }
+  .ui-guidance > summary:hover { color:var(--primary); background:var(--background); border-radius:inherit; }
+  .ui-guidance > summary:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+  .ui-guidance-body { padding:14px; border-top:1px solid var(--border); font-size:.875rem; line-height:1.6; }
+  .workspace-content main > h1 { padding-bottom:.75rem; border-bottom:1px solid var(--border); letter-spacing:-.025em; }
+  .workspace-breadcrumb { margin-bottom:1rem; }
+  .surface-card { background:var(--card); box-shadow:0 1px 3px rgb(21 36 58 / .025); }
+  .dashboard-group { background:var(--card); }
+  .workspace-content :where(form.grid,section.rounded,section.rounded-xl) { background:var(--card); box-shadow:none; }
+  .workspace-nav section+section { margin-top:.5rem; }
+  .workspace-nav a[aria-current="page"] { background:var(--secondary); color:var(--primary); box-shadow:none; border-inline-start:3px solid var(--primary); }
+  .workspace-content [data-slot="card-header"], .workspace-content [data-slot="card-content"] { min-width:0; }
+  @media print { .ui-guidance > .ui-guidance-body { display:block; } }
+}

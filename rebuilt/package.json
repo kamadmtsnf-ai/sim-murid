@@ -135,7 +135,8 @@
     "perf:bundles": "node scripts/performance/bundles.mjs",
     "test:accessibility": "node --test tests/accessibility.test.mjs",
     "test:accessibility:browser": "node scripts/verify-accessibility.mjs",
-    "test:favicon:browser": "node scripts/verify-favicon.mjs"
+    "test:favicon:browser": "node scripts/verify-favicon.mjs",
+    "test:reading:browser": "node scripts/verify-reading.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",

@@ -174,7 +174,7 @@ try {
     });
     return route.fulfill({ json: { revoked: 1, signed_out: mode === "self" } });
   });
-  const button = (name) => page.getByRole("button", { name, exact: true }),
+  const button = (name) => (name === "Akun saya" ? page.locator("main") : page).getByRole("button", { name, exact: true }),
     dialog = () => page.getByRole("dialog");
   const idle = () =>
     page.waitForFunction(() => !document.querySelector('[aria-busy="true"]'));

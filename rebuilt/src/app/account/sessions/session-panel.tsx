@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import {
   useCallback,
@@ -388,11 +389,13 @@ export function SessionPanel({
             />
             Sesi dan perangkat
           </h1>
-          <p className="text-sm leading-6 text-muted-foreground">
-            Periksa perangkat yang pernah masuk dan cabut akses sesi bila
-            diperlukan. Satu sesi aktif per akun; maksimal 1 jam, atau 7 hari
-            jika memilih Ingat saya.
-          </p>
+          <Guidance summary="Ketentuan sesi akun">
+            <p className="text-sm leading-6 text-muted-foreground">
+              Periksa perangkat yang pernah masuk dan cabut akses sesi bila
+              diperlukan. Satu sesi aktif per akun; maksimal 1 jam, atau 7 hari
+              jika memilih Ingat saya.
+            </p>
+          </Guidance>
         </header>
         {canManageOthers && (
           <Card className="min-w-0">

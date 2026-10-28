@@ -9,8 +9,8 @@ export const metadata: Metadata = { title: "Beranda" };
 
 const principles = [
   { title: "Layanan murid yang terhubung", description: "Akademik, kehadiran, bimbingan, dan administrasi dalam satu sistem." },
-  { title: "Akses sesuai tanggung jawab", description: "Setiap peran memperoleh layanan sesuai tugas dan hubungan datanya." },
-  { title: "Riwayat tetap terjaga", description: "Perubahan kelas dan status murid tetap mempertahankan catatan sebelumnya." },
+  { title: "Akses sesuai tanggung jawab", description: "Untuk guru, siswa, dan orang tua sesuai izin." },
+  { title: "Riwayat tetap terjaga", description: "Catatan murid tetap tersimpan saat berpindah kelas." },
 ];
 
 export default function HomePage() {
@@ -28,8 +28,8 @@ export default function HomePage() {
         <section aria-labelledby="welcome-title" className={styles.hero}>
           <div>
             <p className="eyebrow mb-4">Sistem Informasi Murid</p>
-            <h1 id="welcome-title" className={styles.title}>Mendampingi setiap langkah perjalanan murid.</h1>
-            <p className={styles.lead}>Kelola layanan akademik, kehadiran, bimbingan, dan administrasi murid melalui satu akun madrasah.</p>
+            <h1 id="welcome-title" className={styles.title}>Layanan murid, lebih mudah.</h1>
+            <p className={styles.lead}>Akademik, kehadiran, dan administrasi dalam satu akun.</p>
             <Button asChild size="lg" className={styles.login}><Link href="/login"><span className="min-w-0">Masuk ke akun</span><ArrowRight aria-hidden="true" /></Link></Button>
             <p className="mt-4 text-sm text-muted-foreground">Gunakan akun yang diberikan oleh madrasah.</p>
           </div>
@@ -37,7 +37,7 @@ export default function HomePage() {
             <CardHeader className={`${styles.serviceHeader} rounded-t-xl border-b bg-secondary/50`}>
               <div className="flex items-start gap-3">
                 <span className={styles.serviceIcon}><BookOpen aria-hidden="true" /></span>
-                <div className="min-w-0"><CardTitle><h2 className="text-xl leading-snug">Layanan madrasah terpadu</h2></CardTitle><CardDescription className="mt-2 leading-relaxed">Informasi dan layanan sesuai peran Anda di madrasah.</CardDescription></div>
+                <div className="min-w-0"><CardTitle><h2 className="text-xl leading-snug">Layanan madrasah terpadu</h2></CardTitle><CardDescription className="mt-2 leading-relaxed">Sesuai peran Anda.</CardDescription></div>
               </div>
             </CardHeader>
             <CardContent className={styles.serviceContent}>

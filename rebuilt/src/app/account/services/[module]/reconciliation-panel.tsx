@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { formatAcademicYear } from "@/lib/academic/period";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -230,10 +231,12 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
           <CardTitle>
             <h2>Ringkasan data aplikasi</h2>
           </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Cakupan keseluruhan data sesuai izin Admin. Filter pada paket ekspor
-            tidak mengubah ringkasan ini.
-          </p>
+          <Guidance summary="Cakupan ringkasan">
+            <p className="text-sm text-muted-foreground">
+              Cakupan keseluruhan data sesuai izin Admin. Filter pada paket ekspor
+              tidak mengubah ringkasan ini.
+            </p>
+          </Guidance>
         </CardHeader>
         <CardContent className="space-y-4">
           <dl className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -270,10 +273,12 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
           <CardTitle>
             <h2>Paket laporan lintas modul</h2>
           </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Absensi siswa, bimbingan, iuran komite, tabungan, dan poin siswa.
-            Ekspor mengikuti hak akses pada setiap modul.
-          </p>
+          <Guidance summary="Cakupan paket ekspor">
+            <p className="text-sm text-muted-foreground">
+              Absensi siswa, bimbingan, iuran komite, tabungan, dan poin siswa.
+              Ekspor mengikuti hak akses pada setiap modul.
+            </p>
+          </Guidance>
         </CardHeader>
         <CardContent>
           <form onSubmit={submit} className="space-y-4">

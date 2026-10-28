@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination, FilterBar } from "@/components/ui/collection-controls";
@@ -429,10 +430,12 @@ const retainedEcurrentTarget=e.currentTarget;
             </a>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground">
-          Ekspor mengikuti periode, siswa, dan hak akses yang sama. Maksimal
-          10.000 laporan; persempit periode bila diperlukan.
-        </p>
+        <Guidance summary="Ketentuan ekspor bimbingan">
+          <p className="text-sm text-muted-foreground">
+            Ekspor mengikuti periode, siswa, dan hak akses yang sama. Maksimal
+            10.000 laporan; persempit periode bila diperlukan.
+          </p>
+        </Guidance>
         <TableRegion label="Laporan bimbingan — gulir untuk melihat seluruh kolom">
           <table className="w-full text-left text-sm">
             <caption className="sr-only">

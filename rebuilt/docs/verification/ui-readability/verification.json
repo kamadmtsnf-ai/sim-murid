@@ -1,0 +1,365 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Jakarta",
+  "baseline": "038d99da60337d3684f53118b3ac4be409e5d089",
+  "local": {
+    "npmCi": "passed",
+    "npmRunCheck": "passed",
+    "tests": 786,
+    "failures": 0,
+    "typecheck": "passed",
+    "lint": "passed",
+    "dbTypesReplay": "passed",
+    "productionBuild": "passed"
+  },
+  "browser": {
+    "checks": 1934,
+    "axeScans": 190,
+    "additionalModalScenarios": 16,
+    "suites": [
+      {
+        "suite": "reading",
+        "command": "node scripts/verify-reading.mjs",
+        "summary": {
+          "checks": 72,
+          "axe": 9,
+          "errors": []
+        },
+        "stdoutSha256": "3a2a7b9469d4aa32e7ed482996276ff853cca24b9ffa4e63193bec1efa608f13"
+      },
+      {
+        "suite": "dashboard",
+        "command": "node scripts/verify-dashboard.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 78,
+          "findings": [],
+          "axeScreens": 11
+        },
+        "stdoutSha256": "dcd35c9537004ed01580a5fea8a9d21315148c0dd3b159520396e332d24a1fd5"
+      },
+      {
+        "suite": "design-system",
+        "command": "node scripts/verify-design-system.mjs",
+        "summary": {
+          "checks": 54,
+          "axe": 9,
+          "errors": []
+        },
+        "stdoutSha256": "709676f9574a6bd98297cb41f9effbd8e3eac882694cafcc21cb77588b637c20"
+      },
+      {
+        "suite": "health",
+        "command": "node scripts/verify-health.mjs",
+        "summary": {
+          "checks": 218,
+          "axe": 12,
+          "errors": []
+        },
+        "stdoutSha256": "01e2d0f10bb149048a336da07c6ea3b84f77a857a49df8b16067fe5b303ce117"
+      },
+      {
+        "suite": "access",
+        "command": "node scripts/verify-access.mjs",
+        "summary": {
+          "checks": 108,
+          "axe": 8,
+          "errors": []
+        },
+        "stdoutSha256": "1e0083e1bdcf83e77c953b43767cea46d2c8b31c29c58b3177387ed5325d793c"
+      },
+      {
+        "suite": "navigation",
+        "command": "node scripts/verify-navigation.mjs",
+        "summary": {
+          "checks": 66,
+          "axe": 14,
+          "errors": []
+        },
+        "stdoutSha256": "d8b0990b339ae6e9d74d142ce9af8151671aa5a4bbdd9b5fbb6f859cf18fc2d7"
+      },
+      {
+        "suite": "login",
+        "command": "node scripts/verify-login.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 215,
+          "issues": [],
+          "axeViews": 17
+        },
+        "stdoutSha256": "35f2e0d8389c4fbc3376213cc831a4bbd89db046bac64d128776206d1cde8491"
+      },
+      {
+        "suite": "home",
+        "command": "node scripts/verify-home.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 64,
+          "issues": [],
+          "axeViews": 6
+        },
+        "stdoutSha256": "e0d197a789d88350fc73bb2aa21abc5d2c6b3a6e18847b4b11d8479bb1486af5"
+      },
+      {
+        "suite": "modal-feedback",
+        "command": "node scripts/verify-modal-feedback.mjs",
+        "summary": {
+          "results": [
+            {
+              "width": 320,
+              "generatedIdPreserved": true,
+              "busyEscapeBlocked": true,
+              "draftPreserved": true,
+              "focusRestored": true,
+              "uncertainGuidance": true,
+              "confirmationOnce": true,
+              "noOverflow": true,
+              "axeViolations": 0
+            },
+            {
+              "width": 390,
+              "generatedIdPreserved": true,
+              "busyEscapeBlocked": true,
+              "draftPreserved": true,
+              "focusRestored": true,
+              "uncertainGuidance": true,
+              "confirmationOnce": true,
+              "noOverflow": true,
+              "axeViolations": 0
+            },
+            {
+              "width": 768,
+              "generatedIdPreserved": true,
+              "busyEscapeBlocked": true,
+              "draftPreserved": true,
+              "focusRestored": true,
+              "uncertainGuidance": true,
+              "confirmationOnce": true,
+              "noOverflow": true,
+              "axeViolations": 0
+            },
+            {
+              "width": 1440,
+              "generatedIdPreserved": true,
+              "busyEscapeBlocked": true,
+              "draftPreserved": true,
+              "focusRestored": true,
+              "uncertainGuidance": true,
+              "confirmationOnce": true,
+              "noOverflow": true,
+              "axeViolations": 0
+            },
+            {
+              "variant": "classes-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "schedules-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "duty-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "attendance-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "mentoring-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "committee-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "savings-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "discipline-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "grades-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "reports-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "promotions-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            },
+            {
+              "variant": "books-dialog",
+              "headerStable": true,
+              "noOverflow": true
+            }
+          ],
+          "errors": []
+        },
+        "stdoutSha256": "d65d9103bb69c738a435a87fa0fdd8111060f9af7ca0c79c21dc9ab7868695c6"
+      },
+      {
+        "suite": "attendance",
+        "command": "node scripts/verify-attendance.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 90,
+          "axe": 6
+        },
+        "stdoutSha256": "fe5114809e998e579389e9e0ff3892d2797f54094c1016d2febc6712c0731d76"
+      },
+      {
+        "suite": "savings",
+        "command": "node scripts/verify-savings.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 48,
+          "axe": 6
+        },
+        "stdoutSha256": "79e6e53678dd5ba7434bd7b6b7f8587b727749c4c6cca9ea23254747d7172a11"
+      },
+      {
+        "suite": "committee",
+        "command": "node scripts/verify-committee.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 92,
+          "axe": 6
+        },
+        "stdoutSha256": "e16d74329f81a890f6965bde57534f63b034b1a1a1b954c0c159cff42bff8f68"
+      },
+      {
+        "suite": "schedules",
+        "command": "node scripts/verify-schedules.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 169,
+          "axe": 16
+        },
+        "stdoutSha256": "01d6e7309cce54d06bc3d8aa56373785cb8e6098efd4631d3bc671f3f490f70a"
+      },
+      {
+        "suite": "sessions",
+        "command": "node scripts/verify-sessions.mjs",
+        "summary": {
+          "checks": 105,
+          "axe": 13,
+          "errors": []
+        },
+        "stdoutSha256": "293b80583312c9702b85d16cd7e7ba7abe3ef67c3777d2c961408a0318f0cb79"
+      },
+      {
+        "suite": "families",
+        "command": "node scripts/verify-families.mjs",
+        "summary": {
+          "checks": 32,
+          "axe": 7,
+          "errors": []
+        },
+        "stdoutSha256": "f9d3569bfb52c7d02db834d9f8318f3f9691e345d24d95034fac78c80ea8f07a"
+      },
+      {
+        "suite": "mentoring",
+        "command": "node scripts/verify-mentoring.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 94,
+          "axe": 7
+        },
+        "stdoutSha256": "06c5fa80271909d7e62b25c6069aa183f6f5ce598400601e47e40ed1ae2d62c1"
+      },
+      {
+        "suite": "duty",
+        "command": "node scripts/verify-duty.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 155,
+          "axe": 9
+        },
+        "stdoutSha256": "cc8529958f8e52901caada46d1733b52ade614439e0e81572c2a7cf6871c4cd6"
+      },
+      {
+        "suite": "reports",
+        "command": "node scripts/verify-reports.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 62,
+          "axe": 7
+        },
+        "stdoutSha256": "74581eaeed4039b92dbc718daf3c836d7d9f5d3388a8d40690b056227b9da4b4"
+      },
+      {
+        "suite": "promotions",
+        "command": "node scripts/verify-promotions.mjs",
+        "summary": {
+          "status": "passed",
+          "checks": 104,
+          "axe": 13
+        },
+        "stdoutSha256": "db260760de1dfb7082ae8ea6860834681be49feed8ededfc48030b9cfd6d2710"
+      },
+      {
+        "suite": "jobs",
+        "command": "node scripts/verify-jobs.mjs",
+        "summary": {
+          "checks": 49,
+          "axe": 9,
+          "errors": []
+        },
+        "stdoutSha256": "d5240cba10ded53e74217f441cde1d0625ab3f5d59f4cd2560b1a5337574a0ca"
+      },
+      {
+        "suite": "reconciliation",
+        "command": "node scripts/verify-reconciliation.mjs",
+        "summary": {
+          "checks": 59,
+          "axe": 5,
+          "errors": []
+        },
+        "stdoutSha256": "5d86474fb9ea9e5f2280bb025eaea8409208aa0b230b9876503afd86ce36cedc"
+      }
+    ]
+  },
+  "environment": {
+    "node": "24.22.1",
+    "chromium": "145.0.7632.6",
+    "playwright": "1.58.2",
+    "axeCore": "4.11.0",
+    "viewports": "320–1440px; landscape/short height; selected text 200%/400%, keyboard/touch, forced colors"
+  },
+  "fixedBeforeRelease": [
+    "Guidance/card spacing caused 400% text overflow; fixed px gutters and icons, wrap retained",
+    "Historical browser locators updated for existing sidebar tabs, HTML confirmations and feedback semantics; explicit decisions, draft/payload/focus checks retained",
+    "Async modal focus assertions wait for actual focus restoration",
+    "No-JS Login test targets visible shell guidance, including streamed loading fallback"
+  ],
+  "scope": [
+    "Actual components and synthetic data with intercepted HTTP boundaries",
+    "Public Home/Login production server local",
+    "No production account mutation, provider messaging, AI invocation or database changes",
+    "Browser checks passed for tested scenarios, not a universal absence-of-bugs guarantee"
+  ],
+  "limitations": [
+    "No real user UAT or physical-device/screen-reader session",
+    "20 selected static paragraphs measured, not a whole-app readability/user comfort score",
+    "Role/data contracts verified by existing suites, not authenticated production UAT"
+  ],
+  "migration": "not required",
+  "ciAndRelease": "Exact-head CI/merge/deployment evidence is added to PR description"
+}

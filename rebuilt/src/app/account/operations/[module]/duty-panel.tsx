@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import { MutationFeedback } from "@/components/feedback/mutation-feedback";
 import { confirmAction } from "@/components/ui/confirm-action";
 import { listenForUnsavedChanges } from "@/lib/forms/leave-guard";
@@ -346,10 +347,12 @@ export function DutyPanel({
               Ekspor PDF
             </a>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Ekspor mengikuti periode dan hak akses, maksimal 10.000 catatan.
-            Jadwal mingguan tidak dibatasi filter riwayat.
-          </p>
+          <Guidance summary="Ketentuan ekspor Guru Piket">
+            <p className="text-sm text-muted-foreground">
+              Ekspor mengikuti periode dan hak akses, maksimal 10.000 catatan.
+              Jadwal mingguan tidak dibatasi filter riwayat.
+            </p>
+          </Guidance>
           {!data.rows.length ? (
             <p className="rounded-xl border p-5">
               Belum ada catatan sesuai periode dan hak akses.

@@ -521,10 +521,10 @@ try {
       .getByRole("button", { name: "Simpan pelajaran", exact: true })
       .click();
       await settleConfirmation(page);
-    await dialog().getByRole("alert").waitFor();
+    await dialog().locator('[role="alert"], [role="status"]').filter({hasText:/Perlu perhatian|Periksa sebelum melanjutkan|Hasil belum terkonfirmasi/}).waitFor();
     check(
       await dialog()
-        .getByRole("alert")
+        .locator('[role="alert"], [role="status"]').filter({hasText:/Perlu perhatian|Periksa sebelum melanjutkan|Hasil belum terkonfirmasi/})
         .evaluate((e) => e === document.activeElement),
       failure + " feedback focused inside modal",
     );
@@ -561,7 +561,7 @@ try {
   check(requests.length === 1, "timeout request observed before advancing clock");
   await page.clock.fastForward(31000);
   await page.clock.resume();
-  await dialog().getByRole("alert").waitFor();
+  await dialog().locator('[role="alert"], [role="status"]').filter({hasText:/Perlu perhatian|Periksa sebelum melanjutkan|Hasil belum terkonfirmasi/}).waitFor();
   check(
     await dialog()
       .getByRole("button", { name: "Simpan pelajaran", exact: true })

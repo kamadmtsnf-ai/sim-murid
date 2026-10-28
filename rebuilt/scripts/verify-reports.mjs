@@ -322,6 +322,8 @@ try {
       "modal footer reachable " + width,
     );
     await page.keyboard.press("Escape");
+    await dialog.waitFor({state:"hidden"});
+    await page.waitForFunction(()=>document.activeElement?.textContent?.trim()==="Terbitkan pilihan");
     check((await dialog.count()) === 0, "Escape closes modal " + width);
     check(
       await page

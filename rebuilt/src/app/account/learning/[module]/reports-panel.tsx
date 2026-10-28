@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
@@ -217,10 +218,12 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
           });
         }}
       />
-      <p className="text-sm text-muted-foreground">
-        Tinjau nilai siswa per kelas dan semester. Rapor terbit mempertahankan
-        nilai dan KKM saat diterbitkan.
-      </p>
+      <Guidance summary="Tentang halaman rapor">
+        <p className="text-sm text-muted-foreground">
+          Tinjau nilai siswa per kelas dan semester. Rapor terbit mempertahankan
+          nilai dan KKM saat diterbitkan.
+        </p>
+      </Guidance>
       <form
         onSubmit={load}
         className="grid min-w-0 gap-4 rounded-xl border bg-card p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_auto] lg:items-end"

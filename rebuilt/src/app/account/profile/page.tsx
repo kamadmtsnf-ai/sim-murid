@@ -31,9 +31,7 @@ export default async function ProfilePage() {
     >
       <h1 className="text-3xl font-semibold">Profil pribadi</h1>
       <p className="text-sm leading-6 text-muted-foreground">
-        Perbarui nama, nomor HP, email kontak dan bio. Perubahan email
-        membatalkan verifikasi lama. Formulir ini tidak menggantikan biodata
-        wajib Siswa atau Calon Siswa.
+        Kelola kontak dan profil Anda. Mengubah email memerlukan verifikasi ulang. Biodata wajib siswa diisi terpisah.
       </p>
       <ProfileForm initialProfile={profile} />
     </main>

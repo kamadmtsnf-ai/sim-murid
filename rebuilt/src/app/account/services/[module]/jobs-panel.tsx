@@ -1,4 +1,5 @@
 "use client";
+import { Guidance } from "@/components/ui/guidance";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
@@ -286,11 +287,13 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-muted-foreground">
-            Pratinjau hanya memeriksa kandidat. Antrekan pekerjaan menjalankan
-            pemeriksaan terjadwal. Proses satu pengiriman mengambil satu email
-            atau WhatsApp yang siap.
-          </p>
+          <Guidance summary="Panduan proses pekerjaan">
+            <p className="text-sm text-muted-foreground">
+              Pratinjau hanya memeriksa kandidat. Antrekan pekerjaan menjalankan
+              pemeriksaan terjadwal. Proses satu pengiriman mengambil satu email
+              atau WhatsApp yang siap.
+            </p>
+          </Guidance>
           <div className="flex flex-wrap gap-3">
             <Button
               variant="outline"
