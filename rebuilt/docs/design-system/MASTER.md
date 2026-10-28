@@ -413,3 +413,7 @@ Instruksi terbaru pengguna memprioritaskan kenyamanan membaca: data dan tindakan
 Jangan masukkan pesan error/loading/success, hasil ambigu, label/batas isian wajib, konsekuensi penghapusan, biaya transaksi, kode kredensial, atau peringatan AI ke disclosure tertutup. Data yang hilang tetap unknown, bukan nol atau sukses. Dashboard menempatkan ringkasan akun dan inventaris layanan pada disclosure; keadaan akses gagal/kosong tetap terlihat. Detail layanan tetap dibuka melalui sidebar sesuai kontrak navigasi existing.
 
 Lihat `docs/development/UI-READABILITY-AUDIT.md` untuk cakupan, pengukuran terbatas, dan hasil QA aktual. Pengurangan kata pada petunjuk terpilih bukan pengukuran kenyamanan pengguna atau persentase seluruh aplikasi.
+
+## Pemasangan PWA tanpa gangguan — 28 Oktober 2026
+
+Ajakan pemasangan adalah utilitas sekunder di akhir dokumen, berupa tombol ghost “Pasang aplikasi”; bukan accordion besar/floating banner di area kerja. Panduan menggunakan Dialog bersama dan hanya terbuka atas klik/keyboard pengguna. Offline bukan promosi instalasi dan tetap tersedia di luar dialog. Fokus kembali ke pemicu atau main jika pemasangan menghapus pemicu. Jangan membuka modal otomatis dari event browser atau melakukan reload/cache transaksi. Lihat `docs/development/PWA-INSTALL-PLACEMENT.md`.
