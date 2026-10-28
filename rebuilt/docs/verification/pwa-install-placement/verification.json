@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-28",
+  "timezone": "Asia/Jakarta",
+  "baseline": "17b298cc6a8bcbe624923a81a527f134c30e948d",
+  "branch": "ui/pwa-install-footer",
+  "local": {
+    "npmRunCheck": "passed",
+    "tests": 786,
+    "failures": 0,
+    "typecheck": "passed",
+    "lint": "passed",
+    "dbTypesReplay": "passed",
+    "productionBuild": "passed"
+  },
+  "browser": {
+    "componentChecks": 52,
+    "realLocalPageChecks": 57,
+    "axeScans": 2,
+    "errors": [],
+    "viewports": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "textScale": [
+      200,
+      400
+    ]
+  },
+  "placement": "Single global component remains after RootLayout children. Quiet document-end launcher; guide in explicit-action modal. No fixed/sticky overlay while working.",
+  "preserved": [
+    "Install event prompt/user choice/accept/dismiss/error",
+    "No event reuse or duplicate native prompt",
+    "Manual browser/Safari instructions",
+    "Standalone hides invite",
+    "Offline status outside install dialog",
+    "Drafts retained; no automatic reload",
+    "No worker/private cache/offline writes",
+    "No auth/RBAC/API/database/dependency change"
+  ],
+  "limits": [
+    "Synthetic browser install events, not actual physical-device install",
+    "Public Home/Login/Recovery/404 tested with local production server; no authenticated production UAT",
+    "No human screen-reader/device UAT"
+  ],
+  "migration": "not required",
+  "release": "Exact-head CI, merge and production deployment recorded on PR"
+}

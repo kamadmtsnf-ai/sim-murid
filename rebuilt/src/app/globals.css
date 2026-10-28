@@ -614,3 +614,15 @@
   .workspace-content [data-slot="card-header"], .workspace-content [data-slot="card-content"] { min-width:0; }
   @media print { .ui-guidance > .ui-guidance-body { display:block; } }
 }
+
+
+/* Installation is a quiet document-end utility, never a floating work-area panel. */
+@layer components {
+ .pwa-install-footer { display:flex; justify-content:flex-end; width:100%; min-width:0; padding:4px 16px 12px; }
+ .pwa-install-launcher { min-height:44px; max-width:100%; height:auto; white-space:normal; overflow-wrap:anywhere; color:var(--muted-foreground); font-size:.8125rem; }
+ .pwa-install-launcher svg { width:16px; height:16px; flex-shrink:0; }
+}
+.pwa-install-dialog .dialog-header, .pwa-install-dialog .dialog-body { padding:16px; }
+.pwa-install-dialog .dialog-header { gap:12px; }
+.pwa-install-dialog .dialog-header > button { width:44px; height:44px; min-width:44px; }
+.pwa-install-dialog .dialog-header > button svg { width:20px; height:20px; }

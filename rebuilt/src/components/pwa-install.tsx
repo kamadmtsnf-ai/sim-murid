@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog } from "@/components/ui/dialog";
 
 type InstallEvent = Event & {
   prompt: () => Promise<void>;
@@ -13,6 +14,8 @@ type InstallEvent = Event & {
 export function PwaInstall() {
   const deferred = useRef<InstallEvent | null>(null);
   const busy = useRef(false);
+  const returnFocus = useRef<HTMLElement | null>(null);
+  const [open, setOpen] = useState(false);
   const [available, setAvailable] = useState(false);
   const [standalone, setStandalone] = useState(false);
   const [offline, setOffline] = useState(false);
@@ -26,11 +29,18 @@ export function PwaInstall() {
       setAvailable(false);
       setStandalone(true);
       setMessage("");
+      returnFocus.current = document.getElementById("main-content");
+      setOpen(false);
     };
     const mode = () => {
       const active = display.matches || Boolean((navigator as Navigator & { standalone?: boolean }).standalone);
       setStandalone(active);
-      if (active) { deferred.current = null; setAvailable(false); }
+      if (active) {
+        deferred.current = null;
+        setAvailable(false);
+        returnFocus.current = document.getElementById("main-content");
+        setOpen(false);
+      }
     };
     const offer = (event: Event) => {
       event.preventDefault();
@@ -78,23 +88,45 @@ export function PwaInstall() {
   }
 
   return (
-    <aside aria-label="Pemasangan dan koneksi aplikasi" className="mx-auto w-full max-w-7xl min-w-0 space-y-3 px-[16px] py-[16px] text-sm [overflow-wrap:anywhere] sm:px-[24px]">
-      <div role="status" aria-live="polite" className="break-words">
-        {offline ? <p className="rounded-lg border border-warning/40 bg-warning/10 p-3">Perangkat terdeteksi offline. Data belum dapat diperiksa atau disimpan. Sambungkan kembali lalu periksa status sebelum mengulangi penyimpanan; aplikasi tidak mengantrekan transaksi.</p> : null}
-        {message ? <p className="mt-2 text-muted-foreground">{message}</p> : null}
-      </div>
-      {!standalone ? <details className="min-w-0 rounded-xl border bg-card p-[12px] text-card-foreground">
-        <summary className="min-h-11 cursor-pointer content-center rounded-md font-medium outline-offset-4 focus-visible:outline-2 focus-visible:outline-primary">Pasang SiM-Murid di perangkat</summary>
-        <div className="space-y-3 pt-2 leading-relaxed">
-          <p>Akses aplikasi melalui ikon perangkat. Login, verifikasi email, dan seluruh penyimpanan tetap membutuhkan internet.</p>
+    <>
+      {offline ? <aside aria-label="Koneksi aplikasi" className="mx-auto w-full min-w-0 max-w-7xl px-[16px] py-[12px] text-sm [overflow-wrap:anywhere] sm:px-[24px]">
+        <p role="status" className="rounded-lg border border-warning/40 bg-warning/10 p-[12px]">Perangkat terdeteksi offline. Data belum dapat diperiksa atau disimpan. Sambungkan kembali lalu periksa status sebelum mengulangi penyimpanan; aplikasi tidak mengantrekan transaksi.</p>
+      </aside> : null}
+      {!standalone ? <div className="pwa-install-footer">
+        <Button
+          type="button"
+          variant="ghost"
+          className="pwa-install-launcher"
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          onClick={(event) => {
+            returnFocus.current = event.currentTarget;
+            setOpen(true);
+          }}
+        >
+          <Download aria-hidden="true" />Pasang aplikasi
+        </Button>
+      </div> : null}
+      <Dialog
+        open={open}
+        onOpenChange={setOpen}
+        returnFocusRef={returnFocus}
+        closeDisabled={pending}
+        title="Pasang SiM-Murid di perangkat"
+        description="Akses SiM-Murid melalui ikon perangkat. Instalasi bersifat opsional."
+        className="pwa-install-dialog w-[calc(100%-32px)] max-h-[calc(100dvh-32px)]"
+      >
+        <div className="space-y-4 text-sm leading-relaxed">
+          <p>Login, verifikasi email, dan seluruh penyimpanan tetap membutuhkan internet.</p>
           {available || pending ? <Button type="button" onClick={install} disabled={pending} aria-busy={pending}><Download aria-hidden="true" />{pending ? "Membuka instalasi…" : "Instal aplikasi"}</Button> : null}
-          <ul className="list-disc space-y-2 pl-[20px] text-muted-foreground">
+          <ul className="list-disc space-y-3 pl-[20px] text-muted-foreground">
             <li>Chrome/Edge desktop atau Android: buka menu browser dan cari “Instal aplikasi” atau “Tambahkan ke layar utama”, jika tersedia.</li>
             <li>iPhone/iPad: buka melalui Safari, pilih Bagikan, lalu “Tambahkan ke Layar Utama”. Nama menu dapat berbeda menurut versi sistem.</li>
           </ul>
           <p className="text-muted-foreground">Jika pilihan pemasangan tidak tersedia, gunakan aplikasi di browser. Koneksi perangkat aktif belum menjamin layanan dapat dijangkau.</p>
+          <div role="status" aria-live="polite" className="text-muted-foreground">{message}</div>
         </div>
-      </details> : null}
-    </aside>
+      </Dialog>
+    </>
   );
 }

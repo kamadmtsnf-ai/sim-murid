@@ -136,7 +136,8 @@
     "test:accessibility": "node --test tests/accessibility.test.mjs",
     "test:accessibility:browser": "node scripts/verify-accessibility.mjs",
     "test:favicon:browser": "node scripts/verify-favicon.mjs",
-    "test:reading:browser": "node scripts/verify-reading.mjs"
+    "test:reading:browser": "node scripts/verify-reading.mjs",
+    "test:pwa-pages:browser": "node scripts/verify-pwa-pages.mjs"
   },
   "license": "UNLICENSED",
   "type": "module",
