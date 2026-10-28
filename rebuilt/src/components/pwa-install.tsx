@@ -242,7 +242,12 @@ export function PwaInstallButton() {
       variant="ghost"
       className="pwa-install-launcher"
       aria-haspopup="dialog"
-      onClick={(event) => state.showGuide(event.currentTarget)}
+      disabled={state.pending}
+      aria-busy={state.pending}
+      onClick={(event) => {
+        state.showGuide(event.currentTarget);
+        if (state.available && !state.offline) void state.install();
+      }}
     >
       <Download aria-hidden="true" />
       Pasang aplikasi
