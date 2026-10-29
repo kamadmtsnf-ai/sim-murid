@@ -12,6 +12,8 @@ import {
   visibleFollowUps,
   type FollowUp,
 } from "@/lib/dashboard/follow-up";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const statuses = {
   needs_action: "Perlu tindak lanjut",
   in_progress: "Dalam proses",
@@ -325,11 +327,9 @@ export function FollowUpCenter({
                   ))}
                 </select>
               </label>
-              <label className="min-w-0">
-                <span className="mb-2 block text-sm font-medium">
+              <div className="min-w-0"><FloatingLabel label={<><span className="mb-2 block text-sm font-medium">
                   Cari tindak lanjut
-                </span>
-                <input
+                </span></>}><input
                   type="search"
                   className={controlClass}
                   maxLength={200}
@@ -339,8 +339,8 @@ export function FollowUpCenter({
                     setPage(1);
                   }}
                   placeholder="Judul atau penanggung jawab"
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
             </FilterBar>
             <section
               aria-busy={pending}

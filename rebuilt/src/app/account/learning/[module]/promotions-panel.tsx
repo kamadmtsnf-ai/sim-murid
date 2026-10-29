@@ -24,6 +24,8 @@ import {
   type PromotionCommand,
 } from "@/lib/learning/promotions";
 import { formatAcademicYear } from "@/lib/academic/period";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/learning/promotions",
   assetApi = "/api/learning/assets";
 const fields: Record<(typeof diplomaFields)[number], string> = {
@@ -692,9 +694,8 @@ const retainedEvalue=e.target.value;
               kelas 7 → 8; kelas 8 → 9; kelas 9 → Alumni. Penempatan manual
               dapat memulihkan status alumni. Maksimal 500 siswa per proses.
             </p>
-            <label className="block max-w-lg">
-              Cari siswa
-              <input
+            <div className="block max-w-lg"><FloatingLabel label={<>Cari siswa
+              </>}><input
                 className={controlClass}
                 value={search}
                 disabled={disabled}
@@ -706,8 +707,8 @@ const retainedEvalue=e.target.value;
                   if (e.key === "Enter") e.preventDefault();
                 }}
                 placeholder="Nama siswa"
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             {!source ? (
               <p className="rounded-lg border border-dashed p-6">
                 Pilih tahun ajaran asal untuk melihat siswa.
@@ -803,9 +804,8 @@ const retainedEvalue=e.target.value;
               {Object.keys(mapping).length} siswa dipilih; pilihan tetap
               tersimpan saat pencarian atau halaman berubah.
             </p>
-            <label className="block">
-              Alasan / referensi keputusan
-              <textarea
+            <div className="block"><FloatingLabel label={<>Alasan / referensi keputusan
+              </>}><textarea placeholder=" "
                 className={controlClass}
                 required
                 minLength={3}
@@ -813,8 +813,8 @@ const retainedEvalue=e.target.value;
                 value={reason}
                 disabled={disabled}
                 onChange={(e) => setReason(e.target.value)}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <Button
               type="submit"
               disabled={
@@ -836,9 +836,8 @@ const retainedEvalue=e.target.value;
                 </p>
                 <p className="text-2xl font-semibold">{alumni.length}</p>
               </div>
-              <label className="sm:col-span-2">
-                Cari alumni
-                <input
+              <div className="sm:col-span-2"><FloatingLabel label={<>Cari alumni
+                </>}><input
                   className={controlClass}
                   value={search}
                   disabled={disabled}
@@ -847,8 +846,8 @@ const retainedEvalue=e.target.value;
                     setPage(1);
                   }}
                   placeholder="Nama alumni"
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
             </div>
             {tab === "access" && data.isAdmin && (
               <form
@@ -1170,9 +1169,7 @@ const retainedEvalue=e.target.value;
             <p className="font-semibold break-words">{mode.row.name}</p>
             <div className="grid gap-4 sm:grid-cols-2">
               {diplomaFields.map((key) => (
-                <label key={key} className="min-w-0">
-                  {fields[key]}
-                  <input
+                <div key={key} className="min-w-0"><FloatingLabel label={<>{fields[key]}</>}><input placeholder=" "
                     className={controlClass}
                     maxLength={1000}
                     value={metadata[key] ?? ""}
@@ -1181,8 +1178,8 @@ const retainedEvalue=e.target.value;
                       setMetadata((v) => ({ ...v, [key]: e.target.value }));
                       setDirty(true);
                     }}
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
               ))}
             </div>
             {message && <p role="status">{message}</p>}

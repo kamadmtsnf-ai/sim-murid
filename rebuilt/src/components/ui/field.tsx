@@ -1,4 +1,10 @@
-import type { ReactNode } from "react";
+import {
+  cloneElement,
+  isValidElement,
+  type ReactNode,
+  type InputHTMLAttributes,
+} from "react";
+import { FloatingLabel } from "./floating-label";
 import { cn } from "@/lib/utils";
 
 /** Shared presentation only: callers retain values, validation and submission. */
@@ -33,17 +39,39 @@ export function Field({
   children: ReactNode;
   className?: string;
 }) {
+  const floating =
+    isValidElement<InputHTMLAttributes<HTMLInputElement>>(children) &&
+    (children.type === "textarea" ||
+      (children.type === "input" &&
+        !["checkbox", "radio", "file", "hidden", "range", "color"].includes(
+          children.props.type ?? "text",
+        )));
+  const caption = (
+    <>
+      {label}
+      {required && (
+        <span aria-hidden="true" className="ml-1 text-destructive">
+          *
+        </span>
+      )}
+    </>
+  );
   return (
     <div className={cn("ds-field", className)}>
-      <label htmlFor={id} className="ds-field-label">
-        {label}
-        {required && (
-          <span aria-hidden="true" className="ml-1 text-destructive">
-            *
-          </span>
-        )}
-      </label>
-      {children}
+      {floating ? (
+        <FloatingLabel htmlFor={id} label={caption}>
+          {cloneElement(children, {
+            placeholder: children.props.placeholder ?? " ",
+          })}
+        </FloatingLabel>
+      ) : (
+        <>
+          <label htmlFor={id} className="ds-field-label">
+            {caption}
+          </label>
+          {children}
+        </>
+      )}
       {description && (
         <p id={`${id}-help`} className="ds-field-help">
           {description}

@@ -27,6 +27,8 @@ import {
   calendarStatus,
   type AttendanceSnapshot,
 } from "@/lib/operations/attendance";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/operations/attendance";
 const labels: Record<string, string> = {
   effectiveDays: "Hari efektif",
@@ -332,9 +334,8 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
               >
                 <fieldset disabled={disabled} className="min-w-0 space-y-4">
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <label className="text-sm">
-                      Tanggal absensi
-                      <input
+                    <div className="text-sm"><FloatingLabel label={<>Tanggal absensi
+                      </>}><input placeholder=" "
                         type="date"
                         required
                         min="2000-01-01"
@@ -349,8 +350,8 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                           }
                         }}
                         className={controlClass}
-                      />
-                    </label>
+                      /></FloatingLabel>
+                    </div>
                     <label className="text-sm">
                       Kelas untuk input
                       <select
@@ -454,17 +455,15 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                                 ))}
                               </select>
                             </label>
-                            <label className="min-w-0 text-sm">
-                              Keterangan {p.full_name}
-                              <input
+                            <div className="min-w-0 text-sm"><FloatingLabel label={<>Keterangan {p.full_name}</>}><input placeholder=" "
                                 className={controlClass}
                                 maxLength={2000}
                                 value={entries[p.id]?.notes ?? ""}
                                 onChange={(e) =>
                                   entry(p.id, { notes: e.target.value })
                                 }
-                              />
-                            </label>
+                              /></FloatingLabel>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -519,9 +518,8 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                     disabled={disabled}
                     className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
                   >
-                    <label className="text-sm">
-                      Tahun kalender
-                      <input
+                    <div className="text-sm"><FloatingLabel label={<>Tahun kalender
+                      </>}><input placeholder=" "
                         name="year"
                         type="number"
                         min="2000"
@@ -529,8 +527,8 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                         defaultValue={filters.year}
                         required
                         className={controlClass}
-                      />
-                    </label>
+                      /></FloatingLabel>
+                    </div>
                     <TextField label="Dari tanggal" name="start" type="date" />
                     <TextField label="Sampai tanggal" name="end" type="date" />
                     <SelectField label="Kelas" name="classId">
@@ -623,9 +621,8 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                 disabled={calendarBusy || disabled}
                 className="grid min-w-0 items-end gap-3 sm:grid-cols-3"
               >
-                <label className="min-w-0 text-sm">
-                  Bulan kalender
-                  <input
+                <div className="min-w-0 text-sm"><FloatingLabel label={<>Bulan kalender
+                  </>}><input placeholder=" "
                     className={controlClass}
                     name="month"
                     type="month"
@@ -633,8 +630,8 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                     max="2100-12"
                     defaultValue={data.today.slice(0, 7)}
                     required
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
                 <SelectField label="Siswa / anak" name="studentId" required>
                   <option value="">Pilih siswa</option>
                   {people.map((p) => (
@@ -841,16 +838,15 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                 value={edit.notes}
                 max={2000}
               />
-              <label className="block text-sm">
-                Alasan koreksi / pembatalan
-                <input
+              <div className="block text-sm"><FloatingLabel label={<>Alasan koreksi / pembatalan
+                </>}><input placeholder=" "
                   name="reason"
                   className={controlClass}
                   minLength={3}
                   maxLength={2000}
                   required
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <div className="flex flex-wrap gap-2">
                 <Button type="submit">Simpan koreksi</Button>
                 <Button

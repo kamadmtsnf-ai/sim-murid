@@ -9,6 +9,8 @@ import type { PublicRecaptcha } from "@/lib/auth/recaptcha";
 import { RecaptchaWidget } from "./recaptcha-widget";
 import { loginSchema } from "@/lib/auth/validation";
 import styles from "./login.module.css";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 
 type Phase = "idle" | "submitting" | "success" | "uncertain";
 export function LoginForm({captcha = { mode: "disabled" }}: {captcha?: PublicRecaptcha}) {
@@ -85,8 +87,8 @@ export function LoginForm({captcha = { mode: "disabled" }}: {captcha?: PublicRec
   const pending = phase === "submitting";
   return <form method="post" action="/api/auth/login" onSubmit={submit} className={styles.form} aria-busy={pending} aria-describedby={message ? "login-error" : undefined}>
     <fieldset disabled={phase !== "idle"} className={styles.fields}>
-      <div><label htmlFor="username" className="text-sm font-medium">Username</label><input id="username" name="username" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} required maxLength={100} className={styles.input} /></div>
-      <div><label htmlFor="password" className="text-sm font-medium">Password</label><div className={styles.passwordField}><input id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" onKeyUp={e=>setCapsLock(e.getModifierState("CapsLock"))} onBlur={()=>setCapsLock(false)} aria-describedby={capsLock?"login-caps-lock":undefined} required maxLength={1024} className={styles.input} /><button type="button" aria-controls="password" aria-pressed={visible} onClick={() => setVisible(value => !value)} aria-label={visible ? "Sembunyikan password" : "Tampilkan password"} title={visible ? "Sembunyikan password" : "Tampilkan password"} className={styles.passwordToggle}>{visible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}<span className="sr-only">{visible ? "Sembunyikan password" : "Tampilkan password"}</span></button></div>{capsLock && <p id="login-caps-lock" role="status" className="text-sm text-muted-foreground">Caps Lock aktif. Periksa huruf besar pada password.</p>}</div>
+      <div><FloatingLabel htmlFor="username" label={<>Username</>}><input placeholder=" " id="username" name="username" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} required maxLength={100} className={styles.input} /></FloatingLabel></div>
+      <div><div className={styles.passwordField}><FloatingLabel htmlFor="password" label={<>Password</>}><input placeholder=" " id="password" name="password" type={visible ? "text" : "password"} autoComplete="current-password" onKeyUp={e=>setCapsLock(e.getModifierState("CapsLock"))} onBlur={()=>setCapsLock(false)} aria-describedby={capsLock?"login-caps-lock":undefined} required maxLength={1024} className={styles.input} /></FloatingLabel><button type="button" aria-controls="password" aria-pressed={visible} onClick={() => setVisible(value => !value)} aria-label={visible ? "Sembunyikan password" : "Tampilkan password"} title={visible ? "Sembunyikan password" : "Tampilkan password"} className={styles.passwordToggle}>{visible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}<span className="sr-only">{visible ? "Sembunyikan password" : "Tampilkan password"}</span></button></div>{capsLock && <p id="login-caps-lock" role="status" className="text-sm text-muted-foreground">Caps Lock aktif. Periksa huruf besar pada password.</p>}</div>
       <label className={styles.remember}><input type="checkbox" name="remember" /><span>Ingat saya selama 7 hari<span className="mt-1 block text-xs text-muted-foreground">Gunakan hanya pada perangkat pribadi. Sesi biasa berlaku 1 jam.</span></span></label>
     </fieldset>
     {captcha.mode === "enabled" && <RecaptchaWidget key={captchaVersion} siteKey={captcha.siteKey} onToken={setCaptchaToken} disabled={phase !== "idle"} />}

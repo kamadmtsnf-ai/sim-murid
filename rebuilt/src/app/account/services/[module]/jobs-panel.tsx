@@ -17,6 +17,8 @@ import {
   type JobsSnapshot,
 } from "@/lib/services/jobs";
 import type { ServiceSnapshot } from "@/lib/services/validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const dates = new Intl.DateTimeFormat("id-ID", {
   dateStyle: "medium",
   timeStyle: "short",
@@ -339,9 +341,8 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
             data yang ditampilkan.
           </p>
           <div className="grid min-w-0 gap-3 sm:grid-cols-3">
-            <label className="block text-sm" htmlFor="jobs-search">
-              Cari peristiwa atau ID
-              <input
+            <div className="block text-sm"><FloatingLabel htmlFor="jobs-search" label={<>Cari peristiwa atau ID
+              </>}><input placeholder=" "
                 id="jobs-search"
                 type="search"
                 maxLength={200}
@@ -351,8 +352,8 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
                   setQuery(e.target.value);
                   setPage(1);
                 }}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <label className="block text-sm" htmlFor="jobs-status">
               Status
               <select

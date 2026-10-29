@@ -28,6 +28,8 @@ import {
   semesterPeriod,
   defaultSemesterDate,
 } from "@/lib/academic/period";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/learning/grades",
   kinds = ["PH", "ATS", "ASAS", "Praktik"] as const;
 type Scope = { classId: string; subjectId: string; semester: number };
@@ -665,9 +667,8 @@ const retainedEcurrentTarget=e.currentTarget;
       <section className="min-w-0 space-y-4" aria-busy={reading}>
         <h2 className="text-xl font-semibold">Riwayat penilaian</h2>
         <div className="grid min-w-0 gap-3 sm:grid-cols-3">
-          <label className="text-sm">
-            Cari mapel atau nama siswa
-            <input
+          <div className="text-sm"><FloatingLabel label={<>Cari mapel atau nama siswa
+            </>}><input placeholder=" "
               value={historySearch}
               onChange={(e) => {
                 setHistorySearch(e.target.value);
@@ -675,8 +676,8 @@ const retainedEcurrentTarget=e.currentTarget;
               }}
               className={controlClass}
               maxLength={100}
-            />
-          </label>
+            /></FloatingLabel>
+          </div>
           <label className="text-sm">
             Jenis penilaian di riwayat
             <select
@@ -693,9 +694,8 @@ const retainedEcurrentTarget=e.currentTarget;
               ))}
             </select>
           </label>
-          <label className="text-sm">
-            Nomor PH
-            <input
+          <div className="text-sm"><FloatingLabel label={<>Nomor PH
+            </>}><input placeholder=" "
               type="number"
               min={1}
               step={1}
@@ -705,8 +705,8 @@ const retainedEcurrentTarget=e.currentTarget;
                 setHistoryPage(1);
               }}
               className={controlClass}
-            />
-          </label>
+            /></FloatingLabel>
+          </div>
         </div>
         {history.slice((historyPage - 1) * 10, historyPage * 10).map((row) => {
           const cls = data.classes.find((c) => c.id === row.class_id);
@@ -845,17 +845,16 @@ const retainedEcurrentTarget=e.currentTarget;
                     {edit?.subject_name} · {edit?.kind} ·{" "}
                     {edit?.assessment_date}
                   </p>
-                  <label className="block text-sm">
-                    Alasan pembatalan
-                    <textarea
+                  <div className="block text-sm"><FloatingLabel label={<>Alasan pembatalan
+                    </>}><textarea placeholder=" "
                       name="reason"
                       minLength={3}
                       maxLength={2000}
                       rows={3}
                       className={controlClass}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                 </>
               ) : (
                 <>
@@ -881,9 +880,8 @@ const retainedEcurrentTarget=e.currentTarget;
                     disabled={!context || !entryAllowed}
                     className="min-w-0 space-y-4"
                   >
-                    <label className="block text-sm">
-                      Tanggal penilaian / periode KKM
-                      <input
+                    <div className="block text-sm"><FloatingLabel label={<>Tanggal penilaian / periode KKM
+                      </>}><input placeholder=" "
                         type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
@@ -891,13 +889,12 @@ const retainedEcurrentTarget=e.currentTarget;
                         max={period?.end}
                         className={controlClass}
                         required
-                      />
-                    </label>
+                      /></FloatingLabel>
+                    </div>
                     {mode === "kkm" ? (
                       <>
-                        <label className="block text-sm">
-                          KKM (0–100)
-                          <input
+                        <div className="block text-sm"><FloatingLabel label={<>KKM (0–100)
+                          </>}><input placeholder=" "
                             key={
                               context?.revision + "-" + (scope?.classId ?? "")
                             }
@@ -909,8 +906,8 @@ const retainedEcurrentTarget=e.currentTarget;
                             defaultValue={context?.extra.kkm ?? 75}
                             className={controlClass}
                             required
-                          />
-                        </label>
+                          /></FloatingLabel>
+                        </div>
                         <p className="text-sm text-muted-foreground">
                           Perubahan berlaku untuk penilaian baru dan rapor yang
                           masih draf. KKM penilaian lama dan arsip rapor tetap
@@ -945,9 +942,8 @@ const retainedEcurrentTarget=e.currentTarget;
                             {target.kkm_snapshot}.
                           </p>
                         )}
-                        <label className="block text-sm">
-                          Cari siswa dalam formulir
-                          <input
+                        <div className="block text-sm"><FloatingLabel label={<>Cari siswa dalam formulir
+                          </>}><input placeholder=" "
                             data-view-control="true"
                             onKeyDown={(e) => {
                               if (e.key === "Enter") e.preventDefault();
@@ -959,8 +955,8 @@ const retainedEcurrentTarget=e.currentTarget;
                             }}
                             maxLength={100}
                             className={controlClass}
-                          />
-                        </label>
+                          /></FloatingLabel>
+                        </div>
                         <p className="text-sm text-muted-foreground">
                           {roster.length} siswa dalam batch. Pencarian dan
                           halaman hanya mengubah tampilan; seluruh isian tetap
@@ -974,9 +970,7 @@ const retainedEcurrentTarget=e.currentTarget;
                             <p className="break-words font-medium sm:col-span-2">
                               {p.full_name}
                             </p>
-                            <label className="text-sm">
-                              Nilai {p.full_name}
-                              <input
+                            <div className="text-sm"><FloatingLabel label={<>Nilai {p.full_name}</>}><input placeholder=" "
                                 type="number"
                                 min={0}
                                 max={100}
@@ -992,11 +986,9 @@ const retainedEcurrentTarget=e.currentTarget;
                                   }))
                                 }
                                 className={controlClass}
-                              />
-                            </label>
-                            <label className="text-sm">
-                              Catatan {p.full_name}
-                              <input
+                              /></FloatingLabel>
+                            </div>
+                            <div className="text-sm"><FloatingLabel label={<>Catatan {p.full_name}</>}><input placeholder=" "
                                 value={draft[p.id]?.notes ?? ""}
                                 onChange={(e) =>
                                   setDraft((d) => ({
@@ -1009,8 +1001,8 @@ const retainedEcurrentTarget=e.currentTarget;
                                 }
                                 maxLength={2000}
                                 className={controlClass}
-                              />
-                            </label>
+                              /></FloatingLabel>
+                            </div>
                           </div>
                         ))}
                         {!entryRows.length && (
@@ -1041,9 +1033,8 @@ const retainedEcurrentTarget=e.currentTarget;
                           </Button>
                         </div>
                         {target && (
-                          <label className="block text-sm">
-                            Alasan koreksi
-                            <textarea
+                          <div className="block text-sm"><FloatingLabel label={<>Alasan koreksi
+                            </>}><textarea placeholder=" "
                               key={target?.id}
                               name="reason"
                               minLength={3}
@@ -1051,8 +1042,8 @@ const retainedEcurrentTarget=e.currentTarget;
                               rows={2}
                               className={controlClass}
                               required
-                            />
-                          </label>
+                            /></FloatingLabel>
+                          </div>
                         )}
                       </>
                     )}

@@ -18,6 +18,8 @@ import {
   type FamilySnapshot,
   type FamilyCommand,
 } from "@/lib/education/families";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const relation = { father: "Ayah", mother: "Ibu", guardian: "Wali" };
 export function FamilyPanel({ initial }: { initial: FamilySnapshot }) {
   const [data, setData] = useState(initial),
@@ -403,9 +405,8 @@ const retainedEcurrentTarget=e.currentTarget;
             <summary className="min-h-11 cursor-pointer font-medium">
               Daftar relasi terverifikasi ({data.guardians.length})
             </summary>
-            <label className="block text-sm font-medium">
-              Cari relasi
-              <input
+            <div className="block text-sm font-medium"><FloatingLabel label={<>Cari relasi
+              </>}><input placeholder=" "
                 type="search"
                 className={controlClass}
                 value={guardianSearch}
@@ -413,8 +414,8 @@ const retainedEcurrentTarget=e.currentTarget;
                   setGuardianSearch(e.target.value);
                   setGuardianPage(1);
                 }}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             {!guardians.length ? (
               <p className="text-sm text-muted-foreground">
                 {guardianSearch
@@ -500,15 +501,14 @@ const retainedEcurrentTarget=e.currentTarget;
                 required
                 max={150}
               />
-              <label className="block text-sm font-medium">
-                Cari calon anggota
-                <input
+              <div className="block text-sm font-medium"><FloatingLabel label={<>Cari calon anggota
+                </>}><input placeholder=" "
                   type="search"
                   className={controlClass}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <fieldset className="max-h-72 min-w-0 overflow-y-auto rounded-lg border p-3">
                 <legend className="text-sm font-medium">
                   Anggota terverifikasi ({selected.length}/30)
@@ -581,9 +581,8 @@ const retainedEcurrentTarget=e.currentTarget;
             <summary className="min-h-11 cursor-pointer font-medium">
               Daftar grup saudara ({data.families.length})
             </summary>
-            <label className="block text-sm font-medium">
-              Cari grup
-              <input
+            <div className="block text-sm font-medium"><FloatingLabel label={<>Cari grup
+              </>}><input placeholder=" "
                 type="search"
                 className={controlClass}
                 value={groupSearch}
@@ -591,8 +590,8 @@ const retainedEcurrentTarget=e.currentTarget;
                   setGroupSearch(e.target.value);
                   setGroupPage(1);
                 }}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             {!groups.length ? (
               <p className="text-sm text-muted-foreground">
                 {groupSearch

@@ -23,6 +23,8 @@ import {
 } from "@/lib/learning/reports";
 import { grade } from "@/lib/learning/grade";
 import { formatAcademicYear, semesterPeriod } from "@/lib/academic/period";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/learning/reports";
 export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
   const [data, setData] = useState(initial),
@@ -309,9 +311,8 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
             className="space-y-4 rounded-xl border bg-card p-4"
           >
             <div className="grid gap-3 sm:grid-cols-3">
-              <label className="min-w-0">
-                Cari siswa
-                <input
+              <div className="min-w-0"><FloatingLabel label={<>Cari siswa
+                </>}><input
                   className={controlClass}
                   value={search}
                   onChange={(e) => {
@@ -320,8 +321,8 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
                   }}
                   placeholder="Nama atau username"
                   disabled={disabled}
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <label className="min-w-0">
                 Status
                 <select

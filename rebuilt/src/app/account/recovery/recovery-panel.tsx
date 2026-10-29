@@ -14,6 +14,8 @@ import {
   recoveryResolutionSchema,
   type RecoveryList,
 } from "@/lib/auth/recovery-validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const date = new Intl.DateTimeFormat("id-ID", {
   dateStyle: "medium",
   timeStyle: "short",
@@ -321,9 +323,8 @@ const retainedEVENTcurrentTarget=event.currentTarget;
               Password hanya ditampilkan pada halaman ini dan tidak disimpan di
               penyimpanan browser.
             </p>
-            <label className="block text-sm" htmlFor="recovery-temporary">
-              Password baru
-              <input
+            <div className="block text-sm"><FloatingLabel htmlFor="recovery-temporary" label={<>Password baru
+              </>}><input placeholder=" "
                 ref={passwordRef}
                 id="recovery-temporary"
                 type="text"
@@ -333,8 +334,8 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                 value={password}
                 readOnly
                 onFocus={(e) => e.currentTarget.select()}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <Button
               onClick={async () => {
                 if (
@@ -368,9 +369,8 @@ const retainedEVENTcurrentTarget=event.currentTarget;
         </CardHeader>
         <CardContent className="space-y-4" aria-busy={busy}>
           <div className="grid min-w-0 gap-3 sm:grid-cols-2">
-            <label className="block text-sm" htmlFor="recovery-search">
-              Cari nama atau username
-              <input
+            <div className="block text-sm"><FloatingLabel htmlFor="recovery-search" label={<>Cari nama atau username
+              </>}><input placeholder=" "
                 id="recovery-search"
                 type="search"
                 className={controlClass}
@@ -380,8 +380,8 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                   setQuery(e.target.value);
                   setPage(1);
                 }}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <label className="block text-sm" htmlFor="recovery-type">
               Jenis permintaan
               <select
@@ -549,9 +549,8 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                   )}
                 </div>
               )}
-              <label className="block text-sm" htmlFor="recovery-evidence">
-                Referensi pemeriksaan identitas
-                <input
+              <div className="block text-sm"><FloatingLabel htmlFor="recovery-evidence" label={<>Referensi pemeriksaan identitas
+                </>}><input placeholder=" "
                   id="recovery-evidence"
                   name="evidenceReference"
                   className={controlClass}
@@ -561,7 +560,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                   autoComplete="off"
                   disabled={disabled}
                   aria-describedby="recovery-evidence-help"
-                />
+                /></FloatingLabel>
                 <span
                   id="recovery-evidence-help"
                   className="mt-1 block text-sm text-muted-foreground"
@@ -570,7 +569,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                   huruf, angka, spasi, titik, garis miring, minus atau garis
                   bawah. Jangan isi NIK, jawaban keamanan atau data rahasia.
                 </span>
-              </label>
+              </div>
               <label className="flex min-h-11 items-start gap-3 text-sm">
                 <input
                   className="mt-1 size-5 shrink-0"
@@ -582,9 +581,8 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                 Saya sudah memverifikasi identitas pemilik akun melalui prosedur
                 madrasah.
               </label>
-              <label className="block text-sm" htmlFor="recovery-current">
-                Password Admin saat ini
-                <input
+              <div className="block text-sm"><FloatingLabel htmlFor="recovery-current" label={<>Password Admin saat ini
+                </>}><input placeholder=" "
                   id="recovery-current"
                   name="currentPassword"
                   className={controlClass}
@@ -593,8 +591,8 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                   required
                   maxLength={1024}
                   disabled={disabled}
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <div className="flex flex-wrap gap-3">
                 <Button
                   type="submit"

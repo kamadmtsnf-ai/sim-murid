@@ -6,6 +6,8 @@ import { recoveryRequestSchema } from "@/lib/auth/recovery-validation";
 import { useRecoverySubmission } from "./use-recovery-submission";
 import { RecoveryFeedback } from "./recovery-feedback";
 import styles from "./recovery.module.css";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 export function RecoveryForm() {
   const [manual, setManual] = useState(false),
     [sent, setSent] = useState(false);
@@ -65,9 +67,8 @@ export function RecoveryForm() {
           aria-busy={state.pending}
         >
           <fieldset disabled={state.locked} className={styles.fields}>
-            <label htmlFor="recovery-username">
-              Username
-              <input
+            <div><FloatingLabel htmlFor="recovery-username" label={<>Username
+              </>}><input placeholder=" "
                 id="recovery-username"
                 name="username"
                 autoComplete="username"
@@ -77,8 +78,8 @@ export function RecoveryForm() {
                 className={styles.input}
                 required
                 maxLength={100}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <label htmlFor="recovery-type">
               Bantuan yang dibutuhkan
               <select
@@ -127,9 +128,8 @@ export function RecoveryForm() {
                 <p id="recovery-question-help" className={styles.note}>
                   {questions.find((q) => q.code === question)?.label}
                 </p>
-                <label htmlFor="recovery-answer">
-                  Jawaban keamanan
-                  <input
+                <div><FloatingLabel htmlFor="recovery-answer" label={<>Jawaban keamanan
+                  </>}><input placeholder=" "
                     id="recovery-answer"
                     name="answer"
                     type="password"
@@ -137,8 +137,8 @@ export function RecoveryForm() {
                     className={styles.input}
                     maxLength={256}
                     required
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
               </>
             )}
           </fieldset>

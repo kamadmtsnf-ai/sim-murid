@@ -18,6 +18,8 @@ import {
   assignmentLabel,
 } from "@/lib/education/directory";
 import type { z } from "zod";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Command = z.infer<typeof assignmentCommand>;
 export function ManageAssignments({ target }: { target: string }) {
   const router = useRouter(),
@@ -199,9 +201,8 @@ export function ManageAssignments({ target }: { target: string }) {
                   </select>
                 </label>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="min-w-0 text-sm">
-                    Tanggal mulai
-                    <input
+                  <div className="min-w-0 text-sm"><FloatingLabel label={<>Tanggal mulai
+                    </>}><input placeholder=" "
                       required
                       type="date"
                       name="from"
@@ -209,27 +210,25 @@ export function ManageAssignments({ target }: { target: string }) {
                       max="2199-12-31"
                       defaultValue={directoryToday()}
                       className="mt-1 min-h-11 w-full min-w-0 rounded-md border p-2"
-                    />
-                  </label>
-                  <label className="min-w-0 text-sm">
-                    Tanggal akhir (opsional)
-                    <input
+                    /></FloatingLabel>
+                  </div>
+                  <div className="min-w-0 text-sm"><FloatingLabel label={<>Tanggal akhir (opsional)
+                    </>}><input placeholder=" "
                       type="date"
                       name="until"
                       min="1900-01-01"
                       max="2199-12-31"
                       className="mt-1 min-h-11 w-full min-w-0 rounded-md border p-2"
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                 </div>
                 <Button type="submit">Simpan penugasan</Button>
               </fieldset>
             </form>
             <section className="space-y-3">
               <h2 className="font-semibold">Daftar penugasan dan riwayat</h2>
-              <label className="block text-sm">
-                Alasan pencabutan
-                <textarea
+              <div className="block text-sm"><FloatingLabel label={<>Alasan pencabutan
+                </>}><textarea
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                   disabled={busy || !!pending}
@@ -237,8 +236,8 @@ export function ManageAssignments({ target }: { target: string }) {
                   maxLength={500}
                   className="mt-1 min-h-20 w-full rounded-md border p-2"
                   placeholder="Isi minimal 5 karakter sebelum mencabut tugas"
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               {!rows.length && <p>Belum ada penugasan yang dapat dikelola.</p>}
               <ul className="space-y-3">
                 {rows.map((row) => (

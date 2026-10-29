@@ -60,3 +60,7 @@
 .story::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle at 15% 10%, #ffffff1f, transparent 45%), radial-gradient(circle at 95% 90%, #ffffff12, transparent 45%); }
 @media(min-width:64rem) { .story { margin: 16px; border-radius: 1.5rem; min-block-size: calc(100dvh - 32px); } }
 @media(prefers-reduced-motion:reduce) { .input { transition: none; } }
+/* Floating label and password value share a fixed gutter with the eye control. */
+.passwordField { margin-block-start: 0; }
+.passwordField :global(.floating-label-text) { padding-inline-end: 60px; }
+.passwordToggle { inset-block-start: 50%; transform: translateY(-50%); }

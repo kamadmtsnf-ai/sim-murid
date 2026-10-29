@@ -21,6 +21,8 @@ import {
   mentoringSnapshot,
   type MentoringSnapshot,
 } from "@/lib/operations/mentoring";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/operations/mentoring";
 type Report = MentoringSnapshot["rows"][number];
 export function MentoringPanel({ initial }: { initial: MentoringSnapshot }) {
@@ -381,9 +383,8 @@ const retainedEcurrentTarget=e.currentTarget;
               disabled={disabled}
               className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4"
             >
-              <label className="text-sm">
-                Tahun kalender
-                <input
+              <div className="text-sm"><FloatingLabel label={<>Tahun kalender
+                </>}><input placeholder=" "
                   className={controlClass}
                   name="year"
                   type="number"
@@ -391,8 +392,8 @@ const retainedEcurrentTarget=e.currentTarget;
                   max="2100"
                   defaultValue={filters.year}
                   required
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <TextField name="start" label="Dari tanggal" type="date" />
               <TextField name="end" label="Sampai tanggal" type="date" />
               <SelectField label="Siswa" name="studentId">
@@ -572,9 +573,8 @@ const retainedEvalue=e.target.value;
                         />{" "}
                         Tetapkan juga tugas Guru Wali bila belum aktif
                       </label>
-                      <label className="block text-sm">
-                        Cari siswa
-                        <input
+                      <div className="block text-sm"><FloatingLabel label={<>Cari siswa
+                        </>}><input
                           className={controlClass}
                           value={search}
                           onChange={(e) => {
@@ -582,8 +582,8 @@ const retainedEvalue=e.target.value;
                             setSearch(e.target.value);
                           }}
                           placeholder="Nama atau username"
-                        />
-                      </label>
+                        /></FloatingLabel>
+                      </div>
                       <p className="text-sm">
                         {selected.length} siswa dipilih dari seluruh daftar.
                         Pencarian tidak mengubah pilihan.
@@ -662,9 +662,8 @@ const retainedEvalue=e.target.value;
                         </option>
                       )}
                   </SelectField>
-                  <label className="block text-sm">
-                    Tanggal laporan
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Tanggal laporan
+                    </>}><input placeholder=" "
                       name="date"
                       type="date"
                       className={controlClass}
@@ -672,8 +671,8 @@ const retainedEvalue=e.target.value;
                       max={data.today}
                       defaultValue={edit?.date ?? data.today}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <label className="block text-sm">
                     Jenis laporan
                     <select
@@ -733,30 +732,27 @@ const retainedEvalue=e.target.value;
                       max={100}
                     />
                   )}
-                  <label className="block text-sm">
-                    {kind === "development"
+                  <div className="block text-sm"><FloatingLabel label={<>{kind === "development"
                       ? "Deskripsi perkembangan"
-                      : "Catatan hafalan"}
-                    <textarea
+                      : "Catatan hafalan"}</>}><textarea placeholder=" "
                       className={controlClass}
                       name="notes"
                       defaultValue={edit?.notes ?? ""}
                       required={kind === "development"}
                       maxLength={4000}
                       rows={4}
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   {edit && (
-                    <label className="block text-sm">
-                      Alasan koreksi / pembatalan
-                      <input
+                    <div className="block text-sm"><FloatingLabel label={<>Alasan koreksi / pembatalan
+                      </>}><input placeholder=" "
                         className={controlClass}
                         name="reason"
                         minLength={3}
                         maxLength={2000}
                         required
-                      />
-                    </label>
+                      /></FloatingLabel>
+                    </div>
                   )}
                 </>
               )}

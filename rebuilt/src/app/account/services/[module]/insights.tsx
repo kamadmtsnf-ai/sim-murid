@@ -15,6 +15,8 @@ import {
 } from "@/components/domain-controls";
 import { analysisSchema } from "@/lib/services/analysis-schema";
 import type { ServiceSnapshot } from "@/lib/services/validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Row = Record<string, unknown>;
 const list = (v: unknown): Row[] => (Array.isArray(v) ? (v as Row[]) : []),
   obj = (v: unknown): Row => (v && typeof v === "object" ? (v as Row) : {});
@@ -511,9 +513,8 @@ const retainedEvalue=e.target.value;
               >
                 <h2 className="font-semibold">Rencana aksi Kepala Madrasah</h2>
                 <p>3–7 poin, setelah akhir tanggal penutupan sampai H+30.</p>
-                <label>
-                  Jumlah poin
-                  <input
+                <div><FloatingLabel label={<>Jumlah poin
+                  </>}><input placeholder=" "
                     type="number"
                     min="3"
                     max="7"
@@ -536,8 +537,8 @@ const retainedEvalue=e.target.value;
                       dirty.current = true;
                       setPoints(next);
                     }}
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
                 {Array.from({ length: points }, (_, i) => (
                   <fieldset
                     key={period + ":" + i}
