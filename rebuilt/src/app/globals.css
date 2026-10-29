@@ -664,7 +664,7 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  min-height: 2.25rem;
+  min-height: 2.75rem;
   margin: 0;
   border: 0;
   border-radius: inherit;
@@ -700,3 +700,9 @@
   .floating-label-text { color: CanvasText; }
   .floating-label-field:focus-within { outline-color: Highlight; }
 }
+
+/* Keep search adornments aligned with the editable row below its floating label. */
+.nav-search > svg { align-self: flex-end; margin-block-end: 14px; }
+.nav-search .nav-search-clear { align-self: flex-end; }
+.floating-label-field > .relative > svg { top: 50%; transform: translateY(-50%); }
+.floating-label-text > span.block { margin-block: 0; font-size: inherit; font-weight: inherit; }

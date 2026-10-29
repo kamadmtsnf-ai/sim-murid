@@ -2,12 +2,42 @@
   "date": "2026-10-30",
   "environment": "Chrome cloud browser, same-origin iframe containing actual shared Field/FloatingLabel/domain TextField/LoginForm/Dialog with synthetic inputs",
   "cases": [
-    {"viewport":320,"text":"100%","overflow":false,"violations":[]},
-    {"viewport":390,"text":"100%","overflow":false,"violations":[]},
-    {"viewport":768,"text":"100%","overflow":false,"violations":[]},
-    {"viewport":1280,"text":"100%","overflow":false,"violations":[]},
-    {"viewport":320,"text":"200%","overflow":false,"violations":[]},
-    {"viewport":320,"text":"400%","overflow":false,"violations":[]}
+    {
+      "viewport": 320,
+      "text": "100%",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": 390,
+      "text": "100%",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": 768,
+      "text": "100%",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": 1280,
+      "text": "100%",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": 320,
+      "text": "200%",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": 320,
+      "text": "400%",
+      "overflow": false,
+      "violations": []
+    }
   ],
   "interactions": {
     "syntheticFormDataRetainsNamesAndValues": true,
@@ -16,5 +46,16 @@
     "labelClickFocusesInput": true,
     "modalEscapeAndReturnFocus": true
   },
-  "limits": ["No authenticated production writes", "No physical device or screen reader UAT", "Autofill CSS compatibility reviewed; real password-manager/OS autofill not exercised", "Browser extension metadata errors were observed; these were not application-origin errors", "This fixture is not an end-to-end visit to every authenticated module"]
+  "limits": [
+    "No authenticated production writes",
+    "No physical device or screen reader UAT",
+    "Autofill CSS compatibility reviewed; real password-manager/OS autofill not exercised",
+    "Browser extension metadata errors were observed; these were not application-origin errors",
+    "This fixture is not an end-to-end visit to every authenticated module"
+  ],
+  "nativeControlMinimumHeight": {
+    "text": "100%",
+    "minimumPixels": 44,
+    "sampledControls": 14
+  }
 }
