@@ -11,6 +11,8 @@ import { passwordValueSchema } from "@/lib/auth/security-validation";
 import { useRecoverySubmission } from "../use-recovery-submission";
 import { RecoveryFeedback } from "../recovery-feedback";
 import styles from "../recovery.module.css";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 export function EmailRecoveryForm() {
   const router = useRouter(),
     codeRef = useRef<HTMLInputElement>(null);
@@ -93,9 +95,8 @@ export function EmailRecoveryForm() {
           onSubmit={(e) => submit(e, "send")}
           aria-busy={state.pending}
         >
-          <label htmlFor="email-recovery-user">
-            Username
-            <input
+          <div><FloatingLabel htmlFor="email-recovery-user" label={<>Username
+            </>}><input placeholder=" "
               id="email-recovery-user"
               name="username"
               className={styles.input}
@@ -106,8 +107,8 @@ export function EmailRecoveryForm() {
               maxLength={100}
               required
               disabled={state.locked}
-            />
-          </label>
+            /></FloatingLabel>
+          </div>
           <Button
             type="submit"
             className={styles.action}
@@ -131,9 +132,8 @@ export function EmailRecoveryForm() {
             aria-busy={state.pending}
           >
             <fieldset disabled={state.locked} className={styles.fields}>
-              <label htmlFor="recovery-email-code">
-                Kode enam digit
-                <input
+              <div><FloatingLabel htmlFor="recovery-email-code" label={<>Kode enam digit
+                </>}><input placeholder=" "
                   ref={codeRef}
                   id="recovery-email-code"
                   name="code"
@@ -143,16 +143,15 @@ export function EmailRecoveryForm() {
                   pattern="[0-9]{6}"
                   maxLength={6}
                   required
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <p id="reset-password-rules" className={styles.note}>
                 Password minimal 8 karakter, maksimal 72 byte; huruf
                 besar/kecil, angka dan simbol. Hindari username dan tiga
                 karakter sama berurutan.
               </p>
-              <label htmlFor="recovery-new-password">
-                Password baru
-                <input
+              <div><FloatingLabel htmlFor="recovery-new-password" label={<>Password baru
+                </>}><input placeholder=" "
                   id="recovery-new-password"
                   name="newPassword"
                   type="password"
@@ -162,11 +161,10 @@ export function EmailRecoveryForm() {
                   maxLength={72}
                   aria-describedby="reset-password-rules"
                   required
-                />
-              </label>
-              <label htmlFor="recovery-confirm-password">
-                Konfirmasi password
-                <input
+                /></FloatingLabel>
+              </div>
+              <div><FloatingLabel htmlFor="recovery-confirm-password" label={<>Konfirmasi password
+                </>}><input placeholder=" "
                   id="recovery-confirm-password"
                   name="confirmPassword"
                   type="password"
@@ -174,8 +172,8 @@ export function EmailRecoveryForm() {
                   className={styles.input}
                   maxLength={1024}
                   required
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
             </fieldset>
             <Button
               type="submit"

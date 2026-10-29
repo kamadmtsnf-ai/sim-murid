@@ -22,6 +22,8 @@ import {
 } from "@/lib/bulk/validation";
 import { fileBase64 } from "@/lib/spreadsheets/client";
 import { z } from "zod";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const titles = {
   enrollment: "Impor penempatan siswa",
   schedules: "Impor jadwal KBM",
@@ -457,16 +459,15 @@ export function BulkImport({
                 Maksimal 500 akun aktif dan 100 mapel; validasi akhir tetap
                 memeriksa data sumber lengkap.
               </p>
-              <label className="mt-3 block text-sm">
-                Cari referensi
-                <input
+              <div className="mt-3 block text-sm"><FloatingLabel label={<>Cari referensi
+                </>}><input placeholder=" "
                   type="search"
                   className={controlClass}
                   value={referenceSearch}
                   maxLength={100}
                   onChange={(e) => setReferenceSearch(e.target.value)}
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <ul className="mt-3 space-y-2 text-sm">
                 {catalog.people
                   .filter((p) =>
@@ -528,11 +529,9 @@ export function BulkImport({
               </p>
             ) : null}
             {domain !== "schedules" ? (
-              <label className="text-sm">
-                {domain === "enrollment"
+              <div className="text-sm"><FloatingLabel label={<>{domain === "enrollment"
                   ? "Tanggal mulai penempatan"
-                  : "Tanggal penilaian"}
-                <input
+                  : "Tanggal penilaian"}</>}><input placeholder=" "
                   className={controlClass}
                   type="date"
                   value={date}
@@ -540,8 +539,8 @@ export function BulkImport({
                     setDate(e.target.value);
                     edit();
                   }}
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
             ) : null}
             {domain === "grades" ? (
               <label className="text-sm">

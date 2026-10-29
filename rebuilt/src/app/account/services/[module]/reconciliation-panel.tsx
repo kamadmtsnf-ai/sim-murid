@@ -13,6 +13,8 @@ import {
   packageQuery,
   packageDefaults,
 } from "@/lib/services/reconciliation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const number = new Intl.NumberFormat("id-ID"),
   money = new Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -287,9 +289,8 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
               className="grid min-w-0 gap-4 sm:grid-cols-2"
             >
               <legend className="sr-only">Filter paket ekspor</legend>
-              <label className="block text-sm" htmlFor="reconciliation-start">
-                Tanggal awal operasional
-                <input
+              <div className="block text-sm"><FloatingLabel htmlFor="reconciliation-start" label={<>Tanggal awal operasional
+                </>}><input placeholder=" "
                   id="reconciliation-start"
                   type="date"
                   required
@@ -298,11 +299,10 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                   className={controlClass}
                   value={start}
                   onChange={(e) => setStart(e.target.value)}
-                />
-              </label>
-              <label className="block text-sm" htmlFor="reconciliation-end">
-                Tanggal akhir operasional
-                <input
+                /></FloatingLabel>
+              </div>
+              <div className="block text-sm"><FloatingLabel htmlFor="reconciliation-end" label={<>Tanggal akhir operasional
+                </>}><input placeholder=" "
                   id="reconciliation-end"
                   type="date"
                   required
@@ -311,11 +311,10 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                   className={controlClass}
                   value={end}
                   onChange={(e) => setEnd(e.target.value)}
-                />
-              </label>
-              <label className="block text-sm" htmlFor="reconciliation-month">
-                Bulan poin siswa (SPK)
-                <input
+                /></FloatingLabel>
+              </div>
+              <div className="block text-sm"><FloatingLabel htmlFor="reconciliation-month" label={<>Bulan poin siswa (SPK)
+                </>}><input placeholder=" "
                   id="reconciliation-month"
                   type="month"
                   required
@@ -325,7 +324,7 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                   value={month}
                   onChange={(e) => setMonth(e.target.value)}
                   aria-describedby="reconciliation-month-help"
-                />
+                /></FloatingLabel>
                 <span
                   id="reconciliation-month-help"
                   className="mt-1 block text-sm text-muted-foreground"
@@ -333,7 +332,7 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                   Saldo poin mengikuti bulan ini; laporan transaksi mengikuti
                   rentang tanggal operasional.
                 </span>
-              </label>
+              </div>
               <label className="block text-sm" htmlFor="reconciliation-class">
                 Kelas
                 <select

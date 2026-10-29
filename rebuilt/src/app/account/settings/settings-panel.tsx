@@ -16,6 +16,8 @@ import {
   settingsRequest,
   type SettingsSnapshot,
 } from "@/lib/settings/validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const inputClass =
   "mt-1 min-h-11 w-full min-w-0 rounded-md border border-input bg-card px-3 py-2 text-base shadow-xs focus-visible:outline-2 focus-visible:outline-ring";
 function Field({
@@ -34,9 +36,7 @@ function Field({
   type?: string;
 }) {
   return (
-    <label className="block min-w-0 text-sm font-medium">
-      {label}
-      <input
+    <div className="block min-w-0 text-sm font-medium"><FloatingLabel label={<>{label}</>}><input placeholder=" "
         className={inputClass}
         name={name}
         defaultValue={value}
@@ -53,8 +53,8 @@ function Field({
             }
           }
         }}
-      />
-    </label>
+      /></FloatingLabel>
+    </div>
   );
 }
 export function SettingsPanel({
@@ -317,9 +317,8 @@ export function SettingsPanel({
     </nav>
   );
   const search = (
-    <label className="block min-w-0 text-sm font-medium">
-      Cari data
-      <input
+    <div className="block min-w-0 text-sm font-medium"><FloatingLabel label={<>Cari data
+      </>}><input
         type="search"
         className={inputClass}
         value={query}
@@ -332,8 +331,8 @@ export function SettingsPanel({
             ? "Tanggal atau keterangan"
             : "Nama mata pelajaran atau hafalan"
         }
-      />
-    </label>
+      /></FloatingLabel>
+    </div>
   );
   const currentHoliday = data.holidays.find((x) => x.id === editing);
   const section = async (value: string) => {

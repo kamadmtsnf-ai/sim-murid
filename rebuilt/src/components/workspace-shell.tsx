@@ -39,6 +39,8 @@ import {
   filterNavigation,
   type NavGroup,
 } from "@/config/account-navigation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Workspace = {
   navigation: NavGroup[];
   name: string;
@@ -191,13 +193,8 @@ export function WorkspaceShell({
             className="size-4 shrink-0 text-muted-foreground"
             aria-hidden="true"
           />
-          <label
-            className="sr-only"
-            htmlFor={`${searchId}-${mobile ? "mobile" : "desktop"}`}
-          >
-            {mobile ? "Cari menu pada navigasi seluler" : "Cari menu navigasi"}
-          </label>
-          <input
+
+          <FloatingLabel htmlFor={`${searchId}-${mobile ? "mobile" : "desktop"}`} label={<>{mobile ? "Cari menu pada navigasi seluler" : "Cari menu navigasi"}</>}><input
             id={`${searchId}-${mobile ? "mobile" : "desktop"}`}
             ref={mobile ? mobileSearch : desktopSearch}
             type="search"
@@ -213,7 +210,7 @@ export function WorkspaceShell({
                 clearSearch(mobile);
               }
             }}
-          />
+          /></FloatingLabel>
           {query && (
             <Button
               type="button"

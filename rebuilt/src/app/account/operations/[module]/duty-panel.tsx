@@ -17,6 +17,8 @@ import {
   dutyDays,
   type DutySnapshot,
 } from "@/lib/operations/duty";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Filter = {
   year?: number | undefined;
   start?: string | undefined;
@@ -300,35 +302,32 @@ export function DutyPanel({
             className="grid gap-3 rounded-xl border p-4 sm:grid-cols-3"
           >
             <input type="hidden" name="view" value="history" />
-            <label>
-              Tahun kalender
-              <input
+            <div><FloatingLabel label={<>Tahun kalender
+              </>}><input placeholder=" "
                 className={controlClass}
                 name="year"
                 type="number"
                 min={2000}
                 max={2100}
                 defaultValue={filters.year ?? Number(data.today.slice(0, 4))}
-              />
-            </label>
-            <label>
-              Dari tanggal
-              <input
+              /></FloatingLabel>
+            </div>
+            <div><FloatingLabel label={<>Dari tanggal
+              </>}><input placeholder=" "
                 type="date"
                 className={controlClass}
                 name="start"
                 defaultValue={filters.start}
-              />
-            </label>
-            <label>
-              Sampai tanggal
-              <input
+              /></FloatingLabel>
+            </div>
+            <div><FloatingLabel label={<>Sampai tanggal
+              </>}><input placeholder=" "
                 type="date"
                 className={controlClass}
                 name="end"
                 defaultValue={filters.end}
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <Button type="submit" disabled={busy}>
               Terapkan filter
             </Button>
@@ -486,16 +485,15 @@ export function DutyPanel({
                       ))}
                     </select>
                   </label>
-                  <label>
-                    Alasan
-                    <textarea
+                  <div><FloatingLabel label={<>Alasan
+                    </>}><textarea placeholder=" "
                       name="reason"
                       className={controlClass}
                       minLength={3}
                       maxLength={2000}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                 </>
               ) : mode === "roster" ? (
                 <>

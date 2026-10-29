@@ -15,6 +15,8 @@ import {
   type SurveyResponse,
 } from "@/lib/services/surveys";
 import extras from "@/lib/services/instrument-extras.json";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Draft = {
   version: number;
   answers: Answers;
@@ -387,18 +389,11 @@ export function SurveyEditor({
       </div>
       <div className="space-y-4">
         {response.instrument.slice((page - 1) * 10, page * 10).map((q, i) => (
-          <label
-            key={q.code}
-            className="block rounded-lg border p-4"
-            htmlFor={prefix + q.code}
-          >
-            <span className="mb-2 block text-xs text-muted-foreground">
+          <div key={q.code} className="block rounded-lg border p-4"><FloatingLabel htmlFor={prefix + q.code} label={<><span className="mb-2 block text-xs text-muted-foreground">
               Pertanyaan {(page - 1) * 10 + i + 1} · {q.code} ·{" "}
               {q.required ? "Wajib" : "Opsional"}
-            </span>
-            <span className="block text-sm font-medium">{q.question}</span>
-            {q.kind === "essay" ? (
-              <textarea
+            </span><span className="block text-sm font-medium">{q.question}</span></>}>{q.kind === "essay" ? (
+              <textarea placeholder=" "
                 id={prefix + q.code}
                 data-code={q.code}
                 className={controlClass}
@@ -434,8 +429,8 @@ export function SurveyEditor({
                   </option>
                 ))}
               </select>
-            )}
-          </label>
+            )}</FloatingLabel>
+          </div>
         ))}
       </div>
       <nav
@@ -503,17 +498,16 @@ export function SurveyEditor({
                     </select>
                   </label>
                 ))}
-                <label className="block text-sm">
-                  Apresiasi atau masukan (opsional)
-                  <textarea
+                <div className="block text-sm"><FloatingLabel label={<>Apresiasi atau masukan (opsional)
+                  </>}><textarea placeholder=" "
                     className={controlClass}
                     rows={3}
                     maxLength={10000}
                     disabled={peerLocked || blocked || isFinalizing}
                     value={String(draft.peerAnswers[id]?.["PTS-7"] ?? "")}
                     onChange={(e) => change("PTS-7", e.target.value, id)}
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
               </div>
             </details>
           ))}

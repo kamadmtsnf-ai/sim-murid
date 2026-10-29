@@ -633,3 +633,70 @@
 .pwa-guide button { min-height:44px; max-width:100%; height:auto; white-space:normal; overflow-wrap:anywhere; }
 .pwa-guide [role=group] button { padding:8px 12px; }
 .pwa-required-shell [hidden] { display:none; }
+
+/* Shared floating textboxes: label stays in flow so long translations and text zoom wrap. */
+.floating-label-field {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--input);
+  border-radius: .8rem;
+  background: var(--card);
+  color: var(--foreground);
+  transition: border-color .15s, box-shadow .15s;
+}
+.floating-label-text {
+  display: block;
+  min-width: 0;
+  padding: .375rem .75rem 0;
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  color: var(--muted-foreground);
+  transform-origin: left center;
+  transition: transform .15s, color .15s;
+}
+/* Native controls retain IDs, handlers, values, constraints, refs and form ownership. */
+.floating-label-field :is(input,textarea) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 2.25rem;
+  margin: 0;
+  border: 0;
+  border-radius: inherit;
+  padding-block: .125rem .375rem;
+  background: transparent;
+  box-shadow: none;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.floating-label-field :is(input,textarea):focus-visible { outline: none; box-shadow: none; }
+.floating-label-field:focus-within { border-color: var(--primary); outline: 2px solid var(--ring); outline-offset: 2px; }
+.floating-label-field:focus-within > .floating-label-text { color: var(--primary); }
+.floating-label-field:has(:is(input,textarea)[placeholder=" "]:placeholder-shown):not(:focus-within) > .floating-label-text {
+  transform: translateY(.7rem);
+  color: var(--foreground);
+}
+.floating-label-field:has(:is(input,textarea)[readonly]) { background: var(--background); }
+.floating-label-field:has(:is(input,textarea):disabled) { background: var(--secondary); }
+.floating-label-field:has(:is(input,textarea)[aria-invalid="true"]) { border-color: var(--destructive); }
+.floating-label-field:has(:is(input,textarea)[aria-invalid="true"]) > .floating-label-text { color: var(--destructive); }
+.floating-label-field:has(input:is([type="date"],[type="time"],[type="datetime-local"],[type="month"],[type="week"])) > .floating-label-text,
+.floating-label-field:has(:is(input,textarea):autofill) > .floating-label-text { transform: none !important; }
+/* Search adornments remain outside the field's label and editable value. */
+.nav-search .floating-label-field { flex: 1; border: 0; background: transparent; }
+.nav-search .floating-label-text { padding-inline: 0; }
+.nav-search .floating-label-field input { padding-inline: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .floating-label-field, .floating-label-text { transition: none; }
+}
+@media (forced-colors: active) {
+  .floating-label-field { border-color: CanvasText; }
+  .floating-label-text { color: CanvasText; }
+  .floating-label-field:focus-within { outline-color: Highlight; }
+}

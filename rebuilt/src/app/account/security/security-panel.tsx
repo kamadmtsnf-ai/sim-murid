@@ -13,6 +13,8 @@ import {
   securityStateSchema,
   type SecurityState,
 } from "@/lib/auth/security-validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const guidance: Record<
   SecurityState["gate"],
   { title: string; detail: string }
@@ -325,12 +327,8 @@ export function SecurityPanel({
                 readOnly
                 hidden
               />
-              <label
-                className="block text-sm font-medium"
-                htmlFor="password-current"
-              >
-                Password saat ini
-                <input
+              <div className="block text-sm font-medium"><FloatingLabel htmlFor="password-current" label={<>Password saat ini
+                </>}><input placeholder=" "
                   className={field}
                   id="password-current"
                   name="currentPassword"
@@ -342,15 +340,11 @@ export function SecurityPanel({
                   aria-describedby={
                     errors.currentPassword ? "currentPassword-error" : undefined
                   }
-                />
+                /></FloatingLabel>
                 {errorFor("currentPassword")}
-              </label>
-              <label
-                className="block text-sm font-medium"
-                htmlFor="password-new"
-              >
-                Password baru
-                <input
+              </div>
+              <div className="block text-sm font-medium"><FloatingLabel htmlFor="password-new" label={<>Password baru
+                </>}><input placeholder=" "
                   className={field}
                   id="password-new"
                   name="newPassword"
@@ -365,15 +359,11 @@ export function SecurityPanel({
                   }
                   required
                   disabled={blocked}
-                />
+                /></FloatingLabel>
                 {errorFor("newPassword")}
-              </label>
-              <label
-                className="block text-sm font-medium"
-                htmlFor="password-confirm"
-              >
-                Konfirmasi password baru
-                <input
+              </div>
+              <div className="block text-sm font-medium"><FloatingLabel htmlFor="password-confirm" label={<>Konfirmasi password baru
+                </>}><input placeholder=" "
                   className={field}
                   id="password-confirm"
                   name="confirmPassword"
@@ -385,9 +375,9 @@ export function SecurityPanel({
                   aria-describedby={
                     errors.confirmPassword ? "confirmPassword-error" : undefined
                   }
-                />
+                /></FloatingLabel>
                 {errorFor("confirmPassword")}
-              </label>
+              </div>
               <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
                 <input
                   type="checkbox"
@@ -469,12 +459,8 @@ export function SecurityPanel({
                     ))}
                   </select>
                 </label>
-                <label
-                  className="block text-sm font-medium"
-                  htmlFor="security-answer"
-                >
-                  Jawaban
-                  <input
+                <div className="block text-sm font-medium"><FloatingLabel htmlFor="security-answer" label={<>Jawaban
+                  </>}><input placeholder=" "
                     id="security-answer"
                     name="answer"
                     className={field}
@@ -487,15 +473,11 @@ export function SecurityPanel({
                     aria-describedby={
                       "answer-rules" + (errors.answer ? " answer-error" : "")
                     }
-                  />
+                  /></FloatingLabel>
                   {errorFor("answer")}
-                </label>
-                <label
-                  className="block text-sm font-medium"
-                  htmlFor="question-current"
-                >
-                  Password saat ini
-                  <input
+                </div>
+                <div className="block text-sm font-medium"><FloatingLabel htmlFor="question-current" label={<>Password saat ini
+                  </>}><input placeholder=" "
                     id="question-current"
                     name="currentPassword"
                     className={field}
@@ -509,9 +491,9 @@ export function SecurityPanel({
                         ? "questionPassword-error"
                         : undefined
                     }
-                  />
+                  /></FloatingLabel>
                   {errorFor("questionPassword")}
-                </label>
+                </div>
                 <Button
                   className="w-full whitespace-normal sm:w-auto"
                   type="submit"

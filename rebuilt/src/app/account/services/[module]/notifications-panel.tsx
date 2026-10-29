@@ -10,6 +10,8 @@ import {
   notificationSnapshot,
   type ServiceSnapshot,
 } from "@/lib/services/validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 
 const formatter = new Intl.DateTimeFormat("id-ID", {
   dateStyle: "medium",
@@ -188,11 +190,9 @@ export function NotificationsPanel({ initial }: { initial: ServiceSnapshot }) {
         <Status tone={feedback.tone}>{feedback.message}</Status>
       ) : null}
       <div className="notification-filters">
-        <label className="min-w-0">
-          <span className="mb-2 block text-sm font-medium">
+        <div className="min-w-0"><FloatingLabel label={<><span className="mb-2 block text-sm font-medium">
             Cari notifikasi
-          </span>
-          <span className="relative block">
+          </span></>}><span className="relative block">
             <Search
               className="pointer-events-none absolute top-[1.125rem] left-3 size-4 text-muted-foreground"
               aria-hidden="true"
@@ -209,8 +209,8 @@ export function NotificationsPanel({ initial }: { initial: ServiceSnapshot }) {
               aria-describedby="notification-search-help"
               className={`${controlClass} pl-10`}
             />
-          </span>
-        </label>
+          </span></FloatingLabel>
+        </div>
         <label className="min-w-0">
           <span className="mb-2 block text-sm font-medium">
             Status notifikasi

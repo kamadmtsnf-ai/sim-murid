@@ -24,6 +24,8 @@ import {
   rupiah,
   type CommitteeSnapshot,
 } from "@/lib/operations/committee";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/operations/fees",
   names = [
     "Januari",
@@ -417,9 +419,8 @@ const retainedEcurrentTarget=e.currentTarget;
               disabled={disabled}
               className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3"
             >
-              <label className="text-sm">
-                Tahun kalender
-                <input
+              <div className="text-sm"><FloatingLabel label={<>Tahun kalender
+                </>}><input placeholder=" "
                   className={controlClass}
                   name="year"
                   type="number"
@@ -427,8 +428,8 @@ const retainedEcurrentTarget=e.currentTarget;
                   max="2100"
                   defaultValue={filters.year}
                   required
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <TextField
                 label="Dari tanggal pembayaran"
                 name="start"
@@ -610,9 +611,8 @@ const retainedEcurrentTarget=e.currentTarget;
         <h2 id="committee-recap" className="text-xl font-semibold">
           Status bulanan siswa
         </h2>
-        <label className="block text-sm">
-          Cari pada rekap
-          <input
+        <div className="block text-sm"><FloatingLabel label={<>Cari pada rekap
+          </>}><input
             className={controlClass}
             value={monthSearch}
             placeholder="Nama, bulan, atau status"
@@ -620,8 +620,8 @@ const retainedEcurrentTarget=e.currentTarget;
               setMonthSearch(e.target.value);
               setMonthPage(1);
             }}
-          />
-        </label>
+          /></FloatingLabel>
+        </div>
         <p className="text-sm text-muted-foreground">
           {recap.length} baris sesuai pencarian, termasuk siswa yang belum
           pernah membayar.
@@ -742,9 +742,8 @@ const retainedEcurrentTarget=e.currentTarget;
                       </option>
                     ))}
                   </SelectField>
-                  <label className="block text-sm">
-                    Bulan tarif
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Bulan tarif
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="month"
                       type="month"
@@ -752,11 +751,10 @@ const retainedEcurrentTarget=e.currentTarget;
                       max="2100-12"
                       defaultValue={data.today.slice(0, 7)}
                       required
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Tarif (Rp)
-                    <input
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Tarif (Rp)
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="amount"
                       type="number"
@@ -764,8 +762,8 @@ const retainedEcurrentTarget=e.currentTarget;
                       max="1000000000000"
                       step="1"
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <p className="text-sm text-muted-foreground">
                     Rp0 adalah tarif yang diketahui. Tarif yang belum ditetapkan
                     tetap ditampilkan sebagai belum tersedia.
@@ -812,9 +810,8 @@ const retainedEcurrentTarget=e.currentTarget;
                         )}
                     </select>
                   </label>
-                  <label className="block text-sm">
-                    Tanggal pembayaran
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Tanggal pembayaran
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="date"
                       type="date"
@@ -822,8 +819,8 @@ const retainedEcurrentTarget=e.currentTarget;
                       max={data.today}
                       defaultValue={edit?.date ?? data.today}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <label className="block text-sm">
                     Tahun bulan iuran
                     <select
@@ -894,9 +891,8 @@ const retainedEcurrentTarget=e.currentTarget;
                                 {locked ? " — tidak dapat dibayar ulang" : ""}
                               </p>
                               {checked && (
-                                <label className="mt-2 block text-sm">
-                                  Nominal {mo.slice(0, 7)} (Rp)
-                                  <input
+                                <div className="mt-2 block text-sm"><FloatingLabel label={<>Nominal {mo.slice(0, 7)}(Rp)
+                                  </>}><input placeholder=" "
                                     className={controlClass}
                                     type="number"
                                     min="1"
@@ -910,8 +906,8 @@ const retainedEcurrentTarget=e.currentTarget;
                                         [mo]: e.target.value,
                                       }))
                                     }
-                                  />
-                                </label>
+                                  /></FloatingLabel>
+                                </div>
                               )}
                             </div>
                           );
@@ -972,16 +968,15 @@ const retainedEcurrentTarget=e.currentTarget;
                     max={2000}
                   />
                   {edit && (
-                    <label className="block text-sm">
-                      Alasan koreksi / pembatalan
-                      <input
+                    <div className="block text-sm"><FloatingLabel label={<>Alasan koreksi / pembatalan
+                      </>}><input placeholder=" "
                         className={controlClass}
                         name="reason"
                         minLength={3}
                         maxLength={2000}
                         required
-                      />
-                    </label>
+                      /></FloatingLabel>
+                    </div>
                   )}
                 </>
               )}

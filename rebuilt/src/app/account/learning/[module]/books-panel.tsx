@@ -24,6 +24,8 @@ import {
   type BooksSnapshot,
 } from "@/lib/learning/books";
 import { BookReader } from "./reader";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/learning/books";
 type Scope = Record<string, string>;
 class Rejected extends Error {
@@ -615,9 +617,8 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
                     max={2000}
                     value={edit?.publisher}
                   />
-                  <label className="block text-sm">
-                    Tahun terbit
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Tahun terbit
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="year"
                       type="number"
@@ -625,8 +626,8 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
                       max={2200}
                       step={1}
                       defaultValue={edit?.publication_year ?? ""}
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <TextField
                     label="Versi"
                     name="version"

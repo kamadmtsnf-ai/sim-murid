@@ -3,6 +3,8 @@ import { useId, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { helpFor, supportTemplate } from "@/config/contextual-help";
 import { errorDigest, requestReference } from "@/lib/observability/reference";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 
 export function ContextualHelp({
   href,
@@ -61,9 +63,7 @@ export function ContextualHelp({
               yang sudah Anda kenal. Jangan sertakan password, OTP, cookie,
               kunci API atau data pribadi siswa.
             </p>
-            <label className="block space-y-1" htmlFor={`${id}-reference`}>
-              <span>Kode laporan (opsional)</span>
-              <input
+            <div className="block space-y-1"><FloatingLabel htmlFor={`${id}-reference`} label={<><span>Kode laporan (opsional)</span></>}><input placeholder=" "
                 id={`${id}-reference`}
                 value={reference}
                 maxLength={64}
@@ -76,8 +76,8 @@ export function ContextualHelp({
                 aria-invalid={invalid}
                 aria-describedby={`${id}-hint`}
                 className="min-h-11 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:outline-2 focus-visible:outline-ring"
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <p id={`${id}-hint`} className="text-muted-foreground">
               {invalid
                 ? "Gunakan hanya kode UUID atau digest yang ditampilkan aplikasi; jangan isi pesan error atau data akun."
@@ -92,16 +92,14 @@ export function ContextualHelp({
             >
               Salin templat laporan
             </Button>
-            <label className="block space-y-1" htmlFor={`${id}-template`}>
-              <span>Templat laporan untuk disalin</span>
-              <textarea
+            <div className="block space-y-1"><FloatingLabel htmlFor={`${id}-template`} label={<><span>Templat laporan untuk disalin</span></>}><textarea placeholder=" "
                 id={`${id}-template`}
                 readOnly
                 value={template}
                 rows={10}
                 className="w-full min-w-0 resize-y rounded-md border bg-background p-[12px] text-sm"
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <p role="status" aria-live="polite">
               {feedback}
             </p>

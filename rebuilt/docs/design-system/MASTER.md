@@ -421,3 +421,9 @@ Ajakan pemasangan adalah utilitas sekunder di akhir dokumen, berupa tombol ghost
 ## Footer asli dan kewajiban PWA — 28 Oktober 2026
 
 Menggantikan penempatan PR88: tombol Pasang aplikasi berada **di dalam footer** setiap shell, tanpa strip tambahan. Satu provider root mengelola state; komponen footer tidak mendaftarkan listener sendiri. Admin terverifikasi dapat memakai browser. Non-admin mendapat layar persiapan penuh sampai benar-benar standalone/iOS standalone; pemasangan diterima/selesai tidak otomatis membuka layanan. Panduan tiga langkah, perangkat pilihan, mode check dan logout tetap jelas. Mode browser adalah sinyal penggunaan client, bukan kredensial atau pengganti RBAC. Lihat `docs/development/PWA-REQUIRED-USAGE.md` dan keputusan PWA-USAGE-20261028.
+
+## Floating label untuk textbox — 30 Oktober 2026
+
+Gunakan `FloatingLabel` bagi native input/textarea langsung, atau `Field` existing yang otomatis menerapkan presentasi tersebut. Label wajib bermakna, tetap native dan terlihat; jangan mengganti label dengan placeholder. Pertahankan ID/name/ref/value/constraint/handler dan `aria-describedby` menuju bantuan/error. Isi placeholder `" "` hanya bila tidak ada petunjuk existing; placeholder nyata, tanggal/waktu dan autofill tetap punya ruang label. Jangan menyembunyikan informasi wajib atau error saat label berubah posisi. Checkbox/radio/file/select bukan textbox.
+
+CSS memakai state browser, bukan listener input/React state tambahan. Label panjang tetap dalam flow; jangan memaksakan tinggi tetap yang memotong teks pada pembesaran 400%. Gunakan semantic tokens, focus ring pada wrapper, serta gutter tetap untuk ikon password. Lihat `docs/development/FLOATING-LABEL-TEXTBOXES.md` untuk cakupan dan batas validasi.

@@ -20,6 +20,8 @@ import {
   sessionRevokeSchema,
   type SessionList,
 } from "@/lib/auth/sessions";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const formatter = new Intl.DateTimeFormat("id-ID", {
   dateStyle: "medium",
   timeStyle: "short",
@@ -413,12 +415,8 @@ export function SessionPanel({
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <form noValidate className="min-w-0 space-y-3" onSubmit={search}>
-                <label
-                  className="block text-sm font-medium"
-                  htmlFor="session-username"
-                >
-                  Username
-                  <input
+                <div className="block text-sm font-medium"><FloatingLabel htmlFor="session-username" label={<>Username
+                  </>}><input placeholder=" "
                     ref={searchInput}
                     id="session-username"
                     name="username"
@@ -439,8 +437,8 @@ export function SessionPanel({
                       "session-search-help" +
                       (inputError ? " session-search-error" : "")
                     }
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
                 {inputError && (
                   <p
                     id="session-search-error"

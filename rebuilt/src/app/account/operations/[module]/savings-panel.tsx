@@ -25,6 +25,8 @@ import {
   type SavingsSnapshot,
 } from "@/lib/operations/savings";
 import { SlipActions } from "./fees";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const api = "/api/operations/savings";
 type Row = SavingsSnapshot["rows"][number];
 type Bracket = NonNullable<SavingsSnapshot["extra"]["brackets"]>[number];
@@ -425,9 +427,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
               disabled={disabled}
               className="mt-4 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4"
             >
-              <label className="text-sm">
-                Tahun kalender
-                <input
+              <div className="text-sm"><FloatingLabel label={<>Tahun kalender
+                </>}><input placeholder=" "
                   name="year"
                   type="number"
                   min="2000"
@@ -435,8 +436,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   defaultValue={filters.year}
                   className={controlClass}
                   required
-                />
-              </label>
+                /></FloatingLabel>
+              </div>
               <TextField label="Dari tanggal" name="start" type="date" />
               <TextField label="Sampai tanggal" name="end" type="date" />
               <SelectField label="Pemilik rekening" name="studentId">
@@ -473,9 +474,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
         <h2 id="savings-accounts" className="text-xl font-semibold">
           Daftar rekening ({data.extra.accounts.length})
         </h2>
-        <label className="block text-sm">
-          Cari rekening
-          <input
+        <div className="block text-sm"><FloatingLabel label={<>Cari rekening
+          </>}><input
             className={controlClass}
             placeholder="Nama pemilik"
             value={accountSearch}
@@ -483,8 +483,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
               setAccountSearch(e.target.value);
               setAccountPage(1);
             }}
-          />
-        </label>
+          /></FloatingLabel>
+        </div>
         <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {accountRows.map((a) => (
             <div key={a.id} className="min-w-0 rounded-xl border bg-card p-4">
@@ -777,9 +777,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                 </>
               ) : mode === "bracket" ? (
                 <>
-                  <label className="block text-sm">
-                    Minimum (Rp)
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Minimum (Rp)
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="minimum"
                       type="number"
@@ -788,11 +787,10 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       step="1"
                       defaultValue={editBracket?.minimum ?? 0}
                       required
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Maksimum (Rp, kosong tanpa batas)
-                    <input
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Maksimum (Rp, kosong tanpa batas)
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="maximum"
                       type="number"
@@ -800,11 +798,10 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       max="1000000000000"
                       step="1"
                       defaultValue={editBracket?.maximum ?? ""}
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Persentase (%)
-                    <input
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Persentase (%)
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="percent"
                       type="number"
@@ -813,8 +810,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       step="0.0001"
                       defaultValue={editBracket?.percent ?? 0}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <label className="flex min-h-11 items-center gap-2 text-sm">
                     <input
                       type="checkbox"
@@ -824,16 +821,15 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                     Tarif aktif
                   </label>
                   {editBracket && (
-                    <label className="block text-sm">
-                      Alasan perubahan tarif
-                      <input
+                    <div className="block text-sm"><FloatingLabel label={<>Alasan perubahan tarif
+                      </>}><input placeholder=" "
                         className={controlClass}
                         name="reason"
                         minLength={3}
                         maxLength={2000}
                         required
-                      />
-                    </label>
+                      /></FloatingLabel>
+                    </div>
                   )}
                 </>
               ) : (
@@ -859,9 +855,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       </>
                     )}
                   </SelectField>
-                  <label className="block text-sm">
-                    Tanggal transaksi
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Tanggal transaksi
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="date"
                       type="date"
@@ -869,8 +864,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       max={data.today}
                       defaultValue={edit?.date ?? data.today}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <label className="block text-sm">
                     Jenis transaksi
                     <select
@@ -886,9 +881,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       <option value="withdrawal">Penarikan</option>
                     </select>
                   </label>
-                  <label className="block text-sm">
-                    Nominal (Rp)
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Nominal (Rp)
+                    </>}><input placeholder=" "
                       className={controlClass}
                       type="number"
                       min="1000"
@@ -897,8 +891,8 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       value={amount}
                       onChange={(e) => setAmount(e.target.value)}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   {kind === "withdrawal" && (
                     <div className="space-y-3 rounded-lg border p-3">
                       <label className="flex min-h-11 items-center gap-2 text-sm">
@@ -933,17 +927,16 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                       </p>
                     </div>
                   )}
-                  <label className="block text-sm">
-                    Keterangan / alasan transaksi
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Keterangan / alasan transaksi
+                    </>}><input placeholder=" "
                       className={controlClass}
                       name="reason"
                       defaultValue={edit?.notes ?? ""}
                       minLength={3}
                       maxLength={2000}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                 </>
               )}
               <div className="flex flex-wrap gap-2">

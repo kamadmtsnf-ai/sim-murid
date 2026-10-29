@@ -14,6 +14,8 @@ import {
   emailTiming,
   type EmailState,
 } from "@/lib/email/validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const responseSchema = z.object({
   state: emailStateSchema,
   serverTime: z.iso.datetime({ offset: true }).optional(),
@@ -342,13 +344,9 @@ export function EmailPanel({
         </CardHeader>
         <CardContent className="min-w-0 space-y-4 px-4 sm:px-6">
           <form onSubmit={saveAddress} className="space-y-3">
-            <label
-              htmlFor="verification-address"
-              className="block text-sm font-medium"
-            >
-              Alamat email kontak
-            </label>
-            <input
+
+            <FloatingLabel htmlFor="verification-address" label={<>Alamat email kontak
+            </>}><input placeholder=" "
               id="verification-address"
               name="email"
               type="email"
@@ -361,7 +359,7 @@ export function EmailPanel({
               disabled={busy || needsSync}
               className="min-h-12 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:ring-2 focus-visible:ring-ring"
               aria-describedby="verification-address-help"
-            />
+            /></FloatingLabel>
             <p
               id="verification-address-help"
               className="text-sm text-muted-foreground"
@@ -450,10 +448,9 @@ export function EmailPanel({
                   className="min-w-0 space-y-4"
                 >
                   <div>
-                    <label className="text-sm font-medium" htmlFor="email-otp">
-                      Kode enam digit
-                    </label>
-                    <input
+
+                    <FloatingLabel htmlFor="email-otp" label={<>Kode enam digit
+                    </>}><input placeholder=" "
                       ref={input}
                       id="email-otp"
                       name="code"
@@ -481,7 +478,7 @@ export function EmailPanel({
                         "email-otp-help" + (codeError ? " email-otp-error" : "")
                       }
                       disabled={busy || needsSync || !timing.canVerify}
-                    />
+                    /></FloatingLabel>
                     <p
                       id="email-otp-help"
                       className="mt-2 text-xs text-muted-foreground"

@@ -26,6 +26,8 @@ import {
   fieldVisible,
 } from "@/lib/student/presentation";
 import { documentRow, documentPrepare } from "@/lib/documents/validation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 const fieldClass =
   "mt-1 min-h-11 w-full min-w-0 rounded-md border bg-background px-3 py-2 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring";
 const snapshot = z.object({
@@ -491,13 +493,7 @@ export function BiodataPanel({
                       </label>
                     ) : (
                       <div className="min-w-0" key={field}>
-                        <label
-                          htmlFor={"biodata-" + field}
-                          className="text-sm font-medium"
-                        >
-                          {label(field)}
-                          {required.includes(field) ? " *" : ""}
-                        </label>
+
                         {enums[field] ? (
                           <select
                             id={"biodata-" + field}
@@ -517,7 +513,7 @@ export function BiodataPanel({
                             ))}
                           </select>
                         ) : (
-                          <input
+                          <FloatingLabel htmlFor={"biodata-" + field} label={<>{label(field)}{required.includes(field) ? " *" : ""}</>}><input placeholder=" "
                             id={"biodata-" + field}
                             className={fieldClass}
                             maxLength={500}
@@ -547,7 +543,7 @@ export function BiodataPanel({
                               fieldErrors[field] ? "error-" + field : undefined
                             }
                             onChange={(e) => update(field, e.target.value)}
-                          />
+                          /></FloatingLabel>
                         )}{" "}
                         {fieldErrors[field] && (
                           <p

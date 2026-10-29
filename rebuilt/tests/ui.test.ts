@@ -69,3 +69,35 @@ test('Current menu detection can be restricted to the callers allowed navigation
  const admin=navigationFor([],true);assert.equal(currentNavItem('/account/directory/00000000-0000-4000-8000-000000000001',admin)?.href,'/account/directory');
  assert.equal(currentNavItem('/account/security-foreign',scoped),undefined);
 });
+
+test('Every visible native textbox belongs to the shared floating label or Field adapter', async () => {
+ const ts = await import('typescript'), fs = await import('node:fs'), path = await import('node:path');
+ const missing: string[] = [];
+ let count = 0;
+ function walk(dir: string) {
+  for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+   const file = path.join(dir, entry.name);
+   if (entry.isDirectory()) { walk(file); continue; }
+   if (!file.endsWith('.tsx')) continue;
+   const sf = ts.createSourceFile(file, fs.readFileSync(file,'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+   function visit(node: import('typescript').Node) {
+    if (ts.isJsxSelfClosingElement(node) && ['input','textarea'].includes(node.tagName.getText(sf))) {
+     const attribute = (name: string) => node.attributes.properties.find(a => ts.isJsxAttribute(a) && a.name.getText(sf) === name);
+     const type = attribute('type');
+     const excluded = type && ts.isJsxAttribute(type) && type.initializer && ts.isStringLiteral(type.initializer) && ['checkbox','radio','file','hidden','range','color','button','submit','reset','image'].includes(type.initializer.text);
+     if (!excluded && !attribute('hidden')) {
+      count++;
+      let parent: import('typescript').Node | undefined = node.parent;
+      while (parent && !(ts.isJsxElement(parent) && ['FloatingLabel','Field'].includes(parent.openingElement.tagName.getText(sf)))) parent = parent.parent;
+      if (!parent) missing.push(`${file}:${sf.getLineAndCharacterOfPosition(node.getStart()).line+1}`);
+     }
+    }
+    ts.forEachChild(node,visit);
+   }
+   visit(sf);
+  }
+ }
+ walk(new URL('../src',import.meta.url).pathname);
+ assert.ok(count >= 100, 'audit must include native controls across all application modules');
+ assert.deepEqual(missing, []);
+});

@@ -18,6 +18,8 @@ import {
 import { Status } from "@/components/ui/status";
 import { classCommand, classSnapshot } from "@/lib/education/validation";
 import { useDomainMutation } from "@/lib/education/use-mutation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Snapshot = z.infer<typeof classSnapshot>;
 export function ClassPanel({
   initial,
@@ -248,15 +250,14 @@ const retainedEvalue=e.target.value;
             ))}
           </select>
         </label>
-        <label className="block text-sm">
-          Cari kelas
-          <input
+        <div className="block text-sm"><FloatingLabel label={<>Cari kelas
+          </>}><input placeholder=" "
             className={controlClass}
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-          />
-        </label>
+          /></FloatingLabel>
+        </div>
       </FilterBar>
       {data.can_manage && (
         <Card>
@@ -284,9 +285,8 @@ const retainedEcurrentTarget=e.currentTarget;
                 disabled={disabled}
                 className="classes-year-fields flex flex-wrap items-end gap-3"
               >
-                <label className="block min-w-0 flex-1 text-sm">
-                  Tahun ajaran (misalnya 2026/2027)
-                  <input
+                <div className="block min-w-0 flex-1 text-sm"><FloatingLabel label={<>Tahun ajaran (misalnya 2026/2027)
+                  </>}><input
                     className={controlClass}
                     name="academicYear"
                     type="text"
@@ -294,8 +294,8 @@ const retainedEcurrentTarget=e.currentTarget;
                     maxLength={9}
                     pattern="[0-9]{4}(/[0-9]{4}|-[0-9]{4})"
                     required
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
                 <Button type="submit">Tambah tahun ajaran</Button>
               </fieldset>
             </form>
@@ -591,26 +591,24 @@ const retainedEcurrentTarget=e.currentTarget;
                     Wali kelas berbeda dari Guru Wali. Perpindahan tetap
                     menyimpan riwayat kelas.
                   </p>
-                  <label className="block text-sm">
-                    Tanggal mulai penempatan
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Tanggal mulai penempatan
+                    </>}><input placeholder=" "
                       className={controlClass}
                       type="date"
                       name="startsOn"
                       value={startsOn}
                       onChange={(e) => setStartsOn(e.target.value)}
                       required
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Cari siswa
-                    <input
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Cari siswa
+                    </>}><input placeholder=" "
                       className={controlClass}
                       type="search"
                       value={studentSearch}
                       onChange={(e) => setStudentSearch(e.target.value)}
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <p role="status" className="text-sm">
                     {chosen.length} siswa dipilih · maksimum 500
                   </p>

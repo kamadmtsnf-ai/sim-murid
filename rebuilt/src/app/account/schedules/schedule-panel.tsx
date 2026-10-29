@@ -26,6 +26,8 @@ import {
   weekdays,
 } from "@/lib/education/validation";
 import { useDomainMutation } from "@/lib/education/use-mutation";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Schedule = z.infer<typeof scheduleSnapshot>;
 type Classes = z.infer<typeof classSnapshot>;
 type Lesson = Schedule["lessons"][number];
@@ -732,19 +734,17 @@ function LessonForm({
             </option>
           ))}
         </SelectField>
-        <label>
-          Waktu mulai
-          <input
+        <div><FloatingLabel label={<>Waktu mulai
+          </>}><input placeholder=" "
             className={controlClass}
             type="time"
             required
             value={start}
             onChange={(e) => setStart(e.target.value)}
-          />
-        </label>
-        <label>
-          Menit per JTM
-          <input
+          /></FloatingLabel>
+        </div>
+        <div><FloatingLabel label={<>Menit per JTM
+          </>}><input placeholder=" "
             className={controlClass}
             type="number"
             min={1}
@@ -752,11 +752,10 @@ function LessonForm({
             required
             value={duration}
             onChange={(e) => setDuration(Number(e.target.value))}
-          />
-        </label>
-        <label>
-          Jumlah JTM
-          <input
+          /></FloatingLabel>
+        </div>
+        <div><FloatingLabel label={<>Jumlah JTM
+          </>}><input placeholder=" "
             className={controlClass}
             type="number"
             min={1}
@@ -764,11 +763,10 @@ function LessonForm({
             required
             value={jtm}
             onChange={(e) => setJtm(Number(e.target.value))}
-          />
-        </label>
-        <label>
-          Istirahat (menit)
-          <input
+          /></FloatingLabel>
+        </div>
+        <div><FloatingLabel label={<>Istirahat (menit)
+          </>}><input placeholder=" "
             className={controlClass}
             type="number"
             min={0}
@@ -776,8 +774,8 @@ function LessonForm({
             required
             value={rest}
             onChange={(e) => setRest(Number(e.target.value))}
-          />
-        </label>
+          /></FloatingLabel>
+        </div>
         <p className="self-center" role="status">
           Selesai:{" "}
           <strong>{validEnd ? clock(end) : "Melewati batas hari"}</strong>

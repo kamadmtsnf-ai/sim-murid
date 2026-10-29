@@ -16,6 +16,8 @@ import {
   canCancelEvent,
   type DisciplineSnapshot,
 } from "@/lib/services/discipline";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Student = DisciplineSnapshot["rows"][number];
 type Event = Student["snapshot"]["events"][number];
 type Catalog = DisciplineSnapshot["extra"]["catalog"][number];
@@ -330,16 +332,15 @@ const retainedEcurrentTarget=e.currentTarget;
             disabled={disabled}
             className="mt-4 grid min-w-0 items-end gap-3 sm:grid-cols-3"
           >
-            <label className="text-sm">
-              Bulan laporan
-              <input
+            <div className="text-sm"><FloatingLabel label={<>Bulan laporan
+              </>}><input placeholder=" "
                 name="month"
                 type="month"
                 defaultValue={data.month.slice(0, 7)}
                 className={controlClass}
                 required
-              />
-            </label>
+              /></FloatingLabel>
+            </div>
             <label className="text-sm">
               Kelas
               <select name="classId" className={controlClass}>
@@ -400,9 +401,8 @@ const retainedEcurrentTarget=e.currentTarget;
             ))}
           </div>
         </div>
-        <label className="block text-sm">
-          Cari nama atau kelas
-          <input
+        <div className="block text-sm"><FloatingLabel label={<>Cari nama atau kelas
+          </>}><input
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -410,8 +410,8 @@ const retainedEcurrentTarget=e.currentTarget;
             }}
             className={controlClass}
             placeholder="Nama siswa atau kelas"
-          />
-        </label>
+          /></FloatingLabel>
+        </div>
         <p className="text-sm text-muted-foreground">
           Tingkat 0–5 mengikuti saldo. R02 menandai tindak lanjut wali; R03
           menetapkan saldo 0 pada kejadian tersebut. Penanda ini bukan keputusan
@@ -630,17 +630,16 @@ const retainedEcurrentTarget=e.currentTarget;
                       ))}
                     </select>
                   </label>
-                  <label className="block text-sm">
-                    Tanggal kejadian
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Tanggal kejadian
+                    </>}><input placeholder=" "
                       type="date"
                       value={eventDate}
                       max={data.today}
                       className={controlClass}
                       required
                       onChange={(e) => setEventDate(e.target.value)}
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <label className="block text-sm">
                     Kode kejadian
                     <select
@@ -666,15 +665,14 @@ const retainedEcurrentTarget=e.currentTarget;
                       Saldo akhir dan pengali mengikuti urutan kejadian.
                     </p>
                   )}
-                  <label className="block text-sm">
-                    Keterangan
-                    <textarea
+                  <div className="block text-sm"><FloatingLabel label={<>Keterangan
+                    </>}><textarea placeholder=" "
                       name="notes"
                       maxLength={2000}
                       className={controlClass}
                       rows={3}
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   {eventDate.slice(0, 7) !== data.month.slice(0, 7) && (
                     <p role="status" className="text-sm">
                       Kejadian ini masuk bulan {eventDate.slice(0, 7)}, berbeda
@@ -691,9 +689,8 @@ const retainedEcurrentTarget=e.currentTarget;
                 </>
               ) : mode === "catalog" ? (
                 <>
-                  <label className="block text-sm">
-                    Kode
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Kode
+                    </>}><input
                       name="code"
                       defaultValue={catalog?.code ?? ""}
                       readOnly={!!catalog}
@@ -702,32 +699,29 @@ const retainedEcurrentTarget=e.currentTarget;
                       placeholder="A01"
                       className={controlClass}
                       required
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Kategori
-                    <input
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Kategori
+                    </>}><input placeholder=" "
                       name="category"
                       defaultValue={catalog?.category ?? ""}
                       maxLength={2000}
                       className={controlClass}
                       required
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Deskripsi
-                    <textarea
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Deskripsi
+                    </>}><textarea placeholder=" "
                       name="description"
                       defaultValue={catalog?.description ?? ""}
                       maxLength={2000}
                       rows={3}
                       className={controlClass}
                       required
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Poin dasar
-                    <input
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Poin dasar
+                    </>}><input placeholder=" "
                       name="points"
                       type="number"
                       min={-100}
@@ -736,18 +730,17 @@ const retainedEcurrentTarget=e.currentTarget;
                       defaultValue={catalog?.points ?? 0}
                       className={controlClass}
                       required
-                    />
-                  </label>
-                  <label className="block text-sm">
-                    Konsekuensi / tindak lanjut
-                    <textarea
+                    /></FloatingLabel>
+                  </div>
+                  <div className="block text-sm"><FloatingLabel label={<>Konsekuensi / tindak lanjut
+                    </>}><textarea placeholder=" "
                       name="consequence"
                       defaultValue={catalog?.consequence ?? ""}
                       maxLength={2000}
                       rows={2}
                       className={controlClass}
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <label className="flex min-h-11 items-center gap-2 text-sm">
                     <input
                       type="checkbox"
@@ -779,9 +772,8 @@ const retainedEcurrentTarget=e.currentTarget;
                     Email memerlukan alamat terverifikasi; WhatsApp memerlukan
                     nomor E.164 dan layanan pengiriman yang dikonfigurasi.
                   </p>
-                  <label className="block text-sm">
-                    Ambang tingkat notifikasi
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Ambang tingkat notifikasi
+                    </>}><input placeholder=" "
                       name="threshold"
                       type="number"
                       min={0}
@@ -790,8 +782,8 @@ const retainedEcurrentTarget=e.currentTarget;
                       defaultValue={data.extra.settings.point_threshold}
                       className={controlClass}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <label className="block text-sm">
                     Mapel nilai afektif
                     <select
@@ -834,15 +826,14 @@ const retainedEcurrentTarget=e.currentTarget;
                       </option>
                     </select>
                   </label>
-                  <label className="block text-sm">
-                    Bulan sumber
-                    <input
+                  <div className="block text-sm"><FloatingLabel label={<>Bulan sumber
+                    </>}><input placeholder=" "
                       name="month"
                       type="month"
                       className={controlClass}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                   <p className="text-sm text-muted-foreground">
                     Arsip bulanan tidak dapat diubah. Sinkronisasi memakai arsip
                     dan mapel yang dipilih di pengaturan; data yang sudah ada
@@ -855,17 +846,16 @@ const retainedEcurrentTarget=e.currentTarget;
                     {cancel?.row.name} · {cancel?.event.event_date} ·{" "}
                     {cancel?.event.code}
                   </p>
-                  <label className="block text-sm">
-                    Alasan pembatalan
-                    <textarea
+                  <div className="block text-sm"><FloatingLabel label={<>Alasan pembatalan
+                    </>}><textarea placeholder=" "
                       name="reason"
                       minLength={3}
                       maxLength={2000}
                       rows={3}
                       className={controlClass}
                       required
-                    />
-                  </label>
+                    /></FloatingLabel>
+                  </div>
                 </>
               )}
               <Button

@@ -13,6 +13,8 @@ import { TextField, controlClass } from "@/components/domain-controls";
 import { commands, type ServiceSnapshot } from "@/lib/services/validation";
 import { surveyResponse } from "@/lib/services/surveys";
 import { SurveyEditor } from "./survey-editor";
+import { FloatingLabel } from "@/components/ui/floating-label";
+
 type Row = Record<string, unknown>;
 const obj = (v: unknown): Row =>
   v && typeof v === "object" && !Array.isArray(v) ? (v as Row) : {};
@@ -180,28 +182,26 @@ export function SurveyForm({
               )}
               {dateError && <p role="alert">{dateError}</p>}
               <div key={`${periodYear}-${periodSemester}`} className="contents">
-                <label className="block text-sm">
-                  Mulai
-                  <input
+                <div className="block text-sm"><FloatingLabel label={<>Mulai
+                  </>}><input placeholder=" "
                     className={controlClass}
                     type="date"
                     name="start"
                     min={periodBounds?.start}
                     max={periodBounds?.end}
                     required
-                  />
-                </label>
-                <label className="block text-sm">
-                  Selesai
-                  <input
+                  /></FloatingLabel>
+                </div>
+                <div className="block text-sm"><FloatingLabel label={<>Selesai
+                  </>}><input placeholder=" "
                     className={controlClass}
                     type="date"
                     name="end"
                     min={periodBounds?.start}
                     max={periodBounds?.end}
                     required
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
               </div>
               <fieldset>
                 <legend>Target</legend>
@@ -220,15 +220,14 @@ export function SurveyForm({
                 name="examOverride"
               />
               {kind === "micro" && (
-                <label>
-                  Pertanyaan mikro (satu esai wajib per baris)
-                  <textarea
+                <div><FloatingLabel label={<>Pertanyaan mikro (satu esai wajib per baris)
+                  </>}><textarea placeholder=" "
                     className={controlClass}
                     name="questions"
                     maxLength={50050}
                     required
-                  />
-                </label>
+                  /></FloatingLabel>
+                </div>
               )}
               <Button disabled={busy || blocked || !periodYear}>
                 Buat periode
