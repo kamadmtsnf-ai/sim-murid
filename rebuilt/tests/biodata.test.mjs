@@ -210,6 +210,7 @@ test("biodata routes reject absent session and cross-origin mutations before sto
 });
 test("biodata profile passes verified caller, normalizes addresses and preserves zero/leading zeros", async () => {
   const m = setup();
+  m.student.data.JumlahSaudara = "0";
   const r = await profilePost(
     req({
       requestId: id(8),
