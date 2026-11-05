@@ -448,7 +448,10 @@ try {
     mode = failure;
     await page.getByRole("button", { name: "Simpan kelas" }).click();
     await settleConfirmation(page);
-    await page.getByRole("alert").waitFor();
+    await page.getByRole("dialog").getByText(
+      failure === "stale" ? "Periksa sebelum melanjutkan" : "Hasil belum terkonfirmasi",
+      { exact: true },
+    ).waitFor();
     check(
       await page.getByRole("button", { name: "Simpan kelas" }).isDisabled(),
       failure + " write locked",
