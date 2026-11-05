@@ -99,8 +99,6 @@ try {
   page = await browser.newPage({ hasTouch: true });
   page.setDefaultTimeout(15000);
   page.on("pageerror", (e) => errors.push(String(e)));
-  let acceptDialogs = true;
-  page.on("dialog", (d) => (acceptDialogs ? d.accept() : d.dismiss()));
   let mode = "ok",
     posts = [],
     reads = 0,
@@ -240,6 +238,21 @@ try {
     (await field("JumlahSaudara").inputValue()) === "0",
     "zero siblings retained",
   );
+  check(
+    (await field("JumlahSaudara").locator("option").evaluateAll(
+      (options) => options.map((option) => option.value).filter((value) => value && value !== "0"),
+    )).join(",") === "1,2,3,4,5,6,7,8,9,10,11,12",
+    "siblings dropdown offers 1 through 12",
+  );
+  await field("JumlahSaudara").selectOption("12");
+  await field("Agama").selectOption("Konghucu");
+  check(await field("Agama").inputValue() === "Konghucu", "religion selection works");
+  const phone = field("NoHP");
+  await phone.fill("6281234567890");
+  check(await phone.inputValue() === "6281234567890", "13-digit 62 number accepted");
+  await phone.fill("6381234567890");
+  check(await phone.inputValue() === "6281234567890", "invalid prefix rejected");
+
   await field("Email").fill("invalid");
   await button("Ayah").click();
   await button("Simpan biodata / draf").click();
@@ -255,9 +268,9 @@ try {
   check(posts.length === 0, "invalid data never sent");
   await field("Email").fill("student@example.org");
   const beforeRefresh = reads;
-  acceptDialogs = false;
   await button("Muat ulang").click();
-  acceptDialogs = true;
+  await page.getByRole("alertdialog").getByRole("button", { name: "Batal" }).click();
+  await page.getByRole("alertdialog").waitFor({ state: "hidden" });
   check(
     reads === beforeRefresh &&
       (await field("Email").inputValue()) === "student@example.org",
@@ -299,12 +312,13 @@ try {
   check(posts.length === count + 1, "synchronous save lock");
   for (const failure of ["401", "403", "409", "503", "json", "malformed"]) {
     mode = failure;
-    await field("Hobi").fill("Draf " + failure);
+    const hobby = (await field("Hobi").inputValue()) === "Membaca" ? "Menulis" : "Membaca";
+    await field("Hobi").selectOption(hobby);
     await button("Simpan biodata / draf").click();
     await idle();
     await page.getByRole("alert").waitFor();
     check(
-      (await field("Hobi").inputValue()) === "Draf " + failure,
+      (await field("Hobi").inputValue()) === hobby,
       failure + " preserves draft",
     );
   }
@@ -370,6 +384,14 @@ try {
   await idle();
   check(posts.length === before, "wrong MIME rejected before prepare");
   await page.locator("#document-file").setInputFiles({
+    name: "besar.pdf",
+    mimeType: "application/pdf",
+    buffer: Buffer.alloc(3 * 1024 * 1024 + 1),
+  });
+  await button("Unggah dan validasi").click();
+  await page.getByText("Ukuran dokumen maksimal 3 MB.", { exact: true }).waitFor();
+  check(posts.length === before, "oversized file rejected before prepare");
+  await page.locator("#document-file").setInputFiles({
     name: "kk.pdf",
     mimeType: "application/pdf",
     buffer: Buffer.from("%PDF-synthetic"),
@@ -426,6 +448,8 @@ try {
     .getByRole("button", { name: "Hapus KK", exact: true })
     .first()
     .click();
+  await page.getByRole("alertdialog").getByRole("button", { name: "Lanjutkan" }).click();
+  await page.getByRole("alertdialog").waitFor({ state: "hidden" });
   await idle();
   check(
     await button("Unggah dan validasi").isDisabled(),
@@ -442,6 +466,8 @@ try {
     .getByRole("button", { name: "Hapus KK", exact: true })
     .first()
     .click();
+  await page.getByRole("alertdialog").getByRole("button", { name: "Lanjutkan" }).click();
+  await page.getByRole("alertdialog").waitFor({ state: "hidden" });
   await idle();
   check(posts.at(-1).action === "delete", "delete action preserved");
   await page.setViewportSize({ width: 844, height: 390 });

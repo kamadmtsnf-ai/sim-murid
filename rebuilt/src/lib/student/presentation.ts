@@ -18,8 +18,14 @@ export function fieldSection(field: string) {
           ? "address"
           : "student";
 }
+const labels: Record<string, string> = {
+  BiayaSekolah: "Yang Membiayai Sekolah",
+  SiswaJarak: "Jarak Tempat Tinggal ke Madrasah",
+  SiswaTransportasi: "Transportasi ke Madrasah",
+  SiswaWaktuTempuh: "Waktu Tempuh dari Rumah ke Madrasah",
+};
 export const fieldLabel = (field: string) =>
-  field.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/No HP/g, "No. HP");
+  labels[field] ?? field.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/No HP/g, "No. HP/WA");
 export function fieldVisible(field: string, data: Biodata) {
   if (field.startsWith("Ayah") && rules.fatherAddress.includes(field))
     return (

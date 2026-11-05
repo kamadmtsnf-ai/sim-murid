@@ -13,7 +13,7 @@ import {
   rules,
   enums,
   normalizeBiodata,
-  biodataRequest,
+  biodataRequestFor,
   requiredFields,
   studentSnapshot,
   type StudentSnapshot,
@@ -25,6 +25,7 @@ import {
   fieldLabel as label,
   fieldVisible,
 } from "@/lib/student/presentation";
+import { digitField } from "@/lib/student/choices";
 import { documentRow, documentPrepare } from "@/lib/documents/validation";
 import { FloatingLabel } from "@/components/ui/floating-label";
 
@@ -138,7 +139,7 @@ export function BiodataPanel({
     const key = JSON.stringify({ revision: student.revision, data });
     if (request.current?.key !== key)
       request.current = { key, id: crypto.randomUUID() };
-    const parsed = biodataRequest.safeParse({
+    const parsed = biodataRequestFor(normalizeBiodata(student.data)).safeParse({
       requestId: request.current.id,
       revision: student.revision,
       data,
@@ -495,28 +496,36 @@ export function BiodataPanel({
                       <div className="min-w-0" key={field}>
 
                         {enums[field] ? (
-                          <select
-                            id={"biodata-" + field}
-                            className={fieldClass}
-                            value={String(data[field] ?? "")}
-                            aria-invalid={!!fieldErrors[field]}
-                            aria-describedby={
-                              fieldErrors[field] ? "error-" + field : undefined
-                            }
-                            onChange={(e) => update(field, e.target.value)}
-                          >
-                            <option value="">Pilih…</option>
-                            {enums[field]?.map((v) => (
-                              <option key={v} value={v}>
-                                {v}
-                              </option>
-                            ))}
-                          </select>
+                          <>
+                            <label htmlFor={"biodata-" + field} className="text-sm font-medium">
+                              {label(field)}{required.includes(field) ? " *" : ""}
+                            </label>
+                            <select
+                              id={"biodata-" + field}
+                              className={fieldClass}
+                              value={String(data[field] ?? "")}
+                              aria-invalid={!!fieldErrors[field]}
+                              aria-describedby={
+                                fieldErrors[field] ? "error-" + field : undefined
+                              }
+                              onChange={(e) => update(field, e.target.value)}
+                            >
+                              <option value="">Pilih…</option>
+                              {typeof data[field] === "string" && data[field] && !enums[field].includes(data[field]) && (
+                                <option value={data[field]}>Data lama: {data[field]}</option>
+                              )}
+                              {enums[field]?.map((v) => (
+                                <option key={v} value={v}>
+                                  {v}
+                                </option>
+                              ))}
+                            </select>
+                          </>
                         ) : (
                           <FloatingLabel htmlFor={"biodata-" + field} label={<>{label(field)}{required.includes(field) ? " *" : ""}</>}><input placeholder=" "
                             id={"biodata-" + field}
                             className={fieldClass}
-                            maxLength={500}
+                            maxLength={digitField(field) === "identity" ? 16 : digitField(field) === "phone" ? 13 : 500}
                             type={
                               field.endsWith("TanggalLahir") ||
                               field === "TanggalLahir"
@@ -525,24 +534,19 @@ export function BiodataPanel({
                                   ? "email"
                                   : "text"
                             }
-                            inputMode={
-                              field === "Email"
-                                ? "email"
-                                : field.endsWith("NoHP")
-                                  ? "tel"
-                                  : field.includes("NIK") ||
-                                      field === "NomorKK" ||
-                                      field === "JumlahSaudara" ||
-                                      field === "AnakKe"
-                                    ? "numeric"
-                                    : undefined
-                            }
+                            inputMode={digitField(field) ? "numeric" : undefined}
                             value={String(data[field] ?? "")}
                             aria-invalid={!!fieldErrors[field]}
                             aria-describedby={
                               fieldErrors[field] ? "error-" + field : undefined
                             }
-                            onChange={(e) => update(field, e.target.value)}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              const digits = digitField(field);
+                              if (digits === "identity" && !/^\d{0,16}$/.test(value)) return;
+                              if (digits === "phone" && !/^(?:0\d{0,11}|6|62\d{0,11})?$/.test(value)) return;
+                              update(field, value);
+                            }}
                           /></FloatingLabel>
                         )}{" "}
                         {fieldErrors[field] && (
@@ -579,7 +583,7 @@ export function BiodataPanel({
             <div className="min-w-0 space-y-5">
               <p className="text-sm text-muted-foreground">
                 Dokumen disimpan privat. PDF untuk KK, Akta, dan Ijazah;
-                PNG/JPEG untuk kartu bantuan, BPJS, dan KTP. Maksimal 50 MiB per
+                PNG/JPEG untuk kartu bantuan, BPJS, dan KTP. Maksimal 3 MB per
                 berkas.
               </p>
               <p className="text-sm break-words">

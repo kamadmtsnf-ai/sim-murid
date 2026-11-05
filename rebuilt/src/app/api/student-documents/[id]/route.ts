@@ -17,7 +17,7 @@ import {
   documentMetadata,
   documentGc,
 } from "@/lib/documents/server";
-import { documentPrepare, documentAction } from "@/lib/documents/validation";
+import { documentPrepare, documentAction, maxDocumentBytes } from "@/lib/documents/validation";
 import { inspectDocument } from "@/lib/documents/inspect";
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -126,6 +126,8 @@ async function handle(
         );
       let hash: string;
       try {
+        if (meta.state === "pending" && file.data.size > maxDocumentBytes)
+          throw new Error("Ukuran melebihi 3 MB");
         if (file.data.size !== meta.size) throw new Error("Ukuran tidak cocok");
         if (file.data.type.split(";")[0] !== meta.mime)
           throw new Error("Tipe tidak cocok");
@@ -133,6 +135,7 @@ async function handle(
           new Uint8Array(await file.data.arrayBuffer()),
           meta.mime,
           meta.size,
+          meta.state === "pending" ? maxDocumentBytes : undefined,
         );
       } catch {
         await admin.rpc("app_document_finish", {

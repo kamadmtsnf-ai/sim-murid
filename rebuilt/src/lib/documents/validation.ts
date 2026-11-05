@@ -1,7 +1,7 @@
 import {z} from 'zod';
 import rules from '../student/rules.json' with {type:'json'};
-export const maxDocumentBytes=50*1024*1024;
-export const documentPrepare=z.object({action:z.literal('prepare'),kind:z.string().refine(k=>rules.documents.includes(k)),filename:z.string().min(1).max(200).refine(n=>!/[\u0000-\u001f\u007f/\\]/.test(n)),size:z.number().int().min(1).max(maxDocumentBytes),mime:z.enum(['application/pdf','image/png','image/jpeg'])}).strict().superRefine((d,ctx)=>{
+export const maxDocumentBytes=3*1024*1024;
+export const documentPrepare=z.object({action:z.literal('prepare'),kind:z.string().refine(k=>rules.documents.includes(k)),filename:z.string().min(1).max(200).refine(n=>!/[\u0000-\u001f\u007f/\\]/.test(n)),size:z.number().int().min(1).max(maxDocumentBytes,'Ukuran dokumen maksimal 3 MB.'),mime:z.enum(['application/pdf','image/png','image/jpeg'])}).strict().superRefine((d,ctx)=>{
  const pdf=['KK','AKTA','IJAZAH_MI','IJAZAH_TK'].includes(d.kind),extension=d.filename.split('.').pop()?.toLowerCase();
  if(pdf?(d.mime!=='application/pdf'||extension!=='pdf'):!((d.mime==='image/png'&&extension==='png')||(d.mime==='image/jpeg'&&['jpg','jpeg'].includes(extension??''))))ctx.addIssue({code:'custom',message:pdf?'Dokumen ini harus PDF.':'Dokumen ini harus PNG/JPEG; ekstensi dan tipe harus cocok.'});
 });
