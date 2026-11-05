@@ -270,6 +270,7 @@ try {
     await modalGeometry(String(width));
     await a11y("dialog-" + width);
     await button("Batal").click();
+    await button("Cabut seluruh sesi").and(page.locator(":focus")).waitFor();
     check(
       await button("Cabut seluruh sesi").evaluate(
         (e) => document.activeElement === e,

@@ -209,10 +209,10 @@ try {
     await page.locator("main h1").waitFor();
   }
   async function openEdit() {
-    await page
-      .getByRole("button", { name: "Edit", exact: true })
-      .first()
-      .click();
+    const edit = page.getByRole("button", { name: "Edit", exact: true }).first();
+    if (!(await edit.isVisible()))
+      await page.locator("summary").filter({ hasText: "Kelola kelas" }).first().click();
+    await edit.click();
       await settleConfirmation(page);
     await page.getByRole("dialog").waitFor();
   }
