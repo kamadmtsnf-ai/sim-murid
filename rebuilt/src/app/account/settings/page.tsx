@@ -1,3 +1,4 @@
+import { PermissionDenied } from "@/components/ui/content-state";
 import { redirect } from "next/navigation";
 import {
   readServerPrincipal,
@@ -19,12 +20,10 @@ export default async function SettingsPage() {
   } catch (error) {
     if (!(error instanceof AccessDenied)) throw Error("Settings unavailable");
     return (
-      <main tabIndex={-1} id="main-content" className="mx-auto max-w-xl space-y-4 px-6 py-12">
-        <h1 className="text-2xl font-semibold">Pengaturan madrasah</h1>
-        <p>
-          Akses khusus Admin yang telah menyelesaikan pengaturan keamanan akun.
-        </p>
-      </main>
+      <PermissionDenied title="Pengaturan madrasah">
+        Akses khusus Admin yang telah menyelesaikan pengaturan keamanan akun.
+        Hubungi administrator madrasah jika izin Anda perlu diperiksa.
+      </PermissionDenied>
     );
   }
   return (

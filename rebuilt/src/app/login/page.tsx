@@ -24,11 +24,11 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   if (signedIn) redirect("/account");
   const notice = query.password === "pending" ? {tone:"info" as const,text:"Sesi diakhiri untuk keamanan. Perubahan password belum dapat dipastikan selesai. Coba masuk kembali; jika password lama tidak berlaku, gunakan password baru atau hubungi administrator."}
     : query.password === "changed" ? {tone:"success" as const,text:"Password berhasil diperbarui. Masuk kembali dengan password baru."}
-    : query.expired === "1" ? {tone:"info" as const,text:"Sesi tidak berlaku. Silakan masuk kembali."}
+    : query.expired === "1" ? {tone:"warning" as const,heading:"Sesi berakhir",text:"Sesi tidak berlaku. Silakan masuk kembali untuk melanjutkan."}
     : query.logout === "1" ? {tone:"success" as const,text:"Anda berhasil keluar."} : null;
   return <LoginShell>
     <Card className={styles.card}><CardHeader className={styles.cardHeader}><h1 className="text-2xl font-semibold">Masuk ke SiM-Murid</h1></CardHeader><CardContent className={styles.cardContent}>
-      {notice && <div className="mb-5"><Status tone={notice.tone}>{notice.text}</Status></div>}
+      {notice && <div className="mb-5"><Status tone={notice.tone} heading={notice.heading}>{notice.text}</Status></div>}
 
       <LoginForm captcha={publicRecaptcha()} />
       <p className={styles.help}>Kesulitan masuk? <Link href="/recovery">Minta bantuan akun</Link>. Akun baru? Hubungi admin madrasah.</p>

@@ -27,6 +27,7 @@ import {
 } from "@/lib/student/presentation";
 import { digitField } from "@/lib/student/choices";
 import { documentRow, documentPrepare } from "@/lib/documents/validation";
+import { Status } from "@/components/ui/status";
 import { RegionFields } from "./region-fields";
 import { FloatingLabel } from "@/components/ui/floating-label";
 
@@ -57,6 +58,7 @@ export function BiodataPanel({
     [dirty, setDirty] = useState(false),
     [message, setMessage] = useState(""),
     [error, setError] = useState(false),
+    [confirmed, setConfirmed] = useState(false),
     [preview, setPreview] = useState<View | null>(null),
     [download, setDownload] = useState<View | null>(null),
     [zoom, setZoom] = useState(100),
@@ -90,10 +92,11 @@ export function BiodataPanel({
     fields = rules.fields.filter(
       (k) => fieldSection(k) === section && fieldVisible(k, data),
     );
-  function notice(text: string, failed = false) {
+  function notice(text: string, failed = false, success = false) {
     if (mounted.current) {
       setMessage(text);
       setError(failed);
+      setConfirmed(success);
     }
   }
   function updateFields(patch: Biodata) {
@@ -188,6 +191,8 @@ export function BiodataPanel({
         typeof result.message === "string"
           ? result.message
           : "Biodata berhasil disimpan.",
+        false,
+        true,
       );
     } catch (err) {
       notice(
@@ -279,6 +284,8 @@ export function BiodataPanel({
         typeof result.message === "string"
           ? result.message
           : "Dokumen tersimpan.",
+        false,
+        true,
       );
     } catch (err) {
       await recover();
@@ -341,6 +348,8 @@ export function BiodataPanel({
           typeof result.message === "string"
             ? result.message
             : "Dokumen diperbarui.",
+          false,
+          true,
         );
       }
     } catch (err) {
@@ -375,7 +384,7 @@ export function BiodataPanel({
       request.current = null;
       setPreview(null);
       setDownload(null);
-      notice("Biodata dan daftar dokumen diperbarui.");
+      notice("Biodata dan daftar dokumen diperbarui.", false, true);
     } catch {
       notice(
         "Data belum dapat dimuat ulang. Isian Anda tetap dipertahankan.",
@@ -446,18 +455,14 @@ export function BiodataPanel({
           </Button>
         ))}
       </nav>
-      <div
-        role={error ? "alert" : "status"}
-        aria-live={error ? "assertive" : "polite"}
-        className={
-          message
-            ? "rounded-lg border p-3 text-sm break-words [overflow-wrap:anywhere] " +
-              (error ? "border-destructive text-destructive" : "bg-muted/30")
-            : ""
-        }
-      >
-        {message}
-      </div>
+      {message && (
+        <Status
+          tone={error ? "error" : busy ? "pending" : confirmed ? "success" : "info"}
+          heading={Object.keys(fieldErrors).length ? "Periksa kembali isian biodata" : undefined}
+        >
+          {message}
+        </Status>
+      )}
       {needsReload && (
         <p className="rounded border border-destructive p-3 text-sm">
           Status dokumen belum dapat diperiksa. Muat ulang sebelum mengubah

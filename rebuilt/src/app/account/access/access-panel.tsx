@@ -382,6 +382,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                 </ul>
               ) : (
                 <EmptyState
+                  kind={rows.length ? "search" : "empty"}
                   title={
                     rows.length
                       ? "Tidak ada izin yang cocok"

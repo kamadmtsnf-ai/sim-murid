@@ -4,6 +4,7 @@ import {
   type ReactNode,
   type InputHTMLAttributes,
 } from "react";
+import { CircleAlert } from "lucide-react";
 import { FloatingLabel } from "./floating-label";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +47,18 @@ export function Field({
         !["checkbox", "radio", "file", "hidden", "range", "color"].includes(
           children.props.type ?? "text",
         )));
+  const control = isValidElement<InputHTMLAttributes<HTMLInputElement>>(children) &&
+    typeof children.type === "string" &&
+    ["input", "select", "textarea"].includes(children.type)
+    ? cloneElement(children, {
+        "aria-invalid": error ? true : children.props["aria-invalid"],
+        "aria-describedby": [...new Set([
+          children.props["aria-describedby"],
+          fieldDescriptionIds(id, description, error),
+        ].filter(Boolean).join(" ").split(/\s+/).filter(Boolean))].join(" ") || undefined,
+        ...(floating ? { placeholder: children.props.placeholder ?? " " } : {}),
+      })
+    : children;
   const caption = (
     <>
       {label}
@@ -60,16 +73,14 @@ export function Field({
     <div className={cn("ds-field", className)}>
       {floating ? (
         <FloatingLabel htmlFor={id} label={caption}>
-          {cloneElement(children, {
-            placeholder: children.props.placeholder ?? " ",
-          })}
+          {control}
         </FloatingLabel>
       ) : (
         <>
           <label htmlFor={id} className="ds-field-label">
             {caption}
           </label>
-          {children}
+          {control}
         </>
       )}
       {description && (
@@ -78,8 +89,9 @@ export function Field({
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="ds-field-error">
-          {error}
+        <p id={`${id}-error`} className="ds-field-error flex items-start gap-2">
+          <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+          <span className="min-w-0 [overflow-wrap:anywhere]">{error}</span>
         </p>
       )}
     </div>

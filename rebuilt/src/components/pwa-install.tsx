@@ -14,6 +14,8 @@ import {
   Monitor,
   School,
   Smartphone,
+  WifiOff,
+  Gauge,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -23,6 +25,8 @@ import {
   installPlatform,
   type InstallPlatform,
 } from "@/lib/pwa/presentation";
+
+type NetworkConnection = EventTarget & { effectiveType?: string };
 
 type InstallEvent = Event & {
   prompt: () => Promise<void>;
@@ -67,6 +71,7 @@ export function PwaInstall({ children }: { children?: ReactNode }) {
   const [pending, setPending] = useState(false),
     [message, setMessage] = useState("");
   const [platform, setPlatform] = useState<InstallPlatform>("desktop");
+  const [slowNetwork, setSlowNetwork] = useState(false);
   useEffect(() => {
     const display = window.matchMedia("(display-mode: standalone)");
     const mode = () => {
@@ -98,7 +103,12 @@ export function PwaInstall({ children }: { children?: ReactNode }) {
       setAvailable(true);
       setMessage("");
     };
-    const connection = () => setOffline(!navigator.onLine);
+    const network = (navigator as Navigator & { connection?: NetworkConnection }).connection;
+    const connection = () => {
+      setOffline(!navigator.onLine);
+      setSlowNetwork(["slow-2g", "2g", "3g"].includes(network?.effectiveType ?? ""));
+    };
+    network?.addEventListener("change", connection);
     window.addEventListener("beforeinstallprompt", offer);
     window.addEventListener("appinstalled", installed);
     window.addEventListener("online", connection);
@@ -113,6 +123,7 @@ export function PwaInstall({ children }: { children?: ReactNode }) {
     });
     return () => {
       cancelAnimationFrame(frame);
+      network?.removeEventListener("change", connection);
       window.removeEventListener("beforeinstallprompt", offer);
       window.removeEventListener("appinstalled", installed);
       window.removeEventListener("online", connection);
@@ -176,19 +187,23 @@ export function PwaInstall({ children }: { children?: ReactNode }) {
   };
   return (
     <PwaContext.Provider value={state}>
-      {children}
-      {offline ? (
+      {(offline || slowNetwork) && (
         <aside
           aria-label="Koneksi aplikasi"
-          className="mx-auto w-full min-w-0 max-w-7xl px-[16px] py-[12px] text-sm [overflow-wrap:anywhere] sm:px-[24px]"
+          className="mx-auto w-full min-w-0 max-w-7xl px-[16px] py-[12px] sm:px-[24px]"
         >
-          <Status tone="warning">
-            Perangkat terdeteksi offline. Data belum dapat diperiksa atau
-            disimpan. Sambungkan kembali lalu periksa status sebelum mengulangi
-            penyimpanan; aplikasi tidak mengantrekan transaksi.
+          <Status
+            tone="warning"
+            icon={offline ? WifiOff : Gauge}
+            heading={offline ? "Tidak ada koneksi internet" : "Koneksi internet lambat"}
+          >
+            {offline
+              ? "Perangkat terdeteksi offline. Sambungkan kembali, lalu periksa status data sebelum mengulangi penyimpanan."
+              : "Memuat data atau mengunggah berkas mungkin lebih lama. Tunggu hasil tampil sebelum mengirim ulang."}
           </Status>
         </aside>
-      ) : null}
+      )}
+      {children}
       <Dialog
         open={open}
         onOpenChange={setOpen}

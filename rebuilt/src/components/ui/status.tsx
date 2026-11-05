@@ -5,6 +5,7 @@ import {
   CheckCircle2,
   TriangleAlert,
   LoaderCircle,
+  type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 const tones = {
@@ -32,14 +33,17 @@ export function Status({
   tone = "info",
   className,
   heading,
+  icon,
   hint,
   ...props
 }: Omit<ComponentProps<"div">, "role"> & {
   tone?: keyof typeof tones;
   heading?: ReactNode;
+  icon?: LucideIcon;
   hint?: ReactNode;
 }) {
-  const { icon: Icon, style } = tones[tone];
+  const { icon: defaultIcon, style } = tones[tone];
+  const Icon = icon ?? defaultIcon;
   const label =
     heading ??
     (

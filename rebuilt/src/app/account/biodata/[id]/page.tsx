@@ -1,3 +1,4 @@
+import { PermissionDenied } from "@/components/ui/content-state";
 import { redirect, notFound } from "next/navigation";
 import { z } from "zod";
 import { readServerPrincipal } from "@/lib/auth/read-server";
@@ -25,20 +26,10 @@ export default async function BiodataPage({
   } catch (error) {
     if (!(error instanceof AccessDenied)) throw error;
     return (
-      <main
-        id="main-content"
-        tabIndex={-1}
-        className="mx-auto max-w-xl space-y-3 px-4 py-10"
-      >
-        <h1 className="text-2xl font-semibold">
-          Biodata tidak tersedia untuk akun Anda
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          Halaman ini untuk Siswa, Calon Siswa, Alumni, atau akun yang memiliki
-          izin terhadap siswa terkait. Pastikan langkah keamanan akun telah
-          diselesaikan.
-        </p>
-      </main>
+      <PermissionDenied title="Biodata tidak tersedia untuk akun Anda">
+        Periksa apakah pengaturan keamanan akun sudah selesai. Jika sudah,
+        hubungi administrator madrasah untuk memeriksa izin biodata.
+      </PermissionDenied>
     );
   }
   return (
