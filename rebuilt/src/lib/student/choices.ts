@@ -1,5 +1,7 @@
 const childNumbers = Array.from({ length: 12 }, (_, index) => String(index + 1));
 
+const neighborhoodNumbers = Array.from({ length: 13 }, (_, index) => String(index).padStart(3, "0"));
+
 const familyChoices = {
   Pendidikan: ["MI/SD/Sederajat", "MTs/SMP/Sederajat", "MA/SMA/Sederajat", "D1", "D2", "D3", "D4/S1", "S2", "S3", "Tidak Bersekolah"],
   Pekerjaan: [
@@ -19,6 +21,11 @@ const familyChoices = {
 };
 
 export const biodataChoices: Record<string, string[]> = {
+  ...Object.fromEntries(
+    ["Siswa", "Ayah", "Ibu", "Wali"].flatMap((person) =>
+      ["RT", "RW"].map((field) => [person + field, neighborhoodNumbers]),
+    ),
+  ),
   JumlahSaudara: childNumbers,
   AnakKe: childNumbers,
   Agama: ["Islam", "Protestan", "Katolik", "Hindu", "Buddha", "Konghucu"],

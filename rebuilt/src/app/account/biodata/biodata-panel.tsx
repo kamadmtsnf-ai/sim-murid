@@ -27,6 +27,7 @@ import {
 } from "@/lib/student/presentation";
 import { digitField } from "@/lib/student/choices";
 import { documentRow, documentPrepare } from "@/lib/documents/validation";
+import { RegionFields } from "./region-fields";
 import { FloatingLabel } from "@/components/ui/floating-label";
 
 const fieldClass =
@@ -95,10 +96,13 @@ export function BiodataPanel({
       setError(failed);
     }
   }
-  function update(field: string, value: string | boolean) {
-    setData((current) => normalizeBiodata({ ...current, [field]: value }));
+  function updateFields(patch: Biodata) {
+    setData((current) => normalizeBiodata({ ...current, ...patch }));
     setDirty(true);
     setFieldErrors({});
+  }
+  function update(field: string, value: string | boolean) {
+    updateFields({ [field]: value });
   }
   function apply(result: z.infer<typeof snapshot>, replaceDraft = true) {
     if (!mounted.current) return;
@@ -478,6 +482,17 @@ export function BiodataPanel({
                 </legend>
                 <div className="grid min-w-0 gap-5 sm:grid-cols-2">
                   {fields.map((field) =>
+                    field.endsWith("Provinsi") ? (
+                      <RegionFields
+                        key={field}
+                        prefix={field.slice(0, -"Provinsi".length)}
+                        data={data}
+                        required={required}
+                        errors={fieldErrors}
+                        className={fieldClass}
+                        onChange={updateFields}
+                      />
+                    ) : /(?:Kabupaten|Kecamatan|Kelurahan)$/.test(field) ? null :
                     rules.booleans.includes(field) ? (
                       <label
                         className="flex min-h-11 items-center gap-3 text-sm"
