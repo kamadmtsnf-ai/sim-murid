@@ -298,7 +298,11 @@ try {
   await page
     .getByRole("button", { name: "Verifikasi dan hubungkan", exact: true })
     .click();
+  const linkResponse = page.waitForResponse((response) =>
+    new URL(response.url()).pathname === "/api/families" && response.request().method() === "POST",
+  );
   await page.getByRole("alertdialog").getByRole("button", {name:"Lanjutkan",exact:true}).click();
+  await linkResponse;
   await page.waitForFunction(
     () =>
       document.querySelector("div[aria-busy]")?.getAttribute("aria-busy") ===
@@ -309,7 +313,11 @@ try {
     .getByRole("searchbox", { name: "Cari relasi", exact: true })
     .fill("Siswa 1 (001)");
   await page.getByRole("button", { name: "Cabut relasi", exact: true }).click();
+  const revokeResponse = page.waitForResponse((response) =>
+    new URL(response.url()).pathname === "/api/families" && response.request().method() === "POST",
+  );
   await page.getByRole("alertdialog").getByRole("button", {name:"Lanjutkan",exact:true}).click();
+  await revokeResponse;
   await page.waitForFunction(
     () =>
       document.querySelector("div[aria-busy]")?.getAttribute("aria-busy") ===
