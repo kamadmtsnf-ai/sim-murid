@@ -1,4 +1,5 @@
 "use client";
+import { PagedCollection } from "@/components/ui/paged-collection";
 import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { BulkImport } from "@/components/bulk/bulk-import";
@@ -439,70 +440,79 @@ const retainedEcurrentTarget=e.currentTarget;
             : "Belum ada kelas yang dapat diakses pada tahun ajaran ini."}
         </Status>
       ) : (
-        <ul className="classes-grid">
-          {classes.map((c) => (
-            <li
-              key={c.id}
-              className="min-w-0 space-y-4 rounded-xl border bg-card p-4 shadow-xs"
-            >
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">
-                  {yearLabel(c.year_id)} · Tingkat {c.level}
-                  {c.archived ? " · Arsip" : ""}
-                </p>
-                <h2 id={`class-${c.id}`} className="text-xl font-semibold">
-                  {c.name}
-                </h2>
-                <p className="text-sm">
-                  Wali kelas: {c.teacher_name ?? "belum ditetapkan"}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {c.students.length} siswa dapat diakses
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  variant="outline"
-                  disabled={busy}
-                  aria-describedby={`class-${c.id}`}
-                  onClick={async () => await showRoster(c.id)}
+        <PagedCollection key={JSON.stringify([year, search])} items={classes} label="Halaman daftar kelas">
+          {(items) => (
+            <ul className="classes-grid">
+              {items.map((c) => (
+                <li
+                  key={c.id}
+                  className="min-w-0 space-y-4 rounded-xl border bg-card p-4 shadow-xs"
                 >
-                  Daftar siswa
-                </Button>
-                {data.can_manage && !c.archived && (
-                  <>
+                  <div className="space-y-2">
+                    <p className="text-sm text-muted-foreground">
+                      {yearLabel(c.year_id)} · Tingkat {c.level}
+                      {c.archived ? " · Arsip" : ""}
+                    </p>
+                    <h2 id={`class-${c.id}`} className="text-xl font-semibold">
+                      {c.name}
+                    </h2>
+                    <p className="text-sm">
+                      Wali kelas: {c.teacher_name ?? "belum ditetapkan"}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {c.students.length} siswa dapat diakses
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-start gap-2">
                     <Button
                       variant="outline"
-                      disabled={disabled}
+                      disabled={busy}
                       aria-describedby={`class-${c.id}`}
-                      onClick={(e) => openClass(c.id, e.currentTarget)}
+                      onClick={async () => await showRoster(c.id)}
                     >
-                      Edit
+                      Daftar siswa
                     </Button>
-                    <Button
-                      variant="outline"
-                      disabled={disabled}
-                      aria-describedby={`class-${c.id}`}
-                      onClick={async () => {
-                        if (
-                          await confirmAction(
-                            `Arsipkan kelas ${c.name}? Riwayat tetap tersimpan.`,
-                          )
-                        )
-                          void mutate(data.revision, {
-                            type: "class_archive",
-                            id: c.id,
-                          });
-                      }}
-                    >
-                      Arsipkan
-                    </Button>
-                  </>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
+                    {data.can_manage && !c.archived && (
+                      <details className="min-w-0">
+                        <summary className="flex min-h-11 cursor-pointer items-center rounded-md px-3 text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2">
+                          Kelola kelas
+                        </summary>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                            <Button
+                              variant="outline"
+                              disabled={disabled}
+                              aria-describedby={`class-${c.id}`}
+                              onClick={(e) => openClass(c.id, e.currentTarget)}
+                            >
+                              Edit
+                            </Button>
+                            <Button
+                              variant="outline"
+                              disabled={disabled}
+                              aria-describedby={`class-${c.id}`}
+                              onClick={async () => {
+                                if (
+                                  await confirmAction(
+                                    `Arsipkan kelas ${c.name}? Riwayat tetap tersimpan.`,
+                                  )
+                                )
+                                  void mutate(data.revision, {
+                                    type: "class_archive",
+                                    id: c.id,
+                                  });
+                              }}
+                            >
+                              Arsipkan
+                            </Button>
+                        </div>
+                      </details>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </PagedCollection>
       )}
       {selected && (
         <Card>
@@ -523,42 +533,46 @@ const retainedEcurrentTarget=e.currentTarget;
             {selected.students.length === 0 ? (
               <Status>Belum ada siswa yang dapat diakses.</Status>
             ) : (
-              <ul className="divide-y">
-                {selected.students.map((p) => (
-                  <li key={p.id} className="classes-student">
-                    <div className="min-w-0 flex-1">
-                      <p className="font-medium">{p.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {p.username} · mulai {p.starts_on}
-                        {p.status !== "active" ? " · akun nonaktif" : ""}
-                      </p>
-                    </div>
-                    {data.can_manage && !selected.archived && (
-                      <Button
-                        variant="outline"
-                        disabled={disabled}
-                        aria-label={`Keluarkan ${p.name}`}
-                        onClick={async () => {
-                          if (
-                            await confirmAction(
-                              `Keluarkan ${p.name} dari penempatan kelas ini? Riwayat tetap tersimpan.`,
-                            )
-                          )
-                            void mutate(data.revision, {
-                              type: "enrollment",
-                              classId: selected.id,
-                              studentIds: [p.id],
-                              startsOn: p.starts_on,
-                              remove: true,
-                            });
-                        }}
-                      >
-                        Keluarkan
-                      </Button>
-                    )}
-                  </li>
-                ))}
-              </ul>
+              <PagedCollection key={selected.id} items={selected.students} label="Halaman daftar siswa">
+                {(items) => (
+                  <ul className="divide-y">
+                    {items.map((p) => (
+                      <li key={p.id} className="classes-student">
+                        <div className="min-w-0 flex-1">
+                          <p className="font-medium">{p.name}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {p.username} · mulai {p.starts_on}
+                            {p.status !== "active" ? " · akun nonaktif" : ""}
+                          </p>
+                        </div>
+                        {data.can_manage && !selected.archived && (
+                          <Button
+                            variant="outline"
+                            disabled={disabled}
+                            aria-label={`Keluarkan ${p.name}`}
+                            onClick={async () => {
+                              if (
+                                await confirmAction(
+                                  `Keluarkan ${p.name} dari penempatan kelas ini? Riwayat tetap tersimpan.`,
+                                )
+                              )
+                                void mutate(data.revision, {
+                                  type: "enrollment",
+                                  classId: selected.id,
+                                  studentIds: [p.id],
+                                  startsOn: p.starts_on,
+                                  remove: true,
+                                });
+                            }}
+                          >
+                            Keluarkan
+                          </Button>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </PagedCollection>
             )}
             {data.can_manage && !selected.archived && (
               <form

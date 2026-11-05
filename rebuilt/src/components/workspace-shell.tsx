@@ -360,9 +360,6 @@ export function WorkspaceShell({
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
-                    <span className="block text-xs text-muted-foreground">
-                      Ruang kerja madrasah
-                    </span>
                     <span className="block text-sm font-semibold [overflow-wrap:anywhere]">
                       {detailLabel ?? item?.label ?? "Layanan madrasah"}
                     </span>
@@ -438,7 +435,6 @@ export function WorkspaceShell({
                 aria-label="Informasi aplikasi"
               >
                 <p className="font-medium">SiM-Murid · MTs Nurul Falah</p>
-                <p>Data mengikuti hak akses akun Anda.</p>
                 <PwaInstallButton />
               </footer>
             </div>

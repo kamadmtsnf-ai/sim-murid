@@ -1,7 +1,7 @@
 import { publicRecaptcha } from "@/lib/auth/recaptcha";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Card, CardHeader, CardDescription, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Status } from "@/components/ui/status";
 import { LoginForm } from "./login-form";
 import { LoginShell } from "./login-shell";
@@ -27,7 +27,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     : query.expired === "1" ? {tone:"info" as const,text:"Sesi tidak berlaku. Silakan masuk kembali."}
     : query.logout === "1" ? {tone:"success" as const,text:"Anda berhasil keluar."} : null;
   return <LoginShell>
-    <Card className={styles.card}><CardHeader className={styles.cardHeader}><p className="eyebrow">Akses akun</p><h1 className="text-2xl font-semibold">Masuk ke SiM-Murid</h1><CardDescription>Masuk dengan akun madrasah Anda.</CardDescription></CardHeader><CardContent className={styles.cardContent}>
+    <Card className={styles.card}><CardHeader className={styles.cardHeader}><h1 className="text-2xl font-semibold">Masuk ke SiM-Murid</h1></CardHeader><CardContent className={styles.cardContent}>
       {notice && <div className="mb-5"><Status tone={notice.tone}>{notice.text}</Status></div>}
 
       <LoginForm captcha={publicRecaptcha()} />

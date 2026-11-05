@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Check, School } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import styles from "./home.module.css";
 
 export const metadata: Metadata = { title: "Beranda" };
@@ -38,7 +38,7 @@ export default function HomePage() {
             <CardHeader className={`${styles.serviceHeader} rounded-t-xl border-b bg-secondary/50`}>
               <div className="flex items-start gap-3">
                 <span className={styles.serviceIcon}><BookOpen aria-hidden="true" /></span>
-                <div className="min-w-0"><CardTitle><h2 className="text-xl leading-snug">Layanan madrasah terpadu</h2></CardTitle><CardDescription className="mt-2 leading-relaxed">Sesuai peran Anda.</CardDescription></div>
+                <div className="min-w-0"><CardTitle><h2 className="text-xl leading-snug">Layanan madrasah terpadu</h2></CardTitle></div>
               </div>
             </CardHeader>
             <CardContent className={styles.serviceContent}>

@@ -1,4 +1,5 @@
 "use client";
+import { PagedCollection } from "@/components/ui/paged-collection";
 import { Guidance } from "@/components/ui/guidance";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
 import {
@@ -550,81 +551,89 @@ export function SessionPanel({
                   </p>
                 </div>
               )}
-              {displayed.sessions.map((s) => {
-                const status = effectiveSessionStatus(s, now);
-                return (
-                  <Card key={s.id} className="min-w-0">
-                    <CardHeader className="min-w-0 grid-cols-1 gap-3 px-4 sm:px-6">
-                      <CardTitle>
-                        <h3 className="text-base leading-6 [overflow-wrap:anywhere]">
-                          {s.device || "Perangkat tidak dikenal"}
-                        </h3>
-                      </CardTitle>
-                      <div className="flex flex-wrap items-center gap-2 text-xs">
-                        <span
-                          className={
-                            "rounded-full border px-2.5 py-1 font-medium " +
-                            (status === "active"
-                              ? "bg-success-subtle text-success"
-                              : "bg-muted text-muted-foreground")
-                          }
-                        >
-                          {statusLabels[status]}
-                        </span>
-                        {s.current && (
-                          <span className="rounded-full border px-2.5 py-1 font-medium">
-                            Sesi Anda saat ini
-                          </span>
-                        )}
-                        <span className="text-muted-foreground">
-                          {s.remember ? "Ingat saya" : "Sesi biasa"}
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="min-w-0 space-y-4 px-4 sm:px-6">
-                      <dl className="grid min-w-0 gap-x-5 gap-y-2 text-sm sm:grid-cols-[auto_minmax(0,1fr)]">
-                        <dt className="text-muted-foreground">Masuk</dt>
-                        <dd>
-                          <time dateTime={s.issued_at}>
-                            {format(s.issued_at)} WIB
-                          </time>
-                        </dd>
-                        <dt className="text-muted-foreground">
-                          Terakhir diperiksa
-                        </dt>
-                        <dd>
-                          <time dateTime={s.last_seen_at}>
-                            {format(s.last_seen_at)} WIB
-                          </time>
-                        </dd>
-                        <dt className="text-muted-foreground">Batas sesi</dt>
-                        <dd>
-                          <time dateTime={s.expires_at}>
-                            {format(s.expires_at)} WIB
-                          </time>
-                        </dd>
-                      </dl>
-                      {status === "active" && (
-                        <Button
-                          variant="outline"
-                          className="w-full sm:w-auto"
-                          disabled={busy || needsSync || !!confirmation}
-                          onClick={(e) =>
-                            openConfirmation(e.currentTarget, s.id)
-                          }
-                          aria-label={
-                            s.current
-                              ? "Cabut sesi Anda saat ini"
-                              : `Cabut sesi ${s.device || "perangkat tidak dikenal"}`
-                          }
-                        >
-                          Cabut sesi
-                        </Button>
-                      )}
-                    </CardContent>
-                  </Card>
-                );
-              })}
+              <PagedCollection
+                key={displayed.username}
+                items={displayed.sessions}
+                label="Halaman riwayat sesi"
+                pageSize={8}
+              >
+                {(sessions) =>
+                  sessions.map((s) => {
+                    const status = effectiveSessionStatus(s, now);
+                    return (
+                      <Card key={s.id} className="min-w-0">
+                        <CardHeader className="min-w-0 grid-cols-1 gap-3 px-4 sm:px-6">
+                          <CardTitle>
+                            <h3 className="text-base leading-6 [overflow-wrap:anywhere]">
+                              {s.device || "Perangkat tidak dikenal"}
+                            </h3>
+                          </CardTitle>
+                          <div className="flex flex-wrap items-center gap-2 text-xs">
+                            <span
+                              className={
+                                "rounded-full border px-2.5 py-1 font-medium " +
+                                (status === "active"
+                                  ? "bg-success-subtle text-success"
+                                  : "bg-muted text-muted-foreground")
+                              }
+                            >
+                              {statusLabels[status]}
+                            </span>
+                            {s.current && (
+                              <span className="rounded-full border px-2.5 py-1 font-medium">
+                                Sesi Anda saat ini
+                              </span>
+                            )}
+                            <span className="text-muted-foreground">
+                              {s.remember ? "Ingat saya" : "Sesi biasa"}
+                            </span>
+                          </div>
+                        </CardHeader>
+                        <CardContent className="min-w-0 space-y-4 px-4 sm:px-6">
+                          <dl className="grid min-w-0 gap-x-5 gap-y-2 text-sm sm:grid-cols-[auto_minmax(0,1fr)]">
+                            <dt className="text-muted-foreground">Masuk</dt>
+                            <dd>
+                              <time dateTime={s.issued_at}>
+                                {format(s.issued_at)} WIB
+                              </time>
+                            </dd>
+                            <dt className="text-muted-foreground">
+                              Terakhir diperiksa
+                            </dt>
+                            <dd>
+                              <time dateTime={s.last_seen_at}>
+                                {format(s.last_seen_at)} WIB
+                              </time>
+                            </dd>
+                            <dt className="text-muted-foreground">Batas sesi</dt>
+                            <dd>
+                              <time dateTime={s.expires_at}>
+                                {format(s.expires_at)} WIB
+                              </time>
+                            </dd>
+                          </dl>
+                          {status === "active" && (
+                            <Button
+                              variant="outline"
+                              className="w-full sm:w-auto"
+                              disabled={busy || needsSync || !!confirmation}
+                              onClick={(e) =>
+                                openConfirmation(e.currentTarget, s.id)
+                              }
+                              aria-label={
+                                s.current
+                                  ? "Cabut sesi Anda saat ini"
+                                  : `Cabut sesi ${s.device || "perangkat tidak dikenal"}`
+                              }
+                            >
+                              Cabut sesi
+                            </Button>
+                          )}
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+              </PagedCollection>
             </>
           )}
         </section>

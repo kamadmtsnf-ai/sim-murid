@@ -532,6 +532,10 @@ test("discipline notifications exclude stale homeroom/BK roles and inactive coun
   await setTask(A.duty, "counselor");
   await setTask(A.manager, "counselor");
   await db.query(
+    "update public.user_assignments set valid_from=public.app_ops_today()-1 where assignment_code='counselor' and user_id=any($1::uuid[])",
+    [[A.other.id, A.duty.id, A.manager.id]],
+  );
+  await db.query(
     "update public.user_roles set role_code='student' where user_id=any($1::uuid[])",
     [[A.other.id, A.mentor.id]],
   );
