@@ -1,4 +1,5 @@
 "use client";
+import { PagedCollection } from "@/components/ui/paged-collection";
 import { Guidance } from "@/components/ui/guidance";
 import {MutationFeedback} from "@/components/feedback/mutation-feedback";
 import {confirmAction} from "@/components/ui/confirm-action";
@@ -339,10 +340,7 @@ export function SchedulePanel({
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="kbm" className="mt-5 space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm text-muted-foreground">
-              Daftar pelajaran sesuai tahun ajaran, kelas, dan hari.
-            </p>
+          <div className="flex justify-end empty:hidden">
             {writable.length > 0 && (
               <Button
                 disabled={locked}
@@ -360,84 +358,85 @@ export function SchedulePanel({
               {data.lessons.length === 0 ? (
                 <p>Belum ada pelajaran sesuai filter dan hak akses.</p>
               ) : (
-                <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
-                  <table className="w-full text-left text-sm">
-                    <caption className="sr-only">
-                      Daftar jadwal pelajaran
-                    </caption>
-                    <thead>
-                      <tr>
-                        {[
-                          "Pilih",
-                          "Hari / waktu",
-                          "Kelas / mapel",
-                          "Guru / durasi",
-                          "Tindakan",
-                        ].map((h) => (
-                          <th key={h} scope="col" className="p-2">
-                            {h}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.lessons.map((l) => (
-                        <tr key={l.id} className="border-t">
-                          <td className="p-2">
-                            <input
-                              type="checkbox"
-                              aria-label={`Pilih ${l.subject} ${l.class_name} ${weekdays[l.weekday]}`}
-                              disabled={locked || !l.can_manage}
-                              checked={selectedLessons.includes(l.id)}
-                              onChange={() =>
-                                setSelectedLessons((a) => toggle(a, l.id))
-                              }
-                            />
-                          </td>
-                          <td className="whitespace-nowrap p-2">
-                            {weekdays[l.weekday]}
-                            <p>
-                              {clock(l.start_minute)}–{clock(l.end_minute)}
-                            </p>
-                          </td>
-                          <td className="p-2">
-                            {l.class_name}
-                            <p>{l.subject}</p>
-                          </td>
-                          <td className="p-2">
-                            {l.teacher_name}
-                            <p>
-                              {l.duration_minutes} menit × {l.jtm} JTM +
-                              istirahat {l.break_minutes} menit
-                            </p>
-                          </td>
-                          <td className="p-2">
-                            {l.can_manage && (
-                              <Button
-                                disabled={locked}
-                                variant="outline"
-                                onClick={(e) =>
-                                  openModal("lesson", e.currentTarget, l.id)
-                                }
-                              >
-                                Edit
-                              </Button>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </TableRegion>
+                <PagedCollection key={query.toString()} items={data.lessons} label="Halaman jadwal KBM" pageSize={15}>
+                  {(items) => (
+                    <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
+                      <table className="w-full text-left text-sm">
+                        <caption className="sr-only">
+                          Daftar jadwal pelajaran
+                        </caption>
+                        <thead>
+                          <tr>
+                            {[
+                              "Pilih",
+                              "Hari / waktu",
+                              "Kelas / mapel",
+                              "Guru / durasi",
+                              "Tindakan",
+                            ].map((h) => (
+                              <th key={h} scope="col" className="p-2">
+                                {h}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {items.map((l) => (
+                            <tr key={l.id} className="border-t">
+                              <td className="p-2">
+                                <input
+                                  type="checkbox"
+                                  aria-label={`Pilih ${l.subject} ${l.class_name} ${weekdays[l.weekday]}`}
+                                  disabled={locked || !l.can_manage}
+                                  checked={selectedLessons.includes(l.id)}
+                                  onChange={() =>
+                                    setSelectedLessons((a) => toggle(a, l.id))
+                                  }
+                                />
+                              </td>
+                              <td className="whitespace-nowrap p-2">
+                                {weekdays[l.weekday]}
+                                <p>
+                                  {clock(l.start_minute)}–{clock(l.end_minute)}
+                                </p>
+                              </td>
+                              <td className="p-2">
+                                {l.class_name}
+                                <p>{l.subject}</p>
+                              </td>
+                              <td className="p-2">
+                                {l.teacher_name}
+                                <p>
+                                  {l.duration_minutes} menit × {l.jtm} JTM +
+                                  istirahat {l.break_minutes} menit
+                                </p>
+                              </td>
+                              <td className="p-2">
+                                {l.can_manage && (
+                                  <Button
+                                    disabled={locked}
+                                    variant="outline"
+                                    onClick={(e) =>
+                                      openModal("lesson", e.currentTarget, l.id)
+                                    }
+                                  >
+                                    Edit
+                                  </Button>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </TableRegion>
+                  )}
+                </PagedCollection>
               )}
             </CardContent>
           </Card>
         </Tabs.Content>
         <Tabs.Content value="piket" className="mt-5 space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm text-muted-foreground">
-              Penugasan piket siswa sesuai filter yang diterapkan.
-            </p>
+          <div className="flex justify-end empty:hidden">
             {writable.length > 0 && (
               <Button
                 disabled={locked}
@@ -455,28 +454,32 @@ export function SchedulePanel({
               {data.duties.length === 0 ? (
                 <p>Belum ada piket sesuai filter dan hak akses.</p>
               ) : (
-                <ul className="divide-y">
-                  {data.duties.map((d) => (
-                    <li
-                      key={d.id}
-                      className="flex min-w-0 items-center gap-3 py-2"
-                    >
-                      <input
-                        type="checkbox"
-                        aria-label={`Pilih piket ${d.student_name} ${weekdays[d.weekday]}`}
-                        disabled={locked || !d.can_manage}
-                        checked={selectedDuties.includes(d.id)}
-                        onChange={() =>
-                          setSelectedDuties((a) => toggle(a, d.id))
-                        }
-                      />
-                      <span className="min-w-0 break-words">
-                        {weekdays[d.weekday]} · {d.class_name} ·{" "}
-                        {d.student_name}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                <PagedCollection key={query.toString()} items={data.duties} label="Halaman jadwal piket" pageSize={15}>
+                  {(items) => (
+                    <ul className="divide-y">
+                      {items.map((d) => (
+                        <li
+                          key={d.id}
+                          className="flex min-w-0 items-center gap-3 py-2"
+                        >
+                          <input
+                            type="checkbox"
+                            aria-label={`Pilih piket ${d.student_name} ${weekdays[d.weekday]}`}
+                            disabled={locked || !d.can_manage}
+                            checked={selectedDuties.includes(d.id)}
+                            onChange={() =>
+                              setSelectedDuties((a) => toggle(a, d.id))
+                            }
+                          />
+                          <span className="min-w-0 break-words">
+                            {weekdays[d.weekday]} · {d.class_name} ·{" "}
+                            {d.student_name}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </PagedCollection>
               )}
             </CardContent>
           </Card>

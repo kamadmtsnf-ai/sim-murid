@@ -253,10 +253,15 @@ try {
     await fresh("", make("qa-sessions", 20, true));
     await geometry(String(width));
     await a11y(String(width));
-    check(
-      (await page.locator("main h3").count()) === 20,
-      "twenty records " + width,
-    );
+    const pagination = page.getByRole("navigation", { name: "Halaman riwayat sesi" });
+    check((await page.locator("main h3").count()) === 8, "first page " + width);
+    await pagination.getByRole("button", { name: "Berikutnya" }).click();
+    check((await page.locator("main h3").count()) === 8, "second page " + width);
+    await pagination.getByRole("button", { name: "Berikutnya" }).click();
+    check((await page.locator("main h3").count()) === 4, "last page " + width);
+    check(await pagination.getByRole("button", { name: "Berikutnya" }).isDisabled(), "last page boundary " + width);
+    await pagination.getByRole("button", { name: "Sebelumnya" }).click();
+    await pagination.getByRole("button", { name: "Sebelumnya" }).click();
     await page.screenshot({
       path: join(out, "sessions-" + width + ".png"),
       fullPage: true,
@@ -265,6 +270,7 @@ try {
     await modalGeometry(String(width));
     await a11y("dialog-" + width);
     await button("Batal").click();
+    await button("Cabut seluruh sesi").and(page.locator(":focus")).waitFor();
     check(
       await button("Cabut seluruh sesi").evaluate(
         (e) => document.activeElement === e,

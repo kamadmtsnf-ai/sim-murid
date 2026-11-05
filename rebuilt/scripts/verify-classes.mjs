@@ -209,10 +209,10 @@ try {
     await page.locator("main h1").waitFor();
   }
   async function openEdit() {
-    await page
-      .getByRole("button", { name: "Edit", exact: true })
-      .first()
-      .click();
+    const edit = page.getByRole("button", { name: "Edit", exact: true }).first();
+    if (!(await edit.isVisible()))
+      await page.locator("summary").filter({ hasText: "Kelola kelas" }).first().click();
+    await edit.click();
       await settleConfirmation(page);
     await page.getByRole("dialog").waitFor();
   }
@@ -448,7 +448,10 @@ try {
     mode = failure;
     await page.getByRole("button", { name: "Simpan kelas" }).click();
     await settleConfirmation(page);
-    await page.getByRole("alert").waitFor();
+    await page.getByRole("dialog").getByText(
+      failure === "stale" ? "Periksa sebelum melanjutkan" : "Hasil belum terkonfirmasi",
+      { exact: true },
+    ).waitFor();
     check(
       await page.getByRole("button", { name: "Simpan kelas" }).isDisabled(),
       failure + " write locked",
@@ -503,7 +506,7 @@ try {
     .click();
     await settleConfirmation(page);
   await page.clock.fastForward(31000);
-  await page.getByRole("alert").waitFor();
+  await page.getByText("Hasil belum terkonfirmasi", { exact: true }).waitFor();
   check(
     await page
       .getByRole("button", { name: "Tambah tahun ajaran", exact: true })

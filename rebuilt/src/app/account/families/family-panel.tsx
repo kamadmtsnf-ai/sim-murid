@@ -1,4 +1,5 @@
 "use client";
+import { Tabs } from "radix-ui";
 import { Guidance } from "@/components/ui/guidance";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { useWriteGuard } from "@/lib/forms/use-write-guard";
@@ -333,300 +334,313 @@ const retainedEcurrentTarget=e.currentTarget;
           Muat ulang relasi
         </Button>
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            <h2>Hubungkan orang tua dan siswa</h2>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="min-w-0 space-y-5">
-          {(!data.students.length || !data.parents.length) && (
-            <Status>
-              Belum tersedia akun siswa atau orang tua aktif untuk dihubungkan.
-              Relasi yang sudah ada tetap dapat ditinjau.
-            </Status>
-          )}
-          <form
-            data-draft="guardian"
-            key={formVersion.guardian}
-            onSubmit={async (e) => {
-const retainedEcurrentTarget=e.currentTarget;
-
-              e.preventDefault();
-              const f = new FormData(retainedEcurrentTarget);
-              if (
-                await confirmAction(
-                  "Identitas dan hubungan kedua akun sudah diverifikasi?",
-                )
-              )
-                submit({
-                  type: "guardian",
-                  studentId: String(f.get("student")),
-                  parentId: String(f.get("parent")),
-                  relationship: String(f.get("relationship")),
-                  remove: false,
-                });
-            }}
-          >
-            <fieldset
-              disabled={busy}
-              className="grid min-w-0 gap-4 sm:grid-cols-2"
-            >
-              <SelectField name="student" label="Siswa / Calon Siswa" required>
-                <option value="">Pilih siswa</option>
-                {data.students.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {name(p.id)}
-                  </option>
-                ))}
-              </SelectField>
-              <SelectField name="parent" label="Akun Orang Tua" required>
-                <option value="">Pilih orang tua</option>
-                {data.parents.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {name(p.id)}
-                  </option>
-                ))}
-              </SelectField>
-              <SelectField name="relationship" label="Hubungan">
-                <option value="father">Ayah</option>
-                <option value="mother">Ibu</option>
-                <option value="guardian">Wali</option>
-              </SelectField>
-              <Button
-                disabled={!data.students.length || !data.parents.length}
-                type="submit"
-              >
-                Verifikasi dan hubungkan
-              </Button>
-            </fieldset>
-          </form>
-          <details className="space-y-4">
-            <summary className="min-h-11 cursor-pointer font-medium">
-              Daftar relasi terverifikasi ({data.guardians.length})
-            </summary>
-            <div className="block text-sm font-medium"><FloatingLabel label={<>Cari relasi
-              </>}><input placeholder=" "
-                type="search"
-                className={controlClass}
-                value={guardianSearch}
-                onChange={(e) => {
-                  setGuardianSearch(e.target.value);
-                  setGuardianPage(1);
-                }}
-              /></FloatingLabel>
-            </div>
-            {!guardians.length ? (
-              <p className="text-sm text-muted-foreground">
-                {guardianSearch
-                  ? "Tidak ada relasi yang cocok."
-                  : "Belum ada relasi terverifikasi."}
-              </p>
-            ) : (
-              <ul className="divide-y">
-                {guardians.slice((rp - 1) * 20, rp * 20).map((g) => (
-                  <li
-                    key={g.id}
-                    className="flex min-w-0 flex-col items-start justify-between gap-3 py-4 sm:flex-row"
-                  >
-                    <div className="min-w-0 space-y-1">
-                      <p className="font-medium">{name(g.student_id)}</p>
-                      <p className="text-sm">
-                        {relation[g.relationship]}: {name(g.parent_id)}
-                      </p>
-                      {(!activeStudents.has(g.student_id) ||
-                        !data.parents.some((p) => p.id === g.parent_id)) && (
-                        <p className="text-xs text-muted-foreground">
-                          Memuat akun di luar katalog aktif; pencabutan tetap
-                          tersedia.
-                        </p>
-                      )}
-                    </div>
-                    <Button
-                      variant="outline"
-                      disabled={busy}
-                      onClick={async () => {
-                        if (
-                          await confirmAction(
-                            `Cabut akses ${name(g.parent_id)} terhadap ${name(g.student_id)} sebagai ${relation[g.relationship]}?`,
-                          )
-                        )
-                          submit({
-                            type: "guardian",
-                            studentId: g.student_id,
-                            parentId: g.parent_id,
-                            relationship: g.relationship,
-                            remove: true,
-                          });
-                      }}
-                    >
-                      Cabut relasi
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {pages(
-              guardians.length,
-              guardianPage,
-              setGuardianPage,
-              "Halaman relasi orang tua",
-            )}
-          </details>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            <h2>Grup saudara kandung</h2>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="min-w-0 space-y-5">
-          <p className="text-sm text-muted-foreground">
-            Urutan anggota tersimpan dipertahankan untuk perhitungan iuran.
-            Pemindahan atau pengeluaran anggota mengakhiri keanggotaan lama
-            dengan riwayat.
-          </p>
-          <form
-            ref={groupForm}
-            data-draft="family"
-            key={`${editing}:${formVersion.family}`}
-            onSubmit={familySubmit}
-          >
-            <fieldset disabled={busy} className="min-w-0 space-y-4">
-              <TextField
-                name="name"
-                label="Nama / kode grup"
-                value={current?.name}
-                required
-                max={150}
-              />
-              <div className="block text-sm font-medium"><FloatingLabel label={<>Cari calon anggota
-                </>}><input placeholder=" "
-                  type="search"
-                  className={controlClass}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                /></FloatingLabel>
-              </div>
-              <fieldset className="max-h-72 min-w-0 overflow-y-auto rounded-lg border p-3">
-                <legend className="text-sm font-medium">
-                  Anggota terverifikasi ({selected.length}/30)
-                </legend>
-                {!roster.length && (
-                  <p className="text-sm">Belum ada siswa yang dapat dipilih.</p>
-                )}
-                {roster.length > 0 && !visibleRoster.length && (
-                  <p className="text-sm">
-                    Tidak ada siswa yang cocok dengan pencarian.
-                  </p>
-                )}
-                {visibleRoster.map((p) => (
-                  <label
-                    key={p.id}
-                    className="flex min-h-11 cursor-pointer items-start gap-3 py-2 text-sm"
-                  >
-                    <input
-                      className="mt-1 size-5 shrink-0 accent-primary"
-                      type="checkbox"
-                      name="students"
-                      value={p.id}
-                      checked={selected.includes(p.id)}
-                      disabled={
-                        !selected.includes(p.id) && selected.length >= 30
-                      }
-                      onChange={(e) => {
-                        setSelected((ids) =>
-                          e.target.checked
-                            ? [...ids, p.id]
-                            : ids.filter((x) => x !== p.id),
-                        );
-                        dirty.current.add("family");
-                      }}
-                    />
-                    <span className="min-w-0">
-                      {name(p.id)}
-                      {!activeStudents.has(p.id) && (
-                        <span className="block text-xs text-muted-foreground">
-                          Anggota tersimpan di luar katalog aktif; tidak dihapus
-                          otomatis.
-                        </span>
-                      )}
-                    </span>
-                  </label>
-                ))}
-              </fieldset>
-              {selected.length > 0 && (
-                <p className="text-sm text-muted-foreground">
-                  Terpilih: {selected.map(name).join(", ")}
-                </p>
+      <Tabs.Root defaultValue="parents" activationMode="manual" className="space-y-4">
+        <Tabs.List
+          aria-label="Jenis relasi keluarga"
+          className="schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
+        >
+          <Tabs.Trigger value="parents">Orang tua dan siswa</Tabs.Trigger>
+          <Tabs.Trigger value="siblings">Saudara kandung</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="parents" forceMount className="data-[state=inactive]:hidden">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                <h2>Hubungkan orang tua dan siswa</h2>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="min-w-0 space-y-5">
+              {(!data.students.length || !data.parents.length) && (
+                <Status>
+                  Belum tersedia akun siswa atau orang tua aktif untuk dihubungkan.
+                  Relasi yang sudah ada tetap dapat ditinjau.
+                </Status>
               )}
-              <div className="flex flex-wrap gap-3">
-                <Button disabled={!roster.length} type="submit">
-                  {current ? "Simpan perubahan grup" : "Buat grup"}
-                </Button>
-                {editing && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={async () => await edit(null)}
-                  >
-                    Batal edit
-                  </Button>
-                )}
-              </div>
-            </fieldset>
-          </form>
-          <details className="space-y-4">
-            <summary className="min-h-11 cursor-pointer font-medium">
-              Daftar grup saudara ({data.families.length})
-            </summary>
-            <div className="block text-sm font-medium"><FloatingLabel label={<>Cari grup
-              </>}><input placeholder=" "
-                type="search"
-                className={controlClass}
-                value={groupSearch}
-                onChange={(e) => {
-                  setGroupSearch(e.target.value);
-                  setGroupPage(1);
+              <form
+                data-draft="guardian"
+                key={formVersion.guardian}
+                onSubmit={async (e) => {
+    const retainedEcurrentTarget=e.currentTarget;
+
+                  e.preventDefault();
+                  const f = new FormData(retainedEcurrentTarget);
+                  if (
+                    await confirmAction(
+                      "Identitas dan hubungan kedua akun sudah diverifikasi?",
+                    )
+                  )
+                    submit({
+                      type: "guardian",
+                      studentId: String(f.get("student")),
+                      parentId: String(f.get("parent")),
+                      relationship: String(f.get("relationship")),
+                      remove: false,
+                    });
                 }}
-              /></FloatingLabel>
-            </div>
-            {!groups.length ? (
+              >
+                <fieldset
+                  disabled={busy}
+                  className="grid min-w-0 gap-4 sm:grid-cols-2"
+                >
+                  <SelectField name="student" label="Siswa / Calon Siswa" required>
+                    <option value="">Pilih siswa</option>
+                    {data.students.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {name(p.id)}
+                      </option>
+                    ))}
+                  </SelectField>
+                  <SelectField name="parent" label="Akun Orang Tua" required>
+                    <option value="">Pilih orang tua</option>
+                    {data.parents.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {name(p.id)}
+                      </option>
+                    ))}
+                  </SelectField>
+                  <SelectField name="relationship" label="Hubungan">
+                    <option value="father">Ayah</option>
+                    <option value="mother">Ibu</option>
+                    <option value="guardian">Wali</option>
+                  </SelectField>
+                  <Button
+                    disabled={!data.students.length || !data.parents.length}
+                    type="submit"
+                  >
+                    Verifikasi dan hubungkan
+                  </Button>
+                </fieldset>
+              </form>
+              <details className="space-y-4">
+                <summary className="min-h-11 cursor-pointer font-medium">
+                  Daftar relasi terverifikasi ({data.guardians.length})
+                </summary>
+                <div className="block text-sm font-medium"><FloatingLabel label={<>Cari relasi
+                  </>}><input placeholder=" "
+                    type="search"
+                    className={controlClass}
+                    value={guardianSearch}
+                    onChange={(e) => {
+                      setGuardianSearch(e.target.value);
+                      setGuardianPage(1);
+                    }}
+                  /></FloatingLabel>
+                </div>
+                {!guardians.length ? (
+                  <p className="text-sm text-muted-foreground">
+                    {guardianSearch
+                      ? "Tidak ada relasi yang cocok."
+                      : "Belum ada relasi terverifikasi."}
+                  </p>
+                ) : (
+                  <ul className="divide-y">
+                    {guardians.slice((rp - 1) * 20, rp * 20).map((g) => (
+                      <li
+                        key={g.id}
+                        className="flex min-w-0 flex-col items-start justify-between gap-3 py-4 sm:flex-row"
+                      >
+                        <div className="min-w-0 space-y-1">
+                          <p className="font-medium">{name(g.student_id)}</p>
+                          <p className="text-sm">
+                            {relation[g.relationship]}: {name(g.parent_id)}
+                          </p>
+                          {(!activeStudents.has(g.student_id) ||
+                            !data.parents.some((p) => p.id === g.parent_id)) && (
+                            <p className="text-xs text-muted-foreground">
+                              Memuat akun di luar katalog aktif; pencabutan tetap
+                              tersedia.
+                            </p>
+                          )}
+                        </div>
+                        <Button
+                          variant="outline"
+                          disabled={busy}
+                          onClick={async () => {
+                            if (
+                              await confirmAction(
+                                `Cabut akses ${name(g.parent_id)} terhadap ${name(g.student_id)} sebagai ${relation[g.relationship]}?`,
+                              )
+                            )
+                              submit({
+                                type: "guardian",
+                                studentId: g.student_id,
+                                parentId: g.parent_id,
+                                relationship: g.relationship,
+                                remove: true,
+                              });
+                          }}
+                        >
+                          Cabut relasi
+                        </Button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {pages(
+                  guardians.length,
+                  guardianPage,
+                  setGuardianPage,
+                  "Halaman relasi orang tua",
+                )}
+              </details>
+            </CardContent>
+          </Card>
+        </Tabs.Content>
+        <Tabs.Content value="siblings" forceMount className="data-[state=inactive]:hidden">
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                <h2>Grup saudara kandung</h2>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="min-w-0 space-y-5">
               <p className="text-sm text-muted-foreground">
-                {groupSearch
-                  ? "Tidak ada grup yang cocok."
-                  : "Belum ada grup saudara kandung."}
+                Urutan anggota tersimpan dipertahankan untuk perhitungan iuran.
+                Pemindahan atau pengeluaran anggota mengakhiri keanggotaan lama
+                dengan riwayat.
               </p>
-            ) : (
-              <ul className="divide-y">
-                {groups.slice((gp - 1) * 20, gp * 20).map((f) => (
-                  <li key={f.id} className="space-y-2 py-4">
-                    <h3 className="font-semibold">{f.name}</h3>
-                    <p className="text-sm">
-                      {f.members.map((m) => name(m.student_id)).join(", ") ||
-                        "Tidak ada anggota aktif"}
+              <form
+                ref={groupForm}
+                data-draft="family"
+                key={`${editing}:${formVersion.family}`}
+                onSubmit={familySubmit}
+              >
+                <fieldset disabled={busy} className="min-w-0 space-y-4">
+                  <TextField
+                    name="name"
+                    label="Nama / kode grup"
+                    value={current?.name}
+                    required
+                    max={150}
+                  />
+                  <div className="block text-sm font-medium"><FloatingLabel label={<>Cari calon anggota
+                    </>}><input placeholder=" "
+                      type="search"
+                      className={controlClass}
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                    /></FloatingLabel>
+                  </div>
+                  <fieldset className="max-h-72 min-w-0 overflow-y-auto rounded-lg border p-3">
+                    <legend className="text-sm font-medium">
+                      Anggota terverifikasi ({selected.length}/30)
+                    </legend>
+                    {!roster.length && (
+                      <p className="text-sm">Belum ada siswa yang dapat dipilih.</p>
+                    )}
+                    {roster.length > 0 && !visibleRoster.length && (
+                      <p className="text-sm">
+                        Tidak ada siswa yang cocok dengan pencarian.
+                      </p>
+                    )}
+                    {visibleRoster.map((p) => (
+                      <label
+                        key={p.id}
+                        className="flex min-h-11 cursor-pointer items-start gap-3 py-2 text-sm"
+                      >
+                        <input
+                          className="mt-1 size-5 shrink-0 accent-primary"
+                          type="checkbox"
+                          name="students"
+                          value={p.id}
+                          checked={selected.includes(p.id)}
+                          disabled={
+                            !selected.includes(p.id) && selected.length >= 30
+                          }
+                          onChange={(e) => {
+                            setSelected((ids) =>
+                              e.target.checked
+                                ? [...ids, p.id]
+                                : ids.filter((x) => x !== p.id),
+                            );
+                            dirty.current.add("family");
+                          }}
+                        />
+                        <span className="min-w-0">
+                          {name(p.id)}
+                          {!activeStudents.has(p.id) && (
+                            <span className="block text-xs text-muted-foreground">
+                              Anggota tersimpan di luar katalog aktif; tidak dihapus
+                              otomatis.
+                            </span>
+                          )}
+                        </span>
+                      </label>
+                    ))}
+                  </fieldset>
+                  {selected.length > 0 && (
+                    <p className="text-sm text-muted-foreground">
+                      Terpilih: {selected.map(name).join(", ")}
                     </p>
-                    <Button
-                      variant="outline"
-                      disabled={busy}
-                      onClick={async () => await edit(f.id)}
-                    >
-                      Edit grup
+                  )}
+                  <div className="flex flex-wrap gap-3">
+                    <Button disabled={!roster.length} type="submit">
+                      {current ? "Simpan perubahan grup" : "Buat grup"}
                     </Button>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {pages(
-              groups.length,
-              groupPage,
-              setGroupPage,
-              "Halaman grup saudara",
-            )}
-          </details>
-        </CardContent>
-      </Card>
+                    {editing && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={async () => await edit(null)}
+                      >
+                        Batal edit
+                      </Button>
+                    )}
+                  </div>
+                </fieldset>
+              </form>
+              <details className="space-y-4">
+                <summary className="min-h-11 cursor-pointer font-medium">
+                  Daftar grup saudara ({data.families.length})
+                </summary>
+                <div className="block text-sm font-medium"><FloatingLabel label={<>Cari grup
+                  </>}><input placeholder=" "
+                    type="search"
+                    className={controlClass}
+                    value={groupSearch}
+                    onChange={(e) => {
+                      setGroupSearch(e.target.value);
+                      setGroupPage(1);
+                    }}
+                  /></FloatingLabel>
+                </div>
+                {!groups.length ? (
+                  <p className="text-sm text-muted-foreground">
+                    {groupSearch
+                      ? "Tidak ada grup yang cocok."
+                      : "Belum ada grup saudara kandung."}
+                  </p>
+                ) : (
+                  <ul className="divide-y">
+                    {groups.slice((gp - 1) * 20, gp * 20).map((f) => (
+                      <li key={f.id} className="space-y-2 py-4">
+                        <h3 className="font-semibold">{f.name}</h3>
+                        <p className="text-sm">
+                          {f.members.map((m) => name(m.student_id)).join(", ") ||
+                            "Tidak ada anggota aktif"}
+                        </p>
+                        <Button
+                          variant="outline"
+                          disabled={busy}
+                          onClick={async () => await edit(f.id)}
+                        >
+                          Edit grup
+                        </Button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {pages(
+                  groups.length,
+                  groupPage,
+                  setGroupPage,
+                  "Halaman grup saudara",
+                )}
+              </details>
+            </CardContent>
+          </Card>
+        </Tabs.Content>
+      </Tabs.Root>
     </div>
   );
 }
