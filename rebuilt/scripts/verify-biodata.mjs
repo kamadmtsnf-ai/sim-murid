@@ -474,6 +474,7 @@ try {
     .click();
   await page.getByRole("alertdialog").getByRole("button", { name: "Lanjutkan" }).click();
   await page.getByRole("alertdialog").waitFor({ state: "hidden" });
+  await page.getByText(/Status dokumen belum dapat diperiksa/).waitFor();
   await idle();
   check(
     await button("Unggah dan validasi").isDisabled(),
@@ -481,6 +482,7 @@ try {
   );
   mode = "ok";
   await button("Muat ulang").click();
+  await page.getByText("Biodata dan daftar dokumen diperbarui.").waitFor();
   await idle();
   check(
     await button("Unggah dan validasi").isEnabled(),
@@ -490,8 +492,12 @@ try {
     .getByRole("button", { name: "Hapus KK", exact: true })
     .first()
     .click();
+  const deleted = page.waitForResponse((response) =>
+    response.request().method() === "POST" && response.request().postDataJSON()?.action === "delete",
+  );
   await page.getByRole("alertdialog").getByRole("button", { name: "Lanjutkan" }).click();
   await page.getByRole("alertdialog").waitFor({ state: "hidden" });
+  await deleted;
   await idle();
   check(posts.at(-1).action === "delete", "delete action preserved");
   await page.setViewportSize({ width: 844, height: 390 });
