@@ -506,7 +506,7 @@ try {
     .click();
     await settleConfirmation(page);
   await page.clock.fastForward(31000);
-  await page.getByRole("alert").waitFor();
+  await page.getByText("Hasil belum terkonfirmasi", { exact: true }).waitFor();
   check(
     await page
       .getByRole("button", { name: "Tambah tahun ajaran", exact: true })
