@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { createServer } from 'node:http';
 import assert from 'node:assert/strict';
 const root=process.cwd(),req=createRequire(import.meta.url),tools=process.env.UI_TEST_TOOLS||join(root,'node_modules');
-const {chromium}=req(join(tools,'playwright'));
+const {chromium}=req(join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES||tools,'playwright'));
 const {build}=await import(pathToFileURL(join(tools,'esbuild/lib/main.js')));
 const temp=await mkdtemp(join(tmpdir(),'sim-pwa-'));
 await build({entryPoints:[join(root,'tests/ui/pwa-fixture.tsx')],outfile:join(temp,'app.js'),bundle:true,platform:'browser',format:'iife',jsx:'automatic',tsconfig:join(root,'tsconfig.json'),define:{'process.env.NODE_ENV':'"production"'}});
@@ -23,6 +23,12 @@ try{
  const url=`http://127.0.0.1:${server.address().port}`;
  const context=await browser.newContext();
  await context.addInitScript(()=>{
+  const connection = Object.assign(new EventTarget(), { effectiveType: '4g' });
+  Object.defineProperty(navigator, 'connection', { configurable: true, value: connection });
+  window.setConnection = (effectiveType) => {
+    connection.effectiveType = effectiveType;
+    connection.dispatchEvent(new Event('change'));
+  };
   window.pwaStandalone=false;window.pwaFullscreen=false;const listeners=new Set();const original=window.matchMedia.bind(window);
   window.setPwaMode=value=>{window.pwaStandalone=value;for(const f of listeners)f();};
   window.matchMedia=query=>query==='(display-mode: standalone)'?{get matches(){return window.pwaStandalone;},addEventListener(type,f){listeners.add(f);},removeEventListener(type,f){listeners.delete(f);}}:query==='(display-mode: fullscreen)'?{get matches(){return window.pwaFullscreen;},addEventListener(){},removeEventListener(){}}:original(query);
@@ -54,7 +60,19 @@ try{
  for(const percent of [200,400]){await page.setViewportSize({width:320,height:700});await page.addStyleTag({content:`html{font-size:${percent}%}`});await geometry('gate text'+percent);}
  await page.addStyleTag({content:'html{font-size:100%}'});await launcher().click();await dialog().waitFor();await page.evaluate(()=>window.setPwaMode(true));await page.getByText('Konten layanan akun',{exact:true}).waitFor();await dialog().waitFor({state:'hidden'});await page.waitForFunction(()=>document.activeElement?.id==='main-content');check(true,'standalone admission restores main focus after guide closes');check(await launcher().count()===0,'standalone hides install button');check(await page.getByRole('heading',{name:'Buka SiM-Murid melalui aplikasi',exact:true}).count()===0,'standalone admits non-admin');
  await page.getByLabel('Catatan').fill('draft mode berubah');await page.evaluate(()=>window.setPwaMode(false));await page.getByRole('heading',{name:'Buka SiM-Murid melalui aplikasi',exact:true}).waitFor();check(await page.getByLabel('Catatan').isVisible()===false,'mode loss blocks interaction');check(await page.evaluate(()=>{const ids=Array.from(document.querySelectorAll('[id]')).map(e=>e.id);return new Set(ids).size===ids.length;}),'mode loss has no duplicate DOM IDs');await a11y('mode loss');await page.evaluate(()=>window.setPwaMode(true));await page.getByLabel('Catatan').waitFor();check(await page.getByLabel('Catatan').inputValue()==='draft mode berubah','mode loss preserves mounted draft');
+ await page.evaluate(() => window.setConnection('2g'));
+ await page.getByText('Koneksi internet lambat', { exact: true }).waitFor();
+ check(await page.getByLabel('Catatan').inputValue() === 'draft mode berubah', 'slow connection retains draft');
  await page.evaluate(()=>{Object.defineProperty(navigator,'onLine',{configurable:true,value:false});window.dispatchEvent(new Event('offline'));});await page.getByText(/Perangkat terdeteksi offline/).waitFor();check(await page.getByLabel('Catatan').inputValue()==='draft mode berubah','offline retains draft');
+ check(await page.getByText('Koneksi internet lambat', { exact: true }).count() === 0, 'offline takes precedence');
+ await page.evaluate(() => {
+   Object.defineProperty(navigator, 'onLine', { configurable: true, value: true });
+   window.dispatchEvent(new Event('online'));
+   window.setConnection('4g');
+ });
+ await page.getByRole('complementary', { name: 'Koneksi aplikasi' }).waitFor({ state: 'hidden' });
+ check(await page.getByLabel('Catatan').inputValue() === 'draft mode berubah', 'reconnection retains draft');
+
  await page.goto(url);await page.getByText('Konten layanan akun',{exact:true}).waitFor();check(true,'admin/public requirement=false admits browser');
  // Platform guidance is selectable and does not claim an unsupported native prompt.
  await launcher().click();await dialog().getByRole('button',{name:'iPhone / iPad',exact:true}).click();check(await dialog().getByText(/Buka situs ini melalui Safari/).isVisible(),'iOS instructions');await dialog().getByRole('button',{name:'Android',exact:true}).click();check(await dialog().getByText(/Buka situs ini melalui Chrome atau Edge\./).isVisible(),'Android instructions');await a11y('guide');
