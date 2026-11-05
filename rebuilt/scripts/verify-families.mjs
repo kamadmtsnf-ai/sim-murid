@@ -191,32 +191,35 @@ try {
     });
     check(!r.violations.length, label + " axe");
   }
+  const parentsTab = page.getByRole("tab", { name: "Orang tua dan siswa" });
+  const siblingsTab = page.getByRole("tab", { name: "Saudara kandung" });
   for (const width of [320, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base);
+    await parentsTab.waitFor();
+    check(await input().isHidden(), "inactive siblings form is hidden");
+    await page.getByText(/^Daftar relasi terverifikasi/).click();
+    await geometry("guardian list " + width);
+    await a11y("guardian list " + width);
+    await siblingsTab.click();
     await input().waitFor();
-    await geometry("families " + width);
-    await a11y("families " + width);
-    await page.getByText(/^Daftar relasi terverifikasi/).click();
     await page.getByText(/^Daftar grup saudara/).click();
-    await geometry("expanded lists " + width);
-    await a11y("expanded lists " + width);
-    await page.getByText(/^Daftar relasi terverifikasi/).click();
-    await page.getByText(/^Daftar grup saudara/).click();
+    await geometry("sibling list " + width);
+    await a11y("sibling list " + width);
     await page.screenshot({
       path: join(out, "families-" + width + ".png"),
       fullPage: true,
       animations: "disabled",
     });
   }
-  await page.getByText(/^Daftar relasi terverifikasi/).click();
-  await page.getByText(/^Daftar grup saudara/).click();
+  await parentsTab.click();
   check(
     (await page
       .getByRole("button", { name: "Cabut relasi", exact: true })
       .count()) === 20,
     "guardian pagination",
   );
+  await siblingsTab.click();
   check(
     (await page
       .getByRole("button", { name: "Edit grup", exact: true })
@@ -241,12 +244,14 @@ try {
     await page.getByRole("checkbox", { name: /Anggota Nonaktif/ }).isChecked(),
     "inactive existing member retained",
   );
+  await parentsTab.click();
   await page
     .getByRole("combobox", { name: /^Siswa \/ Calon Siswa/ })
     .selectOption(id(11));
   await page
     .getByRole("combobox", { name: /^Akun Orang Tua/ })
     .selectOption(id(200));
+  await siblingsTab.click();
   await page
     .getByRole("searchbox", { name: "Cari calon anggota", exact: true })
     .fill("Siswa 2");
@@ -277,6 +282,7 @@ try {
   await page
     .getByText("Perubahan tersimpan dan relasi telah dikonfirmasi.")
     .waitFor();
+  await parentsTab.click();
   check(writes === before + 1, "double group save sends one request");
   check(
     JSON.stringify(lastCommand.studentIds) ===
@@ -310,6 +316,7 @@ try {
       "false",
   );
   check(lastCommand.remove === true, "guardian revocation");
+  await siblingsTab.click();
   await input().fill("Draft group");
 
   await page
@@ -356,22 +363,21 @@ try {
   );
   await page.setViewportSize({ width: 812, height: 375 });
   await geometry("landscape");
-  await page
-    .getByRole("button", { name: "Muat ulang relasi", exact: true })
-    .focus();
-  await page.keyboard.press("Tab");
-  check(
-    await page.evaluate(() => document.activeElement?.tagName === "SELECT"),
-    "keyboard reaches guardian form",
-  );
+  await siblingsTab.focus();
+  await page.keyboard.press("ArrowLeft");
+  check(await parentsTab.evaluate((tab) => tab === document.activeElement), "arrow focuses adjacent tab");
+  check((await siblingsTab.getAttribute("aria-selected")) === "true", "focus keeps current tab selected");
+  await page.keyboard.press("Enter");
+  check((await parentsTab.getAttribute("aria-selected")) === "true", "Enter activates focused tab");
   await page.goto(base + "/?empty=1");
-  await input().waitFor();
+  await parentsTab.waitFor();
   check(
     await page
       .getByRole("button", { name: "Verifikasi dan hubungkan", exact: true })
       .isDisabled(),
     "empty catalog disables link",
   );
+  await siblingsTab.click();
   check(
     await page
       .getByRole("button", { name: "Buat grup", exact: true })
