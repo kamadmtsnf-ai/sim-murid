@@ -104,6 +104,16 @@ try {
     reads = 0,
     stored,
     preparedCount = 0;
+  const regions = {
+    "/provinces.json": [{ id: "32", name: "Jawa Barat" }, { id: "33", name: "Jawa Tengah" }],
+    "/regencies/32.json": [{ id: "32.01", name: "Kabupaten Bogor" }],
+    "/regencies/33.json": [{ id: "33.01", name: "Kabupaten Cilacap" }],
+    "/districts/32.01.json": [{ id: "32.01.01", name: "Cibinong" }],
+    "/villages/32.01.01.json": [{ id: "32.01.01.1001", name: "Pabuaran" }],
+  };
+  await page.route("https://www.emsifa.com/api-wilayah-indonesia/v2/**", (route) =>
+    route.fulfill({ json: { data: regions[new URL(route.request().url()).pathname.split("/v2")[1]] ?? [] } }),
+  );
   await page.route("**/api/student-*/**", async (route) => {
     const r = route.request(),
       url = new URL(r.url());
@@ -244,6 +254,20 @@ try {
     )).join(",") === "1,2,3,4,5,6,7,8,9,10,11,12",
     "siblings dropdown offers 1 through 12",
   );
+  await button("Alamat siswa").click();
+  await field("SiswaProvinsi").selectOption("32");
+  await field("SiswaKabupaten").selectOption("32.01");
+  await field("SiswaKecamatan").selectOption("32.01.01");
+  await field("SiswaKelurahan").selectOption("32.01.01.1001");
+  await field("SiswaRT").selectOption("000");
+  await field("SiswaRW").selectOption("012");
+  await field("SiswaProvinsi").selectOption("33");
+  await field("SiswaKabupaten").locator('option[value="33.01"]').waitFor({ state: "attached" });
+  check(await field("SiswaKabupaten").inputValue() === "", "changing province clears regency");
+  check(await field("SiswaKecamatan").isDisabled(), "district awaits new regency");
+  check(await field("SiswaKelurahan").inputValue() === "", "changing province clears village");
+  check(await field("SiswaRT").inputValue() === "000" && await field("SiswaRW").inputValue() === "012", "RT/RW retain leading zeros");
+  await button("Data siswa").click();
   await field("JumlahSaudara").selectOption("12");
   await field("Agama").selectOption("Konghucu");
   check(await field("Agama").inputValue() === "Konghucu", "religion selection works");
@@ -450,6 +474,7 @@ try {
     .click();
   await page.getByRole("alertdialog").getByRole("button", { name: "Lanjutkan" }).click();
   await page.getByRole("alertdialog").waitFor({ state: "hidden" });
+  await page.getByText(/Status dokumen belum dapat diperiksa/).waitFor();
   await idle();
   check(
     await button("Unggah dan validasi").isDisabled(),
@@ -457,6 +482,7 @@ try {
   );
   mode = "ok";
   await button("Muat ulang").click();
+  await page.getByText("Biodata dan daftar dokumen diperbarui.").waitFor();
   await idle();
   check(
     await button("Unggah dan validasi").isEnabled(),
@@ -466,8 +492,12 @@ try {
     .getByRole("button", { name: "Hapus KK", exact: true })
     .first()
     .click();
+  const deleted = page.waitForResponse((response) =>
+    response.request().method() === "POST" && response.request().postDataJSON()?.action === "delete",
+  );
   await page.getByRole("alertdialog").getByRole("button", { name: "Lanjutkan" }).click();
   await page.getByRole("alertdialog").waitFor({ state: "hidden" });
+  await deleted;
   await idle();
   check(posts.at(-1).action === "delete", "delete action preserved");
   await page.setViewportSize({ width: 844, height: 390 });
