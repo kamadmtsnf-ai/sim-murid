@@ -40,6 +40,7 @@
   --card: #ffffff;
   --primary: #125e64;
   --primary-foreground: #ffffff;
+  --ring: var(--primary);
   --secondary: #e8f0f2;
   --muted-foreground: #526278;
   --border: #dae3ec;
@@ -707,7 +708,7 @@
 @layer components {
 :where(button:not([data-slot="button"]), summary) {
   background-color:var(--secondary);
-  color:var(--secondary-foreground);
+  color:var(--foreground);
   border-radius:.65rem;
   min-block-size:44px;
   padding:8px 12px;
@@ -716,7 +717,7 @@
 }
 .ui-guidance > summary, .nav-group-toggle, .schedule-tabs [role="tab"]:not([aria-selected="true"]) {
   background-color:var(--secondary);
-  color:var(--secondary-foreground);
+  color:var(--foreground);
 }
 .nav-group-toggle[data-current-group="true"] {
   background-color:var(--primary);
@@ -740,7 +741,7 @@
   outline-offset:2px;
 }
 :is(button, [data-slot="button"]):is(:disabled, [aria-disabled="true"]) {
-  background:var(--muted);
+  background:var(--secondary);
   border-color:var(--border);
   color:var(--muted-foreground);
   box-shadow:none;

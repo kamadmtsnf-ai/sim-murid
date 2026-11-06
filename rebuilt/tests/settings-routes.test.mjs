@@ -238,7 +238,9 @@ test("Settings page redirects anonymous, denies non-admin and exposes recoverabl
   await assert.rejects(page(), (e) => e.url === "/login?expired=1");
   m = setup();
   m.caller.principal.is_admin = false;
-  assert.equal((await page()).type, "main");
+  const denied = await page();
+  assert.equal(denied.type.name, "PermissionDenied");
+  assert.match(denied.props.children, /Akses khusus Admin/);
   m = setup();
   m.readError = { message: "private failure" };
   await assert.rejects(page(), /Settings unavailable/);
