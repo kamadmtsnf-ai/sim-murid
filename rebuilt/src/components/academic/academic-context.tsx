@@ -259,6 +259,7 @@ export function AcademicContextBar({
             Ingat pilihan halaman
           </Button>
           <Button
+            aria-busy={busy}
             type="button"
             variant="outline"
             disabled={!c.ready || disabled || busy || !c.selection || !!issue}
@@ -268,7 +269,7 @@ export function AcademicContextBar({
           </Button>
           <Button
             type="button"
-            variant="ghost"
+            variant="secondary"
             disabled={disabled || busy || (!c.selection && !c.invalid)}
             onClick={() => {
               c.clear();

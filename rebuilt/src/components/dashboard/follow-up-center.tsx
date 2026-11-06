@@ -199,6 +199,7 @@ export function FollowUpCenter({
               </Guidance>
             </div>
             <Button
+              aria-busy={pending}
               type="button"
               onClick={() => void refresh()}
               disabled={pending}

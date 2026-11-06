@@ -254,7 +254,7 @@ export function PwaInstallButton() {
   return (
     <Button
       type="button"
-      variant="ghost"
+      variant="secondary"
       className="pwa-install-launcher"
       aria-haspopup="dialog"
       disabled={state.pending}

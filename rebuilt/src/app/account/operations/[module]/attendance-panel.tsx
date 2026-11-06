@@ -469,7 +469,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                       </div>
                     </>
                   )}
-                  <Button type="submit" disabled={!classId || !selected.length}>
+                  <Button aria-busy={writeBusy} type="submit" disabled={!classId || !selected.length}>
                     {writeBusy ? "Menyimpan…" : "Simpan absensi"}
                   </Button>
                 </fieldset>

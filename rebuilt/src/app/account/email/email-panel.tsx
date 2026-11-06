@@ -395,6 +395,7 @@ export function EmailPanel({
               </p>
               <div className="space-y-2">
                 <Button
+                  aria-busy={busy}
                   type="button"
                   className="w-full max-w-full whitespace-normal sm:w-auto"
                   disabled={

@@ -80,7 +80,7 @@ export function Dialog({
             <Primitive.Close asChild>
               <Button
                 type="button"
-                variant="ghost"
+                variant="secondary"
                 size="icon"
                 className="shrink-0 rounded-full border bg-background/70"
                 aria-label="Tutup dialog"

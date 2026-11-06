@@ -160,7 +160,7 @@ export function WorkspaceShell({
             <Button
               type="submit"
               size={compact ? "icon" : "default"}
-              variant="ghost"
+              variant="secondary"
               aria-label="Keluar dari akun"
             >
               <LogOut aria-hidden="true" />{!compact && "Keluar akun"}
@@ -214,7 +214,7 @@ export function WorkspaceShell({
           {query && (
             <Button
               type="button"
-              variant="ghost"
+              variant="secondary"
               size="icon"
               className="nav-search-clear"
               aria-label="Hapus pencarian menu"

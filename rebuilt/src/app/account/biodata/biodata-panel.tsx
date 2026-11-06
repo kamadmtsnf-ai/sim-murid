@@ -590,6 +590,7 @@ export function BiodataPanel({
                 )}
                 {student.can_write && (
                   <Button
+                    aria-busy={busy}
                     type="submit"
                     disabled={needsReload}
                     className="w-full sm:w-auto"

@@ -692,7 +692,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
             >
               Batal
             </Button>
-            <Button disabled={disabled}>
+            <Button aria-busy={busy} disabled={disabled}>
               {busy
                 ? "Memproses…"
                 : dialog === "upload"

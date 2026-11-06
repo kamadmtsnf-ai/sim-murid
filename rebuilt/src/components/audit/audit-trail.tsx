@@ -237,7 +237,7 @@ export function AuditTrail() {
             ))}
           </select>
         </label>
-        <Button disabled={busy}>
+        <Button aria-busy={busy} disabled={busy}>
           {busy ? "Memuat riwayat…" : "Muat riwayat"}
         </Button>
       </form>

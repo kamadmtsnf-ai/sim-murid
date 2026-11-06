@@ -417,7 +417,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 </SelectField>
               </fieldset>
               <div className="mt-5 flex flex-wrap gap-3">
-                <Button type="submit" disabled={disabled || !year}>
+                <Button aria-busy={busy} type="submit" disabled={disabled || !year}>
                   {busy ? "Menyimpan…" : "Simpan kelas"}
                 </Button>
                 <Button

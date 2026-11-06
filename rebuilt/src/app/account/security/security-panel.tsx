@@ -392,6 +392,7 @@ export function SecurityPanel({
                 Setelah password tersimpan, semua sesi akan diakhiri.
               </p>
               <Button
+                aria-busy={active === "password"}
                 className="w-full whitespace-normal sm:w-auto"
                 disabled={blocked}
                 type="submit"
@@ -495,6 +496,7 @@ export function SecurityPanel({
                   {errorFor("questionPassword")}
                 </div>
                 <Button
+                  aria-busy={active === "question"}
                   className="w-full whitespace-normal sm:w-auto"
                   type="submit"
                   disabled={blocked}
@@ -510,6 +512,7 @@ export function SecurityPanel({
       </div>
       <footer className="flex min-w-0 flex-col gap-3 border-t pt-5 sm:flex-row sm:flex-wrap">
         <Button
+          aria-busy={active === "refresh"}
           className="whitespace-normal"
           type="button"
           variant="outline"

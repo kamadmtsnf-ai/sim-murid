@@ -138,15 +138,13 @@ export function DailyOverview({ initial }: { initial: Overview }) {
           )}
         </div>
         <Button
+          aria-busy={busy}
           type="button"
           variant="outline"
           disabled={busy}
           onClick={() => void refresh()}
         >
-          <RefreshCw
-            className={busy ? "animate-spin" : ""}
-            aria-hidden="true"
-          />
+          {!busy && <RefreshCw aria-hidden="true" />}
           {busy ? "Memperbarui…" : "Perbarui ringkasan"}
         </Button>
       </div>

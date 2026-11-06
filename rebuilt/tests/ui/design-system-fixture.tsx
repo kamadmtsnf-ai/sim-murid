@@ -38,7 +38,9 @@ function Fixture() {
     >
       <h1 className="text-2xl font-semibold">Komponen bersama SiM-Murid</h1>
       <section aria-label="Uji tombol" className="ds-actions">
-        {(["default","destructive","outline","secondary","ghost","link"] as const).map(variant=><Button key={variant} variant={variant}>{variant}</Button>)}
+        {(["default","destructive","outline","secondary"] as const).map(variant=><Button key={variant} variant={variant}>{variant}</Button>)}
+        <Button disabled>Tidak tersedia</Button>
+        <Button disabled aria-busy="true">Sedang menyimpan</Button>
         {(["xs","sm","icon-xs","icon-sm"] as const).map(size=><Button key={size} size={size} aria-label={"Ukuran "+size}>{size.startsWith("icon")?"+":size}</Button>)}
       </section>
       <Card>

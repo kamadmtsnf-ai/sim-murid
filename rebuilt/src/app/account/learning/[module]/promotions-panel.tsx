@@ -516,6 +516,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
           </p>
         </Guidance>
         <Button
+          aria-busy={reading}
           id="promotions-refresh"
           type="button"
           variant="outline"
@@ -1276,7 +1277,7 @@ const retainedEvalue=e.target.value;
               >
                 Batal
               </Button>
-              <Button disabled={disabled || (mode.type === "delete" && !ack)}>
+              <Button aria-busy={assetBusy} disabled={disabled || (mode.type === "delete" && !ack)}>
                 {assetBusy
                   ? "Memproses…"
                   : mode.type === "delete"
@@ -1395,7 +1396,7 @@ const retainedEvalue=e.target.value;
               >
                 Batal
               </Button>
-              <Button disabled={disabled || !ack}>
+              <Button aria-busy={busy} disabled={disabled || !ack}>
                 {busy ? "Menyimpan…" : "Konfirmasi simpan"}
               </Button>
             </div>

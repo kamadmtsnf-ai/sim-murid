@@ -353,7 +353,7 @@ export function ProfileForm({
             </Status>
           )}
           <div className="ds-actions flex-col sm:flex-row">
-            <Button type="submit" disabled={busy || !!pending}>
+            <Button aria-busy={busy} type="submit" disabled={busy || !!pending}>
               {busy ? "Memproses…" : "Simpan profil"}
             </Button>
             {pending && (

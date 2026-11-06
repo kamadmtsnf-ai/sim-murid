@@ -1051,6 +1051,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 </>
               )}
               <Button
+                aria-busy={busy}
                 type="submit"
                 disabled={mode !== "void" && (!context || !entryAllowed)}
               >

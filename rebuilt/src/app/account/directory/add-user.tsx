@@ -56,7 +56,7 @@ export function AddUser(){
    </fieldset>
    {message&&<Status tone="error">{message}</Status>}
    <p className="text-sm text-muted-foreground">Kata sandi sementara dibuat otomatis dan ditampilkan setelah akun berhasil dibuat. Penugasan, kelas, dan hubungan keluarga diatur melalui modul terkait.</p>
-   <div className="flex flex-wrap justify-end gap-3"><Button type="button" variant="outline" disabled={busy||locked} onClick={async ()=>await changeOpen(false)}>Batal</Button><Button type="submit" disabled={busy}>{busy?'Memproses…':locked?'Coba kembali':'Buat pengguna'}</Button></div>
+   <div className="flex flex-wrap justify-end gap-3"><Button type="button" variant="outline" disabled={busy||locked} onClick={async ()=>await changeOpen(false)}>Batal</Button><Button aria-busy={busy} type="submit" disabled={busy}>{busy?'Memproses…':locked?'Coba kembali':'Buat pengguna'}</Button></div>
   </form>)}
  </Dialog>;
 }

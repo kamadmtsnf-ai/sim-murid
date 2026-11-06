@@ -167,7 +167,7 @@ export function FormNavigationGuard({ children }: { children: ReactNode }) {
             <Button
               type="button"
               size="icon"
-              variant="ghost"
+              variant="secondary"
               className="absolute right-1 top-1"
               aria-label="Tutup pemberitahuan"
               onClick={() => setMessage("")}

@@ -699,6 +699,7 @@ export function SessionPanel({
                 Batal
               </Button>
               <Button
+                aria-busy={mutating}
                 variant="destructive"
                 type="button"
                 disabled={mutating}

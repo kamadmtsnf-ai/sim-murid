@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { z } from "zod";
+import { Button } from "@/components/ui/button";
 import type { Biodata } from "@/lib/student/validation";
 
 const baseUrl = "https://www.emsifa.com/api-wilayah-indonesia/v2/";
@@ -122,9 +123,9 @@ export function RegionFields({ prefix, data, required, errors, className, onChan
           {options.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
         </select>
         {failed && (
-          <button type="button" className="mt-1 min-h-11 text-sm underline" onClick={retry}>
+          <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={retry}>
             Muat ulang {label}
-          </button>
+          </Button>
         )}
         {errors[field] && <p id={"error-" + field} className="mt-1 text-sm text-destructive">{errors[field]}</p>}
       </div>
