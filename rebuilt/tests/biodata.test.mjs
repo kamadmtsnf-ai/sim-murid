@@ -234,6 +234,19 @@ test("biodata profile passes verified caller, normalizes addresses and preserves
   assert.equal(args.p_data.JumlahSaudara, "0");
   assert.equal(args.p_data.NIK, "001234");
 });
+test("biodata persists Other details and rejects missing details before the RPC", async () => {
+  const m = setup();
+  const body = { requestId: id(8), revision: 2, data: { Hobi: "Lainnya:  " } };
+  assert.equal((await profilePost(req(body), context())).status, 400);
+  assert.equal(m.calls.some(([name]) => name === "app_student_save"), false);
+
+  body.data = { Hobi: "Lainnya: Merajut", AyahPekerjaan: "Lainnya: Teknisi panggung" };
+  assert.equal((await profilePost(req(body), context())).status, 200);
+  const args = m.calls.find(([name]) => name === "app_student_save")[1];
+  assert.equal(args.p_data.Hobi, body.data.Hobi);
+  assert.equal(args.p_data.AyahPekerjaan, body.data.AyahPekerjaan);
+});
+
 test("biodata invalid/stale/denied/storage errors never report success or expose SQL", async () => {
   for (const code of ["stale", "denied", "request_conflict"]) {
     const m = setup();
