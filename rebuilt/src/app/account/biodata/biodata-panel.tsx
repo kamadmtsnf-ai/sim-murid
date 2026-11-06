@@ -548,7 +548,7 @@ export function BiodataPanel({
                             >
                               <option value="">Pilih…</option>
                               {!custom && value && !enums[field].includes(value) && (
-                                <option value={data[field]}>Data lama: {data[field]}</option>
+                                <option value={value}>Data lama: {value}</option>
                               )}
                               {enums[field]?.map((v) => (
                                 <option key={v} value={v}>
