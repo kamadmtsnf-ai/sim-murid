@@ -1,6 +1,6 @@
 import {z} from 'zod';
 import rules from './rules.json' with {type:'json'};
-import {biodataChoices,digitField} from './choices.ts';
+import {biodataChoices,digitField,otherChoice,otherChoicePrefix,supportsOtherDetail} from './choices.ts';
 export {rules};
 export type Biodata=Record<string,string|boolean>;
 export const emptyBiodata=()=>Object.fromEntries(rules.fields.map(k=>[k,rules.booleans.includes(k)?false:''])) as Biodata;
@@ -30,6 +30,16 @@ const biodataFor=(previous?:Biodata)=>z.record(z.string(),z.union([z.string(),z.
   if(!value)continue;
   if(key.endsWith('TanggalLahir')||key==='TanggalLahir'){if(!z.iso.date().safeParse(value).success||value>new Date().toISOString().slice(0,10))ctx.addIssue({code:'custom',path:[key],message:'Tanggal lahir tidak valid.'});}
   if(key==='Email'&&!z.email().safeParse(value).success)ctx.addIssue({code:'custom',path:[key],message:'Email tidak valid.'});
+  if(supportsOtherDetail(key)){
+   if(value.startsWith(otherChoicePrefix)){
+    if(!value.slice(otherChoicePrefix.length).trim())ctx.addIssue({code:'custom',path:[key],message:'Tuliskan detail untuk pilihan Lainnya.'});
+    continue;
+   }
+   if(value.trim()===otherChoice&&previous?.[key]!==value){
+    ctx.addIssue({code:'custom',path:[key],message:'Tuliskan detail untuk pilihan Lainnya.'});
+    continue;
+   }
+  }
   if(previous?.[key]===value&&(biodataChoices[key]||digitField(key)))continue;
   const digits=digitField(key);
   if(digits==='identity'&&!/^\d{1,16}$/.test(value))ctx.addIssue({code:'custom',path:[key],message:'Masukkan angka saja, maksimal 16 digit.'});

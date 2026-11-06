@@ -268,6 +268,19 @@ try {
   check(await field("SiswaKelurahan").inputValue() === "", "changing province clears village");
   check(await field("SiswaRT").inputValue() === "000" && await field("SiswaRW").inputValue() === "012", "RT/RW retain leading zeros");
   await button("Data siswa").click();
+  await field("Hobi").selectOption("Lainnya");
+  const otherHobby = field("Hobi-other");
+  await otherHobby.fill("   ");
+  await button("Simpan biodata / draf").click();
+  await page.getByText("Tuliskan detail untuk pilihan Lainnya.").waitFor();
+  check(await otherHobby.evaluate((e) => e.required && e === document.activeElement), "empty Other detail is required and focused");
+  check(posts.length === 0, "empty Other detail never submitted");
+  await otherHobby.fill("Merajut");
+  await field("Hobi").selectOption("Membaca");
+  check(await otherHobby.count() === 0, "standard choice hides Other detail");
+  await field("Hobi").selectOption("Lainnya");
+  check(await otherHobby.inputValue() === "", "switching choices clears Other detail");
+  await otherHobby.fill("Merajut");
   await field("JumlahSaudara").selectOption("12");
   await field("Agama").selectOption("Konghucu");
   check(await field("Agama").inputValue() === "Konghucu", "religion selection works");
@@ -334,6 +347,8 @@ try {
   });
   await idle();
   check(posts.length === count + 1, "synchronous save lock");
+  check(posts.at(-1).data.Hobi === "Lainnya: Merajut", "custom hobby reaches the save payload");
+  check(await otherHobby.inputValue() === "Merajut", "confirmed response restores custom detail");
   for (const failure of ["401", "403", "409", "503", "json", "malformed"]) {
     mode = failure;
     const hobby = (await field("Hobi").inputValue()) === "Membaca" ? "Menulis" : "Membaca";

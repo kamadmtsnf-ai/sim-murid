@@ -25,7 +25,7 @@ import {
   fieldLabel as label,
   fieldVisible,
 } from "@/lib/student/presentation";
-import { digitField } from "@/lib/student/choices";
+import { digitField, otherChoice, otherChoicePrefix, otherDetailMaxLength, supportsOtherDetail } from "@/lib/student/choices";
 import { documentRow, documentPrepare } from "@/lib/documents/validation";
 import { Status } from "@/components/ui/status";
 import { RegionFields } from "./region-fields";
@@ -146,10 +146,15 @@ export function BiodataPanel({
     const key = JSON.stringify({ revision: student.revision, data });
     if (request.current?.key !== key)
       request.current = { key, id: crypto.randomUUID() };
+    const payload = { ...data };
+    for (const field of rules.fields) {
+      if (supportsOtherDetail(field) && fieldVisible(field, data) && data[field] === otherChoice)
+        payload[field] = otherChoicePrefix;
+    }
     const parsed = biodataRequestFor(normalizeBiodata(student.data)).safeParse({
       requestId: request.current.id,
       revision: student.revision,
-      data,
+      data: payload,
     });
     if (!parsed.success) {
       const errors: Record<string, string> = {};
@@ -160,7 +165,10 @@ export function BiodataPanel({
       setFieldErrors(errors);
       const first = Object.keys(errors)[0];
       if (first) {
-        focusField.current = first;
+        focusField.current = supportsOtherDetail(first) &&
+          String(payload[first]).startsWith(otherChoicePrefix)
+          ? first + "-other"
+          : first;
         setSection(fieldSection(first));
       }
       notice(
@@ -486,8 +494,11 @@ export function BiodataPanel({
                   {sections.find((s) => s[0] === section)?.[1]}
                 </legend>
                 <div className="grid min-w-0 gap-5 sm:grid-cols-2">
-                  {fields.map((field) =>
-                    field.endsWith("Provinsi") ? (
+                  {fields.map((field) => {
+                    const value = String(data[field] ?? "");
+                    const custom = supportsOtherDetail(field) &&
+                      (value === otherChoice || value.startsWith(otherChoicePrefix));
+                    return field.endsWith("Provinsi") ? (
                       <RegionFields
                         key={field}
                         prefix={field.slice(0, -"Provinsi".length)}
@@ -523,15 +534,20 @@ export function BiodataPanel({
                             <select
                               id={"biodata-" + field}
                               className={fieldClass}
-                              value={String(data[field] ?? "")}
-                              aria-invalid={!!fieldErrors[field]}
+                              value={custom ? otherChoice : value}
+                              aria-invalid={!custom && !!fieldErrors[field]}
                               aria-describedby={
-                                fieldErrors[field] ? "error-" + field : undefined
+                                !custom && fieldErrors[field] ? "error-" + field : undefined
                               }
-                              onChange={(e) => update(field, e.target.value)}
+                              onChange={(e) => update(
+                                field,
+                                supportsOtherDetail(field) && e.target.value === otherChoice
+                                  ? otherChoicePrefix
+                                  : e.target.value,
+                              )}
                             >
                               <option value="">Pilih…</option>
-                              {typeof data[field] === "string" && data[field] && !enums[field].includes(data[field]) && (
+                              {!custom && value && !enums[field].includes(value) && (
                                 <option value={data[field]}>Data lama: {data[field]}</option>
                               )}
                               {enums[field]?.map((v) => (
@@ -540,6 +556,25 @@ export function BiodataPanel({
                                 </option>
                               ))}
                             </select>
+                            {custom && (
+                              <div className="mt-3 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-200">
+                                <label htmlFor={`biodata-${field}-other`} className="text-sm font-medium">
+                                  Detail {label(field)} <span aria-hidden="true">*</span>
+                                </label>
+                                <input
+                                  id={`biodata-${field}-other`}
+                                  type="text"
+                                  required
+                                  className={fieldClass}
+                                  placeholder="Mohon tuliskan detail lainnya..."
+                                  maxLength={otherDetailMaxLength}
+                                  value={value.startsWith(otherChoicePrefix) ? value.slice(otherChoicePrefix.length) : ""}
+                                  aria-invalid={!!fieldErrors[field]}
+                                  aria-describedby={fieldErrors[field] ? "error-" + field : undefined}
+                                  onChange={(event) => update(field, otherChoicePrefix + event.target.value)}
+                                />
+                              </div>
+                            )}
                           </>
                         ) : (
                           <FloatingLabel htmlFor={"biodata-" + field} label={<>{label(field)}{required.includes(field) ? " *" : ""}</>}><input placeholder=" "
@@ -578,8 +613,8 @@ export function BiodataPanel({
                           </p>
                         )}
                       </div>
-                    ),
-                  )}
+                    );
+                  })}
                 </div>
                 {section === "guardian" && data.WaliPilihan !== "Lainnya" && (
                   <p className="rounded-lg bg-muted/40 p-3 text-sm">

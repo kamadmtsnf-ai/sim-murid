@@ -47,3 +47,12 @@ export function digitField(field: string) {
   if (field.endsWith("NIK") || field === "NomorKK") return "identity";
   if (field.endsWith("NoHP")) return "phone";
 }
+
+// Store the label and detail in the existing text field so saved choices round-trip.
+export const otherChoice = "Lainnya";
+export const otherChoicePrefix = "Lainnya: ";
+export const otherDetailMaxLength = 500 - otherChoicePrefix.length;
+
+export function supportsOtherDetail(field: string) {
+  return biodataChoices[field]?.includes(otherChoice) ?? false;
+}
