@@ -143,6 +143,7 @@ export function RecoveryForm() {
             )}
           </fieldset>
           <Button
+            aria-busy={state.pending}
             type="submit"
             className={styles.action}
             disabled={state.locked}

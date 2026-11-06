@@ -142,6 +142,21 @@ try {
     });
     check(!r.violations.length, label + " axe");
   }
+  await page.goto(base);
+  const solid = button("secondary");
+  await solid.waitFor();
+  check(await solid.evaluate((e) => getComputedStyle(e).backgroundColor !== "rgba(0, 0, 0, 0)"), "solid fill");
+  await solid.hover();
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('[data-variant="secondary"]')).filter === "brightness(0.93)");
+  check(true, "desktop hover");
+  await page.mouse.down();
+  await page.waitForFunction(() => getComputedStyle(document.querySelector('[data-variant="secondary"]')).filter === "brightness(0.84)");
+  await page.mouse.up();
+  check(true, "pressed appearance");
+  await page.keyboard.press("Tab");
+  check(await page.locator('[data-slot="button"]:focus-visible').evaluate((e) => getComputedStyle(e).outlineWidth === "2px"), "keyboard focus outline");
+  check(await button("Tidak tersedia").isDisabled(), "native disabled");
+  check(await button("Sedang menyimpan").evaluate((e) => getComputedStyle(e, "::before").animationName === "button-loading-spin"), "busy spinner");
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base);

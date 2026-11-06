@@ -40,6 +40,7 @@
   --card: #ffffff;
   --primary: #125e64;
   --primary-foreground: #ffffff;
+  --ring: var(--primary);
   --secondary: #e8f0f2;
   --muted-foreground: #526278;
   --border: #dae3ec;
@@ -167,9 +168,7 @@
 }
 @layer components {
   .surface-card,.dashboard-group { background:var(--surface-glass); border-color:var(--border); box-shadow:var(--surface-shadow); }
-  .button-primary { background:linear-gradient(135deg,var(--primary),var(--primary-to)); box-shadow:0 3px 10px rgb(18 94 100 / .17); transition:box-shadow var(--motion-fast),opacity var(--motion-fast); }
-  .button-primary:hover:not(:disabled) { box-shadow:0 5px 15px rgb(18 94 100 / .25); }
-  .button-primary:active:not(:disabled) { box-shadow:0 1px 4px rgb(18 94 100 / .18); }
+  .button-primary { background:var(--primary); box-shadow:0 3px 10px rgb(18 94 100 / .17); }
   .button-glass { background:var(--surface-glass); box-shadow:0 1px 3px rgb(21 36 58 / .04); border-color:var(--border); }
   .workspace-topbar { background:var(--surface-glass); backdrop-filter:blur(18px); border-color:var(--surface-line); box-shadow:0 1px 0 var(--border); }
   .workspace-sidebar { background:var(--surface-glass); }
@@ -587,7 +586,6 @@
 /* Sidebar groups start closed; keyboard-accessible buttons control their own lists. */
 .workspace-nav h2.nav-group-heading { padding:0; }
 .nav-group-toggle { display:flex; align-items:center; gap:8px; inline-size:100%; min-block-size:44px; padding:10px 12px; border-radius:.7rem; text-align:start; font:inherit; color:inherit; letter-spacing:inherit; text-transform:inherit; }
-.nav-group-toggle:hover { background:var(--background); color:var(--foreground); }
 .nav-group-toggle:focus-visible { outline:2px solid var(--ring); outline-offset:-2px; }
 .nav-group-toggle svg { inline-size:16px; block-size:16px; flex-shrink:0; }
 .workspace-nav ul[hidden] { display:none; }
@@ -601,7 +599,6 @@
   .ui-guidance { min-width:0; border:1px solid var(--border); border-radius:.75rem; background:var(--card); overflow-wrap:anywhere; }
   .ui-guidance > summary { display:flex; align-items:center; gap:10px; min-height:44px; cursor:pointer; padding:10px 14px; list-style:none; font-size:.875rem; font-weight:500; color:var(--muted-foreground); }
   .ui-guidance > summary::-webkit-details-marker { display:none; }
-  .ui-guidance > summary:hover { color:var(--primary); background:var(--background); border-radius:inherit; }
   .ui-guidance > summary:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
   .ui-guidance-body { padding:14px; border-top:1px solid var(--border); font-size:.875rem; line-height:1.6; }
   .workspace-content main > h1 { padding-bottom:.75rem; border-bottom:1px solid var(--border); letter-spacing:-.025em; }
@@ -618,7 +615,7 @@
 
 /* Installation is a quiet document-end utility, never a floating work-area panel. */
 @layer components {
- .pwa-install-launcher { min-height:44px; max-width:100%; height:auto; white-space:normal; overflow-wrap:anywhere; color:var(--muted-foreground); font-size:.8125rem; }
+ .pwa-install-launcher { min-height:44px; max-width:100%; height:auto; white-space:normal; overflow-wrap:anywhere; font-size:.8125rem; }
  .pwa-install-launcher svg { width:16px; height:16px; flex-shrink:0; }
 }
 .pwa-install-dialog .dialog-header, .pwa-install-dialog .dialog-body { padding:16px; }
@@ -706,3 +703,69 @@
 .nav-search .nav-search-clear { align-self: flex-end; }
 .floating-label-field > .relative > svg { top: 50%; transform: translateY(-50%); }
 .floating-label-text > span.block { margin-block: 0; font-size: inherit; font-weight: inherit; }
+
+/* Solid fills for native action, disclosure, and tab controls. */
+@layer components {
+:where(button:not([data-slot="button"]), summary) {
+  background-color:var(--secondary);
+  color:var(--foreground);
+  border-radius:.65rem;
+  min-block-size:44px;
+  padding:8px 12px;
+  overflow-wrap:anywhere;
+}
+}
+.ui-guidance > summary, .nav-group-toggle, .schedule-tabs [role="tab"]:not([aria-selected="true"]) {
+  background-color:var(--secondary);
+  color:var(--foreground);
+}
+.nav-group-toggle[data-current-group="true"] {
+  background-color:var(--primary);
+  color:var(--primary-foreground);
+}
+
+:where(button, summary, [data-slot="button"]) {
+  transition:filter var(--motion-fast), box-shadow var(--motion-fast);
+}
+@media (hover:hover) and (pointer:fine) {
+  :is(button, summary, [data-slot="button"]):not(:disabled, [aria-disabled="true"], [aria-busy="true"]):hover {
+    filter:brightness(.93);
+  }
+}
+:is(button, summary, [data-slot="button"]):not(:disabled, [aria-disabled="true"], [aria-busy="true"]):active {
+  filter:brightness(.84);
+  box-shadow:inset 0 2px 5px rgb(0 0 0 / .2);
+}
+:is(button, summary, [data-slot="button"]):focus-visible {
+  outline:2px solid var(--ring);
+  outline-offset:2px;
+}
+:is(button, [data-slot="button"]):is(:disabled, [aria-disabled="true"]) {
+  background:var(--secondary);
+  border-color:var(--border);
+  color:var(--muted-foreground);
+  box-shadow:none;
+  cursor:not-allowed;
+}
+:is(button, [data-slot="button"])[aria-busy="true"] {
+  cursor:progress;
+}
+:is(button, [data-slot="button"])[aria-busy="true"]::before {
+  content:"";
+  flex:0 0 auto;
+  inline-size:1em;
+  block-size:1em;
+  border:2px solid currentColor;
+  border-inline-end-color:transparent;
+  border-radius:50%;
+  animation:button-loading-spin .75s linear infinite;
+}
+@keyframes button-loading-spin { to { transform:rotate(360deg); } }
+@media (forced-colors:active) {
+  :is(button, summary, [data-slot="button"]):focus-visible { outline-color:Highlight; }
+  :is(button, [data-slot="button"]):is(:disabled, [aria-disabled="true"]) { color:GrayText; }
+  :is(button, [data-slot="button"])[aria-busy="true"]::before {
+    forced-color-adjust:none;
+    border-inline-end-color:transparent;
+  }
+}

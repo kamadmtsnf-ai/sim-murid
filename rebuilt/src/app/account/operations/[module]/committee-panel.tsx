@@ -982,6 +982,7 @@ const retainedEcurrentTarget=e.currentTarget;
               )}
               <div className="flex flex-wrap gap-2">
                 <Button
+                  aria-busy={busy}
                   type="submit"
                   disabled={
                     mode === "payment" &&

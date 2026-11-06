@@ -359,6 +359,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
           <div className="flex min-w-0 flex-wrap items-center justify-between gap-3">
             <CardTitle>Antrean pemulihan ({requests.length})</CardTitle>
             <Button
+              aria-busy={busy}
               variant="outline"
               disabled={busy || Boolean(password)}
               onClick={() => void refresh()}

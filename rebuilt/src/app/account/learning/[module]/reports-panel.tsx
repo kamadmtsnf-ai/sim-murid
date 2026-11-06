@@ -259,7 +259,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
             <option value="2">Genap (Januari–Juni)</option>
           </select>
         </label>
-        <Button id="reports-filter" disabled={disabled}>
+        <Button aria-busy={reading} id="reports-filter" disabled={disabled}>
           {reading ? "Memuat…" : "Tampilkan"}
         </Button>
       </form>
@@ -380,7 +380,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
               </Button>
               <Button
                 type="button"
-                variant="ghost"
+                variant="secondary"
                 disabled={disabled || !selected.length}
                 onClick={() => setSelected([])}
               >
@@ -392,6 +392,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
             </div>
             <div className="flex flex-wrap gap-3">
               <Button
+                aria-busy={downloading}
                 type="button"
                 variant="outline"
                 disabled={disabled || !selected.length || selected.length > 500}
@@ -661,7 +662,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
             >
               Batal
             </Button>
-            <Button disabled={disabled || !ack || !publishable}>
+            <Button aria-busy={busy} disabled={disabled || !ack || !publishable}>
               {busy ? "Menerbitkan…" : "Konfirmasi penerbitan"}
             </Button>
           </div>

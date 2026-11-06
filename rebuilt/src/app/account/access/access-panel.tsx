@@ -156,6 +156,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
           Muat ulang untuk memeriksa perubahan peran atau penugasan.
         </p>
         <Button
+          aria-busy={busy}
           className="shrink-0"
           variant="outline"
           type="button"

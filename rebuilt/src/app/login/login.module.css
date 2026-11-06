@@ -22,17 +22,13 @@
 .passwordField { position: relative; margin-block-start: .5rem; min-inline-size: 0; }
 /* Match the fixed44px toggle: rem padding grows past the textbox at large text sizes. */
 .passwordField .input { margin-block-start: 0; padding-inline-end: 60px; }
-.passwordToggle { position: absolute; inset-inline-end: 4px; inset-block-start: 4px; display: inline-flex; align-items: center; justify-content: center; inline-size: 44px; block-size: 44px; border-radius: .6rem; color: var(--muted-foreground); }
-.passwordToggle:hover { background: var(--muted); color: var(--foreground); }
-.passwordToggle:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
-.passwordToggle:disabled { cursor: not-allowed; opacity: .5; }
+.passwordToggle { position: absolute; inset-inline-end: 4px; inset-block-start: 4px; display: inline-flex; align-items: center; justify-content: center; inline-size: 44px; block-size: 44px; border-radius: .6rem; }
 .passwordToggle svg { inline-size: 18px; block-size: 18px; flex-shrink: 0; }
 .remember { display: flex; align-items: start; gap: 12px; }
 .remember input { margin-block-start: .25rem; }
 .remember > span { min-inline-size: 0; font-size: .875rem; }
 .error { min-inline-size: 0; padding: 12px; border: 1px solid color-mix(in srgb,var(--destructive) 35%,var(--border)); border-radius: .65rem; background: var(--danger-subtle); color: var(--destructive); font-size: .875rem; }
 .submit { inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; padding-inline: 12px; white-space: normal; text-align: center; }
-.textLink { display: inline-flex; align-items: center; min-block-size: 44px; max-inline-size: 100%; color: var(--primary); text-decoration: underline; text-underline-offset: .2em; }
 .help { margin-block-start: 1.5rem; font-size: .875rem; color: var(--muted-foreground); }
 .help a { color: var(--primary); text-decoration: underline; text-underline-offset: .2em; }
 .skeleton { block-size: 44px; }

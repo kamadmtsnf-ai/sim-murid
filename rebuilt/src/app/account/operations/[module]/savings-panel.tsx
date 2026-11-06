@@ -941,6 +941,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
               )}
               <div className="flex flex-wrap gap-2">
                 <Button
+                  aria-busy={busy}
                   type="submit"
                   disabled={mode === "transaction" && !feeReady}
                 >

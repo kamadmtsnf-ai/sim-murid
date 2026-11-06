@@ -110,6 +110,7 @@ export function EmailRecoveryForm() {
             /></FloatingLabel>
           </div>
           <Button
+            aria-busy={state.pending}
             type="submit"
             className={styles.action}
             disabled={state.locked}
@@ -176,6 +177,7 @@ export function EmailRecoveryForm() {
               </div>
             </fieldset>
             <Button
+              aria-busy={state.pending}
               type="submit"
               className={styles.action}
               disabled={state.locked}
