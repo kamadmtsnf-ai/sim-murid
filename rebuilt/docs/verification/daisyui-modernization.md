@@ -70,7 +70,7 @@ Entry `[module]` tetap divalidasi dispatcher existing; daftar modul tidak mencip
 | Accessibility | 108 checks / 18 axe, forced colors, keyboard, zoom dan dialog |
 | Audit atribut | 594 kontrol dibandingkan terhadap baseline; tidak ada perubahan atribut interaksi |
 | Browser produksi | Beranda dan login memakai server build lokal; mayoritas modul lain memakai komponen asli dengan API fixture terisolasi |
-| CI | Dicatat di PR; bukan diasumsikan lulus dari hasil lokal |
+| CI | Belum berjalan untuk perubahan ini: push ditolak automatic approval review; PR belum dibuat |
 
 Bukti terstruktur: [summary.json](daisyui/summary.json), hasil per-suite pada direktori `daisyui/`, serta screenshot [sebelum](daisyui/screenshots/components-before-390.png), [sesudah](daisyui/screenshots/components-after-390.png), dan [Login](daisyui/screenshots/login-after-390.png). Browser Chromium 153 dengan Playwright runtime, esbuild dan axe-core dipasang hanya di lingkungan QA, tidak ditambahkan ke aplikasi.
 
@@ -82,7 +82,14 @@ CSS hasil kompilasi seluruh source (belum minifikasi): baseline 107.466 byte / g
 
 ## E. GitHub
 
-Branch kerja `design/daisyui-modernization-20261107`. Commit/PR dan hasil CI tersedia pada riwayat branch/PR. PR sengaja **draft**: lima suite browser masih memiliki kegagalan baseline yang direproduksi, sehingga gerbang penerimaan browser lengkap belum hijau. Tidak merge, force push, deployment produksi atau migrasi database.
+Branch kerja `design/daisyui-modernization-20261107`. Commit implementasi lokal:
+
+- `5bc874d`: konfigurasi tema, dependensi eksak dan shared components.
+- `cccec73`: migrasi kontrol lintas modul, skrip QA dan bukti verifikasi.
+
+Push ditolak **automatic approval review**, dengan alasan izin ekspor source/perubahan repositori bersama belum dianggap eksplisit. Tidak mencoba jalur lain untuk melewati penolakan. PR belum dibuat, URL PR belum tersedia, dan CI GitHub belum berjalan untuk perubahan ini. Draft deskripsi PR tersedia pada [pull-request.md](daisyui/pull-request.md).
+
+Rencana PR berstatus **draft** karena lima suite browser masih memiliki kegagalan baseline yang direproduksi; gerbang penerimaan browser lengkap belum hijau. Tidak merge, force push, deployment produksi atau migrasi database.
 
 ## F. Temuan tersisa dan batas penerimaan
 
