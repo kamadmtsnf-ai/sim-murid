@@ -4,17 +4,17 @@ import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
 
 const buttonVariants = cva(
-  "inline-flex max-w-full shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-normal [overflow-wrap:anywhere] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "btn inline-flex max-w-full shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-normal [overflow-wrap:anywhere] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default: "button-primary text-primary-foreground",
+        default: "btn-primary",
         destructive:
-          "bg-destructive text-white focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
+          "btn-error focus-visible:ring-destructive/20",
         outline:
-          "button-glass border dark:border-input dark:bg-input/30",
+          "btn-secondary border-border",
         secondary:
-          "bg-secondary text-secondary-foreground",
+          "btn-secondary",
       },
       size: {
         default: "min-h-11 px-4 py-2 has-[>svg]:px-3",

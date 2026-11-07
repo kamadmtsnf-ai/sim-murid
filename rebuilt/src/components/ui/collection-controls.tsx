@@ -14,7 +14,7 @@ export function FilterBar({
   className?: string;
 }) {
   return (
-    <fieldset className={cn("ds-filter-bar", className)}>
+    <fieldset className={cn("fieldset ds-filter-bar", className)}>
       <legend className="sr-only">{label}</legend>
       {children}
     </fieldset>

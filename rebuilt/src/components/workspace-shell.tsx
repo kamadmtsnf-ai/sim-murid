@@ -125,8 +125,11 @@ export function WorkspaceShell({
             focused instanceof HTMLElement &&
             scroller.contains(focused) &&
             !nav.contains(focused)
-          )
+          ) {
+            // Reflow after filtering can leave the focused search partly outside a short sidebar.
+            (focused.closest(".nav-search") ?? focused).scrollIntoView({ block: "nearest", inline: "nearest" });
             return;
+          }
           const box = scroller.getBoundingClientRect(),
             link = current.getBoundingClientRect();
           if (link.top < box.top) scroller.scrollTop -= box.top - link.top;
@@ -141,7 +144,9 @@ export function WorkspaceShell({
   }, [open, path, query]);
   function clearSearch(mobile: boolean) {
     setQuery("");
-    (mobile ? mobileSearch : desktopSearch).current?.focus();
+    const input = (mobile ? mobileSearch : desktopSearch).current;
+    input?.focus({ preventScroll: true });
+    input?.closest(".nav-search")?.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
   function finishNavigation() {
     setOpen(false);
@@ -209,7 +214,7 @@ export function WorkspaceShell({
                 e.stopPropagation();
                 clearSearch(mobile);
               }
-            }}
+            }} className="input w-full"
           /></FloatingLabel>
           {query && (
             <Button
@@ -253,7 +258,7 @@ export function WorkspaceShell({
               <section key={g.label}>
                 <h2 className="nav-group-heading"><button
                   type="button"
-                  className="nav-group-toggle"
+                  className="btn btn-secondary nav-group-toggle"
                   aria-label={g.label}
                   aria-expanded={expanded}
                   aria-controls={panelId}
@@ -264,10 +269,10 @@ export function WorkspaceShell({
                     : setExpandedGroups(previous => ({ ...previous, [g.label]: !expanded }))}
                 >
                   <span className="min-w-0 flex-1 wrap-anywhere">{g.label}</span>
-                  {currentGroup && <><span aria-hidden="true" className="nav-current-badge">Halaman aktif</span><span id={`${panelId}-current`} className="sr-only">Halaman aktif: {item?.label}. {expanded ? "Kelompok terbuka." : "Buka kelompok untuk melihat menunya."}</span></>}
+                  {currentGroup && <><span aria-hidden="true" className="badge badge-soft nav-current-badge">Halaman aktif</span><span id={`${panelId}-current`} className="sr-only">Halaman aktif: {item?.label}. {expanded ? "Kelompok terbuka." : "Buka kelompok untuk melihat menunya."}</span></>}
                   <ChevronRight aria-hidden="true" className={expanded ? "rotate-90" : undefined} />
                 </button></h2>
-                <ul id={panelId} hidden={!expanded}>
+                <ul className="menu" id={panelId} hidden={!expanded}>
                   {g.items.map((i) => (
                     <li key={i.href}>
                       <Link
@@ -337,7 +342,7 @@ export function WorkspaceShell({
               {navigationContent(false)}
             </aside>
             <div className="workspace-body">
-              <header className="workspace-topbar">
+              <header className="navbar workspace-topbar">
                 <div className="flex min-w-0 items-center gap-3">
                   <Button
                     variant="outline"
@@ -382,7 +387,7 @@ export function WorkspaceShell({
                 </div>
               </header>
               <div className="workspace-content">
-                <nav aria-label="Breadcrumb" className="workspace-breadcrumb">
+                <nav aria-label="Breadcrumb" className="breadcrumbs workspace-breadcrumb">
                   <ol>
                     <li>
                       <span className="breadcrumb-home">

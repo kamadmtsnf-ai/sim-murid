@@ -207,7 +207,7 @@ export function NotificationsPanel({ initial }: { initial: ServiceSnapshot }) {
               }}
               placeholder="Cari judul atau isi pesan"
               aria-describedby="notification-search-help"
-              className={`${controlClass} pl-10`}
+              className={"input w-full " + (`${controlClass} pl-10`)}
             />
           </span></FloatingLabel>
         </div>
@@ -216,7 +216,7 @@ export function NotificationsPanel({ initial }: { initial: ServiceSnapshot }) {
             Status notifikasi
           </span>
           <select
-            className={controlClass}
+            className={"select w-full " + (controlClass)}
             value={filter}
             onChange={(event) => {
               setFilter(event.target.value);
@@ -277,7 +277,7 @@ export function NotificationsPanel({ initial }: { initial: ServiceSnapshot }) {
                         {row.title?.trim() || "Pemberitahuan"}
                       </h3>
                       <span
-                        className={`notification-badge ${row.read_at ? "" : "notification-badge-unread"}`}
+                        className={`badge badge-soft notification-badge ${row.read_at ? "" : "notification-badge-unread"}`}
                       >
                         {row.read_at ? "Sudah dibaca" : "Belum dibaca"}
                       </span>

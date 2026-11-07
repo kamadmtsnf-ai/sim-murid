@@ -1,0 +1,263 @@
+{
+  "checks": [
+    {
+      "name": "reconciliation 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "reconciliation 320 axe",
+      "passed": true
+    },
+    {
+      "name": "reconciliation 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "reconciliation 768 axe",
+      "passed": true
+    },
+    {
+      "name": "reconciliation 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "reconciliation 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "source comparison limitation honest",
+      "passed": true
+    },
+    {
+      "name": "no false empty state when rows empty",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "downloaded real XLSX numeric content",
+      "passed": true
+    },
+    {
+      "name": "package filename",
+      "passed": true
+    },
+    {
+      "name": "month normalized to first day",
+      "passed": true
+    },
+    {
+      "name": "class forwarded",
+      "passed": true
+    },
+    {
+      "name": "date range forwarded",
+      "passed": true
+    },
+    {
+      "name": "five legacy domains preserved",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "downloaded real XLSX numeric content",
+      "passed": true
+    },
+    {
+      "name": "summary filename",
+      "passed": true
+    },
+    {
+      "name": "summary endpoint independent of filters",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "synchronous download lock",
+      "passed": true
+    },
+    {
+      "name": "invalid range rejected without network",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "refresh preserves export draft",
+      "passed": true
+    },
+    {
+      "name": "refresh loads once",
+      "passed": true
+    },
+    {
+      "name": "zero saldo renders after refresh",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "503 allows manual read retry",
+      "passed": true
+    },
+    {
+      "name": "503 preserves draft",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "403 allows manual read retry",
+      "passed": true
+    },
+    {
+      "name": "403 preserves draft",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "401 allows manual read retry",
+      "passed": true
+    },
+    {
+      "name": "401 preserves draft",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "network allows manual read retry",
+      "passed": true
+    },
+    {
+      "name": "network preserves draft",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "json allows manual read retry",
+      "passed": true
+    },
+    {
+      "name": "json preserves draft",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "invalid allows manual read retry",
+      "passed": true
+    },
+    {
+      "name": "invalid preserves draft",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "malformed reload does not replace snapshot",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "stale class cannot silently widen export",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "read-only request",
+      "passed": true
+    },
+    {
+      "name": "mobile touch download",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "native date keyboard reaches next field",
+      "passed": true
+    },
+    {
+      "name": "landscape axe",
+      "passed": true
+    },
+    {
+      "name": "empty class catalog has explicit all option",
+      "passed": true
+    },
+    {
+      "name": "empty metrics retain legitimate zero",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "reconciliation 320",
+      "violations": []
+    },
+    {
+      "label": "reconciliation 768",
+      "violations": []
+    },
+    {
+      "label": "reconciliation 1440",
+      "violations": []
+    },
+    {
+      "label": "landscape",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

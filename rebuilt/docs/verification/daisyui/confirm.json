@@ -1,0 +1,203 @@
+{
+  "checks": [
+    {
+      "name": "safe cancel focus 320",
+      "passed": true
+    },
+    {
+      "name": "escaped confirmation text 320",
+      "passed": true
+    },
+    {
+      "name": "focus restored 320",
+      "passed": true
+    },
+    {
+      "name": "double activation confirms once 320",
+      "passed": true
+    },
+    {
+      "name": "navigation cancels stale decision 320",
+      "passed": true
+    },
+    {
+      "name": "nested draft preserved 320",
+      "passed": true
+    },
+    {
+      "name": "nested axe 320",
+      "passed": true
+    },
+    {
+      "name": "no overflow 320",
+      "passed": true
+    },
+    {
+      "name": "cancelled logout skips child cleanup 320",
+      "passed": true
+    },
+    {
+      "name": "approved logout runs original submit exactly once 320",
+      "passed": true
+    },
+    {
+      "name": "approved navigation runs original click 320",
+      "passed": true
+    },
+    {
+      "name": "safe cancel focus 390",
+      "passed": true
+    },
+    {
+      "name": "escaped confirmation text 390",
+      "passed": true
+    },
+    {
+      "name": "focus restored 390",
+      "passed": true
+    },
+    {
+      "name": "double activation confirms once 390",
+      "passed": true
+    },
+    {
+      "name": "navigation cancels stale decision 390",
+      "passed": true
+    },
+    {
+      "name": "nested draft preserved 390",
+      "passed": true
+    },
+    {
+      "name": "nested axe 390",
+      "passed": true
+    },
+    {
+      "name": "no overflow 390",
+      "passed": true
+    },
+    {
+      "name": "cancelled logout skips child cleanup 390",
+      "passed": true
+    },
+    {
+      "name": "approved logout runs original submit exactly once 390",
+      "passed": true
+    },
+    {
+      "name": "approved navigation runs original click 390",
+      "passed": true
+    },
+    {
+      "name": "safe cancel focus 768",
+      "passed": true
+    },
+    {
+      "name": "escaped confirmation text 768",
+      "passed": true
+    },
+    {
+      "name": "focus restored 768",
+      "passed": true
+    },
+    {
+      "name": "double activation confirms once 768",
+      "passed": true
+    },
+    {
+      "name": "navigation cancels stale decision 768",
+      "passed": true
+    },
+    {
+      "name": "nested draft preserved 768",
+      "passed": true
+    },
+    {
+      "name": "nested axe 768",
+      "passed": true
+    },
+    {
+      "name": "no overflow 768",
+      "passed": true
+    },
+    {
+      "name": "cancelled logout skips child cleanup 768",
+      "passed": true
+    },
+    {
+      "name": "approved logout runs original submit exactly once 768",
+      "passed": true
+    },
+    {
+      "name": "approved navigation runs original click 768",
+      "passed": true
+    },
+    {
+      "name": "safe cancel focus 1440",
+      "passed": true
+    },
+    {
+      "name": "escaped confirmation text 1440",
+      "passed": true
+    },
+    {
+      "name": "focus restored 1440",
+      "passed": true
+    },
+    {
+      "name": "double activation confirms once 1440",
+      "passed": true
+    },
+    {
+      "name": "navigation cancels stale decision 1440",
+      "passed": true
+    },
+    {
+      "name": "nested draft preserved 1440",
+      "passed": true
+    },
+    {
+      "name": "nested axe 1440",
+      "passed": true
+    },
+    {
+      "name": "no overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "cancelled logout skips child cleanup 1440",
+      "passed": true
+    },
+    {
+      "name": "approved logout runs original submit exactly once 1440",
+      "passed": true
+    },
+    {
+      "name": "approved navigation runs original click 1440",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": 320,
+      "violations": []
+    },
+    {
+      "label": 390,
+      "violations": []
+    },
+    {
+      "label": 768,
+      "violations": []
+    },
+    {
+      "label": 1440,
+      "violations": []
+    }
+  ],
+  "errors": []
+}

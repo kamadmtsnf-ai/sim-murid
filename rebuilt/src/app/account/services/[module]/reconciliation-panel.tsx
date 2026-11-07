@@ -296,7 +296,7 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                   required
                   min="2000-01-01"
                   max={end || "2100-12-31"}
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   value={start}
                   onChange={(e) => setStart(e.target.value)}
                 /></FloatingLabel>
@@ -308,7 +308,7 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                   required
                   min={start || "2000-01-01"}
                   max="2100-12-31"
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   value={end}
                   onChange={(e) => setEnd(e.target.value)}
                 /></FloatingLabel>
@@ -320,7 +320,7 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                   required
                   min="2000-01"
                   max="2100-12"
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   value={month}
                   onChange={(e) => setMonth(e.target.value)}
                   aria-describedby="reconciliation-month-help"
@@ -337,7 +337,7 @@ export function ReconciliationPanel({ initial }: { initial: ServiceSnapshot }) {
                 Kelas
                 <select
                   id="reconciliation-class"
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={classId}
                   onChange={(e) => setClassId(e.target.value)}
                 >

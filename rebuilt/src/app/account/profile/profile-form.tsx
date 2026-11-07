@@ -280,7 +280,7 @@ export function ProfileForm({
                   <textarea
                     id={"profile-" + name}
                     name={name}
-                    className={fieldControlClass + " min-h-32 resize-y"}
+                    className={"textarea w-full " + (fieldControlClass + " min-h-32 resize-y")}
                     value={draft[name]}
                     onChange={(e) => {
                       setDraft((d) => ({ ...d, [name]: e.target.value }));
@@ -303,7 +303,7 @@ export function ProfileForm({
                   <input
                     id={"profile-" + name}
                     name={name}
-                    className={fieldControlClass}
+                    className={"input w-full " + (fieldControlClass)}
                     type={
                       name === "phone"
                         ? "tel"

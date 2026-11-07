@@ -230,7 +230,7 @@ export function ClassPanel({
         <label className="block text-sm">
           Tahun ajaran
           <select
-            className={controlClass}
+            className={"select w-full " + (controlClass)}
             value={year}
             disabled={disabled}
             onChange={async (e) => {
@@ -253,7 +253,7 @@ const retainedEvalue=e.target.value;
         </label>
         <div className="block text-sm"><FloatingLabel label={<>Cari kelas
           </>}><input placeholder=" "
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -288,7 +288,7 @@ const retainedEcurrentTarget=e.currentTarget;
               >
                 <div className="block min-w-0 flex-1 text-sm"><FloatingLabel label={<>Tahun ajaran (misalnya 2026/2027)
                   </>}><input
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     name="academicYear"
                     type="text"
                     placeholder="2026/2027"
@@ -607,7 +607,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   </p>
                   <div className="block text-sm"><FloatingLabel label={<>Tanggal mulai penempatan
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       type="date"
                       name="startsOn"
                       value={startsOn}
@@ -617,7 +617,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   </div>
                   <div className="block text-sm"><FloatingLabel label={<>Cari siswa
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       type="search"
                       value={studentSearch}
                       onChange={(e) => setStudentSearch(e.target.value)}
@@ -649,7 +649,7 @@ const retainedEcurrentTarget=e.currentTarget;
                                   ? [...old, p.id]
                                   : old.filter((id) => id !== p.id),
                               )
-                            }
+                            } className="checkbox checkbox-primary"
                           />
                           <span>
                             {p.name} ({p.username})

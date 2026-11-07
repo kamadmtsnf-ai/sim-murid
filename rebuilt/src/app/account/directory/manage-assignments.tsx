@@ -191,7 +191,7 @@ export function ManageAssignments({ target }: { target: string }) {
                   Tugas tambahan
                   <select
                     name="code"
-                    className="mt-1 min-h-11 w-full rounded-md border bg-background p-2"
+                    className="select w-full mt-1 min-h-11 w-full rounded-md border bg-background p-2"
                   >
                     {Object.entries(teacherTasks).map(([code, label]) => (
                       <option key={code} value={code}>
@@ -209,7 +209,7 @@ export function ManageAssignments({ target }: { target: string }) {
                       min="1900-01-01"
                       max="2199-12-31"
                       defaultValue={directoryToday()}
-                      className="mt-1 min-h-11 w-full min-w-0 rounded-md border p-2"
+                      className="input w-full mt-1 min-h-11 w-full min-w-0 rounded-md border p-2"
                     /></FloatingLabel>
                   </div>
                   <div className="min-w-0 text-sm"><FloatingLabel label={<>Tanggal akhir (opsional)
@@ -218,7 +218,7 @@ export function ManageAssignments({ target }: { target: string }) {
                       name="until"
                       min="1900-01-01"
                       max="2199-12-31"
-                      className="mt-1 min-h-11 w-full min-w-0 rounded-md border p-2"
+                      className="input w-full mt-1 min-h-11 w-full min-w-0 rounded-md border p-2"
                     /></FloatingLabel>
                   </div>
                 </div>
@@ -234,7 +234,7 @@ export function ManageAssignments({ target }: { target: string }) {
                   disabled={busy || !!pending}
                   minLength={5}
                   maxLength={500}
-                  className="mt-1 min-h-20 w-full rounded-md border p-2"
+                  className="textarea w-full mt-1 min-h-20 w-full rounded-md border p-2"
                   placeholder="Isi minimal 5 karakter sebelum mencabut tugas"
                 /></FloatingLabel>
               </div>

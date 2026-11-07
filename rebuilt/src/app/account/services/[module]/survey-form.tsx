@@ -131,7 +131,7 @@ export function SurveyForm({
               <label className="block text-sm">
                 Tahun ajaran
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   name="yearId"
                   required
                   value={periodYear}
@@ -150,7 +150,7 @@ export function SurveyForm({
               <label className="block text-sm">
                 Semester
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   name="semester"
                   value={periodSemester}
                   onChange={(e) => {
@@ -165,7 +165,7 @@ export function SurveyForm({
               <label className="block text-sm">
                 Jenis
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   name="kind"
                   value={kind}
                   onChange={(e) => setKind(e.target.value)}
@@ -184,7 +184,7 @@ export function SurveyForm({
               <div key={`${periodYear}-${periodSemester}`} className="contents">
                 <div className="block text-sm"><FloatingLabel label={<>Mulai
                   </>}><input placeholder=" "
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     type="date"
                     name="start"
                     min={periodBounds?.start}
@@ -194,7 +194,7 @@ export function SurveyForm({
                 </div>
                 <div className="block text-sm"><FloatingLabel label={<>Selesai
                   </>}><input placeholder=" "
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     type="date"
                     name="end"
                     min={periodBounds?.start}
@@ -211,7 +211,7 @@ export function SurveyForm({
                   ["parent", "Orangtua"],
                 ].map(([k, v]) => (
                   <label key={k} className="mr-3">
-                    <input type="checkbox" name="targets" value={k} /> {v}
+                    <input type="checkbox" name="targets" value={k} className="checkbox checkbox-primary" /> {v}
                   </label>
                 ))}
               </fieldset>
@@ -222,7 +222,7 @@ export function SurveyForm({
               {kind === "micro" && (
                 <div><FloatingLabel label={<>Pertanyaan mikro (satu esai wajib per baris)
                   </>}><textarea placeholder=" "
-                    className={controlClass}
+                    className={"textarea w-full " + (controlClass)}
                     name="questions"
                     maxLength={50050}
                     required

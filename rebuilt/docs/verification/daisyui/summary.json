@@ -1,0 +1,262 @@
+{
+  "baseline": {
+    "groups": 64,
+    "tests": 596,
+    "failures": 1,
+    "buildPassed": false
+  },
+  "browser": [
+    {
+      "suite": "accessibility",
+      "status": "passed",
+      "checks": 108,
+      "axe": 18
+    },
+    {
+      "suite": "account-security",
+      "status": "passed",
+      "checks": 80,
+      "axe": 7
+    },
+    {
+      "suite": "attendance",
+      "status": "passed",
+      "checks": 90,
+      "axe": 6
+    },
+    {
+      "suite": "audit",
+      "status": "passed",
+      "checks": 191,
+      "axe": 21
+    },
+    {
+      "suite": "biodata",
+      "status": "passed",
+      "checks": 81,
+      "axe": 11
+    },
+    {
+      "suite": "books",
+      "status": "passed",
+      "checks": 54,
+      "axe": 8
+    },
+    {
+      "suite": "bulk",
+      "status": "passed",
+      "checks": 106,
+      "axe": 12
+    },
+    {
+      "suite": "classes",
+      "status": "passed",
+      "checks": 302,
+      "axe": 17
+    },
+    {
+      "suite": "committee",
+      "status": "passed",
+      "checks": 92,
+      "axe": 6
+    },
+    {
+      "suite": "confirm",
+      "status": "passed",
+      "checks": 45,
+      "axe": 4
+    },
+    {
+      "suite": "directory",
+      "status": "passed",
+      "checks": 73,
+      "axe": 13
+    },
+    {
+      "suite": "duty",
+      "status": "passed",
+      "checks": 155,
+      "axe": 9
+    },
+    {
+      "suite": "email-verification",
+      "status": "passed",
+      "checks": 87,
+      "axe": 10
+    },
+    {
+      "suite": "families",
+      "status": "passed",
+      "checks": 37,
+      "axe": 7
+    },
+    {
+      "suite": "follow-up",
+      "status": "passed",
+      "checks": 90,
+      "axe": 8
+    },
+    {
+      "suite": "grades",
+      "status": "passed",
+      "checks": 62,
+      "axe": 7
+    },
+    {
+      "suite": "help",
+      "status": "passed",
+      "checks": 41,
+      "axe": 4
+    },
+    {
+      "suite": "jobs",
+      "status": "passed",
+      "checks": 49,
+      "axe": 9
+    },
+    {
+      "suite": "mentoring",
+      "status": "passed",
+      "checks": 94,
+      "axe": 7
+    },
+    {
+      "suite": "modal-feedback",
+      "status": "passed",
+      "checks": 0,
+      "axe": 0
+    },
+    {
+      "suite": "notifications",
+      "status": "passed",
+      "checks": 59,
+      "axe": 7
+    },
+    {
+      "suite": "overview",
+      "status": "passed",
+      "checks": 120,
+      "axe": 20
+    },
+    {
+      "suite": "promotions",
+      "status": "passed",
+      "checks": 104,
+      "axe": 13
+    },
+    {
+      "suite": "reconciliation",
+      "status": "passed",
+      "checks": 59,
+      "axe": 5
+    },
+    {
+      "suite": "reports",
+      "status": "passed",
+      "checks": 62,
+      "axe": 7
+    },
+    {
+      "suite": "savings",
+      "status": "passed",
+      "checks": 48,
+      "axe": 6
+    },
+    {
+      "suite": "schedules",
+      "status": "passed",
+      "checks": 169,
+      "axe": 16
+    },
+    {
+      "suite": "user-detail",
+      "status": "passed",
+      "checks": 146,
+      "axe": 18
+    },
+    {
+      "suite": "design-system",
+      "status": "passed",
+      "checks": 82,
+      "axe": 13
+    },
+    {
+      "suite": "navigation",
+      "status": "passed",
+      "checks": 66,
+      "axe": 14
+    },
+    {
+      "suite": "forms",
+      "status": "passed",
+      "checks": 87,
+      "axe": 7
+    },
+    {
+      "suite": "home",
+      "status": "passed",
+      "checks": 64,
+      "issues": [],
+      "axeViews": 6
+    },
+    {
+      "suite": "login",
+      "status": "passed",
+      "checks": 215,
+      "issues": [],
+      "axeViews": 17
+    },
+    {
+      "suite": "settings",
+      "status": "passed",
+      "checks": 39,
+      "axe": 5
+    },
+    {
+      "suite": "personal-profile",
+      "status": "passed",
+      "checks": 87,
+      "axe": 8
+    },
+    {
+      "suite": "account-recovery",
+      "status": "passed",
+      "checks": 46,
+      "axe": 5
+    },
+    {
+      "suite": "points",
+      "status": "passed",
+      "checks": 67,
+      "axe": 8
+    },
+    {
+      "suite": "surveys",
+      "status": "passed",
+      "checks": 60,
+      "axe": 6
+    }
+  ],
+  "css": {
+    "baseline": {
+      "unminifiedBytes": 107466,
+      "gzipBytes": 17121
+    },
+    "daisyui": {
+      "unminifiedBytes": 216872,
+      "gzipBytes": 28859
+    }
+  },
+  "finalCheck": {
+    "groups": 83,
+    "tests": 792,
+    "failures": 0,
+    "buildPassed": true
+  },
+  "mergeReadiness": {
+    "pr": 98,
+    "fiveBaselineBrowserBlockersResolved": true,
+    "runtimeBusinessCodeChangedForTestRepairs": false,
+    "verificationSource": "Current-head local check and browser runs; latest remote CI status is on PR98."
+  }
+}

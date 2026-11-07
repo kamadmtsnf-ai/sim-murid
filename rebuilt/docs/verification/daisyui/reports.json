@@ -1,0 +1,328 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "reports 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "reports 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "incomplete draft identified 320",
+      "passed": true
+    },
+    {
+      "name": "null draft not mislabeled published 320",
+      "passed": true
+    },
+    {
+      "name": "practice zero retained 320",
+      "passed": true
+    },
+    {
+      "name": "touch selects student",
+      "passed": true
+    },
+    {
+      "name": "keyboard focus remains in modal 320",
+      "passed": true
+    },
+    {
+      "name": "confirm 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "confirm 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "confirmation acknowledgement required 320",
+      "passed": true
+    },
+    {
+      "name": "modal footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "Escape closes modal 320",
+      "passed": true
+    },
+    {
+      "name": "focus restored 320",
+      "passed": true
+    },
+    {
+      "name": "orientation landscape no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 740,
+        "document": 740
+      }
+    },
+    {
+      "name": "reports 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "reports 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "incomplete draft identified 768",
+      "passed": true
+    },
+    {
+      "name": "null draft not mislabeled published 768",
+      "passed": true
+    },
+    {
+      "name": "practice zero retained 768",
+      "passed": true
+    },
+    {
+      "name": "keyboard focus remains in modal 768",
+      "passed": true
+    },
+    {
+      "name": "confirm 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "confirm 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "confirmation acknowledgement required 768",
+      "passed": true
+    },
+    {
+      "name": "modal footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "Escape closes modal 768",
+      "passed": true
+    },
+    {
+      "name": "focus restored 768",
+      "passed": true
+    },
+    {
+      "name": "reports 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "reports 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "incomplete draft identified 1440",
+      "passed": true
+    },
+    {
+      "name": "null draft not mislabeled published 1440",
+      "passed": true
+    },
+    {
+      "name": "practice zero retained 1440",
+      "passed": true
+    },
+    {
+      "name": "keyboard focus remains in modal 1440",
+      "passed": true
+    },
+    {
+      "name": "confirm 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "confirm 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "confirmation acknowledgement required 1440",
+      "passed": true
+    },
+    {
+      "name": "modal footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "Escape closes modal 1440",
+      "passed": true
+    },
+    {
+      "name": "focus restored 1440",
+      "passed": true
+    },
+    {
+      "name": "publish command preserves scope",
+      "passed": true
+    },
+    {
+      "name": "double click publishes once",
+      "passed": true
+    },
+    {
+      "name": "successful publish closes dialog",
+      "passed": true
+    },
+    {
+      "name": "PDF carries explicit student selection",
+      "passed": true
+    },
+    {
+      "name": "single PDF success feedback",
+      "passed": true
+    },
+    {
+      "name": "PDF failure feedback",
+      "passed": true
+    },
+    {
+      "name": "loading disables concurrent read",
+      "passed": true
+    },
+    {
+      "name": "failed read retains previous data",
+      "passed": true
+    },
+    {
+      "name": "large data paginated",
+      "passed": true
+    },
+    {
+      "name": "pagination advances",
+      "passed": true
+    },
+    {
+      "name": "large data no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "search empty state",
+      "passed": true
+    },
+    {
+      "name": "read-only role has no publish action",
+      "passed": true
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty data disables export",
+      "passed": true
+    },
+    {
+      "name": "empty no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "network blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "network one request",
+      "passed": true
+    },
+    {
+      "name": "malformed blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "malformed one request",
+      "passed": true
+    },
+    {
+      "name": "stale blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "stale one request",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "real UI performs scoped reads",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "axe": [
+    {
+      "name": "reports 320",
+      "violations": []
+    },
+    {
+      "name": "confirm 320",
+      "violations": []
+    },
+    {
+      "name": "reports 768",
+      "violations": []
+    },
+    {
+      "name": "confirm 768",
+      "violations": []
+    },
+    {
+      "name": "reports 1440",
+      "violations": []
+    },
+    {
+      "name": "confirm 1440",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    }
+  ]
+}

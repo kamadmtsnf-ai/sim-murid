@@ -106,7 +106,7 @@ export function RegionFields({ prefix, data, required, errors, className, onChan
         </label>
         <select
           id={id}
-          className={className}
+          className={"select w-full " + (className)}
           value={match?.id ?? (saved ? "saved" : "")}
           disabled={loading || failed || !parent || options.length === 0}
           aria-invalid={!!errors[field]}

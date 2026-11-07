@@ -429,7 +429,7 @@ export function SessionPanel({
                       setInput(e.target.value);
                       setInputError("");
                     }}
-                    className="mt-2 min-h-11 w-full min-w-0 rounded-md border bg-background px-3 py-2 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="input w-full mt-2 min-h-11 w-full min-w-0 rounded-md border bg-background px-3 py-2 text-base outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     autoComplete="off"
                     autoCapitalize="none"
                     spellCheck={false}

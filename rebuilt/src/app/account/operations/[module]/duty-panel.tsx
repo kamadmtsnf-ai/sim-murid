@@ -167,7 +167,7 @@ export function DutyPanel({
     return (
       <label className="block text-sm">
         {label}
-        <select required className={controlClass} name={name}>
+        <select required className={"select w-full " + (controlClass)} name={name}>
           <option value="">Pilih guru…</option>
           {choices.map((p) => (
             <option key={p.id} value={p.id}>
@@ -244,11 +244,11 @@ export function DutyPanel({
       )}
       <Tabs.Root defaultValue={initialTab}>
         <Tabs.List
-          className="schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
+          className="tabs tabs-box schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
           aria-label="Informasi guru piket"
         >
-          <Tabs.Trigger value="roster">Jadwal mingguan</Tabs.Trigger>
-          <Tabs.Trigger value="history">Riwayat konfirmasi</Tabs.Trigger>
+          <Tabs.Trigger value="roster" className="tab">Jadwal mingguan</Tabs.Trigger>
+          <Tabs.Trigger value="history" className="tab">Riwayat konfirmasi</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="roster" className="mt-5 space-y-4">
           <h2 className="text-xl font-semibold">Jadwal piket mingguan</h2>
@@ -304,7 +304,7 @@ export function DutyPanel({
             <input type="hidden" name="view" value="history" />
             <div><FloatingLabel label={<>Tahun kalender
               </>}><input placeholder=" "
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 name="year"
                 type="number"
                 min={2000}
@@ -315,7 +315,7 @@ export function DutyPanel({
             <div><FloatingLabel label={<>Dari tanggal
               </>}><input placeholder=" "
                 type="date"
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 name="start"
                 defaultValue={filters.start}
               /></FloatingLabel>
@@ -323,7 +323,7 @@ export function DutyPanel({
             <div><FloatingLabel label={<>Sampai tanggal
               </>}><input placeholder=" "
                 type="date"
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 name="end"
                 defaultValue={filters.end}
               /></FloatingLabel>
@@ -358,7 +358,7 @@ export function DutyPanel({
             </p>
           ) : (
             <TableRegion label="Riwayat konfirmasi guru piket">
-              <table className="w-full min-w-[40rem] text-left text-sm">
+              <table className="table table-zebra w-full min-w-[40rem] text-left text-sm">
                 <caption className="sr-only">Riwayat guru piket</caption>
                 <thead>
                   <tr>
@@ -477,7 +477,7 @@ export function DutyPanel({
                   </p>
                   <label>
                     Tindakan
-                    <select name="action" className={controlClass} required>
+                    <select name="action" className={"select w-full " + (controlClass)} required>
                       {dutyActions(edit, data.today).map((a) => (
                         <option value={a} key={a}>
                           {actionLabel[a]}
@@ -488,7 +488,7 @@ export function DutyPanel({
                   <div><FloatingLabel label={<>Alasan
                     </>}><textarea placeholder=" "
                       name="reason"
-                      className={controlClass}
+                      className={"textarea w-full " + (controlClass)}
                       minLength={3}
                       maxLength={2000}
                       required
@@ -501,7 +501,7 @@ export function DutyPanel({
                     Guru
                     <select
                       value={teacher}
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       required
                       onChange={async (e) => {
                         const retainedEvalue = e.target.value;
@@ -534,14 +534,14 @@ export function DutyPanel({
                                 (r) =>
                                   r.teacher_id === teacher &&
                                   r.weekday === i + 1,
-                              )}
+                              )} className="checkbox checkbox-primary"
                             />
                             {day}
                           </label>
                         ))}
                       </div>
                       <label className="mt-3 flex min-h-11 items-center gap-2">
-                        <input type="checkbox" name="assignTask" />
+                        <input type="checkbox" name="assignTask" className="checkbox checkbox-primary" />
                         Tetapkan juga tugas Guru Piket bila belum aktif
                       </label>
                       <p className="mt-2 text-sm text-muted-foreground">

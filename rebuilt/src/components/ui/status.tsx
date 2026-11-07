@@ -9,22 +9,22 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 const tones = {
-  info: { icon: Info, style: "border-info/30 bg-info-subtle text-info" },
+  info: { icon: Info, style: "alert-info alert-soft border-info/30 bg-info-subtle text-info" },
   success: {
     icon: CheckCircle2,
-    style: "border-success/30 bg-success-subtle text-success",
+    style: "alert-success alert-soft border-success/30 bg-success-subtle text-success",
   },
   error: {
     icon: CircleAlert,
-    style: "border-destructive/30 bg-danger-subtle text-destructive",
+    style: "alert-error alert-soft border-destructive/30 bg-danger-subtle text-destructive",
   },
   warning: {
     icon: TriangleAlert,
-    style: "border-warning/30 bg-warning-subtle text-warning",
+    style: "alert-warning alert-soft border-warning/30 bg-warning-subtle text-warning",
   },
   pending: {
     icon: LoaderCircle,
-    style: "border-info/30 bg-info-subtle text-info",
+    style: "alert-info alert-soft border-info/30 bg-info-subtle text-info",
   },
 };
 /** Additive API: existing info/success/error callers retain their live-region semantics. */
@@ -61,7 +61,7 @@ export function Status({
       role={tone === "error" ? "alert" : "status"}
       aria-atomic="true"
       className={cn(
-        "ds-status flex min-w-0 items-start gap-[12px] rounded-xl border p-[16px] text-sm leading-relaxed",
+        "alert ds-status flex min-w-0 items-start gap-[12px] rounded-xl border p-[16px] text-sm leading-relaxed",
         style,
         className,
       )}

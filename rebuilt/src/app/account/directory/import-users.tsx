@@ -352,7 +352,7 @@ export function ImportUsers() {
           <input
             type="file"
             accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            className="block min-h-11 w-full min-w-0 rounded-md border p-2"
+            className="file-input w-full block min-h-11 w-full min-w-0 rounded-md border p-2"
             disabled={busy || started}
             onChange={(e) => void read(e.target.files?.[0])}
           />
@@ -376,7 +376,7 @@ export function ImportUsers() {
               belum selesai
             </p>
             <TableRegion label="Pratinjau impor pengguna">
-              <table className="w-full text-left text-sm">
+              <table className="table table-zebra w-full text-left text-sm">
                 <caption className="sr-only">Data dan status per baris</caption>
                 <thead>
                   <tr>
@@ -444,7 +444,7 @@ export function ImportUsers() {
             <label className="flex min-h-11 items-start gap-3 text-sm">
               <input
                 type="checkbox"
-                className="mt-1 size-5 shrink-0"
+                className="checkbox checkbox-primary mt-1 size-5 shrink-0"
                 checked={checked}
                 disabled={busy}
                 onChange={(e) => setChecked(e.target.checked)}

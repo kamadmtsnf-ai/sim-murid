@@ -75,7 +75,7 @@ export function ContextualHelp({
                 }}
                 aria-invalid={invalid}
                 aria-describedby={`${id}-hint`}
-                className="min-h-11 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:outline-2 focus-visible:outline-ring"
+                className="input w-full min-h-11 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:outline-2 focus-visible:outline-ring"
               /></FloatingLabel>
             </div>
             <p id={`${id}-hint`} className="text-muted-foreground">
@@ -97,7 +97,7 @@ export function ContextualHelp({
                 readOnly
                 value={template}
                 rows={10}
-                className="w-full min-w-0 resize-y rounded-md border bg-background p-[12px] text-sm"
+                className="textarea w-full w-full min-w-0 resize-y rounded-md border bg-background p-[12px] text-sm"
               /></FloatingLabel>
             </div>
             <p role="status" aria-live="polite">

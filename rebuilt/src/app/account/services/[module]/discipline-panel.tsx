@@ -337,13 +337,13 @@ const retainedEcurrentTarget=e.currentTarget;
                 name="month"
                 type="month"
                 defaultValue={data.month.slice(0, 7)}
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 required
               /></FloatingLabel>
             </div>
             <label className="text-sm">
               Kelas
-              <select name="classId" className={controlClass}>
+              <select name="classId" className={"select w-full " + (controlClass)}>
                 <option value="">Semua sesuai izin</option>
                 {initial.classes.map((c) => (
                   <option key={String(c.id)} value={String(c.id)}>
@@ -408,7 +408,7 @@ const retainedEcurrentTarget=e.currentTarget;
               setSearch(e.target.value);
               setPage(1);
             }}
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             placeholder="Nama siswa atau kelas"
           /></FloatingLabel>
         </div>
@@ -455,7 +455,7 @@ const retainedEcurrentTarget=e.currentTarget;
                     "Riwayat poin " + row.name + " — gulir untuk seluruh kolom"
                   }
                 >
-                  <table className="w-full text-left text-sm">
+                  <table className="table table-zebra w-full text-left text-sm">
                     <caption className="sr-only">
                       Riwayat kejadian {row.name}
                     </caption>
@@ -618,7 +618,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 <>
                   <label className="block text-sm">
                     Siswa
-                    <select name="studentId" className={controlClass} required>
+                    <select name="studentId" className={"select w-full " + (controlClass)} required>
                       <option value="">Pilih siswa</option>
                       {students.map((r) => (
                         <option
@@ -635,7 +635,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       type="date"
                       value={eventDate}
                       max={data.today}
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       required
                       onChange={(e) => setEventDate(e.target.value)}
                     /></FloatingLabel>
@@ -645,7 +645,7 @@ const retainedEcurrentTarget=e.currentTarget;
                     <select
                       value={eventCode}
                       onChange={(e) => setEventCode(e.target.value)}
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       required
                     >
                       <option value="">Pilih kode</option>
@@ -669,7 +669,7 @@ const retainedEcurrentTarget=e.currentTarget;
                     </>}><textarea placeholder=" "
                       name="notes"
                       maxLength={2000}
-                      className={controlClass}
+                      className={"textarea w-full " + (controlClass)}
                       rows={3}
                     /></FloatingLabel>
                   </div>
@@ -697,7 +697,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       pattern="[A-I][0-9]{2}"
                       maxLength={3}
                       placeholder="A01"
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>
@@ -706,7 +706,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       name="category"
                       defaultValue={catalog?.category ?? ""}
                       maxLength={2000}
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>
@@ -716,7 +716,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       defaultValue={catalog?.description ?? ""}
                       maxLength={2000}
                       rows={3}
-                      className={controlClass}
+                      className={"textarea w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>
@@ -728,7 +728,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       max={100}
                       step={1}
                       defaultValue={catalog?.points ?? 0}
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>
@@ -738,14 +738,14 @@ const retainedEcurrentTarget=e.currentTarget;
                       defaultValue={catalog?.consequence ?? ""}
                       maxLength={2000}
                       rows={2}
-                      className={controlClass}
+                      className={"textarea w-full " + (controlClass)}
                     /></FloatingLabel>
                   </div>
                   <label className="flex min-h-11 items-center gap-2 text-sm">
                     <input
                       type="checkbox"
                       name="active"
-                      defaultChecked={catalog?.active ?? true}
+                      defaultChecked={catalog?.active ?? true} className="checkbox checkbox-primary"
                     />
                     Kode aktif
                   </label>
@@ -756,7 +756,7 @@ const retainedEcurrentTarget=e.currentTarget;
                     <input
                       type="checkbox"
                       name="email"
-                      defaultChecked={data.extra.settings.email_enabled}
+                      defaultChecked={data.extra.settings.email_enabled} className="checkbox checkbox-primary"
                     />
                     Aktifkan antrean email
                   </label>
@@ -764,7 +764,7 @@ const retainedEcurrentTarget=e.currentTarget;
                     <input
                       type="checkbox"
                       name="whatsapp"
-                      defaultChecked={data.extra.settings.whatsapp_enabled}
+                      defaultChecked={data.extra.settings.whatsapp_enabled} className="checkbox checkbox-primary"
                     />
                     Aktifkan antrean WhatsApp
                   </label>
@@ -780,7 +780,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       max={5}
                       step={1}
                       defaultValue={data.extra.settings.point_threshold}
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>
@@ -791,7 +791,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       defaultValue={
                         data.extra.settings.affective_subject_id ?? ""
                       }
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                     >
                       <option value="">Belum ditetapkan</option>
                       {data.extra.settings.affective_subject_id &&
@@ -817,7 +817,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 <>
                   <label className="block text-sm">
                     Tindakan
-                    <select name="type" className={controlClass}>
+                    <select name="type" className={"select w-full " + (controlClass)}>
                       <option value="reset">
                         Arsipkan bulan yang sudah berakhir
                       </option>
@@ -830,7 +830,7 @@ const retainedEcurrentTarget=e.currentTarget;
                     </>}><input placeholder=" "
                       name="month"
                       type="month"
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>
@@ -852,7 +852,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       minLength={3}
                       maxLength={2000}
                       rows={3}
-                      className={controlClass}
+                      className={"textarea w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>

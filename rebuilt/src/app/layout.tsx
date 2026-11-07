@@ -18,7 +18,7 @@ export const viewport: Viewport = { themeColor: "#125e64" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id">
+    <html lang="id" data-theme="sim-murid">
       <body>
         <PwaInstall><PwaSkipLink />{children}</PwaInstall>
       </body>

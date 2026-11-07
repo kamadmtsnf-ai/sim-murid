@@ -346,7 +346,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
                 id="jobs-search"
                 type="search"
                 maxLength={200}
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value);
@@ -358,7 +358,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
               Status
               <select
                 id="jobs-status"
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 value={status}
                 onChange={(e) => {
                   setStatus(e.target.value);
@@ -384,7 +384,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
               Saluran
               <select
                 id="jobs-channel"
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 value={channel}
                 onChange={(e) => {
                   setChannel(e.target.value);

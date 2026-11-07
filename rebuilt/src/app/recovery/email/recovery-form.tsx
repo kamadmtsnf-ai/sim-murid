@@ -99,7 +99,7 @@ export function EmailRecoveryForm() {
             </>}><input placeholder=" "
               id="email-recovery-user"
               name="username"
-              className={styles.input}
+              className={"input w-full " + (styles.input)}
               autoComplete="username"
               autoCapitalize="none"
               autoCorrect="off"
@@ -138,7 +138,7 @@ export function EmailRecoveryForm() {
                   ref={codeRef}
                   id="recovery-email-code"
                   name="code"
-                  className={styles.input}
+                  className={"input w-full " + (styles.input)}
                   inputMode="numeric"
                   autoComplete="one-time-code"
                   pattern="[0-9]{6}"
@@ -157,7 +157,7 @@ export function EmailRecoveryForm() {
                   name="newPassword"
                   type="password"
                   autoComplete="new-password"
-                  className={styles.input}
+                  className={"input w-full " + (styles.input)}
                   minLength={8}
                   maxLength={72}
                   aria-describedby="reset-password-rules"
@@ -170,7 +170,7 @@ export function EmailRecoveryForm() {
                   name="confirmPassword"
                   type="password"
                   autoComplete="new-password"
-                  className={styles.input}
+                  className={"input w-full " + (styles.input)}
                   maxLength={1024}
                   required
                 /></FloatingLabel>

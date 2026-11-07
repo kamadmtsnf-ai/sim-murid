@@ -434,7 +434,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   min="2000"
                   max="2100"
                   defaultValue={filters.year}
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   required
                 /></FloatingLabel>
               </div>
@@ -476,7 +476,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
         </h2>
         <div className="block text-sm"><FloatingLabel label={<>Cari rekening
           </>}><input
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             placeholder="Nama pemilik"
             value={accountSearch}
             onChange={(e) => {
@@ -633,7 +633,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
           </p>
         </Guidance>
         <TableRegion label="Mutasi tabungan — gulir untuk melihat seluruh kolom">
-          <table className="w-full text-left text-sm">
+          <table className="table table-zebra w-full text-left text-sm">
             <caption className="sr-only">
               Ledger tabungan sesuai filter dan hak akses
             </caption>
@@ -779,7 +779,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                 <>
                   <div className="block text-sm"><FloatingLabel label={<>Minimum (Rp)
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="minimum"
                       type="number"
                       min="0"
@@ -791,7 +791,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   </div>
                   <div className="block text-sm"><FloatingLabel label={<>Maksimum (Rp, kosong tanpa batas)
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="maximum"
                       type="number"
                       min="0"
@@ -802,7 +802,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   </div>
                   <div className="block text-sm"><FloatingLabel label={<>Persentase (%)
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="percent"
                       type="number"
                       min="0"
@@ -816,14 +816,14 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                     <input
                       type="checkbox"
                       name="active"
-                      defaultChecked={editBracket?.active ?? true}
+                      defaultChecked={editBracket?.active ?? true} className="checkbox checkbox-primary"
                     />{" "}
                     Tarif aktif
                   </label>
                   {editBracket && (
                     <div className="block text-sm"><FloatingLabel label={<>Alasan perubahan tarif
                       </>}><input placeholder=" "
-                        className={controlClass}
+                        className={"input w-full " + (controlClass)}
                         name="reason"
                         minLength={3}
                         maxLength={2000}
@@ -857,7 +857,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   </SelectField>
                   <div className="block text-sm"><FloatingLabel label={<>Tanggal transaksi
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="date"
                       type="date"
                       min="2000-01-01"
@@ -869,7 +869,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   <label className="block text-sm">
                     Jenis transaksi
                     <select
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       value={kind}
                       onChange={(e) => {
                         setKind(e.target.value as typeof kind);
@@ -883,7 +883,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   </label>
                   <div className="block text-sm"><FloatingLabel label={<>Nominal (Rp)
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       type="number"
                       min="1000"
                       max="1000000000000"
@@ -899,7 +899,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                         <input
                           type="checkbox"
                           checked={feeApplied}
-                          onChange={(e) => setFeeApplied(e.target.checked)}
+                          onChange={(e) => setFeeApplied(e.target.checked)} className="checkbox checkbox-primary"
                         />{" "}
                         Terapkan biaya penarikan
                       </label>
@@ -929,7 +929,7 @@ export function SavingsPanel({ initial }: { initial: SavingsSnapshot }) {
                   )}
                   <div className="block text-sm"><FloatingLabel label={<>Keterangan / alasan transaksi
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="reason"
                       defaultValue={edit?.notes ?? ""}
                       minLength={3}

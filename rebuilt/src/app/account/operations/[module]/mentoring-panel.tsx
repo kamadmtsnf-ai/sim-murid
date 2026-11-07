@@ -385,7 +385,7 @@ const retainedEcurrentTarget=e.currentTarget;
             >
               <div className="text-sm"><FloatingLabel label={<>Tahun kalender
                 </>}><input placeholder=" "
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   name="year"
                   type="number"
                   min="2000"
@@ -438,7 +438,7 @@ const retainedEcurrentTarget=e.currentTarget;
           </p>
         </Guidance>
         <TableRegion label="Laporan bimbingan — gulir untuk melihat seluruh kolom">
-          <table className="w-full text-left text-sm">
+          <table className="table table-zebra w-full text-left text-sm">
             <caption className="sr-only">
               Laporan sesuai filter dan hak akses
             </caption>
@@ -545,7 +545,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   <label className="block text-sm">
                     Guru Wali
                     <select
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       value={teacher}
                       required
                       onChange={async (e) => {
@@ -569,13 +569,13 @@ const retainedEvalue=e.target.value;
                         <input
                           key={teacher}
                           type="checkbox"
-                          name="assignTask"
+                          name="assignTask" className="checkbox checkbox-primary"
                         />{" "}
                         Tetapkan juga tugas Guru Wali bila belum aktif
                       </label>
                       <div className="block text-sm"><FloatingLabel label={<>Cari siswa
                         </>}><input
-                          className={controlClass}
+                          className={"input w-full " + (controlClass)}
                           value={search}
                           onChange={(e) => {
                             e.stopPropagation();
@@ -600,7 +600,7 @@ const retainedEvalue=e.target.value;
                               className="flex min-h-11 items-start gap-3 rounded-lg border p-3 text-sm"
                             >
                               <input
-                                className="mt-1 shrink-0"
+                                className="checkbox checkbox-primary mt-1 shrink-0"
                                 type="checkbox"
                                 checked={selected.includes(p.id)}
                                 disabled={!!other}
@@ -666,7 +666,7 @@ const retainedEvalue=e.target.value;
                     </>}><input placeholder=" "
                       name="date"
                       type="date"
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       min="2000-01-01"
                       max={data.today}
                       defaultValue={edit?.date ?? data.today}
@@ -676,7 +676,7 @@ const retainedEvalue=e.target.value;
                   <label className="block text-sm">
                     Jenis laporan
                     <select
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       value={kind}
                       onChange={(e) => {
                         setKind(e.target.value as typeof kind);
@@ -691,7 +691,7 @@ const retainedEvalue=e.target.value;
                     <label className="block text-sm">
                       Master hafalan
                       <select
-                        className={controlClass}
+                        className={"select w-full " + (controlClass)}
                         value={catalog}
                         onChange={(e) => setCatalog(e.target.value)}
                       >
@@ -735,7 +735,7 @@ const retainedEvalue=e.target.value;
                   <div className="block text-sm"><FloatingLabel label={<>{kind === "development"
                       ? "Deskripsi perkembangan"
                       : "Catatan hafalan"}</>}><textarea placeholder=" "
-                      className={controlClass}
+                      className={"textarea w-full " + (controlClass)}
                       name="notes"
                       defaultValue={edit?.notes ?? ""}
                       required={kind === "development"}
@@ -746,7 +746,7 @@ const retainedEvalue=e.target.value;
                   {edit && (
                     <div className="block text-sm"><FloatingLabel label={<>Alasan koreksi / pembatalan
                       </>}><input placeholder=" "
-                        className={controlClass}
+                        className={"input w-full " + (controlClass)}
                         name="reason"
                         minLength={3}
                         maxLength={2000}

@@ -1,0 +1,16 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.inputValue: Timeout 15000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('textbox', { name: 'Nama sekolah', exact: true })[22m
+
+    at /tmp/sim-original/rebuilt/scripts/verify-settings.mjs:216:17 {
+  log: [
+    "  - waiting for getByRole('textbox', { name: 'Nama sekolah', exact: true })"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1

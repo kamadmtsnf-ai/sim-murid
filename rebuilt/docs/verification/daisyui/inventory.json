@@ -1,0 +1,1102 @@
+{
+  "baseline": "2562fe6db2fb54c865709d7fdfcccd292f5a3827",
+  "pages": 23,
+  "tsxFiles": 140,
+  "interactionControlsUnchanged": 594,
+  "files": [
+    {
+      "file": "src/app/account/access/access-panel.tsx",
+      "controls": 6,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/access/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/access/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/access/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/biodata/[id]/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/biodata/biodata-panel.tsx",
+      "controls": 18,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/biodata/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/biodata/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/biodata/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/biodata/region-fields.tsx",
+      "controls": 2,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "controls": 18,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/classes/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/classes/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/classes/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/directory/[id]/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/directory/[id]/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/directory/[id]/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "controls": 11,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/directory-detail.tsx",
+      "controls": 1,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/directory-panel.tsx",
+      "controls": 6,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/directory/export-directory-page.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/directory/import-users.tsx",
+      "controls": 7,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "controls": 9,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/email/email-panel.tsx",
+      "controls": 6,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/email/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/email/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/email/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "controls": 15,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/families/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/health/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/health/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/health/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/layout.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/learning/[module]/books-panel.tsx",
+      "controls": 13,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "controls": 27,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/learning/[module]/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/learning/[module]/panel.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/learning/[module]/promotions-panel.tsx",
+      "controls": 35,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/reader.tsx",
+      "controls": 8,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/learning/[module]/reports-panel.tsx",
+      "controls": 19,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "controls": 21,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "controls": 25,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/duty-panel.tsx",
+      "controls": 23,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/operations/[module]/fees.tsx",
+      "controls": 2,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/operations/[module]/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "controls": 19,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/operations/[module]/panel.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "controls": 27,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/profile/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/profile/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/profile/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/profile/profile-form.tsx",
+      "controls": 5,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/recovery/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/recovery/recovery-panel.tsx",
+      "controls": 14,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/schedules/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/schedules/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/schedules/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "controls": 27,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/security/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/security/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/security/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/security/security-panel.tsx",
+      "controls": 13,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/ai-review.tsx",
+      "controls": 2,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "controls": 31,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/error.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/services/[module]/insights-workspace.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/services/[module]/insights.tsx",
+      "controls": 14,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/jobs-panel.tsx",
+      "controls": 8,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/services/[module]/notifications-panel.tsx",
+      "controls": 6,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/services/[module]/panel.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/services/[module]/reconciliation-panel.tsx",
+      "controls": 7,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/survey-editor.tsx",
+      "controls": 11,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/survey-form.tsx",
+      "controls": 10,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/surveys-panel.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/sessions/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/sessions/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/sessions/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/sessions/session-panel.tsx",
+      "controls": 8,
+      "changed": true
+    },
+    {
+      "file": "src/app/account/settings/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/account/settings/settings-panel.tsx",
+      "controls": 20,
+      "changed": true
+    },
+    {
+      "file": "src/app/error.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/layout.tsx",
+      "controls": 0,
+      "changed": true
+    },
+    {
+      "file": "src/app/login/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/login/login-form.tsx",
+      "controls": 7,
+      "changed": true
+    },
+    {
+      "file": "src/app/login/login-shell.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/login/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/login/recaptcha-widget.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/not-found.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/page.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/app/recovery/email/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/recovery/email/recovery-form.tsx",
+      "controls": 7,
+      "changed": true
+    },
+    {
+      "file": "src/app/recovery/loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/recovery/page.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/recovery/recovery-feedback.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/app/recovery/recovery-form.tsx",
+      "controls": 7,
+      "changed": true
+    },
+    {
+      "file": "src/app/recovery/recovery-shell.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/academic/academic-context.tsx",
+      "controls": 4,
+      "changed": true
+    },
+    {
+      "file": "src/components/account-dashboard.tsx",
+      "controls": 0,
+      "changed": true
+    },
+    {
+      "file": "src/components/account/account-completion.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/admin-health.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/components/audit/audit-trail.tsx",
+      "controls": 9,
+      "changed": true
+    },
+    {
+      "file": "src/components/bulk/bulk-import.tsx",
+      "controls": 15,
+      "changed": true
+    },
+    {
+      "file": "src/components/dashboard/daily-overview.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "controls": 9,
+      "changed": true
+    },
+    {
+      "file": "src/components/domain-controls.tsx",
+      "controls": 2,
+      "changed": true
+    },
+    {
+      "file": "src/components/feedback/error-reference.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/feedback/mutation-feedback.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/feedback/panel-loading.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/forms/navigation-guard.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/components/help/contextual-help.tsx",
+      "controls": 3,
+      "changed": true
+    },
+    {
+      "file": "src/components/imports/import-report.tsx",
+      "controls": 1,
+      "changed": false
+    },
+    {
+      "file": "src/components/navigation-icon.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/pwa-install.tsx",
+      "controls": 4,
+      "changed": false
+    },
+    {
+      "file": "src/components/ui/button.tsx",
+      "controls": 0,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/card.tsx",
+      "controls": 0,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/collection-controls.tsx",
+      "controls": 2,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/collection-summary.tsx",
+      "controls": 0,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/confirm-action.tsx",
+      "controls": 2,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/content-state.tsx",
+      "controls": 1,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/data-table.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/ui/dialog.tsx",
+      "controls": 1,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/field.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/ui/floating-label.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/ui/guidance.tsx",
+      "controls": 0,
+      "changed": true
+    },
+    {
+      "file": "src/components/ui/link-pagination.tsx",
+      "controls": 4,
+      "changed": false
+    },
+    {
+      "file": "src/components/ui/paged-collection.tsx",
+      "controls": 0,
+      "changed": false
+    },
+    {
+      "file": "src/components/ui/status.tsx",
+      "controls": 0,
+      "changed": true
+    },
+    {
+      "file": "src/components/workspace-shell.tsx",
+      "controls": 5,
+      "changed": true
+    }
+  ],
+  "visualControlMigration": [
+    {
+      "file": "src/app/account/access/access-panel.tsx",
+      "controls": {
+        "input": 1,
+        "select": 3
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/biodata/biodata-panel.tsx",
+      "controls": {
+        "progress": 1,
+        "input": 4,
+        "select": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/biodata/region-fields.tsx",
+      "controls": {
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/classes/class-panel.tsx",
+      "controls": {
+        "select": 1,
+        "input": 5
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/add-user.tsx",
+      "controls": {
+        "input": 4,
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/directory-panel.tsx",
+      "controls": {
+        "progress": 1,
+        "table": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/import-users.tsx",
+      "controls": {
+        "input": 2,
+        "table": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/directory/manage-assignments.tsx",
+      "controls": {
+        "select": 1,
+        "input": 2,
+        "textarea": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/email/email-panel.tsx",
+      "controls": {
+        "input": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/families/family-panel.tsx",
+      "controls": {
+        "Tabs.List": 1,
+        "Tabs.Trigger": 2,
+        "input": 4
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/books-panel.tsx",
+      "controls": {
+        "input": 3
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/grades-panel.tsx",
+      "controls": {
+        "select": 6,
+        "input": 7,
+        "table": 1,
+        "textarea": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/promotions-panel.tsx",
+      "controls": {
+        "div": 1,
+        "Button": 1,
+        "select": 7,
+        "input": 10,
+        "textarea": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/learning/[module]/reports-panel.tsx",
+      "controls": {
+        "select": 4,
+        "input": 3,
+        "table": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/attendance-panel.tsx",
+      "controls": {
+        "Tabs.List": 1,
+        "Tabs.Trigger": 1,
+        "input": 5,
+        "select": 2,
+        "table": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/committee-panel.tsx",
+      "controls": {
+        "input": 8,
+        "table": 2,
+        "select": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/duty-panel.tsx",
+      "controls": {
+        "select": 3,
+        "Tabs.List": 1,
+        "Tabs.Trigger": 2,
+        "input": 5,
+        "table": 1,
+        "textarea": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/mentoring-panel.tsx",
+      "controls": {
+        "input": 6,
+        "table": 1,
+        "select": 3,
+        "textarea": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/operations/[module]/savings-panel.tsx",
+      "controls": {
+        "input": 11,
+        "table": 1,
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/profile/profile-form.tsx",
+      "controls": {
+        "textarea": 1,
+        "input": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/recovery/recovery-panel.tsx",
+      "controls": {
+        "input": 5,
+        "select": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/schedules/schedule-panel.tsx",
+      "controls": {
+        "select": 3,
+        "input": 8,
+        "Tabs.List": 1,
+        "Tabs.Trigger": 2,
+        "table": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/security/security-panel.tsx",
+      "controls": {
+        "input": 8,
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/ai-review.tsx",
+      "controls": {
+        "input": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/discipline-panel.tsx",
+      "controls": {
+        "input": 11,
+        "select": 5,
+        "table": 1,
+        "textarea": 4
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/insights.tsx",
+      "controls": {
+        "select": 3,
+        "table": 1,
+        "input": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/jobs-panel.tsx",
+      "controls": {
+        "input": 1,
+        "select": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/notifications-panel.tsx",
+      "controls": {
+        "input": 1,
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/reconciliation-panel.tsx",
+      "controls": {
+        "input": 3,
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/survey-editor.tsx",
+      "controls": {
+        "progress": 1,
+        "textarea": 2,
+        "select": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/services/[module]/survey-form.tsx",
+      "controls": {
+        "select": 3,
+        "input": 3,
+        "textarea": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/sessions/session-panel.tsx",
+      "controls": {
+        "input": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/account/settings/settings-panel.tsx",
+      "controls": {
+        "input": 4,
+        "table": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/login/login-form.tsx",
+      "controls": {
+        "input": 3
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/recovery/email/recovery-form.tsx",
+      "controls": {
+        "input": 4
+      },
+      "changed": true
+    },
+    {
+      "file": "src/app/recovery/recovery-form.tsx",
+      "controls": {
+        "input": 3,
+        "select": 2
+      },
+      "changed": true
+    },
+    {
+      "file": "src/components/academic/academic-context.tsx",
+      "controls": {
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/components/audit/audit-trail.tsx",
+      "controls": {
+        "table": 1,
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/components/bulk/bulk-import.tsx",
+      "controls": {
+        "input": 4,
+        "select": 2,
+        "table": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/components/dashboard/follow-up-center.tsx",
+      "controls": {
+        "Tabs.List": 1,
+        "Tabs.Trigger": 2,
+        "input": 2,
+        "select": 3
+      },
+      "changed": true
+    },
+    {
+      "file": "src/components/domain-controls.tsx",
+      "controls": {
+        "input": 1,
+        "select": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/components/help/contextual-help.tsx",
+      "controls": {
+        "input": 1,
+        "textarea": 1
+      },
+      "changed": true
+    },
+    {
+      "file": "src/components/workspace-shell.tsx",
+      "controls": {
+        "input": 1,
+        "button": 1
+      },
+      "changed": true
+    }
+  ],
+  "pageFiles": [
+    "src/app/account/access/page.tsx",
+    "src/app/account/biodata/[id]/page.tsx",
+    "src/app/account/biodata/page.tsx",
+    "src/app/account/classes/page.tsx",
+    "src/app/account/directory/[id]/page.tsx",
+    "src/app/account/directory/page.tsx",
+    "src/app/account/email/page.tsx",
+    "src/app/account/families/page.tsx",
+    "src/app/account/health/page.tsx",
+    "src/app/account/learning/[module]/page.tsx",
+    "src/app/account/operations/[module]/page.tsx",
+    "src/app/account/page.tsx",
+    "src/app/account/profile/page.tsx",
+    "src/app/account/recovery/page.tsx",
+    "src/app/account/schedules/page.tsx",
+    "src/app/account/security/page.tsx",
+    "src/app/account/services/[module]/page.tsx",
+    "src/app/account/sessions/page.tsx",
+    "src/app/account/settings/page.tsx",
+    "src/app/login/page.tsx",
+    "src/app/page.tsx",
+    "src/app/recovery/email/page.tsx",
+    "src/app/recovery/page.tsx"
+  ]
+}

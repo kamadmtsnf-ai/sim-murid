@@ -1,0 +1,567 @@
+{
+  "checks": [
+    {
+      "name": "admin administrator-only job source",
+      "passed": true
+    },
+    {
+      "name": "admin relevant academic source",
+      "passed": true
+    },
+    {
+      "name": "admin raw source identities and bodies not rendered",
+      "passed": true
+    },
+    {
+      "name": "admin axe",
+      "passed": true
+    },
+    {
+      "name": "teacher administrator-only job source",
+      "passed": true
+    },
+    {
+      "name": "teacher relevant academic source",
+      "passed": true
+    },
+    {
+      "name": "teacher raw source identities and bodies not rendered",
+      "passed": true
+    },
+    {
+      "name": "teacher axe",
+      "passed": true
+    },
+    {
+      "name": "student administrator-only job source",
+      "passed": true
+    },
+    {
+      "name": "student relevant academic source",
+      "passed": true
+    },
+    {
+      "name": "student raw source identities and bodies not rendered",
+      "passed": true
+    },
+    {
+      "name": "student axe",
+      "passed": true
+    },
+    {
+      "name": "parent administrator-only job source",
+      "passed": true
+    },
+    {
+      "name": "parent relevant academic source",
+      "passed": true
+    },
+    {
+      "name": "parent raw source identities and bodies not rendered",
+      "passed": true
+    },
+    {
+      "name": "parent axe",
+      "passed": true
+    },
+    {
+      "name": "alumni administrator-only job source",
+      "passed": true
+    },
+    {
+      "name": "alumni relevant academic source",
+      "passed": true
+    },
+    {
+      "name": "alumni raw source identities and bodies not rendered",
+      "passed": true
+    },
+    {
+      "name": "alumni axe",
+      "passed": true
+    },
+    {
+      "name": "customer administrator-only job source",
+      "passed": true
+    },
+    {
+      "name": "customer relevant academic source",
+      "passed": true
+    },
+    {
+      "name": "customer raw source identities and bodies not rendered",
+      "passed": true
+    },
+    {
+      "name": "customer axe",
+      "passed": true
+    },
+    {
+      "name": "applicant administrator-only job source",
+      "passed": true
+    },
+    {
+      "name": "applicant relevant academic source",
+      "passed": true
+    },
+    {
+      "name": "applicant raw source identities and bodies not rendered",
+      "passed": true
+    },
+    {
+      "name": "applicant axe",
+      "passed": true
+    },
+    {
+      "name": "normal mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "normal mobile axe",
+      "passed": true
+    },
+    {
+      "name": "normal overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "normal overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "normal overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "normal overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "long mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "long mobile axe",
+      "passed": true
+    },
+    {
+      "name": "long overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "long overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "long overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "long overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "partial mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "partial mobile axe",
+      "passed": true
+    },
+    {
+      "name": "unavailable source is not a false zero",
+      "passed": true
+    },
+    {
+      "name": "valid source survives partial failure",
+      "passed": true
+    },
+    {
+      "name": "partial overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "partial overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "partial overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "partial overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "empty mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "empty mobile axe",
+      "passed": true
+    },
+    {
+      "name": "empty overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "empty overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "empty overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "empty overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "unavailable mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "unavailable mobile axe",
+      "passed": true
+    },
+    {
+      "name": "unavailable overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "unavailable overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "unavailable overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "unavailable overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "holiday mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "holiday mobile axe",
+      "passed": true
+    },
+    {
+      "name": "holiday suppresses lesson priority",
+      "passed": true
+    },
+    {
+      "name": "holiday overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "holiday overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "holiday overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "holiday overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "multi mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "multi mobile axe",
+      "passed": true
+    },
+    {
+      "name": "multi overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "multi overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "multi overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "multi overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "unknown-fee mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "unknown-fee mobile axe",
+      "passed": true
+    },
+    {
+      "name": "unknown tariff is not a false paid/zero value",
+      "passed": true
+    },
+    {
+      "name": "unknown-fee overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "unknown-fee overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "unknown-fee overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "unknown-fee overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "no-grants mobile overflow",
+      "passed": true
+    },
+    {
+      "name": "no-grants mobile axe",
+      "passed": true
+    },
+    {
+      "name": "no-grants overflow 390x844",
+      "passed": true
+    },
+    {
+      "name": "no-grants overflow 768x900",
+      "passed": true
+    },
+    {
+      "name": "no-grants overflow 1440x900",
+      "passed": true
+    },
+    {
+      "name": "no-grants overflow 844x390",
+      "passed": true
+    },
+    {
+      "name": "multi 320 axe",
+      "passed": true
+    },
+    {
+      "name": "refresh touch target 320",
+      "passed": true
+    },
+    {
+      "name": "multi 390 axe",
+      "passed": true
+    },
+    {
+      "name": "refresh touch target 390",
+      "passed": true
+    },
+    {
+      "name": "multi 768 axe",
+      "passed": true
+    },
+    {
+      "name": "refresh touch target 768",
+      "passed": true
+    },
+    {
+      "name": "multi 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "refresh touch target 1440",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "double refresh sends one request",
+      "passed": true
+    },
+    {
+      "name": "confirmed refresh replaces snapshot",
+      "passed": true
+    },
+    {
+      "name": "refresh feedback receives keyboard focus",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "offline keeps timestamped last snapshot",
+      "passed": true
+    },
+    {
+      "name": "offline no automatic replay or raw errors",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "500 keeps timestamped last snapshot",
+      "passed": true
+    },
+    {
+      "name": "500 no automatic replay or raw errors",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "malformed keeps timestamped last snapshot",
+      "passed": true
+    },
+    {
+      "name": "malformed no automatic replay or raw errors",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "401 clears previous private summary",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "403 clears previous private summary",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "wrong-owner clears previous private summary",
+      "passed": true
+    },
+    {
+      "name": "new server account context remounts old private summary",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "unmount ignores late response",
+      "passed": true
+    },
+    {
+      "name": "refresh is read only without actor/scope parameters",
+      "passed": true
+    },
+    {
+      "name": "read timeout never repeats request",
+      "passed": true
+    },
+    {
+      "name": "operational snapshot not stored in browser drafts",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "admin",
+      "violations": []
+    },
+    {
+      "label": "teacher",
+      "violations": []
+    },
+    {
+      "label": "student",
+      "violations": []
+    },
+    {
+      "label": "parent",
+      "violations": []
+    },
+    {
+      "label": "alumni",
+      "violations": []
+    },
+    {
+      "label": "customer",
+      "violations": []
+    },
+    {
+      "label": "applicant",
+      "violations": []
+    },
+    {
+      "label": "normal mobile",
+      "violations": []
+    },
+    {
+      "label": "long mobile",
+      "violations": []
+    },
+    {
+      "label": "partial mobile",
+      "violations": []
+    },
+    {
+      "label": "empty mobile",
+      "violations": []
+    },
+    {
+      "label": "unavailable mobile",
+      "violations": []
+    },
+    {
+      "label": "holiday mobile",
+      "violations": []
+    },
+    {
+      "label": "multi mobile",
+      "violations": []
+    },
+    {
+      "label": "unknown-fee mobile",
+      "violations": []
+    },
+    {
+      "label": "no-grants mobile",
+      "violations": []
+    },
+    {
+      "label": "multi 320",
+      "violations": []
+    },
+    {
+      "label": "multi 390",
+      "violations": []
+    },
+    {
+      "label": "multi 768",
+      "violations": []
+    },
+    {
+      "label": "multi 1440",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

@@ -14,7 +14,7 @@ export function EmptyState({
 }) {
   const Icon = kind === "search" ? SearchX : Inbox;
   return (
-    <div className="ds-empty-state">
+    <div className="card ds-empty-state">
       <div className="mx-auto mb-3 grid size-[44px] place-items-center rounded-xl bg-muted text-muted-foreground">
         <Icon className="size-[20px]" aria-hidden="true" />
       </div>
@@ -35,7 +35,7 @@ export function LoadingState({
 }) {
   return (
     <div className="min-w-0 space-y-4">
-      <p role="status" className="flex items-start gap-[12px] rounded-xl border bg-card p-[16px] text-sm text-muted-foreground">
+      <p role="status" className="alert alert-soft alert-info flex items-start gap-[12px] rounded-xl border bg-card p-[16px] text-sm text-muted-foreground">
         <LoaderCircle className="mt-0.5 size-[16px] shrink-0 motion-safe:animate-spin" aria-hidden="true" />
         <span className="min-w-0 [overflow-wrap:anywhere]">{children}</span>
       </p>

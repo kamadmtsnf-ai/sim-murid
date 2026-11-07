@@ -49,7 +49,7 @@ export function Dialog({
             if (closeDisabled) event.preventDefault();
           }}
           className={cn(
-            "dialog-content min-w-0 [overflow-wrap:anywhere] fixed top-1/2 left-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-xl",
+            "modal-box dialog-content min-w-0 [overflow-wrap:anywhere] fixed top-1/2 left-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl border bg-card text-card-foreground shadow-xl",
             className,
           )}
           onPointerDownOutside={(event) => event.preventDefault()}

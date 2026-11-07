@@ -1,0 +1,550 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "mapping 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "mapping 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "paired target year 320",
+      "passed": true
+    },
+    {
+      "name": "no implicit graduation 320",
+      "passed": true
+    },
+    {
+      "name": "destination year/level/archive filtered 320",
+      "passed": true
+    },
+    {
+      "name": "confirm 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "confirm 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "ack required 320",
+      "passed": true
+    },
+    {
+      "name": "focus trapped 320",
+      "passed": true
+    },
+    {
+      "name": "footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "focus returned 320",
+      "passed": true
+    },
+    {
+      "name": "metadata details keyboard expandable",
+      "passed": true
+    },
+    {
+      "name": "metadata correct target 320",
+      "passed": true
+    },
+    {
+      "name": "metadata 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "metadata 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "metadata footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "switch alumni does not reuse previous metadata 320",
+      "passed": true
+    },
+    {
+      "name": "global existing download prefilled 320",
+      "passed": true
+    },
+    {
+      "name": "global view independent 320",
+      "passed": true
+    },
+    {
+      "name": "access 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "access 320 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 740,
+        "document": 740
+      }
+    },
+    {
+      "name": "mapping 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "mapping 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "paired target year 768",
+      "passed": true
+    },
+    {
+      "name": "no implicit graduation 768",
+      "passed": true
+    },
+    {
+      "name": "destination year/level/archive filtered 768",
+      "passed": true
+    },
+    {
+      "name": "confirm 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "confirm 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "ack required 768",
+      "passed": true
+    },
+    {
+      "name": "focus trapped 768",
+      "passed": true
+    },
+    {
+      "name": "footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "focus returned 768",
+      "passed": true
+    },
+    {
+      "name": "metadata correct target 768",
+      "passed": true
+    },
+    {
+      "name": "metadata 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "metadata 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "metadata footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "switch alumni does not reuse previous metadata 768",
+      "passed": true
+    },
+    {
+      "name": "global existing download prefilled 768",
+      "passed": true
+    },
+    {
+      "name": "global view independent 768",
+      "passed": true
+    },
+    {
+      "name": "access 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "access 768 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "ArrowRight changes tab",
+      "passed": true
+    },
+    {
+      "name": "ArrowLeft restores mapping tab",
+      "passed": true
+    },
+    {
+      "name": "mapping 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "mapping 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "paired target year 1440",
+      "passed": true
+    },
+    {
+      "name": "no implicit graduation 1440",
+      "passed": true
+    },
+    {
+      "name": "destination year/level/archive filtered 1440",
+      "passed": true
+    },
+    {
+      "name": "confirm 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "confirm 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "ack required 1440",
+      "passed": true
+    },
+    {
+      "name": "focus trapped 1440",
+      "passed": true
+    },
+    {
+      "name": "footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "focus returned 1440",
+      "passed": true
+    },
+    {
+      "name": "metadata correct target 1440",
+      "passed": true
+    },
+    {
+      "name": "metadata 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "metadata 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "metadata footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "dirty cancellation keeps modal open",
+      "passed": true
+    },
+    {
+      "name": "dirty cancellation preserves draft",
+      "passed": true
+    },
+    {
+      "name": "switch alumni does not reuse previous metadata 1440",
+      "passed": true
+    },
+    {
+      "name": "global existing download prefilled 1440",
+      "passed": true
+    },
+    {
+      "name": "global view independent 1440",
+      "passed": true
+    },
+    {
+      "name": "access 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "access 1440 axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "double click executes one mapping",
+      "passed": true
+    },
+    {
+      "name": "command retains expected source and explicit target",
+      "passed": true
+    },
+    {
+      "name": "grade 9 graduates only with explicit alumni target",
+      "passed": true
+    },
+    {
+      "name": "metadata save reflected",
+      "passed": true
+    },
+    {
+      "name": "metadata saves correct alumni",
+      "passed": true
+    },
+    {
+      "name": "individual access independent policies",
+      "passed": true
+    },
+    {
+      "name": "global access saves separate flags",
+      "passed": true
+    },
+    {
+      "name": "invalid file rejected before prepare",
+      "passed": true
+    },
+    {
+      "name": "upload prepares, transfers and finalizes",
+      "passed": true
+    },
+    {
+      "name": "signed storage upload once",
+      "passed": true
+    },
+    {
+      "name": "finalized asset replaces current slot",
+      "passed": true
+    },
+    {
+      "name": "download success feedback",
+      "passed": true
+    },
+    {
+      "name": "download denied feedback",
+      "passed": true
+    },
+    {
+      "name": "delete requires acknowledgement",
+      "passed": true
+    },
+    {
+      "name": "delete readback removes asset",
+      "passed": true
+    },
+    {
+      "name": "loading locks reads",
+      "passed": true
+    },
+    {
+      "name": "failed read retains snapshot",
+      "passed": true
+    },
+    {
+      "name": "mapping persists across pagination",
+      "passed": true
+    },
+    {
+      "name": "selection restored on previous page",
+      "passed": true
+    },
+    {
+      "name": "search empty state",
+      "passed": true
+    },
+    {
+      "name": "alumni pagination limits cards",
+      "passed": true
+    },
+    {
+      "name": "large alumni no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "pagination resets after refreshed roster shrinks",
+      "passed": true
+    },
+    {
+      "name": "empty alumni state",
+      "passed": true
+    },
+    {
+      "name": "empty no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "read-only role only documents tab",
+      "passed": true
+    },
+    {
+      "name": "read-only role no admin actions",
+      "passed": true
+    },
+    {
+      "name": "view denied link hidden",
+      "passed": true
+    },
+    {
+      "name": "read-only axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "network blocks retry",
+      "passed": true
+    },
+    {
+      "name": "network one request",
+      "passed": true
+    },
+    {
+      "name": "malformed blocks retry",
+      "passed": true
+    },
+    {
+      "name": "malformed one request",
+      "passed": true
+    },
+    {
+      "name": "stale blocks retry",
+      "passed": true
+    },
+    {
+      "name": "stale one request",
+      "passed": true
+    },
+    {
+      "name": "uncertain delete blocks retry",
+      "passed": true
+    },
+    {
+      "name": "write timeout blocks blind retry",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "axe": [
+    {
+      "name": "mapping 320",
+      "violations": []
+    },
+    {
+      "name": "confirm 320",
+      "violations": []
+    },
+    {
+      "name": "metadata 320",
+      "violations": []
+    },
+    {
+      "name": "access 320",
+      "violations": []
+    },
+    {
+      "name": "mapping 768",
+      "violations": []
+    },
+    {
+      "name": "confirm 768",
+      "violations": []
+    },
+    {
+      "name": "metadata 768",
+      "violations": []
+    },
+    {
+      "name": "access 768",
+      "violations": []
+    },
+    {
+      "name": "mapping 1440",
+      "violations": []
+    },
+    {
+      "name": "confirm 1440",
+      "violations": []
+    },
+    {
+      "name": "metadata 1440",
+      "violations": []
+    },
+    {
+      "name": "access 1440",
+      "violations": []
+    },
+    {
+      "name": "read-only",
+      "violations": []
+    }
+  ]
+}

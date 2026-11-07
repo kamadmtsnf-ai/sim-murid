@@ -290,7 +290,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
       >
         <Tabs.List
           aria-label="Bagian absensi siswa"
-          className="grid grid-cols-2 gap-1 rounded-xl border bg-muted/40 p-1"
+          className="tabs tabs-box grid grid-cols-2 gap-1 rounded-xl border bg-muted/40 p-1"
         >
           {(
             [
@@ -301,7 +301,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
             <Tabs.Trigger
               key={value}
               value={value}
-              className="min-h-11 min-w-0 rounded-lg px-3 py-2 text-sm font-medium whitespace-normal text-muted-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+              className="tab min-h-11 min-w-0 rounded-lg px-3 py-2 text-sm font-medium whitespace-normal text-muted-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
             >
               {label}
             </Tabs.Trigger>
@@ -349,13 +349,13 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                             setEntries({});
                           }
                         }}
-                        className={controlClass}
+                        className={"input w-full " + (controlClass)}
                       /></FloatingLabel>
                     </div>
                     <label className="text-sm">
                       Kelas untuk input
                       <select
-                        className={controlClass}
+                        className={"select w-full " + (controlClass)}
                         required
                         value={classId}
                         onChange={async (e) => {
@@ -443,7 +443,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                             <label className="min-w-0 text-sm">
                               Status {p.full_name}
                               <select
-                                className={controlClass}
+                                className={"select w-full " + (controlClass)}
                                 value={entries[p.id]?.status ?? ""}
                                 onChange={(e) =>
                                   entry(p.id, { status: e.target.value })
@@ -456,7 +456,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                               </select>
                             </label>
                             <div className="min-w-0 text-sm"><FloatingLabel label={<>Keterangan {p.full_name}</>}><input placeholder=" "
-                                className={controlClass}
+                                className={"input w-full " + (controlClass)}
                                 maxLength={2000}
                                 value={entries[p.id]?.notes ?? ""}
                                 onChange={(e) =>
@@ -526,7 +526,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
                         max="2100"
                         defaultValue={filters.year}
                         required
-                        className={controlClass}
+                        className={"input w-full " + (controlClass)}
                       /></FloatingLabel>
                     </div>
                     <TextField label="Dari tanggal" name="start" type="date" />
@@ -623,7 +623,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
               >
                 <div className="min-w-0 text-sm"><FloatingLabel label={<>Bulan kalender
                   </>}><input placeholder=" "
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     name="month"
                     type="month"
                     min="2000-01"
@@ -711,7 +711,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
               </p>
             </Guidance>
             <TableRegion label="Riwayat absensi — gulir untuk melihat seluruh kolom">
-              <table className="w-full text-left text-sm">
+              <table className="table table-zebra w-full text-left text-sm">
                 <caption className="sr-only">
                   Absensi sesuai filter dan hak akses
                 </caption>
@@ -841,7 +841,7 @@ export function AttendancePanel({ initial }: { initial: AttendanceSnapshot }) {
               <div className="block text-sm"><FloatingLabel label={<>Alasan koreksi / pembatalan
                 </>}><input placeholder=" "
                   name="reason"
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   minLength={3}
                   maxLength={2000}
                   required

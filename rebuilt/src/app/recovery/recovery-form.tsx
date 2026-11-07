@@ -75,7 +75,7 @@ export function RecoveryForm() {
                 autoCapitalize="none"
                 autoCorrect="off"
                 spellCheck={false}
-                className={styles.input}
+                className={"input w-full " + (styles.input)}
                 required
                 maxLength={100}
               /></FloatingLabel>
@@ -85,7 +85,7 @@ export function RecoveryForm() {
               <select
                 id="recovery-type"
                 name="requestType"
-                className={styles.input}
+                className={"select w-full " + (styles.input)}
               >
                 <option value="password">Lupa password</option>
                 <option value="session">Tidak dapat mengakses sesi lama</option>
@@ -99,7 +99,7 @@ export function RecoveryForm() {
                   setManual(e.target.checked);
                   setQuestion(questions[0].code);
                   state.clear();
-                }}
+                }} className="checkbox checkbox-primary"
               />
               <span>
                 Saya belum mengatur atau lupa jawaban keamanan. Saya ingin
@@ -116,7 +116,7 @@ export function RecoveryForm() {
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
                     aria-describedby="recovery-question-help"
-                    className={styles.input}
+                    className={"select w-full " + (styles.input)}
                   >
                     {questions.map((q) => (
                       <option key={q.code} value={q.code}>
@@ -134,7 +134,7 @@ export function RecoveryForm() {
                     name="answer"
                     type="password"
                     autoComplete="off"
-                    className={styles.input}
+                    className={"input w-full " + (styles.input)}
                     maxLength={256}
                     required
                   /></FloatingLabel>

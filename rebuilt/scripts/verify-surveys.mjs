@@ -1,3 +1,4 @@
+import { chooseConfirmation } from "./testing/confirmation.mjs";
 /** Actual Survei UI with isolated Auth/HTTP/Storage boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -290,21 +291,18 @@ try {
   check(posts.length === 1, "double submit sends one write");
   check(!("Q-1" in posts[0].answers), "empty Likert does not become zero");
   await q2().fill("Draft tetap");
-  page.off("dialog", accept);
-  const dismiss = (d) => d.dismiss();
-  page.on("dialog", dismiss);
   await page
     .getByRole("button", { name: "Tutup jawaban", exact: true })
     .click();
+  await chooseConfirmation(page, false);
   check(
     await editor().isVisible(),
     "cancelled discard keeps questionnaire open",
   );
-  page.off("dialog", dismiss);
-  page.on("dialog", accept);
   await page
     .getByRole("button", { name: "Tutup jawaban", exact: true })
     .click();
+  await chooseConfirmation(page);
   await editor().waitFor({ state: "hidden" });
   await open();
   await page.waitForFunction(
@@ -351,6 +349,7 @@ try {
   await editor()
     .getByRole("button", { name: "Kirim final", exact: true })
     .click();
+  await chooseConfirmation(page);
   await editor().getByText("Jawaban terkunci.", { exact: false }).waitFor();
   check(await q1().isDisabled(), "main final locks answers");
   check(
@@ -399,6 +398,7 @@ try {
   for (const s of await editor().locator("details select").all())
     await s.selectOption("TT");
   await editor().getByRole("button", { name: "Kirim penilaian rekan" }).click();
+  await chooseConfirmation(page);
   await editor()
     .getByText("Penilaian rekan sudah dikirim dan terkunci.", { exact: true })
     .waitFor();
@@ -412,6 +412,7 @@ try {
   await editor()
     .getByRole("button", { name: "Kirim final", exact: true })
     .click();
+  await chooseConfirmation(page);
   await editor().getByText("Jawaban terkunci.", { exact: false }).waitFor();
   check(true, "teacher can finalize after peer final");
   await visit("large");
@@ -475,6 +476,7 @@ try {
     .getByRole("button", { name: "Tutup periode", exact: true })
     .first()
     .click();
+  await chooseConfirmation(page);
   await page.waitForFunction(
     () => window.surveysFixture.rows[0].status === "closed",
     undefined,
@@ -567,6 +569,7 @@ try {
     await page
       .getByRole("button", { name: "Muat ulang survei", exact: true })
       .click();
+    await chooseConfirmation(page);
     await page
       .getByText("Data belum dapat dimuat ulang.", { exact: false })
       .waitFor();
@@ -578,6 +581,7 @@ try {
     await page
       .getByRole("button", { name: "Muat ulang survei", exact: true })
       .click();
+    await chooseConfirmation(page);
     await page
       .getByText("Data server berhasil dimuat ulang.", { exact: false })
       .waitFor();
@@ -586,20 +590,16 @@ try {
   await visit();
   await open();
   await q2().fill("Draft setelah logout dibatalkan");
-  page.off("dialog", accept);
-  const cancelLeave = d => d.type() === "beforeunload" ? d.accept() : d.dismiss();
-  page.on("dialog", cancelLeave);
   await page.evaluate(() => {
     window.cancelledLogoutReachedTarget = false;
     const form = document.querySelector('form[action="/api/auth/logout"]');
     form.addEventListener("submit", e => { window.cancelledLogoutReachedTarget = true; e.preventDefault(); }, {once:true});
     form.requestSubmit();
   });
+  await chooseConfirmation(page, false);
   check(!(await page.evaluate(() => window.cancelledLogoutReachedTarget)), "cancelled dirty logout stops before draft cleanup");
   await editor().getByText("Seluruh draft tersimpan di server.", {exact:true}).waitFor();
   check((await q2().inputValue()) === "Draft setelah logout dibatalkan", "cancelled logout retains answers and autosave continues");
-  page.off("dialog", cancelLeave);
-  page.on("dialog", accept);
   await visit();
   await open();
   await q2().fill("Logout");
@@ -611,6 +611,11 @@ try {
     f.addEventListener("submit", (e) => e.preventDefault(), { once: true });
     f.requestSubmit();
   });
+  await page.getByText("Tunggu proses pada halaman ini selesai sebelum berpindah. Setelah itu, pilih kembali tujuan Anda.", { exact: true }).waitFor();
+  check(await page.getByRole("alertdialog").count() === 0, "pending write blocks logout before confirmation");
+  await editor().getByText("Seluruh draft tersimpan di server.", { exact: true }).waitFor();
+  await page.evaluate(() => document.querySelector('form[action="/api/auth/logout"]').requestSubmit());
+  await chooseConfirmation(page);
   await page.waitForTimeout(900);
   check(
     (await page.evaluate(

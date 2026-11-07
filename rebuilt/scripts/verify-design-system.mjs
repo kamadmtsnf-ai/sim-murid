@@ -157,7 +157,7 @@ try {
   check(await page.locator('[data-slot="button"]:focus-visible').evaluate((e) => getComputedStyle(e).outlineWidth === "2px"), "keyboard focus outline");
   check(await button("Tidak tersedia").isDisabled(), "native disabled");
   check(await button("Sedang menyimpan").evaluate((e) => getComputedStyle(e, "::before").animationName === "button-loading-spin"), "busy spinner");
-  for (const width of [320, 390, 768, 1440]) {
+  for (const width of [320, 390, 768, 1024, 1280, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base);
     await button("Periksa isian").waitFor();

@@ -357,7 +357,7 @@ export function EmailPanel({
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               disabled={busy || needsSync}
-              className="min-h-12 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:ring-2 focus-visible:ring-ring"
+              className="input w-full min-h-12 w-full min-w-0 rounded-md border bg-background px-3 text-base focus-visible:ring-2 focus-visible:ring-ring"
               aria-describedby="verification-address-help"
             /></FloatingLabel>
             <p
@@ -456,7 +456,7 @@ export function EmailPanel({
                       id="email-otp"
                       name="code"
                       type="text"
-                      className="mt-2 min-h-12 w-full min-w-0 rounded-md border bg-background px-3 py-2 text-center text-xl tracking-[0.3em] outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="input w-full mt-2 min-h-12 w-full min-w-0 rounded-md border bg-background px-3 py-2 text-center text-xl tracking-[0.3em] outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       inputMode="numeric"
                       autoComplete="one-time-code"
                       maxLength={6}

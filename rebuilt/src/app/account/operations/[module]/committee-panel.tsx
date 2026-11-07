@@ -421,7 +421,7 @@ const retainedEcurrentTarget=e.currentTarget;
             >
               <div className="text-sm"><FloatingLabel label={<>Tahun kalender
                 </>}><input placeholder=" "
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   name="year"
                   type="number"
                   min="2000"
@@ -534,7 +534,7 @@ const retainedEcurrentTarget=e.currentTarget;
           </p>
         </Guidance>
         <TableRegion label="Riwayat pembayaran — gulir untuk melihat seluruh kolom">
-          <table className="w-full text-left text-sm">
+          <table className="table table-zebra w-full text-left text-sm">
             <caption className="sr-only">
               Pembayaran sesuai filter dan hak akses
             </caption>
@@ -613,7 +613,7 @@ const retainedEcurrentTarget=e.currentTarget;
         </h2>
         <div className="block text-sm"><FloatingLabel label={<>Cari pada rekap
           </>}><input
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             value={monthSearch}
             placeholder="Nama, bulan, atau status"
             onChange={(e) => {
@@ -627,7 +627,7 @@ const retainedEcurrentTarget=e.currentTarget;
           pernah membayar.
         </p>
         <TableRegion label="Status bulanan — gulir untuk melihat seluruh kolom">
-          <table className="w-full text-left text-sm">
+          <table className="table table-zebra w-full text-left text-sm">
             <caption className="sr-only">
               Status iuran menurut bulan alokasi
             </caption>
@@ -744,7 +744,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   </SelectField>
                   <div className="block text-sm"><FloatingLabel label={<>Bulan tarif
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="month"
                       type="month"
                       min="2000-01"
@@ -755,7 +755,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   </div>
                   <div className="block text-sm"><FloatingLabel label={<>Tarif (Rp)
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="amount"
                       type="number"
                       min="0"
@@ -774,7 +774,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   <label className="block text-sm">
                     Siswa
                     <select
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       required
                       value={student}
                       onChange={(e) => {
@@ -812,7 +812,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   </label>
                   <div className="block text-sm"><FloatingLabel label={<>Tanggal pembayaran
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="date"
                       type="date"
                       min="2000-01-01"
@@ -824,7 +824,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   <label className="block text-sm">
                     Tahun bulan iuran
                     <select
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       value={year}
                       onChange={(e) => {
                         e.stopPropagation();
@@ -879,7 +879,7 @@ const retainedEcurrentTarget=e.currentTarget;
                                       else delete next[mo];
                                       return next;
                                     })
-                                  }
+                                  } className="checkbox checkbox-primary"
                                 />
                                 {name} {year}
                               </label>
@@ -891,9 +891,9 @@ const retainedEcurrentTarget=e.currentTarget;
                                 {locked ? " — tidak dapat dibayar ulang" : ""}
                               </p>
                               {checked && (
-                                <div className="mt-2 block text-sm"><FloatingLabel label={<>Nominal {mo.slice(0, 7)}(Rp)
+                                <div className="mt-2 block text-sm"><FloatingLabel label={<>Nominal {mo.slice(0, 7)} (Rp)
                                   </>}><input placeholder=" "
-                                    className={controlClass}
+                                    className={"input w-full " + (controlClass)}
                                     type="number"
                                     min="1"
                                     max="1000000000000"
@@ -970,7 +970,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   {edit && (
                     <div className="block text-sm"><FloatingLabel label={<>Alasan koreksi / pembatalan
                       </>}><input placeholder=" "
-                        className={controlClass}
+                        className={"input w-full " + (controlClass)}
                         name="reason"
                         minLength={3}
                         maxLength={2000}
