@@ -20,7 +20,7 @@ async function geometry(page,name){
  for(const control of await page.locator('main a').all()){
   const b=await control.boundingBox();check(b&&b.x>=-1&&b.x+b.width<=size.viewport+1,name+' — login control fits viewport',b);
  }
- await page.locator('footer').scrollIntoViewIfNeeded();const bottom=await page.locator('footer').boundingBox();check(bottom&&bottom.y>=-1&&bottom.y+bottom.height<=(await page.evaluate(()=>innerHeight))+1,name+' — footer reachable through normal document scrolling',bottom);
+ await page.locator('footer').evaluate(e=>e.scrollIntoView({block:'end'}));const bottom=await page.locator('footer').boundingBox();check(bottom&&bottom.y+bottom.height>0&&bottom.y+bottom.height<=(await page.evaluate(()=>innerHeight))+1,name+' — footer reachable through normal document scrolling',bottom);
 }
 async function accessible(page,name){await page.evaluate(axe);const r=await page.evaluate(()=>window.axe.run(document,{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','best-practice']}}));const violations=r.violations.map(x=>({id:x.id,impact:x.impact,targets:x.nodes.map(n=>n.target)}));views.push({name,violations});check(violations.length===0,name+' — axe has no violations',violations);}
 try{

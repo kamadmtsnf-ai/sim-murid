@@ -1,6 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+function palette(css: string): Record<string,string> {
+ const values: Record<string,string> = Object.fromEntries([...css.matchAll(/--([\w-]+):\s*(#[\da-f]{6}|var\(--[\w-]+\))\s*;/gi)].map(m=>[m[1]!,m[2]!]));
+ function resolve(key: string, seen = new Set<string>()): string {
+  assert.ok(!seen.has(key), `cyclic theme token ${key}`); seen.add(key);
+  const value=values[key]; assert.ok(value, `missing theme token ${key}`);
+  const alias=/^var\(--([\w-]+)\)$/.exec(value);
+  return alias ? resolve(alias[1]!,seen) : value;
+ }
+ return Object.fromEntries(Object.keys(values).filter(key=>!key.startsWith("radius-")).map(key=>[key,resolve(key)]));
+}
 import {accountNavigation,navigationFor,currentNavItem,matchesNavigation} from '../src/config/account-navigation.ts';
 
 test('Navigation never exposes administrative links to non-admin capability contexts',()=>{
@@ -24,7 +34,7 @@ test('Deep links retain their parent navigation, with exact dashboard and locali
 });
 test('Semantic text pairs meet AA contrast and input boundary exceeds 3:1',()=>{
  const css=readFileSync(new URL('../src/app/globals.css',import.meta.url),'utf8');
- const vars=Object.fromEntries([...css.matchAll(/--([\w-]+):\s*(#[\da-f]{6})\s*;/gi)].map(m=>[m[1],m[2]]));
+ const vars=palette(css);
  function lum(hex:string){const s=hex.slice(1).match(/../g)!.map(c=>parseInt(c,16)/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4);return s[0]!*.2126+s[1]!*.7152+s[2]!*.0722;}
  function ratio(a:string,b:string){const x=lum(vars[a]!),y=lum(vars[b]!);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
  for(const [fg,bg] of [['foreground','card'],['muted-foreground','card'],['primary-foreground','primary'],['destructive','danger-subtle'],['success','success-subtle'],['warning','warning-subtle'],['info','info-subtle']])assert.ok(ratio(fg!,bg!)>=4.5,`${fg}/${bg}`);
@@ -44,7 +54,7 @@ test('Account pages have no static cross-page links duplicating sidebar destinat
  const directory=readFileSync(new URL('../src/app/account/directory/directory-panel.tsx',import.meta.url),'utf8');assert.ok(directory.includes('Lihat detail'));assert.ok(directory.includes('pageUrl'));
 });
 test('Both endpoints of the primary control gradient preserve readable white labels',()=>{
- const css=readFileSync(new URL('../src/app/globals.css',import.meta.url),'utf8');const vars=Object.fromEntries([...css.matchAll(/--([\w-]+):\s*(#[\da-f]{6})\s*;/gi)].map(m=>[m[1],m[2]]));
+ const css=readFileSync(new URL('../src/app/globals.css',import.meta.url),'utf8');const vars=palette(css);
  const lum=(h:string)=>h.slice(1).match(/../g)!.map(c=>parseInt(c,16)/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i]!,0);
  for(const stop of ['primary','primary-to']){const a=lum(vars[stop]!),b=lum(vars['primary-foreground']!);assert.ok((Math.max(a,b)+.05)/(Math.min(a,b)+.05)>=4.5);}
  assert.ok(css.includes('prefers-reduced-transparency:reduce'));assert.ok(css.includes('forced-colors:active'));

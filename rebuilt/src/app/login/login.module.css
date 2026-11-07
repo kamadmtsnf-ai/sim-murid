@@ -27,7 +27,7 @@
 .remember { display: flex; align-items: start; gap: 12px; }
 .remember input { margin-block-start: .25rem; }
 .remember > span { min-inline-size: 0; font-size: .875rem; }
-.error { min-inline-size: 0; padding: 12px; border: 1px solid color-mix(in srgb,var(--destructive) 35%,var(--border)); border-radius: .65rem; background: var(--danger-subtle); color: var(--destructive); font-size: .875rem; }
+.error { min-inline-size: 0; padding: 12px; border: 1px solid color-mix(in srgb,var(--destructive) 35%,var(--border-color)); border-radius: .65rem; background: var(--danger-subtle); color: var(--destructive); font-size: .875rem; }
 .submit { inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; padding-inline: 12px; white-space: normal; text-align: center; }
 .help { margin-block-start: 1.5rem; font-size: .875rem; color: var(--muted-foreground); }
 .help a { color: var(--primary); text-decoration: underline; text-underline-offset: .2em; }
@@ -49,9 +49,9 @@
 .input { min-block-size: 52px; border-radius: .8rem; transition: border-color .15s, box-shadow .15s; font-size: 1rem; }
 .input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-color: var(--primary); }
 .submit { min-block-size: 52px; border-radius: .8rem; font-weight: 650; }
-.remember { padding: 12px; border: 1px solid var(--border); border-radius: .8rem; background: var(--muted); }
+.remember { padding: 12px; border: 1px solid var(--border-color); border-radius: .8rem; background: var(--muted); }
 .remember input { inline-size: 20px; block-size: 20px; flex-shrink: 0; accent-color: var(--primary); }
-.help { border-block-start: 1px solid var(--border); padding-block-start: 1.25rem; line-height: 1.7; }
+.help { border-block-start: 1px solid var(--border-color); padding-block-start: 1.25rem; line-height: 1.7; }
 .story { position: relative; isolation: isolate; }
 .story::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(circle at 15% 10%, #ffffff1f, transparent 45%), radial-gradient(circle at 95% 90%, #ffffff12, transparent 45%); }
 @media(min-width:64rem) { .story { margin: 16px; border-radius: 1.5rem; min-block-size: calc(100dvh - 32px); } }

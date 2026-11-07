@@ -582,7 +582,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
                 <label className="block text-sm">
                   Berkas PDF
                   <input
-                    className={controlClass}
+                    className={"file-input w-full " + (controlClass)}
                     name="file"
                     type="file"
                     accept=".pdf,application/pdf"
@@ -619,7 +619,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
                   />
                   <div className="block text-sm"><FloatingLabel label={<>Tahun terbit
                     </>}><input placeholder=" "
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       name="year"
                       type="number"
                       min={1800}
@@ -676,7 +676,7 @@ export function BooksPanel({ initial }: { initial: BooksSnapshot }) {
                   <input
                     type="checkbox"
                     name="premium"
-                    defaultChecked={edit?.premium ?? false}
+                    defaultChecked={edit?.premium ?? false} className="checkbox checkbox-primary"
                   />
                   Hanya untuk akun dengan akses premium
                 </label>

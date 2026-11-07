@@ -38,7 +38,7 @@ function ScoreChanges({ before, after }: { before: unknown; after: unknown }) {
     <section aria-label="Perubahan nilai siswa" className="space-y-3">
       <h3 className="font-medium">Nilai siswa ({ids.length})</h3>
       <TableRegion label="Perbandingan nilai siswa">
-        <table className="w-full text-left text-sm">
+        <table className="table table-zebra w-full text-left text-sm">
           <thead>
             <tr>
               <th scope="col" className="p-3">
@@ -219,7 +219,7 @@ export function AuditTrail() {
         <label className="min-w-0 flex-1 text-sm font-medium">
           Modul riwayat
           <select
-            className={controlClass}
+            className={"select w-full " + (controlClass)}
             value={domain}
             disabled={busy}
             onChange={(e) => {

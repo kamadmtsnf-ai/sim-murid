@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "checks": [
+    "directory 320 — no horizontal overflow",
+    "directory 360 — no horizontal overflow",
+    "directory 375 — no horizontal overflow",
+    "directory 390 — no horizontal overflow",
+    "directory 768 — no horizontal overflow",
+    "directory 1024 — no horizontal overflow",
+    "directory 1280 — no horizontal overflow",
+    "directory 1440 — no horizontal overflow",
+    "list desktop — axe violations 0",
+    "Desktop table remains semantic with named details",
+    "empty 320 — no horizontal overflow",
+    "empty 768 — no horizontal overflow",
+    "empty 1440 — no horizontal overflow",
+    "empty — axe violations 0",
+    "many 320 — no horizontal overflow",
+    "many 768 — no horizontal overflow",
+    "many 1440 — no horizontal overflow",
+    "many — axe violations 0",
+    "long 320 — no horizontal overflow",
+    "long 768 — no horizontal overflow",
+    "long 1440 — no horizontal overflow",
+    "long — axe violations 0",
+    "mobile cards — axe violations 0",
+    "Mobile cards keep all records, detail links and zero-percent progress",
+    "Native GET filter preserves Unicode/special characters and resets page without actor fields",
+    "Non-admin filter submits active status only",
+    "Pagination preserves role/search/status; assignments have readable labels",
+    "Last-page controls and full filter reset are predictable",
+    "Keyboard/touch detail actions stay visible and target the same record",
+    "detail-student 320 — no horizontal overflow",
+    "detail-student 768 — no horizontal overflow",
+    "detail-student 1440 — no horizontal overflow",
+    "detail-student — axe violations 0",
+    "detail-teacher 320 — no horizontal overflow",
+    "detail-teacher 768 — no horizontal overflow",
+    "detail-teacher 1440 — no horizontal overflow",
+    "detail-teacher — axe violations 0",
+    "detail-parent 320 — no horizontal overflow",
+    "detail-parent 768 — no horizontal overflow",
+    "detail-parent 1440 — no horizontal overflow",
+    "detail-parent — axe violations 0",
+    "detail-restricted 320 — no horizontal overflow",
+    "detail-restricted 768 — no horizontal overflow",
+    "detail-restricted 1440 — no horizontal overflow",
+    "detail-restricted — axe violations 0",
+    "detail-invalid-date 320 — no horizontal overflow",
+    "detail-invalid-date 768 — no horizontal overflow",
+    "detail-invalid-date 1440 — no horizontal overflow",
+    "detail-invalid-date — axe violations 0",
+    "detail-long 320 — no horizontal overflow",
+    "detail-long 768 — no horizontal overflow",
+    "detail-long 1440 — no horizontal overflow",
+    "detail-long — axe violations 0",
+    "loading 320 — no horizontal overflow",
+    "loading 768 — no horizontal overflow",
+    "loading 1440 — no horizontal overflow",
+    "loading — axe violations 0",
+    "error 320 — no horizontal overflow",
+    "error 768 — no horizontal overflow",
+    "error 1440 — no horizontal overflow",
+    "error — axe violations 0",
+    "Detail sections preserve contact/biodata restrictions, relationships and unchanged JTM/break values",
+    "Loading and existing error reset remain accessible",
+    "long text 200 percent — no horizontal overflow",
+    "long desktop breakpoint at 200 percent text — no horizontal overflow",
+    "detail-long text 200 percent — no horizontal overflow",
+    "detail-long desktop breakpoint at 200 percent text — no horizontal overflow",
+    "orientation 812x375 — no horizontal overflow",
+    "orientation 390x844 — no horizontal overflow",
+    "Resize/orientation and existing drawer remain usable",
+    "Excel exports current authorized page only with usernames as text",
+    "Non-admin export control remains absent",
+    "No uncaught JavaScript or console errors"
+  ],
+  "axe": [
+    {
+      "label": "list desktop",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "many",
+      "violations": []
+    },
+    {
+      "label": "long",
+      "violations": []
+    },
+    {
+      "label": "mobile cards",
+      "violations": []
+    },
+    {
+      "label": "detail-student",
+      "violations": []
+    },
+    {
+      "label": "detail-teacher",
+      "violations": []
+    },
+    {
+      "label": "detail-parent",
+      "violations": []
+    },
+    {
+      "label": "detail-restricted",
+      "violations": []
+    },
+    {
+      "label": "detail-invalid-date",
+      "violations": []
+    },
+    {
+      "label": "detail-long",
+      "violations": []
+    },
+    {
+      "label": "loading",
+      "violations": []
+    },
+    {
+      "label": "error",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "viewports": [
+    320,
+    360,
+    375,
+    390,
+    768,
+    1024,
+    1280,
+    1440
+  ],
+  "scope": "Synthetic directory/detail fixtures. Server/API flow mocks and isolated SQL tests cover data boundaries; no authenticated production UAT or writes."
+}

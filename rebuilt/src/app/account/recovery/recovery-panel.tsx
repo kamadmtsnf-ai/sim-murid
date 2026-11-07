@@ -330,7 +330,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                 type="text"
                 autoComplete="off"
                 spellCheck={false}
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 value={password}
                 readOnly
                 onFocus={(e) => e.currentTarget.select()}
@@ -374,7 +374,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
               </>}><input placeholder=" "
                 id="recovery-search"
                 type="search"
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 value={query}
                 maxLength={200}
                 onChange={(e) => {
@@ -387,7 +387,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
               Jenis permintaan
               <select
                 id="recovery-type"
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 value={filter}
                 onChange={(e) => {
                   setFilter(e.target.value);
@@ -508,7 +508,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                   ref={selectRef}
                   id="recovery-request"
                   name="requestId"
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   required
                   disabled={disabled}
                   value={selected}
@@ -554,7 +554,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                 </>}><input placeholder=" "
                   id="recovery-evidence"
                   name="evidenceReference"
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   minLength={8}
                   maxLength={120}
                   required
@@ -573,7 +573,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
               </div>
               <label className="flex min-h-11 items-start gap-3 text-sm">
                 <input
-                  className="mt-1 size-5 shrink-0"
+                  className="checkbox checkbox-primary mt-1 size-5 shrink-0"
                   type="checkbox"
                   name="identityConfirmed"
                   required
@@ -586,7 +586,7 @@ const retainedEVENTcurrentTarget=event.currentTarget;
                 </>}><input placeholder=" "
                   id="recovery-current"
                   name="currentPassword"
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   type="password"
                   autoComplete="current-password"
                   required

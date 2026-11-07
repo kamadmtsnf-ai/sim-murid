@@ -325,11 +325,11 @@ export function SecurityPanel({
                 autoComplete="username"
                 value={username}
                 readOnly
-                hidden
+                hidden className="input w-full"
               />
               <div className="block text-sm font-medium"><FloatingLabel htmlFor="password-current" label={<>Password saat ini
                 </>}><input placeholder=" "
-                  className={field}
+                  className={"input w-full " + (field)}
                   id="password-current"
                   name="currentPassword"
                   type={show ? "text" : "password"}
@@ -345,7 +345,7 @@ export function SecurityPanel({
               </div>
               <div className="block text-sm font-medium"><FloatingLabel htmlFor="password-new" label={<>Password baru
                 </>}><input placeholder=" "
-                  className={field}
+                  className={"input w-full " + (field)}
                   id="password-new"
                   name="newPassword"
                   type={show ? "text" : "password"}
@@ -364,7 +364,7 @@ export function SecurityPanel({
               </div>
               <div className="block text-sm font-medium"><FloatingLabel htmlFor="password-confirm" label={<>Konfirmasi password baru
                 </>}><input placeholder=" "
-                  className={field}
+                  className={"input w-full " + (field)}
                   id="password-confirm"
                   name="confirmPassword"
                   type={show ? "text" : "password"}
@@ -381,7 +381,7 @@ export function SecurityPanel({
               <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
                 <input
                   type="checkbox"
-                  className="size-4 accent-primary"
+                  className="checkbox checkbox-primary size-4 accent-primary"
                   checked={show}
                   disabled={busy}
                   onChange={(e) => setShow(e.target.checked)}
@@ -438,7 +438,7 @@ export function SecurityPanel({
                   value={username}
                   readOnly
                   hidden
-                  disabled
+                  disabled className="input w-full"
                 />
                 <label
                   className="block text-sm font-medium"
@@ -449,7 +449,7 @@ export function SecurityPanel({
                     key={state.question_code}
                     id="security-question"
                     name="question"
-                    className={field}
+                    className={"select w-full " + (field)}
                     defaultValue={state.question_code ?? "q1"}
                     disabled={blocked}
                   >
@@ -464,7 +464,7 @@ export function SecurityPanel({
                   </>}><input placeholder=" "
                     id="security-answer"
                     name="answer"
-                    className={field}
+                    className={"input w-full " + (field)}
                     type="password"
                     autoComplete="off"
                     maxLength={256}
@@ -481,7 +481,7 @@ export function SecurityPanel({
                   </>}><input placeholder=" "
                     id="question-current"
                     name="currentPassword"
-                    className={field}
+                    className={"input w-full " + (field)}
                     type="password"
                     autoComplete="current-password"
                     required

@@ -1,0 +1,855 @@
+{
+  "checks": [
+    {
+      "name": "no automatic request",
+      "passed": true
+    },
+    {
+      "name": "archive rule",
+      "passed": true
+    },
+    {
+      "name": "rules 320 axe",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "loaded 320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "history 320 axe",
+      "passed": true
+    },
+    {
+      "name": "zero",
+      "passed": true
+    },
+    {
+      "name": "null distinct",
+      "passed": true
+    },
+    {
+      "name": "reason not duplicated",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "dialog 320 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "dialog 320 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded dialog",
+      "passed": true
+    },
+    {
+      "name": "score pagination",
+      "passed": true
+    },
+    {
+      "name": "return focus",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "next cursor",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "no automatic request",
+      "passed": true
+    },
+    {
+      "name": "archive rule",
+      "passed": true
+    },
+    {
+      "name": "rules 390 axe",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "loaded 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "history 390 axe",
+      "passed": true
+    },
+    {
+      "name": "zero",
+      "passed": true
+    },
+    {
+      "name": "null distinct",
+      "passed": true
+    },
+    {
+      "name": "reason not duplicated",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "dialog 390 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "dialog 390 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded dialog",
+      "passed": true
+    },
+    {
+      "name": "score pagination",
+      "passed": true
+    },
+    {
+      "name": "return focus",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "next cursor",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "no automatic request",
+      "passed": true
+    },
+    {
+      "name": "archive rule",
+      "passed": true
+    },
+    {
+      "name": "rules 768 axe",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "loaded 768 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "history 768 axe",
+      "passed": true
+    },
+    {
+      "name": "zero",
+      "passed": true
+    },
+    {
+      "name": "null distinct",
+      "passed": true
+    },
+    {
+      "name": "reason not duplicated",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "dialog 768 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "dialog 768 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded dialog",
+      "passed": true
+    },
+    {
+      "name": "score pagination",
+      "passed": true
+    },
+    {
+      "name": "return focus",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "next cursor",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "no automatic request",
+      "passed": true
+    },
+    {
+      "name": "archive rule",
+      "passed": true
+    },
+    {
+      "name": "rules 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "loaded 1440 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "history 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "zero",
+      "passed": true
+    },
+    {
+      "name": "null distinct",
+      "passed": true
+    },
+    {
+      "name": "reason not duplicated",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "focus contained",
+      "passed": true
+    },
+    {
+      "name": "dialog 1440 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "dialog 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "bounded dialog",
+      "passed": true
+    },
+    {
+      "name": "score pagination",
+      "passed": true
+    },
+    {
+      "name": "return focus",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "next cursor",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "open portrait resize no page overflow",
+      "passed": true
+    },
+    {
+      "name": "landscape no page overflow",
+      "passed": true
+    },
+    {
+      "name": "landscape dialog axe",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "old scope cleared",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "filter applied",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "empty no stale data",
+      "passed": true
+    },
+    {
+      "name": "empty private error hidden",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "empty no page overflow",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "401 no stale data",
+      "passed": true
+    },
+    {
+      "name": "401 private error hidden",
+      "passed": true
+    },
+    {
+      "name": "401 axe",
+      "passed": true
+    },
+    {
+      "name": "401 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "403 no stale data",
+      "passed": true
+    },
+    {
+      "name": "403 private error hidden",
+      "passed": true
+    },
+    {
+      "name": "403 axe",
+      "passed": true
+    },
+    {
+      "name": "403 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "503 no stale data",
+      "passed": true
+    },
+    {
+      "name": "503 private error hidden",
+      "passed": true
+    },
+    {
+      "name": "503 axe",
+      "passed": true
+    },
+    {
+      "name": "503 no page overflow",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "offline no stale data",
+      "passed": true
+    },
+    {
+      "name": "offline private error hidden",
+      "passed": true
+    },
+    {
+      "name": "offline axe",
+      "passed": true
+    },
+    {
+      "name": "offline no page overflow",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "malformed no stale data",
+      "passed": true
+    },
+    {
+      "name": "malformed private error hidden",
+      "passed": true
+    },
+    {
+      "name": "malformed axe",
+      "passed": true
+    },
+    {
+      "name": "malformed no page overflow",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "wrong-scope no stale data",
+      "passed": true
+    },
+    {
+      "name": "wrong-scope private error hidden",
+      "passed": true
+    },
+    {
+      "name": "wrong-scope axe",
+      "passed": true
+    },
+    {
+      "name": "wrong-scope no page overflow",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "pending scope lock",
+      "passed": true
+    },
+    {
+      "name": "one pending",
+      "passed": true
+    },
+    {
+      "name": "loading axe",
+      "passed": true
+    },
+    {
+      "name": "read only",
+      "passed": true
+    },
+    {
+      "name": "no claimed actor",
+      "passed": true
+    },
+    {
+      "name": "timeout releases controls",
+      "passed": true
+    },
+    {
+      "name": "timeout no stale",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "rules 320",
+      "violations": []
+    },
+    {
+      "label": "history 320",
+      "violations": []
+    },
+    {
+      "label": "dialog 320",
+      "violations": []
+    },
+    {
+      "label": "rules 390",
+      "violations": []
+    },
+    {
+      "label": "history 390",
+      "violations": []
+    },
+    {
+      "label": "dialog 390",
+      "violations": []
+    },
+    {
+      "label": "rules 768",
+      "violations": []
+    },
+    {
+      "label": "history 768",
+      "violations": []
+    },
+    {
+      "label": "dialog 768",
+      "violations": []
+    },
+    {
+      "label": "rules 1440",
+      "violations": []
+    },
+    {
+      "label": "history 1440",
+      "violations": []
+    },
+    {
+      "label": "dialog 1440",
+      "violations": []
+    },
+    {
+      "label": "landscape dialog",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "401",
+      "violations": []
+    },
+    {
+      "label": "403",
+      "violations": []
+    },
+    {
+      "label": "503",
+      "violations": []
+    },
+    {
+      "label": "offline",
+      "violations": []
+    },
+    {
+      "label": "malformed",
+      "violations": []
+    },
+    {
+      "label": "wrong-scope",
+      "violations": []
+    },
+    {
+      "label": "loading",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

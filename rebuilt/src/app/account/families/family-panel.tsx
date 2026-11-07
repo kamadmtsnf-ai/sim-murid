@@ -337,10 +337,10 @@ const retainedEcurrentTarget=e.currentTarget;
       <Tabs.Root defaultValue="parents" activationMode="manual" className="space-y-4">
         <Tabs.List
           aria-label="Jenis relasi keluarga"
-          className="schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
+          className="tabs tabs-box schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
         >
-          <Tabs.Trigger value="parents">Orang tua dan siswa</Tabs.Trigger>
-          <Tabs.Trigger value="siblings">Saudara kandung</Tabs.Trigger>
+          <Tabs.Trigger value="parents" className="tab">Orang tua dan siswa</Tabs.Trigger>
+          <Tabs.Trigger value="siblings" className="tab">Saudara kandung</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="parents" forceMount className="data-[state=inactive]:hidden">
           <Card>
@@ -418,7 +418,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 <div className="block text-sm font-medium"><FloatingLabel label={<>Cari relasi
                   </>}><input placeholder=" "
                     type="search"
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     value={guardianSearch}
                     onChange={(e) => {
                       setGuardianSearch(e.target.value);
@@ -516,7 +516,7 @@ const retainedEcurrentTarget=e.currentTarget;
                   <div className="block text-sm font-medium"><FloatingLabel label={<>Cari calon anggota
                     </>}><input placeholder=" "
                       type="search"
-                      className={controlClass}
+                      className={"input w-full " + (controlClass)}
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                     /></FloatingLabel>
@@ -539,7 +539,7 @@ const retainedEcurrentTarget=e.currentTarget;
                         className="flex min-h-11 cursor-pointer items-start gap-3 py-2 text-sm"
                       >
                         <input
-                          className="mt-1 size-5 shrink-0 accent-primary"
+                          className="checkbox checkbox-primary mt-1 size-5 shrink-0 accent-primary"
                           type="checkbox"
                           name="students"
                           value={p.id}
@@ -596,7 +596,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 <div className="block text-sm font-medium"><FloatingLabel label={<>Cari grup
                   </>}><input placeholder=" "
                     type="search"
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     value={groupSearch}
                     onChange={(e) => {
                       setGroupSearch(e.target.value);

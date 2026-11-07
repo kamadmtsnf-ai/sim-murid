@@ -47,7 +47,7 @@ export function AccountDashboard({
             Ringkasan aktivitas dan layanan Anda.
           </p>
         </div>
-        <span className="workspace-status">
+        <span className="badge badge-soft workspace-status">
           <ShieldCheck className="size-4 shrink-0" aria-hidden="true" />
           Akun terverifikasi
         </span>

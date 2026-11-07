@@ -246,7 +246,7 @@ export function SchedulePanel({
             Tahun ajaran
             <select
               name="year"
-              className={controlClass}
+              className={"select w-full " + (controlClass)}
               value={filterYear}
               disabled={locked}
               onChange={(e) => {
@@ -267,7 +267,7 @@ export function SchedulePanel({
             Kelas
             <select
               name="class"
-              className={controlClass}
+              className={"select w-full " + (controlClass)}
               value={filterClass}
               disabled={locked}
               onChange={(e) => setFilterClass(e.target.value)}
@@ -310,7 +310,7 @@ export function SchedulePanel({
               type="checkbox"
               name="personal"
               value="1"
-              defaultChecked={filters.personal}
+              defaultChecked={filters.personal} className="checkbox checkbox-primary"
             />
             Untuk Guru: hanya pelajaran yang saya ajar
           </label>
@@ -330,12 +330,12 @@ export function SchedulePanel({
       >
         <Tabs.List
           aria-label="Jenis jadwal"
-          className="schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
+          className="tabs tabs-box schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
         >
-          <Tabs.Trigger value="kbm" disabled={busy}>
+          <Tabs.Trigger value="kbm" disabled={busy} className="tab">
             Jadwal KBM
           </Tabs.Trigger>
-          <Tabs.Trigger value="piket" disabled={busy}>
+          <Tabs.Trigger value="piket" disabled={busy} className="tab">
             Jadwal Piket
           </Tabs.Trigger>
         </Tabs.List>
@@ -361,7 +361,7 @@ export function SchedulePanel({
                 <PagedCollection key={query.toString()} items={data.lessons} label="Halaman jadwal KBM" pageSize={15}>
                   {(items) => (
                     <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
-                      <table className="w-full text-left text-sm">
+                      <table className="table table-zebra w-full text-left text-sm">
                         <caption className="sr-only">
                           Daftar jadwal pelajaran
                         </caption>
@@ -391,7 +391,7 @@ export function SchedulePanel({
                                   checked={selectedLessons.includes(l.id)}
                                   onChange={() =>
                                     setSelectedLessons((a) => toggle(a, l.id))
-                                  }
+                                  } className="checkbox checkbox-primary"
                                 />
                               </td>
                               <td className="whitespace-nowrap p-2">
@@ -469,7 +469,7 @@ export function SchedulePanel({
                             checked={selectedDuties.includes(d.id)}
                             onChange={() =>
                               setSelectedDuties((a) => toggle(a, d.id))
-                            }
+                            } className="checkbox checkbox-primary"
                           />
                           <span className="min-w-0 break-words">
                             {weekdays[d.weekday]} · {d.class_name} ·{" "}
@@ -552,7 +552,7 @@ export function SchedulePanel({
                 Kelas untuk piket
                 <select
                   value={dutyClass}
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   disabled={locked}
                   onChange={async (e) => {
 const retainedEvalue=e.target.value;
@@ -739,7 +739,7 @@ function LessonForm({
         </SelectField>
         <div><FloatingLabel label={<>Waktu mulai
           </>}><input placeholder=" "
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             type="time"
             required
             value={start}
@@ -748,7 +748,7 @@ function LessonForm({
         </div>
         <div><FloatingLabel label={<>Menit per JTM
           </>}><input placeholder=" "
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             type="number"
             min={1}
             max={240}
@@ -759,7 +759,7 @@ function LessonForm({
         </div>
         <div><FloatingLabel label={<>Jumlah JTM
           </>}><input placeholder=" "
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             type="number"
             min={1}
             max={12}
@@ -770,7 +770,7 @@ function LessonForm({
         </div>
         <div><FloatingLabel label={<>Istirahat (menit)
           </>}><input placeholder=" "
-            className={controlClass}
+            className={"input w-full " + (controlClass)}
             type="number"
             min={0}
             max={240}
@@ -870,7 +870,7 @@ const retainedEcurrentTarget=e.currentTarget;
                           d.class_id === classroom.id &&
                           d.weekday === i + 1 &&
                           d.student_id === p.id,
-                      )}
+                      )} className="checkbox checkbox-primary"
                     />
                     <span className="min-w-0 break-words">{p.name}</span>
                   </label>

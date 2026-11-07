@@ -234,7 +234,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
         <label className="min-w-0 space-y-2">
           <span className="text-sm font-medium">Kelas / tahun ajaran</span>
           <select
-            className={controlClass}
+            className={"select w-full " + (controlClass)}
             value={classId}
             onChange={(e) => setClassId(e.target.value)}
             disabled={disabled}
@@ -250,7 +250,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
         <label className="min-w-0 space-y-2">
           <span className="text-sm font-medium">Semester</span>
           <select
-            className={controlClass}
+            className={"select w-full " + (controlClass)}
             value={semester}
             onChange={(e) => setSemester(e.target.value)}
             disabled={disabled}
@@ -313,7 +313,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
             <div className="grid gap-3 sm:grid-cols-3">
               <div className="min-w-0"><FloatingLabel label={<>Cari siswa
                 </>}><input
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   value={search}
                   onChange={(e) => {
                     setSearch(e.target.value);
@@ -326,7 +326,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
               <label className="min-w-0">
                 Status
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={status}
                   onChange={(e) => {
                     setStatus(e.target.value);
@@ -343,7 +343,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
               <label className="min-w-0">
                 Jenis rapor
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={kind}
                   onChange={(e) => setKind(e.target.value as ReportKind)}
                   disabled={disabled}
@@ -452,7 +452,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
                   <label className="flex min-w-0 items-start gap-3">
                     <input
                       type="checkbox"
-                      className="mt-1 size-5 shrink-0 accent-primary"
+                      className="checkbox checkbox-primary mt-1 size-5 shrink-0 accent-primary"
                       checked={selected.includes(r.student_id)}
                       onChange={() => toggle(r.student_id)}
                       disabled={disabled || !s?.subjects.length}
@@ -487,7 +487,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
                         " — gulir untuk melihat seluruh kolom"
                       }
                     >
-                      <table className="w-full text-left text-sm">
+                      <table className="table table-zebra w-full text-left text-sm">
                         <caption className="sr-only">
                           Rapor {r.name},{" "}
                           {kind === "combined" ? "gabungan" : kind}
@@ -637,7 +637,7 @@ export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
           <label className="flex items-start gap-3">
             <input
               type="checkbox"
-              className="mt-1 size-5 shrink-0"
+              className="checkbox checkbox-primary mt-1 size-5 shrink-0"
               required
               checked={ack}
               disabled={busy || blocked}

@@ -384,7 +384,7 @@ export function SurveyEditor({
           aria-label="Kemajuan pertanyaan wajib"
           value={total - missing.length}
           max={Math.max(1, total)}
-          className="mt-2 w-full"
+          className="progress progress-primary mt-2 w-full"
         />
       </div>
       <div className="space-y-4">
@@ -396,7 +396,7 @@ export function SurveyEditor({
               <textarea placeholder=" "
                 id={prefix + q.code}
                 data-code={q.code}
-                className={controlClass}
+                className={"textarea w-full " + (controlClass)}
                 rows={4}
                 maxLength={10000}
                 value={String(draft.answers[q.code] ?? "")}
@@ -408,7 +408,7 @@ export function SurveyEditor({
               <select
                 id={prefix + q.code}
                 data-code={q.code}
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 value={String(draft.answers[q.code] ?? "")}
                 disabled={locked || blocked || isFinalizing}
                 required={q.required}
@@ -476,7 +476,7 @@ export function SurveyEditor({
                   <label className="block text-sm" key={q.kode}>
                     {q.dimensi}: {q.pertanyaan}
                     <select
-                      className={controlClass}
+                      className={"select w-full " + (controlClass)}
                       disabled={peerLocked || blocked || isFinalizing}
                       value={String(draft.peerAnswers[id]?.[q.kode] ?? "")}
                       onChange={(e) =>
@@ -500,7 +500,7 @@ export function SurveyEditor({
                 ))}
                 <div className="block text-sm"><FloatingLabel label={<>Apresiasi atau masukan (opsional)
                   </>}><textarea placeholder=" "
-                    className={controlClass}
+                    className={"textarea w-full " + (controlClass)}
                     rows={3}
                     maxLength={10000}
                     disabled={peerLocked || blocked || isFinalizing}

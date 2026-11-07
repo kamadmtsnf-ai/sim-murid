@@ -1,0 +1,107 @@
+{
+  "status": "passed",
+  "checks": [
+    "normal 320 — no horizontal overflow",
+    "normal 360 — no horizontal overflow",
+    "normal 375 — no horizontal overflow",
+    "normal 390 — no horizontal overflow",
+    "normal 768 — no horizontal overflow",
+    "normal 1024 — no horizontal overflow",
+    "normal 1280 — no horizontal overflow",
+    "normal 1440 — no horizontal overflow",
+    "empty 320 — no horizontal overflow",
+    "empty 390 — no horizontal overflow",
+    "empty 768 — no horizontal overflow",
+    "empty 1440 — no horizontal overflow",
+    "empty — axe violations 0",
+    "Empty inbox disables mark-all and explains empty state",
+    "many 320 — no horizontal overflow",
+    "many 390 — no horizontal overflow",
+    "many 768 — no horizontal overflow",
+    "many 1440 — no horizontal overflow",
+    "many — axe violations 0",
+    "Pagination preserves all 200 rows and resets after search",
+    "long 320 — no horizontal overflow",
+    "long 390 — no horizontal overflow",
+    "long 768 — no horizontal overflow",
+    "long 1440 — no horizontal overflow",
+    "long — axe violations 0",
+    "invalid-date 320 — no horizontal overflow",
+    "invalid-date 390 — no horizontal overflow",
+    "invalid-date 768 — no horizontal overflow",
+    "invalid-date 1440 — no horizontal overflow",
+    "invalid-date — axe violations 0",
+    "Invalid dates render a safe fallback",
+    "normal desktop — axe violations 0",
+    "No duplicated module navigation",
+    "Notification dates use id-ID and Asia/Jakarta",
+    "empty search results — axe violations 0",
+    "Search, status filters, empty results and reset work locally",
+    "Rapid double-click produces one POST; reload is locked and focus survives unread filtering",
+    "Mark-all keeps null-ID contract and updates total unread",
+    "saved write with refresh error — axe violations 0",
+    "Committed write with failed refresh blocks writes until GET reconciles, without reposting",
+    "post-network gives safe feedback and recovers via GET",
+    "post-nonjson gives safe feedback and recovers via GET",
+    "post-malformed gives safe feedback and recovers via GET",
+    "post-403 gives safe feedback and recovers via GET",
+    "post-409 gives safe feedback and recovers via GET",
+    "get-fail retains data and recovers without corrupting state",
+    "get-malformed retains data and recovers without corrupting state",
+    "get-nonjson retains data and recovers without corrupting state",
+    "long content at 200 percent text — no horizontal overflow",
+    "Long content remains vertically scrollable to footer",
+    "200 percent text at desktop breakpoint — no horizontal overflow",
+    "Existing drawer keyboard behavior preserved on Notifications",
+    "resize 812x375 — no horizontal overflow",
+    "resize 1280x900 — no horizontal overflow",
+    "resize 390x844 — no horizontal overflow",
+    "Search field uses a visible input boundary",
+    "Action targets are at least 44px high",
+    "Unmount aborts the outstanding request",
+    "No uncaught JavaScript errors or unexpected console errors"
+  ],
+  "axe": [
+    {
+      "label": "empty",
+      "violations": []
+    },
+    {
+      "label": "many",
+      "violations": []
+    },
+    {
+      "label": "long",
+      "violations": []
+    },
+    {
+      "label": "invalid-date",
+      "violations": []
+    },
+    {
+      "label": "normal desktop",
+      "violations": []
+    },
+    {
+      "label": "empty search results",
+      "violations": []
+    },
+    {
+      "label": "saved write with refresh error",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "expectedNetworkErrors": 5,
+  "viewports": [
+    320,
+    360,
+    375,
+    390,
+    768,
+    1024,
+    1280,
+    1440
+  ],
+  "scope": "Synthetic component fixtures and intercepted API responses; no production writes or authenticated live-account UAT."
+}

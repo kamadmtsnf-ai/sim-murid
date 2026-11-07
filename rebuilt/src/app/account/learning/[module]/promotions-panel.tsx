@@ -529,7 +529,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
       <div
         role="tablist"
         aria-label="Layanan kenaikan dan ijazah"
-        className="flex flex-wrap gap-2"
+        className="tabs tabs-box flex flex-wrap gap-2"
       >
         {(data.isAdmin
           ? [
@@ -566,7 +566,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
                   document.getElementById("tab-" + all[next]![0]!)?.focus();
               }
             }}
-            onClick={async () => await changeTab(key!)}
+            onClick={async () => await changeTab(key!)} className="tab"
           >
             {label}
           </Button>
@@ -610,7 +610,7 @@ export function PromotionsPanel({ initial }: { initial: PromotionsSnapshot }) {
               <label>
                 Tindakan
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={action}
                   disabled={disabled}
                   onChange={async (e) => {
@@ -632,7 +632,7 @@ const retainedEvalue=e.target.value;
               <label>
                 Tahun ajaran asal
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   required
                   value={source}
                   disabled={disabled}
@@ -658,7 +658,7 @@ const retainedEvalue=e.target.value;
               <label>
                 Tahun ajaran tujuan
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   required
                   value={target}
                   disabled={disabled}
@@ -697,7 +697,7 @@ const retainedEvalue=e.target.value;
             </p>
             <div className="block max-w-lg"><FloatingLabel label={<>Cari siswa
               </>}><input
-                className={controlClass}
+                className={"input w-full " + (controlClass)}
                 value={search}
                 disabled={disabled}
                 onChange={(e) => {
@@ -729,7 +729,7 @@ const retainedEvalue=e.target.value;
                   >
                     <label className="flex min-w-0 items-start gap-3">
                       <input
-                        className="mt-1 size-5 shrink-0"
+                        className="checkbox checkbox-primary mt-1 size-5 shrink-0"
                         type="checkbox"
                         disabled={disabled || !target}
                         checked={!!m}
@@ -759,7 +759,7 @@ const retainedEvalue=e.target.value;
                     <label className="min-w-0">
                       Kelas tujuan untuk {r.name}
                       <select
-                        className={controlClass}
+                        className={"select w-full " + (controlClass)}
                         disabled={disabled || !m}
                         required={!!m}
                         value={m?.destination ?? ""}
@@ -807,7 +807,7 @@ const retainedEvalue=e.target.value;
             </p>
             <div className="block"><FloatingLabel label={<>Alasan / referensi keputusan
               </>}><textarea placeholder=" "
-                className={controlClass}
+                className={"textarea w-full " + (controlClass)}
                 required
                 minLength={3}
                 maxLength={2000}
@@ -839,7 +839,7 @@ const retainedEvalue=e.target.value;
               </div>
               <div className="sm:col-span-2"><FloatingLabel label={<>Cari alumni
                 </>}><input
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   value={search}
                   disabled={disabled}
                   onChange={(e) => {
@@ -882,7 +882,7 @@ const retainedEvalue=e.target.value;
                 <label className="block">
                   Cakupan
                   <select
-                    className={controlClass}
+                    className={"select w-full " + (controlClass)}
                     value={accessScope}
                     disabled={disabled}
                     onChange={async (e) => {
@@ -908,7 +908,7 @@ const retainedEvalue=e.target.value;
                     <label className="flex items-center gap-2">
                       <input
                         type="checkbox"
-                        className="size-5"
+                        className="checkbox checkbox-primary size-5"
                         checked={globalView}
                         disabled={disabled}
                         onChange={(e) => {
@@ -921,7 +921,7 @@ const retainedEvalue=e.target.value;
                     <label className="flex items-center gap-2">
                       <input
                         type="checkbox"
-                        className="size-5"
+                        className="checkbox checkbox-primary size-5"
                         checked={globalDownload}
                         disabled={disabled}
                         onChange={(e) => {
@@ -942,7 +942,7 @@ const retainedEvalue=e.target.value;
                         <label key={key}>
                           {label}
                           <select
-                            className={controlClass}
+                            className={"select w-full " + (controlClass)}
                             value={value}
                             required
                             disabled={disabled}
@@ -972,7 +972,7 @@ const retainedEvalue=e.target.value;
                         >
                           <input
                             type="checkbox"
-                            className="mt-1 size-5 shrink-0"
+                            className="checkbox checkbox-primary mt-1 size-5 shrink-0"
                             disabled={disabled}
                             checked={selected.includes(r.student_id)}
                             onChange={(e) =>
@@ -1171,7 +1171,7 @@ const retainedEvalue=e.target.value;
             <div className="grid gap-4 sm:grid-cols-2">
               {diplomaFields.map((key) => (
                 <div key={key} className="min-w-0"><FloatingLabel label={<>{fields[key]}</>}><input placeholder=" "
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     maxLength={1000}
                     value={metadata[key] ?? ""}
                     disabled={disabled}
@@ -1205,7 +1205,7 @@ const retainedEvalue=e.target.value;
                 <label className="block">
                   Jenis berkas
                   <select
-                    className={controlClass}
+                    className={"select w-full " + (controlClass)}
                     value={slot}
                     disabled={disabled}
                     onChange={(e) => {
@@ -1230,7 +1230,7 @@ const retainedEvalue=e.target.value;
                 <label className="block">
                   Berkas dokumen
                   <input
-                    className={controlClass}
+                    className={"file-input w-full " + (controlClass)}
                     type="file"
                     name="file"
                     accept=".pdf,.jpg,.jpeg,.png"
@@ -1249,7 +1249,7 @@ const retainedEvalue=e.target.value;
                 </p>
                 <label className="flex items-start gap-3">
                   <input
-                    className="mt-1 size-5 shrink-0"
+                    className="checkbox checkbox-primary mt-1 size-5 shrink-0"
                     type="checkbox"
                     checked={ack}
                     required
@@ -1374,7 +1374,7 @@ const retainedEvalue=e.target.value;
             ) : null}
             <label className="flex items-start gap-3">
               <input
-                className="mt-1 size-5 shrink-0"
+                className="checkbox checkbox-primary mt-1 size-5 shrink-0"
                 type="checkbox"
                 checked={ack}
                 required

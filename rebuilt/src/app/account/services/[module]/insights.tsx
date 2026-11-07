@@ -181,7 +181,7 @@ const retainedEcurrentTarget=e.currentTarget;
       <label>
         Periode
         <select
-          className={controlClass}
+          className={"select w-full " + (controlClass)}
           value={period}
           disabled={busy || aiBusy}
           onChange={async (e) => {
@@ -283,7 +283,7 @@ const retainedEvalue=e.target.value;
           <label>
             Peran
             <select
-              className={controlClass}
+              className={"select w-full " + (controlClass)}
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
@@ -305,7 +305,7 @@ const retainedEvalue=e.target.value;
           <label>
             Keandalan
             <select
-              className={controlClass}
+              className={"select w-full " + (controlClass)}
               value={quality}
               onChange={(e) => setQuality(e.target.value)}
             >
@@ -407,7 +407,7 @@ const retainedEvalue=e.target.value;
             </div>
           </details>
           <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
-            <table className="w-full text-left">
+            <table className="table table-zebra w-full text-left">
               <caption className="sr-only">
                 Data sesuai filter dan hak akses Anda
               </caption>
@@ -519,7 +519,7 @@ const retainedEvalue=e.target.value;
                     min="3"
                     max="7"
                     value={points}
-                    className={controlClass}
+                    className={"input w-full " + (controlClass)}
                     onChange={async (e) => {
 const retainedEvalue=e.target.value;
 
@@ -703,7 +703,7 @@ const retainedEvalue=e.target.value;
               <input
                 name="consent"
                 type="checkbox"
-                className="mt-1 size-5 shrink-0"
+                className="checkbox checkbox-primary mt-1 size-5 shrink-0"
               />
               <span>
                 Saya memahami cakupan seluruh periode, telah meninjau data untuk

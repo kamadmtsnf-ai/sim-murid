@@ -172,10 +172,10 @@ export function FollowUpCenter({
     >
       <Tabs.List
         aria-label="Notifikasi dan tindak lanjut"
-        className="schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
+        className="tabs tabs-box schedule-tabs grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-1"
       >
-        <Tabs.Trigger value="inbox">Kotak masuk</Tabs.Trigger>
-        <Tabs.Trigger value="follow-up">Tindak lanjut</Tabs.Trigger>
+        <Tabs.Trigger value="inbox" className="tab">Kotak masuk</Tabs.Trigger>
+        <Tabs.Trigger value="follow-up" className="tab">Tindak lanjut</Tabs.Trigger>
       </Tabs.List>
       <Tabs.Content value="inbox" forceMount hidden={activeTab !== "inbox"}>
         {inbox}
@@ -226,7 +226,7 @@ export function FollowUpCenter({
           <label className="flex min-h-11 items-center gap-3 text-sm">
             <input
               type="checkbox"
-              className="size-5 shrink-0"
+              className="checkbox checkbox-primary size-5 shrink-0"
               checked={showInformation}
               onChange={(e) => preference(e.target.checked)}
             />
@@ -273,7 +273,7 @@ export function FollowUpCenter({
               <label className="min-w-0">
                 <span className="mb-2 block text-sm font-medium">Urgensi</span>
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={urgencyFilter}
                   onChange={(e) => {
                     setUrgencyFilter(e.target.value);
@@ -293,7 +293,7 @@ export function FollowUpCenter({
                   Modul sumber
                 </span>
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={module}
                   onChange={(e) => {
                     setModule(e.target.value);
@@ -313,7 +313,7 @@ export function FollowUpCenter({
                   Status pekerjaan
                 </span>
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={status}
                   onChange={(e) => {
                     setStatus(e.target.value);
@@ -332,7 +332,7 @@ export function FollowUpCenter({
                   Cari tindak lanjut
                 </span></>}><input
                   type="search"
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   maxLength={200}
                   value={query}
                   onChange={(e) => {

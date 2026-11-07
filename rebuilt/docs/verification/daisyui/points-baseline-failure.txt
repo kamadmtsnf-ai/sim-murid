@@ -1,0 +1,54 @@
+1 normal 320 no horizontal overflow
+2 normal 320 axe
+3 normal 375 no horizontal overflow
+4 normal 390 no horizontal overflow
+5 normal 768 no horizontal overflow
+6 normal 1440 no horizontal overflow
+7 normal 1440 axe
+8 empty 320 no horizontal overflow
+9 empty axe
+10 large 320 no horizontal overflow
+11 large axe
+12 readonly 320 no horizontal overflow
+13 readonly axe
+14 readonly has no recording controls
+15 teacher 320 no horizontal overflow
+16 teacher axe
+17 loading 320 no horizontal overflow
+18 error 320 no horizontal overflow
+19 expanded history 320 no horizontal overflow
+20 expanded history 320 axe
+21 history table remains readable on mobile
+22 teacher can cancel own active event
+23 archived event has no cancel action
+24 teacher cannot cancel another author event
+25 recording student catalog complete
+26 inactive code excluded from event input
+27 event modal 375 no horizontal overflow
+28 event modal axe
+29 double click creates one request
+30 event payload preserves catalog code and date
+31 catalog modal 320x568 no horizontal overflow
+32 catalog landscape no horizontal overflow
+33 long catalog modal footer reachable
+34 keyboard focus stays inside dialog
+35 catalog restores positive points
+36 catalog restores inactive flag
+37 catalog correction keeps original code
+38 saving inactive catalog does not activate it
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: saving inactive catalog does not activate it ""
+    at check (file:///tmp/sim-points-baseline.mjs:80:27)
+    at file:///tmp/sim-points-baseline.mjs:359:3 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: undefined,
+  expected: undefined,
+  operator: 'fail',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

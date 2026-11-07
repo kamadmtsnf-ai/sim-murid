@@ -40,7 +40,7 @@ export function AiReview({ value }: { value: unknown }) {
       <label className="flex min-h-11 items-start gap-3">
         <input
           type="checkbox"
-          className="mt-1 size-5 shrink-0"
+          className="checkbox checkbox-primary mt-1 size-5 shrink-0"
           checked={reviewed}
           onChange={(e) => {
             setReviewed(e.target.checked);

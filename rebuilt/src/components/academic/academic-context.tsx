@@ -208,7 +208,7 @@ export function AcademicContextBar({
           <Field id={semesterId} label="Semester pilihan lintas halaman">
             <select
               id={semesterId}
-              className={fieldControlClass}
+              className={"select w-full " + (fieldControlClass)}
               value={[1, 2].includes(sem) ? String(sem) : ""}
               onChange={(e) => setChoice(e.target.value)}
               disabled={disabled || busy}

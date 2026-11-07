@@ -462,7 +462,7 @@ export function BulkImport({
               <div className="mt-3 block text-sm"><FloatingLabel label={<>Cari referensi
                 </>}><input placeholder=" "
                   type="search"
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   value={referenceSearch}
                   maxLength={100}
                   onChange={(e) => setReferenceSearch(e.target.value)}
@@ -507,7 +507,7 @@ export function BulkImport({
             <label className="min-w-0 text-sm">
               Kelas dan tahun ajaran
               <select
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 value={classId}
                 onChange={(e) => {
                   setClassId(e.target.value);
@@ -532,7 +532,7 @@ export function BulkImport({
               <div className="text-sm"><FloatingLabel label={<>{domain === "enrollment"
                   ? "Tanggal mulai penempatan"
                   : "Tanggal penilaian"}</>}><input placeholder=" "
-                  className={controlClass}
+                  className={"input w-full " + (controlClass)}
                   type="date"
                   value={date}
                   onChange={(e) => {
@@ -546,7 +546,7 @@ export function BulkImport({
               <label className="text-sm">
                 Jenis penilaian
                 <select
-                  className={controlClass}
+                  className={"select w-full " + (controlClass)}
                   value={kind}
                   onChange={(e) => {
                     setKind(e.target.value as typeof kind);
@@ -564,7 +564,7 @@ export function BulkImport({
               <input
                 type="file"
                 accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                className={controlClass}
+                className={"file-input w-full " + (controlClass)}
                 onChange={(e) => void file(e.target.files?.[0])}
               />
             </label>
@@ -623,7 +623,7 @@ export function BulkImport({
                   : ""}
               </p>
               <TableRegion label="Pratinjau dan hasil impor">
-                <table className="w-full text-left text-sm">
+                <table className="table table-zebra w-full text-left text-sm">
                   <thead>
                     <tr>
                       <th className="p-2">Baris</th>
@@ -679,7 +679,7 @@ export function BulkImport({
             <label className="flex min-h-11 items-center gap-3 text-sm">
               <input
                 type="checkbox"
-                className="size-5 shrink-0"
+                className="checkbox checkbox-primary size-5 shrink-0"
                 checked={checked}
                 disabled={pending}
                 onChange={(e) => setChecked(e.target.checked)}

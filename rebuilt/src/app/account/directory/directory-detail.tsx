@@ -67,7 +67,7 @@ export function DirectoryDetailView({
           </p>
         </div>
         <span
-          className={`directory-status directory-detail-status ${p.status === "active" ? "directory-status-active" : ""}`}
+          className={`badge badge-soft directory-status directory-detail-status ${p.status === "active" ? "directory-status-active" : ""}`}
         >
           <ShieldCheck aria-hidden="true" />
           <span>{p.status === "active" ? "Aktif" : "Nonaktif"}</span>

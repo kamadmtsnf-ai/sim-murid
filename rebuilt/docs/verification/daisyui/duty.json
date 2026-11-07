@@ -1,0 +1,1017 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "inactive roster cannot confirm primary",
+      "passed": true
+    },
+    {
+      "name": "inactive roster cannot appoint substitute",
+      "passed": true
+    },
+    {
+      "name": "inactive roster explained",
+      "passed": true
+    },
+    {
+      "name": "inactive roster cleanup remains available",
+      "passed": true
+    },
+    {
+      "name": "normal 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "normal history 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "normal 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "normal history 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "normal 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal history 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "normal 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "normal history 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "empty 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "empty history 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "empty 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "empty history 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "empty 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "empty history 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "empty 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "empty history 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "large 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "large history 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "large 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "large history 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "large 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "large history 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "large 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "large history 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "readonly history 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "readonly has no mutation controls 320",
+      "passed": true
+    },
+    {
+      "name": "readonly 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "readonly history 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "readonly has no mutation controls 390",
+      "passed": true
+    },
+    {
+      "name": "readonly 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "readonly history 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "readonly has no mutation controls 768",
+      "passed": true
+    },
+    {
+      "name": "readonly 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly history 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "readonly has no mutation controls 1440",
+      "passed": true
+    },
+    {
+      "name": "loading 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "loading axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "loading 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "loading 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "loading 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "error 320 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 320,
+        "document": 320
+      }
+    },
+    {
+      "name": "error axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "error 390 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "name": "error 768 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 768,
+        "document": 768
+      }
+    },
+    {
+      "name": "error 1440 no horizontal overflow",
+      "passed": true,
+      "detail": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "primary 320 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 76.25,
+        "right": 304,
+        "bottom": 491.75,
+        "vw": 320,
+        "vh": 568,
+        "scroll": 286,
+        "client": 286
+      }
+    },
+    {
+      "name": "primary modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "primary footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "primary return focus 320",
+      "passed": true
+    },
+    {
+      "name": "appoint 320 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 36.25,
+        "right": 304,
+        "bottom": 531.75,
+        "vw": 320,
+        "vh": 568,
+        "scroll": 286,
+        "client": 286
+      }
+    },
+    {
+      "name": "appoint modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "appoint footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "appoint return focus 320",
+      "passed": true
+    },
+    {
+      "name": "roster 320 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 304,
+        "bottom": 552,
+        "vw": 320,
+        "vh": 568,
+        "scroll": 286,
+        "client": 286
+      }
+    },
+    {
+      "name": "roster modal axe",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "roster footer reachable 320",
+      "passed": true
+    },
+    {
+      "name": "roster return focus 320",
+      "passed": true
+    },
+    {
+      "name": "primary 375 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 210.625,
+        "right": 359,
+        "bottom": 601.375,
+        "vw": 375,
+        "vh": 812,
+        "scroll": 341,
+        "client": 341
+      }
+    },
+    {
+      "name": "primary footer reachable 375",
+      "passed": true
+    },
+    {
+      "name": "primary return focus 375",
+      "passed": true
+    },
+    {
+      "name": "appoint 375 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 170.625,
+        "right": 359,
+        "bottom": 641.375,
+        "vw": 375,
+        "vh": 812,
+        "scroll": 341,
+        "client": 341
+      }
+    },
+    {
+      "name": "appoint footer reachable 375",
+      "passed": true
+    },
+    {
+      "name": "appoint return focus 375",
+      "passed": true
+    },
+    {
+      "name": "roster 375 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 51.4375,
+        "right": 359,
+        "bottom": 760.5625,
+        "vw": 375,
+        "vh": 812,
+        "scroll": 341,
+        "client": 341
+      }
+    },
+    {
+      "name": "roster footer reachable 375",
+      "passed": true
+    },
+    {
+      "name": "roster return focus 375",
+      "passed": true
+    },
+    {
+      "name": "primary 390 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 222,
+        "right": 374,
+        "bottom": 590,
+        "vw": 390,
+        "vh": 812,
+        "scroll": 356,
+        "client": 356
+      }
+    },
+    {
+      "name": "primary footer reachable 390",
+      "passed": true
+    },
+    {
+      "name": "primary return focus 390",
+      "passed": true
+    },
+    {
+      "name": "appoint 390 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 182,
+        "right": 374,
+        "bottom": 630,
+        "vw": 390,
+        "vh": 812,
+        "scroll": 356,
+        "client": 356
+      }
+    },
+    {
+      "name": "appoint footer reachable 390",
+      "passed": true
+    },
+    {
+      "name": "appoint return focus 390",
+      "passed": true
+    },
+    {
+      "name": "roster 390 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 72.8125,
+        "right": 374,
+        "bottom": 739.1875,
+        "vw": 390,
+        "vh": 812,
+        "scroll": 356,
+        "client": 356
+      }
+    },
+    {
+      "name": "roster footer reachable 390",
+      "passed": true
+    },
+    {
+      "name": "roster return focus 390",
+      "passed": true
+    },
+    {
+      "name": "primary 768 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 48,
+        "y": 224,
+        "right": 720,
+        "bottom": 588,
+        "vw": 768,
+        "vh": 812,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "primary footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "primary return focus 768",
+      "passed": true
+    },
+    {
+      "name": "appoint 768 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 48,
+        "y": 184,
+        "right": 720,
+        "bottom": 628,
+        "vw": 768,
+        "vh": 812,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "appoint footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "appoint return focus 768",
+      "passed": true
+    },
+    {
+      "name": "roster 768 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 48,
+        "y": 88.40625,
+        "right": 720,
+        "bottom": 723.59375,
+        "vw": 768,
+        "vh": 812,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "roster footer reachable 768",
+      "passed": true
+    },
+    {
+      "name": "roster return focus 768",
+      "passed": true
+    },
+    {
+      "name": "primary 1440 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 224,
+        "right": 1056,
+        "bottom": 588,
+        "vw": 1440,
+        "vh": 812,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "primary footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "primary return focus 1440",
+      "passed": true
+    },
+    {
+      "name": "appoint 1440 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 184,
+        "right": 1056,
+        "bottom": 628,
+        "vw": 1440,
+        "vh": 812,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "appoint footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "appoint return focus 1440",
+      "passed": true
+    },
+    {
+      "name": "roster 1440 modal contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 88.40625,
+        "right": 1056,
+        "bottom": 723.59375,
+        "vw": 1440,
+        "vh": 812,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "roster footer reachable 1440",
+      "passed": true
+    },
+    {
+      "name": "roster return focus 1440",
+      "passed": true
+    },
+    {
+      "name": "existing weekly days prefilled",
+      "passed": true
+    },
+    {
+      "name": "dirty Escape cancellation retains modal",
+      "passed": true
+    },
+    {
+      "name": "draft days retained",
+      "passed": true
+    },
+    {
+      "name": "dirty teacher change cancellation retains teacher",
+      "passed": true
+    },
+    {
+      "name": "pending prevents modal dismissal",
+      "passed": true
+    },
+    {
+      "name": "roster mutation retains unedited day and sends once",
+      "passed": true
+    },
+    {
+      "name": "explicit empty roster supported",
+      "passed": true
+    },
+    {
+      "name": "self substitution blocked before network",
+      "passed": true
+    },
+    {
+      "name": "substitute appoint command preserved",
+      "passed": true
+    },
+    {
+      "name": "primary confirmation preserved",
+      "passed": true
+    },
+    {
+      "name": "cancelled and historical rows have no correction",
+      "passed": true
+    },
+    {
+      "name": "pending substitute action choices correct",
+      "passed": true
+    },
+    {
+      "name": "confirm existing substitute supported",
+      "passed": true
+    },
+    {
+      "name": "confirmed row action choices correct",
+      "passed": true
+    },
+    {
+      "name": "unconfirm command supported",
+      "passed": true
+    },
+    {
+      "name": "cancel command supported",
+      "passed": true
+    },
+    {
+      "name": "invalid feedback inside trap",
+      "passed": true
+    },
+    {
+      "name": "invalid retry lock",
+      "passed": true
+    },
+    {
+      "name": "invalid preserves teacher",
+      "passed": true
+    },
+    {
+      "name": "invalid no auto retry",
+      "passed": true
+    },
+    {
+      "name": "duplicate feedback inside trap",
+      "passed": true
+    },
+    {
+      "name": "duplicate retry lock",
+      "passed": true
+    },
+    {
+      "name": "duplicate preserves teacher",
+      "passed": true
+    },
+    {
+      "name": "duplicate no auto retry",
+      "passed": true
+    },
+    {
+      "name": "stale feedback inside trap",
+      "passed": true
+    },
+    {
+      "name": "stale retry lock",
+      "passed": true
+    },
+    {
+      "name": "stale preserves teacher",
+      "passed": true
+    },
+    {
+      "name": "stale reload reachable",
+      "passed": true
+    },
+    {
+      "name": "stale no auto retry",
+      "passed": true
+    },
+    {
+      "name": "denied feedback inside trap",
+      "passed": true
+    },
+    {
+      "name": "denied retry lock",
+      "passed": true
+    },
+    {
+      "name": "denied preserves teacher",
+      "passed": true
+    },
+    {
+      "name": "denied reload reachable",
+      "passed": true
+    },
+    {
+      "name": "denied no auto retry",
+      "passed": true
+    },
+    {
+      "name": "network feedback inside trap",
+      "passed": true
+    },
+    {
+      "name": "network retry lock",
+      "passed": true
+    },
+    {
+      "name": "network preserves teacher",
+      "passed": true
+    },
+    {
+      "name": "network reload reachable",
+      "passed": true
+    },
+    {
+      "name": "network no auto retry",
+      "passed": true
+    },
+    {
+      "name": "malformed feedback inside trap",
+      "passed": true
+    },
+    {
+      "name": "malformed retry lock",
+      "passed": true
+    },
+    {
+      "name": "malformed preserves teacher",
+      "passed": true
+    },
+    {
+      "name": "malformed reload reachable",
+      "passed": true
+    },
+    {
+      "name": "malformed no auto retry",
+      "passed": true
+    },
+    {
+      "name": "timeout locks uncertain write",
+      "passed": true
+    },
+    {
+      "name": "pagination retains history filters",
+      "passed": true
+    },
+    {
+      "name": "export link retains filters",
+      "passed": true
+    },
+    {
+      "name": "filter retains history view",
+      "passed": true
+    },
+    {
+      "name": "landscape modal contained",
+      "passed": true,
+      "detail": {
+        "x": 70,
+        "y": 16,
+        "right": 742,
+        "bottom": 359,
+        "vw": 812,
+        "vh": 375,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "focus trap retains keyboard",
+      "passed": true
+    },
+    {
+      "name": "desktop resize modal contained",
+      "passed": true,
+      "detail": {
+        "x": 384,
+        "y": 132.40625,
+        "right": 1056,
+        "bottom": 767.59375,
+        "vw": 1440,
+        "vh": 900,
+        "scroll": 670,
+        "client": 670
+      }
+    },
+    {
+      "name": "short mobile modal contained",
+      "passed": true,
+      "detail": {
+        "x": 16,
+        "y": 16,
+        "right": 304,
+        "bottom": 552,
+        "vw": 320,
+        "vh": 568,
+        "scroll": 286,
+        "client": 286
+      }
+    },
+    {
+      "name": "no uncaught JavaScript errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "axe": [
+    {
+      "name": "normal",
+      "violations": []
+    },
+    {
+      "name": "empty",
+      "violations": []
+    },
+    {
+      "name": "large",
+      "violations": []
+    },
+    {
+      "name": "readonly",
+      "violations": []
+    },
+    {
+      "name": "loading",
+      "violations": []
+    },
+    {
+      "name": "error",
+      "violations": []
+    },
+    {
+      "name": "primary modal",
+      "violations": []
+    },
+    {
+      "name": "appoint modal",
+      "violations": []
+    },
+    {
+      "name": "roster modal",
+      "violations": []
+    }
+  ],
+  "errors": [],
+  "limits": [
+    "Synthetic fixtures and intercepted writes, not authenticated production role UAT or physical-device testing."
+  ]
+}

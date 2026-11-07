@@ -25,7 +25,7 @@ export function TextField({
         id={id}
         name={name}
         type={type}
-        className={controlClass}
+        className={"input w-full " + (controlClass)}
         defaultValue={value}
         required={required}
         maxLength={max}
@@ -53,7 +53,7 @@ export function SelectField({
         id={id}
         name={name}
         defaultValue={value}
-        className={controlClass}
+        className={"select w-full " + (controlClass)}
         required={required}
       >
         {children}

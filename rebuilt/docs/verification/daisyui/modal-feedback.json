@@ -1,0 +1,109 @@
+{
+  "results": [
+    {
+      "width": 320,
+      "generatedIdPreserved": true,
+      "busyEscapeBlocked": true,
+      "draftPreserved": true,
+      "focusRestored": true,
+      "uncertainGuidance": true,
+      "confirmationOnce": true,
+      "noOverflow": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 390,
+      "generatedIdPreserved": true,
+      "busyEscapeBlocked": true,
+      "draftPreserved": true,
+      "focusRestored": true,
+      "uncertainGuidance": true,
+      "confirmationOnce": true,
+      "noOverflow": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 768,
+      "generatedIdPreserved": true,
+      "busyEscapeBlocked": true,
+      "draftPreserved": true,
+      "focusRestored": true,
+      "uncertainGuidance": true,
+      "confirmationOnce": true,
+      "noOverflow": true,
+      "axeViolations": 0
+    },
+    {
+      "width": 1440,
+      "generatedIdPreserved": true,
+      "busyEscapeBlocked": true,
+      "draftPreserved": true,
+      "focusRestored": true,
+      "uncertainGuidance": true,
+      "confirmationOnce": true,
+      "noOverflow": true,
+      "axeViolations": 0
+    },
+    {
+      "variant": "classes-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "schedules-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "duty-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "attendance-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "mentoring-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "committee-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "savings-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "discipline-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "grades-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "reports-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "promotions-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    },
+    {
+      "variant": "books-dialog",
+      "headerStable": true,
+      "noOverflow": true
+    }
+  ],
+  "errors": []
+}

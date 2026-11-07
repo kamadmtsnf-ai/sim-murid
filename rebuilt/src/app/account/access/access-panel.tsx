@@ -293,7 +293,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                 >
                   <input
                     id="access-search"
-                    className={fieldControlClass}
+                    className={"input w-full " + (fieldControlClass)}
                     type="search"
                     maxLength={200}
                     value={query}
@@ -307,7 +307,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                 <Field id="access-resource" label="Layanan">
                   <select
                     id="access-resource"
-                    className={fieldControlClass}
+                    className={"select w-full " + (fieldControlClass)}
                     value={resource}
                     onChange={(e) => {
                       setResource(e.target.value);
@@ -325,7 +325,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
                 <Field id="access-scope" label="Cakupan">
                   <select
                     id="access-scope"
-                    className={fieldControlClass}
+                    className={"select w-full " + (fieldControlClass)}
                     value={scope}
                     onChange={(e) => {
                       setScope(e.target.value);
@@ -343,7 +343,7 @@ export function AccessPanel({ initialData }: { initialData: AccessPageData }) {
               </FilterBar>
               <div className="ds-actions items-center justify-between">
                 <CollectionSummary total={filtered.length} page={current+1} pageSize={10} unit="jenis izin" filters={[{label:'Pencarian',value:query},{label:'Area',value:resource?(accessResources[resource]??resource):''},{label:'Cakupan',value:scope?(scopeLabels[scope as keyof typeof scopeLabels]??scope):''}]}/>
-                <Field id="access-sort" label="Urutan"><select id="access-sort" className={fieldControlClass} value={sort} onChange={e=>{setSort(e.target.value==='label-desc'?'label-desc':'label-asc');setPage(0);}}><option value="label-asc">Nama izin A–Z</option><option value="label-desc">Nama izin Z–A</option></select></Field>
+                <Field id="access-sort" label="Urutan"><select id="access-sort" className={"select w-full " + (fieldControlClass)} value={sort} onChange={e=>{setSort(e.target.value==='label-desc'?'label-desc':'label-asc');setPage(0);}}><option value="label-asc">Nama izin A–Z</option><option value="label-desc">Nama izin Z–A</option></select></Field>
                 <Button
                   type="button"
                   variant="outline"

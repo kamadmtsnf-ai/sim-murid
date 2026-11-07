@@ -424,7 +424,7 @@ export function BiodataPanel({
           <strong>{student.progress.percent}%</strong>
         </div>
         <progress
-          className="h-2 w-full accent-primary"
+          className="progress progress-primary h-2 w-full accent-primary"
           value={student.progress.percent}
           max={100}
           aria-label="Kelengkapan profil tersimpan"
@@ -517,7 +517,7 @@ export function BiodataPanel({
                         <input
                           id={"biodata-" + field}
                           type="checkbox"
-                          className="size-5 shrink-0 accent-primary"
+                          className="checkbox checkbox-primary size-5 shrink-0 accent-primary"
                           checked={data[field] === true}
                           onChange={(e) => update(field, e.target.checked)}
                         />
@@ -533,7 +533,7 @@ export function BiodataPanel({
                             </label>
                             <select
                               id={"biodata-" + field}
-                              className={fieldClass}
+                              className={"select w-full " + (fieldClass)}
                               value={custom ? otherChoice : value}
                               aria-invalid={!custom && !!fieldErrors[field]}
                               aria-describedby={
@@ -558,28 +558,28 @@ export function BiodataPanel({
                             </select>
                             {custom && (
                               <div className="mt-3 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-200">
-                                <label htmlFor={`biodata-${field}-other`} className="text-sm font-medium">
+                                <FloatingLabel htmlFor={`biodata-${field}-other`} label={<>
                                   Detail {label(field)} <span aria-hidden="true">*</span>
-                                </label>
+                                </>}>
                                 <input
                                   id={`biodata-${field}-other`}
                                   type="text"
                                   required
-                                  className={fieldClass}
+                                  className={"input w-full " + (fieldClass)}
                                   placeholder="Mohon tuliskan detail lainnya..."
                                   maxLength={otherDetailMaxLength}
                                   value={value.startsWith(otherChoicePrefix) ? value.slice(otherChoicePrefix.length) : ""}
                                   aria-invalid={!!fieldErrors[field]}
                                   aria-describedby={fieldErrors[field] ? "error-" + field : undefined}
                                   onChange={(event) => update(field, otherChoicePrefix + event.target.value)}
-                                />
+                                /></FloatingLabel>
                               </div>
                             )}
                           </>
                         ) : (
                           <FloatingLabel htmlFor={"biodata-" + field} label={<>{label(field)}{required.includes(field) ? " *" : ""}</>}><input placeholder=" "
                             id={"biodata-" + field}
-                            className={fieldClass}
+                            className={"input w-full " + (fieldClass)}
                             maxLength={digitField(field) === "identity" ? 16 : digitField(field) === "phone" ? 13 : 500}
                             type={
                               field.endsWith("TanggalLahir") ||
@@ -674,7 +674,7 @@ export function BiodataPanel({
                       <select
                         id="document-kind"
                         name="kind"
-                        className={fieldClass}
+                        className={"select w-full " + (fieldClass)}
                         value={kind}
                         onChange={(e) => setKind(e.target.value)}
                       >
@@ -697,7 +697,7 @@ export function BiodataPanel({
                         type="file"
                         name="file"
                         required
-                        className="mt-1 block min-h-11 w-full min-w-0 max-w-full text-sm file:mr-2 file:rounded file:border file:px-2 file:py-2"
+                        className="file-input w-full mt-1 block min-h-11 w-full min-w-0 max-w-full text-sm file:mr-2 file:rounded file:border file:px-2 file:py-2"
                         accept={
                           ["KK", "AKTA", "IJAZAH_MI", "IJAZAH_TK"].includes(
                             kind,

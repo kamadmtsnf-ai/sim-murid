@@ -1,0 +1,187 @@
+{
+  "checks": [
+    {
+      "name": "keyboard disclosure 320",
+      "passed": true
+    },
+    {
+      "name": "reject private text 320",
+      "passed": true
+    },
+    {
+      "name": "no private text in report 320",
+      "passed": true
+    },
+    {
+      "name": "clipboard denied manual fallback 320",
+      "passed": true
+    },
+    {
+      "name": "explicit copy 320",
+      "passed": true
+    },
+    {
+      "name": "no overflow 320",
+      "passed": true
+    },
+    {
+      "name": "axe 320",
+      "passed": true
+    },
+    {
+      "name": "navigation clears report code 320",
+      "passed": true
+    },
+    {
+      "name": "context updates 320",
+      "passed": true
+    },
+    {
+      "name": "landscape 320",
+      "passed": true
+    },
+    {
+      "name": "keyboard disclosure 390",
+      "passed": true
+    },
+    {
+      "name": "reject private text 390",
+      "passed": true
+    },
+    {
+      "name": "no private text in report 390",
+      "passed": true
+    },
+    {
+      "name": "clipboard denied manual fallback 390",
+      "passed": true
+    },
+    {
+      "name": "explicit copy 390",
+      "passed": true
+    },
+    {
+      "name": "no overflow 390",
+      "passed": true
+    },
+    {
+      "name": "axe 390",
+      "passed": true
+    },
+    {
+      "name": "navigation clears report code 390",
+      "passed": true
+    },
+    {
+      "name": "context updates 390",
+      "passed": true
+    },
+    {
+      "name": "landscape 390",
+      "passed": true
+    },
+    {
+      "name": "keyboard disclosure 768",
+      "passed": true
+    },
+    {
+      "name": "reject private text 768",
+      "passed": true
+    },
+    {
+      "name": "no private text in report 768",
+      "passed": true
+    },
+    {
+      "name": "clipboard denied manual fallback 768",
+      "passed": true
+    },
+    {
+      "name": "explicit copy 768",
+      "passed": true
+    },
+    {
+      "name": "no overflow 768",
+      "passed": true
+    },
+    {
+      "name": "axe 768",
+      "passed": true
+    },
+    {
+      "name": "navigation clears report code 768",
+      "passed": true
+    },
+    {
+      "name": "context updates 768",
+      "passed": true
+    },
+    {
+      "name": "landscape 768",
+      "passed": true
+    },
+    {
+      "name": "keyboard disclosure 1440",
+      "passed": true
+    },
+    {
+      "name": "reject private text 1440",
+      "passed": true
+    },
+    {
+      "name": "no private text in report 1440",
+      "passed": true
+    },
+    {
+      "name": "clipboard denied manual fallback 1440",
+      "passed": true
+    },
+    {
+      "name": "explicit copy 1440",
+      "passed": true
+    },
+    {
+      "name": "no overflow 1440",
+      "passed": true
+    },
+    {
+      "name": "axe 1440",
+      "passed": true
+    },
+    {
+      "name": "navigation clears report code 1440",
+      "passed": true
+    },
+    {
+      "name": "context updates 1440",
+      "passed": true
+    },
+    {
+      "name": "landscape 1440",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": 320,
+      "violations": []
+    },
+    {
+      "label": 390,
+      "violations": []
+    },
+    {
+      "label": 768,
+      "violations": []
+    },
+    {
+      "label": 1440,
+      "violations": []
+    }
+  ],
+  "errors": []
+}

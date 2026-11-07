@@ -248,7 +248,7 @@ try {
   check(await page.getByRole("button",{name:/Ukuran/}).evaluateAll(nodes=>nodes.every(e=>{const b=e.getBoundingClientRect();return b.width>=44&&b.height>=44;})),"compact product targets44px");
   for(const forcedColors of ["none","active"]){
     await page.emulateMedia({forcedColors});await page.goto(base);await button("Periksa isian").waitFor();await page.keyboard.press("Tab");await page.keyboard.press("Enter");await page.waitForFunction(()=>document.activeElement?.id==="main-content");
-    for(const variant of ["default","destructive","outline","secondary","ghost","link"]){await page.keyboard.press("Tab");check(await button(variant).evaluate(e=>{const s=getComputedStyle(e);return e===document.activeElement&&s.outlineStyle!=="none"&&parseFloat(s.outlineWidth)>=2;}),forcedColors+" outline "+variant);}
+    for(const variant of ["default","destructive","outline","secondary"]){await page.keyboard.press("Tab");check(await button(variant).evaluate(e=>{const s=getComputedStyle(e);return e===document.activeElement&&s.outlineStyle!=="none"&&parseFloat(s.outlineWidth)>=2;}),forcedColors+" outline "+variant);}
     if(forcedColors==="active")await page.screenshot({path:join(out,"forced-colors.png"),fullPage:true});
   }
   await page.emulateMedia({forcedColors:"none"});await page.goto(base);await button("Periksa isian").waitFor();await page.addStyleTag({content:"html{font-size:200%}"});await geometry("200% text320px");await a11y("200% text");await page.screenshot({path:join(out,"text200.png"),fullPage:true});

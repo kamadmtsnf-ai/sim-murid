@@ -537,7 +537,7 @@ const retainedEcurrentTarget=e.currentTarget;
               Kelas / tahun ajaran
               <select
                 name="classId"
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 defaultValue={filters.classId ?? ""}
               >
                 <option value="">Semua sesuai izin</option>
@@ -552,7 +552,7 @@ const retainedEcurrentTarget=e.currentTarget;
               Mata pelajaran
               <select
                 name="subjectId"
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 defaultValue={filters.subjectId ?? ""}
               >
                 <option value="">Semua sesuai izin</option>
@@ -567,7 +567,7 @@ const retainedEcurrentTarget=e.currentTarget;
               Semester
               <select
                 name="semester"
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 defaultValue={String(data.semester)}
               >
                 <option value="1">Ganjil (Juli–Desember)</option>
@@ -578,7 +578,7 @@ const retainedEcurrentTarget=e.currentTarget;
               Siswa dalam laporan
               <select
                 name="studentId"
-                className={controlClass}
+                className={"select w-full " + (controlClass)}
                 defaultValue={filters.studentId ?? ""}
               >
                 <option value="">Semua sesuai izin</option>
@@ -674,7 +674,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 setHistorySearch(e.target.value);
                 setHistoryPage(1);
               }}
-              className={controlClass}
+              className={"input w-full " + (controlClass)}
               maxLength={100}
             /></FloatingLabel>
           </div>
@@ -686,7 +686,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 setHistoryKind(e.target.value);
                 setHistoryPage(1);
               }}
-              className={controlClass}
+              className={"select w-full " + (controlClass)}
             >
               <option value="">Semua</option>
               {kinds.map((k) => (
@@ -704,7 +704,7 @@ const retainedEcurrentTarget=e.currentTarget;
                 setPh(e.target.value);
                 setHistoryPage(1);
               }}
-              className={controlClass}
+              className={"input w-full " + (controlClass)}
             /></FloatingLabel>
           </div>
         </div>
@@ -744,7 +744,7 @@ const retainedEcurrentTarget=e.currentTarget;
                     " — gulir untuk seluruh kolom"
                   }
                 >
-                  <table className="w-full text-left text-sm">
+                  <table className="table table-zebra w-full text-left text-sm">
                     <caption className="sr-only">
                       Nilai {row.kind} {row.subject_name}
                     </caption>
@@ -851,7 +851,7 @@ const retainedEcurrentTarget=e.currentTarget;
                       minLength={3}
                       maxLength={2000}
                       rows={3}
-                      className={controlClass}
+                      className={"textarea w-full " + (controlClass)}
                       required
                     /></FloatingLabel>
                   </div>
@@ -887,7 +887,7 @@ const retainedEcurrentTarget=e.currentTarget;
                         onChange={(e) => setDate(e.target.value)}
                         min={period?.start}
                         max={period?.end}
-                        className={controlClass}
+                        className={"input w-full " + (controlClass)}
                         required
                       /></FloatingLabel>
                     </div>
@@ -904,7 +904,7 @@ const retainedEcurrentTarget=e.currentTarget;
                             max={100}
                             step="0.01"
                             defaultValue={context?.extra.kkm ?? 75}
-                            className={controlClass}
+                            className={"input w-full " + (controlClass)}
                             required
                           /></FloatingLabel>
                         </div>
@@ -924,7 +924,7 @@ const retainedEcurrentTarget=e.currentTarget;
                               await changeKind(e.target.value as Assessment["kind"])
                             }
                             disabled={!!edit}
-                            className={controlClass}
+                            className={"select w-full " + (controlClass)}
                           >
                             {kinds.map((k) => (
                               <option key={k}>{k}</option>
@@ -954,7 +954,7 @@ const retainedEcurrentTarget=e.currentTarget;
                               setEntryPage(1);
                             }}
                             maxLength={100}
-                            className={controlClass}
+                            className={"input w-full " + (controlClass)}
                           /></FloatingLabel>
                         </div>
                         <p className="text-sm text-muted-foreground">
@@ -985,7 +985,7 @@ const retainedEcurrentTarget=e.currentTarget;
                                     },
                                   }))
                                 }
-                                className={controlClass}
+                                className={"input w-full " + (controlClass)}
                               /></FloatingLabel>
                             </div>
                             <div className="text-sm"><FloatingLabel label={<>Catatan {p.full_name}</>}><input placeholder=" "
@@ -1000,7 +1000,7 @@ const retainedEcurrentTarget=e.currentTarget;
                                   }))
                                 }
                                 maxLength={2000}
-                                className={controlClass}
+                                className={"input w-full " + (controlClass)}
                               /></FloatingLabel>
                             </div>
                           </div>
@@ -1040,7 +1040,7 @@ const retainedEcurrentTarget=e.currentTarget;
                               minLength={3}
                               maxLength={2000}
                               rows={2}
-                              className={controlClass}
+                              className={"textarea w-full " + (controlClass)}
                               required
                             /></FloatingLabel>
                           </div>

@@ -1,0 +1,251 @@
+{
+  "baseline": {
+    "groups": 64,
+    "tests": 596,
+    "failures": 1,
+    "buildPassed": false
+  },
+  "browser": [
+    {
+      "suite": "accessibility",
+      "status": "passed",
+      "checks": 108,
+      "axe": 18
+    },
+    {
+      "suite": "account-recovery",
+      "status": "baseline failure reproduced",
+      "reason": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Setujui dan pulihkan', exact: true })\u001b[22m\n"
+    },
+    {
+      "suite": "account-security",
+      "status": "passed",
+      "checks": 80,
+      "axe": 7
+    },
+    {
+      "suite": "attendance",
+      "status": "passed",
+      "checks": 90,
+      "axe": 6
+    },
+    {
+      "suite": "audit",
+      "status": "passed",
+      "checks": 191,
+      "axe": 21
+    },
+    {
+      "suite": "biodata",
+      "status": "passed",
+      "checks": 81,
+      "axe": 11
+    },
+    {
+      "suite": "books",
+      "status": "passed",
+      "checks": 54,
+      "axe": 8
+    },
+    {
+      "suite": "bulk",
+      "status": "passed",
+      "checks": 106,
+      "axe": 12
+    },
+    {
+      "suite": "classes",
+      "status": "passed",
+      "checks": 302,
+      "axe": 17
+    },
+    {
+      "suite": "committee",
+      "status": "passed",
+      "checks": 92,
+      "axe": 6
+    },
+    {
+      "suite": "confirm",
+      "status": "passed",
+      "checks": 45,
+      "axe": 4
+    },
+    {
+      "suite": "directory",
+      "status": "passed",
+      "checks": 73,
+      "axe": 13
+    },
+    {
+      "suite": "duty",
+      "status": "passed",
+      "checks": 155,
+      "axe": 9
+    },
+    {
+      "suite": "email-verification",
+      "status": "passed",
+      "checks": 87,
+      "axe": 10
+    },
+    {
+      "suite": "families",
+      "status": "passed",
+      "checks": 37,
+      "axe": 7
+    },
+    {
+      "suite": "follow-up",
+      "status": "passed",
+      "checks": 90,
+      "axe": 8
+    },
+    {
+      "suite": "grades",
+      "status": "passed",
+      "checks": 62,
+      "axe": 7
+    },
+    {
+      "suite": "help",
+      "status": "passed",
+      "checks": 41,
+      "axe": 4
+    },
+    {
+      "suite": "jobs",
+      "status": "passed",
+      "checks": 49,
+      "axe": 9
+    },
+    {
+      "suite": "mentoring",
+      "status": "passed",
+      "checks": 94,
+      "axe": 7
+    },
+    {
+      "suite": "modal-feedback",
+      "status": "passed",
+      "checks": 0,
+      "axe": 0
+    },
+    {
+      "suite": "notifications",
+      "status": "passed",
+      "checks": 59,
+      "axe": 7
+    },
+    {
+      "suite": "overview",
+      "status": "passed",
+      "checks": 120,
+      "axe": 20
+    },
+    {
+      "suite": "personal-profile",
+      "status": "baseline failure reproduced",
+      "reason": "TimeoutError: locator.evaluate: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Simpan profil', exact: true })\u001b[22m\n"
+    },
+    {
+      "suite": "points",
+      "status": "baseline failure reproduced",
+      "reason": "AssertionError [ERR_ASSERTION]: saving inactive catalog does not activate it \"\""
+    },
+    {
+      "suite": "promotions",
+      "status": "passed",
+      "checks": 104,
+      "axe": 13
+    },
+    {
+      "suite": "reconciliation",
+      "status": "passed",
+      "checks": 59,
+      "axe": 5
+    },
+    {
+      "suite": "reports",
+      "status": "passed",
+      "checks": 62,
+      "axe": 7
+    },
+    {
+      "suite": "savings",
+      "status": "passed",
+      "checks": 48,
+      "axe": 6
+    },
+    {
+      "suite": "schedules",
+      "status": "passed",
+      "checks": 169,
+      "axe": 16
+    },
+    {
+      "suite": "settings",
+      "status": "baseline failure reproduced",
+      "reason": "TimeoutError: locator.inputValue: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Nama sekolah', exact: true })\u001b[22m\n"
+    },
+    {
+      "suite": "surveys",
+      "status": "baseline failure reproduced",
+      "reason": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Tutup jawaban', exact: true })\u001b[22m\n"
+    },
+    {
+      "suite": "user-detail",
+      "status": "passed",
+      "checks": 146,
+      "axe": 18
+    },
+    {
+      "suite": "design-system",
+      "status": "passed",
+      "checks": 82,
+      "axe": 13
+    },
+    {
+      "suite": "navigation",
+      "status": "passed",
+      "checks": 66,
+      "axe": 14
+    },
+    {
+      "suite": "forms",
+      "status": "passed",
+      "checks": 87,
+      "axe": 7
+    },
+    {
+      "suite": "home",
+      "status": "passed",
+      "checks": 64,
+      "issues": [],
+      "axeViews": 6
+    },
+    {
+      "suite": "login",
+      "status": "passed",
+      "checks": 215,
+      "issues": [],
+      "axeViews": 17
+    }
+  ],
+  "css": {
+    "baseline": {
+      "unminifiedBytes": 107466,
+      "gzipBytes": 17121
+    },
+    "daisyui": {
+      "unminifiedBytes": 216872,
+      "gzipBytes": 28859
+    }
+  },
+  "finalCheck": {
+    "groups": 83,
+    "tests": 792,
+    "failures": 0,
+    "buildPassed": true
+  }
+}

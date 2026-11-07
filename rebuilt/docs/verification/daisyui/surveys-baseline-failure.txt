@@ -1,0 +1,28 @@
+1 survey 320 no horizontal overflow
+2 survey 320 axe
+3 survey 768 no horizontal overflow
+4 survey 768 axe
+5 survey 1440 no horizontal overflow
+6 survey 1440 axe
+7 new respondent starts through service command
+8 required validation blocks premature final
+9 missing question receives focus
+10 double submit sends one write
+11 empty Likert does not become zero
+12 cancelled discard keeps questionnaire open
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.click: Timeout 15000ms exceeded.
+Call log:
+[2m  - waiting for getByRole('button', { name: 'Tutup jawaban', exact: true })[22m
+
+    at /tmp/sim-original/rebuilt/scripts/verify-surveys.mjs:307:6 {
+  log: [
+    "  - waiting for getByRole('button', { name: 'Tutup jawaban', exact: true })"
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1

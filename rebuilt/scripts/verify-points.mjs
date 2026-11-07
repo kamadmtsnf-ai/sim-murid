@@ -250,7 +250,7 @@ try {
       );
   }
   await visit("normal", 320);
-  await page.locator("summary").first().click();
+  await page.locator("summary").filter({hasText:"Riwayat kejadian"}).first().click();
   await geometry(page, "expanded history 320");
   await a11y(page, "expanded history 320");
   check(
@@ -258,21 +258,21 @@ try {
     "history table remains readable on mobile",
   );
   await visit("teacher");
-  await page.locator("summary").first().click();
+  await page.locator("summary").filter({hasText:"Riwayat kejadian"}).first().click();
   check(
     (await page
       .getByRole("button", { name: "Batalkan kejadian", exact: true })
       .count()) === 1,
     "teacher can cancel own active event",
   );
-  await page.locator("summary").nth(1).click();
+  await page.locator("summary").filter({hasText:"Riwayat kejadian"}).nth(1).click();
   check(
     (await page
       .getByRole("button", { name: "Batalkan kejadian", exact: true })
       .count()) === 1,
     "archived event has no cancel action",
   );
-  await page.locator("summary").nth(2).click();
+  await page.locator("summary").filter({hasText:"Riwayat kejadian"}).nth(2).click();
   check(
     (await page
       .getByRole("button", { name: "Batalkan kejadian", exact: true })
@@ -497,7 +497,7 @@ try {
     "search empty state",
   );
   await visit();
-  await page.locator("summary").first().click();
+  await page.locator("summary").filter({hasText:"Riwayat kejadian"}).first().click();
   await page
     .getByRole("button", { name: "Batalkan kejadian", exact: true })
     .first()

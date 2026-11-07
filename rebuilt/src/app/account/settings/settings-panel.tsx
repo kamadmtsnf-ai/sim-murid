@@ -37,7 +37,7 @@ function Field({
 }) {
   return (
     <div className="block min-w-0 text-sm font-medium"><FloatingLabel label={<>{label}</>}><input placeholder=" "
-        className={inputClass}
+        className={"input w-full " + (inputClass)}
         name={name}
         defaultValue={value}
         maxLength={max}
@@ -320,7 +320,7 @@ export function SettingsPanel({
     <div className="block min-w-0 text-sm font-medium"><FloatingLabel label={<>Cari data
       </>}><input
         type="search"
-        className={inputClass}
+        className={"input w-full " + (inputClass)}
         value={query}
         onChange={(e) => {
           setQuery(e.target.value);
@@ -569,7 +569,7 @@ export function SettingsPanel({
                           name="file"
                           accept="image/png,image/jpeg,image/webp"
                           required
-                          className="mt-2 block w-full min-w-0 max-w-full text-sm file:mr-2 file:min-h-11 file:rounded-md file:border file:px-3"
+                          className="file-input w-full mt-2 block w-full min-w-0 max-w-full text-sm file:mr-2 file:min-h-11 file:rounded-md file:border file:px-3"
                         />
                       </label>
                       <Button type="submit">Unggah logo</Button>
@@ -633,7 +633,7 @@ export function SettingsPanel({
                 <label className="flex min-h-11 cursor-pointer items-center gap-3">
                   <input
                     name="active"
-                    className="size-5 accent-primary"
+                    className="checkbox checkbox-primary size-5 accent-primary"
                     type="checkbox"
                     defaultChecked={current?.active ?? true}
                   />
@@ -792,7 +792,7 @@ export function SettingsPanel({
               </p>
             ) : (
               <TableRegion label="Tabel data — gulir untuk melihat seluruh kolom">
-                <table className="w-full text-left text-sm">
+                <table className="table table-zebra w-full text-left text-sm">
                   <caption className="sr-only">Daftar hari libur</caption>
                   <thead>
                     <tr>
