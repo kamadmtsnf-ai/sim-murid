@@ -1,6 +1,6 @@
 # WP-03 — API perangkat dan lifecycle akun
 
-Baseline main: `d5d4f832a9cc3c66b4558ad2550819a3c90eeb05`. Kode lokal; belum push, migrasi managed, aktivasi atau kirim push. Semua flag konfigurasi dan database existing tetap nonaktif. WP-02 cloud telah diterapkan; migrasi WP-03 harus diterapkan sebelum rilis API ini.
+Baseline main: `d5d4f832a9cc3c66b4558ad2550819a3c90eeb05`. Rilis melalui PR #101 setelah otorisasi eksplisit pengguna untuk push ke main dan migrasi database. Migrasi cloud `20261107175620` (`web_push_device_api_wp03`) telah diterapkan dan diverifikasi pada sim-muridv2. Semua flag tetap nonaktif; tidak mengirim push. Fingerprint empat RPC source/cloud cocok 4/4, tabel baru RLS/service-only dan identitas tidak sah ditolak. Security Advisors tidak menambah WARN/ERROR; INFO no-policy pada tabel privat baru merupakan default-deny yang disengaja.
 
 ## Kontrak API
 
