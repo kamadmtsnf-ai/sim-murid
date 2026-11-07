@@ -13,7 +13,7 @@ export const jobRow = z
   .object({
     id: z.uuid(),
     event_type: z.string(),
-    channel: z.enum(["email", "whatsapp", "internal"]),
+    channel: z.enum(["email", "whatsapp", "internal", "push"]),
     status: statuses,
     attempts: z.number().int().nonnegative(),
     created_at: stamp,

@@ -1,0 +1,127 @@
+{
+  "baseline": "3b3819813b85ffce0aa362ac3694e9515277e5d8",
+  "source": "local PGlite and source checks; no cloud migration",
+  "checks": [
+    {
+      "command": "node scripts/database/generate-runtime-types.mjs",
+      "exit_code": 0,
+      "seconds": 2.69,
+      "log": "final-1.log"
+    },
+    {
+      "command": "npm run db:types",
+      "exit_code": 0,
+      "seconds": 2.85,
+      "log": "final-2.log"
+    },
+    {
+      "command": "npm run db:types:check",
+      "exit_code": 0,
+      "seconds": 2.95,
+      "log": "final-3.log"
+    },
+    {
+      "command": "npm run db:advisory",
+      "exit_code": 0,
+      "seconds": 2.88,
+      "log": "final-4.log"
+    },
+    {
+      "command": "npm run test:database",
+      "exit_code": 0,
+      "seconds": 5.55,
+      "log": "final-5.log"
+    },
+    {
+      "command": "npm run test:push:database",
+      "exit_code": 0,
+      "seconds": 3.2,
+      "log": "final-6.log"
+    },
+    {
+      "command": "npm run test:sessions",
+      "exit_code": 0,
+      "seconds": 4.0,
+      "log": "final-7.log"
+    },
+    {
+      "command": "npm run test:services",
+      "exit_code": 0,
+      "seconds": 4.6,
+      "log": "final-8.log"
+    },
+    {
+      "command": "npm run test:jobs",
+      "exit_code": 0,
+      "seconds": 1.13,
+      "log": "final-9.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "seconds": 5.64,
+      "log": "final-10.log"
+    },
+    {
+      "command": "npm run lint",
+      "exit_code": 0,
+      "seconds": 20.38,
+      "log": "final-11.log"
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "seconds": 25.6,
+      "log": "final-12.log"
+    }
+  ],
+  "finalSqlReview": [
+    {
+      "command": "npm run db:advisory",
+      "exit_code": 0,
+      "seconds": 3.09,
+      "log": "review-1.log"
+    },
+    {
+      "command": "npm run test:database",
+      "exit_code": 0,
+      "seconds": 4.98,
+      "log": "review-2.log"
+    },
+    {
+      "command": "npm run test:sessions",
+      "exit_code": 0,
+      "seconds": 4.07,
+      "log": "review-3.log"
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "seconds": 5.57,
+      "log": "review-4.log"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "seconds": 0.01,
+      "log": "review-5.log"
+    }
+  ],
+  "pushTests": {
+    "passed": 16,
+    "failed": 0,
+    "engine": "PGlite single backend; NOT multi-connection lock stress"
+  },
+  "release": {
+    "dateWib": "2026-11-08",
+    "cloudMigrationVersion": "20261107171317",
+    "project": "sim-muridv2",
+    "tablesPrivateRls": 5,
+    "rpcServiceOnly": 9,
+    "rpcFingerprintMatches": 9,
+    "flagsEnabled": false,
+    "fullCheck": "all suites completed; initial operational-drill table-count assertion updated 84/49 to 89/50 and tail rerun passed; clean build passed after stale cache removed",
+    "managedConcurrency": "not tested",
+    "securityAdvisors": "five additional INFO no-policy private tables; existing Auth leaked-password WARN unchanged"
+  }
+}

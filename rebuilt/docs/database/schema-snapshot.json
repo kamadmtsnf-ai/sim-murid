@@ -49,7 +49,8 @@
     "20261025031124_controlled_ai_p12.sql",
     "20261025091023_teacher_assignments.sql",
     "20261025152242_teacher_duty_assignment_guards.sql",
-    "20261026011522_onboarding_email_contact.sql"
+    "20261026011522_onboarding_email_contact.sql",
+    "20261107162929_web_push_private_foundation.sql"
   ],
   "tables": [
     {
@@ -335,6 +336,31 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "promotion_history",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "push_deliveries",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "push_events",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "push_preferences",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "push_settings",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "push_subscriptions",
       "rls_enabled": true
     },
     {
