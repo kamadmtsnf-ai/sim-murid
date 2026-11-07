@@ -87,7 +87,7 @@ test('preferences use optimistic revision, validate timezone and compute quiet h
 });
 test('claim ownership/generation are fenced; accepted is not read; ordinary retry is separate from ambiguous',async()=>{
  const s=await setup(),e=await event(s.id);assert.equal(e.code,'saved');
- const c=await claim();assert.equal(c.code,'claimed');const d=c.delivery;
+ const c=await claim();assert.equal(c.code,'claimed');assert.equal(c.subscription.installation_id,s.d.installation_id);assert.equal(c.subscription.user_id,a.id);const d=c.delivery;
  assert.equal((await complete(d,'accepted',uuid())).code,'stale');assert.equal((await complete(d,'accepted',d.claim_token,d.binding_version+1)).code,'stale');
  assert.equal((await complete(d,'accepted',d.claim_token,d.binding_version,410)).code,'invalid');
  assert.equal((await complete(d)).status,'accepted');assert.equal((await complete(d)).code,'stale');
@@ -161,4 +161,30 @@ test('non-active account revokes subscriptions; expired registry cleanup alone d
  const s=await setup();await db.query("update sim_murid_private.app_sessions set revoked_at=now(),revocation_reason='expired' where auth_session_id=$1",[a.session]);
  assert.equal(await val('select status from sim_murid_private.push_subscriptions where id=$1',[s.id]),'active');
  await db.query("update public.profiles set status='inactive' where id=$1",[a.id]);assert.equal(await val('select status from sim_murid_private.push_subscriptions where id=$1',[s.id]),'revoked');
+});
+test('WP03 rate buckets are durable, bounded, authenticated and private',async()=>{
+ const u=await account('push-rate');
+ for(let i=0;i<10;i++)assert.equal((await val("select public.app_push_rate($1,$2,'subscriptions')",[u.id,u.session])).code,'saved');
+ assert.equal((await val("select public.app_push_rate($1,$2,'subscriptions')",[u.id,u.session])).code,'rate_limited');
+ assert.equal((await val("select public.app_push_rate($1,$2,'subscriptions')",[u.id,uuid()])).code,'denied');
+ await db.query("update sim_murid_private.push_api_limits set window_start=now()-interval '2 minutes' where user_id=$1",[u.id]);
+ assert.equal((await val("select public.app_push_rate($1,$2,'subscriptions')",[u.id,u.session])).code,'saved');
+ assert.equal(await val('select count(*)::int from sim_murid_private.push_api_limits where user_id=$1',[u.id]),1);
+ for(const role of ['anon','authenticated']){await db.exec('set role '+role);try{await assert.rejects(()=>db.query('select * from sim_murid_private.push_api_limits'));await assert.rejects(()=>val("select public.app_push_rate($1,$2,'test')",[u.id,u.session]));await assert.rejects(()=>val('select public.app_push_test($1,$2,$3,$4)',[u.id,u.session,uuid(),uuid()]));}finally{await db.exec('reset role');}}
+});
+test('WP03 own-device test creates inbox/outbox atomically, replays safely, limits account across devices, never broadcasts',async()=>{
+ const u=await account('push-api-test'),other=await account('push-api-other');
+ await db.exec('update sim_murid_private.push_settings set enabled=true,test_enabled=true');
+ const s=await register(u,data()),s2=await register(u,data());assert.equal(s.code,'saved');assert.equal(s2.code,'saved');
+ const invoke=(actor,sub,request)=>val('select public.app_push_test($1,$2,$3,$4)',[actor.id,actor.session,sub,request]);
+ assert.equal((await invoke(other,s.id,uuid())).code,'not_found');
+ const req=uuid(),first=await invoke(u,s.id,req);assert.equal(first.code,'saved');assert.equal((await invoke(u,s.id,req)).code,'duplicate');assert.equal((await invoke(u,s2.id,req)).code,'request_conflict');
+ assert.equal(await val('select count(*)::int from sim_murid_private.push_deliveries where event_id=$1',[first.id]),1);
+ for(let i=0;i<2;i++)assert.equal((await invoke(u,s.id,uuid())).code,'saved');
+ assert.equal((await invoke(u,s2.id,uuid())).code,'rate_limited');
+ assert.equal(await val("select count(*)::int from sim_murid_private.push_events where recipient_id=$1 and category='test'",[u.id]),3);
+ assert.equal((await invoke(u,s.id,req)).code,'duplicate');
+ await db.exec('update sim_murid_private.push_settings set test_enabled=false');assert.equal((await invoke(u,s.id,uuid())).code,'disabled');
+ const cfg=await val('select public.app_push_config($1,$2)',[u.id,u.session]);assert.equal(cfg.test_enabled,false);
+ assert.equal(await val('select public.app_push_config($1,$2)',[u.id,uuid()]),null);
 });

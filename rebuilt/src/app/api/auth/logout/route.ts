@@ -1,3 +1,4 @@
+import { releasePushInstallation } from "@/lib/push/api";
 import { NextResponse, type NextRequest } from "next/server";
 import { createAuthAdmin } from "@/lib/auth/admin";
 import { privateJson, requestAuth, sameOrigin, verifiedPrincipal } from "@/lib/auth/http";
@@ -9,11 +10,13 @@ export async function POST(request: NextRequest) {
   try {
     const client = requestAuth(request, response);
     const state = await verifiedPrincipal(client);
+    await releasePushInstallation(request);
     if (state) {
       const { error } = await createAuthAdmin().rpc("app_auth_revoke", { p_user: state.principal.id, p_session: state.sessionId });
       if (error) throw error;
     }
-    await client.auth.signOut({ scope: "local" });
+    const signedOut = await client.auth.signOut({ scope: "local" });
+    if (signedOut.error) throw new Error("Sign out unavailable");
     return response;
   } catch {
     return privateJson({ message: "Belum berhasil keluar. Silakan coba kembali." }, 503);

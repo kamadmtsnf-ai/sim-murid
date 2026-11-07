@@ -1,0 +1,36 @@
+{
+  "stage": "WP-03",
+  "baseline": "d5d4f832a9cc3c66b4558ad2550819a3c90eeb05",
+  "scope": "isolated local tests; no provider requests, cloud migration or push activation",
+  "full_check": {
+    "exit_code": 0,
+    "tests": 819,
+    "processes": 85,
+    "typecheck": "passed",
+    "lint": "passed",
+    "db_types_drift": "passed",
+    "build": "passed"
+  },
+  "final_verification": {
+    "npm_ci": "passed",
+    "typecheck": "passed",
+    "lint": "passed",
+    "focused_tests": 47,
+    "failures": 0,
+    "clean_build_exit_code": 0,
+    "cache_note": "Generated .next cleared after Turbopack persistence failure; clean rebuild passed."
+  },
+  "database": {
+    "engine": "isolated PGlite PostgreSQL 18.6",
+    "migrations": 51,
+    "application_tables": 88,
+    "catalog_checks": "passed",
+    "managed_concurrency": "not tested"
+  },
+  "release": {
+    "pushed": false,
+    "cloud_migration_applied": false,
+    "flags_activated": false,
+    "notifications_sent": 0
+  }
+}

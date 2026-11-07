@@ -82,12 +82,15 @@ app_promotions_mutate: { Args: {p_actor: string; p_session: string; p_command: J
 app_push_cancel: { Args: {p_event: string }; Returns: Json };
 app_push_claim: { Args: Record<never, never>; Returns: Json };
 app_push_complete: { Args: {p_id: string; p_token: string; p_binding: number; p_status: string; p_provider_code?: number | null; p_retry_after?: number | null }; Returns: Json };
+app_push_config: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_devices: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_enqueue: { Args: {p_inbox: string; p_category: string; p_source: string; p_dedup: string; p_occurred: string; p_expires: string; p_subscription?: string | null }; Returns: Json };
 app_push_preferences: { Args: {p_actor: string; p_session: string; p_revision?: number | null; p_data?: Json | null }; Returns: Json };
+app_push_rate: { Args: {p_actor: string; p_session: string; p_action: string }; Returns: Json };
 app_push_register: { Args: {p_actor: string; p_session: string; p_data: Json }; Returns: Json };
 app_push_release: { Args: {p_installation: string; p_secret_hash: string }; Returns: Json };
 app_push_revoke: { Args: {p_actor: string; p_session: string; p_id: string }; Returns: Json };
+app_push_test: { Args: {p_actor: string; p_session: string; p_subscription: string; p_request: string }; Returns: Json };
 app_recovery_begin: { Args: {p_actor: string; p_session: string; p_request: string; p_operation: string; p_evidence: string; p_reject?: boolean | null }; Returns: Json };
 app_recovery_finish: { Args: {p_actor: string; p_session: string; p_request: string; p_operation: string }; Returns: boolean };
 app_recovery_identity: { Args: {p_username: string }; Returns: Json };
