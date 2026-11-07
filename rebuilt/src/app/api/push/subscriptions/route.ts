@@ -1,0 +1,4 @@
+import { type NextRequest } from "next/server";
+import { pushApi } from "@/lib/push/api";
+export const runtime = "nodejs";
+export async function POST(request: NextRequest) { return pushApi(request, "register"); }

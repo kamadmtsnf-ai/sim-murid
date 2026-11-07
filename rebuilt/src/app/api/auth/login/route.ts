@@ -1,3 +1,4 @@
+import { releasePushInstallation } from "@/lib/push/api";
 import { createHash } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import type { NextRequest } from "next/server";
@@ -66,6 +67,7 @@ export async function POST(request: NextRequest) {
     const sessionId = verifiedTokenSession(data.session.access_token, data.user.id);
     issued = { userId: data.user.id, sessionId };
     // Even a lost claim response may have committed. Cleanup targets this exact Auth session only.
+    await releasePushInstallation(request,data.user.id);
     claimAttempted = true;
     const { data: claimed, error: claimError } = await admin.rpc("app_auth_claim", { p_user: data.user.id, p_session: sessionId, p_remember: remember });
     if (claimError) throw new Error("Session registration unavailable");

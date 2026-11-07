@@ -137,3 +137,16 @@ test('malformed UTF8 and interrupted Google streams fail closed',async t=>captch
  t.mock.method(globalThis,'fetch',async()=>new Response(new ReadableStream({start(c){if(interrupted)c.error(Error('private stream failure'));else {c.enqueue(new Uint8Array([0xff]));c.close();}}})));
  for(interrupted of [false,true]){const s=reset();await safe(await POST(request({...body,captchaToken:'synthetic-token'})),503);assert.equal(calls(s,'lookup').length,0);}
 }));
+test('account switch releases installation before claiming new login; release failure never transfers cookies',async()=>{
+ const old='44444444-4444-4444-8444-444444444444';
+ const c={installation:'55555555-5555-4555-8555-555555555555',secret:Buffer.alloc(32,9).toString('base64url'),owner:old};
+ const cookie='__Host-sim-push='+Buffer.from(JSON.stringify(c)).toString('base64url');
+ for(const fail of [false,true]){
+  const s=reset(),rpc=s.admin.rpc;s.admin.rpc=async(n,a)=>{if(n==='app_push_release'){s.calls.push([n,a]);return {data:{code:'saved'},error:fail?{}:null};}return rpc(n,a);};
+  const r=await POST(request(body,{headers:{Origin:'https://app.test','Content-Type':'application/json',cookie}}));await safe(r,fail?503:200);
+  assert.equal(calls(s,'app_push_release').length,1);
+  if(fail){assert.equal(calls(s,'app_auth_claim').length,0);assert.equal(r.headers.get('set-cookie'),null);}
+  else assert.ok(s.calls.findIndex(c=>c[0]==='app_push_release')<s.calls.findIndex(c=>c[0]==='app_auth_claim'));
+ }
+ const s=reset(),same={...c,owner:id};await safe(await POST(request(body,{headers:{Origin:'https://app.test','Content-Type':'application/json',cookie:'__Host-sim-push='+Buffer.from(JSON.stringify(same)).toString('base64url')}})),200);assert.equal(calls(s,'app_push_release').length,0);
+});
