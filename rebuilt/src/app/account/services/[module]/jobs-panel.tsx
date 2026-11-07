@@ -394,6 +394,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
                 <option value="all">Semua saluran</option>
                 <option value="email">Email</option>
                 <option value="whatsapp">WhatsApp</option>
+                <option value="push">Web Push</option>
                 <option value="internal">Internal</option>
               </select>
             </label>
@@ -428,7 +429,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
                         ? "Email"
                         : r.channel === "whatsapp"
                           ? "WhatsApp"
-                          : "Internal"}{" "}
+                          : r.channel === "push" ? "Web Push" : "Internal"}{" "}
                       · Percobaan {r.attempts}
                       {r.channel !== "internal" ? " dari 5" : ""}
                     </p>
@@ -455,7 +456,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
                           operator.
                         </p>
                       ) : (
-                        r.channel !== "internal" && (
+                        r.channel !== "internal" && r.channel !== "push" && (
                           <Button
                             variant="outline"
                             disabled={disabled}
