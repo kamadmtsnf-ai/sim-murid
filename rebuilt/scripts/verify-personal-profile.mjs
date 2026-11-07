@@ -1,3 +1,4 @@
+import { chooseConfirmation } from "./testing/confirmation.mjs";
 /** Actual Profil pribadi UI with isolated HTTP boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
@@ -247,6 +248,7 @@ try {
   count = reads;
   acceptDialogs = false;
   await reload().click();
+  await chooseConfirmation(page, acceptDialogs);
   acceptDialogs = true;
   check(
     reads === count && (await field("full_name").inputValue()) === "Nama baru",
@@ -269,8 +271,7 @@ try {
     "server normalized draft applied",
   );
   check(
-    (await page.getByRole("status").innerText()) ===
-      "Profil berhasil diperbarui.",
+    await page.getByRole("status").getByText("Profil berhasil diperbarui.", { exact: true }).isVisible(),
     "same email does not imply lost verification",
   );
   check(
@@ -345,6 +346,7 @@ try {
       failure + " differing persisted data requires review",
     );
     await reload().click();
+  await chooseConfirmation(page, acceptDialogs);
     await idle();
     check(
       await save().isEnabled(),
@@ -367,6 +369,7 @@ try {
   }
   mode = "read-offline";
   await reload().click();
+  await chooseConfirmation(page, acceptDialogs);
   await idle();
   check(
     (await field("full_name").inputValue()) === "Tetap dipertahankan",
@@ -374,6 +377,7 @@ try {
   );
   mode = "ok";
   await reload().click();
+  await chooseConfirmation(page, acceptDialogs);
   await idle();
   mode = "401";
   await field("full_name").fill("Sesi berakhir");

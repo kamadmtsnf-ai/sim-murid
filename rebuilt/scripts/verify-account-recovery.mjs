@@ -1,4 +1,5 @@
-/** Actual Survei UI with isolated Auth/HTTP/Storage boundaries. */
+import { chooseConfirmation } from "./testing/confirmation.mjs";
+/** Actual account recovery UI with isolated HTTP boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
 import { createServer } from "node:http";
@@ -252,14 +253,13 @@ try {
     "changing target clears Admin password",
   );
   await fill();
-  page.off("dialog", accept);
-  page.once("dialog", (d) => d.dismiss());
   const beforeCancel = writes;
   await approve().click();
+  await chooseConfirmation(page, false);
   check(writes === beforeCancel, "cancel confirmation does not write");
-  page.on("dialog", accept);
   mode = "deny";
   await approve().click();
+  await chooseConfirmation(page);
   await page
     .getByText(
       "Password Admin tidak sesuai atau isian tidak valid. Periksa kembali.",
@@ -283,6 +283,7 @@ try {
     e.click();
     e.click();
   });
+  await chooseConfirmation(page);
   await page.getByLabel("Password baru", { exact: true }).waitFor();
   check(writes === before + 1, "double click sends one write");
   check(
@@ -312,12 +313,14 @@ try {
   await page
     .getByRole("button", { name: "Selesai menyerahkan, hapus tampilan" })
     .click();
+  await chooseConfirmation(page);
   check(
     (await page.getByLabel("Password baru", { exact: true }).count()) === 0,
     "password cleared explicitly",
   );
   await fill(2);
   await approve().click();
+  await chooseConfirmation(page);
   await page.getByText("Permintaan selesai.", { exact: true }).waitFor();
   check(
     (await page.getByLabel("Password baru", { exact: true }).count()) === 0,
@@ -327,6 +330,7 @@ try {
   await page
     .getByRole("button", { name: "Tolak permintaan", exact: true })
     .click();
+  await chooseConfirmation(page);
   await page.waitForFunction(
     () =>
       !document.querySelector(
@@ -337,6 +341,7 @@ try {
   mode = "bad";
   await fill(4);
   await approve().click();
+  await chooseConfirmation(page);
   await page.getByText(/^Hasil pemulihan belum dapat dipastikan/).waitFor();
   check(
     await approve().isDisabled(),
@@ -350,6 +355,7 @@ try {
   mode = "uncertain";
   await fill(4);
   await approve().click();
+  await chooseConfirmation(page);
   await page.getByText(/^Hasil pemulihan belum dapat dipastikan/).waitFor();
   check(await approve().isDisabled(), "503 locks mutations");
   mode = "get-error";
@@ -362,6 +368,7 @@ try {
   mode = "network";
   await fill(4);
   await approve().click();
+  await chooseConfirmation(page);
   await page.getByText(/^Hasil pemulihan belum dapat dipastikan/).waitFor();
   check(await approve().isDisabled(), "network failure locks mutation");
   mode = "ok";
@@ -370,6 +377,7 @@ try {
   mode = "conflict";
   await fill(4);
   await approve().click();
+  await chooseConfirmation(page);
   await page.getByText(/^Permintaan berubah/).waitFor();
   check(await approve().isDisabled(), "stale conflict requires reload");
   mode = "ok";

@@ -38,7 +38,7 @@ Benturan penting diperbaiki: warna legacy `--border` diganti `--border-color`; `
 | Login /login | Kontrol DaisyUI, floating password, status sesi, footer | 320–1440px, layar pendek, teks 400% | 215 browser checks, 17 axe |
 | Pemulihan publik /recovery, /recovery/email | Input/select/Button/Status bersama | Shared + source/layout audit | Pengiriman OTP nyata tidak dijalankan |
 | Dashboard /account | Card, badge status dan ringkasan tugas | Shared shell dan overview/follow-up fixtures | Tanpa metrik dummy |
-| Profil /account/profile | Field/FloatingLabel/Button bersama | Shared + fixture parsial | Skrip profil berhenti pada konfirmasi baseline |
+| Profil /account/profile | Field/FloatingLabel/Button bersama | Shared + fixture parsial | Profil 87 checks / 8 axe lulus |
 | Biodata /account/biodata, /account/biodata/[id] | Select/textbox/file-input; detail Lainnya FloatingLabel | Fixture biodata | Pilihan Lainnya dan validasi existing tetap |
 | Direktori /account/directory, /account/directory/[id] | Tabel/card mobile, badge/progress, form pengguna/penugasan/impor | 320–1440px + zoom/orientasi | Direktori, user-detail, bulk fixtures lulus |
 | Keluarga /account/families | Tab Radix + DaisyUI, tabel dan select | Mobile/desktop fixtures | Regresi keluarga lulus |
@@ -46,9 +46,9 @@ Benturan penting diperbaiki: warna legacy `--border` diganti `--border-color`; `
 | Jadwal /account/schedules | Tabs, filter, form, tabel dan modal | Mobile/desktop fixtures | Regresi jadwal lulus |
 | Operasional /account/operations/[module] | Piket, absensi, bimbingan, komite, tabungan memakai kontrol bersama | Mobile/desktop fixtures | Kelima suite lulus; rumus/ledger tidak diubah |
 | Akademik /account/learning/[module] | Nilai, rapor, kenaikan, buku dan dokumen memakai tema/kontrol bersama | Mobile/desktop fixtures | Grades/reports/promotions/books lulus |
-| Layanan /account/services/[module] | Notifikasi, poin, survei, AI review, jobs dan rekonsiliasi | Shared + fixtures | Notifications/jobs/reconciliation lulus; points/surveys parsial karena baseline |
-| Keamanan/email/sesi/akses | Form/table/alert/Button dan konteks akun | Shared + fixtures | Account-security/email/accessibility lulus; pemulihan admin baseline parsial |
-| Pengaturan /account/settings | Kontrol dan tabel, Card/Status bersama | Shared + fixture parsial | Skrip berhenti pada konfirmasi baseline |
+| Layanan /account/services/[module] | Notifikasi, poin, survei, AI review, jobs dan rekonsiliasi | Shared + fixtures | Notifications/jobs/reconciliation lulus; Points dan Surveys kini lulus |
+| Keamanan/email/sesi/akses | Form/table/alert/Button dan konteks akun | Shared + fixtures | Account-security/email/accessibility lulus; pemulihan admin 46 checks / 5 axe lulus |
+| Pengaturan /account/settings | Kontrol dan tabel, Card/Status bersama | Shared + fixture parsial | Settings 39 checks / 5 axe lulus |
 | Kesehatan /account/health dan bantuan | Card/status/skeleton, panduan kontekstual | Accessibility/help fixtures | Lulus dalam lingkup fixture |
 | Akses ditolak / error / not-found / loading | Shared PermissionDenied, Status, Button dan skeleton | Shared + source/regresi | Tidak menambah route atau izin |
 
@@ -63,14 +63,14 @@ Entry `[module]` tetap divalidasi dispatcher existing; daftar modul tidak mencip
 | npm run check setelah migrasi | **792 tests / 83 groups lulus**, typecheck/lint/db type replay/build lulus |
 | Build/lint final setelah pembatasan output CSS | Lulus ulang |
 | npm run audit:deadcode | Selesai; hanya instrumentation.ts dan app/manifest.ts terlapor unreachable oleh graf impor biasa. Keduanya entry framework, dipertahankan |
-| Browser | **33 suite lulus, 3.118 checks**, **333 axe scans** dalam suite sukses. Angka memakai bentuk hasil masing-masing fixture, bukan jumlah tugas manusia |
+| Browser | **38 suite lulus, 3.417 checks**, **365 axe scans** dalam suite sukses. Angka memakai bentuk hasil masing-masing fixture, bukan jumlah tugas manusia |
 | Design system | 82 checks / 13 axe, viewport 320/390/768/1024/1280/1440, dialog, state, pagination, reduced motion |
 | Navigation | 66 checks / 14 axe, lintas peran, drawer, layar pendek, fokus pencarian |
 | Forms | 87 checks / 7 axe, validasi, pending/uncertain, draf dan submit ganda |
 | Accessibility | 108 checks / 18 axe, forced colors, keyboard, zoom dan dialog |
 | Audit atribut | 594 kontrol dibandingkan terhadap baseline; tidak ada perubahan atribut interaksi |
 | Browser produksi | Beranda dan login memakai server build lokal; mayoritas modul lain memakai komponen asli dengan API fixture terisolasi |
-| CI | Belum berjalan untuk perubahan ini: push ditolak automatic approval review; PR belum dibuat |
+| CI | Head awal PR98 lulus; CI head terbaru diperiksa di PR sebelum merge |
 
 Bukti terstruktur: [summary.json](daisyui/summary.json), hasil per-suite pada direktori `daisyui/`, serta screenshot [sebelum](daisyui/screenshots/components-before-390.png), [sesudah](daisyui/screenshots/components-after-390.png), dan [Login](daisyui/screenshots/login-after-390.png). Browser Chromium 153 dengan Playwright runtime, esbuild dan axe-core dipasang hanya di lingkungan QA, tidak ditambahkan ke aplikasi.
 
@@ -82,18 +82,13 @@ CSS hasil kompilasi seluruh source (belum minifikasi): baseline 107.466 byte / g
 
 ## E. GitHub
 
-Branch kerja `design/daisyui-modernization-20261107`. Commit implementasi lokal:
+PR: [#98](https://github.com/kamadmtsnf-ai/sim-murid/pull/98). Branch `design/daisyui-modernization-20261107`, baseline main `2562fe6`. Source terunggah sebelumnya diverifikasi identik dengan tree lokal yang diuji. Izin push kemudian diberikan pengguna; penolakan awal sudah terselesaikan. CI dan preview Vercel pada head awal `a3d413e` lulus.
 
-- `5bc874d`: konfigurasi tema, dependensi eksak dan shared components.
-- `cccec73`: migrasi kontrol lintas modul, skrip QA dan bukti verifikasi.
-
-Push ditolak **automatic approval review**, dengan alasan izin ekspor source/perubahan repositori bersama belum dianggap eksplisit. Tidak mencoba jalur lain untuk melewati penolakan. PR belum dibuat, URL PR belum tersedia, dan CI GitHub belum berjalan untuk perubahan ini. Draft deskripsi PR tersedia pada [pull-request.md](daisyui/pull-request.md).
-
-Rencana PR berstatus **draft** karena lima suite browser masih memiliki kegagalan baseline yang direproduksi; gerbang penerimaan browser lengkap belum hijau. Tidak merge, force push, deployment produksi atau migrasi database.
+Pada 7 November 2026 pengguna mengizinkan merge setelah syarat kelayakan terpenuhi. Lima blocker browser diselesaikan tanpa perubahan kode bisnis/runtime; pemeriksaan lokal akhir lulus. Status CI head terbaru dan hasil merge dicatat pada PR, bukan disimpulkan dari CI head lama. Tidak melakukan force push atau migrasi database.
 
 ## F. Temuan tersisa dan batas penerimaan
 
-Lima kegagalan berikut direproduksi pada baseline; hasilnya tidak dihitung sebagai suite lulus dan tidak dinyatakan sudah diperbaiki oleh migrasi visual:
+Kelima kegagalan baseline berikut **sudah diselesaikan** pada tindak lanjut kesiapan merge. Bukti kegagalan lama dipertahankan sebagai riwayat, sedangkan hasil terkini tersedia pada JSON per-suite.
 
 | Suite | Titik berhenti | Bukti baseline |
 |---|---|---|
@@ -103,6 +98,18 @@ Lima kegagalan berikut direproduksi pada baseline; hasilnya tidak dihitung sebag
 | Account-recovery | Konfirmasi pembatalan approve tidak diselesaikan skrip | [log](daisyui/account-recovery-baseline-failure.txt) |
 | Points | Assertion payload active katalog tidak cocok; perlu rekonsiliasi fixture/kontrak sebelum mengubah logika | [log](daisyui/points-baseline-failure.txt) |
 
-Untuk points, selector summary diselaraskan di baseline maupun branch agar pemeriksaan mencapai assertion payload yang sama. Empat suite konfirmasi memerlukan pemutakhiran test driver Radix; tidak mengubah kebijakan konfirmasi aplikasi hanya agar test lama hijau.
+### Penyelesaian blocker sebelum merge
 
-UAT akun/perangkat nyata, pembaca layar manusia, seluruh kombinasi peran/data produksi, autofill OS, email/CAPTCHA nyata, PDF/Excel aktual dan pengukuran beban produksi belum dijalankan. Tes domain/ekspor lokal dan fixture bukan pengganti penerimaan tersebut. Tidak mengklaim 100% bebas bug atau sertifikasi WCAG. Status akhir: migrasi visual diterapkan; QA otomatis utama lulus; penerimaan browser menyeluruh masih terbuka pada lima suite baseline dan UAT tersebut.
+| Suite | Pemeriksaan lulus | Axe | Akar masalah / perbaikan |
+|---|---:|---:|---|
+| Settings | 39 | 5 | Skrip memilih Batal/Lanjutkan pada alertdialog Radix saat pindah tab dan reload |
+| Personal-profile | 87 | 8 | Konfirmasi reload diselesaikan; assertion pesan dipisahkan dari heading Status |
+| Account-recovery | 46 | 5 | Konfirmasi approve/reject/hapus tampilan password diuji secara eksplisit, termasuk batal tanpa write |
+| Points | 67 | 8 | Menunggu keputusan konfirmasi dan commit UI sebelum membaca payload; active=false terbukti benar |
+| Surveys | 60 | 6 | Konfirmasi tutup draf/final/periode/reload/logout ditangani; logout pending diuji tertahan sebelum konfirmasi |
+
+Helper test `scripts/testing/confirmation.mjs` mengeklik tombol asli pada role alertdialog, menunggu unmount/restore fokus dan commit React. Tidak mengganti atau menonaktifkan `confirmAction`, tidak mengarang hasil respons, tidak menghapus assertion izin/payload. Pending write tetap mencegah logout; setelah save selesai, logout yang dikonfirmasi membersihkan draf dan mempertahankan preferensi lain. Lima suite dijalankan kembali setelah perapian driver dan semuanya lulus. Tambahan bukti: 299 checks / 32 axe; total migrasi menjadi 38 suite / 3.417 checks / 365 axe.
+
+`npm run check` terakhir kembali lulus: 792 tes / 83 grup, typecheck, lint, replay tipe database dan build. Final diff memperbaiki driver QA dan dokumentasi saja; tidak ada perubahan Auth/API/RLS/schema/rumus atau runtime aplikasi pada tindak lanjut ini.
+
+UAT akun/perangkat nyata, pembaca layar manusia, seluruh kombinasi peran/data produksi, autofill OS, email/CAPTCHA nyata, PDF/Excel aktual dan pengukuran beban produksi belum dijalankan. Tes domain/ekspor lokal dan fixture bukan pengganti penerimaan tersebut. Tidak mengklaim 100% bebas bug atau sertifikasi WCAG. Status akhir otomatis: migrasi visual dan lima suite browser yang sebelumnya tertahan telah lulus. Batas UAT manusia/produksi tersebut tetap terbuka dan tidak disamakan dengan blocker regresi migrasi visual.

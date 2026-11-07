@@ -1,0 +1,211 @@
+{
+  "checks": [
+    {
+      "name": "queue 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "queue 320 axe",
+      "passed": true
+    },
+    {
+      "name": "touch review action",
+      "passed": true
+    },
+    {
+      "name": "selected 320 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "queue 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "queue 768 axe",
+      "passed": true
+    },
+    {
+      "name": "selected 768 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "queue 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "queue 1440 axe",
+      "passed": true
+    },
+    {
+      "name": "selected 1440 no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "pagination",
+      "passed": true
+    },
+    {
+      "name": "search username",
+      "passed": true
+    },
+    {
+      "name": "search empty",
+      "passed": true
+    },
+    {
+      "name": "type filter",
+      "passed": true
+    },
+    {
+      "name": "own account unavailable",
+      "passed": true
+    },
+    {
+      "name": "review action selects request",
+      "passed": true
+    },
+    {
+      "name": "review focus",
+      "passed": true
+    },
+    {
+      "name": "changing target clears identity proof",
+      "passed": true
+    },
+    {
+      "name": "changing target clears Admin password",
+      "passed": true
+    },
+    {
+      "name": "cancel confirmation does not write",
+      "passed": true
+    },
+    {
+      "name": "Admin password cleared after refusal",
+      "passed": true
+    },
+    {
+      "name": "evidence preserved on error",
+      "passed": true
+    },
+    {
+      "name": "double click sends one write",
+      "passed": true
+    },
+    {
+      "name": "correct request and action",
+      "passed": true
+    },
+    {
+      "name": "temporary password displayed",
+      "passed": true
+    },
+    {
+      "name": "refresh cannot discard password",
+      "passed": true
+    },
+    {
+      "name": "mutations blocked while password displayed",
+      "passed": true
+    },
+    {
+      "name": "no password browser storage",
+      "passed": true
+    },
+    {
+      "name": "temporary password no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "temporary password axe",
+      "passed": true
+    },
+    {
+      "name": "password cleared explicitly",
+      "passed": true
+    },
+    {
+      "name": "session recovery has no password",
+      "passed": true
+    },
+    {
+      "name": "rejection keeps explicit action",
+      "passed": true
+    },
+    {
+      "name": "unknown 200 acknowledgement locks actions",
+      "passed": true
+    },
+    {
+      "name": "refresh never replays write",
+      "passed": true
+    },
+    {
+      "name": "503 locks mutations",
+      "passed": true
+    },
+    {
+      "name": "GET failure retains lock",
+      "passed": true
+    },
+    {
+      "name": "network failure locks mutation",
+      "passed": true
+    },
+    {
+      "name": "stale conflict requires reload",
+      "passed": true
+    },
+    {
+      "name": "landscape no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "keyboard order",
+      "passed": true
+    },
+    {
+      "name": "expired request disabled after clock tick",
+      "passed": true
+    },
+    {
+      "name": "empty queue",
+      "passed": true
+    },
+    {
+      "name": "no empty queue mutation form",
+      "passed": true
+    },
+    {
+      "name": "empty axe",
+      "passed": true
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true
+    }
+  ],
+  "accessibility": [
+    {
+      "label": "queue 320",
+      "violations": []
+    },
+    {
+      "label": "queue 768",
+      "violations": []
+    },
+    {
+      "label": "queue 1440",
+      "violations": []
+    },
+    {
+      "label": "temporary password",
+      "violations": []
+    },
+    {
+      "label": "empty",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

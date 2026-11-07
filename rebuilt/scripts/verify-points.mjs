@@ -1,4 +1,5 @@
-/** Isolated Committee browser regression suite. No real account, API mutation or production data. */
+import { chooseConfirmation } from "./testing/confirmation.mjs";
+/** Isolated Points browser regression suite. No real account, API mutation or production data. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
 import { createServer } from "node:http";
@@ -355,6 +356,7 @@ try {
     "catalog correction keeps original code",
   );
   await dialog.getByRole("button", { name: "Simpan", exact: true }).click();
+  await chooseConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.active === false,
@@ -371,6 +373,7 @@ try {
   await dialog.getByRole("button", { name: "Simpan", exact: true }).click();
   check(posts.length === invalidBefore, "native point range blocks request");
   await page.keyboard.press("Escape");
+  await chooseConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await page
     .getByRole("button", { name: "Pengaturan poin", exact: true })
@@ -410,6 +413,7 @@ try {
   check(true, "current month cannot be archived");
   await dialog.getByLabel("Bulan sumber", { exact: true }).fill("2026-09");
   await dialog.getByRole("button", { name: "Jalankan tindakan" }).click();
+  await chooseConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.month === "2026-09-01" &&
@@ -424,6 +428,7 @@ try {
     .selectOption("affective");
   await dialog.getByLabel("Bulan sumber", { exact: true }).fill("2026-09");
   await dialog.getByRole("button", { name: "Jalankan tindakan" }).click();
+  await chooseConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.type === "affective",
@@ -511,6 +516,7 @@ try {
     .getByRole("button", { name: "Konfirmasi pembatalan" })
     .scrollIntoViewIfNeeded();
   await dialog.getByRole("button", { name: "Konfirmasi pembatalan" }).click();
+  await chooseConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   check(
     posts.at(-1).command.type === "cancel",
@@ -561,6 +567,7 @@ try {
     "archived error retains draft",
   );
   await page.keyboard.press("Escape");
+  await chooseConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await visit();
   outcome = "slow";
@@ -602,16 +609,14 @@ try {
     .getByRole("button", { name: "Tambah kode poin", exact: true })
     .click();
   await dialog.getByLabel("Deskripsi", { exact: true }).fill("Draf katalog");
-  page.removeAllListeners("dialog");
-  page.on("dialog", (d) => d.dismiss());
   await page.keyboard.press("Escape");
+  await chooseConfirmation(page, false);
   check(
     await dialog.isVisible(),
     "dirty dismissal cancellation retains catalog draft",
   );
-  page.removeAllListeners("dialog");
-  page.on("dialog", (d) => d.accept());
   await page.keyboard.press("Escape");
+  await chooseConfirmation(page);
   await dialog.waitFor({ state: "hidden" });
   await visit();
   outcome = "hang";

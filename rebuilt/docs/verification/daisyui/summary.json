@@ -13,11 +13,6 @@
       "axe": 18
     },
     {
-      "suite": "account-recovery",
-      "status": "baseline failure reproduced",
-      "reason": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Setujui dan pulihkan', exact: true })\u001b[22m\n"
-    },
-    {
       "suite": "account-security",
       "status": "passed",
       "checks": 80,
@@ -144,16 +139,6 @@
       "axe": 20
     },
     {
-      "suite": "personal-profile",
-      "status": "baseline failure reproduced",
-      "reason": "TimeoutError: locator.evaluate: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Simpan profil', exact: true })\u001b[22m\n"
-    },
-    {
-      "suite": "points",
-      "status": "baseline failure reproduced",
-      "reason": "AssertionError [ERR_ASSERTION]: saving inactive catalog does not activate it \"\""
-    },
-    {
       "suite": "promotions",
       "status": "passed",
       "checks": 104,
@@ -182,16 +167,6 @@
       "status": "passed",
       "checks": 169,
       "axe": 16
-    },
-    {
-      "suite": "settings",
-      "status": "baseline failure reproduced",
-      "reason": "TimeoutError: locator.inputValue: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Nama sekolah', exact: true })\u001b[22m\n"
-    },
-    {
-      "suite": "surveys",
-      "status": "baseline failure reproduced",
-      "reason": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Tutup jawaban', exact: true })\u001b[22m\n"
     },
     {
       "suite": "user-detail",
@@ -230,6 +205,36 @@
       "checks": 215,
       "issues": [],
       "axeViews": 17
+    },
+    {
+      "suite": "settings",
+      "status": "passed",
+      "checks": 39,
+      "axe": 5
+    },
+    {
+      "suite": "personal-profile",
+      "status": "passed",
+      "checks": 87,
+      "axe": 8
+    },
+    {
+      "suite": "account-recovery",
+      "status": "passed",
+      "checks": 46,
+      "axe": 5
+    },
+    {
+      "suite": "points",
+      "status": "passed",
+      "checks": 67,
+      "axe": 8
+    },
+    {
+      "suite": "surveys",
+      "status": "passed",
+      "checks": 60,
+      "axe": 6
     }
   ],
   "css": {
@@ -247,5 +252,11 @@
     "tests": 792,
     "failures": 0,
     "buildPassed": true
+  },
+  "mergeReadiness": {
+    "pr": 98,
+    "fiveBaselineBrowserBlockersResolved": true,
+    "runtimeBusinessCodeChangedForTestRepairs": false,
+    "verificationSource": "Current-head local check and browser runs; latest remote CI status is on PR98."
   }
 }

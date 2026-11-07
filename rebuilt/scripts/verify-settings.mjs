@@ -1,4 +1,5 @@
-/** Actual Survei UI with isolated Auth/HTTP/Storage boundaries. */
+import { chooseConfirmation } from "./testing/confirmation.mjs";
+/** Actual Settings UI with isolated HTTP/Storage boundaries. */
 import { createRequire } from "node:module";
 import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
 import { createServer } from "node:http";
@@ -206,18 +207,14 @@ try {
   }
   const name = page.getByRole("textbox", { name: "Nama sekolah", exact: true });
   await name.fill("Profil belum disimpan");
-  page.off("dialog", accept);
-  const dismiss = (d) => d.dismiss();
-  page.on("dialog", dismiss);
   await page
     .getByRole("button", { name: "Mata pelajaran", exact: true })
     .click();
+  await chooseConfirmation(page, false);
   check(
     (await name.inputValue()) === "Profil belum disimpan",
     "tab discard cancellation preserves profile",
   );
-  page.off("dialog", dismiss);
-  page.on("dialog", accept);
   await page.getByLabel("Pilih logo sekolah", { exact: true }).setInputFiles({
     name: "logo.png",
     mimeType: "image/png",
@@ -327,6 +324,7 @@ try {
   const saved = writes;
   mode = "ok";
   await page.getByRole("button", { name: "Muat ulang", exact: true }).click();
+  await chooseConfirmation(page);
   await page.getByText("Pengaturan berhasil dimuat ulang.").waitFor();
   check(writes === saved, "reload never repeats write");
   await page.getByRole("searchbox", { name: "Cari data" }).fill("Akun ambigu");
