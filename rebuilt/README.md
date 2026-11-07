@@ -1,6 +1,6 @@
 # Rebuilt SiM-Murid — Tahap 30
 
-Next.js App Router + TypeScript strict + Tailwind CSS + shadcn/ui + Zod + Supabase; hosting Vercel. Produksi: https://sim-muridv2.vercel.app . Kode GitHub berada di `rebuilt/`, yang menjadi Root Directory Vercel. Aplikasi GAS lama tetap dipertahankan di root repositori.
+Next.js App Router + TypeScript strict + Tailwind CSS + DaisyUI (Radix untuk interaksi) + Zod + Supabase; hosting Vercel. Produksi: https://sim-muridv2.vercel.app . Kode GitHub berada di `rebuilt/`, yang menjadi Root Directory Vercel. Aplikasi GAS lama tetap dipertahankan di root repositori.
 
 ## Rencana pengembangan lanjutan
 
@@ -33,3 +33,7 @@ Input: username teks persis, fullName, role, contactEmail opsional. Password sem
 Master design system: [docs/design-system/MASTER.md](docs/design-system/MASTER.md). Audit, peta perubahan dan hasil pengujian: [docs/verification/ui-ux-enterprise.md](docs/verification/ui-ux-enterprise.md). `npm run test:ui` memeriksa menu dan kontras; `node scripts/audit-ui.mjs` memeriksa hubungan label statis. Browser QA memakai fixture komponen yang tidak masuk route aplikasi; instruksi dan batas buktinya ada dalam laporan.
 
 Pembaruan visual berdasarkan plass-ui dan penghapusan navigasi duplikat: [laporan](docs/verification/plass-ui.md). Navigasi modul dipusatkan pada sidebar.
+
+## Modernisasi DaisyUI
+
+DaisyUI 5.7.50 menjadi fondasi visual. Lihat [sistem desain](docs/design-system/MASTER.md) dan [laporan migrasi beserta batas QA](docs/verification/daisyui-modernization.md). Kontrak API, state domain dan kebijakan PWA dipertahankan.

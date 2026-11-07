@@ -1,6 +1,6 @@
 # Rebuilt SiM-Murid
 
-- Stack wajib Next.js App Router + TypeScript strict + Tailwind CSS + shadcn/ui + Zod + Supabase. Hosting target Vercel.
+- Stack wajib Next.js App Router + TypeScript strict + Tailwind CSS + DaisyUI (Radix untuk perilaku aksesibel) + Zod + Supabase. Hosting target Vercel.
 - Baca docs/specifications dan docs/decisions sebelum mengubah perilaku bisnis. Jangan push atau deploy tanpa lingkup tahap yang memerintahkannya.
 - Kebijakan final: PH20/ATS30/ASAS50; Praktik terpisah. Fee ribuan terdekat half-up. Esai wajib sesuai backend lama; esai peer opsional.
 - D10 KKM/arsip masih belum diputus. Jangan mengubah hasil arsip diam-diam.

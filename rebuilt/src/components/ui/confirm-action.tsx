@@ -70,7 +70,7 @@ export function confirmAction(
         <AlertDialog.Portal>
           <AlertDialog.Overlay className="dialog-overlay fixed inset-0 z-[100] bg-foreground/45 backdrop-blur-sm" />
           <AlertDialog.Content
-            className="fixed left-1/2 top-1/2 z-[101] max-h-[calc(100dvh-32px)] w-[calc(100%-32px)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border bg-card p-[clamp(16px,4vw,24px)] text-card-foreground shadow-2xl [overflow-wrap:anywhere]"
+            className="modal-box fixed left-1/2 top-1/2 z-[101] max-h-[calc(100dvh-32px)] w-[calc(100%-32px)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border bg-card p-[clamp(16px,4vw,24px)] text-card-foreground shadow-2xl [overflow-wrap:anywhere]"
             onCloseAutoFocus={(event) => event.preventDefault()}
             onEscapeKeyDown={() => finish(false)}
           >
