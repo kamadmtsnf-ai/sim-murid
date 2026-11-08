@@ -1,3 +1,4 @@
+import {pushDestination} from "@/lib/push/navigation";
 import { releasePushInstallation } from "@/lib/push/api";
 import { createHash } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
@@ -76,7 +77,7 @@ export async function POST(request: NextRequest) {
       await admin.rpc("app_auth_device", { p_user: data.user.id, p_session: sessionId, p_label: deviceLabel(request.headers.get("user-agent") ?? "") });
     } catch { /* Optional display metadata must not turn a valid login into an orphaned session. */ }
     request.signal.throwIfAborted();
-    const response = privateJson({ destination: "/account" });
+    const response = privateJson({ destination: pushDestination(request.nextUrl.searchParams.get("push"))??"/account" });
     const saved = await requestAuth(request, response).auth.setSession({ access_token: data.session.access_token, refresh_token: data.session.refresh_token });
     if (saved.error) throw new Error("Session cookie unavailable");
     request.signal.throwIfAborted();

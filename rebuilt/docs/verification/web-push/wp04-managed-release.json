@@ -1,0 +1,29 @@
+{
+  "stage": "WP-04 managed release",
+  "baseline": "e36769a90e8be79ada9039230d8f83e06ee89597",
+  "implementation_commit": "ed69b43a527e67953ef414dcf528baed5dbc3038",
+  "migration": {
+    "source": "20261108011007_web_push_click_resolver.sql",
+    "cloud_version": "20261108013820",
+    "name": "web_push_click_resolver_wp04",
+    "project_ref": "qpzoukkhdxpmbtkcqemj",
+    "body_md5": "bb2b6d6d506fc47bef6585a93b28ebdb",
+    "fingerprint_match": true,
+    "service_only": true,
+    "invoker": true,
+    "unknown_identity_denied": true
+  },
+  "database_flags": {
+    "enabled": false,
+    "dispatch_enabled": false,
+    "test_enabled": false,
+    "categories": []
+  },
+  "security_advisors": {
+    "new_findings": 0,
+    "rls_no_policy_info": 74,
+    "preexisting_leaked_password_warn": 1
+  },
+  "notifications_sent": 0,
+  "notes": "CI and deployment status recorded in PR and persistent WP-04 report after release; not physical-device UAT."
+}

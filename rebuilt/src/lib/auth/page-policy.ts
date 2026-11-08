@@ -1,3 +1,4 @@
+import {pushReference} from "@/lib/push/navigation";
 import { currentNavItem, navigationFor } from "@/config/account-navigation";
 
 /** Page-level admission only. Record ownership and writes still require RPC/RLS checks. */
@@ -7,6 +8,7 @@ export function canAccessAccountPage(
   isAdmin: boolean,
 ): boolean {
   if (!path.startsWith("/account") || path.includes("%") || path.includes("\\")) return false;
+  if (pushReference(path)) return true; // Session admission only; resolver RPC checks owner/source.
   const item = currentNavItem(path);
   // Unknown routes are denied even to admins; adding a page requires an explicit policy.
   if (!item) return false;

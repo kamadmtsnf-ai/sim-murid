@@ -143,7 +143,9 @@ test('point events require authentic inbox provenance and guardian revocation ca
  await db.query("insert into sim_murid_private.inbox(id,recipient_id,dedup_key,title,message,entity_id) values($1,$2,$3,'Fixture','Synthetic',$4)",[inbox,parent.id,'point:'+pe+':'+parent.id,pe]);
  await db.exec("update sim_murid_private.push_settings set categories=array['points']");
  const e=await val("select public.app_push_enqueue($1,'points',$2,$3,now(),now()+interval '24 hours')",[inbox,pe,'point:'+pe+':'+parent.id]);assert.equal(e.code,'saved');
+ const clickRef=await val('select delivery_ref from sim_murid_private.push_deliveries where event_id=$1',[e.id]);assert.ok(await val('select public.app_push_open($1,$2,$3)',[parent.id,parent.session,clickRef]));
  await db.query('update sim_murid_private.student_guardians set revoked_at=now() where student_id=$1 and parent_id=$2',[student.id,parent.id]);
+ assert.equal(await val('select public.app_push_open($1,$2,$3)',[parent.id,parent.session,clickRef]),null);
  assert.equal((await claim()).code,'empty');assert.equal(await val('select status from sim_murid_private.push_deliveries where event_id=$1',[e.id]),'cancelled');
  const count=await val("select count(*)::int from sim_murid_private.outbox where channel='push'");
  const fake=uuid();await db.query("insert into sim_murid_private.inbox(id,recipient_id,dedup_key,title,message,entity_id) values($1,$2,$3,'Fake','Synthetic',$4)",[fake,parent.id,'fake:'+fake,pe]);
@@ -187,4 +189,21 @@ test('WP03 own-device test creates inbox/outbox atomically, replays safely, limi
  await db.exec('update sim_murid_private.push_settings set test_enabled=false');assert.equal((await invoke(u,s.id,uuid())).code,'disabled');
  const cfg=await val('select public.app_push_config($1,$2)',[u.id,u.session]);assert.equal(cfg.test_enabled,false);
  assert.equal(await val('select public.app_push_config($1,$2)',[u.id,uuid()]),null);
+});
+test('WP04 click resolver enforces latest session, recipient and source; direct lookup is independent from latest 200 and GET never reads',async()=>{
+ const u=await account('push-open'),other=await account('push-open-other');
+ await db.exec('update sim_murid_private.push_settings set enabled=true,test_enabled=true');
+ const sub=await register(u,data());assert.equal(sub.code,'saved');
+ const req=uuid(),e=await val('select public.app_push_test($1,$2,$3,$4)',[u.id,u.session,sub.id,req]);assert.equal(e.code,'saved');
+ const ref=await val('select delivery_ref from sim_murid_private.push_deliveries where event_id=$1',[e.id]);
+ const open=(actor,mark=false)=>val('select public.app_push_open($1,$2,$3,$4)',[actor.id,actor.session,ref,mark]);
+ assert.equal(await open(other),null);assert.equal(await open({id:u.id,session:uuid()}),null);
+ const first=await open(u);assert.ok(first);assert.equal(first.read_at,null);
+ for(let i=0;i<205;i++)await db.query("insert into sim_murid_private.inbox(recipient_id,dedup_key,title,message) values($1,$2,'Newer','Synthetic')",[u.id,uuid()]);
+ assert.equal((await open(u)).id,first.id);assert.equal((await open(u)).read_at,null);
+ const revision=await val('select revision from sim_murid_private.operations_state');
+ assert.ok((await open(u,true)).read_at);assert.equal(await val('select revision from sim_murid_private.operations_state'),revision+1);
+ await open(u,true);assert.equal(await val('select revision from sim_murid_private.operations_state'),revision+1);
+ await db.query("update public.profiles set status='inactive' where id=$1",[u.id]);assert.equal(await open(u),null);
+ for(const role of ['anon','authenticated']){await db.exec('set role '+role);try{await assert.rejects(()=>open(other));}finally{await db.exec('reset role');}}
 });

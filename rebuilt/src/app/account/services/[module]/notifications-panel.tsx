@@ -1,4 +1,5 @@
 "use client";
+import {PushPanel} from "@/components/push/push-panel";
 import { Pagination } from "@/components/ui/collection-controls";
 import { useEffect, useRef, useState } from "react";
 import { Bell, CheckCheck, RefreshCw, Search } from "lucide-react";
@@ -136,6 +137,7 @@ export function NotificationsPanel({ initial }: { initial: ServiceSnapshot }) {
   }
   return (
     <div className="notifications-panel space-y-6">
+      <PushPanel/>
       <section
         aria-labelledby="inbox-summary-title"
         className="notification-summary"

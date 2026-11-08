@@ -150,3 +150,6 @@ test('account switch releases installation before claiming new login; release fa
  }
  const s=reset(),same={...c,owner:id};await safe(await POST(request(body,{headers:{Origin:'https://app.test','Content-Type':'application/json',cookie:'__Host-sim-push='+Buffer.from(JSON.stringify(same)).toString('base64url')}})),200);assert.equal(calls(s,'app_push_release').length,0);
 });
+test('push login continuation accepts only an opaque UUID and never arbitrary redirect URLs',async()=>{
+ for(const ref of ['https://evil.test','//evil.test',id]){reset();const req=request();const next=new NextRequest(req.url+'?push='+encodeURIComponent(ref),req);const result=await safe(await POST(next),200);assert.equal(result.destination,ref===id?'/account/notifications/open/'+id:'/account');}
+});
