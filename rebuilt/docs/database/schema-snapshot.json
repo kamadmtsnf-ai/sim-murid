@@ -51,7 +51,8 @@
     "20261025152242_teacher_duty_assignment_guards.sql",
     "20261026011522_onboarding_email_contact.sql",
     "20261107162929_web_push_private_foundation.sql",
-    "20261107173727_web_push_device_api.sql"
+    "20261107173727_web_push_device_api.sql",
+    "20261108011007_web_push_click_resolver.sql"
   ],
   "tables": [
     {

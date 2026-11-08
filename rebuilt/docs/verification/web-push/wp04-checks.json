@@ -1,0 +1,55 @@
+{
+  "stage": "WP-04",
+  "baseline": "e36769a90e8be79ada9039230d8f83e06ee89597",
+  "scope": "local implementation and isolated QA; not cloud/physical device UAT",
+  "npm_ci": "passed",
+  "full_check": {
+    "exit_code": 0,
+    "tests": 832,
+    "processes": 86,
+    "typecheck": "passed",
+    "lint": "passed",
+    "db_types_drift": "passed",
+    "production_build": "passed"
+  },
+  "focused_final": {
+    "tests": 71,
+    "failures": 0
+  },
+  "browser": {
+    "version": "131.0.6778.204",
+    "checks": 12,
+    "errors": [],
+    "kind": "Chromium with UI/API doubles plus real worker install/update; not physical iOS/OS push UAT"
+  },
+  "http": {
+    "status": "passed",
+    "sw_status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "cache_control": "no-store, max-age=0",
+    "scope": "/",
+    "nosniff": "nosniff",
+    "foreign_read_action": 403,
+    "fetch_handler": false
+  },
+  "database": {
+    "engine": "isolated PGlite",
+    "migrations": 52,
+    "application_tables": 88,
+    "rpc": "app_push_open(uuid,uuid,uuid,boolean)",
+    "body_md5": "bb2b6d6d506fc47bef6585a93b28ebdb",
+    "cloud_applied": false
+  },
+  "release": {
+    "pushed": false,
+    "deployed": false,
+    "flags_changed": false,
+    "notifications_sent": 0
+  },
+  "open_gates": [
+    "isolated authenticated staging",
+    "physical iOS/Android/Safari UAT",
+    "provider-to-OS delivery",
+    "managed multi-connection locking"
+  ]
+}

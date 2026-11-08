@@ -53,3 +53,13 @@ test('malformed DB contracts are server failures; preference/revoke remain avail
  s=reset();process.env.WEB_PUSH_ENABLED='false';await safe(await pushApi(request('DELETE',undefined,'subscriptions/'+device),'revoke',device),200);await safe(await pushApi(request(),'preferences'),200);
  const {GET}=await import('../src/app/api/push/config/route.ts');await safe(await GET(request()),200);
 });
+test('stale account tab header rejects before any device RPC',async()=>{const s=reset(),r=request('POST',body);r.headers.set('X-Sim-Push-Account',device);await safe(await pushApi(r,'register'),403);assert.equal(s.calls.length,0);});
+test('WP04 read action validates origin/session/recipient result and returns no notification content',async()=>{
+ const {POST}=await import('../src/app/api/push/open/[ref]/route.ts');const params={params:Promise.resolve({ref:device})};
+ let s=reset(),req=request('POST');req.headers.set('origin','https://foreign.test');await safe(await POST(req,params),403);assert.equal(s.calls.length,0);
+ s=reset();s.state=null;await safe(await POST(request('POST'),params),401);assert.equal(s.calls.length,0);
+ s=reset();s.rpc=async()=>({data:null,error:null});await safe(await POST(request('POST'),params),404);
+ s=reset();s.rpc=async()=>({data:{id:device,title:'Private title',message:'Private content',created_at:'2026-11-08T00:00:00Z',read_at:'2026-11-08T00:01:00Z'},error:null});
+ const r=await safe(await POST(request('POST',{actor:device}),params),200);assert.deepEqual(r,{code:'saved',read_at:'2026-11-08T00:01:00Z'});assert.deepEqual(calls(s,'app_push_open')[0][1],{p_actor:id,p_session:session,p_ref:device,p_mark:true});
+ s=reset();s.rpc=async()=>({data:null,error:{}});await safe(await POST(request('POST'),params),503);
+});

@@ -78,6 +78,7 @@ export async function pushApi(request: NextRequest, action: 'config' | 'devices'
         const state = await verifiedPrincipal(requestAuth(request, response));
         if (!state)
             throw new Failure(401, 'Silakan masuk kembali.');
+        if (request.headers.has('X-Sim-Push-Account') && request.headers.get('X-Sim-Push-Account') !== state.principal.id) throw new Failure(403, 'Akun pada tab ini telah berubah. Muat ulang halaman.');
         const admin = createAuthAdmin(), actor = { p_actor: state.principal.id, p_session: state.sessionId };
         const respond = (value: unknown, status = 200) => { const r = privateJson(value, status); response.cookies.getAll().forEach(c => r.cookies.set(c)); if (status === 429)
             r.headers.set('Retry-After', action === 'test' ? '3600' : '60'); return r; };
@@ -124,7 +125,7 @@ export async function pushApi(request: NextRequest, action: 'config' | 'devices'
             const db = parsedConfig.data;
             if (new URL(request.url).protocol === 'https:' && !credential(request))
                 setCredential(response, { installation: randomUUID(), secret: randomBytes(32).toString('base64url'), owner: actor.p_actor });
-            return respond({ available: !!config, enabled: !!config?.enabled && db.enabled, testEnabled: !!config?.enabled && config.test && db.enabled && db.test_enabled, publicKey: config?.publicKey ?? null, vapidKeyVersion: config?.vapidVersion ?? null, categories: config?.categories.filter(c => db.categories.includes(c)) ?? [], maxDevices: 5 });
+            return respond({ accountId: actor.p_actor, available: !!config, enabled: !!config?.enabled && db.enabled, testEnabled: !!config?.enabled && config.test && db.enabled && db.test_enabled, publicKey: config?.publicKey ?? null, vapidKeyVersion: config?.vapidVersion ?? null, categories: config?.categories.filter(c => db.categories.includes(c)) ?? [], maxDevices: 5 });
         }
         if (!config?.enabled)
             throw new Failure(503, 'Push notifikasi belum tersedia.');

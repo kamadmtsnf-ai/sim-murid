@@ -85,6 +85,7 @@ app_push_complete: { Args: {p_id: string; p_token: string; p_binding: number; p_
 app_push_config: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_devices: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_enqueue: { Args: {p_inbox: string; p_category: string; p_source: string; p_dedup: string; p_occurred: string; p_expires: string; p_subscription?: string | null }; Returns: Json };
+app_push_open: { Args: {p_actor: string; p_session: string; p_ref: string; p_mark?: boolean | null }; Returns: Json };
 app_push_preferences: { Args: {p_actor: string; p_session: string; p_revision?: number | null; p_data?: Json | null }; Returns: Json };
 app_push_rate: { Args: {p_actor: string; p_session: string; p_action: string }; Returns: Json };
 app_push_register: { Args: {p_actor: string; p_session: string; p_data: Json }; Returns: Json };

@@ -5,6 +5,7 @@ import {registerHooks} from 'node:module';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const mocks={
+ '@/components/push/push-provider':`export const PushProvider=()=>null;`,
  '@/lib/dashboard/server':`export const readDailyOverview=async(client,caller)=>{globalThis.dashboardMocks.overviewCalls.push(caller);return globalThis.dashboardMocks.overview;};`,
  '@/lib/auth/read-server':`export const readServerAuthClient=async()=>{if(globalThis.dashboardMocks.clientError)throw Error('private client detail');return {fixture:true}};`,
  '@/lib/auth/http':`export const verifiedPrincipal=async()=>{if(globalThis.dashboardMocks.principalError)throw Error('private principal detail');return globalThis.dashboardMocks.caller};`,
@@ -21,7 +22,8 @@ registerHooks({
  load(url,context,next){if(url.startsWith('dashboard-mock:'))return {format:'module',source:mocks[url.slice('dashboard-mock:'.length)],shortCircuit:true};if(/\.tsx?$/.test(url))return {format:'module',source:ts.transpileModule(readFileSync(new URL(url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,shortCircuit:true};return next(url,context);}
 });
 const {default:page}=await import('../src/app/account/page.tsx');
-const {default:layout}=await import('../src/app/account/layout.tsx');
+const {default:rawLayout}=await import('../src/app/account/layout.tsx');
+async function layout(args){const root=await rawLayout(args);return root?.type?.name==='PushProvider'?root.props.children:root;}
 function reset(){globalThis.dashboardMocks={caller:{principal:{id:'11111111-1111-4111-8111-111111111111',full_name:'Synthetic account',username:'qa-dashboard',expires_at:'2026-10-22T00:00:00Z',is_admin:false},sessionId:'synthetic-session'},onboarding:{gate:'ready'},survey:{data:false,error:null},access:{grants:[]},overviewCalls:[],overview:{contextReady:false},securityCalls:[],rpcCalls:[]};return globalThis.dashboardMocks;}
 async function redirects(fn,destination){await assert.rejects(fn,error=>error.message==='NEXT_REDIRECT'&&error.destination===destination);}
 test('Anonymous Dashboard preserves login redirect without invoking privileged gates',async()=>{const state=reset();state.caller=null;await redirects(page,'/login?expired=1');assert.deepEqual(state.securityCalls,[]);assert.deepEqual(state.rpcCalls,[]);});
@@ -40,3 +42,5 @@ test('Non-admin with administrative-looking grants still requires PWA; exemption
  const state=reset();state.caller.principal.is_admin=false;state.access={grants:[{capability:'roles.write'},{capability:'sessions.manage'}]};
  const result=await layout({children:'content'});assert.equal(result.props.pwaRequired,true);
 });
+
+test('WP04 lifecycle provider is keyed by verified account without changing shell access',async()=>{const state=reset(),root=await rawLayout({children:'content'});assert.equal(root.type.name,'PushProvider');assert.equal(root.props.userId,state.caller.principal.id);assert.equal(root.key,state.caller.principal.id);assert.equal(root.props.children.props.children,'content');});

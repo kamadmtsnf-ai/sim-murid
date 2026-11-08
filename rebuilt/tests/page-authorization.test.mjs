@@ -37,3 +37,7 @@ test('anonymous or revoked session redirects to login and never loads permission
 test('revoked grants are checked again on the next request, with no cached authorization',async()=>{const s=reset();s.access.grants=[{capability:'classes.read'}];assert.equal((await proxy(request('/account/classes'))).status,200);s.access.grants=[];assert.equal((await proxy(request('/account/classes'))).status,403);assert.equal(s.calls,2);});
 
 test('onboarding account pages remain reachable when operational grants are not yet available',async()=>{for(const path of ['/account','/account/security','/account/email','/account/sessions','/account/access']){const s=reset();s.access=null;assert.equal((await proxy(request(path))).status,200,path);assert.equal(s.calls,0);}});
+test('opaque push resolver is admitted only for exact UUID paths and preserves safe login continuation',async()=>{
+ reset().caller=null;const path='/account/notifications/open/'+id;const r=await proxy(request(path));assert.equal(r.headers.get('location'),'https://app.test/login?expired=1&push='+id);assert.equal(canAccessAccountPage(path,[],false),true);
+ for(const p of [path+'/extra','/account/notifications/open/https://evil.test','/account/notifications/open/%2f'+id])assert.equal(canAccessAccountPage(p,[],true),false);
+});

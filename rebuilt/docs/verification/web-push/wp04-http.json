@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "sw_status": 200,
+  "content_type": "application/javascript; charset=utf-8",
+  "cache_control": "no-store, max-age=0",
+  "scope": "/",
+  "nosniff": "nosniff",
+  "foreign_read_action": 403,
+  "fetch_handler": false
+}

@@ -7,7 +7,7 @@ const {db}=await createIsolatedDatabase();after(()=>db.close());
 const val=async(sql,p=[])=>Object.values((await db.query(sql,p)).rows[0])[0];
 test('singleton UPDATEs have real row predicates required by production safeupdate',async()=>{
  const rows=(await db.query("select proname,prosrc from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and prosrc ~* 'update sim_murid_private\\.(education_state|operations_state|service_settings) set'")).rows;
- assert.equal(rows.length,7);
+ assert.equal(rows.length,8);
  for(const row of rows){for(const statement of row.prosrc.match(/update sim_murid_private\.(?:education_state|operations_state|service_settings) set[^;]+;/gi)??[]){assert.match(statement,/\bwhere\s+singleton\s*=\s*true\s*;/i,row.proname+' must scope the existing singleton row');}}
 });
 test('service-role year creation commits both semesters, confirms snapshot, and replays once',async()=>{

@@ -7,13 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Status } from "@/components/ui/status";
 import type { PublicRecaptcha } from "@/lib/auth/recaptcha";
 import { RecaptchaWidget } from "./recaptcha-widget";
+import {pushDestination} from "@/lib/push/navigation";
 import { loginSchema } from "@/lib/auth/validation";
 import styles from "./login.module.css";
 import { FloatingLabel } from "@/components/ui/floating-label";
 
 
 type Phase = "idle" | "submitting" | "success" | "uncertain";
-export function LoginForm({captcha = { mode: "disabled" }}: {captcha?: PublicRecaptcha}) {
+export function LoginForm({captcha = { mode: "disabled" },pushRef}: {captcha?: PublicRecaptcha;pushRef?:string|undefined}) {
+  const destination=pushDestination(pushRef)??"/account";
   const router = useRouter();
   const busyRef = useRef(false);
   const mountedRef = useRef(true);
@@ -55,16 +57,16 @@ export function LoginForm({captcha = { mode: "disabled" }}: {captcha?: PublicRec
     const controller = new AbortController();
     timerRef.current = setTimeout(() => controller.abort(), 30_000);
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/login"+(pushDestination(pushRef)?"?push="+pushRef:""), {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...parsed.data, ...(captcha.mode === "enabled" ? {captchaToken} : {}) }), signal: controller.signal, cache: "no-store",
       });
       const data: unknown = await response.json();
       if (!mountedRef.current) return;
       if (response.ok) {
-        if (typeof data !== "object" || data === null || !("destination" in data) || data.destination !== "/account") throw new Error("Unconfirmed login response");
+        if (typeof data !== "object" || data === null || !("destination" in data) || data.destination !== destination) throw new Error("Unconfirmed login response");
         setPhase("success");
-        try { router.replace("/account"); } catch { /* The native link below can complete navigation. */ }
+        try { router.replace(destination); } catch { /* The native link below can complete navigation. */ }
         return;
       }
       if (typeof data !== "object" || data === null || !("message" in data) || typeof data.message !== "string" || !data.message.trim()) throw new Error("Unconfirmed login response");
@@ -95,6 +97,6 @@ export function LoginForm({captcha = { mode: "disabled" }}: {captcha?: PublicRec
     {captcha.mode === "unavailable" && <Status tone="error">Verifikasi keamanan belum tersedia. Silakan coba kembali atau hubungi administrator.</Status>}
     {message && <div id="login-error" ref={errorRef} role="alert" tabIndex={-1} className={styles.error}>{message}</div>}
     {pending && <p role="status" className="sr-only">Sedang memeriksa akun.</p>}
-    {phase === "success" ? <div ref={successRef} tabIndex={-1}><Status tone="success"><p>Berhasil masuk. Membuka akun Anda…</p><Button asChild variant="secondary"><a href="/account">Lanjutkan ke akun</a></Button></Status></div> : phase === "uncertain" ? <Button asChild className={styles.submit}><a href="/login">Periksa sesi saya</a></Button> : <Button type="submit" className={styles.submit} aria-busy={pending} disabled={pending || captcha.mode === "unavailable" || (captcha.mode === "enabled" && !captchaToken)}>{pending ? "Memeriksa akun…" : "Masuk"}</Button>}
+    {phase === "success" ? <div ref={successRef} tabIndex={-1}><Status tone="success"><p>Berhasil masuk. Membuka akun Anda…</p><Button asChild variant="secondary"><a href={destination}>Lanjutkan ke akun</a></Button></Status></div> : phase === "uncertain" ? <Button asChild className={styles.submit}><a href={pushDestination(pushRef)?"/login?push="+pushRef:"/login"}>Periksa sesi saya</a></Button> : <Button type="submit" className={styles.submit} aria-busy={pending} disabled={pending || captcha.mode === "unavailable" || (captcha.mode === "enabled" && !captchaToken)}>{pending ? "Memeriksa akun…" : "Masuk"}</Button>}
   </form>;
 }

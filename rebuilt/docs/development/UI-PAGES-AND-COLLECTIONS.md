@@ -22,3 +22,14 @@ Aplikasi Next.js di `rebuilt/` memiliki 22 berkas halaman, termasuk tiga route d
 | Layanan | Notifikasi, poin, pekerjaan, analitik, audit dan tindak lanjut sudah memiliki kontrol daftar. Survei dan rekonsiliasi mengikuti langkah kerja domain. |
 
 Paginasi baru membatasi jumlah item yang dirender dan menyembunyikan kontrol ketika cukup satu halaman. Data tetap bersumber dari respons yang sama. Tidak ada migrasi database. Skenario akun produksi dan perangkat fisik berada di luar verifikasi lokal.
+
+## Penambahan WP-04 — 8 November 2026 WIB
+
+| Halaman/API | Fungsi | Akses dan perubahan data |
+|---|---|---|
+| `/account/services/notifications` — panel Notifikasi perangkat | Izin opsional, aktif/nonaktif, uji, kategori, jam tenang dan daftar perangkat | Caller terverifikasi; hanya binding/preferensi sendiri. Tidak meminta izin ketika halaman dibuka. Input waktu memakai FloatingLabel. |
+| `/account/notifications/open/[ref]` | Detail pemberitahuan melalui referensi delivery UUID yang buram | Session admission, onboarding, recipient dan sumber diperiksa server; pembacaan langsung tidak dibatasi 200 inbox terakhir. GET tidak mengubah read_at. |
+| POST `/api/push/open/[ref]` | Tindakan eksplisit Tandai dibaca setelah detail tampil | Same-origin, sesi aktual dan resolver sumber; read_at idempoten dan operations revision berubah hanya ketika transisi pertama berhasil. |
+| `/sw.js` | Worker first-party scope `/`, push generik dan klik ke resolver allowlist | Tanpa fetch handler, cache privat, credential atau navigasi ulang formulir aktif. Bukan API baca data pengguna. |
+
+Login mempertahankan hanya query `push` UUID yang tervalidasi, kemudian memeriksa akses lagi di resolver. Query URL tujuan bebas ditolak. Navigasi sidebar tetap menjadi pintu kotak masuk; tidak ditambahkan tautan statis duplikat pada halaman detail baru.

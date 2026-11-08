@@ -1,3 +1,4 @@
+import {pushDestination} from "@/lib/push/navigation";
 import { publicRecaptcha } from "@/lib/auth/recaptcha";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -12,7 +13,7 @@ import { verifiedPrincipal } from "@/lib/auth/http";
 import styles from "./login.module.css";
 
 export const metadata: Metadata = { title: "Masuk" };
-type Query={logout?:string|string[];expired?:string|string[];password?:string|string[]};
+type Query={push?:string|string[];logout?:string|string[];expired?:string|string[];password?:string|string[]};
 export default async function LoginPage({ searchParams }: { searchParams: Promise<Query> }) {
   const query = await searchParams;
   const jar = await cookies();
@@ -21,7 +22,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     try { signedIn = Boolean(await verifiedPrincipal(await readServerAuthClient())); }
     catch { /* Keep the public form available when account verification is unavailable. */ }
   }
-  if (signedIn) redirect("/account");
+  if (signedIn) redirect(pushDestination(query.push)??"/account");
   const notice = query.password === "pending" ? {tone:"info" as const,text:"Sesi diakhiri untuk keamanan. Perubahan password belum dapat dipastikan selesai. Coba masuk kembali; jika password lama tidak berlaku, gunakan password baru atau hubungi administrator."}
     : query.password === "changed" ? {tone:"success" as const,text:"Password berhasil diperbarui. Masuk kembali dengan password baru."}
     : query.expired === "1" ? {tone:"warning" as const,heading:"Sesi berakhir",text:"Sesi tidak berlaku. Silakan masuk kembali untuk melanjutkan."}
@@ -30,7 +31,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
     <Card className={styles.card}><CardHeader className={styles.cardHeader}><h1 className="text-2xl font-semibold">Masuk ke SiM-Murid</h1></CardHeader><CardContent className={styles.cardContent}>
       {notice && <div className="mb-5"><Status tone={notice.tone} heading={notice.heading}>{notice.text}</Status></div>}
 
-      <LoginForm captcha={publicRecaptcha()} />
+      <LoginForm captcha={publicRecaptcha()} pushRef={typeof query.push==="string"&&pushDestination(query.push)?query.push:undefined} />
       <p className={styles.help}>Kesulitan masuk? <Link href="/recovery">Minta bantuan akun</Link>. Akun baru? Hubungi admin madrasah.</p>
     </CardContent></Card>
   </LoginShell>;

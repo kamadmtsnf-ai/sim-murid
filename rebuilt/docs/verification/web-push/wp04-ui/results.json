@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "checks": [
+    "No automatic permission request; StrictMode initialization settles",
+    "Keyboard Enter permission + bounded 428 handshake + active only after saved",
+    "Revision conflict preserves preference draft",
+    "320/390/768/1440 no horizontal overflow",
+    "Axe WCAG A/AA zero violations",
+    "Failed server revoke never unsubscribes browser",
+    "Confirmed revoke precedes unsubscribe; opt-out never auto-reactivates",
+    "Offline and cross-tab account change block unsafe activation",
+    "Denied permission gives settings guidance without repeat prompts",
+    "Unsupported and Apple Home Screen guidance never prompt permission",
+    "Denied storage falls back to memory without persisting keys or losing confirmed active state",
+    "Real first-party worker installs/updates with root scope, no cache and no draft reload"
+  ],
+  "errors": [],
+  "providerSends": 0,
+  "browser": "131.0.6778.204",
+  "kind": "Chromium with UI/API doubles plus real worker install/update; not physical iOS/OS push UAT"
+}
