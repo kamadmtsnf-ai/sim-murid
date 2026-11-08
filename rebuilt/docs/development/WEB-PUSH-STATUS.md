@@ -32,3 +32,13 @@ Rilis WP-03: [PR #101](https://github.com/kamadmtsnf-ai/sim-murid/pull/101). Tre
 ## WP-04 — bukti lokal
 
 `npm ci` dan `npm run check` lulus: 832 test/86 proses, typecheck/lint/drift types/build produksi. Final 71 test terfokus; 12 pemeriksaan browser Chromium 131 dengan doubles + worker install/update nyata lulus, axe nol temuan dan tanpa overflow 320/390/768/1440. HTTP `/sw.js` JavaScript/no-store/scope root/nosniff terverifikasi. Lihat `docs/verification/web-push/wp04-checks.json`. Setelah QA, pengguna mengotorisasi rilis; migrasi managed WP-04 telah diterapkan dan diverifikasi sebelum rilis kode. Aktivasi dan UAT perangkat fisik/provider/staging tetap terbuka.
+
+## WP-05 — sender dan worker
+
+Implementasi lokal sender/worker selesai; baca `WEB-PUSH-WP05.md`. Migrasi baru `20261108020135_web_push_sender_worker.sql` menambah singleton lease/wake privat dan lima RPC service-only. Installer managed opsional `supabase/operations/web-push-scheduler.sql` membuat cron inactive, memakai Vault/pg_net setelah commit; tidak dipasang atau diaktifkan. Endpoint POST memakai dedicated bearer, batch 20/konkurensi 4, IP pinning, final preflight dan completion fencing. Accepted bukan tampil/dibaca; hasil ambigu tidak diulang otomatis. Kode belum push ke main, migrasi belum cloud, semua flag tetap nonaktif. Penerimaan WP-05 nyata masih menunggu staging terisolasi dan perangkat tester yang dipilih. WP-06 producer bisnis belum dijalankan.
+
+Bukti WP-05: `npm ci` + `npm run check` lulus 849 test/87 proses; 35 test push terfokus, 53 pemeriksaan browser/9 audit axe; 89 tabel aplikasi ber-RLS dan 53 migrasi lokal tanpa issue katalog. Rincian `docs/verification/web-push/wp05-checks.json`. Laporan persisten bernama `WP05_Sender_Worker_Pengiriman_SiM_Murid.md`. Ini tidak menutup gate staging/provider/perangkat/managed scheduler.
+
+## Persiapan rilis WP-05 — 8 November 2026
+
+Pengguna telah mengotorisasi push ke main dan migrasi. Migrasi managed `20261108023237` (`web_push_sender_worker_wp05`) diterapkan sebelum rilis kode. Lima fingerprint body RPC source/cloud cocok; invoker/service-only, RLS tabel worker dan penolakan identitas tidak sah terverifikasi. Database mempunyai 53 migrasi. Flag enabled/dispatch/test false, categories kosong, scheduler false dan worker URL null; delivery produksi nol. Installer scheduler managed tidak dijalankan. Hasil UI JSON disertakan; screenshot QA tetap artefak lokal. Penerimaan provider/perangkat/staging tetap terbuka.
