@@ -85,13 +85,18 @@ app_push_complete: { Args: {p_id: string; p_token: string; p_binding: number; p_
 app_push_config: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_devices: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_enqueue: { Args: {p_inbox: string; p_category: string; p_source: string; p_dedup: string; p_occurred: string; p_expires: string; p_subscription?: string | null }; Returns: Json };
+app_push_maintenance: { Args: {p_enabled: boolean; p_test: boolean; p_categories: string[] }; Returns: Json };
 app_push_open: { Args: {p_actor: string; p_session: string; p_ref: string; p_mark?: boolean | null }; Returns: Json };
 app_push_preferences: { Args: {p_actor: string; p_session: string; p_revision?: number | null; p_data?: Json | null }; Returns: Json };
+app_push_preflight: { Args: {p_id: string; p_token: string; p_binding: number }; Returns: Json };
 app_push_rate: { Args: {p_actor: string; p_session: string; p_action: string }; Returns: Json };
 app_push_register: { Args: {p_actor: string; p_session: string; p_data: Json }; Returns: Json };
 app_push_release: { Args: {p_installation: string; p_secret_hash: string }; Returns: Json };
+app_push_result: { Args: {p_id: string; p_token: string; p_binding: number; p_status: string; p_code?: number | null; p_retry?: number | null; p_error?: string | null }; Returns: Json };
 app_push_revoke: { Args: {p_actor: string; p_session: string; p_id: string }; Returns: Json };
+app_push_status: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_test: { Args: {p_actor: string; p_session: string; p_subscription: string; p_request: string }; Returns: Json };
+app_push_worker: { Args: {p_action: string; p_token?: string | null; p_metrics?: Json | null }; Returns: Json };
 app_recovery_begin: { Args: {p_actor: string; p_session: string; p_request: string; p_operation: string; p_evidence: string; p_reject?: boolean | null }; Returns: Json };
 app_recovery_finish: { Args: {p_actor: string; p_session: string; p_request: string; p_operation: string }; Returns: boolean };
 app_recovery_identity: { Args: {p_username: string }; Returns: Json };

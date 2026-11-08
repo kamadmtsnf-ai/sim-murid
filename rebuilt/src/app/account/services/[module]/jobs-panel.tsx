@@ -255,6 +255,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
             {[
               ["Email", data.extra.providers.gmail],
               ["WhatsApp", data.extra.providers.whatsapp],
+              ["Web Push (server)", data.extra.providers.webPush],
               [
                 "Izin dispatch otomatis",
                 data.extra.providers.scheduledDispatch,
@@ -268,6 +269,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
               </div>
             ))}
           </dl>
+          {data.extra.push?<section aria-label="Antrean Web Push" className="space-y-2"><h3 className="font-medium">Antrean Web Push</h3>{data.extra.push.alarm?<Status tone="warning">Web Push memerlukan pemeriksaan konfigurasi atau antrean. Kiriman ambigu tidak diulang otomatis.</Status>:null}<dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">{Object.entries(data.extra.push.counts).map(([status,count])=><div key={status} className="min-w-0 rounded-lg border p-2"><dt className="break-words text-sm">{({accepted:'Diterima layanan push',queued:'Menunggu',processing:'Diproses',retry_wait:'Menunggu ulang',failed_permanent:'Gagal permanen',ambiguous:'Perlu pemeriksaan',cancelled:'Dibatalkan',expired:'Kedaluwarsa'} as Record<string,string>)[status]??status}</dt><dd>{count}</dd></div>)}</dl><p className="text-sm text-muted-foreground">Pemicu terjadwal: {data.extra.push.worker.scheduler_enabled?'Dikonfigurasi':'Belum diaktifkan'}. Status accepted bukan bukti tampil atau dibaca.</p></section>:null}
           <p className="text-sm text-muted-foreground">
             Status konfigurasi bukan bukti koneksi atau penerimaan pesan. Hasil
             ambigu perlu diperiksa dan tidak diulang otomatis. Pengiriman gagal

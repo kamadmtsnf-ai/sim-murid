@@ -1,3 +1,4 @@
+import {senderConfiguration} from "@/lib/push/sender-config";
 import { reconciliationSnapshot } from "./reconciliation";
 import { jobsSnapshot } from "./jobs";
 import { parseGmailEnvironment } from "@/lib/email/gmail-config";
@@ -128,10 +129,16 @@ export async function servicesData(
         !u.password &&
         Boolean(process.env.WHATSAPP_API_KEY);
     } catch {}
+    const pushConfig=senderConfiguration((process.env.WEB_PUSH_APP_ORIGIN??'')+'/api/push/worker');
+    const statusQuery=createAuthAdmin().rpc('app_push_status',{p_actor:actor,p_session:session});
+    const pushStatus=await (signal?statusQuery.abortSignal(signal):statusQuery);
+    if(pushStatus.error||!pushStatus.data)throw Error('Push diagnostics unavailable');
+    parsed.extra.push=pushStatus.data;
     parsed.extra.providers = {
       gmail,
       whatsapp,
       scheduledDispatch: process.env.SERVICES_DISPATCH_ENABLED === "true",
+      webPush:Boolean(pushConfig?.enabled&&pushConfig.dispatch),
     };
     const jobs = jobsSnapshot.safeParse(parsed);
     if (!jobs.success) throw Error("Jobs unavailable");

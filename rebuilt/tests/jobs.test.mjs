@@ -113,7 +113,9 @@ function setup() {
   m.rpc = async (fn) => ({
     error: null,
     data:
-      fn === "app_survey_required"
+      fn === "app_push_status"
+        ? {counts:{},oldest_ready_at:null,worker:{last_started:null,last_finished:null,last_metrics:{},scheduler_enabled:false},database_dispatch:false}
+        : fn === "app_survey_required"
         ? false
         : fn === "app_services_read"
           ? m.snapshot

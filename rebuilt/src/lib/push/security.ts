@@ -45,10 +45,9 @@ export function publicAddress(address: string) {
     const a = oct[0]!, b = oct[1]!;
     return a > 0 && a < 224 && a !== 10 && a !== 127 && !(a === 100 && b >= 64 && b <= 127) && !(a === 169 && b === 254) && !(a === 172 && b >= 16 && b <= 31) && !(a === 192 && (b === 168 || b === 0 || b === 2)) && !(a === 198 && (b === 18 || b === 19 || b === 51)) && !(a === 203 && b === 0);
 }
+export function endpointURL(endpoint:string){const u=new URL(endpoint);if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||!hostAllowed(u.hostname))throw Error('Invalid push endpoint');return u;}
 export async function validateEndpoint(endpoint: string, resolver: typeof lookup = lookup) {
-    const u = new URL(endpoint);
-    if (u.protocol !== 'https:' || u.username || u.password || u.port || u.hash || !hostAllowed(u.hostname))
-        throw Error('Invalid push endpoint');
+    const u = endpointURL(endpoint);
     let timer: ReturnType<typeof setTimeout> | undefined;
     try {
         const answers = await Promise.race([resolver(u.hostname, { all: true, verbatim: true }), new Promise<never>((_, reject) => { timer = setTimeout(() => reject(Error('DNS timeout')), 2000); })]);

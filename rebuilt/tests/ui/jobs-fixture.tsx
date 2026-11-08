@@ -37,7 +37,8 @@ const data = jobsSnapshot.parse({
         last_error_code: i === 0 ? "KodePanjangTanpaSpasi".repeat(8) : null,
       })),
   extra: {
-    providers: { gmail: false, whatsapp: false, scheduledDispatch: false },
+    providers: { gmail: false, whatsapp: false, scheduledDispatch: false, webPush:false },
+    push:{counts:empty?{}:{accepted:3,ambiguous:1,retry_wait:2},errors:{},alarm:!empty,oldest_ready_at:null,worker:{last_started:null,last_finished:null,last_metrics:{},scheduler_enabled:false},database_dispatch:false},
     jobs: empty
       ? []
       : Array.from({ length: 100 }, (_, i) => ({

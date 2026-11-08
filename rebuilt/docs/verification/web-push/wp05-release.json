@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-08",
+  "authorization": "User requested push to main and database migration",
+  "implementation_local_commit": "2cfd7dd34315f842af132a8ee87f5e0a96d26b86",
+  "managed_project": "sim-muridv2",
+  "migration_version": "20261108023237",
+  "migration_name": "web_push_sender_worker_wp05",
+  "rpc_fingerprints_matched": 5,
+  "rpc_browser_execute": false,
+  "private_worker_rls": true,
+  "database_flags": {
+    "enabled": false,
+    "dispatch": false,
+    "test": false,
+    "categories": []
+  },
+  "scheduler_installed": false,
+  "scheduler_enabled": false,
+  "worker_url": null,
+  "production_delivery_rows": 0,
+  "provider_sends": 0,
+  "uat": "isolated staging/provider/physical-device acceptance pending"
+}

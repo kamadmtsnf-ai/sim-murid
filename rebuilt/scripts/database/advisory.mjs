@@ -5,7 +5,7 @@ try {
   const results=await db.exec(await readFile(`${projectRoot}scripts/database/verify-foundation.sql`,'utf8'));
   const [tables,functions,foreignKeys]=results;
   const issues=[];
-  if(tables.rows.length!==88)issues.push('Expected 88 application tables');
+  if(tables.rows.length!==89)issues.push('Expected 89 application tables');
   for(const t of tables.rows){
     if(!t.rls_enabled)issues.push(`RLS off: ${t.schema_name}.${t.table_name}`);
     if(t.anon_can_read||(t.schema_name!=='public'&&t.authenticated_can_read))issues.push(`Unexpected client read grant: ${t.schema_name}.${t.table_name}`);

@@ -1,0 +1,57 @@
+{
+  "stage": "WP-05",
+  "date": "2026-11-08",
+  "baseline": "c5260e5d7e2dca77a07df271233a80c484b09e1c",
+  "scope": "Local implementation and isolated tests; provider/physical-device and managed extension acceptance pending",
+  "npm_ci": "passed",
+  "full_check": {
+    "exit_code": 0,
+    "tests": 849,
+    "processes": 87,
+    "failures": 0,
+    "typecheck": "passed",
+    "lint": "passed",
+    "db_types_drift": "passed",
+    "production_build": "passed"
+  },
+  "focused": {
+    "database_push_tests": 23,
+    "sender_and_worker_route_tests": 12,
+    "failures": 0
+  },
+  "browser": {
+    "checks": 53,
+    "axe_runs": 9,
+    "errors": [],
+    "viewports": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "kind": "Chromium 131; actual JobsPanel with isolated HTTP boundaries; not provider/OS UAT"
+  },
+  "database": {
+    "engine": "PGlite PostgreSQL 18.6",
+    "application_tables": 89,
+    "migrations": 53,
+    "issues": [],
+    "scheduler_extensions": "net/vault/cron simulated in isolated test; managed installation pending",
+    "core_migration": "20261108020135_web_push_sender_worker.sql",
+    "sha256": "7f4ed065e159bfa7c6009646149c7083f7832cb5553100b6faa82af8c86b4a95"
+  },
+  "release": {
+    "pushed": false,
+    "deployed": false,
+    "cloud_migrated": false,
+    "scheduler_installed": false,
+    "flags_changed": false,
+    "provider_sends": 0
+  },
+  "open_gates": [
+    "isolated authenticated staging and selected tester device",
+    "managed pg_cron/pg_net/Vault installation and after-commit request verification",
+    "managed PostgreSQL multi-connection locking",
+    "provider accepted then OS display then authorized click/read"
+  ]
+}

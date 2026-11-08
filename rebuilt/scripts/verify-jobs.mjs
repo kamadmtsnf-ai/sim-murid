@@ -1,10 +1,9 @@
 /** Actual Pekerjaan UI with isolated HTTP boundaries. */
 import { createRequire } from "node:module";
-import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
+import { readFile, writeFile, mkdir, mkdtemp } from "node:fs/promises";
 import { createServer } from "node:http";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { pathToFileURL } from "node:url";
 import assert from "node:assert/strict";
 const root = process.cwd();
 const out = process.env.JOBS_QA_OUTPUT ?? join(root, "docs/verification/jobs");
@@ -15,46 +14,14 @@ const req = createRequire(import.meta.url),
 const { chromium } = runtime
   ? req(join(runtime, "playwright"))
   : req("playwright");
-const tools = process.env.UI_TEST_TOOLS ?? join(root, "node_modules");
-const { build } = await import(
-  pathToFileURL(join(tools, "esbuild/lib/main.js"))
-);
-const axe = await readFile(join(tools, "axe-core/axe.min.js"), "utf8");
-await build({
-  entryPoints: [join(root, "tests/ui/jobs-fixture.tsx")],
-  outfile: join(temp, "fixture.js"),
-  bundle: true,
-  platform: "browser",
-  format: "iife",
-  jsx: "automatic",
-  tsconfig: join(root, "tsconfig.json"),
-  define: { "process.env.NODE_ENV": '"production"', "process.env": "{}" },
-  plugins: [
-    {
-      name: "fixture-navigation",
-      setup(b) {
-        b.onResolve({ filter: /^next\/image$/ }, () => ({
-          path: join(root, "tests/ui/settings-image-shim.ts"),
-        }));
-        b.onResolve({ filter: /^@\/lib\/supabase\/client$/ }, () => ({
-          path: join(root, "tests/ui/promotions-storage-shim.ts"),
-        }));
-        b.onResolve({ filter: /^next\/navigation$/ }, () => ({
-          path: join(root, "tests/ui/surveys-navigation-shim.ts"),
-        }));
-      },
-    },
-  ],
-});
-const css = [];
-async function styles(dir) {
-  for (const f of await readdir(dir, { withFileTypes: true })) {
-    const p = join(dir, f.name);
-    if (f.isDirectory()) await styles(p);
-    else if (p.endsWith(".css")) css.push(await readFile(p, "utf8"));
-  }
-}
-await styles(process.env.UI_CSS_ROOT ?? join(root, ".next/static"));
+const axe = await readFile(join(root, "node_modules/axe-core/axe.min.js"), "utf8");
+// Reuse the project's installed compiler/bundler; no undeclared esbuild dependency.
+const {webpack}=req('next/dist/compiled/webpack/webpack');
+await writeFile(join(temp,'loader.cjs'),`const ts=require(${JSON.stringify(req.resolve('typescript'))});module.exports=function(s){return ts.transpileModule(s,{compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;};`);
+await new Promise((resolve,reject)=>webpack({mode:'development',devtool:false,entry:join(root,'tests/ui/jobs-fixture.tsx'),output:{path:temp,filename:'fixture.js'},resolve:{extensions:['.tsx','.ts','.js'],alias:{'@':join(root,'src'),'next/navigation':join(root,'tests/ui/surveys-navigation-shim.ts')}},module:{rules:[{test:/\.tsx?$/,exclude:/node_modules/,use:join(temp,'loader.cjs')}]},optimization:{minimize:false}},(e,s)=>e||s.hasErrors()?reject(e??Error(s.toString({all:false,errors:true}))):resolve()));
+const postcss=req('postcss'),tailwind=req('@tailwindcss/postcss');
+const stylesheet=await postcss([tailwind()]).process(await readFile(join(root,'src/app/globals.css'),'utf8'),{from:join(root,'src/app/globals.css')});
+const css=[stylesheet.css];
 const server = createServer(async (request, response) => {
   if (request.url === "/fixture.js") {
     response.setHeader("Content-Type", "text/javascript");
@@ -203,6 +170,8 @@ try {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(base);
     await preview().waitFor();
+    await page.getByText("Antrean Web Push",{exact:true}).waitFor();
+    check(await page.getByText("Diterima layanan push",{exact:false}).count()>0,"push accepted label "+width);
     await geometry("jobs " + width);
     await a11y("jobs " + width);
     await page.getByText(/^Tampilkan riwayat/).click();
