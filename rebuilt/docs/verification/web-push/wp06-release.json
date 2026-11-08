@@ -1,0 +1,17 @@
+{
+  "date_wib": "2026-11-08",
+  "authorization": "User requested push to main and database migration",
+  "implementation_local_commit": "dfa2eb59af58f1fa9b53c112b58c6f2e10c91b52",
+  "managed_project": "sim-muridv2",
+  "migration": "20261108032003",
+  "migration_name": "web_push_points_pilot_wp06",
+  "fingerprints_matched": 9,
+  "private_member_rls": true,
+  "browser_select": false,
+  "browser_execute": false,
+  "pilot_enabled": false,
+  "pilot_members": 0,
+  "provider_sends": 0,
+  "scheduler_installed": false,
+  "live_pilot": "pending isolated staging and selected devices"
+}

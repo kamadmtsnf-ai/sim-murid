@@ -1,0 +1,58 @@
+{
+  "stage": "WP-06",
+  "date_wib": "2026-11-08",
+  "baseline": "d3c82b3a8f4cf9204a3d03e96b1b938b34b7e7a4",
+  "scope": "local implementation and isolated QA; live pilot acceptance pending",
+  "npm_ci": "passed",
+  "full_check": {
+    "exit_code": 0,
+    "tests": 864,
+    "processes": 88,
+    "failures": 0,
+    "typecheck": "passed",
+    "lint": "passed",
+    "type_drift": "passed",
+    "production_build": "passed"
+  },
+  "pilot_tests": 15,
+  "api": "actual Next route/validation/reader and actual SQL under service_role; Auth/SDK network doubles",
+  "browser": {
+    "checks": 57,
+    "axe_runs": 9,
+    "errors": [],
+    "physical_device": false
+  },
+  "database": {
+    "engine": "isolated PGlite",
+    "application_tables": 90,
+    "migrations": 54,
+    "issues": [],
+    "migration": "20261108030400_web_push_points_pilot.sql",
+    "sha256": "8156b4b3a618ab146f6f666d3af657d5b921f22b2fdb26ae108a72130bc8b503",
+    "expected_body_md5": {
+      "sim_murid_private.push_point_pilot_allowed": "46bf21b140be3445c0d0afaf8e5aa01d",
+      "sim_murid_private.push_dispatch_eligible": "e7c982400b67f8ba6fde90924731b915",
+      "public.app_push_enqueue": "226186d7acdc06c1874a35d3fed32129",
+      "public.app_push_claim": "1859fc1750753ee49e41124b37220d8b",
+      "public.app_push_preflight": "77cd3425c5558415ebb68a80b5d8ac0c",
+      "public.app_point_notify": "5cf9ba71ea81c2d7825183f056eaacd6",
+      "sim_murid_private.push_cancel_points": "4b458246ecee4e26edcbbbf282c83acb",
+      "public.app_push_maintenance": "e0789f830b9ab485c4071207b1077b06",
+      "public.app_push_status": "6619bf975c85dfc535b491fffcbceea6"
+    }
+  },
+  "release": {
+    "pushed": false,
+    "cloud_migrated": false,
+    "deployed": false,
+    "pilot_activated": false,
+    "members_selected": 0,
+    "provider_sends": 0
+  },
+  "open_gates": [
+    "isolated staging and selected tester devices",
+    "managed scheduler and multi-connection locking",
+    "provider accepted, OS display and scoped click/read",
+    "live pilot operational acceptance"
+  ]
+}

@@ -53,7 +53,8 @@
     "20261107162929_web_push_private_foundation.sql",
     "20261107173727_web_push_device_api.sql",
     "20261108011007_web_push_click_resolver.sql",
-    "20261108020135_web_push_sender_worker.sql"
+    "20261108020135_web_push_sender_worker.sql",
+    "20261108030400_web_push_points_pilot.sql"
   ],
   "tables": [
     {
@@ -354,6 +355,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "push_events",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "push_point_pilot_members",
       "rls_enabled": true
     },
     {

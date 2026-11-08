@@ -42,3 +42,13 @@ Bukti WP-05: `npm ci` + `npm run check` lulus 849 test/87 proses; 35 test push t
 ## Persiapan rilis WP-05 — 8 November 2026
 
 Pengguna telah mengotorisasi push ke main dan migrasi. Migrasi managed `20261108023237` (`web_push_sender_worker_wp05`) diterapkan sebelum rilis kode. Lima fingerprint body RPC source/cloud cocok; invoker/service-only, RLS tabel worker dan penolakan identitas tidak sah terverifikasi. Database mempunyai 53 migrasi. Flag enabled/dispatch/test false, categories kosong, scheduler false dan worker URL null; delivery produksi nol. Installer scheduler managed tidak dijalankan. Hasil UI JSON disertakan; screenshot QA tetap artefak lokal. Penerimaan provider/perangkat/staging tetap terbuka.
+
+## WP-06 — pilot poin: implementasi lokal
+
+Baseline main `d3c82b3a8f4cf9204a3d03e96b1b938b34b7e7a4` (PR #103/WP-05). Baca `WEB-PUSH-WP06.md`. Migrasi additive `20261108030400_web_push_points_pilot.sql` menambah flag pilot default false dan tabel anggota privat/RLS, menghubungkan notify existing secara atomik, menjaga dedup/TTL serta membatalkan pending saat scope berubah. Dispatch pilot dipisah dari otorisasi klik sumber; tidak ada backfill event lama. Installer scheduler diperbaiki urutan lock-nya, tetap tidak dipasang/diaktifkan. Rumus poin, threshold dan resolver existing dipertahankan.
+
+`npm ci` + `npm run check` lulus **864 test/88 proses**, termasuk 15 skenario pilot dan actual API→SQL terisolasi; UI 57 pemeriksaan/9 axe tanpa temuan. Katalog lokal 90 tabel aplikasi ber-RLS/54 migrasi tanpa issue. Bukti `docs/verification/web-push/wp06-checks.json`. Kode belum push; migrasi belum cloud; tidak memilih anggota atau mengirim provider. Pilot nyata masih menunggu gate WP-05 staging/scheduler/perangkat dan penerimaan operasional. Laporan persisten bernama `WP06_Pilot_Poin_Kedisiplinan_SiM_Murid.md`. WP-07 belum dijalankan.
+
+## Rilis WP-06 yang diotorisasi — 8 November 2026
+
+Pengguna mengotorisasi push ke main dan migrasi. Migrasi managed `20261108032003` (`web_push_points_pilot_wp06`) diterapkan sebelum kode; total 54 migrasi. Sembilan body fingerprint RPC/helper source/cloud cocok, semuanya invoker/service-only; tabel anggota ber-RLS dan tidak dapat dibaca anon/authenticated. Pemeriksaan service_role terhadap anggota/event/actor tidak sah menolak akses. Pilot/global/dispatch/test tetap false, categories kosong, anggota nol. Installer scheduler tidak dijalankan dan tidak ada provider send. Gate staging/managed scheduler/multi-koneksi/perangkat nyata tetap terbuka.

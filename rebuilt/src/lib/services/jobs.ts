@@ -60,7 +60,7 @@ export const jobsSnapshot = snapshot
           webPush: z.boolean().default(false),
         }),
       })
-      .extend({push: z.object({alarm:z.boolean().default(false),errors:z.record(z.string(),z.number().int().nonnegative()).default({}),counts:z.record(z.string(),z.number().int().nonnegative()),oldest_ready_at:z.string().nullable(),worker:z.object({last_started:z.string().nullable(),last_finished:z.string().nullable(),last_metrics:z.record(z.string(),z.number()),scheduler_enabled:z.boolean()}),database_dispatch:z.boolean()}).nullable().default(null)})
+      .extend({push: z.object({points_pilot:z.object({enabled:z.boolean(),active_members:z.number().int().nonnegative()}).nullable().default(null),alarm:z.boolean().default(false),errors:z.record(z.string(),z.number().int().nonnegative()).default({}),counts:z.record(z.string(),z.number().int().nonnegative()),oldest_ready_at:z.string().nullable(),worker:z.object({last_started:z.string().nullable(),last_finished:z.string().nullable(),last_metrics:z.record(z.string(),z.number()),scheduler_enabled:z.boolean()}),database_dispatch:z.boolean()}).nullable().default(null)})
       .passthrough(),
   })
   .refine(

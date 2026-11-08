@@ -171,6 +171,7 @@ try {
     await page.goto(base);
     await preview().waitFor();
     await page.getByText("Antrean Web Push",{exact:true}).waitFor();
+    check(await page.getByText("Pilot poin: Belum diaktifkan · 0 anggota aktif",{exact:true}).count()===1,"explicit pilot state "+width);
     check(await page.getByText("Diterima layanan push",{exact:false}).count()>0,"push accepted label "+width);
     await geometry("jobs " + width);
     await a11y("jobs " + width);
