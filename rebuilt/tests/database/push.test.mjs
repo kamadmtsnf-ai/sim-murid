@@ -135,6 +135,7 @@ test('point events require authentic inbox provenance and guardian revocation ca
  const sub=await register(parent,data());assert.equal(sub.code,'saved');
  await val('select public.app_push_preferences($1,$2)',[parent.id,parent.session]);
  await val('select public.app_push_preferences($1,$2,0,$3)',[parent.id,parent.session,{categories:['points'],quiet_start:'00:00',quiet_end:'00:00',timezone:'Asia/Jakarta'}]);
+ await db.query("insert into sim_murid_private.push_point_pilot_members(user_id,expires_at) values($1,now()+interval '1 day')",[parent.id]);await db.exec('update sim_murid_private.push_settings set points_pilot_enabled=true');
  const year=uuid(),cls=uuid(),pe=uuid(),inbox=uuid();
  await db.query('insert into public.academic_years(id,start_year) values($1,2097)',[year]);
  await db.query("insert into public.classes(id,academic_year_id,level,name) values($1,$2,7,'Push fixture')",[cls,year]);

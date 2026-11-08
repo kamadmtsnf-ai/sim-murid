@@ -7,13 +7,17 @@ create extension if not exists pg_net;
 -- Only the privileged cron owner can decrypt this single purpose secret.
 create or replace function sim_murid_private.push_schedule_tick() returns bigint language plpgsql security invoker set search_path='' as $$
 declare s sim_murid_private.push_worker_state%rowtype;secret text;bypass text;h jsonb;rid bigint;c sim_murid_private.push_settings%rowtype;begin
- select * into s from sim_murid_private.push_worker_state where singleton=true for update;
+ select * into s from sim_murid_private.push_worker_state where singleton=true;
  select * into c from sim_murid_private.push_settings;
  if not s.scheduler_enabled or s.worker_url is null then return null;end if;
  if s.locked_until>now() then return null;end if;
  if not s.wake_requested and not exists(select 1 from sim_murid_private.push_deliveries where status in('queued','retry_wait') and available_at<=now() or status='processing' and locked_until<=now()) then return null;end if;
  -- Off channels are cancelled, not accumulated for a future mass dispatch.
  perform public.app_push_maintenance(c.enabled,c.test_enabled,c.categories);
+ -- WP-06 domain cancellation locks delivery rows before requesting a durable wake.
+ -- Keep the same delivery -> worker-state lock order to avoid a cross-transaction deadlock.
+ select * into s from sim_murid_private.push_worker_state where singleton=true for update;
+ if not s.scheduler_enabled or s.worker_url is null or s.locked_until>now() then return null;end if;
  if not c.enabled then update sim_murid_private.push_worker_state set wake_requested=false where singleton=true;return null;end if;
  select decrypted_secret into secret from vault.decrypted_secrets where name='sim_murid_push_worker_secret';
  if secret is null or secret !~ '^[A-Za-z0-9_-]{43,128}$' then raise exception 'Push scheduler credential unavailable';end if;
