@@ -1,0 +1,21 @@
+{
+  "date_wib": "2026-11-08",
+  "authorization": "User requested push to main and database migration",
+  "local_implementation_commit": "adda7ddc8799334a5cf2fa779a6c11eeba7a59fd",
+  "managed_project": "sim-muridv2",
+  "migration_version": "20261108081602",
+  "migration_name": "web_push_extended_categories_wp07",
+  "fingerprints_matched": 19,
+  "new_private_rls_tables": 2,
+  "browser_table_select": false,
+  "browser_function_execute": false,
+  "expanded_pilot_categories": [],
+  "category_members": 0,
+  "flags_changed": false,
+  "scheduler_installed": false,
+  "provider_sends": 0,
+  "held": [
+    "follow_up"
+  ],
+  "live_acceptance": "pending isolated staging, managed scheduler/multi-connection and selected devices"
+}

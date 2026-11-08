@@ -52,3 +52,15 @@ Baseline main `d3c82b3a8f4cf9204a3d03e96b1b938b34b7e7a4` (PR #103/WP-05). Baca `
 ## Rilis WP-06 yang diotorisasi — 8 November 2026
 
 Pengguna mengotorisasi push ke main dan migrasi. Migrasi managed `20261108032003` (`web_push_points_pilot_wp06`) diterapkan sebelum kode; total 54 migrasi. Sembilan body fingerprint RPC/helper source/cloud cocok, semuanya invoker/service-only; tabel anggota ber-RLS dan tidak dapat dibaca anon/authenticated. Pemeriksaan service_role terhadap anggota/event/actor tidak sah menolak akses. Pilot/global/dispatch/test tetap false, categories kosong, anggota nol. Installer scheduler tidak dijalankan dan tidak ada provider send. Gate staging/managed scheduler/multi-koneksi/perangkat nyata tetap terbuka.
+
+## WP-07 — perluasan kategori: kode dan QA lokal
+
+Baseline main `147e24a0b550a97c6a50c17c8b1111ab1dffec2f` (WP-06/PR #104), diverifikasi kembali melalui GitHub. Baca `WEB-PUSH-WP07.md`. Empat kategori diimplementasikan: jadwal/piket siswa dengan debounce, publikasi snapshot rapor, pengingat survei wajib harian dan dokumen biodata byte-verified ready. Tindak lanjut **ditahan**: owner teks/proyeksi read-only belum mempunyai hubungan akun dan event state yang sah; kategori itu disembunyikan dan tidak dapat masuk expanded rollout. Tidak menebak penerima dari nama/role.
+
+Migrasi `20261108044043_web_push_extended_categories.sql` menambah ledger sumber/cohort privat ber-RLS dan RPC reminder service-only. Gerbang expanded default kosong, cohort per kategori eksplisit/berjangka/terbatas; eligibility/cancel/klik dan navigasi scope diperluas. Layanan rapor mengonsumsi konteks kelas/anak/semester dari URL secara tervalidasi, dan dokumen menuju owner yang telah diotorisasi. Tidak mengubah D10/arsip, rumus poin/rapor atau email/WA.
+
+`npm ci` + `npm run check` lulus **888 test/89 proses**, 21 skenario kategori, browser 128 pemeriksaan/17 axe tanpa temuan, 92 tabel aplikasi ber-RLS dan 55 migrasi lokal tanpa issue. Bukti `docs/verification/web-push/wp07-checks.json`. Kode belum push, migrasi belum cloud, flag/scheduler tidak diaktifkan, tidak memilih cohort atau mengirim provider. Empat kategori menunggu validasi staging/perangkat dan penerimaan operasional; follow_up menunggu kontrak owner/source. WP-08 belum dijalankan. Laporan persisten: `WP07_Perluasan_Kategori_SiM_Murid.md`.
+
+## Rilis WP-07 yang diotorisasi — 8 November 2026
+
+Pengguna mengotorisasi push ke main dan migrasi. Migrasi managed `20261108081602` (`web_push_extended_categories_wp07`) diterapkan sebelum kode. Total 55 migrasi; 19 fingerprint fungsi source/cloud cocok, invoker/service-only; dua tabel baru RLS dan tidak dapat dibaca anon/authenticated. Uji service_role menolak source tidak sah dan mengembalikan nol kandidat saat gerbang reminder mati; empty update trigger berjalan dalam rollback. Global/dispatch/test/points pilot false, categories/expanded kosong, cohort nol, scheduler false. Installer tidak dijalankan dan tidak mengirim provider. follow_up tetap ditahan; penerimaan operasional staging/perangkat tetap terbuka.

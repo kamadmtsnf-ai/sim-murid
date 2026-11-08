@@ -250,6 +250,9 @@ test('WP05 durable wake rolls back with enqueue; privileged scheduler coalesces,
  // Lost/failed HTTP wake is recovered from the durable ready delivery, not a browser timer.
  assert.ok(await val('select sim_murid_private.push_schedule_tick()'));assert.equal(await val('select count(*)::int from net.requests'),2);
  for(const role of ['anon','authenticated','service_role']){await db.exec('set role '+role);try{await assert.rejects(()=>db.query('select * from net.requests'));}finally{await db.exec('reset role');}}
+ // WP07: surveys wake the worker even when the daily queue has not been materialized yet.
+ const beforeSurveyWake=await val('select count(*)::int from net.requests');await db.exec("update sim_murid_private.push_deliveries set status='cancelled',claim_token=null,locked_until=null where status in('queued','retry_wait','processing');update sim_murid_private.push_settings set enabled=true,dispatch_enabled=true,categories=array['surveys'],expanded_pilot_categories=array['surveys'];update sim_murid_private.push_worker_state set wake_requested=false where singleton=true");assert.ok(await val('select sim_murid_private.push_schedule_tick()'));assert.equal(await val('select count(*)::int from net.requests'),beforeSurveyWake+1);
+
 });
 test('WP05 isolated end-to-end uses actual RPC repository, AES/VAPID sender, pinned transport double, accepted and click/read',async()=>{
  const {registerAuditHooks}=await import('../audit-loader.mjs');registerAuditHooks({'server-only':'export {};','@/lib/auth/admin':'export const createAuthAdmin=()=>globalThis.pushIntegratedAdmin;'});

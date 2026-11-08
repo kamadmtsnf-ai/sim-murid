@@ -35,7 +35,7 @@ export function pushConfiguration(requestUrl: string, env: NodeJS.ProcessEnv = p
         const flags = ['WEB_PUSH_ENABLED', 'WEB_PUSH_DISPATCH_ENABLED', 'WEB_PUSH_TEST_ENABLED', ...categories.map(c => 'WEB_PUSH_CATEGORY_' + c.toUpperCase() + '_ENABLED')];
         if (flags.some(k => !['true', 'false'].includes(env[k] ?? '')))
             return null;
-        return { enabled: env.WEB_PUSH_ENABLED === 'true', test: env.WEB_PUSH_TEST_ENABLED === 'true', publicKey: publicKey.toString('base64url'), key, encryptionVersion: env.WEB_PUSH_ENCRYPTION_KEY_VERSION!, vapidVersion: env.WEB_PUSH_VAPID_KEY_VERSION!, categories: categories.filter(c => env['WEB_PUSH_CATEGORY_' + c.toUpperCase() + '_ENABLED'] === 'true') };
+        return { enabled: env.WEB_PUSH_ENABLED === 'true', test: env.WEB_PUSH_TEST_ENABLED === 'true', publicKey: publicKey.toString('base64url'), key, encryptionVersion: env.WEB_PUSH_ENCRYPTION_KEY_VERSION!, vapidVersion: env.WEB_PUSH_VAPID_KEY_VERSION!, categories: categories.filter(c => c !== 'follow_up' && env['WEB_PUSH_CATEGORY_' + c.toUpperCase() + '_ENABLED'] === 'true') };
     }
     catch {
         return null;
