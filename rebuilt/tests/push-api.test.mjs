@@ -67,3 +67,4 @@ test('WP04 read action validates origin/session/recipient result and returns no 
 });
 
 test('VAPID fixture preserves leading-zero padding; noncanonical short scalar remains rejected',()=>{reset();assert.equal(vapid.getPrivateKey().length,1);assert.ok(pushConfiguration('https://app.test'));process.env.WEB_PUSH_VAPID_PRIVATE_KEY=vapid.getPrivateKey().toString('base64url');assert.equal(pushConfiguration('https://app.test'),null);});
+test('WP07 unsupported follow-up stays hidden even if its environment flag is accidentally enabled',()=>{reset();const c=pushConfiguration('https://app.test');assert.ok(c);assert.equal(c.categories.includes('follow_up'),false);for(const category of ['schedule','reports','surveys','documents'])assert.ok(c.categories.includes(category));});

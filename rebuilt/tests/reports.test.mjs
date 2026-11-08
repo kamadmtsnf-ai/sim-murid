@@ -304,3 +304,4 @@ test("legacy publish URL without query remains accepted", async () => {
   });
   assert.equal((await POST(r, params)).status, 200);
 });
+test('WP07 report page accepts only validated resource context and forwards the server actor with the exact child/class/semester',async()=>{const s=setup();await page({...params,searchParams:Promise.resolve({classId:id(30),studentId:id(10),semester:'1',actor:id(99)})});const call=s.calls.find(([name])=>name==='app_learning_read');assert.deepEqual(call[1].p_filters,{classId:id(30),studentId:id(10),semester:1});assert.equal(call[1].p_actor,id(1));setup();await assert.rejects(()=>page({...params,searchParams:Promise.resolve({classId:'https://evil.invalid'})}),/not found/);});

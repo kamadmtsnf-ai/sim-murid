@@ -50,3 +50,10 @@ test('certificate failure is permanent before IO and auth misconfiguration stops
  const failed=await pinnedRequest(new URL(endpoint),{address:'142.250.1.1',family:4},{},Buffer.from('encrypted'),new AbortController().signal,request);assert.deepEqual(failed,{status:'failed_permanent',error:'tls_rejected'});
  const repo=repository(25),out=await runPushWorker(repo,config,async()=>({status:'failed_permanent',providerCode:401,error:'provider_unauthorized'}));assert.ok(out.metrics.claimed<=4);assert.equal(out.metrics.permanent,out.metrics.claimed);assert.ok(repo.queue.length>=21);assert.equal(repo.calls.at(-1),'leave');
 });
+
+test('WP07 each supported category uses encrypted generic sender; category off or unsupported follow-up cannot send',async()=>{
+ const {readySchema}=await import('../src/lib/push/sender.ts');const c=fixture();let calls=0;
+ for(const category of ['schedule','reports','surveys','documents']){const guard=async()=>({...ready(c),category});assert.equal((await sendClaim(c,{...config,categories:[category]},guard,new AbortController().signal,async()=>{calls++;return {status:'accepted',providerCode:201};},resolve)).status,'accepted');assert.equal((await sendClaim(c,{...config,categories:[]},guard,new AbortController().signal,async()=>{throw Error('No IO');},resolve)).status,'cancelled');}
+ assert.equal(calls,4);assert.equal(readySchema.safeParse({...ready(c),category:'follow_up'}).success,false);
+ const {pushServiceDestination}=await import('../src/lib/push/navigation.ts');assert.equal(pushServiceDestination({category:'documents',context:{owner_id:c.subscription.user_id,class_id:null,year_id:null,semester:null}}),'/account/biodata/'+c.subscription.user_id);assert.equal(pushServiceDestination({category:'documents',context:{owner_id:'https://evil.test',class_id:null,year_id:null,semester:null}}),'/account/services/notifications');assert.equal(pushServiceDestination({category:'arbitrary-url'}),'/account/services/notifications');
+});

@@ -29,9 +29,11 @@ const api = "/api/learning/reports";
 export function ReportsPanel({ initial }: { initial: ReportsSnapshot }) {
   const [data, setData] = useState(initial),
     [filters, setFilters] = useState<Record<string, string>>({
+      ...(initial.extra.scope?.classId?{classId:initial.extra.scope.classId}:{}),
+      ...(initial.extra.scope?.studentId?{studentId:initial.extra.scope.studentId}:{}),
       semester: String(initial.semester),
     }),
-    [classId, setClassId] = useState(""),
+    [classId, setClassId] = useState(initial.extra.scope?.classId??""),
     [semester, setSemester] = useState(String(initial.semester)),
     [search, setSearch] = useState(""),
     [status, setStatus] = useState("all"),

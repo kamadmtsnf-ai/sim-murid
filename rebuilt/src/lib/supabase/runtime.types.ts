@@ -92,6 +92,7 @@ app_push_preflight: { Args: {p_id: string; p_token: string; p_binding: number };
 app_push_rate: { Args: {p_actor: string; p_session: string; p_action: string }; Returns: Json };
 app_push_register: { Args: {p_actor: string; p_session: string; p_data: Json }; Returns: Json };
 app_push_release: { Args: {p_installation: string; p_secret_hash: string }; Returns: Json };
+app_push_reminders: { Args: {p_enabled: boolean; p_categories: string[] }; Returns: Json };
 app_push_result: { Args: {p_id: string; p_token: string; p_binding: number; p_status: string; p_code?: number | null; p_retry?: number | null; p_error?: string | null }; Returns: Json };
 app_push_revoke: { Args: {p_actor: string; p_session: string; p_id: string }; Returns: Json };
 app_push_status: { Args: {p_actor: string; p_session: string }; Returns: Json };

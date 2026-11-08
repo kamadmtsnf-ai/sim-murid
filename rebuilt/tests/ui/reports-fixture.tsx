@@ -64,10 +64,10 @@ const data = reportsSnapshot.parse({
     { id: id(31), name: "7B", year: 2025 },
   ],
   people: [],
-  rows: [],
-  extra: { canPublish: mode !== "readonly", scope: { semester: 1 } },
+  rows: mode === "scoped" ? rows.slice(0,1) : [],
+  extra: { canPublish: mode !== "readonly", scope: { semester: 1,...(mode === "scoped"?{classId:id(30),studentId:id(100)}:{}) } },
 });
-Object.assign(window, { reportsFixture: { ...data, rows } });
+Object.assign(window, { reportsFixture: { ...data, rows:mode === "scoped"?rows.slice(0,1):rows } });
 createRoot(document.getElementById("root")!).render(
   <WorkspaceShell
     navigation={navigationFor(["grades.read"], mode !== "readonly")}

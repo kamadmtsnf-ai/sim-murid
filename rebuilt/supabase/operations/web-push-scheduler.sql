@@ -11,7 +11,7 @@ declare s sim_murid_private.push_worker_state%rowtype;secret text;bypass text;h 
  select * into c from sim_murid_private.push_settings;
  if not s.scheduler_enabled or s.worker_url is null then return null;end if;
  if s.locked_until>now() then return null;end if;
- if not s.wake_requested and not exists(select 1 from sim_murid_private.push_deliveries where status in('queued','retry_wait') and available_at<=now() or status='processing' and locked_until<=now()) then return null;end if;
+ if not s.wake_requested and not(c.enabled and c.dispatch_enabled and 'surveys'=any(c.categories) and 'surveys'=any(c.expanded_pilot_categories)) and not exists(select 1 from sim_murid_private.push_deliveries where status in('queued','retry_wait') and available_at<=now() or status='processing' and locked_until<=now()) then return null;end if;
  -- Off channels are cancelled, not accumulated for a future mass dispatch.
  perform public.app_push_maintenance(c.enabled,c.test_enabled,c.categories);
  -- WP-06 domain cancellation locks delivery rows before requesting a durable wake.

@@ -27,8 +27,10 @@ export function LearningPanel({
         initial={gradesSnapshot.parse(initial)}
       />
     );
-  if (initial.module === "reports")
-    return <ReportsPanel initial={reportsSnapshot.parse(initial)} />;
+  if (initial.module === "reports") {
+    const reports=reportsSnapshot.parse(initial);
+    return <ReportsPanel key={`${reports.extra.scope?.classId??""}:${reports.extra.scope?.studentId??""}:${reports.semester}:${reports.revision}`} initial={reports} />;
+  }
   if (initial.module === "promotions")
     return <PromotionsPanel initial={promotionsSnapshot.parse(initial)} />;
   return (

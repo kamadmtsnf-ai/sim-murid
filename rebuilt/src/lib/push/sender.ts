@@ -7,7 +7,7 @@ import type {SenderConfiguration} from './sender-config';
 const cipher=z.object({iv:z.string(),ciphertext:z.string(),tag:z.string()}).strict();
 export const claimSchema=z.object({delivery:z.object({id:z.uuid(),claim_token:z.uuid(),binding_version:z.number().int(),delivery_ref:z.uuid()}),subscription:z.object({id:z.uuid(),installation_id:z.uuid(),user_id:z.uuid(),endpoint_ciphertext:cipher,keys_ciphertext:cipher,encryption_key_version:z.string(),vapid_key_version:z.string()}),expires_at:z.string()});
 export type PushClaim=z.infer<typeof claimSchema>;
-export const readySchema=z.object({code:z.literal('ready'),event_ref:z.uuid(),delivery_ref:z.uuid(),category:z.enum(['test','points']),expires_at:z.string()});
+export const readySchema=z.object({code:z.literal('ready'),event_ref:z.uuid(),delivery_ref:z.uuid(),category:z.enum(['test','points','schedule','reports','surveys','documents']),expires_at:z.string()});
 export type Ready=z.infer<typeof readySchema>;
 export async function sendClaim(claim:PushClaim,config:SenderConfiguration,preflight:()=>Promise<Ready|null>,signal:AbortSignal,transport:typeof pinnedRequest=pinnedRequest,resolveEndpoint:typeof validateEndpoint=validateEndpoint):Promise<Outcome>{
  const s=claim.subscription;if(s.encryption_key_version!==config.encryptionVersion||s.vapid_key_version!==config.vapidVersion)return {status:'failed_permanent',error:'key_version_unavailable'};

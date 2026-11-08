@@ -4,8 +4,8 @@ import { restoreDrill } from "../scripts/operations/restore-drill.mjs";
 import { benchmark } from "../scripts/operations/benchmark.mjs";
 test("P10 isolated backup restores all tables, schema/security, balances, archive, session and rejects corrupt data", async () => {
   const r = await restoreDrill();
-  assert.equal(r.tableCount, 92);
-  assert.equal(r.migrations, 54);
+  assert.equal(r.tableCount, 94);
+  assert.equal(r.migrations, 55);
   assert.ok(Object.values(r.checks).every((v) => v === true));
   assert.equal(r.rpo.postBackupSyntheticWritesLost, 1);
   assert.equal(r.rpo.productionTarget, null);
