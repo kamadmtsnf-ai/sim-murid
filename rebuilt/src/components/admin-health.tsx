@@ -1,3 +1,4 @@
+import {PushOperationsStatus} from '@/components/push/operations-status';
 import type { ReactNode } from "react";
 import { ArchiveRestore, CircleCheck, CircleHelp, Clock3, Files, Mail, RefreshCw, type LucideIcon } from "lucide-react";
 import type { HealthSnapshot } from "@/lib/health/model";
@@ -89,6 +90,7 @@ export function AdminHealth({ data }: { data: HealthSnapshot }) {
           <NextStep>Periksa antrean dan hasil sebelumnya melalui menu Pekerjaan sebelum mencoba ulang.</NextStep>
         </> : <Status tone="warning" heading="Data pekerjaan tidak tersedia">Perbarui status dan periksa sumber sebelum mengambil tindakan.</Status>}
       </HealthCard>
+      <HealthCard id="health-push" title="Web Push" icon={Clock3} available={!!data.push}><PushOperationsStatus data={data.push} /></HealthCard>
       <HealthCard id="health-backup" title="Backup dan pemulihan" icon={ArchiveRestore} available={null}>
         <dl className="space-y-3"><div><dt className="font-medium">Backup produksi terakhir</dt><dd className="text-muted-foreground">Belum tersedia; sumber metadata backup belum terhubung.</dd></div><div><dt className="font-medium">Restore produksi terakhir</dt><dd className="text-muted-foreground">Belum tersedia; keberhasilan restore belum dibuktikan.</dd></div></dl>
         <p>Keberadaan file backup atau hasil latihan database lokal tidak membuktikan backup produksi dapat dipulihkan.</p>

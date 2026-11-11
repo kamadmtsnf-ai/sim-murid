@@ -12,7 +12,7 @@ const sources={
  '@/lib/auth/security':`export const securityState=async(...args)=>{const s=globalThis.healthTest;s.securityCalls++;s.securityArgs=args;if(s.securityError)throw Error('private detail');return s.gate===null?null:{gate:s.gate};};`,
  '@/lib/services/server':`export const servicesData=async(...args)=>{const s=globalThis.healthTest;s.calls.push(args);const domain=args[2];if(s.denied===domain){const {AccessDenied}=await import('@/lib/auth/authorization');throw new AccessDenied();}if(s.failed===domain)throw Error('secret provider failure');return s[domain];};`,
 };
-registerHooks({resolve(s,c,next){if(s in sources)return {url:'health-test:'+s,shortCircuit:true};if(s==='@/lib/health/server')return {url:new URL('../src/lib/health/server.ts',import.meta.url).href,shortCircuit:true};if(s==='./model'&&c.parentURL?.endsWith('/health/server.ts'))return {url:new URL('../src/lib/health/model.ts',import.meta.url).href,shortCircuit:true};return next(s,c);},load(url,c,next){if(url.startsWith('health-test:'))return {format:'module',source:sources[url.slice(12)],shortCircuit:true};if(/\.tsx?$/.test(url))return {format:'module',source:ts.transpileModule(readFileSync(new URL(url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,shortCircuit:true};return next(url,c);}});
+registerHooks({resolve(s,c,next){if(s in sources)return {url:'health-test:'+s,shortCircuit:true};const operationalImports={'@/components/ui/status':'components/ui/status.tsx','@/lib/push/operations':'lib/push/operations.ts','@/lib/utils':'lib/utils.ts'};if(s in operationalImports)return {url:new URL('../src/'+operationalImports[s],import.meta.url).href,shortCircuit:true};if(s==='@/lib/health/server')return {url:new URL('../src/lib/health/server.ts',import.meta.url).href,shortCircuit:true};if(s==='./model'&&c.parentURL?.endsWith('/health/server.ts'))return {url:new URL('../src/lib/health/model.ts',import.meta.url).href,shortCircuit:true};return next(s,c);},load(url,c,next){if(url.startsWith('health-test:'))return {format:'module',source:sources[url.slice(12)],shortCircuit:true};if(/\.tsx?$/.test(url))return {format:'module',source:ts.transpileModule(readFileSync(new URL(url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,shortCircuit:true};return next(url,c);}});
 const {healthFromSources,healthSnapshot}=await import('../src/lib/health/model.ts');
 const {readAdminHealth}=await import('../src/lib/health/server.ts');
 const {default:healthPage}=await import('../src/app/account/health/page.tsx');
@@ -44,3 +44,30 @@ test('actual page sanitizes authorization errors while rendering valid partial o
  test('reconciliation-only failure stays unavailable with healthy empty jobs rather than fabricated counts',()=>{
   const f=fixtures(),data=healthFromSources(f.jobs,null,now);assert.equal(data.jobs.outbox.sampled,0);assert.equal(data.reconciliation.available,false);assert.equal(data.reconciliation.tables,null);
  });
+
+
+test('WP08 scoped diagnostic reaches the health view with current alarms, no secret, and an explicit unavailable state',async()=>{
+ const {createElement}=await import('react');
+ const {renderToStaticMarkup}=await import('react-dom/server');
+ const {PushOperationsStatus}=await import('../src/components/push/operations-status.tsx');
+ const f=fixtures();
+ f.jobs.extra.push={
+  counts:{},oldest_ready_at:null,database_dispatch:false,
+  worker:{last_started:null,last_finished:null,last_metrics:{},scheduler_enabled:true},
+  operations:{
+   checked_at:now,alarms:['backlog','worker_stale'],
+   scheduler:{enabled:true,observed_recently:true,last_tick:now,last_dispatched:now,last_response:now,http_status:200,error:null},
+   worker:{last_started:now,last_finished:now,runs_24h:4,errors_1h:1},
+   queue:{ready:8,oldest_ready:now,accepted_samples_24h:2,p95_accepted_seconds:90,invalid_endpoints_1h:0},
+   retention:{enabled:false,delivery_days:90,subscription_days:180,run_days:30,batch:200,last_cleanup:null,last_counts:{}},
+  },
+ };
+ const data=healthFromSources(f.jobs,f.reconciliation,now);
+ assert.equal(data.push.queue.ready,8);
+ const html=renderToStaticMarkup(createElement(PushOperationsStatus,{data:data.push}));
+ assert.match(html,/Tick teramati dalam 3 menit/);
+ assert.match(html,/Antrean siap tertua melewati 5 menit/);
+ assert.match(html,/90 detik · 2 sampel/);
+ assert.match(html,/<summary[^>]*>Retensi dan batas pengukuran<\/summary>/);
+ assert.match(renderToStaticMarkup(createElement(PushOperationsStatus,{data:null})),/Pemantauan Web Push belum tersedia/);
+});

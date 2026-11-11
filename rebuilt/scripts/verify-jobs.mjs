@@ -174,6 +174,14 @@ try {
     check(await page.getByText(/Perluasan kategori: Belum diaktifkan/).count()===1,"expanded categories remain off "+width);
     check(await page.getByText("Pilot poin: Belum diaktifkan · 0 anggota aktif",{exact:true}).count()===1,"explicit pilot state "+width);
     check(await page.getByText("Diterima layanan push",{exact:false}).count()>0,"push accepted label "+width);
+    const operations = page.getByRole("region",{name:"Pemantauan Web Push"});
+    check(await operations.getByText("Tick teramati dalam 3 menit").isVisible(),"observed scheduler "+width);
+    check(await operations.getByText("Antrean siap tertua melewati 5 menit").isVisible(),"backlog alarm "+width);
+    check(await operations.getByText("75 detik · 3 sampel").isVisible(),"accepted latency "+width);
+    const retention=operations.getByText("Retensi dan batas pengukuran",{exact:true});
+    await retention.focus();
+    await page.keyboard.press("Enter");
+    check(await operations.getByText(/Retensi belum diaktifkan/).isVisible(),"retention accordion "+width);
     await geometry("jobs " + width);
     await a11y("jobs " + width);
     await page.getByText(/^Tampilkan riwayat/).click();
@@ -336,6 +344,7 @@ try {
     await page.getByText("Belum ada riwayat pekerjaan otomatis.").isVisible(),
     "empty history",
   );
+  check(await page.getByText(/Pemantauan Web Push belum tersedia/).isVisible(),"missing metrics distinguished from zero");
   await a11y("empty");
   check(!errors.length, "no JavaScript page errors");
   await writeFile(

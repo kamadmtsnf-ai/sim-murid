@@ -68,3 +68,20 @@ test('WP04 read action validates origin/session/recipient result and returns no 
 
 test('VAPID fixture preserves leading-zero padding; noncanonical short scalar remains rejected',()=>{reset();assert.equal(vapid.getPrivateKey().length,1);assert.ok(pushConfiguration('https://app.test'));process.env.WEB_PUSH_VAPID_PRIVATE_KEY=vapid.getPrivateKey().toString('base64url');assert.equal(pushConfiguration('https://app.test'),null);});
 test('WP07 unsupported follow-up stays hidden even if its environment flag is accidentally enabled',()=>{reset();const c=pushConfiguration('https://app.test');assert.ok(c);assert.equal(c.categories.includes('follow_up'),false);for(const category of ['schedule','reports','surveys','documents'])assert.ok(c.categories.includes(category));});
+
+test('WP08 key transition configuration validates exact pairs and exposes no previous keys through the API',async()=>{
+ reset();
+ const legacy={encryptionVersion:'previous-v1',vapidVersion:'previous-v1',key:Buffer.alloc(32,19).toString('base64'),publicKey:process.env.WEB_PUSH_VAPID_PUBLIC_KEY,privateKey:process.env.WEB_PUSH_VAPID_PRIVATE_KEY,expiresAt:'2099-12-31T12:00:00Z'};
+ try{
+  process.env.WEB_PUSH_PREVIOUS_KEYS=JSON.stringify([legacy]);
+  assert.equal(pushConfiguration('https://app.test').previousKeys[0].encryptionVersion,'previous-v1');
+  const res=await pushApi(request(),'config');
+  const body=await res.text();
+  assert.equal(res.status,200);
+  assert.ok(!body.includes('previous-v1')&&!body.includes(legacy.key)&&!body.includes(legacy.privateKey));
+  for(const ring of [[legacy,legacy],[{...legacy,expiresAt:'someday'}],[{...legacy,encryptionVersion:'development-v1'}]]){
+   process.env.WEB_PUSH_PREVIOUS_KEYS=JSON.stringify(ring);
+   assert.equal(pushConfiguration('https://app.test'),null);
+  }
+ }finally{delete process.env.WEB_PUSH_PREVIOUS_KEYS;}
+});

@@ -1,3 +1,4 @@
+import {operationsSnapshot} from '@/lib/push/operations';
 import {senderConfiguration} from "@/lib/push/sender-config";
 import { reconciliationSnapshot } from "./reconciliation";
 import { jobsSnapshot } from "./jobs";
@@ -130,10 +131,17 @@ export async function servicesData(
         Boolean(process.env.WHATSAPP_API_KEY);
     } catch {}
     const pushConfig=senderConfiguration((process.env.WEB_PUSH_APP_ORIGIN??'')+'/api/push/worker');
-    const statusQuery=createAuthAdmin().rpc('app_push_status',{p_actor:actor,p_session:session});
-    const pushStatus=await (signal?statusQuery.abortSignal(signal):statusQuery);
-    if(pushStatus.error||!pushStatus.data)throw Error('Push diagnostics unavailable');
-    parsed.extra.push=pushStatus.data;
+    const admin = createAuthAdmin();
+    const args = {p_actor:actor,p_session:session};
+    const statusQuery = admin.rpc('app_push_status',args);
+    const opsQuery = admin.rpc('app_push_operations',args);
+    const [pushStatus, ops] = await Promise.all([
+      signal ? statusQuery.abortSignal(signal) : statusQuery,
+      signal ? opsQuery.abortSignal(signal) : opsQuery,
+    ]);
+    if (pushStatus.error || !pushStatus.data) throw Error('Push diagnostics unavailable');
+    const operations = operationsSnapshot.safeParse(ops.error ? null : ops.data);
+    parsed.extra.push = {...(pushStatus.data as Record<string,unknown>), operations: operations.data ?? null};
     parsed.extra.providers = {
       gmail,
       whatsapp,

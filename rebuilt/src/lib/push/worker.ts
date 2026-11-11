@@ -34,6 +34,8 @@ export async function runPushWorker(repository:PushRepository,config:SenderConfi
    }
   }));
   return {code:metrics.unconfirmed?'unconfirmed' as const:'processed' as const,metrics};
+ }catch{
+  metrics.unconfirmed++;return {code:'unconfirmed' as const,metrics};
  }finally{
   clearTimeout(timer);
   if(token){try{if(!await repository.leave(token,metrics))metrics.unconfirmed++;}catch{metrics.unconfirmed++;}}

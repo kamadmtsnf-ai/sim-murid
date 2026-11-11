@@ -38,7 +38,13 @@ const data = jobsSnapshot.parse({
       })),
   extra: {
     providers: { gmail: false, whatsapp: false, scheduledDispatch: false, webPush:false },
-    push:{points_pilot:{enabled:false,active_members:0},counts:empty?{}:{accepted:3,ambiguous:1,retry_wait:2},errors:{},alarm:!empty,oldest_ready_at:null,worker:{last_started:null,last_finished:null,last_metrics:{},scheduler_enabled:false},database_dispatch:false},
+    push:{operations:empty?null:{
+      checked_at:stamp,alarms:['backlog','ambiguous'],
+      scheduler:{enabled:true,observed_recently:true,last_tick:stamp,last_dispatched:stamp,last_response:stamp,http_status:200,error:null},
+      worker:{last_started:stamp,last_finished:stamp,runs_24h:15,errors_1h:0},
+      queue:{ready:8,oldest_ready:stamp,accepted_samples_24h:3,p95_accepted_seconds:75,invalid_endpoints_1h:0},
+      retention:{enabled:false,delivery_days:90,subscription_days:180,run_days:30,batch:200,last_cleanup:null,last_counts:{}},
+    },points_pilot:{enabled:false,active_members:0},counts:empty?{}:{accepted:3,ambiguous:1,retry_wait:2},errors:{},alarm:!empty,oldest_ready_at:null,worker:{last_started:null,last_finished:null,last_metrics:{},scheduler_enabled:false},database_dispatch:false},
     jobs: empty
       ? []
       : Array.from({ length: 100 }, (_, i) => ({

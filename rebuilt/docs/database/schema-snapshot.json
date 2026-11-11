@@ -55,7 +55,8 @@
     "20261108011007_web_push_click_resolver.sql",
     "20261108020135_web_push_sender_worker.sql",
     "20261108030400_web_push_points_pilot.sql",
-    "20261108044043_web_push_extended_categories.sql"
+    "20261108044043_web_push_extended_categories.sql",
+    "20261108090000_web_push_operations.sql"
   ],
   "tables": [
     {
@@ -365,6 +366,11 @@
     },
     {
       "schema_name": "sim_murid_private",
+      "table_name": "push_operations_policy",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
       "table_name": "push_point_pilot_members",
       "rls_enabled": true
     },
@@ -386,6 +392,11 @@
     {
       "schema_name": "sim_murid_private",
       "table_name": "push_subscriptions",
+      "rls_enabled": true
+    },
+    {
+      "schema_name": "sim_murid_private",
+      "table_name": "push_worker_runs",
       "rls_enabled": true
     },
     {

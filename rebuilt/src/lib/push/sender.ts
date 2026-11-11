@@ -10,10 +10,12 @@ export type PushClaim=z.infer<typeof claimSchema>;
 export const readySchema=z.object({code:z.literal('ready'),event_ref:z.uuid(),delivery_ref:z.uuid(),category:z.enum(['test','points','schedule','reports','surveys','documents']),expires_at:z.string()});
 export type Ready=z.infer<typeof readySchema>;
 export async function sendClaim(claim:PushClaim,config:SenderConfiguration,preflight:()=>Promise<Ready|null>,signal:AbortSignal,transport:typeof pinnedRequest=pinnedRequest,resolveEndpoint:typeof validateEndpoint=validateEndpoint):Promise<Outcome>{
- const s=claim.subscription;if(s.encryption_key_version!==config.encryptionVersion||s.vapid_key_version!==config.vapidVersion)return {status:'failed_permanent',error:'key_version_unavailable'};
+ const s=claim.subscription;
+ const keysConfig=s.encryption_key_version===config.encryptionVersion&&s.vapid_key_version===config.vapidVersion?config:config.previousKeys?.find(k=>k.encryptionVersion===s.encryption_key_version&&k.vapidVersion===s.vapid_key_version&&Date.parse(k.expiresAt)>Date.now());
+ if(!keysConfig)return {status:'failed_permanent',error:'key_version_unavailable'};
  const aad=`sim-push-v1:${s.installation_id}:${s.user_id}:${s.encryption_key_version}`;
  let endpoint:string,keys:{p256dh:string;auth:string};
- try{endpoint=decrypt(s.endpoint_ciphertext,config.key,aad+':endpoint');keys=JSON.parse(decrypt(s.keys_ciphertext,config.key,aad+':keys')) as typeof keys;const parsed=subscriptionSchema.parse({subscription:{endpoint,expirationTime:null,keys}});endpoint=parsed.subscription.endpoint;keys=parsed.subscription.keys;}catch{return {status:'failed_permanent',error:'cipher_invalid'};}
+ try{endpoint=decrypt(s.endpoint_ciphertext,keysConfig.key,aad+':endpoint');keys=JSON.parse(decrypt(s.keys_ciphertext,keysConfig.key,aad+':keys')) as typeof keys;const parsed=subscriptionSchema.parse({subscription:{endpoint,expirationTime:null,keys}});endpoint=parsed.subscription.endpoint;keys=parsed.subscription.keys;}catch{return {status:'failed_permanent',error:'cipher_invalid'};}
  let target:Awaited<ReturnType<typeof validateEndpoint>>;
  try{target=await resolveEndpoint(endpoint);}catch(error){return {status:error instanceof Error&&error.message.startsWith('Invalid push')?'failed_permanent':'retry_wait',error:error instanceof Error&&error.message.startsWith('Invalid push')?'endpoint_rejected':'dns_unavailable'};}
  const ready=await preflight();if(!ready)return {status:'cancelled',error:'channel_disabled'};
@@ -22,7 +24,7 @@ export async function sendClaim(claim:PushClaim,config:SenderConfiguration,prefl
  const payload=JSON.stringify({v:1,deliveryRef:ready.delivery_ref,eventRef:ready.event_ref,title:'SiM-Murid',body:'Ada pemberitahuan baru. Buka aplikasi untuk melihat detail.'});
  if(Buffer.byteLength(payload)>2048)return {status:'failed_permanent',error:'payload_invalid'};
  let details:ReturnType<typeof generateRequestDetails>;
- try{details=generateRequestDetails({endpoint:target.endpoint,keys},payload,{vapidDetails:{subject:config.subject,publicKey:config.publicKey,privateKey:config.privateKey},TTL:Math.min(86400,ttl),contentEncoding:'aes128gcm',urgency:'normal'});}catch{return {status:'failed_permanent',error:'vapid_invalid'};}
+ try{details=generateRequestDetails({endpoint:target.endpoint,keys},payload,{vapidDetails:{subject:config.subject,publicKey:keysConfig.publicKey,privateKey:keysConfig.privateKey},TTL:Math.min(86400,ttl),contentEncoding:'aes128gcm',urgency:'normal'});}catch{return {status:'failed_permanent',error:'vapid_invalid'};}
  if(signal.aborted)return {status:'cancelled',error:'channel_disabled'};
  return transport(new URL(target.endpoint),target.addresses[0]!,details.headers,details.body,signal);
 }

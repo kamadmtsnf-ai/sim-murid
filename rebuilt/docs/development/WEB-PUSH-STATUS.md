@@ -64,3 +64,9 @@ Migrasi `20261108044043_web_push_extended_categories.sql` menambah ledger sumber
 ## Rilis WP-07 yang diotorisasi — 8 November 2026
 
 Pengguna mengotorisasi push ke main dan migrasi. Migrasi managed `20261108081602` (`web_push_extended_categories_wp07`) diterapkan sebelum kode. Total 55 migrasi; 19 fingerprint fungsi source/cloud cocok, invoker/service-only; dua tabel baru RLS dan tidak dapat dibaca anon/authenticated. Uji service_role menolak source tidak sah dan mengembalikan nol kandidat saat gerbang reminder mati; empty update trigger berjalan dalam rollback. Global/dispatch/test/points pilot false, categories/expanded kosong, cohort nol, scheduler false. Installer tidak dijalankan dan tidak mengirim provider. follow_up tetap ditahan; penerimaan operasional staging/perangkat tetap terbuka.
+
+## WP-08 — otomatisasi dan pemantauan
+
+Implementasi dan validasi lokal selesai pada cabang `feat/web-push-wp08`. Lihat [runbook WP-08](WEB-PUSH-WP08.md) dan [bukti pemeriksaan](../verification/web-push/wp08-checks.json). 906 tes lulus dalam 90 proses. Typecheck, lint, tipe database dan build produksi bersih lulus. Uji browser tertahan saat Chromium gagal membuka socket sandbox. Render server panel Admin lulus.
+
+Migrasi inti `20261108090000_web_push_operations.sql` diperlukan sebelum rilis worker. Retensi nonaktif secara default. Installer managed terpisah dan mendaftarkan job dalam keadaan nonaktif. Pada pemeriksaan 11 November 2026 WIB, produksi masih memakai WP-07 dengan 55 migrasi, tidak mempunyai job Web Push, dan dispatch nonaktif. Staging terisolasi belum ditemukan pada koneksi yang tersedia. Penerimaan cron managed, SLO staging dan perangkat nyata masih terbuka. Laporan persisten `WP08_Otomatisasi_Pemantauan_SiM_Murid.md`.
