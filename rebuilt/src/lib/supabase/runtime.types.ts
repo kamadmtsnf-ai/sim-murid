@@ -95,6 +95,8 @@ app_push_release: { Args: {p_installation: string; p_secret_hash: string }; Retu
 app_push_reminders: { Args: {p_enabled: boolean; p_categories: string[] }; Returns: Json };
 app_push_result: { Args: {p_id: string; p_token: string; p_binding: number; p_status: string; p_code?: number | null; p_retry?: number | null; p_error?: string | null }; Returns: Json };
 app_push_revoke: { Args: {p_actor: string; p_session: string; p_id: string }; Returns: Json };
+app_push_cleanup: { Args: Record<never, never>; Returns: Json };
+app_push_operations: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_status: { Args: {p_actor: string; p_session: string }; Returns: Json };
 app_push_test: { Args: {p_actor: string; p_session: string; p_subscription: string; p_request: string }; Returns: Json };
 app_push_worker: { Args: {p_action: string; p_token?: string | null; p_metrics?: Json | null }; Returns: Json };

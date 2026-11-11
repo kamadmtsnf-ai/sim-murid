@@ -1,0 +1,46 @@
+{
+  "baseline": "bddff2c5af5d870f0a3fa369931279078b4ddc80",
+  "branch": "feat/web-push-wp08",
+  "verifiedOn": "2026-11-11",
+  "checks": {
+    "testsPassed": 906,
+    "testProcesses": 90,
+    "typecheck": "passed",
+    "lint": "passed",
+    "databaseTypes": "passed",
+    "cleanProductionBuild": "passed",
+    "localCatalog": {
+      "applicationTables": 94,
+      "migrations": 56,
+      "issues": []
+    },
+    "browser": "blocked at Chromium startup by sandbox socket denial",
+    "healthServerRender": "passed"
+  },
+  "capacity": {
+    "scenario": "synthetic burst",
+    "recipients": 120,
+    "devicesPerRecipient": 2,
+    "deliveries": 240,
+    "batches": 12,
+    "localRuntimeMs": 897,
+    "providerSends": 0
+  },
+  "productionReadOnly": {
+    "managedMigrations": 55,
+    "cronInstalled": true,
+    "pgNetInstalled": false,
+    "pushCronJobs": 0,
+    "pushSchedulerEnabled": false,
+    "pushEnabled": false,
+    "deliveries": 0,
+    "stagingProjectFound": false
+  },
+  "release": {
+    "pushed": false,
+    "migrationApplied": false,
+    "schedulerInstalled": false,
+    "retentionEnabled": false,
+    "providerSends": 0
+  }
+}

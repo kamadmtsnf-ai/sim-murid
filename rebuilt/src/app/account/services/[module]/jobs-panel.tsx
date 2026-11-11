@@ -1,4 +1,5 @@
 "use client";
+import {PushOperationsStatus} from '@/components/push/operations-status';
 import { Guidance } from "@/components/ui/guidance";
 import {confirmAction} from "@/components/ui/confirm-action";
 import { Pagination } from "@/components/ui/collection-controls";
@@ -270,6 +271,7 @@ export function JobsPanel({ initial }: { initial: ServiceSnapshot }) {
             ))}
           </dl>
           {data.extra.push?<section aria-label="Antrean Web Push" className="space-y-2"><h3 className="font-medium">Antrean Web Push</h3><p className="text-sm text-muted-foreground">Perluasan kategori: {data.extra.push.expanded_pilots.length?data.extra.push.expanded_pilots.join(", "):"Belum diaktifkan"}. Tindak lanjut menunggu pemetaan akun penanggung jawab.</p>{data.extra.push.points_pilot?<p className="text-sm text-muted-foreground">Pilot poin: {data.extra.push.points_pilot.enabled?"Diaktifkan":"Belum diaktifkan"} · {data.extra.push.points_pilot.active_members} anggota aktif</p>:null}{data.extra.push.alarm?<Status tone="warning">Web Push memerlukan pemeriksaan konfigurasi atau antrean. Kiriman ambigu tidak diulang otomatis.</Status>:null}<dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">{Object.entries(data.extra.push.counts).map(([status,count])=><div key={status} className="min-w-0 rounded-lg border p-2"><dt className="break-words text-sm">{({accepted:'Diterima layanan push',queued:'Menunggu',processing:'Diproses',retry_wait:'Menunggu ulang',failed_permanent:'Gagal permanen',ambiguous:'Perlu pemeriksaan',cancelled:'Dibatalkan',expired:'Kedaluwarsa'} as Record<string,string>)[status]??status}</dt><dd>{count}</dd></div>)}</dl><p className="text-sm text-muted-foreground">Pemicu terjadwal: {data.extra.push.worker.scheduler_enabled?'Dikonfigurasi':'Belum diaktifkan'}. Status accepted bukan bukti tampil atau dibaca.</p></section>:null}
+          <PushOperationsStatus data={data.extra.push?.operations??null} />
           <p className="text-sm text-muted-foreground">
             Status konfigurasi bukan bukti koneksi atau penerimaan pesan. Hasil
             ambigu perlu diperiksa dan tidak diulang otomatis. Pengiriman gagal

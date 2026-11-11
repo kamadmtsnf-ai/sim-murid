@@ -5,7 +5,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import ts from 'typescript';
 const mocks={
  'server-only':'export {};',
- '@/lib/auth/admin':`export const createAuthAdmin=()=>({rpc:(name,args)=>{if(name!=='app_push_status')globalThis.hs.args={name,args};const result={data:name==='app_push_status'?{counts:{},errors:{},alarm:false,oldest_ready_at:null,worker:{last_started:null,last_finished:null,last_metrics:{},scheduler_enabled:false},database_dispatch:false}:globalThis.hs.data,error:globalThis.hs.error};return {abortSignal(signal){globalThis.hs.signal=signal;return Promise.resolve(result)},then(resolve,reject){return Promise.resolve(result).then(resolve,reject)}}}});`,
+ '@/lib/auth/admin':`export const createAuthAdmin=()=>({rpc:(name,args)=>{if(!['app_push_status','app_push_operations'].includes(name))globalThis.hs.args={name,args};const result={data:name==='app_push_operations'?null:name==='app_push_status'?{counts:{},errors:{},alarm:false,oldest_ready_at:null,worker:{last_started:null,last_finished:null,last_metrics:{},scheduler_enabled:false},database_dispatch:false}:globalThis.hs.data,error:globalThis.hs.error};return {abortSignal(signal){globalThis.hs.signal=signal;return Promise.resolve(result)},then(resolve,reject){return Promise.resolve(result).then(resolve,reject)}}}});`,
  '@/lib/auth/authorization':'export class AccessDenied extends Error {};',
  '@/lib/email/gmail-config':'export function parseGmailEnvironment(){throw Error("unconfigured");}',
 };

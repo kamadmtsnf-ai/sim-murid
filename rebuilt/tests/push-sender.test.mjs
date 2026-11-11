@@ -57,3 +57,32 @@ test('WP07 each supported category uses encrypted generic sender; category off o
  assert.equal(calls,4);assert.equal(readySchema.safeParse({...ready(c),category:'follow_up'}).success,false);
  const {pushServiceDestination}=await import('../src/lib/push/navigation.ts');assert.equal(pushServiceDestination({category:'documents',context:{owner_id:c.subscription.user_id,class_id:null,year_id:null,semester:null}}),'/account/biodata/'+c.subscription.user_id);assert.equal(pushServiceDestination({category:'documents',context:{owner_id:'https://evil.test',class_id:null,year_id:null,semester:null}}),'/account/services/notifications');assert.equal(pushServiceDestination({category:'arbitrary-url'}),'/account/services/notifications');
 });
+
+test('WP08 old encryption/VAPID pair works during transition and expired or mixed generation does not send', async () => {
+ const c = fixture(), signal = new AbortController().signal;
+ const nextPrivate = Buffer.alloc(32); nextPrivate[31] = 2;
+ const nextVapid = createECDH('prime256v1'); nextVapid.setPrivateKey(nextPrivate);
+ const old = {encryptionVersion:config.encryptionVersion,vapidVersion:config.vapidVersion,key,publicKey:config.publicKey,privateKey:config.privateKey,expiresAt:new Date(Date.now()+60_000).toISOString()};
+ const next = {...config,encryptionVersion:'v2',vapidVersion:'v2',key:Buffer.alloc(32,8),publicKey:nextVapid.getPublicKey().toString('base64url'),privateKey:nextPrivate.toString('base64url'),previousKeys:[old]};
+ let sends = 0;
+ const transport = async (_url,_address,headers) => {
+  sends++;
+  assert.match(headers.Authorization, new RegExp('k='+old.publicKey+'$'));
+  return {status:'accepted'};
+ };
+ assert.equal((await sendClaim(c,next,async()=>ready(c),signal,transport,resolve)).status,'accepted');
+ assert.equal((await sendClaim(c,{...next,previousKeys:[{...old,expiresAt:new Date(0).toISOString()}]},async()=>ready(c),signal,transport,resolve)).error,'key_version_unavailable');
+ assert.equal((await sendClaim({...c,subscription:{...c.subscription,vapid_key_version:'v2'}},next,async()=>ready(c),signal,transport,resolve)).error,'key_version_unavailable');
+ assert.equal(sends,1);
+});
+
+test('WP08 maintenance failure is persisted as unconfirmed and performs no sends', async () => {
+ const repo=repository();
+ repo.maintenance=async()=>{throw Error('internal database error');};
+ let metrics;
+ repo.leave=async(_token,value)=>{metrics=value;return true;};
+ const result=await runPushWorker(repo,config,async()=>{throw Error('Unexpected send');});
+ assert.equal(result.code,'unconfirmed');
+ assert.equal(metrics.unconfirmed,1);
+ assert.equal(metrics.claimed,0);
+});

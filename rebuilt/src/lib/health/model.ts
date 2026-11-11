@@ -1,3 +1,4 @@
+import {operationsSnapshot} from '../push/operations.ts';
 import { z } from "zod";
 import { jobsSnapshot } from "../services/jobs.ts";
 import { reconciliationSnapshot } from "../services/reconciliation.ts";
@@ -6,6 +7,7 @@ const count = z.number().int().nonnegative().safe();
 const timestamp = z.iso.datetime({ offset: true });
 export const healthSnapshot = z.object({
   checkedAt: timestamp,
+  push: operationsSnapshot.nullable().default(null),
   jobs: z.object({
     checkedAt: timestamp,
     available: z.boolean(),
@@ -73,6 +75,7 @@ export function healthFromSources(jobsInput: unknown, reconciliationInput: unkno
   } : null;
   return healthSnapshot.parse({
     checkedAt,
+    push: jobs.success ? jobs.data.extra.push?.operations??null : null,
     jobs: {
       checkedAt, available: jobs.success, outbox, runs,
       providers: jobs.success ? { gmail: jobs.data.extra.providers.gmail, whatsapp: jobs.data.extra.providers.whatsapp, scheduledDispatch: jobs.data.extra.providers.scheduledDispatch } : null,
